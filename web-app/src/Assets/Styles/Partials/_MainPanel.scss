@@ -1,0 +1,16 @@
+.MainPanel {
+  margin: 2rem 1rem;
+
+  .PanelHeader h2 {
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+  }
+  .MyCoursesCardBackground {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    // flex-wrap: wrap;
+  }
+}

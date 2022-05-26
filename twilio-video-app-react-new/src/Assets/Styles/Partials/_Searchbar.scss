@@ -1,0 +1,24 @@
+.Searchbar {
+  background-color: $body-bg-primary;
+
+  border-radius: 25px;
+  margin-top: 0.7rem;
+  width: 90%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+  input {
+    width: 92%;
+    align-content: center;
+    border: none;
+    margin-left: 15px;
+    padding: 5px 20px 5px 0px;
+  }
+  .SearchIcon {
+    color: $icon-red;
+    cursor: pointer;
+  }
+  .SearchIcon:hover {
+    color: $header-primary;
+  }
+}

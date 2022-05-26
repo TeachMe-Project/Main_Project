@@ -1,0 +1,142 @@
+.Parent {
+    margin-left: 1rem;
+    font-family: 'Tahoma', sans-serif;
+}
+
+.Parent-header h1{
+    color: #2f3640;
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin-left: 1rem;
+}
+
+.Parent-tab-content {
+    display: flex;
+    width: fit-content;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.Parent-tab-content-item {
+    padding-inline: 1rem;
+    padding-block: 0.6rem;
+    color: hsl(215, 18%, 57%);
+    /* border-bottom: #8c7ae6 solid 1pt; */
+}
+
+.Parent-tab-content-item {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor: pointer;
+}
+
+.Parent-payment {
+    /* margin-block: 1rem; */
+}
+
+.Parent-payment h1 {
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.Parent-payment p {
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: #7f8fa6;
+}
+
+.Parent-upcomingPayments {
+    width: 95%;
+    margin-block: 2rem;
+    padding: 1rem;
+    border: #dcdde1 solid 1pt;
+    border-radius: 20px;
+    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+}
+
+.Parent-upcomingPayments-content {
+    max-height: 130px;
+    overflow: auto;
+}
+
+.Parent-upcomingPayments-content button {
+    padding: 5px 20px;
+    background-color: #23f15b;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f0f0f0;
+    border: 1px solid #23f15b;
+    border-radius: 20px;
+}
+
+.Parent-upcomingPayments-content button:hover {
+    padding: 5px 20px;
+    background-color: #f0f0f0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    border: 1px solid #23f15b;
+    transition: 0.25s;
+}
+
+.Parent-upcomingPayments-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 0.4rem;
+    padding-inline: 2rem;
+}
+
+.Parent-upcomingPayments-item .subjectName {
+    color: #34495e;
+    font-weight: 600;
+}
+
+.Parent-upcomingPayments-item .payment-status {
+    font-weight: 600;
+    color: #23f15b;
+}
+
+.Parent-transactions {
+    width: 95%;
+    padding: 1rem;
+    border: #dcdde1 solid 1pt;
+    border-radius: 20px;
+    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+}
+
+.Parent-transactions-content {
+    max-height: 210px;
+    overflow: auto;
+}
+
+.Parent-ongoing-class-content {
+    max-height: 530px;
+    overflow: auto;
+}
+
+.Parent-ongoing-class-content-item {
+    width: 95%;
+    margin-block: 2rem;
+    padding: 0.5rem;
+    border: #dcdde1 solid 1pt;
+    border-radius: 20px;
+}
+
+.Parent-ongoing-class-content-item h2 {
+    color: #34495e;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.Parent-ongoing-class-content-item .CardDetailsRow {
+    display: flex;
+    justify-content: space-between;
+    color: #7c7d87;
+}
+
+/* .Parent-ongoing-class-content h1 {
+    font-size: 1rem;
+} */

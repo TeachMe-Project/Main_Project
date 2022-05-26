@@ -1,0 +1,20 @@
+.Card {
+  margin: 10px auto;
+  border-radius: 15px;
+  padding: 10px 15px;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  height: max-content;
+}
+.CardHeader h6 {
+  font-weight: 700;
+  font-size: 16px;
+  color: $header-secondary;
+  margin-bottom: 0.2rem;
+}
+.CardDetails {
+  font-size: 14px;
+  font-weight: 400;
+  color: $content-primary;
+}

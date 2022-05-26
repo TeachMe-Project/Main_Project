@@ -1,15 +1,15 @@
 import React from 'react';
 import { styled, Theme } from '@material-ui/core/styles';
 
-import MenuBar from './components/MenuBar/MenuBar';
-import MobileTopMenuBar from './components/MobileTopMenuBar/MobileTopMenuBar';
-import PreJoinScreens from './components/PreJoinScreens/PreJoinScreens';
-import ReconnectingNotification from './components/ReconnectingNotification/ReconnectingNotification';
-import RecordingNotifications from './components/RecordingNotifications/RecordingNotifications';
-import Room from './components/Room/Room';
+import MenuBar from '../MenuBar/MenuBar';
+import MobileTopMenuBar from '../MobileTopMenuBar/MobileTopMenuBar';
+import PreJoinScreens from '../PreJoinScreens/PreJoinScreens';
+import ReconnectingNotification from '../ReconnectingNotification/ReconnectingNotification';
+import RecordingNotifications from '../RecordingNotifications/RecordingNotifications';
+import Room from '../Room/Room';
 
-import useHeight from './hooks/useHeight/useHeight';
-import useRoomState from './hooks/useRoomState/useRoomState';
+import useHeight from '../../hooks/useHeight/useHeight';
+import useRoomState from '../../hooks/useRoomState/useRoomState';
 
 const Container = styled('div')({
   display: 'grid',
@@ -25,7 +25,7 @@ const Main = styled('main')(({ theme }: { theme: Theme }) => ({
   },
 }));
 
-export default function App() {
+export default function Twilio() {
   const roomState = useRoomState();
 
   // Here we would like the height of the main container to be the height of the viewport.
@@ -36,7 +36,9 @@ export default function App() {
   const height = useHeight();
 
   return (
+
     <Container style={{ height }}>
+
       {roomState === 'disconnected' ? (
         <PreJoinScreens />
       ) : (
@@ -47,7 +49,9 @@ export default function App() {
           <Room />
           <MenuBar />
         </Main>
+
       )}
+
     </Container>
   );
 }

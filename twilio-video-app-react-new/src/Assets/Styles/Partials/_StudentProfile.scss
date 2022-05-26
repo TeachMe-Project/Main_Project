@@ -1,0 +1,53 @@
+.StudentProfile {
+  .PanelContainer {
+    .ProfileImg {
+      display: flex;
+      img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: auto;
+        justify-content: center;
+      }
+    }
+
+    .ProfileDetailsContainer {
+      margin: 2rem auto;
+      width: 100%;
+      .ProfileDetails {
+        display: flex;
+        .ProfileLabel {
+          font-size: 1.2rem;
+          font-weight: 700;
+          justify-content: space-between;
+          margin: auto auto 0.2rem 1.2rem;
+          color: $header-primary;
+         
+        }
+        .ProfileValue {
+          font-size: 1rem;
+          font-weight: 400;
+          color: $header-secondary;
+          justify-content: space-between;
+          margin:auto;
+          margin-bottom: 1rem;
+          background-color: $body-bg-secondary;
+          border-radius: 5px;
+          padding: 0.2rem 0.5rem;
+          width: 90%;
+          border: 1px solid $content-primary;
+        }
+      }
+    }
+    .ProfileButton{
+        .Button{
+        float:right;
+        color:$icon-red;
+        font-size:14px;
+        margin:1rem 1rem 1rem 0;
+        border-radius:12px;
+        padding:7px 15px;
+    }
+}
+  }
+}

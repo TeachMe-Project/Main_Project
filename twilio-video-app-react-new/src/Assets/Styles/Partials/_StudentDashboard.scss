@@ -1,0 +1,26 @@
+.PanelContainer {
+  h5 {
+    margin: 1rem auto 0 auto;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .MyCoursesCardBackground {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+    padding: auto;
+    height: max-content;
+    background-color: $body-bg-primary;
+  }
+    .PendingHomeworkBackground {
+      margin: 1rem 0rem;
+      padding:auto 2rem;
+      height: 38vh;
+      overflow-y: scroll;
+    }
+  }
+

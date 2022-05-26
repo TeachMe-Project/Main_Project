@@ -1,0 +1,21 @@
+.Notes {
+  .Card {
+    width: 90%;
+    margin: 5px auto;
+    display: flex;
+    border-radius: 8px;
+    .NotesBar {
+      width: 100%;
+      margin: auto;
+      color: $icon-red;
+      line-height: 1rem;
+    }
+    .NotesBar:hover {
+      color: $header-primary;
+    }
+    .CardHeader h6 {
+      margin: 0 auto;
+      font-weight: 600;
+    }
+  }
+}

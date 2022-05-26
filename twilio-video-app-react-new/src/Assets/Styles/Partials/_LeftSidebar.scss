@@ -1,0 +1,42 @@
+.LeftSidebar {
+  padding: 3rem 0;
+  height: 90vh;
+  background-color: $sidebar-bg;
+  z-index: 1;
+  transition: all 0.5s;
+  border-radius: 0 20px 20px 0;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+
+  .LeftNavbar{
+    padding:0;
+  }
+  .Logo {
+    background-color: $testing-color;
+    margin: auto 0;
+    margin-bottom: 3rem;
+    padding: 12px;
+    font-size: medium;
+    font-weight: 500;
+  }
+  .Sidebar_item {
+    padding: 0.7em;
+    margin: 5px auto;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    color: $sidebar-color;
+
+    .react-icons{
+      vertical-align: middle;
+    }
+  }
+  .Sidebar_item_name {
+    margin-left: 1rem;
+    font-size: medium;
+    font-weight: 600;
+  }
+  .Sidebar_item:hover {
+    background-color: $sidebar-bg-hover;
+    color: $sidebar-color-hover;
+  }
+}

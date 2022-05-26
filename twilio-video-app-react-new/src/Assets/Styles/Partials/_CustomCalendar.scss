@@ -1,0 +1,99 @@
+@import "react-calendar/dist/Calendar.css";
+
+.CustomCalendar {
+  margin: 1.5rem auto;
+  display: "grid";
+
+  .react-calendar {
+    width: 320px;
+    max-width: 100%;
+    background-color: $sidebar-bg;
+    color: $calendar-color;
+    border-radius: 15px;
+    line-height: 1em;
+    border: none;
+    padding: 5px;
+  }
+  .react-calendar__navigation {
+    margin-bottom: 10px;
+  }
+  .react-calendar__navigation button {
+    color: $header-primary;
+    min-width: 40px;
+    font-size: 18px;
+    margin-top: 8px;
+    font-weight: 800;
+  }
+  .react-calendar__navigation button:enabled:hover,
+  .react-calendar__navigation button:enabled:focus {
+    background-color: $sidebar-bg;
+    flex: 0 0 12.5%;
+  }
+  .react-calendar__navigation button[disabled] {
+    background-color: $body-bg-tertiary;
+    flex: 0 0 12.5%;
+  }
+  abbr[title] {
+    font-weight: 800;
+    color: $day-title;
+  }
+
+  .react-calendar__tile:enabled:hover,
+  .react-calendar__tile:enabled:focus {
+    background: $cal-bg;
+    color: $cal-current-date;
+    border-radius: 6px;
+  }
+  .react-calendar__tile--now {
+    background: $cal-tile-now;
+    border-radius: 6px;
+    font-weight: bold;
+    color: $cal-current-date;
+  }
+  .react-calendar__tile--now:enabled:hover,
+  .react-calendar__tile--now:enabled:focus {
+    background: $cal-tile-now;
+    border-radius: 6px;
+    font-weight: bold;
+    color: $cal-current-date;
+  }
+  .react-calendar__tile--hasActive:enabled:hover,
+  .react-calendar__tile--hasActive:enabled:focus {
+    background: $cal-bg;
+  }
+  .react-calendar__tile--active {
+    background: $cal-current-date;
+    border-radius: 6px;
+    font-weight: bold;
+    color: $body-bg-secondary;
+  }
+  .react-calendar__tile--active:enabled:hover,
+  .react-calendar__tile--active:enabled:focus {
+    background: $cal-current-date;
+    color: $body-bg-secondary;
+  }
+  .react-calendar--selectRange .react-calendar__tile--hover {
+    background-color: $cal-bg;
+  }
+  .react-calendar__tile--range {
+    background: $cal-bg;
+    color: $cal-current-date;
+    border-radius: 0;
+  }
+  .react-calendar__tile--rangeStart {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    background: $cal-current-date;
+    color: $body-bg-secondary;
+  }
+  .react-calendar__tile--rangeEnd {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background: $cal-current-date;
+    color: $body-bg-secondary;
+  }
+}

@@ -1,0 +1,25 @@
+.UpcomingCard {
+    width: 100%;
+    margin: 0;
+
+    .CardDetailsRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .CardButton{
+        background-color: $btn-bg-green;
+        color: $cal-bg;
+        border: 0.1rem solid $body-bg-secondary;
+      }
+      .CardButton:hover{
+        background-color:$body-bg-secondary ;
+        color: $btn-bg-green;
+        border: 0.1rem solid $btn-bg-green;
+      }
+
+.Card:hover{
+  background-color: $testing-color;
+  background-color: aquamarine;
+}
+}

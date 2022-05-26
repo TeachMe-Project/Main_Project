@@ -1,0 +1,21 @@
+.Homework {
+    .Card {
+      width: 90%;
+      margin: 5px auto;
+      display: flex;
+      border-radius: 8px;
+      .HomeworkBar {
+        width: 100%;
+        margin: auto;
+        color: $icon-red;
+        line-height: 1rem;
+      }
+      .HomeworksBar:hover {
+        color: $header-primary;
+      }
+      .CardHeader h6 {
+        margin: 0 auto;
+        font-weight: 600;
+      }
+    }
+  }

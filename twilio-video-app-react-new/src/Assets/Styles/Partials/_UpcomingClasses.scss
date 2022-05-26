@@ -1,0 +1,16 @@
+.UpcomingClasses {
+  background-color: $sidebar-bg;
+  border-radius: 15px;
+  height: 28rem;
+  width: 100%;
+  padding: 1rem 0;
+  overflow-y: scroll;
+
+  h6 {
+    font-weight: 800;
+    color: $header-primary;
+    margin-bottom: 0.8rem;
+  }
+  
+  
+}

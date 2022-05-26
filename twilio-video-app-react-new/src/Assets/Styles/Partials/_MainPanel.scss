@@ -1,0 +1,99 @@
+.MainPanel {
+  margin: 3rem auto;
+  width: 80%;
+
+  .PanelHeader h2 {
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+  }
+  .Panel {
+    .PanelSubheader h5 {
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+    .PanelBody {
+      margin: 1rem 0rem 2rem 0rem;
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      width: 100%;
+      .Card {
+        width: 30%;
+        margin: 1rem 10px;
+        display: flex;
+        flex-direction: row;
+      }
+      .CardImage img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 1rem 0.7rem auto auto;
+        
+      }
+      .CardBody {
+        width: 65%;
+        .CardButton {
+          float: right;
+          padding: 5px 20px;
+          background-color: $btn-bg-green;
+          font-size: 14px;
+          color: $body-bg-tertiary;
+          border: 1px solid $btn-bg-green;
+        }
+        .CardButton:hover {
+          border: 1px solid $btn-bg-green;
+          background-color: $body-bg-tertiary;
+          color: $btn-bg-green;
+        }
+      }
+    }
+    .PendingHomework {
+      height:35vh;
+      overflow-y: scroll;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .Card {
+        width: 95%;
+        display: flex;
+        flex-direction: row;
+        margin-bottom:0;
+        .CardImage img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin: auto;
+          margin-right: 0.7em;
+        }
+        .CardBody {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          vertical-align: middle;
+          padding-top:7px;
+          .CardButton {
+            float: right;
+            padding: 4px 12px;
+            line-height: 1;
+            background-color: $body-bg-tertiary;
+            font-size: 16px;
+            font-weight: 500;
+            color: $header-primary;
+            border: 1px solid $header-primary;
+            margin: 0 1rem;
+            height: fit-content;
+            border-radius: 15px;
+          }
+          .CardButton:hover {
+            border: 1px solid $body-bg-tertiary;
+            background-color: $header-primary;
+            color: $body-bg-tertiary;
+          }
+        }
+      }
+    }
+  }
+}

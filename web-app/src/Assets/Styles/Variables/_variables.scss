@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+textarea {
+  font-family: "Poppins", sans-serif;
+}
+
+section {
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul, li {
+  list-style: none;
+  padding:0;
+  margin:0;
+}
+.link{
+  text-decoration: none;
+}
+img{
+  object-fit:cover;
+}
+
+// colours
+
+// body
+$body-bg-primary: #f5f7fb;
+$body-bg-secondary: #fff;
+$body-bg-tertiary: #f0f0f0;
+
+// sidebar
+$sidebar-bg:#fafcfe;
+$sidebar-color:#738395;
+$sidebar-bg-hover:#f9f2f7;
+$sidebar-color-hover:#5a62b2;
+
+
+$calendar-color:#222;
+$day-title:#5a61b3;
+$cal-current-date:#6f48eb;
+$cal-bg:#f8f8fa;
+$cal-tile-now:#6f48eb33;
+
+// headers
+$header-primary:#2c3e50;
+$header-secondary:#34495e;
+
+
+//content colors
+$content-primary: #7c7d87;
+
+
+//Button colors
+$btn-bg-green: #23f15b;
+
+
+
+//Icon colors
+$icon-red: #ee5253;
+
+
+//testing
+$testing-color:#a81515;
+// $header-secondary:#;
