@@ -6,7 +6,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import App from './App';
 import AppStateProvider, { useAppState } from './state';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import ErrorDialog from './components/ErrorDialog/ErrorDialog';
 import LoginPage from './components/LoginPage/LoginPage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -37,18 +37,13 @@ ReactDOM.render(
     <UnsupportedBrowserWarning>
       <Router>
         <AppStateProvider>
-          <Switch>
-            <PrivateRoute  path="/">
-              <VideoApp />
-            </PrivateRoute>
-            <PrivateRoute path="/room/:URLRoomName">
-              <VideoApp />
-            </PrivateRoute>
-            <Route path="/login">
-              <LoginPage />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<VideoApp />} />
+            <Route path="/room/:URLRoomName" element={<VideoApp />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<VideoApp />} />
+            {/* <Navigate to="/" /> */}
+          </Routes>
         </AppStateProvider>
       </Router>
     </UnsupportedBrowserWarning>

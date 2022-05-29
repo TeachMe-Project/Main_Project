@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => ({
   googleButton: {
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function LoginPage() {
   const classes = useStyles();
   const { signIn, user, isAuthReady } = useAppState();
-  const history = useHistory();
+  const history = useNavigate();
   // @ts-ignore
   const location = useLocation<{ from: Location }>();
   const [passcode, setPasscode] = useState('');
@@ -80,7 +80,7 @@ export default function LoginPage() {
   };
 
   if (user || !isAuthEnabled) {
-    history.replace('/');
+    history('/');
   }
 
   if (!isAuthReady) {

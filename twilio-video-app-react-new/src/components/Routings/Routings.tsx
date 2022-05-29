@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
     BrowserRouter as Router,
-    Switch,
+    Routes,
     Route,
     Link,
     useParams
@@ -24,7 +24,7 @@ const routings = [
 export default function Routings() {
     return (
         <div className="MainPanel">
-            <Switch>
+            <Routes>
                 {routings.map((route, index) => (
                     <Route
                         key={index}
@@ -33,7 +33,7 @@ export default function Routings() {
                         element={<route.main />}
                     />
                 ))}
-            </Switch>
+            </Routes>
         </div>
     );
 }
