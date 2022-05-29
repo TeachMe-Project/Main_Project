@@ -57,6 +57,7 @@ export default function LoginPage() {
   const classes = useStyles();
   const { signIn, user, isAuthReady } = useAppState();
   const history = useHistory();
+  // @ts-ignore
   const location = useLocation<{ from: Location }>();
   const [passcode, setPasscode] = useState('');
   const [authError, setAuthError] = useState<Error | null>(null);
@@ -67,6 +68,7 @@ export default function LoginPage() {
     setAuthError(null);
     signIn?.(passcode)
       .then(() => {
+        // @ts-ignore
         history.replace(location?.state?.from || { pathname: '/' });
       })
       .catch(err => setAuthError(err));
