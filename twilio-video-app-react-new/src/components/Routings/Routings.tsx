@@ -5,7 +5,7 @@ import Dashboard from '../Pages/Student/Dashboard';
 
 const routings = [
   {
-    path: "/",
+    path: "/x",
     exact: true,
     main: () => <Dashboard />,
   },

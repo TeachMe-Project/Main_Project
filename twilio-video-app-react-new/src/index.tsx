@@ -16,6 +16,13 @@ import { ChatProvider } from './components/ChatProvider';
 import { VideoProvider } from './components/VideoProvider';
 import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions';
 import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning';
+import Twilio from "./components/Twilio/Twilio";
+import Dashboard from "./components/Pages/Student/Dashboard";
+import MyTeachers from "./components/Pages/Student/MyTeachers";
+import Settings from "./components/Pages/Student/Settings";
+import Course from "./components/Pages/Student/Course";
+import MyCourses from "./components/Pages/Student/MyCourses";
+import StudentProfile from "./components/Pages/Student/StudentProfile";
 
 const VideoApp = () => {
   const { error, setError } = useAppState();
@@ -25,7 +32,7 @@ const VideoApp = () => {
     <VideoProvider options={connectionOptions} onError={setError}>
       <ErrorDialog dismissError={() => setError(null)} error={error} />
       <ChatProvider>
-        <App />
+        <Twilio />
       </ChatProvider>
     </VideoProvider>
   );
@@ -38,11 +45,18 @@ ReactDOM.render(
       <Router>
         <AppStateProvider>
           <Routes>
-            <Route path="/" element={<VideoApp />} />
+              <Route path="/" element={<App />} />
+              <Route path="/mycourses" element={<MyCourses />} />
+              <Route path="/myteachers" element={<MyTeachers />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/userprofile" element={<StudentProfile />} />
+              <Route path="/course" element={<Course />} />
+
+            <Route path="/twilio" element={<VideoApp />} />
             <Route path="/room/:URLRoomName" element={<VideoApp />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<VideoApp />} />
-            {/* <Navigate to="/" /> */}
+
+
           </Routes>
         </AppStateProvider>
       </Router>
