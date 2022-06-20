@@ -1,9 +1,12 @@
 import React from 'react';
+import Pricing from "./components/pricing/pricing";
 
-function App() {
-  return (
-    <h1>Hello World</h1>
-  );
-}
+const App: React.FC = () => {
+    return (
+        <div>
+            <Pricing/>
+        </div>
+    );
+};
 
 export default App;
