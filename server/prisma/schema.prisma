@@ -1,0 +1,275 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model admin {
+  admin_id   Int    @id @default(autoincrement())
+  first_name String @db.VarChar(255)
+  last_name  String @db.VarChar(255)
+  mobile_no  String @db.VarChar(12)
+  user_id    Int
+  user       user   @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK TO ADMIN FROM USER")
+
+  @@index([user_id], map: "FK TO ADMIN FROM USER")
+}
+
+/// This model has been renamed to 'Renamedclass' during introspection, because the original name 'class' is reserved.
+model Renamedclass {
+  class_id  Int    @id @default(autoincrement())
+  course_id Int
+  course    course @relation("classTocourse", fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO CLASS FROM COURSE")
+
+  @@index([course_id], map: "FK TO CLASS FROM COURSE")
+  @@map("class")
+}
+
+model course {
+  course_name       String              @db.VarChar(100)
+  grade             String              @db.VarChar(3)
+  subject           String              @db.VarChar(100)
+  desctiption       String              @db.VarChar(255)
+  duration          Int
+  start_date        DateTime            @db.Date
+  start_time        DateTime            @db.Time(0)
+  end_time          DateTime            @db.Time(0)
+  day               course_day
+  course_id         Int                 @id @default(autoincrement())
+  teacher_id        Int
+  price             Int
+  teacher           teacher             @relation(fields: [teacher_id], references: [teacher_id], onDelete: NoAction, map: "FK TO COURSE FROM TEACHER")
+  class             Renamedclass[]      @relation("classTocourse")
+  homework          homework[]
+  institute_teacher institute_teacher[]
+  notes             notes[]
+  student_course    student_course[]
+  student_payment   student_payment[]
+
+  @@index([teacher_id], map: "FK TO COURSE FROM TEACHER")
+}
+
+model homework {
+  homework_id   Int      @id @default(autoincrement())
+  uploaded_date DateTime @db.Date
+  homework      String   @db.VarChar(1000)
+  course_id     Int
+  course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM COURSE")
+
+  @@index([course_id], map: "FK TO HOMEWORK FROM COURSE")
+}
+
+model institute {
+  institute_id      Int                 @id @default(autoincrement())
+  institute_name    String              @db.VarChar(255)
+  contact_no        String              @db.VarChar(12)
+  description       String              @db.VarChar(1000)
+  account_name      String              @db.VarChar(100)
+  account_no        String              @db.VarChar(20)
+  bank_name         String              @db.VarChar(100)
+  branch_name       String              @db.VarChar(100)
+  user_id           Int
+  user              user                @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "FK TO INSTITUTE FROM USER")
+  institute_teacher institute_teacher[]
+
+  @@index([user_id], map: "FK TO INSTITUTE FROM USER")
+}
+
+model institute_teacher {
+  institute_id Int
+  course_id    Int
+  course       course    @relation(fields: [course_id], references: [course_id], onDelete: NoAction, map: "FK TO INS_CO FROM COURSE")
+  institute    institute @relation(fields: [institute_id], references: [institute_id], onDelete: NoAction, map: "FK TO INS_CO FROM INSTITUTE")
+
+  @@id([institute_id, course_id])
+  @@index([course_id], map: "FK TO INS_CO FROM COURSE")
+  @@index([institute_id], map: "FK TO INS_CO FROM INSTITUTE")
+}
+
+model notes {
+  note_id       Int      @id
+  uploaded_date DateTime @db.Date
+  note          String   @db.VarChar(1000)
+  course_id     Int
+  course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO NOTE FROM COURSE")
+
+  @@index([course_id], map: "FK TO NOTE FROM COURSE")
+}
+
+model parent {
+  parent_id       Int                    @id
+  user_id         Int
+  first_name      String                 @db.VarChar(100)
+  last_name       String                 @db.VarChar(100)
+  mobile_no       String                 @db.VarChar(12)
+  security_status parent_security_status
+  user            user                   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "FK TO PARENT FROM USER")
+  student         student[]
+
+  @@index([user_id], map: "FK TO PARENT FROM USER")
+}
+
+model parent_payment {
+  payment_id      Int                  @id @default(autoincrement())
+  payment_time    DateTime             @default(now()) @db.Timestamp(0)
+  amount          Int
+  student_id      Int
+  month           parent_payment_month
+  year            Int
+  student         student              @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO PARENT_PAYMENT FROM STUDENT")
+  student_payment student_payment?
+
+  @@index([student_id], map: "FK TO PARENT_PAYMENT FROM STUDENT")
+}
+
+model student {
+  first_name      String                  @db.VarChar(30)
+  last_name       String                  @db.VarChar(30)
+  school          String                  @db.VarChar(100)
+  grade           String                  @db.VarChar(3)
+  security_status student_security_status
+  student_id      Int                     @id
+  user_id         Int
+  parent_id       Int
+  parent          parent                  @relation(fields: [parent_id], references: [parent_id], onDelete: Cascade, map: "FK TO STUDENT FROM PARENT")
+  user            user                    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "FK TO STUDENT FROM USER")
+  parent_payment  parent_payment[]
+  student_course  student_course[]
+  student_payment student_payment[]
+
+  @@index([parent_id], map: "FK TO STUDENT FROM PARENT")
+  @@index([user_id], map: "FK TO STUDENT FROM USER")
+}
+
+model student_course {
+  student_id Int
+  course_id  Int
+  course     course  @relation(fields: [course_id], references: [course_id], onDelete: NoAction, map: "FK TO STU_CO FROM COURSE")
+  student    student @relation(fields: [student_id], references: [student_id], onDelete: NoAction, map: "FK TO STU_CO FROM STUDENT")
+
+  @@id([student_id, course_id])
+  @@index([course_id], map: "FK TO STU_CO FROM COURSE")
+  @@index([student_id], map: "FK TO STU_CO FROM STUDENT")
+}
+
+model student_payment {
+  payment_id     Int                            @id @default(autoincrement())
+  student_id     Int
+  course_id      Int
+  month          student_payment_month
+  payment_status student_payment_payment_status
+  course         course                         @relation(fields: [course_id], references: [course_id], onUpdate: Restrict, map: "FK TO STUDENT_PAYMENT FROM COURSE")
+  parent_payment parent_payment                 @relation(fields: [payment_id], references: [payment_id], onUpdate: Restrict, map: "FK TO STUDENT_PAYMENT FROM PARENT_PAYMENT")
+  student        student                        @relation(fields: [student_id], references: [student_id], onUpdate: Restrict, map: "FK TO STUDENT_PAYMENT FROM STUDENT")
+
+  @@index([course_id], map: "FK TO STUDENT_PAYMENT FROM COURSE")
+  @@index([student_id], map: "FK TO STUDENT_PAYMENT FROM STUDENT")
+}
+
+model teacher {
+  teacher_id      Int                     @id @default(autoincrement())
+  first_name      String                  @db.VarChar(30)
+  last_name       String                  @db.VarChar(30)
+  gender          teacher_gender
+  description     String                  @db.VarChar(255)
+  qualification   String                  @db.VarChar(255)
+  account_name    String                  @db.VarChar(255)
+  bank_name       String                  @db.VarChar(255)
+  branch_name     String                  @db.VarChar(100)
+  account_no      String                  @db.VarChar(20)
+  verification    String                  @db.VarChar(255)
+  security_status teacher_security_status
+  user_id         Int
+  user            user                    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "FK TO TEACHER FROM USER")
+  course          course[]
+
+  @@index([user_id], map: "FK TO TEACHER FROM USER")
+}
+
+model user {
+  user_id       Int         @id @default(autoincrement())
+  username      String      @unique(map: "username") @db.VarChar(50)
+  type          user_type   @default(student)
+  profile_image String      @db.VarChar(255)
+  admin         admin[]
+  institute     institute[]
+  parent        parent[]
+  student       student[]
+  teacher       teacher[]
+}
+
+enum course_day {
+  SUN
+  MON
+  TUE
+  WED
+  THU
+  FRI
+  SAT
+}
+
+enum parent_security_status {
+  active
+  inactive
+}
+
+enum parent_payment_month {
+  Jan
+  Feb
+  Mar
+  Apr
+  May
+  Jun
+  Jul
+  Aug
+  Sep
+  Oct
+  Nov
+  Dec
+}
+
+enum student_security_status {
+  active
+  inactive
+}
+
+enum student_payment_month {
+  Jan
+  Feb
+  Mar
+  Apr
+  May
+  Jun
+  Jul
+  Aug
+  Sep
+  Oct
+  Nov
+  Dec
+}
+
+enum student_payment_payment_status {
+  paid
+  unpaid
+}
+
+enum teacher_gender {
+  male
+  female
+}
+
+enum teacher_security_status {
+  active
+  inactive
+}
+
+enum user_type {
+  student
+  parent
+  teacher
+  institute
+  admin
+}
