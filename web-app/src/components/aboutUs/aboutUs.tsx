@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Col, Container, Image, Row} from "react-bootstrap";
 import Feature from "./feature";
 import Images from "../../assets/images/Images";
 
 const AboutUs: React.FC = () => {
+
     return (
-        <Container fluid={true} className='about-us'>
+        <Container fluid={true} className='about-us pt-4' id="About-Us"  >
             <h1 style={{
                 fontSize: "60px",
                 textAlign: "center",
+                marginTop:"30px",
                 marginBottom: "30px",
                 fontFamily: "cursive"
             }}> Why TeachMe</h1>

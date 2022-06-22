@@ -34,19 +34,15 @@ const PricingCard: React.FC<PricingCardProps> = (props) => {
                         <ListGroup.Item> <FcOk/> Upto 4 classes for month</ListGroup.Item>
                     </ListGroup>
                     <IconContext.Provider value={{style:{margin:"5px"}}}>
-                        <Button style={{
+                        <Button variant="primary" style={{
                             borderRadius: "10px",
                             margin: "auto",
                             display: "flex",
                             flexDirection: "row",
                             justifyContent: "center",
                             alignItems: "center",
-                            background:"#fadd57",
                             color: "#363636",
-                            border:"none",
                             marginTop:"20px",
-                            outline:"0",
-                            boxShadow:"none",
                             fontSize:"18px"
                         }}><BsFillCartCheckFill/> Select This Plan</Button>
                     </IconContext.Provider>

@@ -6,7 +6,7 @@ import {GrSend} from "react-icons/gr";
 
 const ContactUs: React.FC = () => {
     return (
-        <Container fluid={true}>
+        <Container fluid={true} id='ContactUs'>
             <h1 style={{
                 fontSize: "60px",
                 textAlign: "center",
@@ -35,33 +35,36 @@ const ContactUs: React.FC = () => {
                             <Form.Label>Message</Form.Label>
                             <Form.Control required as="textarea" placeholder="Enter the message here" rows={4} id="message" />
                         </Form.Group>
-                        <Button type="submit" variant="primary" className="mt-3 px-4 py-2"><GrSend
+                        <Button type="submit" variant="primary" className="mt-3 px-4 py-2" style={{borderRadius:"20px"}}><GrSend
                             style={{marginRight: "3px"}}/> Submit</Button>
                     </Form>
                 </Col>
             </Row>
             <Row className="d-flex flex-row justify-content-evenly mt-2">
                 <Col xl={2}>
-                    <Card style={{padding: "10px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}>
-                        <Card.Img variant="top" src={Images.phone} style={{width: "35%", margin: "auto"}}/>
+                    <Card style={{padding: "10px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", display:"flex", flexDirection:"row"}}>
+                        <Card.Img variant="top" src={Images.phone} style={{width: "35%", padding:"10px"}}/>
                         <Card.Body style={{padding: "0", paddingTop: "10px"}}>
-                            <Card.Title style={{textAlign: "center"}}>+9477-1234567</Card.Title>
+                            <Card.Title style={{textAlign: "center"}}>Phone</Card.Title>
+                            <Card.Text style={{textAlign: "center"}}>+9477-1234567</Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col xl={2}>
-                    <Card style={{padding: "10px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}>
-                        <Card.Img variant="top" src={Images.location} style={{width: "35%", margin: "auto"}}/>
+                    <Card style={{padding: "10px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",display:"flex", flexDirection:"row"}}>
+                        <Card.Img variant="top" src={Images.location} style={{width: "35%", padding:"10px"}}/>
                         <Card.Body style={{padding: "0", paddingTop: "10px"}}>
-                            <Card.Title style={{textAlign: "center"}}>35 ,Reid Avenue, Colombo 7</Card.Title>
+                            <Card.Title style={{textAlign: "center"}}>Address</Card.Title>
+                            <Card.Text style={{textAlign: "center"}}>35 ,Reid Avenue, Colombo 7</Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col xl={2}>
-                    <Card style={{padding: "10px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}>
-                        <Card.Img variant="top" src={Images.email} style={{width: "35%", margin: "auto"}}/>
+                    <Card style={{padding: "10px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", display:"flex", flexDirection:"row"}}>
+                        <Card.Img variant="top" src={Images.email} style={{width: "35%", padding:"10px"}}/>
                         <Card.Body style={{padding: "0", paddingTop: "10px"}}>
-                            <Card.Title style={{textAlign: "center"}}>contact.teachme.lk</Card.Title>
+                            <Card.Title style={{textAlign: "center"}}>Email</Card.Title>
+                            <Card.Text style={{textAlign: "center"}}>contact.teachme.lk</Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
