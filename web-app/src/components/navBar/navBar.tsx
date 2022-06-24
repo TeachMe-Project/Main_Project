@@ -25,6 +25,12 @@ const NavBar = () => {
         screenComponent.scrollIntoView({behavior:"smooth", });
     }
 
+    // const navigate = useNavigate();
+    // const navigateToAdmin = () => {
+    //     navigate('/admin');
+    // };
+    
+
     return (
         <React.Fragment>
             <AppBar sx={{ color:"#363636" , background:"none", paddingTop:"10px", paddingBottom:"10px", position:"relative"}}>
