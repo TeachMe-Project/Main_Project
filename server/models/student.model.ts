@@ -1,16 +1,8 @@
-import {z} from 'zod';
+const Joi = require('joi');
 
-const studentSchema = z.object({
-    body: z.object({
-        name: z.string({
-            required_error: "Name is required",
-        }),
-        email: z.string({
-            required_error: "Email is required"
-        })
-            .email("Not a valid email"),
-    }),
+const studentSchema = Joi.object({
+    email: Joi.string().email().lowercase().required(),
+    name: Joi.string().min(1).required()
 });
 
 export default studentSchema;
-
