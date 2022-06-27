@@ -1,6 +1,7 @@
 import React from "react";
 import { MDBDataTable, MDBTable } from "mdbreact";
 
+const btn= () => <button className="btn btn-primary">Add</button>; 
 const ExistingTutorsPage = () => {
   const data = {
     columns: [
@@ -41,11 +42,12 @@ const ExistingTutorsPage = () => {
         width: 100,
       },
       {
-        label: "",
-        field: "action",
+        label: "Action",
+        field: "removeBtn",
         sort: "asc",
         width: 100,
       },
+      
     ],
     rows: [
       {
@@ -55,7 +57,7 @@ const ExistingTutorsPage = () => {
         last_name: "Batadombalena",
         contact_no: "4728332341",
         gender: "Female",
-        action:"Remove"
+        removeBtn:<button className="btn btn-primary">Remove</button>,
       },
       {
         id: "2",
@@ -516,7 +518,7 @@ const ExistingTutorsPage = () => {
   return (
     <MDBDataTable
       className="text-center"
-      theaderColor="primary-color"
+      theaderColor="#011250"
       tbodyColor="secondary-color"
       searching={true}
       data={data}
