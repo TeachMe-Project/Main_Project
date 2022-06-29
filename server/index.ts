@@ -29,7 +29,19 @@ app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 
+
+
+
 app.use('/student', studentRouter)
+
+
+
+
+
+
+
+
+
 
 
 // app.use((req, res, next) => {

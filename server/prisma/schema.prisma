@@ -20,11 +20,14 @@ model admin {
 
 /// This model has been renamed to 'Renamedclass' during introspection, because the original name 'class' is reserved.
 model Renamedclass {
-  class_id  Int    @id @default(autoincrement())
-  course_id Int
-  course    course @relation("classTocourse", fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO CLASS FROM COURSE")
+  class_id   Int     @id @default(autoincrement())
+  course_id  Int
+  student_id Int
+  course     course  @relation("classTocourse", fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO CLASS FROM COURSE")
+  student    student @relation("classTostudent", fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO CLASS FROM STUDENT")
 
   @@index([course_id], map: "FK TO CLASS FROM COURSE")
+  @@index([student_id], map: "FK TO CLASS FROM STUDENT")
   @@map("class")
 }
 
@@ -57,9 +60,12 @@ model homework {
   uploaded_date DateTime @db.Date
   homework      String   @db.VarChar(1000)
   course_id     Int
+  student_id    Int
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM COURSE")
+  student       student  @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM STUDENT")
 
   @@index([course_id], map: "FK TO HOMEWORK FROM COURSE")
+  @@index([student_id], map: "FK TO HOMEWORK FROM STUDENT")
 }
 
 model institute {
@@ -94,9 +100,23 @@ model notes {
   uploaded_date DateTime @db.Date
   note          String   @db.VarChar(1000)
   course_id     Int
+  student_id    Int
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO NOTE FROM COURSE")
+  student       student  @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO NOTE FROM STUDENT")
 
   @@index([course_id], map: "FK TO NOTE FROM COURSE")
+  @@index([student_id], map: "FK TO NOTE FROM STUDENT")
+}
+
+model notification {
+  notification_id Int                      @id @default(autoincrement())
+  user_id         Int
+  subject         String                   @db.VarChar(300)
+  description     String                   @db.VarChar(10000)
+  read_status     notification_read_status @default(unread)
+  user            user                     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK TO NOTIF FROM USER")
+
+  @@index([user_id], map: "FK TO NOTIF FROM USER")
 }
 
 model parent {
@@ -136,6 +156,9 @@ model student {
   parent_id       Int
   parent          parent                  @relation(fields: [parent_id], references: [parent_id], onDelete: Cascade, map: "FK TO STUDENT FROM PARENT")
   user            user                    @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "FK TO STUDENT FROM USER")
+  class           Renamedclass[]          @relation("classTostudent")
+  homework        homework[]
+  notes           notes[]
   parent_payment  parent_payment[]
   student_course  student_course[]
   student_payment student_payment[]
@@ -190,12 +213,13 @@ model teacher {
 }
 
 model user {
-  user_id       Int         @id @default(autoincrement())
-  username      String      @unique(map: "username") @db.VarChar(50)
-  type          user_type   @default(student)
-  profile_image String      @db.VarChar(255)
+  user_id       Int            @id @default(autoincrement())
+  username      String         @unique(map: "username") @db.VarChar(50)
+  type          user_type      @default(student)
+  profile_image String         @db.VarChar(255)
   admin         admin[]
   institute     institute[]
+  notification  notification[]
   parent        parent[]
   student       student[]
   teacher       teacher[]
@@ -209,6 +233,11 @@ enum course_day {
   THU
   FRI
   SAT
+}
+
+enum notification_read_status {
+  read
+  unread
 }
 
 enum parent_security_status {

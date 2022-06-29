@@ -1,7 +1,7 @@
 import express from "express";
 import {Request,Response} from "express";
 import { PrismaClient } from '@prisma/client'
-import {integer} from "twilio/lib/base/deserialize";
+import {number} from "joi";
 
 const prisma = new PrismaClient()
 
@@ -23,7 +23,7 @@ export const getStudent=async (req:Request,res:Response)=>{
     try {
         const data =await prisma.student.findMany({
             where:{
-                user_id:integer(req.params.id)
+                user_id:Number(req.params.id)
             }
         })
         res.status(200).send(data)
@@ -34,18 +34,55 @@ export const getStudent=async (req:Request,res:Response)=>{
     }
 }
 
-export const studentCourses=async (req:Request,res:Response)=>{
 
-        try {
-            const data =await prisma.student.findMany({
-                where:{
-                    user_id:integer(req.params.id)
-                }
-            })
-            res.status(200).send(data)
-        }
+export const getStudentUpcomingClasses=async (req:Request,res:Response)=>{
 
-        catch (error) {
-            res.status(500).send(error);
-        }
+    try {
+        const data =await prisma.renamedclass.findMany(
+            {
+                where:{student_id:Number(req.params.id)}
+
+            }
+        )
+        res.status(200).send(data)
+    }
+
+    catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+export const getStudentCourses=async (req:Request,res:Response)=>{
+
+    try {
+        const data =await prisma.student_course.findMany(
+            {
+                where:{student_id:Number(req.params.id)},
+                include:{course:true},
+
+            }
+        )
+        res.status(200).send(data)
+    }
+
+    catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+export const getStudentHomeworks=async (req:Request,res:Response)=>{
+
+    try {
+        const data =await prisma.homework.findMany(
+            {
+                where:{student_id:Number(req.params.id)}
+
+            }
+        )
+        res.status(200).send(data)
+    }
+
+    catch (error) {
+        res.status(500).send(error);
+    }
 }
