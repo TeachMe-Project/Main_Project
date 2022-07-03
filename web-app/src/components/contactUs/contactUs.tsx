@@ -64,7 +64,7 @@ const ContactUs: React.FC = () => {
                         <Card.Img variant="top" src={Images.email} style={{width: "35%", padding:"10px"}}/>
                         <Card.Body style={{padding: "0", paddingTop: "10px"}}>
                             <Card.Title style={{textAlign: "center"}}>Email</Card.Title>
-                            <Card.Text style={{textAlign: "center"}}>contact.teachme.lk</Card.Text>
+                            <Card.Text style={{textAlign: "center"}}>contact@teachme.lk</Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
