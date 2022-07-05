@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     AppBar,
     Tab,
@@ -18,13 +18,14 @@ const NavBar = () => {
     const [value, setValue] = useState();
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-    const {loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently} = useAuth0();
+    const {loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently, user} = useAuth0();
 
     const switchScreen = (screen: string) => {
         let screenComponent = document.getElementById(screen);
         // @ts-ignore
         screenComponent.scrollIntoView({behavior: "smooth",});
     }
+
 
     const loginButtonRender = () => {
         return (
@@ -60,9 +61,9 @@ const NavBar = () => {
         }} variant="secondary"
         >
             Logout
-        </Button>)
+        </Button>
+        )
     }
-
 
     return (
         <React.Fragment>
@@ -101,7 +102,8 @@ const NavBar = () => {
                                 <Tab label="Contact" onClick={() => switchScreen("ContactUs")}
                                      style={{color: "#363636", fontSize: "16px", fontWeight: "600"}}/>
                             </Tabs>
-                            {isAuthenticated ? logoutRender() : loginButtonRender()}
+
+                            {isAuthenticated ? console.log(user) : loginButtonRender()}
                         </>
                     )}
                 </Toolbar>

@@ -8,7 +8,30 @@ import contactUs from './contactUs/contactUs.webp';
 import email from './contactUs/email.webp';
 import location from './contactUs/location.webp';
 import phone from './contactUs/phone.webp';
+import instituteSignup from './signup/institute.webp';
+import parentSignup from "./signup/parent.webp";
+import studentSignup from "./signup/student.webp";
+import teacherSignup from "./signup/teacher.webp";
+import bannerSignup from './signup/banner.webp';
+import logo from "./logo.png";
+import formComplete from "./signup/formComplete.png"
 
 export default {
-    banner, monitoring, online_lesson, reading_books, virtual_class, home, contactUs, email, location, phone
+    banner,
+    monitoring,
+    online_lesson,
+    reading_books,
+    virtual_class,
+    home,
+    contactUs,
+    email,
+    location,
+    phone,
+    instituteSignup,
+    parentSignup,
+    studentSignup,
+    teacherSignup,
+    bannerSignup,
+    logo,
+    formComplete
 }

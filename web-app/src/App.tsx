@@ -2,7 +2,8 @@ import React from 'react';
 import { Routes, Route} from "react-router-dom";
 import Home from "./components/Home";
 import AboutUs from "./components/aboutUs/aboutUs";
-import TeacherSignup from "./components/signup/TeacherSignUp";
+import SignUpCategory from "./components/signup/SignUpCategory";
+import TeacherSignup from "./components/signup/TeacherSignup";
 
 const App: React.FC = () => {
     return (
@@ -10,7 +11,8 @@ const App: React.FC = () => {
             <Routes>
                 <Route path="/" element={<Home/>} />
                 <Route path="/dashboard" element={<AboutUs />} />
-                <Route path="/signup" element={<TeacherSignup />} />
+                <Route path="/Signup" element={<SignUpCategory/>}/>
+                <Route path="/teacherSignup" element={<TeacherSignup/>}/>
             </Routes>
         </div>
     );

@@ -12,10 +12,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Auth0Provider
-        domain="prasadkpd.us.auth0.com"
-        clientId="FbgbRqzMDHQTtfynGLGbuuvJYJf1HJc0"
+        domain="learningsl.us.auth0.com"
+        clientId="JzBbJacKTm5apFvzjOsPdFzrOKjW2iZQ"
         redirectUri="http://localhost:3000/dashboard"
-        audience="this"
+        audience="learning"
         scope="openid profile email"
     >
         <BrowserRouter>
