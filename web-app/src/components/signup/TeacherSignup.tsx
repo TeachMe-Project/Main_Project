@@ -6,6 +6,7 @@ import * as yup from 'yup';
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
+import Footer from "../footer/footer";
 
 const schema = yup.object().shape({
     Title: yup.string().required(),
@@ -583,6 +584,7 @@ const TeacherSignup = () => {
                     </Row>
                 </Col>
             </Row>
+            <Footer/>
         </Container>
     );
 };

@@ -5,9 +5,10 @@ import {ImArrowLeft2} from "react-icons/im";
 import Images from "../../assets/images/Images";
 import {useNavigate} from "react-router-dom";
 import {useAuth0} from "@auth0/auth0-react";
+import Footer from "../footer/footer";
 
 const TEXTS = [
-    "Get started today and let Proktara deliver secure and frictionless online proctoring. So, you can focus on the quality of your evaluation.",
+    "Get started today and let Learning deliver online learning. So, you can focus on the quality of your tutoring.",
     "Learning is an on-demand, easy-to-use, and cost-effective online learning solution for higher education institutions.",
 ];
 
@@ -32,12 +33,14 @@ const SignUpCategory = () => {
                 <Col lg={6} md={12} sm={12} className="leftSide d-flex flex-column justify-content-center">
                     <Row className="ms-lg-5 me-lg-4">
                         <Col>
-                            <div className="d-md-flex flex-column align-items-lg-start align-items-md-center justify-content-between mt-4">
+                            <div
+                                className="d-md-flex flex-column align-items-lg-start align-items-md-center justify-content-between mt-4">
                                 <a href="/"
                                    className="backBtn d-lg-flex text-black flex-row align-items-center fw-bolder text-decoration-none mb-lg-5 d-md-none d-sm-none">
                                     <ImArrowLeft2 style={{marginRight: "4px"}}/> Go Back To Homepage
                                 </a>
-                                <img src={Images.logo} className="logo mt-lg-3" onClick={() => navigate('/')} alt="logo"/>
+                                <img src={Images.logo} className="logo mt-lg-3" onClick={() => navigate('/')}
+                                     alt="logo"/>
 
                             </div>
                             <h1 className="mt-lg-4 mt-md-4 mb-md-3 ms-md-2">
@@ -76,11 +79,7 @@ const SignUpCategory = () => {
                     </Row>
                 </Col>
             </Row>
-            <Row style={{height: "5vh", position: "absolute", bottom: "0", width: "100vw"}} className="text-center">
-                <Col lg={12}>
-                    ©Copyright 2022. All rights reserved.
-                </Col>
-            </Row>
+            <Footer/>
         </Container>
     );
 };

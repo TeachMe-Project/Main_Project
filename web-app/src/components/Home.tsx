@@ -3,7 +3,7 @@ import NavBar from "./navBar/navBar";
 import AboutUs from "./aboutUs/aboutUs";
 import Pricing from "./pricing/pricing";
 import ContactUs from "./contactUs/contactUs";
-import Footer from "./footer/footer";
+import FooterHome from "./footer/footerHome";
 import Banner from "./banner/Banner";
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
             <AboutUs/>
             <Pricing/>
             <ContactUs/>
-            <Footer/>
+            <FooterHome/>
         </div>
     );
 };
