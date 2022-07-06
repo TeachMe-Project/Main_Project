@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {
     AppBar,
     Tab,
@@ -12,6 +12,7 @@ import DrawerComp from "./Drawer";
 import {Button} from "react-bootstrap";
 import {BiBookReader} from "react-icons/bi";
 import {useAuth0} from "@auth0/auth0-react";
+import {useNavigate} from "react-router-dom";
 
 
 const NavBar = () => {
@@ -19,6 +20,7 @@ const NavBar = () => {
     const theme = useTheme();
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
     const {loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently, user} = useAuth0();
+    const navigate = useNavigate();
 
     const switchScreen = (screen: string) => {
         let screenComponent = document.getElementById(screen);
@@ -44,7 +46,8 @@ const NavBar = () => {
                     borderRadius: "20px",
                     padding: " 10px 30px 10px 30px",
                     fontWeight: "700"
-                }} variant="secondary">
+                }} variant="secondary"
+                onClick={()=> navigate('/signup')}>
                     SignUp
                 </Button>
             </>
@@ -54,14 +57,14 @@ const NavBar = () => {
     const logoutRender = () => {
         // @ts-ignore
         return (<Button onClick={logout} style={{
-            marginLeft: "auto",
-            borderRadius: "20px",
-            padding: " 10px 30px 10px 30px",
-            fontWeight: "700"
-        }} variant="secondary"
-        >
-            Logout
-        </Button>
+                marginLeft: "auto",
+                borderRadius: "20px",
+                padding: " 10px 30px 10px 30px",
+                fontWeight: "700"
+            }} variant="secondary"
+            >
+                Logout
+            </Button>
         )
     }
 
@@ -103,7 +106,7 @@ const NavBar = () => {
                                      style={{color: "#363636", fontSize: "16px", fontWeight: "600"}}/>
                             </Tabs>
 
-                            {isAuthenticated ? console.log(user) : loginButtonRender()}
+                            {isAuthenticated ? logoutRender() : loginButtonRender()}
                         </>
                     )}
                 </Toolbar>

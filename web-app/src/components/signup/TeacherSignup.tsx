@@ -13,22 +13,25 @@ const schema = yup.object().shape({
     Lastname: yup.string().required(),
     Email: yup.string().email().required(),
     Password: yup.string().required().matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ),
     Confirm_Password: yup.string().label('Confirm Password').required().matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ).oneOf([yup.ref('Password'), null], 'Passwords must match'),
     Description: yup.string().required(),
-    Qualification: yup.string().required(),
+    Qualification: yup
+        .mixed()
+        .required()
+    ,
     Mobile: yup.string().required().matches(
-        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+        /^((\\+[1-9]{1,4}[ \\-]*)|(\\(\d{2,3}\\)[ \\-]*)|(\d{2,4})[ \\-]*)*?\d{3,4}?[ \\-]*\d{3,4}?$/,
         "Phone number is not valid"),
-    AccountName:yup.string().label("Account Holder Name").required(),
-    BankName:yup.string().label("Bank Name").required(),
-    BranchName:yup.string().label("Branch Name").required(),
-    AccountNo:yup.string().label("Account Number").required()
+    AccountName: yup.string().label("Account Holder Name").required(),
+    BankName: yup.string().label("Bank Name").required(),
+    BranchName: yup.string().label("Branch Name").required(),
+    AccountNo: yup.string().label("Account Number").required()
 });
 
 
@@ -42,15 +45,15 @@ const initialState = {
     Mobile: '',
     Description: '',
     Qualification: '',
-    AccountName:'',
-    BankName:'',
-    BranchName:'',
-    AccountNo:''
+    AccountName: '',
+    BankName: '',
+    BranchName: '',
+    AccountNo: ''
 }
 
 const TeacherSignup = () => {
 
-    const [pageStage, setPageStage] = useState(4);
+    const [pageStage, setPageStage] = useState(1);
     const [titleValidate, setTitleValidate] = useState<boolean>(false);
     const [fistNameValidate, setFistNameValidate] = useState(false);
     const [lastNameValidate, setLastNameValidate] = useState(false);
@@ -192,7 +195,7 @@ const TeacherSignup = () => {
                     <Row className="d-flex align-items-center">
                         <h1 className="text-center mb-lg-2 signup-header pt-md-3">Signup For Teacher</h1>
                         <Col lg={6}>
-                            <img src={Images.teacherSignup} className="Signup-Image w-100 p-lg-2 mt-md-3 my-lg-auto"/>
+                            <img src={Images.teacherSignup} className="Signup-Image w-100 p-lg-2 mt-md-3 my-lg-auto" alt="teacher-signup"/>
                         </Col>
                         <Col>
                             <Row>
@@ -228,7 +231,6 @@ const TeacherSignup = () => {
                                       handleBlur,
                                       values,
                                       touched,
-                                      isValid,
                                       errors,
                                       validateField,
 
@@ -378,7 +380,7 @@ const TeacherSignup = () => {
                                                 </Row>
                                             </LazyLoad>}
                                             {(pageStage === 2) && <LazyLoad once>
-                                                <Row className="mt-lg-1 pe-lg-4">
+                                                <Row className=" pe-lg-4">
                                                     <Col lg={12} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationMobile">
                                                             <Form.Label>Mobile No</Form.Label>
@@ -398,7 +400,7 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-1 pe-lg-4">
+                                                <Row className=" pe-lg-4">
                                                     <Col lg={12} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationDescription">
                                                             <Form.Label>Description</Form.Label>
@@ -418,13 +420,13 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-1 pe-lg-4">
+                                                <Row className="pe-lg-4">
                                                     <Col lg={12} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3"
                                                                     controlId="validationQualification">
                                                             <Form.Label>Qualification</Form.Label>
                                                             <Form.Control
-                                                                type="text"
+                                                                type="file"
                                                                 placeholder="Enter the qualification here"
                                                                 name="Qualification"
                                                                 value={values.Qualification}
@@ -439,7 +441,7 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-1 pe-lg-4">
+                                                <Row className="pe-lg-4">
                                                     <Col className="d-flex flex-row justify-content-lg-between">
 
                                                         <Button type="button" className="px-4"
@@ -553,7 +555,12 @@ const TeacherSignup = () => {
 
                                                         <Button type="submit" className="px-4"
                                                                 variant="primary"
-                                                                onClick={()=> setPageStage(4)}
+                                                                onClick={() => {
+                                                                    if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {
+                                                                        setPageStage(4);
+                                                                    }
+                                                                }
+                                                                }
                                                                 onClickCapture={() => {
                                                                     validateField("AccountName");
                                                                     validateField("BankName");

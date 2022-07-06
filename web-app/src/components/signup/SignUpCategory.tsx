@@ -8,7 +8,7 @@ import {useAuth0} from "@auth0/auth0-react";
 
 const TEXTS = [
     "Get started today and let Proktara deliver secure and frictionless online proctoring. So, you can focus on the quality of your evaluation.",
-    "Proktara is an on-demand, easy-to-use, and cost-effective online proctoring solution for higher education institutions and professional organizations.",
+    "Learning is an on-demand, easy-to-use, and cost-effective online learning solution for higher education institutions.",
 ];
 
 const SignUpCategory = () => {
@@ -37,7 +37,7 @@ const SignUpCategory = () => {
                                    className="backBtn d-lg-flex text-black flex-row align-items-center fw-bolder text-decoration-none mb-lg-5 d-md-none d-sm-none">
                                     <ImArrowLeft2 style={{marginRight: "4px"}}/> Go Back To Homepage
                                 </a>
-                                <img src={Images.logo} className="logo mt-lg-3" onClick={() => navigate('/')} alt=""/>
+                                <img src={Images.logo} className="logo mt-lg-3" onClick={() => navigate('/')} alt="logo"/>
 
                             </div>
                             <h1 className="mt-lg-4 mt-md-4 mb-md-3 ms-md-2">
@@ -55,7 +55,7 @@ const SignUpCategory = () => {
                      className="d-flex flex-lg-row justify-content-lg-center justify-content-md-center mt-md-2 justify-content-md-center">
                     <Row className="categoryForm p-4">
                         <Col className=" d-flex flex-column">
-                            <img src={Images.bannerSignup} className="formImage"/>
+                            <img src={Images.bannerSignup} className="formImage" alt="form-image"/>
                             <h1 className="text-center my-lg-2">Sign Up As</h1>
                             <Button onClick={() => navigate('/teacherSignup')}
                                     className="mt-lg-4 mt-md-3 mx-auto userBtn">Teacher</Button>
@@ -68,7 +68,7 @@ const SignUpCategory = () => {
                                     className="d-flex flex-row align-items-center justify-content-center mt-lg-4 mt-md-3 loginFooter">
                                     <h6 className="text-center mb-0">Already have an account?</h6><a
                                     onClick={loginWithRedirect}
-                                    className="pointer-event ms-3 p-0 mb-0 text-decoration-none fw-bold"
+                                    className="ms-3 p-0 mb-0 text-decoration-none fw-bold login-button"
                                     style={{color: "#45484c"}}>Login</a>
                                 </Col>
                             </Row>

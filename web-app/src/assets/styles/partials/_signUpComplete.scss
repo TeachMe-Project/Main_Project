@@ -1,51 +1,16 @@
-.form-complete {
+@import "../variables/variables";
 
-  h2 {
-    color: green;
-    text-align: center;
+.Signup-Complete {
+  h1 {
+    color: $success-color;
+    font-weight: 600;
   }
 
-  img {
-    margin: 0 auto;
-    //padding: $spacing-medium 0 $spacing-large 0;
-    width: 100px;
-    height: auto;
+  h5, h4 {
+    color: $font-grey-color;
   }
 
-  // fade in image transition
-  .fade-in-image {
-    animation: fadeIn 2.5s;
-    -webkit-animation: fadeIn 2.5s;
-    -moz-animation: fadeIn 2.5s;
-    -o-animation: fadeIn 2.5s;
-    -ms-animation: fadeIn 2.5s;
+  button{
+    border-radius: 20px;
   }
-  @keyframes fadeIn {
-    0% {opacity:0;}
-    100% {opacity:1;}
-  }
-
-  p {
-    text-align: center;
-    color: green;
-    //font-weight: $font-weight-medium;
-    //line-height: $font-line-height-large;
-  }
-
-}
-
-// JSON page code outout render
-.code-output {
-  //margin-top: $spacing-xlarge;
-  //border-radius: $border-radius-medium;
-  //background-color: $secondary-color;
-
-  // code format output
-  pre {
-    //font-weight: $font-weight-medium;
-    //padding: $spacing-medium;
-    //color: $primary-color-background;
-    white-space: pre-wrap; // break words that are too long
-  }
-
 }

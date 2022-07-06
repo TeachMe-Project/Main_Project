@@ -25,6 +25,7 @@
 
     .logo {
       width: 300px;
+      cursor: pointer;
       @media (max-width: $xs-screen-size) {
        width: 200px;
       }
@@ -37,7 +38,7 @@
   }
 
   .categoryForm {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     border-radius: 20px;
 
     .formImage {
@@ -54,6 +55,10 @@
     .loginFooter {
       color: $font-grey-color;
       font-size: 18px;
+
+      .login-button{
+        cursor: pointer;
+      }
     }
   }
 
