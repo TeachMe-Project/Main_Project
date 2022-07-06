@@ -14,7 +14,7 @@ const SignUpComplete = () => {
             <Col lg={12} className="d-lg-flex flex-column align-items-center mt-2">
                 <h1 className="mb-3">Signup Completed</h1>
                 <Row className="d-lg-flex flex-lg-column justify-content-lg-center">
-                    <Col lg={10} className="mx-auto">
+                    <Col lg={8} className="mx-auto">
                         <img src={Images.formComplete} className="w-100" alt="Success"/>
                     </Col>
                 </Row>

@@ -4,11 +4,13 @@
 .Signup-Container {
   height: 100vh;
   font-family: 'Poppins', sans-serif;
-
+  .Signup-Image{
+    margin: 0 auto 0 auto;
+  }
 
   .Signup {
     border-radius: 20px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     height: 70vh;
 
     @media (max-width: $md-screen-size) {

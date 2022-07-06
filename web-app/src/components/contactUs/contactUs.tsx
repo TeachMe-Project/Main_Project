@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Col, Form, Image, Row, FormText, Button, Container, Card} from "react-bootstrap";
+import React from 'react';
+import {Col, Form, Image, Row, Button, Container, Card} from "react-bootstrap";
 import Images from "../../assets/images/Images";
 import {GrSend} from "react-icons/gr";
 import {Formik} from "formik";
@@ -31,7 +31,6 @@ const ContactUs: React.FC = () => {
                   handleBlur,
                   values,
                   touched,
-                  isValid,
                   errors,
               }) => (
                 <Container fluid={true} id='ContactUs'>
@@ -155,7 +154,7 @@ const ContactUs: React.FC = () => {
                                 <Card.Img variant="top" src={Images.email} style={{width: "35%", padding: "10px"}}/>
                                 <Card.Body style={{padding: "0", paddingTop: "10px"}}>
                                     <Card.Title style={{textAlign: "center"}}>Email</Card.Title>
-                                    <Card.Text style={{textAlign: "center"}}>contact@teachme.lk</Card.Text>
+                                    <Card.Text style={{textAlign: "center"}}>contact@learningsl.lk</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>

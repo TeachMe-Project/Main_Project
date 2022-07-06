@@ -54,7 +54,7 @@ const initialState = {
 
 const TeacherSignup = () => {
 
-    const [pageStage, setPageStage] = useState(1);
+    const [pageStage, setPageStage] = useState(4);
     const [titleValidate, setTitleValidate] = useState<boolean>(false);
     const [fistNameValidate, setFistNameValidate] = useState(false);
     const [lastNameValidate, setLastNameValidate] = useState(false);
@@ -195,8 +195,8 @@ const TeacherSignup = () => {
                 <Col lg={9} md={12} xs={12} className="Signup d-lg-flex flex-lg-column justify-content-lg-center">
                     <Row className="d-flex align-items-center">
                         <h1 className="text-center mb-lg-2 signup-header pt-md-3">Signup For Teacher</h1>
-                        <Col lg={6}>
-                            <img src={Images.teacherSignup} className="Signup-Image w-100 p-lg-2 mt-md-3 my-lg-auto" alt="teacher-signup"/>
+                        <Col lg={6} className="d-lg-flex justify-content-lg-center">
+                            <img src={Images.teacherSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto" alt="teacher-signup"/>
                         </Col>
                         <Col>
                             <Row>
@@ -242,7 +242,7 @@ const TeacherSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationTitle">
-                                                            <Form.Label>Title</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Title</Form.Label>
                                                             <Form.Select
                                                                 name="Title"
                                                                 value={values.Title}
@@ -263,7 +263,7 @@ const TeacherSignup = () => {
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationFirstName">
-                                                            <Form.Label>First Name</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>First Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter the first name here"
@@ -283,7 +283,7 @@ const TeacherSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationLastname">
-                                                            <Form.Label>Last Name</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Last Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter the last name here"
@@ -301,7 +301,7 @@ const TeacherSignup = () => {
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationEmail">
-                                                            <Form.Label>Email</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Email</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter the email"
@@ -321,7 +321,7 @@ const TeacherSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationPassword">
-                                                            <Form.Label>Password</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
                                                                 placeholder="Enter the password here"
@@ -339,7 +339,7 @@ const TeacherSignup = () => {
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationRPassword">
-                                                            <Form.Label>Retype Password</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Retype Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
                                                                 placeholder="Retype password here"
@@ -384,7 +384,7 @@ const TeacherSignup = () => {
                                                 <Row className=" pe-lg-4">
                                                     <Col lg={12} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationMobile">
-                                                            <Form.Label>Mobile No</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Mobile No</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="077-1234567"
@@ -404,10 +404,10 @@ const TeacherSignup = () => {
                                                 <Row className=" pe-lg-4">
                                                     <Col lg={12} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationDescription">
-                                                            <Form.Label>Description</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Description</Form.Label>
                                                             <Form.Control as="textarea"
                                                                           placeholder="Enter the description here"
-                                                                          rows={5}
+                                                                          rows={4}
                                                                           name="Description"
                                                                           value={values.Description}
                                                                           onChange={handleChange}
@@ -425,7 +425,7 @@ const TeacherSignup = () => {
                                                     <Col lg={12} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3"
                                                                     controlId="validationQualification">
-                                                            <Form.Label>Qualification</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Qualification</Form.Label>
                                                             <Form.Control
                                                                 type="file"
                                                                 placeholder="Enter the qualification here"
@@ -472,7 +472,7 @@ const TeacherSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4">
                                                     <Col lg={12} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationAccountName">
-                                                            <Form.Label>Account Holder Name</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Account Holder Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter the account name here"
@@ -492,7 +492,7 @@ const TeacherSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationBankName">
-                                                            <Form.Label>Bank Name</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Bank Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter the bank here"
@@ -510,7 +510,7 @@ const TeacherSignup = () => {
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationBranchName">
-                                                            <Form.Label>Branch Name</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Branch Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter the branch name here"
@@ -530,7 +530,7 @@ const TeacherSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4">
                                                     <Col lg={12} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationAccountNo">
-                                                            <Form.Label>Account No</Form.Label>
+                                                            <Form.Label style={{fontWeight:600}}>Account No</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter the account no here"
