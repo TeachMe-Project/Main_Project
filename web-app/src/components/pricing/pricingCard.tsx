@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card, Col, ListGroup, Row} from "react-bootstrap";
+import {Button, Card, Col, ListGroup} from "react-bootstrap";
 import {FcOk} from "react-icons/fc";
 import {BsFillCartCheckFill} from "react-icons/bs";
 import {IconContext} from "react-icons";

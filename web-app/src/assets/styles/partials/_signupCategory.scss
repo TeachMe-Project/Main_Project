@@ -1,0 +1,66 @@
+@import "../variables/variables";
+
+.signupCategory {
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+
+  @media (max-width: $md-screen-size) {
+    height: max-content;
+  }
+
+  .leftSide {
+    height: 100vh;
+
+    @media (max-width: $md-screen-size) {
+      height: max-content;
+    }
+
+    .backBtn {
+      font-size: 20px;
+
+      @media (max-width: $xs-screen-size) {
+        display: none;
+      }
+    }
+
+    .logo {
+      width: 300px;
+      cursor: pointer;
+      @media (max-width: $xs-screen-size) {
+       width: 200px;
+      }
+    }
+
+    .transformText {
+      font-size: 18px;
+    }
+
+  }
+
+  .categoryForm {
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    border-radius: 20px;
+
+    .formImage {
+      width: 400px;
+    }
+
+    .userBtn {
+      font-size: 20px;
+      font-weight: normal;
+      width: 250px;
+      border-radius: 12px;
+    }
+
+    .loginFooter {
+      color: $font-grey-color;
+      font-size: 18px;
+
+      .login-button{
+        cursor: pointer;
+      }
+    }
+  }
+
+
+}

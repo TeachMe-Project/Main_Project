@@ -3,7 +3,7 @@ import {Button, Col, Container, Image, Row} from "react-bootstrap";
 import Images from "../../assets/images/Images";
 import {MdOutlineAddShoppingCart, MdOutlineSend} from "react-icons/md";
 
-const Home: React.FC = () => {
+const Banner: React.FC = () => {
     return (
         <Container fluid={true}>
             <Row className="mt-3">
@@ -30,4 +30,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default Banner;
