@@ -6,12 +6,14 @@ import React from 'react';
 // import ContactUs from "./components/contactUs/contactUs";
 import NavBar from "./components/navBar/navBar";
 import Institute from './components/institute/institute';
+import Admin from './components/admin/admin';
 
 const App: React.FC = () => {
     return (
         <div>
             <NavBar/>
-            <Institute/>
+            <Admin />
+            {/* <Institute/> */}
             {/* <Home/>
             <AboutUs/>
             <Pricing/>
