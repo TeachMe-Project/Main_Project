@@ -2,11 +2,13 @@ import React, {useRef} from 'react';
 import {Col, Container, Image, Row} from "react-bootstrap";
 import Feature from "./feature";
 import Images from "../../assets/images/Images";
+import NavBar from "../navBar/navBar";
 
 const AboutUs: React.FC = () => {
 
     return (
         <Container fluid={true} className='about-us pt-4' id="About-Us"  >
+            <NavBar/>
             <h1 style={{
                 fontSize: "60px",
                 textAlign: "center",

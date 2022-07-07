@@ -1,6 +1,6 @@
 import React from 'react';
 import PricingCard from "./pricingCard";
-import {Col, Container, Row} from "react-bootstrap";
+import {Container, Row} from "react-bootstrap";
 
 const Pricing: React.FC = () => {
     return (
