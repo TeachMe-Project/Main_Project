@@ -9,9 +9,9 @@ import SignUpComplete from "./signUpComplete";
 import Footer from "../footer/footer";
 
 const schema = yup.object().shape({
-    Title: yup.string().required(),
-    Firstname: yup.string().required(),
-    Lastname: yup.string().required(),
+    InstituteName: yup.string().required().label('Institute Name'),
+    OwnerName: yup.string().required().label('Owner Name'),
+    Location: yup.string().required(),
     Email: yup.string().email().required(),
     Password: yup.string().required().matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
@@ -22,10 +22,7 @@ const schema = yup.object().shape({
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ).oneOf([yup.ref('Password'), null], 'Passwords must match'),
     Description: yup.string().required(),
-    Qualification: yup
-        .mixed()
-        .required()
-    ,
+    Address: yup.string().required(),
     Mobile: yup.string().required().matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\(\d{2,3}\\)[ \\-]*)|(\d{2,4})[ \\-]*)*?\d{3,4}?[ \\-]*\d{3,4}?$/,
         "Phone number is not valid"),
@@ -37,32 +34,32 @@ const schema = yup.object().shape({
 
 
 const initialState = {
-    Title: '',
-    Firstname: '',
-    Lastname: '',
+    InstituteName: '',
+    OwnerName: '',
+    Location: '',
     Email: '',
     Password: '',
     Confirm_Password: '',
     Mobile: '',
     Description: '',
-    Qualification: '',
+    Address: '',
     AccountName: '',
     BankName: '',
     BranchName: '',
     AccountNo: ''
 }
 
-const TeacherSignup = () => {
+const InstituteSignup = () => {
 
-    const [pageStage, setPageStage] = useState(1);
-    const [titleValidate, setTitleValidate] = useState<boolean>(false);
-    const [fistNameValidate, setFistNameValidate] = useState(false);
-    const [lastNameValidate, setLastNameValidate] = useState(false);
+    const [pageStage, setPageStage] = useState(4);
+    const [instituteNameValidate, setInstituteNameValidate] = useState<boolean>(false);
+    const [ownerNameValidate, setOwnerNameValidate] = useState(false);
+    const [locationValidate, setLocationValidate] = useState(false);
     const [emailValidate, setEmailValidate] = useState(false);
     const [passwordValidate, setPasswordValidate] = useState(false);
     const [rPasswordValidate, setRPasswordValidate] = useState(false);
     const [descriptionValidate, setDescriptionValidate] = useState(false);
-    const [qualificationValidate, setQualificationValidate] = useState(false);
+    const [addressValidate, setAddressValidate] = useState(false);
     const [mobileValidate, setMobileValidate] = useState(false);
     const [accountNameValidate, setAccountNameValidate] = useState(false);
     const [bankNameValidate, setBankNameValidate] = useState(false);
@@ -70,30 +67,30 @@ const TeacherSignup = () => {
     const [accountNoValidate, setAccountNoValidate] = useState(false);
 
 
-    const changeTitleValidate = (status: boolean): boolean => {
+    const changeInstituteNameValidate = (status: boolean): boolean => {
         if (status) {
-            setTitleValidate(true);
+            setInstituteNameValidate(true);
             return false
         } else {
-            setTitleValidate(false);
+            setInstituteNameValidate(false);
             return true
         }
     }
-    const changeFistNameValidate = (status: boolean): boolean => {
+    const changeOwnerNameValidate = (status: boolean): boolean => {
         if (status) {
-            setFistNameValidate(true);
+            setOwnerNameValidate(true);
             return false
         } else {
-            setFistNameValidate(false);
+            setOwnerNameValidate(false);
             return true
         }
     }
-    const changeLastNameValidate = (status: boolean): boolean => {
+    const changeLocationValidate = (status: boolean): boolean => {
         if (status) {
-            setLastNameValidate(true);
+            setLocationValidate(true);
             return false
         } else {
-            setLastNameValidate(false);
+            setLocationValidate(false);
             return true
         }
     }
@@ -133,12 +130,12 @@ const TeacherSignup = () => {
             return true
         }
     }
-    const changeQualificationValidate = (status: boolean): boolean => {
+    const changeAddressValidate = (status: boolean): boolean => {
         if (status) {
-            setQualificationValidate(true);
+            setAddressValidate(true);
             return false
         } else {
-            setQualificationValidate(false);
+            setAddressValidate(false);
             return true
         }
     }
@@ -196,10 +193,10 @@ const TeacherSignup = () => {
                 <Col lg={9} md={12} xs={12}
                      className="Signup d-flex flex-lg-column justify-content-lg-center p-md-3 mt-md-2 mt-3">
                     <Row className="d-flex align-items-center">
-                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-3">Signup For Teacher</h1>
+                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-3">Signup For Institute</h1>
                         <Col lg={6} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
-                            <img src={Images.teacherSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
-                                 alt="teacher-signup"/>
+                            <img src={Images.instituteSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
+                                 alt="Institute-signup"/>
                         </Col>
                         <Col>
                             <Row>
@@ -243,24 +240,24 @@ const TeacherSignup = () => {
                                         <Form noValidate onSubmit={handleSubmit}>
                                             {(pageStage === 1) && <LazyLoad once>
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationTitle">
-                                                            <Form.Label style={{fontWeight: 600}}>Title</Form.Label>
-                                                            <Form.Select
-                                                                name="Title"
-                                                                value={values.Title}
+                                                        <Form.Group className="mb-3"
+                                                                    controlId="validationInstituteName">
+                                                            <Form.Label style={{fontWeight: 600}}>Institute
+                                                                Name</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                placeholder="Enter the InstituteName"
+                                                                name="InstituteName"
+                                                                value={values.InstituteName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Title ? changeTitleValidate(false) : changeTitleValidate(true)}
-                                                                isValid={touched.Title}
+                                                                isInvalid={!!errors.InstituteName ? changeInstituteNameValidate(false) : changeInstituteNameValidate(true)}
+                                                                isValid={touched.InstituteName}
                                                                 onBlur={handleBlur}
-                                                            >
-                                                                < option> Select Mr/Mrs/Ms</option>
-                                                                <option value="Mr">Mr.</option>
-                                                                <option value="Mrs">Mrs.</option>
-                                                                <option value="Ms">Ms.</option>
-                                                            </Form.Select>
+                                                            />
                                                             <Form.Control.Feedback type="invalid">
-                                                                {errors.Title}
+                                                                {errors.InstituteName}
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
@@ -285,39 +282,39 @@ const TeacherSignup = () => {
                                                 </Row>
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationFirstName">
-                                                            <Form.Label style={{fontWeight: 600}}>First
+                                                        <Form.Group className="mb-3" controlId="validationOwnerName">
+                                                            <Form.Label style={{fontWeight: 600}}>Owner
                                                                 Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the first name here"
-                                                                name="Firstname"
-                                                                value={values.Firstname}
+                                                                placeholder="Enter the owner name here"
+                                                                name="OwnerName"
+                                                                value={values.OwnerName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)}
-                                                                isValid={touched.Firstname}
+                                                                isInvalid={!!errors.OwnerName ? changeOwnerNameValidate(false) : changeOwnerNameValidate(true)}
+                                                                isValid={touched.OwnerName}
                                                                 onBlur={handleBlur}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
-                                                                {errors.Firstname}
+                                                                {errors.OwnerName}
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationLastname">
-                                                            <Form.Label style={{fontWeight: 600}}>Last Name</Form.Label>
+                                                        <Form.Group className="mb-3" controlId="validationLocation">
+                                                            <Form.Label style={{fontWeight: 600}}>Location</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the last name here"
-                                                                name="Lastname"
-                                                                value={values.Lastname}
+                                                                placeholder="Enter the location here"
+                                                                name="Location"
+                                                                value={values.Location}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
-                                                                isValid={touched.Lastname}
+                                                                isInvalid={!!errors.Location ? changeLocationValidate(false) : changeLocationValidate(true)}
+                                                                isValid={touched.Location}
                                                                 onBlur={handleBlur}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
-                                                                {errors.Lastname}
+                                                                {errors.Location}
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
@@ -368,15 +365,15 @@ const TeacherSignup = () => {
                                                                 variant="primary"
                                                                 onClick={
                                                                     () => {
-                                                                        if (titleValidate && fistNameValidate && lastNameValidate && emailValidate && passwordValidate && rPasswordValidate) {
+                                                                        if (instituteNameValidate && ownerNameValidate && locationValidate && emailValidate && passwordValidate && rPasswordValidate) {
                                                                             setPageStage(2);
                                                                         }
                                                                     }
                                                                 }
                                                                 onClickCapture={() => {
-                                                                    validateField("Title");
-                                                                    validateField("Firstname");
-                                                                    validateField("Lastname");
+                                                                    validateField("InstituteName");
+                                                                    validateField("OwnerName");
+                                                                    validateField("Location");
                                                                     validateField("Email");
                                                                     validateField("Password");
                                                                     validateField("Confirm_Password");
@@ -407,6 +404,28 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
+                                                <Row className="pe-lg-4 mt-md-3">
+                                                    <Col lg={12} md={12} sm={12} xs={12}>
+                                                        <Form.Group className="mb-3"
+                                                                    controlId="validationAddress">
+                                                            <Form.Label
+                                                                style={{fontWeight: 600}}>Address</Form.Label>
+                                                            <Form.Control
+                                                                type="text"
+                                                                placeholder="Enter the address here"
+                                                                name="Address"
+                                                                value={values.Address}
+                                                                onChange={handleChange}
+                                                                isInvalid={!!errors.Address ? changeAddressValidate(false) : changeAddressValidate(true)}
+                                                                isValid={touched.Address}
+                                                                onBlur={handleBlur}
+                                                            />
+                                                            <Form.Control.Feedback type="invalid">
+                                                                {errors.Address}
+                                                            </Form.Control.Feedback>
+                                                        </Form.Group>
+                                                    </Col>
+                                                </Row>
                                                 <Row className=" pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationDescription">
@@ -429,28 +448,6 @@ const TeacherSignup = () => {
                                                     </Col>
                                                 </Row>
                                                 <Row className="pe-lg-4 mt-md-3">
-                                                    <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3"
-                                                                    controlId="validationQualification">
-                                                            <Form.Label
-                                                                style={{fontWeight: 600}}>Qualification</Form.Label>
-                                                            <Form.Control
-                                                                type="file"
-                                                                placeholder="Enter the qualification here"
-                                                                name="Qualification"
-                                                                value={values.Qualification}
-                                                                onChange={handleChange}
-                                                                isInvalid={!!errors.Qualification ? changeQualificationValidate(false) : changeQualificationValidate(true)}
-                                                                isValid={touched.Qualification}
-                                                                onBlur={handleBlur}
-                                                            />
-                                                            <Form.Control.Feedback type="invalid">
-                                                                {errors.Qualification}
-                                                            </Form.Control.Feedback>
-                                                        </Form.Group>
-                                                    </Col>
-                                                </Row>
-                                                <Row className="pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between ">
 
                                                         <Button type="button" className="px-4"
@@ -461,14 +458,14 @@ const TeacherSignup = () => {
                                                                 variant="primary"
                                                                 onClick={
                                                                     () => {
-                                                                        if (descriptionValidate && qualificationValidate && mobileValidate) {
+                                                                        if (descriptionValidate && addressValidate && mobileValidate) {
                                                                             setPageStage(3);
                                                                         }
                                                                     }
                                                                 }
                                                                 onClickCapture={() => {
                                                                     validateField("Description");
-                                                                    validateField("Qualification");
+                                                                    validateField("Address");
                                                                     validateField("Mobile");
                                                                 }
                                                                 }
@@ -477,7 +474,7 @@ const TeacherSignup = () => {
                                                 </Row>
                                             </LazyLoad>}
                                             {(pageStage === 3) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3" >
+                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationAccountName">
                                                             <Form.Label style={{fontWeight: 600}}>Account Holder
@@ -600,4 +597,4 @@ const TeacherSignup = () => {
     );
 };
 
-export default TeacherSignup;
+export default InstituteSignup;
