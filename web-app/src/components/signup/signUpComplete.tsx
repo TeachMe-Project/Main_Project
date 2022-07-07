@@ -12,9 +12,9 @@ const SignUpComplete = () => {
     return (
         <Row style={{fontFamily:"'Poppins', sans-serif"}} className="Signup-Complete">
             <Col lg={12} className="d-lg-flex flex-column align-items-center mt-2">
-                <h1 className="mb-3">Signup Completed</h1>
+                <h1 className="mb-3 text-center">Signup Completed</h1>
                 <Row className="d-lg-flex flex-lg-column justify-content-lg-center">
-                    <Col lg={8} className="mx-auto">
+                    <Col lg={8} md={4} xs={6} className="mx-auto">
                         <img src={Images.formComplete} className="w-100" alt="Success"/>
                     </Col>
                 </Row>
@@ -25,8 +25,8 @@ const SignUpComplete = () => {
                         <h5>Please check you email and verify your email.</h5>
                     </Col>
                 </Row>
-                <Row className="d-lg-flex flex-lg-column justify-content-lg-center mt-2 mb-2">
-                    <Col>
+                <Row className="d-lg-flex flex-lg-column justify-content-lg-center mt-2 mb-2 mt-md-3 mt-3">
+                    <Col className="d-flex justify-content-center">
                         <Button variant="primary" className="p-2 px-3" onClick={()=> navigate('/')}>
                             Go Back To Home Page
                         </Button>
