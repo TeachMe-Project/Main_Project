@@ -51,7 +51,7 @@ const initialState = {
 
 const InstituteSignup = () => {
 
-    const [pageStage, setPageStage] = useState(4);
+    const [pageStage, setPageStage] = useState(1);
     const [instituteNameValidate, setInstituteNameValidate] = useState<boolean>(false);
     const [ownerNameValidate, setOwnerNameValidate] = useState(false);
     const [locationValidate, setLocationValidate] = useState(false);
