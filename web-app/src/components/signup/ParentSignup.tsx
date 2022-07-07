@@ -9,10 +9,6 @@ import SignUpComplete from "./signUpComplete";
 import Footer from "../footer/footer";
 
 const schema = yup.object().shape({
-    Grade: yup.string().required().matches(
-        /Grade-(?:1[01]|0[1-9])|AL-20\d\d/,
-        "Grade should in Grade-03 or AL-2022"
-    ),
     Firstname: yup.string().required(),
     Lastname: yup.string().required(),
     Email: yup.string().email().required(),
@@ -24,38 +20,31 @@ const schema = yup.object().shape({
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
         "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ).oneOf([yup.ref('Password'), null], 'Passwords must match'),
+    Mobile: yup.string().required().matches(
+        /^((\\+[1-9]{1,4}[ \\-]*)|(\\(\d{2,3}\\)[ \\-]*)|(\d{2,4})[ \\-]*)*?\d{3,4}?[ \\-]*\d{3,4}?$/,
+        "Phone number is not valid")
 });
 
 
 const initialState = {
-    Grade: '',
     Firstname: '',
     Lastname: '',
     Email: '',
     Password: '',
     Confirm_Password: '',
+    Mobile: '',
 }
 
-const StudentSignup = () => {
+const ParentSignup = () => {
 
-    const [pageStage, setPageStage] = useState(2);
-    const [gradeValidate, setGradeValidate] = useState<boolean>(false);
+    const [pageStage, setPageStage] = useState(1);
     const [fistNameValidate, setFistNameValidate] = useState(false);
     const [lastNameValidate, setLastNameValidate] = useState(false);
     const [emailValidate, setEmailValidate] = useState(false);
     const [passwordValidate, setPasswordValidate] = useState(false);
     const [rPasswordValidate, setRPasswordValidate] = useState(false);
+    const [mobileValidate, setMobileValidate] = useState(false);
 
-
-    const changeGradeValidate = (status: boolean): boolean => {
-        if (status) {
-            setGradeValidate(true);
-            return false
-        } else {
-            setGradeValidate(false);
-            return true
-        }
-    }
     const changeFistNameValidate = (status: boolean): boolean => {
         if (status) {
             setFistNameValidate(true);
@@ -101,6 +90,15 @@ const StudentSignup = () => {
             return true
         }
     }
+    const changeMobileValidate = (status: boolean): boolean => {
+        if (status) {
+            setMobileValidate(true);
+            return false
+        } else {
+            setMobileValidate(false);
+            return true
+        }
+    }
 
 
     return (
@@ -110,9 +108,9 @@ const StudentSignup = () => {
                 <Col lg={9} md={12} xs={12}
                      className="Signup d-flex flex-lg-column justify-content-lg-center p-md-3 mt-md-2 mt-3">
                     <Row className="d-flex align-items-center">
-                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-3">Signup For Student</h1>
+                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-3">Signup For Parent</h1>
                         <Col lg={6} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
-                            <img src={Images.studentSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
+                            <img src={Images.parentSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
                                  alt="teacher-signup"/>
                         </Col>
                         <Col>
@@ -209,20 +207,20 @@ const StudentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationGrade">
-                                                            <Form.Label style={{fontWeight: 600}}>Grade</Form.Label>
+                                                        <Form.Group className="mb-3" controlId="validationMobile">
+                                                            <Form.Label style={{fontWeight: 600}}>Mobile No</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the grade here"
-                                                                name="Grade"
-                                                                value={values.Grade}
+                                                                placeholder="077-1234567"
+                                                                name="Mobile"
+                                                                value={values.Mobile}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Grade ? changeGradeValidate(false) : changeGradeValidate(true)}
-                                                                isValid={touched.Grade}
+                                                                isInvalid={!!errors.Mobile ? changeMobileValidate(false) : changeMobileValidate(true)}
+                                                                isValid={touched.Mobile}
                                                                 onBlur={handleBlur}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
-                                                                {errors.Grade}
+                                                                {errors.Mobile}
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
@@ -273,13 +271,13 @@ const StudentSignup = () => {
                                                                 variant="primary"
                                                                 onClick={
                                                                     () => {
-                                                                        if (gradeValidate && fistNameValidate && lastNameValidate && emailValidate && passwordValidate && rPasswordValidate) {
+                                                                        if (mobileValidate && fistNameValidate && lastNameValidate && emailValidate && passwordValidate && rPasswordValidate) {
                                                                             setPageStage(2);
                                                                         }
                                                                     }
                                                                 }
                                                                 onClickCapture={() => {
-                                                                    validateField("Grade");
+                                                                    validateField("Mobile");
                                                                     validateField("Firstname");
                                                                     validateField("Lastname");
                                                                     validateField("Email");
@@ -308,4 +306,4 @@ const StudentSignup = () => {
     );
 };
 
-export default StudentSignup;
+export default ParentSignup;

@@ -54,7 +54,7 @@ const initialState = {
 
 const TeacherSignup = () => {
 
-    const [pageStage, setPageStage] = useState(2);
+    const [pageStage, setPageStage] = useState(1);
     const [titleValidate, setTitleValidate] = useState<boolean>(false);
     const [fistNameValidate, setFistNameValidate] = useState(false);
     const [lastNameValidate, setLastNameValidate] = useState(false);

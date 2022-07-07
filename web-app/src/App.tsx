@@ -6,6 +6,7 @@ import SignUpCategory from "./components/signup/SignUpCategory";
 import TeacherSignup from "./components/signup/TeacherSignup";
 import InstituteSignup from "./components/signup/InstituteSignup";
 import StudentSignup from "./components/signup/StudentSignup";
+import ParentSignup from "./components/signup/ParentSignup";
 
 const App: React.FC = () => {
     return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
                 <Route path="/teacherSignup" element={<TeacherSignup/>}/>
                 <Route path="/instituteSignup" element={<InstituteSignup/>}/>
                 <Route path="/studentSignup" element={<StudentSignup/>}/>
+                <Route path="/parentSignup" element={<ParentSignup/>}/>
             </Routes>
         </div>
     );
