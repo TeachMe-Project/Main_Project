@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Col, Container, Image, Row} from "react-bootstrap";
-import Images from "../../assets/images/Images";
+import Images from "../../../assets/images/Images";
 import {MdOutlineAddShoppingCart, MdOutlineSend} from "react-icons/md";
 
 const Banner: React.FC = () => {

@@ -6,7 +6,7 @@ import * as yup from 'yup';
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
-import Footer from "../footer/footer";
+import Footer from "../Home/footer/footer";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),

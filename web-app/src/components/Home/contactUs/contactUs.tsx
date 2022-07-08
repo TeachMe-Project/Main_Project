@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Form, Image, Row, Button, Container, Card} from "react-bootstrap";
-import Images from "../../assets/images/Images";
+import Images from "../../../assets/images/Images";
 import {GrSend} from "react-icons/gr";
 import {Formik} from "formik";
 import * as yup from 'yup';

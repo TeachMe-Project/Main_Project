@@ -5,7 +5,7 @@ import {ImArrowLeft2} from "react-icons/im";
 import Images from "../../assets/images/Images";
 import {useNavigate} from "react-router-dom";
 import {useAuth0} from "@auth0/auth0-react";
-import Footer from "../footer/footer";
+import Footer from "../Home/footer/footer";
 
 const TEXTS = [
     "Get started today and let Learning deliver online learning. So, you can focus on the quality of your tutoring.",
