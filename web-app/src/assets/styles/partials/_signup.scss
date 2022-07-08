@@ -15,11 +15,16 @@
 
     @media (max-width: $md-screen-size) {
       box-shadow: none;
+      height: fit-content;
     }
 
     .signup-header {
       color: $font-grey-color;
       font-size: 45px;
+      
+      @media (max-width: $xs-screen-size) {
+        font-size: 30px;
+      }
     }
 
   }
