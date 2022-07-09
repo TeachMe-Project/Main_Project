@@ -18,6 +18,7 @@ import theme from '../../../theme';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import UnsupportedBrowserWarning from '../../UnsupportedBrowserWarning/UnsupportedBrowserWarning';
+import PaymentGateway from '../../PaymentGateway/PayementGateway';
 
 const VideoApp = () => {
   const { error, setError } = useAppState();
@@ -58,6 +59,10 @@ const routes = [
   {
     path: '/course',
     main: () => <Course />,
+  },
+  {
+    path: '/paymentGateway',
+    main: () => <PaymentGateway />,
   },
   {
     path: '/twilio',

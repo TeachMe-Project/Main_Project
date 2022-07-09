@@ -6,6 +6,7 @@ import { ServerlessFunction } from './types';
 
 // importing requires routings
 import {studentRouter} from "./route/studentRoutes";
+import {paymentGatewayRouter} from "./route/paymentGatewayRoutes";
 
 const PORT = process.env.PORT ?? 8081;
 
@@ -25,21 +26,14 @@ const noopMiddleware: RequestHandler = (_, __, next) => next();
 const authMiddleware =
   process.env.REACT_APP_SET_AUTH === 'firebase' ? require('./firebaseAuthMiddleware') : noopMiddleware;
 
+//twilio rtc plugin endpoints
 app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 
-
-
-
+//development endpoints by developers
 app.use('/student', studentRouter)
-
-
-
-
-
-
-
+app.use('/create-checkout-session',paymentGatewayRouter)
 
 
 
