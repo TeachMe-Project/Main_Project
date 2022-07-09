@@ -1,11 +1,12 @@
 import * as React from 'react';
-import Card from "../../Card/Card";
-import { Row, Col, Container } from "react-bootstrap";
+import Card from '../../Card/Card';
+import { Row, Col, Container } from 'react-bootstrap';
+import ChatBox from '../../ChatBox/ChatBox';
 
 export const MyTeachers = () => {
   return (
-    <div className='MyTeachers'>
-        <Container>
+    <div className="MyTeachers">
+      <Container>
         <div className="PanelHeader">
           <h2>My Teachers</h2>
         </div>
@@ -15,12 +16,9 @@ export const MyTeachers = () => {
             <br />
             jkwnfkjenfejkfnejfnef\efjkenjkn
           </Card>
+          <ChatBox></ChatBox>
           <h5>My Recent Courses</h5>
-          <div className="MyCoursesCardBackground">
-           
-          </div>
-
-         
+          <div className="MyCoursesCardBackground"></div>
         </div>
 
         {/* <Tabs>
@@ -36,6 +34,6 @@ export const MyTeachers = () => {
       </Tabs> */}
       </Container>
     </div>
-  )
-}
+  );
+};
 export default MyTeachers;

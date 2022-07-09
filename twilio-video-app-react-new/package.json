@@ -49,6 +49,7 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.3",
+    "react-spring": "^9.4.5",
     "rimraf": "3.0.2",
     "sass": "^1.52.1",
     "strip-color": "^0.1.0",
