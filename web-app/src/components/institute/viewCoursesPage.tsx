@@ -112,9 +112,9 @@ function ViewCoursesPage() {
                     className={classes.status}
                     style={{
                         backgroundColor: 
-                        ((row.status === 'Active' && 'green') ||
-                        (row.status === 'Pending' && 'blue') ||
-                        (row.status === 'Blocked' && 'orange'))
+                        ((row.status === 'Active' ? 'green':undefined) ||
+                        (row.status === 'Pending' ? 'blue':undefined ) ||
+                        (row.status === 'Blocked' ? 'orange':undefined))
                     }}
                   >{row.status}</Typography>
                 </TableCell>
@@ -124,13 +124,13 @@ function ViewCoursesPage() {
         <TableFooter>
         <TablePagination
             rowsPerPageOptions={[5, 10, 15]}
-            component="div"
+            // component="div"
             count={USERS.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+         onPageChange={()=>{}}/>
         </TableFooter>
       </Table>
     </TableContainer>
