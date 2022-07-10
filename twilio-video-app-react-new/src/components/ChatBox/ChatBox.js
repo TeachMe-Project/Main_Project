@@ -3,7 +3,7 @@ import { ChatEngine } from 'react-chat-engine';
 
 function ChatBox() {
   return (
-    <ChatEngine height="50vh" projectID="ec3b49c9-bffa-4956-b777-3977f5eab386" userName="Jonathan" userSecret="0805" />
+    <ChatEngine height="50vh" userName="Jonathan" userSecret="0805" projectID="e3f2a460-d693-4147-bbd8-b8b25df751de" />
   );
 }
 
