@@ -2,7 +2,9 @@ import * as React from 'react';
 import { ChatEngine } from 'react-chat-engine';
 
 function ChatBox() {
-  return <ChatEngine projectID="2e8bb150-ca63-422c-86a4-b2e8cc59766b" userName="Johnny0805" userSecret="0805" />;
+  return (
+    <ChatEngine height="50vh" projectID="ec3b49c9-bffa-4956-b777-3977f5eab386" userName="Jonathan" userSecret="0805" />
+  );
 }
 
 export default ChatBox;
