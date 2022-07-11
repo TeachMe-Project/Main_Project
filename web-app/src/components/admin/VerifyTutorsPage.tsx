@@ -77,9 +77,9 @@ export default function VerifyTutorsPage() {
                 </td>
             </tr>
             <tr>
-                <td data-label="Application ID :">1000010</td>
+                <td data-label="Application ID :">1000011</td>
                 <td data-label="Applied Date :">2022-07-06</td>
-                <td data-label="Tutor's Name :">Bandara Ranasinghe</td>
+                <td data-label="Tutor's Name :">Nirosh Senanayake </td>
                 <td>
                     <div className="Icons">
                         {/*View Icon*/}
@@ -100,9 +100,9 @@ export default function VerifyTutorsPage() {
                 </td>
             </tr>
             <tr>
-                <td data-label="Application ID :">1000010</td>
+                <td data-label="Application ID :">1000012</td>
                 <td data-label="Applied Date :">2022-07-06</td>
-                <td data-label="Tutor's Name :">Bandara Ranasinghe</td>
+                <td data-label="Tutor's Name :">Nilmini Ranatunga</td>
                 <td>
                     <div className="Icons">
                         {/*View Icon*/}
@@ -123,9 +123,9 @@ export default function VerifyTutorsPage() {
                 </td>
             </tr>
             <tr>
-                <td data-label="Application ID :">1000010</td>
-                <td data-label="Applied Date :">2022-07-06</td>
-                <td data-label="Tutor's Name :">Bandara Ranasinghe</td>
+                <td data-label="Application ID :">1000013</td>
+                <td data-label="Applied Date :">2022-07-07</td>
+                <td data-label="Tutor's Name :">Surathni Weerasiri</td>
                 <td>
                     <div className="Icons">
                         {/*View Icon*/}
@@ -146,9 +146,9 @@ export default function VerifyTutorsPage() {
                 </td>
             </tr>
             <tr>
-                <td data-label="Application ID :">1000010</td>
-                <td data-label="Applied Date :">2022-07-06</td>
-                <td data-label="Tutor's Name :">Bandara Ranasinghe</td>
+                <td data-label="Application ID :">1000014</td>
+                <td data-label="Applied Date :">2022-07-07</td>
+                <td data-label="Tutor's Name :">Achira Thennakoon</td>
                 <td>
                     <div className="Icons">
                         {/*View Icon*/}
@@ -169,9 +169,9 @@ export default function VerifyTutorsPage() {
                 </td>
             </tr>
             <tr>
-                <td data-label="Application ID :">1000010</td>
-                <td data-label="Applied Date :">2022-07-06</td>
-                <td data-label="Tutor's Name :">Bandara Ranasinghe</td>
+                <td data-label="Application ID :">1000015</td>
+                <td data-label="Applied Date :">2022-07-07</td>
+                <td data-label="Tutor's Name :">Mahinda Abeywardhana</td>
                 <td>
                     <div className="Icons">
                         {/*View Icon*/}

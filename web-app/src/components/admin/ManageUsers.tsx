@@ -43,11 +43,11 @@ export default function ManageCourses() {
                 </td>
             </tr>
             <tr>
-                <td data-label="User ID :" className="amu-first-td">10000102345</td>
-                <td data-label="Username :">manethwijetunga@yahoo.com</td>
-                <td data-label="First Name :">Maneth</td>
-                <td data-label="Last Name :">Wijetunga</td>
-                <td data-label="User Type :" >Institute</td>
+                <td data-label="User ID :" className="amu-first-td">10000102775</td>
+                <td data-label="Username :">anurasenanayake@gmail.com</td>
+                <td data-label="First Name :">Anura</td>
+                <td data-label="Last Name :">Senanayake</td>
+                <td data-label="User Type :" >Parent</td>
                 <td className="amu-last-td">
                     <div className="Icons">
                         {/*Remove Icon*/}
@@ -59,11 +59,11 @@ export default function ManageCourses() {
                 </td>
             </tr>
             <tr>
-                <td data-label="User ID :" className="amu-first-td">10000102345</td>
-                <td data-label="Username :">manethwijetunga@yahoo.com</td>
-                <td data-label="First Name :">Maneth</td>
-                <td data-label="Last Name :">Wijetunga</td>
-                <td data-label="User Type :" >Institute</td>
+                <td data-label="User ID :" className="amu-first-td">10000102300</td>
+                <td data-label="Username :">thilinamadhushanka@yahoo.com</td>
+                <td data-label="First Name :">Thilina</td>
+                <td data-label="Last Name :">Madhushanka</td>
+                <td data-label="User Type :" >Student</td>
                 <td className="amu-last-td">
                     <div className="Icons">
                         {/*Remove Icon*/}
@@ -75,11 +75,11 @@ export default function ManageCourses() {
                 </td>
             </tr>
             <tr>
-                <td data-label="User ID :" className="amu-first-td">10000102345</td>
-                <td data-label="Username :">manethwijetunga@yahoo.com</td>
-                <td data-label="First Name :">Maneth</td>
-                <td data-label="Last Name :">Wijetunga</td>
-                <td data-label="User Type :" >Institute</td>
+                <td data-label="User ID :" className="amu-first-td">10000102366</td>
+                <td data-label="Username :">michaeldass@gmail.com</td>
+                <td data-label="First Name :">Michael</td>
+                <td data-label="Last Name :">Dass</td>
+                <td data-label="User Type :" >Student</td>
                 <td className="amu-last-td">
                     <div className="Icons">
                         {/*Remove Icon*/}
@@ -91,11 +91,11 @@ export default function ManageCourses() {
                 </td>
             </tr>
             <tr>
-                <td data-label="User ID :" className="amu-first-td">10000102345</td>
-                <td data-label="Username :">manethwijetunga@yahoo.com</td>
-                <td data-label="First Name :">Maneth</td>
-                <td data-label="Last Name :">Wijetunga</td>
-                <td data-label="User Type :" >Institute</td>
+                <td data-label="User ID :" className="amu-first-td">10000102005</td>
+                <td data-label="Username :">samweerasinghe@gmail.com</td>
+                <td data-label="First Name :">Sameera</td>
+                <td data-label="Last Name :">Weerasinghe</td>
+                <td data-label="User Type :" >Teacher</td>
                 <td className="amu-last-td">
                     <div className="Icons">
                         {/*Remove Icon*/}
