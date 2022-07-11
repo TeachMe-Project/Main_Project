@@ -9,7 +9,7 @@ const NavBar: React.FC = () => {
 
     return (
         <Navbar collapseOnSelect expand="lg" variant="light" style={{fontSize: "20px"}}>
-            <Container fluid={true} className='mx-lg-2'>
+            <Container fluid={true}>
                 <Row className='w-100'>
                     <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2'>
                         <Navbar.Brand href="/">

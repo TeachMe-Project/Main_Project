@@ -4,7 +4,7 @@ import Images from "../../../assets/images/Images";
 
 const ProfileNavBar: React.FC = () => {
     return (
-        <Navbar collapseOnSelect expand="lg" variant="light" style={{fontSize: "20px",boxShadow:"rgba(0, 0, 0, 0.25) 0px 25px 50px -12px"}}>
+        <Navbar collapseOnSelect expand="lg" variant="light" style={{fontSize: "20px",boxShadow: "rgba(0, 0, 0, 0.45) 0px 25px 20px -20px"}}>
             <Container fluid={true} className='mx-lg-0 px-0'>
                 <Row className='w-100'>
                     <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2'>

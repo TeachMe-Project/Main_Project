@@ -105,21 +105,21 @@ const ParentUpComing: React.FC = () => {
     }
 
     return (
-        <Container fluid={true}>
+        <Container fluid={true} className='parent'>
             <ProfileNavBar/>
-            <Row className='ps-0'>
+            <Row className='ps-0 upcoming'>
                 <Col lg={12} className="ps-0 d-flex flex-row">
                     <ParentSidebar/>
                     <Row className='ms-lg-5 mt-lg-5 w-100 me-5'>
                         <Row>
-                            <h1 className='text-lg-center'>
+                            <h1 className='text-lg-center header'>
                                 Upcoming Classes
                             </h1>
                         </Row>
-                        <Row>
-                            <Col lg={12} className='d-lg-flex flex-lg-column text-lg-center'>
+                        <Row className='bg-black'>
+                            <Col lg={12} className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                                     {currentItem.map((item:UpComing) => (
-                                        <Row key={item.id} className='my-lg-3'>
+                                        <Row key={item.id} className='my-lg-3' style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}>
                                             <Col>
                                                 <h4>{item.class}</h4>
                                             </Col>

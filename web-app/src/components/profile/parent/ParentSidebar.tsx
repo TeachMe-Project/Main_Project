@@ -56,7 +56,7 @@ const ParentSidebar: React.FC = () => {
             <SidebarContent>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaTachometerAlt className='side-menu-icon'/>}>
-                        Upcoming Payment
+                        Upcoming Class
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
