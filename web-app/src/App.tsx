@@ -7,7 +7,6 @@ import TeacherSignup from "./components/signup/TeacherSignup";
 import InstituteSignup from "./components/signup/InstituteSignup";
 import StudentSignup from "./components/signup/StudentSignup";
 import ParentSignup from "./components/signup/ParentSignup";
-import Pare from "./components/profile/pare";
 import ParentUpComing from "./components/profile/parent/ParentUpComing";
 
 const App: React.FC = () => {

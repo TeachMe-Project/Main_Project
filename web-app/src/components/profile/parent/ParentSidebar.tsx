@@ -3,7 +3,6 @@ import {
     ProSidebar,
     Menu,
     MenuItem,
-    SubMenu,
     SidebarHeader,
     SidebarFooter,
     SidebarContent,
@@ -12,12 +11,13 @@ import {FaGem, FaGithub, FaHeart, FaTachometerAlt} from "react-icons/fa";
 import {HiOutlineMenu} from "react-icons/hi";
 import Images from "../../../assets/images/Images";
 import {Button} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 
 const ParentSidebar: React.FC = () => {
 
     const [toggled, setToggled] = useState(false);
     const [collapsed, setCollapsed] = useState(true);
-
+    const navigate = useNavigate()
     const handleToggleSidebar = () => {
         if (toggled === false) {
             setToggled(true);
@@ -53,9 +53,9 @@ const ParentSidebar: React.FC = () => {
                     (<SidebarHeader></SidebarHeader>)
             }
 
-            <SidebarContent >
+            <SidebarContent>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt className='side-menu-icon'/>} >
+                    <MenuItem icon={<FaTachometerAlt className='side-menu-icon'/>}>
                         Upcoming Payment
                     </MenuItem>
                 </Menu>
@@ -65,8 +65,8 @@ const ParentSidebar: React.FC = () => {
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>}>
-                        Upcoming Class
+                    <MenuItem icon={<FaTachometerAlt/>} onClick={()=>navigate('/studentSignup')}>
+                        SignUp Student
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
@@ -82,7 +82,7 @@ const ParentSidebar: React.FC = () => {
             </SidebarContent>
             {!collapsed &&
                 <SidebarFooter>
-                    <div style={{width: '100%', padding:"10px"}}>
+                    <div style={{width: '100%', padding: "10px"}}>
                         <img src={Images.logo} style={{maxWidth: "250px"}}/>
                     </div>
                 </SidebarFooter>}
