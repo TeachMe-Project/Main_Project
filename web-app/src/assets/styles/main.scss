@@ -1,11 +1,17 @@
 @import "variables/variables";
 
-$table-bg:orange;
-@import "bootstrap/scss/bootstrap";
 
-.table th{text-transform: uppercase}
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+
+// .table th{text-transform: uppercase}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import "partials/aboutUs";
+@import "partials/pricing";
+@import "partials/instituteTables";
+
+@import "bootstrap/scss/bootstrap";
 @import "partials/signupCategory";
 @import "partials/home";
 @import "partials/signup";
@@ -13,3 +19,4 @@ $table-bg:orange;
 @import '~react-pro-sidebar/dist/scss/styles.scss';
 @import "partials/sideBar";
 @import "partials/parent";
+@import "partials/_table";

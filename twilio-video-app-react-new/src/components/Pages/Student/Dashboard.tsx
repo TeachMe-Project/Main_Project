@@ -20,7 +20,7 @@ export const Dashboard = () => {
           </div>
           <div className="Panel">
             <div className="PanelSubheader">
-              <h5>Upcoming Classes</h5>
+              <h5>Recently Accessed Courses</h5>
             </div>
             <div className="PanelBody">
               <Card
