@@ -3,21 +3,23 @@ import {
     ProSidebar,
     Menu,
     MenuItem,
-    SubMenu,
     SidebarHeader,
     SidebarFooter,
     SidebarContent,
 } from 'react-pro-sidebar';
-import {FaGem, FaGithub, FaHeart, FaTachometerAlt} from "react-icons/fa";
 import {HiOutlineMenu} from "react-icons/hi";
 import Images from "../../../assets/images/Images";
-import {Button} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
+import {FaTachometerAlt} from "react-icons/fa";
+import {IoIosSchool} from "react-icons/io";
+import {MdPersonAddAlt} from "react-icons/md";
+import {BsCashCoin} from "react-icons/bs";
 
 const ParentSidebar: React.FC = () => {
 
     const [toggled, setToggled] = useState(false);
     const [collapsed, setCollapsed] = useState(true);
-
+    const navigate = useNavigate()
     const handleToggleSidebar = () => {
         if (toggled === false) {
             setToggled(true);
@@ -53,36 +55,31 @@ const ParentSidebar: React.FC = () => {
                     (<SidebarHeader></SidebarHeader>)
             }
 
-            <SidebarContent >
+            <SidebarContent>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt className='side-menu-icon'/>} >
-                        Upcoming Payment
-                    </MenuItem>
-                </Menu>
-                <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>}>
-                        On Summary
-                    </MenuItem>
-                </Menu>
-                <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>}>
+                    <MenuItem icon={<IoIosSchool/>}>
                         Upcoming Class
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaTachometerAlt/>}>
-                        Dashboard
+                        Progress
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>}>
-                        Dashboard
+                    <MenuItem icon={<BsCashCoin/>}>
+                        UpComing Payment
+                    </MenuItem>
+                </Menu>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<MdPersonAddAlt/>} onClick={()=>navigate('/studentSignup')}>
+                        SignUp Student
                     </MenuItem>
                 </Menu>
             </SidebarContent>
             {!collapsed &&
                 <SidebarFooter>
-                    <div style={{width: '100%', padding:"10px"}}>
+                    <div style={{width: '100%', padding: "10px"}}>
                         <img src={Images.logo} style={{maxWidth: "250px"}}/>
                     </div>
                 </SidebarFooter>}

@@ -40,10 +40,10 @@ const ContactUs: React.FC = () => {
                         fontFamily: "cursive"
                     }}>Contact Us</h1>
                     <Row className="m-0" style={{height: "fit-content"}}>
-                        <Col xl={6} className="d-flex flex-row justify-content-center">
+                        <Col lg={6} className="d-flex flex-row justify-content-center">
                             <Image src={Images.contactUs} style={{height: "650px"}}></Image>
                         </Col>
-                        <Col xl={5} className="d-flex flex-column justify-content-center p-3 ms-5">
+                        <Col lg={5} className="d-flex flex-column justify-content-center p-3 ms-5">
                             <h1 className="mb-3">Quick Contact</h1>
                             <Form noValidate onSubmit={handleSubmit}>
                                 <Form.Group className="mb-3" controlId="validationName">

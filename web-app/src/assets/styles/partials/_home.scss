@@ -1,0 +1,35 @@
+@import "./../variables/variables";
+.banner {
+  fontFamily: "'Poppins', sans-serif";
+
+  .banner-header {
+    font-size: 50px;
+
+    @media (max-width: $xs-screen-size) {
+      font-size: 30px;
+    }
+  }
+  .banner-text{
+    font-size: 20px;
+    
+    @media (max-width: $xs-screen-size) {
+      text-align: justify;
+    }
+  }
+  .btn {
+    border-radius: 12px;
+  }
+}
+
+.about-us{
+  fontFamily: "'Poppins', sans-serif";
+
+  .about-us-header{
+    font-size: 60px;
+    margin-top: 100px;
+    
+    @media (max-width: $xs-screen-size) {
+      font-size: 40px;
+    }
+  }
+}

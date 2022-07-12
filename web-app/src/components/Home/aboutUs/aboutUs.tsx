@@ -1,32 +1,19 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {Col, Container, Image, Row} from "react-bootstrap";
 import Feature from "./feature";
 import Images from "../../../assets/images/Images";
-import NavBar from "../../navBar/navBar";
 
 const AboutUs: React.FC = () => {
 
     return (
-        <Container fluid={true} className='about-us pt-4' id="About-Us"  >
-            <NavBar/>
-            <h1 style={{
-                fontSize: "60px",
-                textAlign: "center",
-                marginTop:"30px",
-                marginBottom: "30px",
-                fontFamily: "cursive"
-            }}> Why TeachMe</h1>
+        <Container fluid={true} className='about-us mt-lg-5 py-lg-3' id="About-Us">
+            <h1 className='about-us-header text-center'> Why TeachMe</h1>
             <Row style={{display: "flex", flexDirection: "row"}}>
-                <Col xl={5}>
-                    <Image src={Images.banner} style={{height: "600px"}}></Image>
+                <Col lg={5}>
+                    <Image src={Images.banner} style={{height: "600px"}} className='d-lg-block d-none '></Image>
                 </Col>
-                <Col xl={7} style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "space-evenly"
-                }}>
-                    <Row style={{width: "100%"}}>
+                <Col lg={7} className='d-flex flex-lg-column align-items-center justify-content-evenly my-md-5 flex-md-column-reverse'>
+                    <Row className='w-100 ms-md-1'>
                         <Feature
                             title={"Enable teachers to keep track of student online activities during live classroom sessions."}
                             image={Images.monitoring}/>
@@ -34,7 +21,7 @@ const AboutUs: React.FC = () => {
                             title={"Enable Institutes to recruit teachers to conduct online courses and improve their\n" +
                                 "online presence."} image={Images.virtual_class}/>
                     </Row>
-                    <Row style={{width: "100%"}}>
+                    <Row className='w-100 ms-md-1 mb-md-3'>
                         <Feature
                             title={"Offer parents to have a comprehensive understanding of their children’s online\n" +
                                 "education activities."} image={Images.reading_books}/>

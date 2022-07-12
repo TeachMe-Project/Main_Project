@@ -5,25 +5,32 @@ import {MdOutlineAddShoppingCart, MdOutlineSend} from "react-icons/md";
 
 const Banner: React.FC = () => {
     return (
-        <Container fluid={true}>
-            <Row className="mt-3">
-                <Col xl={5} style={{display: "flex", flexDirection: "column", justifyContent: "space-evenly",}}>
-                    <Row className="ms-3">
-                        <Col xl={12} className="m-0 px-4">
-                        <h1 style={{fontFamily: "'Poppins', sans-serif", fontSize: "50px"}}>The Online Learning</h1>
-                        <p style={{fontSize:"20px", marginTop:"20px", fontFamily: "'Poppins', sans-serif"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed aliquet dolor. Nullam ac
-                            venenatis neque. Donec consectetur nibh in lacus vulputate volutpat. Ut vulputate elit eros,</p>
-                            <Button className="px-5 py-2 mt-3 btn-secondary" style={{ borderRadius:"10px"}}>
-                               <MdOutlineAddShoppingCart style={{marginRight:"5px", fontSize:"18px"}}/> Try It Now
+        <Container fluid={true} className='banner mb-lg-5'>
+            <Row className="mt-3 d-flex flex-lg-row flex-column-reverse">
+                <Col lg={5} md={12} className='d-lg-flex flex-lg-column justify-content-lg-center'>
+                    <Row className="ms-lg-3">
+                        <Col lg={12} className="m-0 px-lg-4 text-lg-start text-md-center text-center">
+                            <h1 className='banner-header text-lg-start text-center'>The Online Learning</h1>
+                            <p className='mt-lg-3 banner-text text-md-start '>Lorem
+                                ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed aliquet dolor. Nullam ac
+                                venenatis neque. Donec consectetur nibh in lacus vulputate volutpat. Ut vulputate elit
+                                eros,</p>
+                            <Button className="px-md-5 py-2 mt-3 btn-secondary">
+                                <MdOutlineAddShoppingCart style={{marginRight: "5px", fontSize: "20px"}}/> Try It Now
                             </Button>
-                            <Button className="ms-4 px-5 py-2 mt-3 btn-secondary" style={{borderRadius:"10px"}}>
-                                <MdOutlineSend style={{marginRight:"5px", fontSize:"18px"}}/> Contact Us
+                            <Button className="ms-4 px-md-5 py-2 mt-3 btn-secondary" >
+                                <MdOutlineSend style={{marginRight: "5px", fontSize: "20px"}}/> Contact Us
                             </Button>
                         </Col>
                     </Row>
                 </Col>
-                <Col xl={7}>
-                    <Image src={Images.home} style={{width: "100%"}}></Image>
+                <Col lg={7} md={12} >
+                    <Row>
+                        <Col lg={12} md={12} className='mx-md-auto'>
+                            <Image src={Images.home} className='w-100'></Image>
+                        </Col>
+                    </Row>
+
                 </Col>
             </Row>
         </Container>
