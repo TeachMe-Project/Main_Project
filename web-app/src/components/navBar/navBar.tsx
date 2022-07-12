@@ -6,7 +6,7 @@ import Images from "../../assets/images/Images";
 const NavBar: React.FC = () => {
 
     const {loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently, user} = useAuth0();
-
+console.log(user);
     return (
         <Navbar collapseOnSelect expand="lg" variant="light" style={{fontSize: "20px"}}>
             <Container fluid={true}>

@@ -7,11 +7,13 @@ import {
     SidebarFooter,
     SidebarContent,
 } from 'react-pro-sidebar';
-import {FaGem, FaGithub, FaHeart, FaTachometerAlt} from "react-icons/fa";
 import {HiOutlineMenu} from "react-icons/hi";
 import Images from "../../../assets/images/Images";
-import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
+import {FaTachometerAlt} from "react-icons/fa";
+import {IoIosSchool} from "react-icons/io";
+import {MdPersonAddAlt} from "react-icons/md";
+import {BsCashCoin} from "react-icons/bs";
 
 const ParentSidebar: React.FC = () => {
 
@@ -55,28 +57,23 @@ const ParentSidebar: React.FC = () => {
 
             <SidebarContent>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt className='side-menu-icon'/>}>
+                    <MenuItem icon={<IoIosSchool/>}>
                         Upcoming Class
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaTachometerAlt/>}>
-                        On Summary
+                        Progress
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>} onClick={()=>navigate('/studentSignup')}>
+                    <MenuItem icon={<BsCashCoin/>}>
+                        UpComing Payment
+                    </MenuItem>
+                </Menu>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<MdPersonAddAlt/>} onClick={()=>navigate('/studentSignup')}>
                         SignUp Student
-                    </MenuItem>
-                </Menu>
-                <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>}>
-                        Dashboard
-                    </MenuItem>
-                </Menu>
-                <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>}>
-                        Dashboard
                     </MenuItem>
                 </Menu>
             </SidebarContent>
