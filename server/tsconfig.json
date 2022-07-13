@@ -18,6 +18,7 @@
     "noFallthroughCasesInSwitch": true,
     "outDir": "../server-build"
   },
+  
   "exclude": [
     "__tests__"
   ]
