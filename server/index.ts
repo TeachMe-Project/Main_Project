@@ -7,6 +7,16 @@ import { ServerlessFunction } from './types';
 // importing requires routings
 import {studentRouter} from "./route/studentRoutes";
 import {paymentGatewayRouter} from "./route/paymentGatewayRoutes";
+import {userRouter} from "./route/userRoutes";
+import {teacherRouter} from "./route/teacherRoutes";
+import {parentRouter} from "./route/parentRoutes";
+import {courseRouter} from "./route/courseRoutes";
+import {adminRouter} from "./route/adminRoutes";
+import {classRouter} from "./route/classRoutes";
+import {homeworkRouter} from "./route/homeworkRoutes";
+import {instituteRouter} from "./route/instituteRoutes";
+import {notesRouter} from "./route/notesRoutes";
+import {notificationRouter} from "./route/notificationRoutes";
 
 const PORT = process.env.PORT ?? 8081;
 
@@ -32,7 +42,18 @@ app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 
 //development endpoints by developers
+app.use('/admin',adminRouter)
+app.use('/class',classRouter)
+app.use('/course', courseRouter)
+app.use('/homework', homeworkRouter)
+app.use('/institute', instituteRouter)
+app.use('/notes', notesRouter)
+app.use('/notification', notificationRouter)
+app.use('/parent', parentRouter)
 app.use('/student', studentRouter)
+app.use('/teacher', teacherRouter)
+app.use('/user', userRouter)
+
 app.use('/create-checkout-session',paymentGatewayRouter)
 
 
