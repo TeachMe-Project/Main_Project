@@ -5,23 +5,18 @@ import reportWebVitals from './reportWebVitals';
 import './assets/styles/main.scss';
 import {Auth0Provider} from '@auth0/auth0-react';
 import {BrowserRouter} from "react-router-dom";
+import {Auth0ProviderWithHistory} from "./components/utils/auth0-provider-with-history";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <Auth0Provider
-            domain="learningsl.us.auth0.com"
-            clientId="JzBbJacKTm5apFvzjOsPdFzrOKjW2iZQ"
-            redirectUri="http://localhost:3000/dashboard"
-            audience="learning"
-            scope="openid profile email"
-        >
-            <BrowserRouter>
+        <BrowserRouter>
+            <Auth0ProviderWithHistory>
                 <App/>
-            </BrowserRouter>
-        </Auth0Provider>
+            </Auth0ProviderWithHistory>
+        </BrowserRouter>
     </React.StrictMode>
 );
 
