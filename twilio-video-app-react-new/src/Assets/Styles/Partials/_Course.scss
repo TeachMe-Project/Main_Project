@@ -3,22 +3,67 @@
     .PanelSubHeader {
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
-      h3 {
-        font-weight: 600;
-        font-size: 2rem;
-        margin: auto 0;
-        color: $header-secondary;
-      }
+      justify-content: flex-start;
+
       .PanelImage img {
-        height: 150px;
-        width: 150px;
-        max-height: 150px;
-        max-width: 150px;
+        height: 120px;
+        width: 120px;
+        max-height: 120px;
+        max-width: 120px;
         border-radius: 50%;
-        margin: 0;
+        //margin: 0;
+        margin-left: 2rem;
+        margin-right: 8rem;
+        margin-bottom: 1rem;
+      }
+      .PanelTopic {
+        display: flex;
+        flex-direction: column;
+
+        .SubjectName h3 {
+          font-weight: 600;
+          font-size: 1.5rem;
+          margin: auto 0;
+          color: $header-secondary;
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+        .TutorProfileButton {
+          width: max-content;
+          display: flex;
+          flex-direction: row;
+          border-radius: 20px;
+          border: none;
+          padding-right: 20px;
+          background-color: #dff9fb;
+          cursor: pointer;
+
+          .link {
+            display: flex;
+            flex-direction: row;
+            text-decoration: none;
+            color: $header-primary;
+
+            .UserImg img {
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              margin: 5px 0.7em 5px 0.8em;
+            }
+            .Name {
+              font-weight: 600;
+              padding-top: 10px;
+              color: $header-primary;
+            }
+          }
+        }
+
+        .TutorProfileButton:hover {
+          border: 2px solid #dff9fb;
+          color: #22a6b3;
+          background-color: $body-bg-primary;
+        }
       }
     }
-   
   }
 }

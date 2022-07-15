@@ -6,6 +6,7 @@ import MyTeachers from './MyTeachers';
 import StudentProfile from './StudentProfile';
 import { Course } from './Course';
 import Twilio from '../../Twilio/Twilio';
+import Notification from '../../Notification/notifications';
 
 import AppStateProvider, { useAppState } from '../../../state';
 import ErrorDialog from '../../ErrorDialog/ErrorDialog';
@@ -48,6 +49,10 @@ const routes = [
     main: () => <MyTeachers />,
   },
   {
+    path: '/notifications',
+    main: () => <Notification />,
+  },
+  {
     path: '/userprofile',
     main: () => <StudentProfile />,
   },
@@ -84,7 +89,6 @@ export default function MainPanel() {
           </AppStateProvider>
         </UnsupportedBrowserWarning>
       </MuiThemeProvider>
-      ,
     </div>
   );
 }

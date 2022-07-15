@@ -1,10 +1,10 @@
-import * as React from "react";
-import Card from "../../Card/Card";
-import CardHeader from "../../Card/CardHeader";
-import CardDetails from "../../Card/CardDetails";
-import { Row, Col, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import PanelContainer from "../../Layout/PanelContainer";
+import * as React from 'react';
+import CourseCard from '../../Card/CourseCard';
+import CardHeader from '../../Card/CardHeader';
+import CardDetails from '../../Card/CardDetails';
+import { Row, Col, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import PanelContainer from '../../Layout/PanelContainer';
 
 export const MyCourses = () => {
   return (
@@ -18,48 +18,17 @@ export const MyCourses = () => {
           <div className="Panel">
             <div className="PanelBody">
               <Link to="/course" className="link">
-                <Card
+                <CourseCard
                   header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm- 06:00pm"
+                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                  time="04:00pm - 06:00pm"
                   date="Sunday"
-                  image= {<img src={require("../../../Assets/Images/testimg2.jpeg")} />}
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm- 06:00pm"
-                  date="Sunday"
-                  image= {<img src={require("../../../Assets/Images/testimg2.jpeg")} />}
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm- 06:00pm"
-                  date="Sunday"
-                  image= {<img src={require("../../../Assets/Images/testimg2.jpeg")} />}
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm- 06:00pm"
-                  date="Sunday"
-                  image= {<img src={require("../../../Assets/Images/testimg2.jpeg")} />}
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm- 06:00pm"
-                  date="Sunday"
-                  image= {<img src={require("../../../Assets/Images/testimg2.jpeg")} />}
+                  image={<img src={'/Images/subjects/maths.png'} />}
+                  teacher="Lasitha Nuwan"
+                  amount="LKR 2,500"
+                  btn="Unsubscribe"
                 />
               </Link>
             </div>

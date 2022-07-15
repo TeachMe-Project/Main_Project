@@ -11,7 +11,11 @@ import Homework from './Homework';
 import PendingPayments from './PendingPayments';
 import PanelContainer from '../../Layout/PanelContainer';
 
-export const Course = () => {
+type tutorName = {
+  name: string;
+  image?: HTMLImageElement;
+};
+export const Course = (props: tutorName) => {
   return (
     <div className="Course">
       <Container>
@@ -25,10 +29,20 @@ export const Course = () => {
               <div className="PanelImage">
                 <img src={require('../../../Assets/Images/testimg2.jpeg')} />
               </div>
-              <h3>Mathematics Class</h3>
-              <h4>
-                <a href="/">Mr. Lasitha Nuwan</a>
-              </h4>
+
+              <div className="PanelTopic">
+                <div className="SubjectName">
+                  <h3>Mathematics Class</h3>
+                </div>
+                <div className="TutorProfileButton">
+                  <Link to="/userprofile" className="link">
+                    <div className="UserImg">
+                      <img src={require('../../../Assets/Images/testimg2.jpeg')} />
+                    </div>
+                    <div className="Name"> Lasitha Nuwan </div>
+                  </Link>
+                </div>
+              </div>
             </div>
 
             <Tabs>
@@ -46,17 +60,21 @@ export const Course = () => {
                 <Details label="Duration" value="12 months" symbol=":" />
               </div>
               <div className="Notes">
-                <Notes topic="Note for week 1" date="04-05-2022" />
-                <Notes topic="Note for week 2" date="04-05-2022" />
-                <Notes topic="Note for week 3" date="04-05-2022" />
-                <Notes topic="Note for week 4" date="04-05-2022" />
-                <Notes topic="Note for week 5" date="04-05-2022" />
+                <Notes topic="Note for week 1" date="2022-04-05" />
+                <Notes topic="Note for week 2" date="2022-04-12" />
+                <Notes topic="Note for week 3" date="2022-04-19" />
+                <Notes topic="Note for week 4" date="2022-04-26" />
+                <Notes topic="Note for week 5" date="2022-05-03" />
               </div>
               <div className="Homework">
-                <Homework name="Differentiaion part 1" date="2022-04-05" />
-                <Homework name="Differentiaion part 1" date="2022-04-05" />
-                <Homework name="Differentiaion part 1" date="2022-04-05" />
-                <Homework name="Differentiaion part 1" date="2022-04-05" />
+                <Homework name="Homework for week 1" date="2022-04-05" />
+                <Homework name="Homework for week 2" date="2022-04-12" />
+                <Homework name="Homework for week 3" date="2022-04-19" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
               </div>
             </Tabs>
           </div>
