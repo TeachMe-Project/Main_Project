@@ -8,6 +8,11 @@ import TopNavbar from '../../Navbars/TopNavbar';
 import LeftSidebar from '../../Sidebar/LeftSidebar';
 import PanelContainer from '../../Layout/PanelContainer';
 import { AiOutlineHistory } from 'react-icons/ai';
+import Searchbar from '../../Searchbar/Searchbar';
+//! Components
+// import { SearchBar } from "../Searchbar/Searchbar";
+// //! Styles
+// import { Wrapper } from "../Searchbar/Wrapper.styles";
 
 export const Dashboard = () => {
   return (
@@ -20,7 +25,7 @@ export const Dashboard = () => {
           </div>
           <div className="Panel">
             <div className="PanelSubheader">
-              <h5>Recently Accessed Courses</h5>
+              <h5>Upcoming Classes</h5>
             </div>
             <div className="PanelBody">
               <Card
@@ -53,46 +58,11 @@ export const Dashboard = () => {
 
           <div className="Panel">
             <div className="PanelSubheader">
-              <h5>Pending Homework</h5>
+              <h5>Search Courses</h5>
             </div>
             <div className="PanelBody">
-              <div className="PendingHomework">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-              </div>
+              <Searchbar />
+              <img src={require('../../../Assets/Images/testimg2.jpeg')} />
             </div>
           </div>
         </Row>
