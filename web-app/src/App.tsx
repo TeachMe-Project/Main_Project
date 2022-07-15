@@ -10,6 +10,13 @@ import ParentSignup from "./components/signup/ParentSignup";
 import PUpComingClasses from "./components/profile/parent/PUpComingClasses";
 import PUpComingPayments from './components/profile/parent/PUpComingPayments';
 import PStudentProgress from './components/profile/parent/PStudentProgress';
+import Admin from './components/admin/Admin';
+import Institute from './components/institute/institute';
+import ManageUsers from "./components/admin/ManageUsers";
+import ManageCourses from "./components/admin/ManageCourses";
+import ComplaintHandling from "./components/admin/ComplaintHandling";
+import VerifyTutorsPage from "./components/admin/VerifyTutorsPage";
+import VerifyInstitutesPage from "./components/admin/VerifyInstitutesPage";
 
 const App: React.FC = () => {
     return (
@@ -25,6 +32,14 @@ const App: React.FC = () => {
                 <Route path="/parent" >
                     <Route index element={<PUpComingClasses/>}/>
                 </Route>
+                <Route path="/admin" element={<Admin />} >
+                    <Route path="/admin/manageusers" element={<ManageUsers />} />
+                    <Route path="/admin/managecourses" element={<ManageCourses />}/>
+                    <Route path="/admin/complainthandling" element={<ComplaintHandling />}/>
+                    <Route path="/admin/verifytutors" element={<VerifyTutorsPage />} />
+                    <Route path="/admin/verifyinstitutes" element={<VerifyInstitutesPage />} />
+                </Route>
+                <Route path="/institute" element={<Institute />} />
             </Routes>
         </div>
     );

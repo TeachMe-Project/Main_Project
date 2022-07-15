@@ -4,10 +4,11 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import ManageCourses from "../institute/ManageCourses";
-import ExistingTutorsPage from '../institute/ExistingTutorsPage';
+import ManageCourses from "../admin/ManageCourses";
 import ManageUsers from '../admin/ManageUsers';
 import VerifyTutorsPage from '../admin/VerifyTutorsPage';
+import VerifyInstitutesPage from '../admin/VerifyInstitutesPage';
+import ComplaintHandling from '../admin/ComplaintHandling';
 
 export default function AdminTabs() {
   const [value, setValue] = React.useState('1');
@@ -30,9 +31,9 @@ export default function AdminTabs() {
         </Box>
         <TabPanel value="1"><ManageUsers /></TabPanel>
         <TabPanel value="2"><ManageCourses /></TabPanel>
-        <TabPanel value="3"><ExistingTutorsPage /></TabPanel>
+        <TabPanel value="3"><ComplaintHandling /></TabPanel>
         <TabPanel value="4"><VerifyTutorsPage /></TabPanel>
-        <TabPanel value="5">Item Four</TabPanel>
+        <TabPanel value="5"><VerifyInstitutesPage /></TabPanel>
       </TabContext>
     </Box>
   );
