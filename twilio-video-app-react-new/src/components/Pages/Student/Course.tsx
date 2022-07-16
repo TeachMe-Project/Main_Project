@@ -37,9 +37,9 @@ export const Course = (props: tutorName) => {
                 <div className="TutorProfileButton">
                   <Link to="/userprofile" className="link">
                     <div className="UserImg">
-                      <img src={require('../../../Assets/Images/testimg2.jpeg')} />
+                      <img src={'/Images/Teachers/mr1.jpg'} />
                     </div>
-                    <div className="Name"> Lasitha Nuwan </div>
+                    <div className="Name">Mr. Lasitha Nuwan</div>
                   </Link>
                 </div>
               </div>

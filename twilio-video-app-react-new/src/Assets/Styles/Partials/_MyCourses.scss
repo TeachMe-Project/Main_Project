@@ -9,36 +9,45 @@
         margin: 0 auto;
         height: 75vh;
         overflow-y: scroll;
-        .link {
-          width: 90%;
 
-          .CardImage img {
-            max-width: 150px;
-            width: 150px;
-            max-height: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 0 2rem 0 0;
+        .CardImage img {
+          max-width: 150px;
+          width: 150px;
+          max-height: 150px;
+          height: 150px;
+          border-radius: 50%;
+          margin: 0 2rem 0 0;
+        }
+        .CardBody {
+          width: 85%;
+          .CardButton {
+            margin-left: 2rem;
+            background-color: #fff;
+            font-weight: 600;
+            font-size: 12px;
+            width: max-content;
+            padding: 7px 10px;
+            border-radius: 10px;
+            color: #ee5253;
+            border: 1px solid #ee5253;
+            height: max-content;
+            line-height: 1;
+            box-shadow: none;
           }
-          .CardBody {
-            width: 85%;
-            .CardButton {
-              margin-left: 4rem;
-              background-color: #ee5253;
-              font-weight: 600;
-              font-size: 12px;
-              width: max-content;
-              padding: 7px 10px;
-              border-radius: 15px;
-              border: 2px solid #ee5253;
-              height: max-content;
-              line-height: 1;
-            }
-            .CardButton:hover {
-              border: 2px solid #ee5253;
-              color: #ee5253;
-              background-color: #fff;
-            }
+          .CardButton:hover {
+            border: 1px solid #ee5253;
+            color: #fff;
+            background-color: #ee5253;
+          }
+          .ViewMore .CardButton {
+            box-shadow: none;
+            color: #fff;
+            background-color: #1e90ff;
+            border: 1px solid #1e90ff;
+          }
+          .ViewMore .CardButton:hover {
+            background-color: #ddf3fa;
+            color: #1e90ff;
           }
         }
       }

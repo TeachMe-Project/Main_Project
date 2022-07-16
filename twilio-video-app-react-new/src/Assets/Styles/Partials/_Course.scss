@@ -12,6 +12,7 @@
         max-width: 120px;
         border-radius: 50%;
         //margin: 0;
+
         margin-left: 2rem;
         margin-right: 8rem;
         margin-bottom: 1rem;
@@ -22,7 +23,7 @@
 
         .SubjectName h3 {
           font-weight: 600;
-          font-size: 1.5rem;
+          font-size: 1.8rem;
           margin: auto 0;
           color: $header-secondary;
           padding-top: 1rem;
@@ -32,12 +33,15 @@
           width: max-content;
           display: flex;
           flex-direction: row;
-          border-radius: 20px;
-          border: none;
+          border-radius: 25px;
+          //border: 1px solid #1e90ff;
           padding-right: 20px;
-          background-color: #dff9fb;
+          margin-top: 1rem;
+          background-color: #fff;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+            rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
           cursor: pointer;
-
+          color: #1e90ff;
           .link {
             display: flex;
             flex-direction: row;
@@ -45,23 +49,23 @@
             color: $header-primary;
 
             .UserImg img {
-              width: 30px;
-              height: 30px;
+              width: 40px;
+              height: 40px;
               border-radius: 50%;
-              margin: 5px 0.7em 5px 0.8em;
+              margin: 0px 0.7em 0px 0em;
+              border: 2px solid #1e90ff;
             }
             .Name {
               font-weight: 600;
               padding-top: 10px;
-              color: $header-primary;
             }
           }
         }
 
         .TutorProfileButton:hover {
-          border: 2px solid #dff9fb;
-          color: #22a6b3;
-          background-color: $body-bg-primary;
+          border: 1px solid #1e90ff;
+          background-color: #1e90ff;
+          color: #fff;
         }
       }
     }

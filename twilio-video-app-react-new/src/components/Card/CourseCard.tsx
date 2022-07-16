@@ -2,6 +2,7 @@ import * as React from 'react';
 import { CardDetails } from './CardDetails';
 import { CardHeader } from './CardHeader';
 import { CardButton } from './CardButton';
+import { Link } from 'react-router-dom';
 
 type CourseCard = {
   date?: string;
@@ -11,7 +12,8 @@ type CourseCard = {
   header?: string;
   amount?: string;
   image?: JSX.Element;
-  btn?: string;
+  btn1?: string;
+  btn2?: string;
 };
 
 export const CourseCard: React.FC<CourseCard> = props => {
@@ -21,7 +23,9 @@ export const CourseCard: React.FC<CourseCard> = props => {
       <div className="CardBody">
         <CardHeader header={props.header} />
         <div className="teacherLink">
-          <CardDetails details={props.teacher} />
+          <Link to="/teacherProfile" className="link">
+            <CardDetails details={props.teacher} />
+          </Link>
         </div>
         <CardDetails details={props.description} />
         <div className="lastRow">
@@ -30,8 +34,14 @@ export const CourseCard: React.FC<CourseCard> = props => {
             <CardDetails details={props.time} />
             <CardDetails details={props.amount} />
           </div>
-
-          <CardButton btnname={props.btn} />
+          <div className="ViewMore">
+            <Link to="/course" className="link">
+              <CardButton btnname={props.btn1} />
+            </Link>
+          </div>
+          <Link to="/course" className="link">
+            <CardButton btnname={props.btn2} />
+          </Link>
         </div>
       </div>
     </div>
