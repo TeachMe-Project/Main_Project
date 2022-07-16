@@ -8,6 +8,7 @@ import StudentProfile from './StudentProfile';
 import { Course } from './Course';
 import Twilio from '../../Twilio/Twilio';
 import Notification from '../../Notification/notifications';
+import SearchResults from './SearchResults';
 
 import AppStateProvider, { useAppState } from '../../../state';
 import ErrorDialog from '../../ErrorDialog/ErrorDialog';
@@ -60,6 +61,10 @@ const routes = [
   {
     path: '/userprofile',
     main: () => <StudentProfile />,
+  },
+  {
+    path: '/searchresults',
+    main: () => <SearchResults />,
   },
   {
     path: '/course',
