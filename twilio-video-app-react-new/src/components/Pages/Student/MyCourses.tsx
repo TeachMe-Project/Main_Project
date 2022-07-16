@@ -26,7 +26,63 @@ export const MyCourses = () => {
                   time="04:00pm - 06:00pm"
                   date="Sunday"
                   image={<img src={'/Images/subjects/maths.png'} />}
-                  teacher="Lasitha Nuwan"
+                  teacher="Mr. Lasitha Nuwan"
+                  amount="LKR 2,500"
+                  btn="Unsubscribe"
+                />
+              </Link>
+              <Link to="/course" className="link">
+                <CourseCard
+                  header="Science"
+                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                  time="04:00pm - 06:00pm"
+                  date="Monday"
+                  image={<img src={'/Images/subjects/science.png'} />}
+                  teacher="Ms. Nayana Sandamali"
+                  amount="LKR 2,500"
+                  btn="Unsubscribe"
+                />
+              </Link>
+              <Link to="/course" className="link">
+                <CourseCard
+                  header="History"
+                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                  time="04:00pm - 06:00pm"
+                  date="Saturday"
+                  image={<img src={'/Images/subjects/history.png'} />}
+                  teacher="Mr. Kamal Maggona"
+                  amount="LKR 2,500"
+                  btn="Unsubscribe"
+                />
+              </Link>
+              <Link to="/course" className="link">
+                <CourseCard
+                  header="Music"
+                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                  time="05:00pm - 07:00pm"
+                  date="Tuesday"
+                  image={<img src={'/Images/subjects/music.png'} />}
+                  teacher="Mr. Anura Kahatagoda"
+                  amount="LKR 2,500"
+                  btn="Unsubscribe"
+                />
+              </Link>
+              <Link to="/course" className="link">
+                <CourseCard
+                  header="Art"
+                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                  time="04:00pm - 06:00pm"
+                  date="Sunday"
+                  image={<img src={'/Images/subjects/art.png'} />}
+                  teacher="Mrs. Shiromi Chandraguptha"
                   amount="LKR 2,500"
                   btn="Unsubscribe"
                 />

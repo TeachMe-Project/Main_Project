@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import MyCourses from './MyCourses';
 import MyTeachers from './MyTeachers';
+import Messages from './Messages';
 import StudentProfile from './StudentProfile';
 import { Course } from './Course';
 import Twilio from '../../Twilio/Twilio';
@@ -47,6 +48,10 @@ const routes = [
   {
     path: '/myteachers',
     main: () => <MyTeachers />,
+  },
+  {
+    path: '/messages',
+    main: () => <Messages />,
   },
   {
     path: '/notifications',

@@ -39,6 +39,7 @@
     .teacherLink {
       .CardDetails {
         background-color: #ddf3fa;
+        border: 2px solid #ddf3fa;
         color: #1e90ff;
         padding: 3px 10px;
         width: max-content;
@@ -47,5 +48,16 @@
         margin-bottom: 0.8rem;
       }
     }
+    .teacherLink {
+      .CardDetails:hover {
+        background-color: #fff;
+        border: 2px solid #1e90ff;
+      }
+    }
   }
+}
+.CourseCard:hover {
+  box-shadow: 1px 7px 25px rgb(0 0 0 / 13%);
+  -webkit-transform: translateY(-4px);
+  transform: translateY(-4px);
 }
