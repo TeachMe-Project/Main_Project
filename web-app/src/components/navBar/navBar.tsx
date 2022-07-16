@@ -6,7 +6,7 @@ import Images from "../../assets/images/Images";
 const NavBar: React.FC = () => {
 
     const {loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently, user} = useAuth0();
-console.log(user);
+    console.log(user);
     return (
         <Navbar collapseOnSelect expand="lg" variant="light" style={{fontSize: "20px"}}>
             <Container fluid={true}>
@@ -26,17 +26,36 @@ console.log(user);
                                 <Nav.Link href="#ContactUs" className="me-2">ContactUs</Nav.Link>
                             </Nav>
                             <Nav className='ms-md-5 ps-md-4'>
-                                <Nav.Link>
-                                    <Button variant="secondary" onClick={loginWithRedirect}
-                                            style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
-                                        Login
-                                    </Button></Nav.Link>
-                                <Nav.Link>
-                                    <Button variant="secondary"
-                                            style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
-                                        Signup
-                                    </Button>
-                                </Nav.Link>
+                                {isAuthenticated ? (
+                                    <>
+                                        <Nav.Link>
+                                            <Button variant="secondary"
+                                                    onClick={() => logout({returnTo: window.location.origin})}
+                                                    style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
+                                                Logout
+                                            </Button></Nav.Link>
+                                        <Nav.Link>
+                                            <Button variant="secondary"
+                                                    style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
+                                                Signup
+                                            </Button>
+                                        </Nav.Link>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Nav.Link>
+                                            <Button variant="secondary" onClick={loginWithRedirect}
+                                                    style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
+                                                Login
+                                            </Button></Nav.Link>
+                                        <Nav.Link>
+                                            <Button variant="secondary"
+                                                    style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
+                                                Signup
+                                            </Button>
+                                        </Nav.Link>
+                                    </>
+                                )}
                             </Nav>
                         </Navbar.Collapse>
                     </Col>
