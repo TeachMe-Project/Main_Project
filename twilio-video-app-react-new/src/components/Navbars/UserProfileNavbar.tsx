@@ -25,11 +25,6 @@ export const UserProfileNavbar = (props: UserProfileNavbar) => {
           <BsFillBellFill className="Bell-icon" />
         </div>
       </Link>
-      <Link to="/userprofile" className="link">
-        <div className="SignoutBtn">
-          <Button name="Signout" />
-        </div>
-      </Link>
     </div>
   );
 };

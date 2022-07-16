@@ -27,12 +27,12 @@ export const Course = (props: tutorName) => {
           <div className="Panel">
             <div className="PanelSubHeader">
               <div className="PanelImage">
-                <img src={require('../../../Assets/Images/testimg2.jpeg')} />
+                <img src={'/Images/subjects/maths.png'} />
               </div>
 
               <div className="PanelTopic">
                 <div className="SubjectName">
-                  <h3>Mathematics Class</h3>
+                  <h3>Mathematics</h3>
                 </div>
                 <div className="TutorProfileButton">
                   <Link to="/userprofile" className="link">

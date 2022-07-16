@@ -6,7 +6,7 @@
   transition: all 0.5s;
   border-radius: 0 0 20px 0;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-
+  position: relative;
   .LeftNavbar {
     padding: 0;
   }
@@ -31,5 +31,30 @@
   .Sidebar_item:hover {
     background-color: #ddf3fa;
     color: #1e90ff;
+  }
+  .LogoutBtn {
+    position: absolute;
+    left: 3.5rem;
+    bottom: 1rem;
+    color: #7c7d87;
+    display: flex;
+    font-size: 1rem;
+    cursor: pointer;
+    .Button {
+      font-size: 1rem;
+      //align-content: center;
+      box-shadow: none;
+      margin: auto;
+      //color:#7c7d87;
+      padding: 0;
+    }
+    .LogoutIcon {
+      font-size: 1.3rem;
+      padding-right: 5px;
+    }
+  }
+  .LogoutBtn:hover,
+  .LogoutIcon:hover {
+    color: $header-primary;
   }
 }

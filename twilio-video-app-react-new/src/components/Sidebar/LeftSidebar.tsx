@@ -1,18 +1,19 @@
 import * as React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BsFillGridFill, BsFillBookFill, BsMessenger } from 'react-icons/bs';
-import { GiTeacher } from 'react-icons/gi';
-import { IoMdCog } from 'react-icons/io';
+import { BsFillGridFill, BsFillPersonFill, BsFillChatFill } from 'react-icons/bs';
+import { FaBook } from 'react-icons/fa';
+import { AiOutlineLogout } from 'react-icons/ai';
+
 import '../../Assets/Styles/main.scss';
 import { Link } from 'react-router-dom';
 import '../Pages/Student/MainPanel';
+import Button from '../Button/Button';
 
 export const LeftSidebar = () => {
   return (
     <div className="LeftSidebar">
       <Container>
-        {/* <div className="Logo">Logo</div> */}
         <ul className="LeftNavbar">
           <Row>
             <li>
@@ -34,7 +35,7 @@ export const LeftSidebar = () => {
               <Link to="/mycourses" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    <BsFillBookFill />
+                    <FaBook />
                   </div>
                   <div className="Sidebar_item_name">My Courses</div>
                 </div>
@@ -47,7 +48,7 @@ export const LeftSidebar = () => {
               <Link to="/myteachers" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    <GiTeacher />
+                    <BsFillPersonFill />
                   </div>
                   <div className="Sidebar_item_name">My Teachers</div>
                 </div>
@@ -59,7 +60,7 @@ export const LeftSidebar = () => {
               <Link to="/messages" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    <BsMessenger />
+                    <BsFillChatFill />
                   </div>
                   <div className="Sidebar_item_name">Messages</div>
                 </div>
@@ -67,6 +68,14 @@ export const LeftSidebar = () => {
             </li>
           </Row>
         </ul>
+
+        <Link to="/" className="link">
+          <div className="LogoutBtn">
+            {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
+            <AiOutlineLogout className="LogoutIcon" />
+            <Button name="Log out" />
+          </div>
+        </Link>
       </Container>
     </div>
   );
