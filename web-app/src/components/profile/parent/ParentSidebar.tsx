@@ -85,7 +85,7 @@ const ParentSidebar: React.FC<ParentSidebarProps> = (props:ParentSidebarProps) =
             {!collapsed && isPc &&
                 <SidebarFooter>
                     <div style={{width: '100%', padding: "10px"}}>
-                        <img src={Images.logo} style={{maxWidth: "250px"}}/>
+                        <img src={Images.logo} style={{maxWidth: "200px"}}/>
                     </div>
                 </SidebarFooter>}
         </ProSidebar>

@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {Card, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import ParentSidebar from "./ParentSidebar";
 import ProfileNavBar from "../navBar/profileNavBar";
 import {Pagination} from "react-headless-pagination";
-import axios from 'axios';
 import {useMediaQuery} from "react-responsive";
 
 type UpComing = {
@@ -103,7 +102,7 @@ const PUpComingClasses: React.FC = () => {
     const [toggled, setToggled] = useState(false);
 
     const handleToggleSidebar = () => {
-        if (toggled === false) {
+        if (!toggled) {
             setToggled(true);
             return toggled;
         }
@@ -115,16 +114,16 @@ const PUpComingClasses: React.FC = () => {
     }
 
     return (
-        <Container fluid={true} className="profile-actions m-0 px-0">
+        <Container fluid={true} className="profile-actions m-0 px-0 py-0">
             <ProfileNavBar handleToggleSidebar={handleToggleSidebar} isMobile={isMobile}/>
-            <Row className="ps-0 action-page mx-0">
+            <Row className="ps-0 action-page mx-0 py-0">
                 <Col lg={12} className="d-flex flex-row p-0">
                     <ParentSidebar handleToggleSidebar={handleToggleSidebar} toggle={toggled}/>
-                    <Row className='px-0 d-flex mx-auto mt-lg-5 w-75'>
+                    <Row className='px-0 d-flex mx-auto mt-lg-1 w-75'>
                        <Col lg={12} className='px-lg-5'>
                            <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                                <Col lg={12}>
-                                   <h1 className='text-lg-start header my-md-5'>
+                                   <h1 className='text-lg-start header my-lg-1'>
                                        Upcoming Classes
                                    </h1>
                                </Col>

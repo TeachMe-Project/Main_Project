@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Col, Container, Nav, Navbar, Row} from "react-bootstrap";
 import Images from "../../../assets/images/Images";
 import {useAuth0} from "@auth0/auth0-react";
@@ -17,11 +17,11 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
     const navigate = useNavigate();
     const {isMobile,handleToggleSidebar} = props
     return (
-        <Navbar collapseOnSelect expand="lg" variant="light" className='sticky-top'
-                style={{fontSize: "20px", boxShadow: "rgba(0, 0, 0, 0.1) 0px 25px 20px -20px"}}>
-            <Container fluid={true} className='mx-0 px-2 py-1'>
+        <Navbar collapseOnSelect expand="lg" variant="light"
+                style={{fontSize: "20px", boxShadow: "rgba(0, 0, 0, 0.1) 0px 25px 20px -20px",height:"10vh"}}>
+            <Container fluid={true} className='mx-0 px-2 py-0'>
                 <Row className='w-100'>
-                    <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2'>
+                    <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2 py-0'>
                         <Row className='d-flex flex-row align-content-center'>
                             <Col>
                                 {isMobile && <Button className='ms-0 me-1 p-1' variant='outline-light'
