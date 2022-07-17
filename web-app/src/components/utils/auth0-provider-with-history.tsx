@@ -27,6 +27,8 @@ export const Auth0ProviderWithHistory = ({
             scope={scope}
             redirectUri={window.location.origin}
             onRedirectCallback={onRedirectCallback}
+            useRefreshTokens
+            cacheLocation='localstorage'
         >
             {children}
         </Auth0Provider>
