@@ -1,0 +1,138 @@
+ (<Row className="pb-md-0 pb-4">
+                      <Form noValidate onSubmit={handleSubmit}>
+                                             {/*{(pageStage === 1) */}
+
+                        <Row>
+                                                 <Form.Group className="mb-3" controlId="validationLastname">
+
+                                                    <Col xl={4}>
+                                                        <Form.Label style={{fontWeight: 600}}>Last Name</Form.Label>
+                                                    </Col>
+
+                                                    <Col xl={8}>
+                                                     <Form.Control
+                                                                                     type="text"
+                                                                                     placeholder="Enter the last name here"
+                                                                                     name="Lastname"
+                                                                                     value={values.Lastname}
+                                                                                     onChange={handleChange}
+                                                                                     isInvalid={!!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
+                                                                                     isValid={touched.Lastname}
+                                                                                     onBlur={handleBlur}
+                                                                                   />
+                                                                                   <Form.Control.Feedback type="invalid">
+                                                                                     {errors.Lastname}
+                                                                                   </Form.Control.Feedback>
+                                                    </Col>
+
+                                                  </Form.Group>
+                                                </Row>
+
+
+                          <Col lg={6} md={6} sm={12} xs={12}>
+                            <Form.Group className="mb-3" controlId="validationLastname">
+                              <Form.Label style={{fontWeight: 600}}>Last Name</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter the last name here"
+                                name="Lastname"
+                                value={values.Lastname}
+                                onChange={handleChange}
+                                isInvalid={!!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
+                                isValid={touched.Lastname}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">
+                                {errors.Lastname}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                        </Row>
+
+
+
+                        <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                          <Col lg={6} md={6} sm={12} xs={12}>
+                            <Form.Group className="mb-3" controlId="validationEmail">
+                              <Form.Label style={{fontWeight: 600}}>Email</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter the email"
+                                name="Email"
+                                value={values.Email}
+                                onChange={handleChange}
+                                isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
+                                isValid={touched.Email}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">
+                                {errors.Email}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+
+                          <Col lg={6} md={6} sm={12} xs={12}>
+                            <Form.Group className="mb-3" controlId="validationGrade">
+                              <Form.Label style={{fontWeight: 600}}>Grade</Form.Label>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter the grade here"
+                                name="Grade"
+                                value={values.Grade}
+                                onChange={handleChange}
+                                isInvalid={!!errors.Grade ? changeGradeValidate(false) : changeGradeValidate(true)}
+                                isValid={touched.Grade}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">
+                                {errors.Grade}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                          <Col lg={6} md={6} sm={12} xs={12}>
+                            <Form.Group className="mb-3" controlId="validationPassword">
+                              <Form.Label style={{fontWeight: 600}}>Password</Form.Label>
+
+                            </Form.Group>
+                          </Col>
+                          <Col lg={6} md={6} sm={12} xs={12}>
+                            <Form.Group className="mb-3" controlId="validationschoolName">
+                              <Form.Label style={{fontWeight: 600}}>School Name</Form.Label>
+
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                          <Col
+                            className="d-flex flex-row justify-content-lg-end justify-content-end">
+                            <Button type="submit" className="px-4"
+                                    variant="primary"
+                                    onClick={
+                                      () => {
+                                        if (gradeValidate && fistNameValidate && lastNameValidate && emailValidate && passwordValidate && schoolNameValidate) {
+                                          setPageStage(2);
+                                        }
+                                      }
+                                    }
+                                    onClickCapture={() => {
+                                      validateField("Grade");
+                                      validateField("Firstname");
+                                      validateField("Lastname");
+                                      validateField("Email");
+                                      validateField("Password");
+                                      validateField("Schoolname");
+                                    }
+                                    }
+                            >Next</Button>
+                          </Col>
+                        </Row>
+                        {/*</LazyLoad>}*/}
+
+                        {(pageStage === 2) && <LazyLoad once>
+                          {/*<SignUpComplete/>*/}
+                        </LazyLoad>}
+
+                      </Form>
+                    </Row>)
