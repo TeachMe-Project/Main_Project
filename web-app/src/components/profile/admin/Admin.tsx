@@ -1,7 +1,6 @@
 import React from "react";
 import {Col, Container, Image, Row} from "react-bootstrap";
-import NavBar from "../navBar/navBar";
-import AdminTabs from "../tabset/adminTabs";
+import NavBar from "../../navBar/navBar";
 import {Routes, Route} from "react-router-dom";
 import ManageUsers from "../admin/ManageUsers";
 import ManageCourses from "../admin/ManageCourses";
@@ -17,15 +16,7 @@ const Admin: React.FC = () => {
        display:"flex",
         justifyContent:"center"
     }} >
-      <AdminTabs />
       </Container>
-     {/*<Routes>*/}
-     {/*    <Route path="/admin/manageusers" element={<ManageUsers/>} />*/}
-     {/*    <Route path="/managecourses" element={<ManageCourses />}/>*/}
-     {/*    <Route path="/complainthandling" element={<ComplaintHandling />}/>*/}
-     {/*    <Route path="/verifytutors" element={<VerifyTutorsPage />} />*/}
-     {/*    <Route path="/verifyinstitutes" element={<VerifyInstitutesPage />} />*/}
-     {/*</Routes>*/}
  </div>
   );
 };

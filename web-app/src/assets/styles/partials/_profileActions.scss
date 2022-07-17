@@ -1,0 +1,22 @@
+@import "../variables/variables";
+
+.profile-actions{
+  fontFamily: "'Poppins', sans-serif";
+
+  .action-page{
+
+    .header{
+        font-size: 50px;
+    }
+
+  }
+
+}
+
+.profile-nav-logo{
+  width: 240px;
+
+  @media (max-width: $xs-screen-size) {
+    width: 180px;
+  }
+}
