@@ -173,9 +173,9 @@ const PStudentProgress: React.FC = () => {
     }
 
     return (
-        <Container fluid={true} className="parent">
+        <Container fluid={true} className="profile-actions">
             <ProfileNavBar/>
-            <Row className="ps-0 upcoming">
+            <Row className="ps-0 action-page">
                 <Col lg={12} className="ps-0 d-flex flex-row">
                     <ParentSidebar/>
                     <Row className="ms-lg-5 mt-lg-5 w-100 me-5">

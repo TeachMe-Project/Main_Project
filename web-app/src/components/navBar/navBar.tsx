@@ -1,18 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useAuth0} from "@auth0/auth0-react";
 import {Button, Col, Container, Nav, Navbar, NavDropdown, Row} from 'react-bootstrap';
 import Images from "../../assets/images/Images";
+import {useNavigate} from "react-router-dom";
 
 const NavBar: React.FC = () => {
 
     const {loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently, user} = useAuth0();
+    const navigate = useNavigate();
+
     console.log(user);
+
     return (
         <Navbar collapseOnSelect expand="lg" variant="light" style={{fontSize: "20px"}}>
             <Container fluid={true}>
                 <Row className='w-100'>
                     <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2'>
-                        <Navbar.Brand href="/">
+                        <Navbar.Brand onClick={()=> navigate('/')} style={{cursor:"pointer"}}>
                             <img src={Images.logo} style={{maxWidth: "240px"}}/>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" className='ms-2'/>
@@ -49,7 +53,7 @@ const NavBar: React.FC = () => {
                                                 Login
                                             </Button></Nav.Link>
                                         <Nav.Link>
-                                            <Button variant="secondary"
+                                            <Button variant="secondary" onClick={()=> navigate('/signup')}
                                                     style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
                                                 Signup
                                             </Button>
