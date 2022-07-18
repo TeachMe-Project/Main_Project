@@ -1,7 +1,6 @@
 import React from 'react';
 import {Routes, Route} from "react-router-dom";
 import Home from "./components/Home/Home";
-import AboutUs from "./components/Home/aboutUs/aboutUs";
 import SignUpCategory from "./components/signup/SignUpCategory";
 import TeacherSignup from "./components/signup/TeacherSignup";
 import InstituteSignup from "./components/signup/InstituteSignup";
@@ -10,8 +9,6 @@ import ParentSignup from "./components/signup/ParentSignup";
 import PUpComingClasses from "./components/profile/parent/PUpComingClasses";
 import PUpComingPayments from './components/profile/parent/PUpComingPayments';
 import PStudentProgress from './components/profile/parent/PStudentProgress';
-import Admin from './components/profile/admin/Admin';
-import Institute from './components/institute/institute';
 import ManageUsers from "./components/profile/admin/ManageUsers";
 import ManageCourses from "./components/profile/admin/ManageCourses";
 import ComplaintHandling from "./components/profile/admin/ComplaintHandling";
@@ -39,8 +36,6 @@ const App: React.FC = () => {
                 <Route path="/parent/history" element={<ProtectedRoute component={PStudentProgress} role={'parent'}/>}/>
 
                 <Route path="/admin" element={<ProtectedRoute component={ManageUsers} role={'admin'}/>}/>
-                <Route path="/admin/manageusers"
-                       element={<ProtectedRoute component={ManageUsers} role={'admin'}/>}/>
                 <Route path="/admin/managecourses"
                        element={<ProtectedRoute component={ManageCourses} role={'admin'}/>}/>
                 <Route path="/admin/complainthandling"

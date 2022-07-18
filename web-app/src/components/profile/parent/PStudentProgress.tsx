@@ -1,10 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
-import ParentSidebar from "./ParentSidebar";
-import ProfileNavBar from "../navBar/profileNavBar";
+import React, {useState} from "react";
+import {Col, Row} from "react-bootstrap";
 import {Pagination} from "react-headless-pagination";
-import axios from "axios";
-import {FaRegMoneyBillAlt} from "react-icons/fa";
+import ParentLayout from "./ParentLayout";
 
 type UpComing = {
     id: number;
@@ -173,82 +170,76 @@ const PStudentProgress: React.FC = () => {
     }
 
     return (
-        <Container fluid={true} className="profile-actions">
-            <ProfileNavBar/>
-            <Row className="ps-0 action-page">
-                <Col lg={12} className="ps-0 d-flex flex-row">
-                    <ParentSidebar/>
-                    <Row className="ms-lg-5 mt-lg-5 w-100 me-5">
-                        <Row className="d-lg-flex flex-lg-column align-items-center text-lg-center">
-                            <Col lg={10}>
-                                <h1 className="text-lg-start header">Progress of Student</h1>
-                            </Col>
-                        </Row>
-                        <Row className="d-lg-flex flex-lg-column align-items-center text-lg-center">
-                            <Col
-                                lg={10}
-                                className="d-lg-flex flex-lg-column align-items-center text-lg-center"
+        <ParentLayout>
+            <Col lg={12} className='px-lg-5'>
+                <Row className="d-lg-flex flex-lg-column align-items-center text-lg-center">
+                    <Col lg={10}>
+                        <h1 className="text-lg-start header my-lg-1">Progress of Student</h1>
+                    </Col>
+                </Row>
+                <Row className="d-lg-flex flex-lg-column align-items-center text-lg-center">
+                    <Col
+                        lg={10}
+                        className="d-lg-flex flex-lg-column align-items-center text-lg-center"
+                    >
+                        {currentItem.map((item: UpComing) => (
+                            <Row
+                                key={item.id}
+                                className="my-lg-3 w-100 py-lg-1 my-md-4 py-md-2"
+                                style={{
+                                    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                                    borderRadius: "20px",
+                                }}
                             >
-                                {currentItem.map((item: UpComing) => (
-                                    <Row
-                                        key={item.id}
-                                        className="my-lg-3 w-100 py-lg-3 d-flex flex-row align-items-center"
-                                        style={{
-                                            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-                                            borderRadius: "20px",
-                                        }}
-                                    >
-                                        <Col>
-                                            <h4>{item.class} Class</h4>
-                                        </Col>
-                                        <Col>
-                                            <h4>{item.date.toDateString()}</h4>
-                                        </Col>
-                                        <Col>
-                                            <h4>{handleTime(item.attendTime)}</h4>
-                                        </Col>
-                                       <Col>
-                                           <h4>{handleTime(item.leaveTime)}</h4>
-                                       </Col>
-                                        <Col>
-                                            <h4>{handleTime(item.classStartTime)} - {handleTime(item.classEndTime)}</h4>
-                                        </Col>
-                                    </Row>
-                                ))}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col lg={10} className="d-lg-flex flex-lg-column align-items-end">
-                                <Pagination
-                                    currentPage={page}
-                                    setCurrentPage={handlePageChange}
-                                    totalPages={numberOfPages}
-                                    edgePageCount={1}
-                                    middlePagesSiblingCount={1}
-                                    className="d-flex flex-row align-items-center justify-content-end"
-                                    truncableText="..."
-                                    truncableClassName=""
-                                >
-                                    <Pagination.PrevButton className="btn btn-secondary mx-2">
-                                        Previous
-                                    </Pagination.PrevButton>
+                                <Col>
+                                    <h4>{item.class} Class</h4>
+                                </Col>
+                                <Col>
+                                    <h4>{item.date.toDateString()}</h4>
+                                </Col>
+                                <Col>
+                                    <h4>{handleTime(item.attendTime)}</h4>
+                                </Col>
+                                <Col>
+                                    <h4>{handleTime(item.leaveTime)}</h4>
+                                </Col>
+                                <Col>
+                                    <h4>{handleTime(item.classStartTime)} - {handleTime(item.classEndTime)}</h4>
+                                </Col>
+                            </Row>
+                        ))}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={10} className="d-lg-flex flex-lg-column align-items-end">
+                        <Pagination
+                            currentPage={page}
+                            setCurrentPage={handlePageChange}
+                            totalPages={numberOfPages}
+                            edgePageCount={1}
+                            middlePagesSiblingCount={1}
+                            className="d-flex flex-row align-items-center justify-content-end"
+                            truncableText="..."
+                            truncableClassName=""
+                        >
+                            <Pagination.PrevButton className="btn btn-secondary mx-2">
+                                Previous
+                            </Pagination.PrevButton>
 
-                                    <Pagination.PageButton
-                                        activeClassName="btn btn-secondary"
-                                        inactiveClassName="btn btn-outline-secondary"
-                                        className="btn mx-1"
-                                    />
+                            <Pagination.PageButton
+                                activeClassName="btn btn-secondary"
+                                inactiveClassName="btn btn-outline-secondary"
+                                className="btn mx-1"
+                            />
 
-                                    <Pagination.NextButton className="btn btn-secondary mx-2">
-                                        Next
-                                    </Pagination.NextButton>
-                                </Pagination>
-                            </Col>
-                        </Row>
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
+                            <Pagination.NextButton className="btn btn-secondary mx-2">
+                                Next
+                            </Pagination.NextButton>
+                        </Pagination>
+                    </Col>
+                </Row>
+            </Col>
+        </ParentLayout>
     );
 };
 

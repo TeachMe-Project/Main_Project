@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useAuth0} from "@auth0/auth0-react";
-import {Button, Col, Container, Nav, Navbar, NavDropdown, Row} from 'react-bootstrap';
+import {Button, Col, Container, Nav, Navbar,Row} from 'react-bootstrap';
 import Images from "../../assets/images/Images";
 import {useNavigate} from "react-router-dom";
 
@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
                 <Row className='w-100'>
                     <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2'>
                         <Navbar.Brand onClick={()=> navigate('/')} style={{cursor:"pointer"}}>
-                            <img src={Images.logo} style={{maxWidth: "240px"}}/>
+                            <img src={Images.logo} style={{maxWidth: "240px"}} alt='logo'/>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" className='ms-2'/>
                     </Col>
@@ -39,9 +39,9 @@ const NavBar: React.FC = () => {
                                                 Logout
                                             </Button></Nav.Link>
                                         <Nav.Link>
-                                            <Button variant="secondary"
+                                            <Button variant="secondary" onClick={()=> navigate(`/${user?.family_name}`)}
                                                     style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
-                                                Signup
+                                                Profile
                                             </Button>
                                         </Nav.Link>
                                     </>
