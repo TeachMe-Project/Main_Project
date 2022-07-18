@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import MyCourses from './MyCourses';
 import MyTeachers from './MyTeachers';
-import Settings from './Settings';
+import Messages from './Messages';
 import StudentProfile from './StudentProfile';
 import { Course } from './Course';
 import Twilio from '../../Twilio/Twilio';
+import Notification from '../../Notification/notifications';
+import SearchResults from './SearchResults';
 
 import AppStateProvider, { useAppState } from '../../../state';
 import ErrorDialog from '../../ErrorDialog/ErrorDialog';
@@ -49,12 +51,20 @@ const routes = [
     main: () => <MyTeachers />,
   },
   {
-    path: '/settings',
-    main: () => <Settings />,
+    path: '/messages',
+    main: () => <Messages />,
+  },
+  {
+    path: '/notifications',
+    main: () => <Notification />,
   },
   {
     path: '/userprofile',
     main: () => <StudentProfile />,
+  },
+  {
+    path: '/searchresults',
+    main: () => <SearchResults />,
   },
   {
     path: '/course',
@@ -89,7 +99,6 @@ export default function MainPanel() {
           </AppStateProvider>
         </UnsupportedBrowserWarning>
       </MuiThemeProvider>
-      ,
     </div>
   );
 }

@@ -1,7 +1,7 @@
 .Tabs {
   margin: 0 auto;
   .tab-list {
-    border-bottom: 0.5px solid #95a5a6;
+    border-bottom: 0.1px solid #95a5a6;
     font-weight: 500;
     color: #95a5a6;
     padding-left: 0;
@@ -17,10 +17,11 @@
   .tab-list-active {
     color: #2c3e50;
     font-weight: 700;
+    font-size: 1rem;
     border-bottom: 5px solid #2c3e50;
   }
-  .tab-content{
-    height: 48vh;
+  .tab-content {
+    height: 46vh;
     overflow-y: scroll;
   }
 }

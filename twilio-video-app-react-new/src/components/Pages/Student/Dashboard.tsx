@@ -7,7 +7,7 @@ import PendingHomework from './PendingHomework';
 import TopNavbar from '../../Navbars/TopNavbar';
 import LeftSidebar from '../../Sidebar/LeftSidebar';
 import PanelContainer from '../../Layout/PanelContainer';
-import { AiOutlineHistory } from 'react-icons/ai';
+import Searchbar from '../../Searchbar/Searchbar';
 
 export const Dashboard = () => {
   return (
@@ -20,7 +20,7 @@ export const Dashboard = () => {
           </div>
           <div className="Panel">
             <div className="PanelSubheader">
-              <h5>Recently Accessed Courses</h5>
+              <h5>Upcoming Classes</h5>
             </div>
             <div className="PanelBody">
               <Card
@@ -29,69 +29,35 @@ export const Dashboard = () => {
                 time="04:00pm- 06:00pm"
                 date="23-05-2022"
                 btnname="Join"
-                image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
+                image={<img src={'/Images/subjects/maths.png'} />}
               />
               <Card
-                header="Mathematics"
-                teacher="Mr. Lasitha Nuwan"
-                time="04:00pm- 06:00pm"
-                date="24-05-2022"
-                btnname="Join"
-                image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-              />
-
-              <Card
-                header="Mathematics"
-                teacher="Mr. Lasitha Nuwan"
+                header="Science"
+                teacher="Ms. Nayana Sandamali"
                 time="04:00pm- 06:00pm"
                 date="25-05-2022"
                 btnname="Join"
-                image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
+                image={<img src={'/Images/subjects/science.png'} />}
+              />
+
+              <Card
+                header="Music"
+                teacher="Mr. Anura Kahatgoda"
+                time="06:00pm- 08:00pm"
+                date="26-05-2022"
+                btnname="Join"
+                image={<img src={'/Images/subjects/music.png'} />}
               />
             </div>
-          </div>
 
-          <div className="Panel">
-            <div className="PanelSubheader">
-              <h5>Pending Homework</h5>
-            </div>
+            <div className="PanelSubheader">{/*<h5>Search Courses</h5>*/}</div>
             <div className="PanelBody">
-              <div className="PendingHomework">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  date="28-04-2022"
-                  btnname="View"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
+              <div className="SearchContainer">
+                <div className="SearchDescr">
+                  <h2> Get the best out of Online Learning</h2>
+                </div>
+                <img src={'/Images/landingpage.png'} />
+                <Searchbar />
               </div>
             </div>
           </div>

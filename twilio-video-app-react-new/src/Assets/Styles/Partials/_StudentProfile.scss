@@ -1,53 +1,104 @@
 .StudentProfile {
+  .PanelHeader {
+    .Button {
+      float: right;
+      box-shadow: none;
+      border: 2px solid #1e90ff;
+      color: #1e90ff;
+    }
+
+    .Button:hover {
+      background-color: #1e90ff;
+      color: #fff;
+    }
+  }
+
   .PanelContainer {
-    .ProfileImg {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .LeftContainer {
       display: flex;
-      img {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        margin: auto;
-        justify-content: center;
+      flex-direction: column;
+
+      .ProfileImg {
+        display: flex;
+
+        img {
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          margin: auto;
+          justify-content: center;
+        }
+      }
+      .ParentContact {
+        margin-top: 3rem;
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 15px 20px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        color: $header-primary;
+        .ContactHeader {
+          font-weight: 600;
+          font-size: 1.2rem;
+          padding-bottom: 0.6rem;
+        }
+        .ParentLabel {
+          font-weight: 600;
+        }
+        .ParentValue {
+          font-weight: 500;
+          padding-bottom: 10px;
+        }
       }
     }
 
-    .ProfileDetailsContainer {
-      margin: 2rem auto;
-      width: 100%;
-      .ProfileDetails {
+    .RightContainer {
+      margin: 1rem 0rem 0rem 5rem;
+      .ProfileDetailsContainer {
         display: flex;
-        .ProfileLabel {
-          font-size: 1.2rem;
-          font-weight: 700;
-          justify-content: space-between;
-          margin: auto auto 0.2rem 1.2rem;
+        margin-bottom: 1rem;
+        .form-label {
+          font-weight: 600;
           color: $header-primary;
-         
-        }
-        .ProfileValue {
+          align-content: center;
           font-size: 1rem;
-          font-weight: 400;
-          color: $header-secondary;
-          justify-content: space-between;
-          margin:auto;
-          margin-bottom: 1rem;
-          background-color: $body-bg-secondary;
-          border-radius: 5px;
-          padding: 0.2rem 0.5rem;
-          width: 90%;
-          border: 1px solid $content-primary;
+          padding-top: 10px;
+        }
+        .form-control {
+          border-radius: 10px;
+          background-color: #fff;
+          padding: 7px 15px;
+          border: 0;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+          box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+        }
+        .form-control.is-valid {
+          border: 1px solid #2ecc71;
+        }
+        .form-control.is-invalid {
+          border: 1px solid #ee5253;
+        }
+        .invalid-feedback {
+          color: #ee5253;
+          text-align: center;
         }
       }
+      .Button {
+        margin-left: 27rem;
+        width: max-content;
+        background-color: #23f15b;
+        border: 1px solid #23f15b;
+        color: #fff;
+        padding: 7px 10px;
+      }
+      .Button:hover {
+        color: #23f15b;
+        background-color: #fff;
+      }
     }
-    .ProfileButton{
-        .Button{
-        float:right;
-        color:$icon-red;
-        font-size:14px;
-        margin:1rem 1rem 1rem 0;
-        border-radius:12px;
-        padding:7px 15px;
-    }
-}
   }
 }

@@ -14,10 +14,10 @@ function App() {
           <TopNavbar />
         </Row>
         <Row>
-          <Col xl={2}>
+          <Col xl={2} className="LeftCol">
             <LeftSidebar />
           </Col>
-          <Col xl={10}>
+          <Col xl={10} className={'MiddleCol'}>
             <MainPanel />
           </Col>
         </Row>
