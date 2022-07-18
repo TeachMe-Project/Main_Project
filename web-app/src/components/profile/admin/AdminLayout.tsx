@@ -28,7 +28,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = (props: AdminLayoutProps) => {
             <Row className="ps-0 action-page mx-0 py-0">
                 <Col lg={12} className="d-flex flex-row p-0">
                     <AdminSidebar handleToggleSidebar={handleToggleSidebar} toggle={toggled}/>
-                    <Row className='px-0 d-flex mx-auto mt-lg-1 w-75'>
+                    <Row className='px-0 d-flex mx-auto mt-lg-1 w-100'>
                         {children}
                     </Row>
                 </Col>

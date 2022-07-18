@@ -1,23 +1,18 @@
 import React from 'react';
-import {Col, Row} from "react-bootstrap";
-import AdminLayout from "./AdminLayout";
+import MaterialTable from "material-table";
 
 const InstitutePayments = () => {
     return (
-        <div>
-            <AdminLayout>
-                <Col lg={12} className='px-lg-5'>
-                    <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
-                        <Col lg={12}>
-                            <h1 className='text-lg-start header my-lg-3'>
-                                Institute's Payments
-                            </h1>
-                        </Col>
-                    </Row>
-
-                </Col>
-            </AdminLayout>
-        </div>
+        <MaterialTable
+            columns={[
+                { title: 'Adı', field: 'name' },
+                { title: 'Soyadı', field: 'surname' },
+                { title: 'Doğum Yılı', field: 'birthYear', type: 'numeric' },
+                { title: 'Doğum Yeri', field: 'birthCity', lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' } }
+            ]}
+            data={[{ name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 }]}
+            title="Demo Title"
+        />
     );
 };
 
