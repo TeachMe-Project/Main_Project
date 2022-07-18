@@ -11,13 +11,13 @@ export const MyTeachers = () => {
           <h2>My Teachers</h2>
         </div>
         <div className="PanelContainer">
-          <Card>
+          {/* <Card>
             Search bar
             <br />
             jkwnfkjenfejkfnejfnef\efjkenjkn
-          </Card>
-          <ChatBox></ChatBox>
-          <h5>My Recent Courses</h5>
+          </Card> */}
+          {/* <ChatBox></ChatBox> */}
+          {/* <h5>My Recent Courses</h5> */}
           <div className="MyCoursesCardBackground"></div>
         </div>
 
