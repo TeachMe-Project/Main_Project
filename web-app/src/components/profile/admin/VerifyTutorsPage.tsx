@@ -9,7 +9,6 @@ import AcceptTutorModal from "../../Modals/AcceptTutorModal";
 import RejectTutorModal from "../../Modals/RejectTutorModal";
 import AdminLayout from "./AdminLayout";
 import {Col, Row} from "react-bootstrap";
-import RemoveUserModal from "../../Modals/RemoveUserModal";
 
 
 library.add(fas)

@@ -16,6 +16,8 @@ import VerifyTutorsPage from "./components/profile/admin/VerifyTutorsPage";
 import VerifyInstitutesPage from "./components/profile/admin/VerifyInstitutesPage";
 import {ProtectedRoute} from "./components/utils/protected-routes";
 import NotFound from "./components/utils/notFound";
+import TutorPayments from "./components/profile/admin/TutorPayments";
+import InstitutePayments from "./components/profile/admin/InstitutePayments";
 
 const App: React.FC = () => {
     return (
@@ -44,6 +46,10 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={VerifyTutorsPage} role={'admin'}/>}/>
                 <Route path="/admin/verifyinstitutes"
                        element={<ProtectedRoute component={VerifyInstitutesPage} role={'admin'}/>}/>
+                <Route path="/admin/tutorpayment"
+                       element={<ProtectedRoute component={TutorPayments} role={'admin'}/>}/>
+                <Route path="/admin/institutepayment"
+                       element={<ProtectedRoute component={InstitutePayments} role={'admin'}/>}/>
                 <Route path="/*" element={<NotFound/>}/>
             </Routes>
         </div>

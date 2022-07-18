@@ -1,26 +1,21 @@
 import React, {useState} from 'react';
-import {
-    ProSidebar,
-    Menu,
-    MenuItem,
-    SidebarHeader,
-    SidebarFooter,
-    SidebarContent,
-} from 'react-pro-sidebar';
+import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarFooter, SidebarHeader,} from 'react-pro-sidebar';
 import {HiOutlineMenu} from "react-icons/hi";
 import Images from "../../../assets/images/Images";
 import {useNavigate} from "react-router-dom";
-import {FaUsers, FaSchool} from "react-icons/fa";
+import {FaSchool, FaUsers} from "react-icons/fa";
 import {SiCoursera, SiGoogleclassroom} from "react-icons/si";
 import {BiMessageRoundedError} from "react-icons/bi";
-import { useMediaQuery } from 'react-responsive';
+import {useMediaQuery} from 'react-responsive';
+import {BsCashCoin} from "react-icons/bs";
+import {GiCash} from "react-icons/gi";
 
 type AdminSidebarProps = {
-    toggle : boolean,
-    handleToggleSidebar:()=> void
+    toggle: boolean,
+    handleToggleSidebar: () => void
 }
 
-const AdminSidebar: React.FC<AdminSidebarProps> = (props:AdminSidebarProps) => {
+const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => {
 
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
@@ -39,7 +34,10 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props:AdminSidebarProps) => {
             collapsed={collapsed || isTab}
             toggled={toggle}
             breakPoint="md"
-            style={{height: '90vh',boxShadow: "rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"}}
+            style={{
+                height: '90vh',
+                boxShadow: "rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+            }}
             onToggle={handleToggleSidebar}
             className='SideBar'
         >
@@ -60,27 +58,37 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props:AdminSidebarProps) => {
 
             <SidebarContent>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaUsers/>} onClick={()=> navigate('/admin')}>
+                    <MenuItem icon={<FaUsers/>} onClick={() => navigate('/admin')}>
                         Manage Users
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<SiCoursera/>} onClick={()=> navigate('/admin/managecourses')}>
+                    <MenuItem icon={<SiCoursera/>} onClick={() => navigate('/admin/managecourses')}>
                         Manage Courses
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<SiGoogleclassroom/>} onClick={()=> navigate('/admin/verifytutors')}>
+                    <MenuItem icon={<BsCashCoin/>} onClick={() => navigate('/admin/tutorpayment')}>
+                        Tutor's Payments
+                    </MenuItem>
+                </Menu>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<GiCash/>} onClick={() => navigate('/admin/institutepayment')}>
+                        Institute's Payments
+                    </MenuItem>
+                </Menu>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<SiGoogleclassroom/>} onClick={() => navigate('/admin/verifytutors')}>
                         Verify Tutor
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaSchool/>} onClick={()=>navigate('/admin/verifyinstitutes')}>
+                    <MenuItem icon={<FaSchool/>} onClick={() => navigate('/admin/verifyinstitutes')}>
                         Verify Institute
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<BiMessageRoundedError/>} onClick={()=>navigate('/admin/complainthandling')}>
+                    <MenuItem icon={<BiMessageRoundedError/>} onClick={() => navigate('/admin/complainthandling')}>
                         Complaint Handle
                     </MenuItem>
                 </Menu>

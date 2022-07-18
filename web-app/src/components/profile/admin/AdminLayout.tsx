@@ -8,7 +8,7 @@ type AdminLayoutProps = {
     children: React.ReactNode
 }
 
-const AdminLayout:React.FC<AdminLayoutProps> = (props:AdminLayoutProps) => {
+const AdminLayout: React.FC<AdminLayoutProps> = (props: AdminLayoutProps) => {
 
     const {children} = props;
     const [toggled, setToggled] = useState(false);

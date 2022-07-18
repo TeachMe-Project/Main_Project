@@ -9,7 +9,6 @@ import AcceptInstituteModal from "../../Modals/AcceptInstituteModal";
 import RejectInstituteModal from "../../Modals/RejectInstituteModal";
 import AdminLayout from "./AdminLayout";
 import {Col, Row} from "react-bootstrap";
-import RemoveUserModal from "../../Modals/RemoveUserModal";
 
 library.add(fas);
 
@@ -17,7 +16,9 @@ export default function VerifyInstitutesPage() {
     const [modalShowAccept, setModalShowAccept] = React.useState(false);
     const [modalShowReject, setModalShowReject] = React.useState(false);
     const navigate = useNavigate();
-    const directToInstituteApplication = () => { navigate('/'); };
+    const directToInstituteApplication = () => {
+        navigate('/');
+    };
     return (
         <AdminLayout>
             <Col lg={12} className='px-lg-5'>
