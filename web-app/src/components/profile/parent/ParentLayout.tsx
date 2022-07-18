@@ -8,7 +8,7 @@ type ParentLayoutProps = {
     children: React.ReactNode
 }
 
-const ParentLayout:React.FC<ParentLayoutProps> = (props:ParentLayoutProps) => {
+const ParentLayout: React.FC<ParentLayoutProps> = (props: ParentLayoutProps) => {
 
     const {children} = props;
     const [toggled, setToggled] = useState(false);

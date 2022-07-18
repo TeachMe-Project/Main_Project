@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-    ProSidebar,
-    Menu,
-    MenuItem,
-    SidebarHeader,
-    SidebarFooter,
-    SidebarContent,
-} from 'react-pro-sidebar';
+import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarFooter, SidebarHeader,} from 'react-pro-sidebar';
 import {HiOutlineMenu} from "react-icons/hi";
 import Images from "../../../assets/images/Images";
 import {useNavigate} from "react-router-dom";
@@ -14,15 +7,14 @@ import {FaTachometerAlt} from "react-icons/fa";
 import {IoIosSchool} from "react-icons/io";
 import {MdPersonAddAlt} from "react-icons/md";
 import {BsCashCoin} from "react-icons/bs";
-import {Button} from "react-bootstrap";
-import { useMediaQuery } from 'react-responsive';
+import {useMediaQuery} from 'react-responsive';
 
 type ParentSidebarProps = {
-    toggle : boolean,
-    handleToggleSidebar:()=> void
+    toggle: boolean,
+    handleToggleSidebar: () => void
 }
 
-const ParentSidebar: React.FC<ParentSidebarProps> = (props:ParentSidebarProps) => {
+const ParentSidebar: React.FC<ParentSidebarProps> = (props: ParentSidebarProps) => {
 
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
@@ -41,7 +33,10 @@ const ParentSidebar: React.FC<ParentSidebarProps> = (props:ParentSidebarProps) =
             collapsed={collapsed || isTab}
             toggled={toggle}
             breakPoint="md"
-            style={{height: '90vh',boxShadow: "rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"}}
+            style={{
+                height: '90vh',
+                boxShadow: "rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+            }}
             onToggle={handleToggleSidebar}
             className='SideBar'
         >
@@ -62,32 +57,32 @@ const ParentSidebar: React.FC<ParentSidebarProps> = (props:ParentSidebarProps) =
 
             <SidebarContent>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<IoIosSchool/>} onClick={()=> navigate('/parent')}>
+                    <MenuItem icon={<IoIosSchool/>} onClick={() => navigate('/parent')}>
                         Upcoming Class
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>} onClick={()=> navigate('/parent/history')}>
+                    <MenuItem icon={<FaTachometerAlt/>} onClick={() => navigate('/parent/history')}>
                         Progress
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<BsCashCoin/>} onClick={()=> navigate('/parent/payments')}>
+                    <MenuItem icon={<BsCashCoin/>} onClick={() => navigate('/parent/payments')}>
                         UpComing Payment
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<MdPersonAddAlt/>} onClick={()=>navigate('/parent/stuSignup')}>
+                    <MenuItem icon={<MdPersonAddAlt/>} onClick={() => navigate('/parent/stuSignup')}>
                         SignUp Student
                     </MenuItem>
                 </Menu>
             </SidebarContent>
             {!collapsed && isPc &&
-                <SidebarFooter>
-                    <div style={{width: '100%', padding: "10px"}}>
-                        <img src={Images.logo} style={{maxWidth: "200px"}}/>
-                    </div>
-                </SidebarFooter>}
+            <SidebarFooter>
+                <div style={{width: '100%', padding: "10px"}}>
+                    <img src={Images.logo} style={{maxWidth: "200px"}} alt='logo'/>
+                </div>
+            </SidebarFooter>}
         </ProSidebar>
     );
 };
