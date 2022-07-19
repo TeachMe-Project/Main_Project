@@ -1,0 +1,46 @@
+.MainPanel {
+  margin-bottom: 0;
+  .MyCourses {
+    .Panel {
+      .PanelBody {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0 auto;
+        height: 75vh;
+        overflow-y: scroll;
+        .link {
+          width: 90%;
+          .Card {
+            width: 100%;
+            margin: 0.4rem 0rem;
+            padding: 1rem;
+            height: max-content;
+            border-radius: 10px;
+            background-color: $body-bg-secondary;
+            cursor: pointer;
+            .CardImage img {
+              max-width: 180px;
+              width: 180px;
+              max-height: 180px;
+              height: 180px;
+              border-radius: 50%;
+              margin: 0 3rem 0 0;
+            }
+            .CardHeader h6 {
+              font-size: 2rem;
+              font-weight: 700;
+              margin-bottom: 2rem;
+            }
+            .CardDetails {
+              font-size: 1.2rem;
+            }
+            .CardButton {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
