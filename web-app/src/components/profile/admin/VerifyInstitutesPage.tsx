@@ -5,8 +5,8 @@ import {library} from '@fortawesome/fontawesome-svg-core'
 import {fas} from '@fortawesome/free-solid-svg-icons'
 import Button from "react-bootstrap/Button";
 import {useNavigate} from "react-router-dom";
-import AcceptInstituteModal from "../../Modals/AcceptInstituteModal";
-import RejectInstituteModal from "../../Modals/RejectInstituteModal";
+import AcceptInstituteModal from "./Modals/AcceptInstituteModal";
+import RejectInstituteModal from "./Modals/RejectInstituteModal";
 import AdminLayout from "./AdminLayout";
 import {Col, Row} from "react-bootstrap";
 

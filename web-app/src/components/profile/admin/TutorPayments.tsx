@@ -8,6 +8,8 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 import {FaRegMoneyBillAlt} from "react-icons/fa";
 import {BsTrashFill} from "react-icons/bs";
 import {useMediaQuery} from "react-responsive";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 
 export const productsGenerator = (quantity: number) => {
     const items = [];
@@ -32,7 +34,25 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
             cursor: "pointer"
         }}
         className='accept-icon'
-        onClick={() => console.log(row)}
+        onClick={() => {
+            swal({
+                title: "User Removal",
+                text: `Do you really want to remove ${row.name}?`,
+                icon: "error",
+                buttons: {
+                    cancel: true,
+                    confirm: true
+                },
+                // dangerMode: true,
+            })
+                .then((willDelete: any) => {
+                    if (willDelete) {
+                        swal(`Poof! You have successfully removed ${row.name}`, {
+                            icon: "success",
+                        });
+                    }
+                });
+        }}
     />
 );
 
@@ -44,10 +64,15 @@ const makePayments = (cell: any, row: any, rowIndex: any, formatExtraData: any) 
         fontSize: "18px",
         fontWeight: "600"
     }}
-            onClick={() => alert(row.id)}
+            onClick={() => swal({
+                icon: "info",
+                title: "Are You Sure"
+            })}
     ><FaRegMoneyBillAlt
         style={{marginBottom: "3px", marginRight: "5px"}}/>PayNow</Button>
 );
+
+
 const columns = [
     {
         dataField: "id",
@@ -131,9 +156,10 @@ const TutorPayments = () => {
                         defaultSortDirection="asc"
                     />}
                     {!isPc &&
-                        products.map((item) => (
-                            <Card>
-                                <ul>
+                    <Col md={12} className='d-flex flex-column align-items-center next-table-list'>
+                        {products.map((item) => (
+                            <Card className='w-75 p-3 mb-2'>
+                                <ul className='ps-3'>
                                     <li className='d-none'>
                                         <span>{columns[0].text}</span>
                                         <span>{item.id}</span>
@@ -160,7 +186,8 @@ const TutorPayments = () => {
                                     </li>
                                 </ul>
                             </Card>
-                        ))
+                        ))}
+                    </Col>
                     }
                 </Row>
             </Col>

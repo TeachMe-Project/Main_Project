@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {fas} from '@fortawesome/free-solid-svg-icons'
 import Button from "react-bootstrap/Button";
-import RemoveUserModal from '../../Modals/RemoveUserModal';
+import RemoveUserModal from './Modals/RemoveUserModal';
 import {Col, Row} from "react-bootstrap";
 import AdminLayout from "./AdminLayout";
 
