@@ -10,7 +10,7 @@ const SignUpComplete = () => {
     const navigate = useNavigate();
 
     return (
-        <Row style={{fontFamily:"'Poppins', sans-serif"}} className="Signup-Complete">
+        <Row style={{fontFamily: "'Poppins', sans-serif"}} className="Signup-Complete">
             <Col lg={12} className="d-lg-flex flex-column align-items-center mt-2">
                 <h1 className="mb-3 text-center">Signup Completed</h1>
                 <Row className="d-lg-flex flex-lg-column justify-content-lg-center">
@@ -27,7 +27,7 @@ const SignUpComplete = () => {
                 </Row>
                 <Row className="d-lg-flex flex-lg-column justify-content-lg-center mt-2 mb-2 mt-md-3 mt-3">
                     <Col className="d-flex justify-content-center">
-                        <Button variant="primary" className="p-2 px-3" onClick={()=> navigate('/')}>
+                        <Button variant="primary" className="p-2 px-3" onClick={() => navigate('/')}>
                             Go Back To Home Page
                         </Button>
                     </Col>

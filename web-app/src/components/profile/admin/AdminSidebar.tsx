@@ -3,18 +3,19 @@ import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarFooter, SidebarHeader
 import {HiOutlineMenu} from "react-icons/hi";
 import Images from "../../../assets/images/Images";
 import {useNavigate} from "react-router-dom";
-import {FaTachometerAlt} from "react-icons/fa";
-import {IoIosSchool} from "react-icons/io";
-import {MdPersonAddAlt} from "react-icons/md";
-import {BsCashCoin} from "react-icons/bs";
+import {FaSchool, FaUsers} from "react-icons/fa";
+import {SiCoursera, SiGoogleclassroom} from "react-icons/si";
+import {BiMessageRoundedError} from "react-icons/bi";
 import {useMediaQuery} from 'react-responsive';
+import {BsCashCoin} from "react-icons/bs";
+import {GiCash} from "react-icons/gi";
 
-type ParentSidebarProps = {
+type AdminSidebarProps = {
     toggle: boolean,
     handleToggleSidebar: () => void
 }
 
-const ParentSidebar: React.FC<ParentSidebarProps> = (props: ParentSidebarProps) => {
+const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => {
 
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
@@ -57,34 +58,49 @@ const ParentSidebar: React.FC<ParentSidebarProps> = (props: ParentSidebarProps) 
 
             <SidebarContent>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<IoIosSchool/>} onClick={() => navigate('/parent')}>
-                        Upcoming Class
+                    <MenuItem icon={<FaUsers/>} onClick={() => navigate('/admin')}>
+                        Manage Users
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>} onClick={() => navigate('/parent/history')}>
-                        Progress
+                    <MenuItem icon={<SiCoursera/>} onClick={() => navigate('/admin/managecourses')}>
+                        Manage Courses
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<BsCashCoin/>} onClick={() => navigate('/parent/payments')}>
-                        UpComing Payment
+                    <MenuItem icon={<BsCashCoin/>} onClick={() => navigate('/admin/tutorpayment')}>
+                        Tutor's Payments
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<MdPersonAddAlt/>} onClick={() => navigate('/parent/stuSignup')}>
-                        SignUp Student
+                    <MenuItem icon={<GiCash/>} onClick={() => navigate('/admin/institutepayment')}>
+                        Institute's Payments
+                    </MenuItem>
+                </Menu>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<SiGoogleclassroom/>} onClick={() => navigate('/admin/verifytutors')}>
+                        Verify Tutor
+                    </MenuItem>
+                </Menu>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<FaSchool/>} onClick={() => navigate('/admin/verifyinstitutes')}>
+                        Verify Institute
+                    </MenuItem>
+                </Menu>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<BiMessageRoundedError/>} onClick={() => navigate('/admin/complainthandling')}>
+                        Complaint Handle
                     </MenuItem>
                 </Menu>
             </SidebarContent>
             {!collapsed && isPc &&
             <SidebarFooter>
                 <div style={{width: '100%', padding: "10px"}}>
-                    <img src={Images.logo} style={{maxWidth: "200px"}} alt='logo'/>
+                    <img src={Images.logo} style={{maxWidth: "200px"}}/>
                 </div>
             </SidebarFooter>}
         </ProSidebar>
     );
 };
 
-export default ParentSidebar;
+export default AdminSidebar;

@@ -15,6 +15,8 @@ import teacherSignup from "./signup/teacher.webp";
 import bannerSignup from './signup/banner.webp';
 import logo from "./logo.png";
 import formComplete from "./signup/formComplete.png"
+import unAuth from "./auth/401.webp";
+import notFound from "./auth/404.webp";
 
 export default {
     banner,
@@ -33,5 +35,7 @@ export default {
     teacherSignup,
     bannerSignup,
     logo,
-    formComplete
+    formComplete,
+    unAuth,
+    notFound
 }

@@ -59,11 +59,11 @@ const SignUpCategory = () => {
                         <Col md={12} className="d-flex flex-column ms-2">
                             <img src={Images.bannerSignup} className="formImage" alt="form-category"/>
                             <h1 className="text-center my-lg-2 mt-sm-2">Sign Up As</h1>
-                            <Button onClick={() => navigate('/teacherSignup')}
+                            <Button onClick={() => navigate('/signup/teacher')}
                                     className="userBtn mt-lg-4 mt-md-3 mx-auto  mt-3">Teacher</Button>
-                            <Button onClick={() => navigate('/instituteSignup')}
+                            <Button onClick={() => navigate('/signup/institute')}
                                     className="userBtn mt-lg-4 mt-md-3 mx-auto  mt-3">Institute</Button>
-                            <Button onClick={() => navigate('/parentSignup')}
+                            <Button onClick={() => navigate('/signup/parent')}
                                     className="userBtn mt-lg-4 mt-md-3 mx-auto userBtn mt-sm-2 mt-3">Parent</Button>
                             <Row>
                                 <Col
