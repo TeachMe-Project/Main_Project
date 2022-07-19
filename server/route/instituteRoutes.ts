@@ -1,5 +1,11 @@
 import express from "express";
-import {createInstitute, getInstituteByID, getInstitutes} from "../controllers/instituteController";
+import {
+    createInstitute, getAllInstituteCourses,
+    getInstituteByID,
+    getInstituteByName,
+    getInstitutes,
+    updateInstituteDetails
+} from "../controllers/instituteController";
 
 export const instituteRouter=express.Router();
 
@@ -10,6 +16,15 @@ instituteRouter.route("/allInstitutes")
 
 instituteRouter.route("/:id")
     .get(getInstituteByID);
+
+instituteRouter.route("/getInstituteByName/:name")
+    .get(getInstituteByName);
+
+instituteRouter.route("/:id/updateInstituteDetails")
+    .post(updateInstituteDetails);
+
+instituteRouter.route("/:id/getAllInstituteCourses")
+    .get(getAllInstituteCourses);
 
 instituteRouter.route("/createInstitute")
     .post(createInstitute);
