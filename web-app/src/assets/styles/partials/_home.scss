@@ -2,6 +2,9 @@
 body {
   fontFamily: "'Poppins', sans-serif";
 }
+.container-fluid{
+  width:98%;
+}
 .banner {
   fontFamily: "'Poppins', sans-serif";
 
@@ -40,10 +43,7 @@ body {
   }
 }
 
-//.pricing {
-//  fontFamily: "'Poppins', sans-serif";
-//  .
-//}
+
 .navbar-light .navbar-nav .nav-link {
   font-weight:500;
   color:#95a5a6;
