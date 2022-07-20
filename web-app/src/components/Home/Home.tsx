@@ -15,6 +15,7 @@ const Home = () => {
             <Pricing/>
             <ContactUs/>
             <FooterHome/>
+
         </>
     );
 };

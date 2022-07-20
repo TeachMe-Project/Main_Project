@@ -13,7 +13,7 @@ const NavBar: React.FC = () => {
 
     return (
         <Navbar collapseOnSelect expand="lg" variant="light" style={{fontSize: "20px"}}>
-            <Container fluid={true}>
+            <Container fluid={true} >
                 <Row className='w-100'>
                     <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2'>
                         <Navbar.Brand onClick={()=> navigate('/')} style={{cursor:"pointer"}}>
@@ -24,10 +24,11 @@ const NavBar: React.FC = () => {
                     <Col lg={10}>
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-lg-auto ms-lg-3 ms-md-5 ps-md-4">
-                                <Nav.Link href="#About-Us" className="me-2">About-Us</Nav.Link>
+                                <Nav.Link href="#Home" className="me-2">Home</Nav.Link>
+                                <Nav.Link href="#About-Us" className="me-2">About us</Nav.Link>
                                 <Nav.Link href="#Pricing" className="me-2">Pricing</Nav.Link>
-                                <Nav.Link href="#Download" className="me-2">Download</Nav.Link>
-                                <Nav.Link href="#ContactUs" className="me-2">ContactUs</Nav.Link>
+                                {/*<Nav.Link href="#Download" className="me-2">Downloads</Nav.Link>*/}
+                                <Nav.Link href="#ContactUs" className="me-2">Contact us</Nav.Link>
                             </Nav>
                             <Nav className='ms-md-5 ps-md-4'>
                                 {isAuthenticated ? (
@@ -48,14 +49,14 @@ const NavBar: React.FC = () => {
                                 ) : (
                                     <>
                                         <Nav.Link>
-                                            <Button variant="secondary" onClick={loginWithRedirect}
-                                                    style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
+                                            <Button variant="secondary" onClick={loginWithRedirect} className="LoginBtn"
+                                                    style={{borderRadius: "20px", width: "100px"}}>
                                                 Login
                                             </Button></Nav.Link>
                                         <Nav.Link>
-                                            <Button variant="secondary" onClick={()=> navigate('/signup')}
-                                                    style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
-                                                Signup
+                                            <Button variant="secondary" onClick={()=> navigate('/signup')} className="SignupBtn"
+                                                    style={{borderRadius: "20px", width: "100px"}}>
+                                                Sign Up
                                             </Button>
                                         </Nav.Link>
                                     </>
