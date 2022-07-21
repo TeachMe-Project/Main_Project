@@ -34,14 +34,15 @@ const NavBar: React.FC = () => {
                                 {isAuthenticated ? (
                                     <>
                                         <Nav.Link>
-                                            <Button variant="secondary"
+                                            <Button variant="secondary" className="LoginBtn"
                                                     onClick={() => logout({returnTo: window.location.origin})}
-                                                    style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
-                                                Logout
+                                                    style={{borderRadius: "20px", width: "100px"}}>
+                                                Log out
                                             </Button></Nav.Link>
                                         <Nav.Link>
-                                            <Button variant="secondary" onClick={()=> navigate(`/${user?.family_name}`)}
-                                                    style={{borderRadius: "20px", width: "100px", fontSize: "20px"}}>
+                                            <Button variant="secondary"  className="LoginBtn"
+                                                    onClick={()=> navigate(`/${user?.family_name}`)}
+                                                    style={{borderRadius: "20px", width: "100px"}}>
                                                 Profile
                                             </Button>
                                         </Nav.Link>

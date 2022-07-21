@@ -147,10 +147,11 @@ const TutorPayments = () => {
                         columns={columns}
                         pagination={paginationFactory({sizePerPage: 5})}
                         rowStyle={{
-                            fontSize: "20px",
-                            fontWeight: "600",
+                            fontSize: "16px",
+                            fontWeight: "500",
                             borderCollapse: "separate",
-                            borderSpacing: "0 20px"
+                            borderSpacing: "0 20px",
+                            color:"#95a5a6"
                         }}
                         headerWrapperClasses="next-table"
                         defaultSortDirection="asc"

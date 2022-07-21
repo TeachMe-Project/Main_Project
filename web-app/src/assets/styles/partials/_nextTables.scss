@@ -18,7 +18,7 @@
 }
 
 tr{
-  background: rgba(234, 234, 234, 0.49);
+  background:#fff;
   margin: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   &:hover {
@@ -40,9 +40,9 @@ table tr td:last-child {
 
 .next-table{
   th{
-    background: #012250;
+    background: #dcdcdc;
     padding: 20px;
-    color: white;
+    color:#2c3e50;
   }
 }
 
