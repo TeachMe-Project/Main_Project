@@ -14,15 +14,15 @@ const schema = yup.object().shape({
     Email: yup.string().email().required(),
     Password: yup.string().required().matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        "Must contain 8 characters including 1 uppercase, 1 lowercase, 1 number & 1 special character"
     ),
     Confirm_Password: yup.string().label('Confirm Password').required().matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        "Must contain 8 characters including 1 uppercase, 1 lowercase, 1 number & 1 special character"
     ).oneOf([yup.ref('Password'), null], 'Passwords must match'),
     Mobile: yup.string().required().matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\(\d{2,3}\\)[ \\-]*)|(\d{2,4})[ \\-]*)*?\d{3,4}?[ \\-]*\d{3,4}?$/,
-        "Phone number is not valid")
+        "Phone number is invalid")
 });
 
 
@@ -154,7 +154,7 @@ const ParentSignup = () => {
                                                             <Form.Label style={{fontWeight: 600}}>Email</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the email"
+                                                                placeholder="Enter email"
                                                                 name="Email"
                                                                 value={values.Email}
                                                                 onChange={handleChange}
@@ -170,10 +170,10 @@ const ParentSignup = () => {
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationFirstName">
                                                             <Form.Label style={{fontWeight: 600}}>First
-                                                                Name</Form.Label>
+                                                                name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the first name here"
+                                                                placeholder="Enter first name"
                                                                 name="Firstname"
                                                                 value={values.Firstname}
                                                                 onChange={handleChange}
@@ -190,10 +190,10 @@ const ParentSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationLastname">
-                                                            <Form.Label style={{fontWeight: 600}}>Last Name</Form.Label>
+                                                            <Form.Label style={{fontWeight: 600}}>Last name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the last name here"
+                                                                placeholder="Enter last name"
                                                                 name="Lastname"
                                                                 value={values.Lastname}
                                                                 onChange={handleChange}
@@ -208,10 +208,10 @@ const ParentSignup = () => {
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationMobile">
-                                                            <Form.Label style={{fontWeight: 600}}>Mobile No</Form.Label>
+                                                            <Form.Label style={{fontWeight: 600}}>Mobile number</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="077-1234567"
+                                                                placeholder="Mobile no. format: 0771234567"
                                                                 name="Mobile"
                                                                 value={values.Mobile}
                                                                 onChange={handleChange}
@@ -231,7 +231,7 @@ const ParentSignup = () => {
                                                             <Form.Label style={{fontWeight: 600}}>Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
-                                                                placeholder="Enter the password here"
+                                                                placeholder="Enter password"
                                                                 name="Password"
                                                                 value={values.Password}
                                                                 onChange={handleChange}
@@ -246,11 +246,11 @@ const ParentSignup = () => {
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationRPassword">
-                                                            <Form.Label style={{fontWeight: 600}}>Retype
-                                                                Password</Form.Label>
+                                                            <Form.Label style={{fontWeight: 600}}>Confirm
+                                                                password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
-                                                                placeholder="Retype password here"
+                                                                placeholder="Retype password"
                                                                 name="Confirm_Password"
                                                                 value={values.Confirm_Password}
                                                                 onChange={handleChange}
@@ -267,7 +267,7 @@ const ParentSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col
                                                         className="d-flex flex-row justify-content-lg-end justify-content-end">
-                                                        <Button type="submit" className="px-4"
+                                                        <Button type="submit" className="px-4 nextBtn"
                                                                 variant="primary"
                                                                 onClick={
                                                                     () => {
