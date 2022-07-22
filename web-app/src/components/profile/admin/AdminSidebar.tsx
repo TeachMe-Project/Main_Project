@@ -93,12 +93,6 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
                     </MenuItem>
                 </Menu>
             </SidebarContent>
-            {!collapsed && isPc &&
-            <SidebarFooter>
-                <div style={{width: '100%', padding: "10px"}}>
-                    <img src={Images.logo} style={{maxWidth: "200px"}}/>
-                </div>
-            </SidebarFooter>}
         </ProSidebar>
     );
 };

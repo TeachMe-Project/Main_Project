@@ -230,7 +230,7 @@ import {useMediaQuery} from "react-responsive";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
 // @ts-ignore
-import ToolkitProvider,{Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
+import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 
 export const productsGenerator = (quantity: number) => {
     const items = [];
@@ -278,19 +278,7 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
 );
 
 const makePayments = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
-    <Button style={{
-        borderRadius: "20px",
-        textAlign: "center",
-        alignItems: "center",
-        fontSize: "18px",
-        fontWeight: "600"
-    }}
-            onClick={() => swal({
-                icon: "info",
-                title: "Are You Sure"
-            })}
-    ><FaRegMoneyBillAlt
-        style={{marginBottom: "3px", marginRight: "5px"}}/>PayNow</Button>
+    <p>hello</p>
 );
 
 
@@ -334,11 +322,12 @@ const columns = [
 const TutorPayments = () => {
 
     const isPc = useMediaQuery({minWidth: 991});
-    const { SearchBar } = Search;
+    const {SearchBar} = Search;
+
     // @ts-ignore
     return (
 
-        <AdminLayout>21
+        <AdminLayout>
             <Col lg={12} className='px-lg-5'>
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12}>
@@ -348,6 +337,7 @@ const TutorPayments = () => {
                     </Col>
                 </Row>
                 <Row>
+                    {isPc &&
                     <ToolkitProvider
                         keyField="id"
                         data={products}
@@ -356,26 +346,31 @@ const TutorPayments = () => {
                         {(props: any) =>
                             (
                                 <Row>
-                                    <SearchBar {...props.searchProps}/>
-                                <BootstrapTable
-                                    pagination={paginationFactory({sizePerPage: 5})}
-                                    rowStyle={{
-                                        fontSize: "16px",
-                                        fontWeight: "500",
-                                        borderCollapse: "separate",
-                                        borderSpacing: "0 20px",
-                                        color: "#95a5a6"
-                                    }}
-                                    headerWrapperClasses="next-table"
-                                    defaultSortDirection="asc"
-                                    columns={columns} data={products} keyField="id"
-                                    {...props.baseProps}
-                                />
+                                    <SearchBar {...props.searchProps}
+                                               placeholder="Search Something!!!"
+                                    />
+                                    <BootstrapTable
+                                        columns={columns} data={products} keyField="id"
+                                        {...props.baseProps}
+                                        bootstrap4={true}
+                                        pagination={paginationFactory({sizePerPage: 5, hideSizePerPage:true})}
+                                        rowStyle={{
+                                            fontSize: "16px",
+                                            fontWeight: "500",
+                                            borderCollapse: "separate",
+                                            borderSpacing: "0 30px",
+                                            color: "#95a5a6",
+                                        }}
+
+                                        headerWrapperClasses="next-table"
+                                        defaultSortDirection="asc"
+
+                                    />
                                 </Row>
                             )
                         }
                     </ToolkitProvider>
-
+                    }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center next-table-list'>
                         {products.map((item) => (
