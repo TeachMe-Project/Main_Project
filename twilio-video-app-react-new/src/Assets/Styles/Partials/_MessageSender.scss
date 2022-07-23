@@ -1,0 +1,32 @@
+.senderLayout {
+  position: fixed;
+  bottom: 20px;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  right: 25vh;
+}
+
+.senderLayout input {
+  color: #e0e4cc;
+  width: 84%;
+  line-height: 42px;
+  font-size: 1.1em;
+  box-sizing: border-box;
+  padding: 7px;
+  border: 1px solid #a8a39d;
+  border-radius: 10px;
+  // box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+  height: 50px;
+  margin-right: 5px;
+}
+
+.senderLayout button {
+  background-color: #69d2e7;
+  width: 8%;
+  height: 50px;
+  border: none;
+  border-radius: 25px;
+  margin-left: 5px;
+  // box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}

@@ -1,0 +1,79 @@
+.Messages {
+  .Panel {
+    .PanelBody {
+      display: flex;
+      // flex-direction: column;
+      width: 100%;
+      // margin: 0 auto;
+      height: 70vh;
+
+      // overflow-y: scroll;
+      .displayChatters {
+        width: 30%;
+        overflow-y: scroll;
+
+        .link {
+          width: 90%;
+
+          .CardImage img {
+            max-width: 120px;
+            width: 120px;
+            max-height: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 2rem 0 0;
+          }
+
+          .CardBody {
+            width: 80%;
+
+            .teacherName {
+              .CardDetails {
+                font-weight: 600;
+                font-size: 1rem;
+                color: $header-primary;
+                margin-bottom: 0.6rem;
+              }
+            }
+
+            .teacherSubject {
+              .CardDetails {
+                font-weight: 500;
+                font-size: 0.8rem;
+                color: $testing-color;
+                margin-bottom: 0.6rem;
+              }
+            }
+
+            .lastRow {
+              margin-top: 0.8rem;
+
+              .CardDetails {
+                font-weight: 500;
+                font-size: 0.1rem;
+              }
+            }
+
+            .CardButton {
+              margin-left: 4rem;
+              background-color: #ee5253;
+              font-weight: 600;
+              font-size: 12px;
+              width: max-content;
+              padding: 7px 10px;
+              border-radius: 15px;
+              border: 2px solid #ee5253;
+              height: max-content;
+              line-height: 1;
+            }
+
+            .teacherLink .CardDetails {
+              margin-bottom: 0.1rem;
+              margin-left: 4rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

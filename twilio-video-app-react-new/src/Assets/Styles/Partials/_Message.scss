@@ -1,0 +1,27 @@
+.messageLayoutSender1 {
+  float: left;
+  background-color: #69d2e7;
+  border-radius: 0 7px 7px 7px;
+  font-size: 0.9em;
+  width: auto;
+  max-width: 250px;
+  padding: 5px;
+  margin: 4px 0;
+  display: block;
+  text-align: left;
+  clear: both;
+}
+
+.messageLayoutSender2 {
+  float: right;
+  background-color: $content-primary;
+  border-radius: 7px 0 7px 7px;
+  font-size: 0.9em;
+  width: auto;
+  max-width: 250px;
+  padding: 5px;
+  margin: 4px 14px;
+  display: block;
+  text-align: left;
+  clear: both;
+}

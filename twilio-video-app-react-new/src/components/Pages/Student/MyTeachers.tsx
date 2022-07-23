@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import Card from '../../Card/Card';
 import { Row, Col, Container } from 'react-bootstrap';
-import ChatBox from '../../ChatBox/ChatBox';
 
 import PanelContainer from '../../Layout/PanelContainer';
 import { Link } from 'react-router-dom';

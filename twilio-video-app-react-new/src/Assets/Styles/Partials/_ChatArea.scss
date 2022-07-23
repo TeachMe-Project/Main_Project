@@ -1,0 +1,11 @@
+.StyledChatArea {
+  color: #2a2829;
+  background-color: $body-bg-primary;
+  display: inline-block;
+  position: absolute;
+  width: 40%;
+  height: 75vh;
+  overflow-y: scroll;
+  right: 25vh;
+  // margin: auto;
+}
