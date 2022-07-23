@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarFooter, SidebarHeader,} from 'react-pro-sidebar';
+import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader,} from 'react-pro-sidebar';
 import {HiOutlineMenu} from "react-icons/hi";
-import Images from "../../../assets/images/Images";
 import {useNavigate} from "react-router-dom";
 import {FaSchool, FaUsers} from "react-icons/fa";
 import {SiCoursera, SiGoogleclassroom} from "react-icons/si";
@@ -25,7 +24,6 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
         setCollapsed(!collapsed);
     }
 
-    const isPc = useMediaQuery({minWidth: 991});
     const isTab = useMediaQuery({maxWidth: 991, minWidth: 768});
     const isMobile = useMediaQuery({maxWidth: 768});
 
@@ -36,6 +34,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
             breakPoint="md"
             style={{
                 height: '90vh',
+                overflowY: "hidden",
                 boxShadow: "rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
             }}
             onToggle={handleToggleSidebar}
