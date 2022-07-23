@@ -233,7 +233,7 @@ const ManageCourses = () => {
                                             <span className='table-card-label'>{columns[4].text}</span>
                                             <span className='table-card-data'>{item.institute_name}</span>
                                         </li>
-                                        <li className='d-flex flex-row align-items-center justify-content-end'>
+                                        <li className='d-flex flex-row align-items-center justify-content-end mt-2'>
                                             <span className='me-3'>
                                                  {gotoCourse(null, item, null, null)}
                                             </span>

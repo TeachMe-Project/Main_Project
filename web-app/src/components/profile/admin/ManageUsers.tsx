@@ -337,7 +337,7 @@ const ManageUsers = () => {
                                             <span className='table-card-label'>{columns[4].text}</span>
                                             <span className='table-card-data'>{item.user_type}</span>
                                         </li>
-                                        <li className='d-flex flex-row align-items-center justify-content-end'>
+                                        <li className='d-flex flex-row align-items-center justify-content-end mt-2'>
                                             <span className='me-3'>
                                                  {removeItem(null, item, null, null)}
                                             </span>
