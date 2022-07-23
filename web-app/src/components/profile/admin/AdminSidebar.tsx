@@ -6,8 +6,6 @@ import {FaSchool, FaUsers} from "react-icons/fa";
 import {SiCoursera, SiGoogleclassroom} from "react-icons/si";
 import {BiMessageRoundedError} from "react-icons/bi";
 import {useMediaQuery} from 'react-responsive';
-import {BsCashCoin} from "react-icons/bs";
-import {GiCash} from "react-icons/gi";
 
 type AdminSidebarProps = {
     toggle: boolean,
@@ -64,16 +62,6 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
                 <Menu iconShape="circle">
                     <MenuItem icon={<SiCoursera/>} onClick={() => navigate('/admin/managecourses')}>
                         Manage Courses
-                    </MenuItem>
-                </Menu>
-                <Menu iconShape="circle">
-                    <MenuItem icon={<BsCashCoin/>} onClick={() => navigate('/admin/tutorpayment')}>
-                        Tutor's Payments
-                    </MenuItem>
-                </Menu>
-                <Menu iconShape="circle">
-                    <MenuItem icon={<GiCash/>} onClick={() => navigate('/admin/institutepayment')}>
-                        Institute's Payments
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">

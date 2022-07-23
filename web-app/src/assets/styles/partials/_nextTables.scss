@@ -1,4 +1,5 @@
 @import "../variables/variables";
+
 .table {
   --bs-table-bg: transparent;
   --bs-table-accent-bg: transparent;
@@ -17,10 +18,11 @@
   border-spacing: 0px 10px;
 }
 
-tr{
-  background:#fff;
+tr {
+  background: #fff;
   margin: 5px;
   box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+
   &:hover {
     box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;
   }
@@ -39,25 +41,29 @@ table tr td:last-child {
   border-bottom-right-radius: 10px;
 }
 
-.next-table{
-  th{
+.next-table {
+  th {
     background: #dcdcdc;
     padding: 20px;
-    color:#2c3e50;
+    color: #2c3e50;
     font-weight: 700;
   }
 }
 
-td{
+td {
   vertical-align: middle;
 }
 
 
-.react-bootstrap-table table {
+.react-bootstrap-table {
   table-layout: auto;
+  max-height: 470px;
+  overflow-y: hidden;
+
+
 }
 
-.next-table-list{
+.next-table-list {
   @media (max-width: $md-screen-size) {
     height: 80vh;
     margin-top: 20px;
@@ -73,32 +79,33 @@ span#search-bar-0-label {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color:#012250;
+  background-color: #012250;
   border-color: #012250;
 }
 
 .page-item .page-link {
   z-index: 3;
   color: $header-primary;
-  background-color:#ffffff;
+  background-color: #ffffff;
   border-color: #012250;
 }
 
-.table-card{
+.table-card {
 
   box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+
   &:hover {
     box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;
   }
 
-.table-card-label {
-  color: $header-primary;
-  weight: 700;
-}
+  .table-card-label {
+    color: $header-primary;
+    weight: 700;
+  }
 
-.table-card-data {
-  color: $content-primary;
-}
+  .table-card-data {
+    color: $content-primary;
+  }
 
 }
 
