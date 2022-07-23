@@ -141,9 +141,9 @@ const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
     }}
             onClick={() => {
                 swal({
-                    title: "User Removal",
-                    text: `Do you really want to remove ${row.name}?`,
-                    icon: "error",
+                    title: "Class Payment",
+                    text: `Do you really want to pay ${row.class} class fees for ${row.month}?`,
+                    icon: "info",
                     buttons: {
                         cancel: true,
                         confirm: true
@@ -152,7 +152,7 @@ const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
                 })
                     .then((willDelete: any) => {
                         if (willDelete) {
-                            swal(`Poof! You have successfully removed ${row.name}`, {
+                            swal(`Poof! You have successfully paid ${row.class} class fees for ${row.month}`, {
                                 icon: "success",
                             });
                         }
