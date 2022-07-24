@@ -5,7 +5,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from "react-bootstrap-table2-paginator";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
-import {BsCheckCircleFill, BsTrashFill} from "react-icons/bs";
+import {BsCheckCircleFill} from "react-icons/bs";
 import {useMediaQuery} from "react-responsive";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
@@ -178,12 +178,12 @@ const columns = [
     {
         dataField: "id",
         text: "Application ID",
-        sort:true,
+        sort: true,
     },
     {
         dataField: "applied_date",
         text: "Applied Date",
-        sort:true,
+        sort: true,
     },
     {
         dataField: "tutors_name",

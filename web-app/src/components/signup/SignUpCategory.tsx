@@ -36,10 +36,10 @@ const SignUpCategory = () => {
                         <Col>
                             <div
                                 className="d-lg-flex d-md-flex flex-column align-items-lg-start align-items-md-start justify-content-between mt-4 mb-md-4">
-                                <a href="/"
-                                   className="backBtn d-lg-flex flex-row align-items-center text-decoration-none mb-lg-5 d-md-none d-sm-none">
+                                <button onClick={()=> navigate('/')} style={{background:"none"}}
+                                   className="backBtn d-lg-flex flex-row align-items-center text-decoration-none mb-lg-5 d-md-none d-sm-none border-0 bg">
                                     <ImArrowLeft2 style={{marginRight: "4px"}}/> Go Back
-                                </a>
+                                </button>
                                 <img src={Images.logo} className="logo mt-lg-3" onClick={() => navigate('/')}
                                      alt="logo"/>
                             </div>
@@ -70,10 +70,10 @@ const SignUpCategory = () => {
                                 <Col
                                     className="d-flex flex-row align-items-center justify-content-center mt-lg-4 mt-md-3 loginFooter">
                                     <h6 className="text-center mb-0">Already have an account?</h6>
-                                    <a href=''
+                                    <button
                                        onClick={loginWithRedirect}
-                                       className="ms-3 p-0 mb-0 text-decoration-none fw-bold login-button"
-                                       style={{color: "#45484c"}}>Login</a>
+                                       className="ms-3 p-0 mb-0 text-decoration-none fw-bold login-button border-0 bg-transparent"
+                                       style={{color: "#45484c"}}>Login</button>
                                 </Col>
                             </Row>
                         </Col>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Card, Col, Row} from "react-bootstrap";
 import ParentLayout from "./ParentLayout";
 import {useMediaQuery} from "react-responsive";
@@ -62,17 +62,18 @@ const data: Array<UpComing> = [
         class: "History",
         month: "September",
         payment: 1500,
-        date: new Date(2022, 7, 22, 15, 30).toDateString(),        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 7, 22, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),   },
+        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+    },
     {
         id: 1,
         name: "Upul Sanasagala",
         class: "English",
         month: "September",
         payment: 1500,
-        date: new Date(2022, 7, 23, 15, 30).toDateString(),        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 7, 23, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -83,7 +84,7 @@ const data: Array<UpComing> = [
         class: "Commerce",
         month: "September",
         payment: 1500,
-        date: new Date(2022, 7, 24, 15, 30).toDateString(),        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 7, 24, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -94,7 +95,7 @@ const data: Array<UpComing> = [
         class: "Mathematics",
         month: "September",
         payment: 1500,
-        date: new Date(2022, 7, 25, 15, 30).toDateString(),        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 7, 25, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -118,7 +119,7 @@ const columns = [
     {
         dataField: "id",
         text: "",
-        hidden:true
+        hidden: true
     },
     {
         dataField: "class",
@@ -140,7 +141,6 @@ const columns = [
 
 
 const PStudentProgress: React.FC = () => {
-
 
 
     // console.log(data);
