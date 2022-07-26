@@ -14,7 +14,7 @@ import Settings from './Settings';
 import { Students } from './Students';
 import Uploadhomework from './Uploadhomework';
 import Uploadnotes from './Uploadnotes';
-import Userprofile, { TutorProfile } from './TutorProfile';
+import TeacherProfile from './TeacherProfile';
 import Notifications from '../../Notification/notifications';
 
 const routes = [
@@ -33,8 +33,8 @@ const routes = [
     main: () => <Settings />,
   },
   {
-    path: '/tutorprofile',
-    main: () => <TutorProfile />,
+    path: '/userprofile',
+    main: () => <TeacherProfile />,
   },
   {
     path: '/createcourse',

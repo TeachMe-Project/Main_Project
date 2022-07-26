@@ -1,9 +1,10 @@
 import * as React from 'react';
-import Card from '../../Card/Card';
-import { Row, Col, Container, Button } from 'react-bootstrap';
-import '../../../Assets/Styles/main.scss';
-import PanelContainer from '../../Layout/PanelContainer';
+import CourseCardTeacher from '../../Card/CourseCardTeacher';
+import CardHeader from '../../Card/CardHeader';
+import CardDetails from '../../Card/CardDetails';
+import { Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import PanelContainer from '../../Layout/PanelContainer';
 
 export const MyCourses = () => {
   return (
@@ -13,59 +14,68 @@ export const MyCourses = () => {
           <PanelContainer />
           <div className="PanelHeader">
             <h2>My Courses</h2>
-            <Link to="/addcourse" className="link">
-              <Button className="btn-alert" style={{ float: 'right', marginBottom: '40px', marginRight: '40px' }}>
-                Add a Course{' '}
-              </Button>
-            </Link>
           </div>
           <div className="Panel">
             <div className="PanelBody">
-              <Link to="/course" className="link">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm- 06:00pm"
-                  date="Sunday"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm - 06:00pm"
-                  date="Sunday"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm- 06:00pm"
-                  date="Sunday"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm- 06:00pm"
-                  date="Sunday"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <Card
-                  header="Mathematics"
-                  teacher="Mr. Lasitha Nuwan"
-                  time="04:00pm- 06:00pm"
-                  date="Sunday"
-                  image={<img src={require('../../../Assets/Images/testimg2.jpeg')} />}
-                />
-              </Link>
+              <CourseCardTeacher
+                header="Mathematics"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                time="04:00pm - 06:00pm"
+                date="Sunday"
+                image={<img src={'/Images/subjects/maths.png'} />}
+                amount="LKR 2,500"
+                btn1="View more"
+              />
+
+              <CourseCardTeacher
+                header="Science"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                time="04:00pm - 06:00pm"
+                date="Monday"
+                image={<img src={'/Images/subjects/science.png'} />}
+                amount="LKR 2,500"
+                btn1="View more"
+              />
+
+              <CourseCardTeacher
+                header="History"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                time="04:00pm - 06:00pm"
+                date="Saturday"
+                image={<img src={'/Images/subjects/history.png'} />}
+                amount="LKR 2,500"
+                btn1="View more"
+              />
+
+              <CourseCardTeacher
+                header="Music"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                time="05:00pm - 07:00pm"
+                date="Tuesday"
+                image={<img src={'/Images/subjects/music.png'} />}
+                amount="LKR 2,500"
+                btn1="View more"
+              />
+
+              <CourseCardTeacher
+                header="Art"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  elit, sed do eiusmod tempor incididunt ut labore et dolore
+                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                time="04:00pm - 06:00pm"
+                date="Sunday"
+                image={<img src={'/Images/subjects/art.png'} />}
+                amount="LKR 2,500"
+                btn1="View more"
+              />
             </div>
           </div>
         </Row>
