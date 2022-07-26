@@ -31,6 +31,77 @@ export const getTeacherByID=async (req:Request,res:Response)=>{
         res.status(500).send(error);
     }
 }
+
+export const getTeacherByUsername=async (req:Request,res:Response)=>{
+
+            try {
+                const data =await prisma.user.findMany({
+                    where:{
+                        username:req.params.username
+                    },
+                    include:{
+                        teacher:true
+                    }
+
+                })
+                res.status(200).send(data)
+            }
+
+            catch (error) {
+                res.status(500).send(error);
+            }
+}
+
+export  const getTeacherUpcomingClasses=async (req:Request,res:Response)=>{
+
+        try {
+            const data =await prisma.teacher.findMany({
+                where:{
+                    user_id:Number(req.params.id)
+                },
+                include:{course:true}
+            })
+            res.status(200).send(data)
+        }
+
+        catch (error) {
+            res.status(500).send(error);
+        }
+}
+
+export const getTeacherCourses=async (req:Request,res:Response)=>{
+
+        try {
+            const data =await prisma.teacher.findMany({
+                where:{
+                    user_id:Number(req.params.id)
+                },
+                include:{course:true}
+            })
+            res.status(200).send(data)
+        }
+
+        catch (error) {
+            res.status(500).send(error);
+        }
+}
+export const getTeacherInstitutes=async (req:Request,res:Response)=>{
+
+            try {
+                const data =await prisma.teacher.findMany({
+                    where:{
+                        user_id:Number(req.params.id)
+                    },
+                    include:{institute:true}
+                })
+                res.status(200).send(data)
+            }
+
+            catch (error) {
+                res.status(500).send(error);
+            }
+}
+
 export const createTeacher=async (req:Request,res:Response)=>{
 
         const { error, value } = teacherSchema.validate(req.body);
