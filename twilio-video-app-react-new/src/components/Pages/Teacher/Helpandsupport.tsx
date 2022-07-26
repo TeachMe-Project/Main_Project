@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Form, Image, Row, Button, Container, Card } from 'react-bootstrap';
-// import Images from '../../../assets/images/Images';
+import Images from '../../../Assets/Images/Images';
 import { GrSend } from 'react-icons/gr';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -39,7 +39,7 @@ const Helpandsupport: React.FC = () => {
           </h1>
           <Row className="m-0" style={{ height: 'fit-content' }}>
             <Col lg={6} className="d-flex flex-row justify-content-center">
-              {/* <Image src={Images.contactUs} style={{ height: '550px' }}></Image> */}
+              <Image src={Images.contactUs} style={{ height: '550px' }}></Image>
             </Col>
             <Col lg={5} className="d-flex flex-column justify-content-center p-3 ms-5">
               <Form noValidate onSubmit={handleSubmit}>
@@ -123,7 +123,7 @@ const Helpandsupport: React.FC = () => {
               >
                 <Card.Img
                   variant="top"
-                  // src={Images.location}
+                  src={Images.location}
                   style={{ width: '22%', padding: '10px', height: 'fit-content' }}
                 />
                 <Card.Body style={{ padding: '0', paddingTop: '10px' }}>
@@ -143,7 +143,7 @@ const Helpandsupport: React.FC = () => {
               >
                 <Card.Img
                   variant="top"
-                  // src={Images.phone}
+                  src={Images.phone}
                   style={{ width: '22%', padding: '10px', height: 'fit-content' }}
                 />
                 <Card.Body style={{ padding: '0', paddingTop: '10px' }}>
@@ -163,7 +163,7 @@ const Helpandsupport: React.FC = () => {
               >
                 <Card.Img
                   variant="top"
-                  // src={Images.email}
+                  src={Images.email}
                   style={{ width: '22%', padding: '10px', height: 'fit-content' }}
                 />
                 <Card.Body style={{ padding: '0', paddingTop: '10px' }}>
