@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
-import Notifications from '../../Notifications/Notifications';
+
 import AddCourse from './AddCourse';
 import Addextraclass from './Addextraclass';
 import Course from './Course';
@@ -15,6 +15,7 @@ import { Students } from './Students';
 import Uploadhomework from './Uploadhomework';
 import Uploadnotes from './Uploadnotes';
 import Userprofile, { TutorProfile } from './TutorProfile';
+import Notifications from '../../Notification/notifications';
 
 const routes = [
   {

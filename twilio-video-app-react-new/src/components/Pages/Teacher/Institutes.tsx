@@ -13,13 +13,13 @@ import PanelContainer from '../../Layout/PanelContainer';
 import UploadButton from '../../Button/UploadButton';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+// import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+// import TableCell from '@mui/material/TableCell';
+// import TableContainer from '@mui/material/TableContainer';
+// import TableHead from '@mui/material/TableHead';
+// import TableRow from '@mui/material/TableRow';
+// import Paper from '@mui/material/Paper';
 import { Instituterequest } from './Instituterequest';
 
 function createData(name: string, joineddate: string, courseofferings: string, classdate: string, starttime: string) {
@@ -48,7 +48,7 @@ export const Institutes = () => {
               <div className="Institutes I am working at">
                 <Link to="/editdetails" className="link"></Link>
 
-                <TableContainer component={Paper}>
+                {/* <TableContainer component={Paper}>
                   <Table size="medium" aria-label="a dense table">
                     <TableHead>
                       <TableRow>
@@ -88,7 +88,7 @@ export const Institutes = () => {
                       ))}
                     </TableBody>
                   </Table>
-                </TableContainer>
+                </TableContainer> */}
               </div>
               <div className="New Institute Requests">
                 <Link className="link" to="/uploadnotes"></Link>

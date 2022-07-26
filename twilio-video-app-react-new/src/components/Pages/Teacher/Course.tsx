@@ -15,13 +15,13 @@ import { Homework } from './Homework';
 import { Students } from './Students';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+// import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+// import TableCell from '@mui/material/TableCell';
+// import TableContainer from '@mui/material/TableContainer';
+// import TableHead from '@mui/material/TableHead';
+// import TableRow from '@mui/material/TableRow';
+// import Paper from '@mui/material/Paper';
 
 function createData(
   name: string,
@@ -151,7 +151,7 @@ export const Course = () => {
 
               <div className="Students">
                 <div className="studentContainer">
-                  <TableContainer component={Paper}>
+                  {/* <TableContainer component={Paper}>
                     <Table size="medium" aria-label="a dense table" style={{ textAlign: 'left' }}>
                       <TableHead style={{ backgroundColor: '#9DD6DF' }}>
                         <TableRow>
@@ -197,7 +197,7 @@ export const Course = () => {
                         ))}
                       </TableBody>
                     </Table>
-                  </TableContainer>
+                  </TableContainer> */}
                 </div>
               </div>
 
@@ -214,7 +214,7 @@ export const Course = () => {
                       Add Extra Class
                     </Button>
                   </Link>
-                  <TableContainer component={Paper}>
+                  {/* <TableContainer component={Paper}>
                     <Table size="medium" aria-label="a dense table" style={{ textAlign: 'left' }}>
                       <TableHead style={{ backgroundColor: '#9DD6DF' }}>
                         <TableRow>
@@ -259,12 +259,12 @@ export const Course = () => {
                         ))}
                       </TableBody>
                     </Table>
-                  </TableContainer>
+                  </TableContainer> */}
                 </div>
               </div>
               <div className="Pending Payments">
                 <div className="paymentsContainer">
-                  <TableContainer component={Paper}>
+                  {/* <TableContainer component={Paper}>
                     <Table size="medium" aria-label="a dense table" style={{ textAlign: 'left' }}>
                       <TableHead style={{ backgroundColor: '#9DD6DF' }}>
                         <TableRow>
@@ -301,7 +301,7 @@ export const Course = () => {
                         ))}
                       </TableBody>
                     </Table>
-                  </TableContainer>
+                  </TableContainer> */}
                 </div>
               </div>
             </Tabs>

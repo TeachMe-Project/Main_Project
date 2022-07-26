@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../src/Assets/Styles/main.scss';
-import LeftSidebar from './components/Sidebar/LeftSidebar';
-import MainPanel from './components/Pages/Student/MainPanel';
+import LeftSidebarTeacher from './components/Sidebar/LeftSidebarTeacher';
+import MainPanel from './components/Pages/Teacher/MainPanel';
 import { Container, Row, Col } from 'react-bootstrap';
 import { BrowserRouter as Router } from 'react-router-dom';
 import TopNavbar from './components/Navbars/TopNavbar';
@@ -15,7 +15,7 @@ function App() {
         </Row>
         <Row>
           <Col xl={2} className="LeftCol">
-            <LeftSidebar />
+            <LeftSidebarTeacher />
           </Col>
           <Col xl={10} className={'MiddleCol'}>
             <MainPanel />
