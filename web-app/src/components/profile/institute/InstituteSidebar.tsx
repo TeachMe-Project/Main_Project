@@ -2,18 +2,16 @@ import React, {useState} from 'react';
 import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader,} from 'react-pro-sidebar';
 import {HiOutlineMenu} from "react-icons/hi";
 import {useNavigate} from "react-router-dom";
-import {FaTachometerAlt} from "react-icons/fa";
-import {IoIosSchool} from "react-icons/io";
-import {MdPersonAddAlt} from "react-icons/md";
+import {FaUsers} from "react-icons/fa";
+import {SiCoursera} from "react-icons/si";
 import {useMediaQuery} from 'react-responsive';
-import {BsCashCoin} from "react-icons/bs";
 
-type AdminSidebarProps = {
+type InstituteSidebarProps = {
     toggle: boolean,
     handleToggleSidebar: () => void
 }
 
-const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => {
+const InstituteSidebar: React.FC<InstituteSidebarProps> = (props: InstituteSidebarProps) => {
 
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
@@ -56,23 +54,18 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
 
             <SidebarContent>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<IoIosSchool/>} onClick={() => navigate('/parent')}>
-                        Upcoming Class
+                    <MenuItem icon={<SiCoursera/>} onClick={() => navigate('/institute')}>
+                        Manage Courses
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaTachometerAlt/>} onClick={() => navigate('/parent/history')}>
-                        Student History
+                    <MenuItem icon={<FaUsers/>} onClick={() => navigate('/institute/tutors')}>
+                        View Tutors
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<BsCashCoin/>} onClick={() => navigate('/parent/payments')}>
-                        UpComing Payment
-                    </MenuItem>
-                </Menu>
-                <Menu iconShape="circle">
-                    <MenuItem icon={<MdPersonAddAlt/>} onClick={() => navigate('/parent/stuSignup')}>
-                        SignUp Student
+                    <MenuItem icon={<FaUsers/>} onClick={() => navigate('/institute/addtutors')}>
+                        Add Tutors
                     </MenuItem>
                 </Menu>
             </SidebarContent>
@@ -80,4 +73,4 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
     );
 };
 
-export default AdminSidebar;
+export default InstituteSidebar;

@@ -1,5 +1,4 @@
 import React from 'react';
-import AdminLayout from "./AdminLayout";
 import {Card, Col, Row} from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from "react-bootstrap-table2-paginator";
@@ -11,83 +10,10 @@ import swal from "@sweetalert/with-react";
 // @ts-ignore
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {FaEye} from "react-icons/fa";
-
-const data = [
-    {
-        id: 10000102345,
-        grade: 'Grade 9',
-        subject: 'History',
-        tutor_name: 'Vajira Gamage',
-        institute_name: 'Susipwan Institute'
-    },
-    {
-        id: 10000102340,
-        grade: 'Grade 9',
-        subject: 'Sinhala Lang. & Lit',
-        tutor_name: 'Nimali Weeerasinghe',
-        institute_name: 'Sakya Institute'
-    },
-    {
-        id: 10000102341,
-        grade: 'Grade 10',
-        subject: 'Science',
-        tutor_name: 'Anusha Palpita',
-        institute_name: 'Sigma Institute'
-    },
-    {
-        id: 10000102342,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-    {
-        id: 10000102346,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-    {
-        id: 10000102345,
-        grade: 'Grade 9',
-        subject: 'History',
-        tutor_name: 'Vajira Gamage',
-        institute_name: 'Susipwan Institute'
-    },
-    {
-        id: 10000102340,
-        grade: 'Grade 9',
-        subject: 'Sinhala Lang. & Lit',
-        tutor_name: 'Nimali Weeerasinghe',
-        institute_name: 'Sakya Institute'
-    },
-    {
-        id: 10000102341,
-        grade: 'Grade 10',
-        subject: 'Science',
-        tutor_name: 'Anusha Palpita',
-        institute_name: 'Sigma Institute'
-    },
-    {
-        id: 10000102342,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-    {
-        id: 10000102346,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
+import InstituteLayout from "./InstituteLayout";
 
 
-];
-
-const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+const gotoTutorProfile = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
     < FaEye
         style={{
             fontSize: "20px",
@@ -122,40 +48,77 @@ const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
     />
 );
 
+
+const data = [{
+    id: 10000102398,
+    username: 'sameera@gmail.com',
+    first_name: 'Sameera',
+    last_name: 'Senevirathne',
+    contact_no: '0713455673',
+},
+    {
+        id: 10000102345,
+        username: 'pramuka@gmail.com',
+        first_name: 'Pramuka',
+        last_name: 'Senevirathne',
+        contact_no: '071345567',
+    },
+    {
+        id: 1000010299,
+        username: 'anajani@gmail.com',
+        first_name: 'Anajani',
+        last_name: 'Bandara',
+        contact_no: '0713455673',
+    },
+    {
+        id: 10000102300,
+        username: 'chirath@gmail.com',
+        first_name: 'Chirath',
+        last_name: 'Edirisinghe',
+        contact_no: '0713455673',
+    }
+    , {
+        id: 10000102356,
+        username: 'thilina@gmail.com',
+        first_name: 'Thilina',
+        last_name: 'Dissanayake',
+        contact_no: '0713455673',
+    }
+    ,]
+
 const columns = [
     {
         dataField: "id",
-        text: "Course ID",
+        text: "Tutor ID",
         sort: true,
     },
     {
-        dataField: "grade",
-        text: "Grade",
-        sort: true,
+        dataField: "username",
+        text: "Username ",
     },
     {
-        dataField: "subject",
-        text: "subject",
+        dataField: "first_name",
+        text: "First Name",
     },
     {
-        dataField: "tutor_name",
-        text: "tutor name"
+        dataField: "last_name",
+        text: "Last name"
     },
     {
-        dataField: "institute_name",
-        text: "institute name"
+        dataField: "contact_no",
+        text: "Contact No"
     },
     {
         dataField: "",
         text: "",
-        formatter: gotoCourse,
+        formatter: gotoTutorProfile,
         headerAttrs: {width: 100},
         attrs: {width: 100, class: "EditRow"}
     },
 ];
 
 
-const ManageCourses = () => {
+const InstituteTutorsPage = () => {
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
@@ -163,12 +126,12 @@ const ManageCourses = () => {
     // @ts-ignore
     return (
 
-        <AdminLayout>
+        <InstituteLayout>
             <Col lg={12} className='px-lg-5'>
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
                         <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
-                            Manage Courses
+                            View Tutors
                         </h1>
                     </Col>
                 </Row>
@@ -183,7 +146,7 @@ const ManageCourses = () => {
                             (
                                 <Row className='next-table'>
                                     <SearchBar {...props.searchProps}
-                                               placeholder="Search Courses"
+                                               placeholder="Search Tutors"
                                     />
                                     <BootstrapTable
                                         columns={columns} data={data} keyField="id"
@@ -219,23 +182,23 @@ const ManageCourses = () => {
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[1].text}</span>
-                                            <span className='table-card-data'>{item.grade}</span>
+                                            <span className='table-card-data'>{item.username}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[2].text}</span>
-                                            <span className='table-card-data'>{item.subject}</span>
+                                            <span className='table-card-data'>{item.first_name}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[3].text}</span>
-                                            <span className='table-card-data'>{item.tutor_name}</span>
+                                            <span className='table-card-data'>{item.last_name}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[4].text}</span>
-                                            <span className='table-card-data'>{item.institute_name}</span>
+                                            <span className='table-card-data'>{item.contact_no}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-end mt-2'>
                                             <span className='me-3'>
-                                                 {gotoCourse(null, item, null, null)}
+                                                 {gotoTutorProfile(null, item, null, null)}
                                             </span>
                                         </li>
                                     </ul>
@@ -246,8 +209,9 @@ const ManageCourses = () => {
                     }
                 </Row>
             </Col>
-        </AdminLayout>
+        </InstituteLayout>
     );
 };
 
-export default ManageCourses;
+export default InstituteTutorsPage;
+

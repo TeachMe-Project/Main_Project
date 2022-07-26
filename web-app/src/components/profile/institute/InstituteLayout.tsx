@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import ProfileNavBar from "../navBar/profileNavBar";
 import {Col, Container, Row} from "react-bootstrap";
-import ParentSidebar from "./ParentSidebar";
 import {useMediaQuery} from "react-responsive";
+import InstituteSidebar from "./InstituteSidebar";
+import InstituteNavBar from "../navBar/InstituteNavBar";
 
-type ParentLayoutProps = {
+type InstituteLayoutProps = {
     children: React.ReactNode
 }
 
-const ParentLayout: React.FC<ParentLayoutProps> = (props: ParentLayoutProps) => {
+const InstituteLayout: React.FC<InstituteLayoutProps> = (props: InstituteLayoutProps) => {
 
     const {children} = props;
     const [toggled, setToggled] = useState(false);
@@ -24,10 +25,10 @@ const ParentLayout: React.FC<ParentLayoutProps> = (props: ParentLayoutProps) => 
 
     return (
         <Container fluid={true} className="profile-actions m-0 px-0 py-0">
-            <ProfileNavBar handleToggleSidebar={handleToggleSidebar} isMobile={isMobile}/>
+            <InstituteNavBar handleToggleSidebar={handleToggleSidebar} isMobile={isMobile}/>
             <Row className="ps-0 action-page mx-0 py-0">
                 <Col lg={12} className="d-flex flex-row p-0">
-                    <ParentSidebar handleToggleSidebar={handleToggleSidebar} toggle={toggled}/>
+                    <InstituteSidebar handleToggleSidebar={handleToggleSidebar} toggle={toggled}/>
                     <Row className='px-0 d-flex mx-auto mt-lg-1 w-100'>
                         {children}
                     </Row>
@@ -37,4 +38,4 @@ const ParentLayout: React.FC<ParentLayoutProps> = (props: ParentLayoutProps) => 
     );
 };
 
-export default ParentLayout;
+export default InstituteLayout;

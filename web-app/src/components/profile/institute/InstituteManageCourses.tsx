@@ -1,5 +1,4 @@
 import React from 'react';
-import AdminLayout from "./AdminLayout";
 import {Card, Col, Row} from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from "react-bootstrap-table2-paginator";
@@ -11,81 +10,8 @@ import swal from "@sweetalert/with-react";
 // @ts-ignore
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {FaEye} from "react-icons/fa";
+import InstituteLayout from "./InstituteLayout";
 
-const data = [
-    {
-        id: 10000102345,
-        grade: 'Grade 9',
-        subject: 'History',
-        tutor_name: 'Vajira Gamage',
-        institute_name: 'Susipwan Institute'
-    },
-    {
-        id: 10000102340,
-        grade: 'Grade 9',
-        subject: 'Sinhala Lang. & Lit',
-        tutor_name: 'Nimali Weeerasinghe',
-        institute_name: 'Sakya Institute'
-    },
-    {
-        id: 10000102341,
-        grade: 'Grade 10',
-        subject: 'Science',
-        tutor_name: 'Anusha Palpita',
-        institute_name: 'Sigma Institute'
-    },
-    {
-        id: 10000102342,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-    {
-        id: 10000102346,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-    {
-        id: 10000102345,
-        grade: 'Grade 9',
-        subject: 'History',
-        tutor_name: 'Vajira Gamage',
-        institute_name: 'Susipwan Institute'
-    },
-    {
-        id: 10000102340,
-        grade: 'Grade 9',
-        subject: 'Sinhala Lang. & Lit',
-        tutor_name: 'Nimali Weeerasinghe',
-        institute_name: 'Sakya Institute'
-    },
-    {
-        id: 10000102341,
-        grade: 'Grade 10',
-        subject: 'Science',
-        tutor_name: 'Anusha Palpita',
-        institute_name: 'Sigma Institute'
-    },
-    {
-        id: 10000102342,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-    {
-        id: 10000102346,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-
-
-];
 
 const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
     < FaEye
@@ -122,6 +48,47 @@ const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
     />
 );
 
+const data = [
+    {
+        id: 10000102345,
+        grade: 'Grade 10',
+        subject: 'Business & Accounting Studies',
+        tutor_name: 'Amila Banadaranayake',
+    },
+    {
+        id: 10000102355,
+        grade: 'Grade 10',
+        subject: 'History',
+        tutor_name: 'Kamal Maggona',
+    },
+    {
+        id: 10000102320,
+        grade: "Grade 10",
+        subject: "Science",
+        tutor_name: "Anusha Palpita",
+    },
+    {
+        id: 10000109945,
+        grade: "Grade 10",
+        subject: "Sinhala Lang. & Lit",
+        tutor_name: "Nimali Weeerasinghe",
+    }
+    ,
+    {
+        id: 10000102300,
+        grade: "Grade 9",
+        subject: "History",
+        tutor_name: "Vajira Gamage",
+
+    },
+    {
+        id: 10000102345,
+        grade: "Grade 11",
+        subject: "Business & Accounting Studies",
+        tutor_name: "Sameera Rajapakse",
+    }
+];
+
 const columns = [
     {
         dataField: "id",
@@ -142,10 +109,6 @@ const columns = [
         text: "tutor name"
     },
     {
-        dataField: "institute_name",
-        text: "institute name"
-    },
-    {
         dataField: "",
         text: "",
         formatter: gotoCourse,
@@ -155,7 +118,7 @@ const columns = [
 ];
 
 
-const ManageCourses = () => {
+const InstituteManageCourses = () => {
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
@@ -163,7 +126,7 @@ const ManageCourses = () => {
     // @ts-ignore
     return (
 
-        <AdminLayout>
+        <InstituteLayout>
             <Col lg={12} className='px-lg-5'>
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
@@ -229,10 +192,6 @@ const ManageCourses = () => {
                                             <span className='table-card-label'>{columns[3].text}</span>
                                             <span className='table-card-data'>{item.tutor_name}</span>
                                         </li>
-                                        <li className='d-flex flex-row align-items-center justify-content-between'>
-                                            <span className='table-card-label'>{columns[4].text}</span>
-                                            <span className='table-card-data'>{item.institute_name}</span>
-                                        </li>
                                         <li className='d-flex flex-row align-items-center justify-content-end mt-2'>
                                             <span className='me-3'>
                                                  {gotoCourse(null, item, null, null)}
@@ -246,8 +205,8 @@ const ManageCourses = () => {
                     }
                 </Row>
             </Col>
-        </AdminLayout>
+        </InstituteLayout>
     );
 };
 
-export default ManageCourses;
+export default InstituteManageCourses;

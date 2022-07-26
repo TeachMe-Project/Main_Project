@@ -12,7 +12,7 @@ const NavBar: React.FC = () => {
     console.log(user);
 
     return (
-        <Navbar collapseOnSelect expand="lg" variant="light" style={{fontSize: "20px"}}>
+        <Navbar collapseOnSelect expand="lg" variant="light" style={{fontSize: "20px",background:"white"}} className='sticky-top' >
             <Container fluid={true} >
                 <Row className='w-100'>
                     <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2'>
