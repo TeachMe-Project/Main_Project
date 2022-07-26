@@ -18,6 +18,7 @@ function App() {
         <Row>
           <Col xl={2} className="LeftCol">
             <LeftSidebarTeacher />
+            {/* <LeftSidebar /> */}
           </Col>
           <Col xl={10} className={'MiddleCol'}>
             <MainPanel />
