@@ -1,8 +1,10 @@
 .messageLayoutSender1 {
   float: left;
-  background-color: #69d2e7;
+  background-color: #ddf3fa;
+  color: #1e90ff;
   border-radius: 0 7px 7px 7px;
   font-size: 0.9em;
+  font-weight: 600;
   width: auto;
   max-width: 250px;
   padding: 5px;
@@ -14,9 +16,11 @@
 
 .messageLayoutSender2 {
   float: right;
-  background-color: $content-primary;
+  background-color: #1e90ff;
+  color: #fff;
   border-radius: 7px 0 7px 7px;
   font-size: 0.9em;
+  font-weight: 600;
   width: auto;
   max-width: 250px;
   padding: 5px;

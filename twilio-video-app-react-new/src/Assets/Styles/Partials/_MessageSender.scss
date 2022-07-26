@@ -8,7 +8,7 @@
 }
 
 .senderLayout input {
-  color: #e0e4cc;
+  color: $header-secondary;
   width: 84%;
   line-height: 42px;
   font-size: 1.1em;
@@ -22,7 +22,8 @@
 }
 
 .senderLayout button {
-  background-color: #69d2e7;
+  background-color: #1e90ff;
+  color: #fff;
   width: 8%;
   height: 50px;
   border: none;

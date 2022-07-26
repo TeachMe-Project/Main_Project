@@ -9,17 +9,22 @@
 
       // overflow-y: scroll;
       .displayChatters {
-        width: 30%;
+        width: 60%;
         overflow-y: scroll;
 
-        .link {
-          width: 90%;
+        .ChatCard {
+          width: 45%;
+          margin: 1rem 10px;
+          padding: 10px 15px;
+          display: flex;
+          flex-direction: row;
+          cursor: pointer;
+          border-radius: 15px;
+          box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
 
-          .CardImage img {
-            max-width: 120px;
-            width: 120px;
-            max-height: 120px;
-            height: 120px;
+          .ChatCardImage img {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             margin: 0 2rem 0 0;
           }
@@ -40,39 +45,25 @@
               .CardDetails {
                 font-weight: 500;
                 font-size: 0.8rem;
-                color: $testing-color;
-                margin-bottom: 0.6rem;
+                color: $header-secondary;
+                margin-bottom: 0.2rem;
               }
             }
 
-            .lastRow {
-              margin-top: 0.8rem;
+            // .lastRow {
+            //   margin-top: 0.2rem;
 
-              .CardDetails {
-                font-weight: 500;
-                font-size: 0.1rem;
-              }
-            }
-
-            .CardButton {
-              margin-left: 4rem;
-              background-color: #ee5253;
-              font-weight: 600;
-              font-size: 12px;
-              width: max-content;
-              padding: 7px 10px;
-              border-radius: 15px;
-              border: 2px solid #ee5253;
-              height: max-content;
-              line-height: 1;
-            }
-
-            .teacherLink .CardDetails {
-              margin-bottom: 0.1rem;
-              margin-left: 4rem;
-            }
+            //   .CardDetails {
+            //     font-weight: 500;
+            //     font-size: 0.1rem;
+            //   }
+            // }
           }
         }
+
+        // .ChatCard:focus-visible {
+        //   background-color: $testing-color
+        // }
       }
     }
   }
