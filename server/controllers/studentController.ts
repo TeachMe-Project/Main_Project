@@ -86,6 +86,24 @@ export const getStudentHomeworks=async (req:Request,res:Response)=>{
         res.status(500).send(error);
     }
 }
+
+export const getStudentUpcomingPayments=async (req:Request,res:Response)=>{
+
+        try {
+            const data =await prisma.student_payment.findMany(
+                {
+                    where:{student_id:Number(req.params.id),payment_status:"unpaid"},
+
+
+                }
+            )
+            res.status(200).send(data);
+        }
+
+        catch (error) {
+            res.status(500).send(error);
+        }
+}
 export const createStudent=async (req:Request,res:Response)=>{
     const { error, value } = studentSchema.validate(req.body);
 

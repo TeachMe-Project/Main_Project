@@ -33,6 +33,26 @@ export const getParentByID=async (req:Request,res:Response)=>{
         res.status(500).send(error);
     }
 }
+
+export const parentDoPayment=async (req:Request,res:Response)=>{
+
+        try {
+            const data =await prisma.parent_payment.create({
+                data:{
+                    payment_time:req.body.payment_time,
+                    amount:req.body.amount,
+                    student_id:Number(req.body.student_id),
+                    month:req.body.month,
+                    year:req.body.year
+                }
+            })
+            res.status(200).send(data)
+        }
+
+        catch (error) {
+            res.status(500).send(error);
+        }
+}
 export const  createParent=async (req:Request,res:Response)=>{
 
         const { error, value } = parentSchema.validate(req.body);
