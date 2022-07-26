@@ -9,13 +9,15 @@ import {useMediaQuery} from "react-responsive";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
 
-
-type ProfileNavBarProps = {
+type InstituteNavBarProps = {
     isMobile: boolean,
     handleToggleSidebar: () => void
 }
 
-const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
+
+
+
+const InstituteNavBar: React.FC<InstituteNavBarProps> = (props: InstituteNavBarProps) => {
 
     const {user, logout} = useAuth0();
     const navigate = useNavigate();
@@ -23,21 +25,21 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
     const isPc = useMediaQuery({minWidth: 991});
 
     const userLogOut = () => {
-        swal({
-            title: "Log out",
-            text: `Do you really want to logout?`,
-            icon: "warning",
-            buttons: {
-                cancel: true,
-                confirm: true
-            },
-        })
-            .then((willDelete: any) => {
-                if (willDelete) {
-                    logout();
-                }
+            swal({
+                title: "Log out",
+                text: `Do you really want to logout?`,
+                icon: "warning",
+                buttons: {
+                    cancel: true,
+                    confirm: true
+                },
             })
-    };
+                .then((willDelete: any) => {
+                    if (willDelete) {
+                        logout();
+                    }
+                })
+        };
 
     return (
         <Navbar collapseOnSelect expand="lg" variant="light" className="profile-navbar"
@@ -74,19 +76,6 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav
                                 className='ps-md-4 ms-auto d-flex flex-lg-row flex-column align-items-end navbar-expand-card'>
-                                <Nav.Link>
-                                    <Button className='d-flex flex-row align-items-center p-0 pe-3 profile-view'
-                                            style={{
-                                                borderRadius: "20px",
-                                                fontSize: "18px",
-                                                boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
-                                            }}>
-                                        <img src={user?.picture}
-                                             style={{height: "40px", borderRadius: "50%", marginRight: "10px"}}
-                                             alt='user'/>
-                                        {user?.name}
-                                    </Button>
-                                </Nav.Link>
                                 {isPc &&
                                 <Nav.Link>
                                     <BsFillBellFill className='profile-notification'/>
@@ -107,4 +96,4 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
     );
 };
 
-export default ProfileNavBar;
+export default InstituteNavBar;

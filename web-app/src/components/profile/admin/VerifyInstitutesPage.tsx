@@ -131,17 +131,16 @@ const verifyItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
         onClick={() => {
             swal({
                 title: "User Approve",
-                text: `Do you really want to remove ${row.username}?`,
-                icon: "error",
+                text: `Do you really want to accept ${row.institute_name}?`,
+                icon: "info",
                 buttons: {
                     cancel: true,
                     confirm: true
                 },
-                // dangerMode: true,
             })
                 .then((willDelete: any) => {
                     if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.username}`, {
+                        swal(`Poof! You have successfully accept ${row.institute_name}`, {
                             icon: "success",
                         });
                     }
@@ -166,8 +165,8 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
         onClick={() => {
             swal({
                 title: "User Removal",
-                text: `Do you really want to remove ${row.username}?`,
-                icon: "error",
+                text: `Do you really want to reject ${row.institute_name}?`,
+                icon: "warning",
                 buttons: {
                     cancel: true,
                     confirm: true
@@ -176,7 +175,7 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
             })
                 .then((willDelete: any) => {
                     if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.username}`, {
+                        swal(`Poof! You have successfully reject ${row.institute_name}`, {
                             icon: "success",
                         });
                     }

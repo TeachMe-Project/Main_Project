@@ -4,7 +4,6 @@ import {HiOutlineMenu} from "react-icons/hi";
 import {useNavigate} from "react-router-dom";
 import {FaSchool, FaUsers} from "react-icons/fa";
 import {SiCoursera, SiGoogleclassroom} from "react-icons/si";
-import {BiMessageRoundedError} from "react-icons/bi";
 import {useMediaQuery} from 'react-responsive';
 
 type AdminSidebarProps = {
@@ -66,17 +65,12 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<SiGoogleclassroom/>} onClick={() => navigate('/admin/verifytutors')}>
-                        Verify Tutor
+                        Verify Tutors
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaSchool/>} onClick={() => navigate('/admin/verifyinstitutes')}>
-                        Verify Institute
-                    </MenuItem>
-                </Menu>
-                <Menu iconShape="circle">
-                    <MenuItem icon={<BiMessageRoundedError/>} onClick={() => navigate('/admin/complainthandling')}>
-                        Complaint Handle
+                        Verify Institutes
                     </MenuItem>
                 </Menu>
             </SidebarContent>

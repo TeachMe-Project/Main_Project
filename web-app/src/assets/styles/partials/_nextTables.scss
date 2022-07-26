@@ -43,10 +43,14 @@ table tr td:last-child {
 
 .next-table {
   th {
-    background: #dcdcdc;
+    background: #012250;
     padding: 20px;
-    color: #2c3e50;
+    color: white;
     font-weight: 700;
+
+    &:hover{
+      box-shadow: none;
+    }
   }
 }
 

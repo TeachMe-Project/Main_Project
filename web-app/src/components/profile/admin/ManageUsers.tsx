@@ -207,7 +207,7 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
         onClick={() => {
             swal({
                 title: "User Removal",
-                text: `Do you really want to remove ${row.username}?`,
+                text: `Do you really want to remove ${row.first_name} ${row.last_name} ?`,
                 icon: "error",
                 buttons: {
                     cancel: true,
@@ -217,7 +217,7 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
             })
                 .then((willDelete: any) => {
                     if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.username}`, {
+                        swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
                             icon: "success",
                         });
                     }
