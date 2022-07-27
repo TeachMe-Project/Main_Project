@@ -21,12 +21,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import TableRow from '@mui/material/TableRow';
 // import Paper from '@mui/material/Paper';
 import { Instituterequest } from './Instituterequest';
-import { Row, Col, Container, Tab, Button } from 'react-bootstrap';
+
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-// import Button from 'react-bootstrap/Button';
+
 import { useNavigate } from 'react-router-dom';
 
 library.add(fas);
@@ -54,8 +54,8 @@ export const Institutes = () => {
                   <thead>
                     <tr className="booking-thead-second-tr">
                       {/*amc: Institute Manage Courses*/}
-                      <th className="imc-first-th">Course ID</th>
-                      <th className="imc-second-th">Grade</th>
+                      <th className="imc-first-th">Institute ID </th>
+                      <th className="imc-second-th">Institute Name</th>
                       <th className="imc-third-th">Subject</th>
                       <th className="imc-fourth-th">Tutor's name</th>
                       <th className="imc-last-th"></th>
@@ -64,7 +64,7 @@ export const Institutes = () => {
                   <tbody>
                     <tr>
                       <td data-label="Course ID :">10000102345</td>
-                      <td data-label="Grade :">Grade 10</td>
+                      <td data-label="Institute Name :">Sigma</td>
                       <td data-label="Subject :">Business & Accounting Studies</td>
                       <td data-label="Tutor's Name :">Amila Banadaranayake</td>
                       <td>
@@ -77,8 +77,8 @@ export const Institutes = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000102355</td>
-                      <td data-label="Grade :">Grade 10</td>
+                      <td data-label="Institute ID  :">10000102355</td>
+                      <td data-label="Institute Name :">Rotary</td>
                       <td data-label="Subject :">History</td>
                       <td data-label="Tutor's Name :">Kamal Maggona</td>
                       <td>
@@ -91,8 +91,8 @@ export const Institutes = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000102320</td>
-                      <td data-label="Grade :">Grade 10</td>
+                      <td data-label="Institute ID  :">10000102320</td>
+                      <td data-label="Institute Name :">Syzygy</td>
                       <td data-label="Subject :">Science</td>
                       <td data-label="Tutor's Name :">Anusha Palpita</td>
                       <td>
@@ -105,8 +105,8 @@ export const Institutes = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000109945</td>
-                      <td data-label="Grade :">Grade 10</td>
+                      <td data-label="Institute ID  :">10000109945</td>
+                      <td data-label="Institute Name :">Montana</td>
                       <td data-label="Subject :">Sinhala Lang. & Lit</td>
                       <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
                       <td>
@@ -119,8 +119,8 @@ export const Institutes = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000102300</td>
-                      <td data-label="Grade :">Grade 9</td>
+                      <td data-label="Institute ID  :">10000102300</td>
+                      <td data-label="Institute Name :">Sasip</td>
                       <td data-label="Subject :">History</td>
                       <td data-label="Tutor's Name :">Vajira Gamage</td>
                       <td>
@@ -133,8 +133,8 @@ export const Institutes = () => {
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000102345</td>
-                      <td data-label="Grade :">Grade 11</td>
+                      <td data-label="Institute ID  :">10000102345</td>
+                      <td data-label="Institute Name :">Shakthi</td>
                       <td data-label="Subject :">Business & Accounting Studies</td>
                       <td data-label="Tutor's Name :">Sameera Rajapakse</td>
                       <td>
