@@ -21,12 +21,62 @@ export const getAdminByID=async (req:Request,res:Response)=>{
     try {
         const data =await prisma.admin.findMany({
             where:{
-                user_id:Number(req.params.id)
+                admin_id:Number(req.params.id)
             }
         })
         res.status(200).send(data)
     }
 
+    catch (error) {
+        res.status(500).send(error);
+    }
+}
+export const adminRemoveUser=async (req:Request,res:Response)=>{
+
+    try {
+        const data =await prisma.user.update({
+            where:{user_id:Number(req.body.user_id)},
+            data:{
+                is_active:false
+            }
+        }
+        )
+        res.status(200).send(data)
+    }
+    catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+export const acceptTeacher=async (req:Request,res:Response)=>{
+
+        try {
+            const data =await prisma.teacher.update({
+                where:{user_id:Number(req.body.user_id)},
+                data:{
+                    security_status:"active"
+                }
+            }
+            )
+            res.status(200).send(data)
+        }
+        catch (error) {
+            res.status(500).send(error);
+        }
+}
+
+export const rejectTeacher=async (req:Request,res:Response)=>{
+
+    try {
+        const data =await prisma.teacher.update({
+                where:{user_id:Number(req.body.user_id)},
+                data:{
+                    security_status:"inactive"
+                }
+            }
+        )
+        res.status(200).send(data)
+    }
     catch (error) {
         res.status(500).send(error);
     }

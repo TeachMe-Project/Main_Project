@@ -7,7 +7,7 @@ const AboutUs: React.FC = () => {
 
     return (
         <Container fluid={true} className='about-us mt-lg-5 py-lg-3' id="About-Us">
-            <h1 className='about-us-header text-center'> Why TeachMe</h1>
+            <h1 className='about-us-header text-center'>About Learning</h1>
             <Row style={{display: "flex", flexDirection: "row"}}>
                 <Col lg={5}>
                     <Image src={Images.banner} style={{height: "600px"}} className='d-lg-block d-none '></Image>

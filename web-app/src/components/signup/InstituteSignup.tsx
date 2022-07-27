@@ -15,23 +15,22 @@ const schema = yup.object().shape({
     Email: yup.string().email().required(),
     Password: yup.string().required().matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        "Must contain 8 characters including 1 uppercase, 1 lowercase, 1 number & 1 special character"
     ),
     Confirm_Password: yup.string().label('Confirm Password').required().matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        "Must contain 8 characters including 1 uppercase, 1 lowercase, 1 number & 1 special character"
     ).oneOf([yup.ref('Password'), null], 'Passwords must match'),
     Description: yup.string().required(),
     Address: yup.string().required(),
-    Mobile: yup.string().required().matches(
+    Mobile_Number: yup.string().required().label("Mobile Number").matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\(\d{2,3}\\)[ \\-]*)|(\d{2,4})[ \\-]*)*?\d{3,4}?[ \\-]*\d{3,4}?$/,
-        "Phone number is not valid"),
-    AccountName: yup.string().label("Account Holder Name").required(),
+        "Entered mobile number is invalid"),
+    AccountName: yup.string().label("Account Holder's Name").required(),
     BankName: yup.string().label("Bank Name").required(),
     BranchName: yup.string().label("Branch Name").required(),
     AccountNo: yup.string().label("Account Number").required()
 });
-
 
 const initialState = {
     InstituteName: '',
@@ -40,7 +39,7 @@ const initialState = {
     Email: '',
     Password: '',
     Confirm_Password: '',
-    Mobile: '',
+    Mobile_Number: '',
     Description: '',
     Address: '',
     AccountName: '',
@@ -51,7 +50,7 @@ const initialState = {
 
 const InstituteSignup = () => {
 
-    const [pageStage, setPageStage] = useState(1);
+    const [pageStage, setPageStage] = useState(4);
     const [instituteNameValidate, setInstituteNameValidate] = useState<boolean>(false);
     const [ownerNameValidate, setOwnerNameValidate] = useState(false);
     const [locationValidate, setLocationValidate] = useState(false);
@@ -248,8 +247,8 @@ const InstituteSignup = () => {
                                                                 Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the InstituteName"
-                                                                name="InstituteName"
+                                                                placeholder="Enter institute's name"
+                                                                name="Institute's name"
                                                                 value={values.InstituteName}
                                                                 onChange={handleChange}
                                                                 isInvalid={!!errors.InstituteName ? changeInstituteNameValidate(false) : changeInstituteNameValidate(true)}
@@ -263,10 +262,10 @@ const InstituteSignup = () => {
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationEmail">
-                                                            <Form.Label style={{fontWeight: 600}}>Email</Form.Label>
+                                                            <Form.Label style={{fontWeight: 600}}>Institute's email</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the email"
+                                                                placeholder="Enter institute's email"
                                                                 name="Email"
                                                                 value={values.Email}
                                                                 onChange={handleChange}
@@ -283,11 +282,11 @@ const InstituteSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationOwnerName">
-                                                            <Form.Label style={{fontWeight: 600}}>Owner
-                                                                Name</Form.Label>
+                                                            <Form.Label style={{fontWeight: 600}}>Owner's
+                                                                name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the owner name here"
+                                                                placeholder="Enter owner's name"
                                                                 name="OwnerName"
                                                                 value={values.OwnerName}
                                                                 onChange={handleChange}
@@ -305,7 +304,7 @@ const InstituteSignup = () => {
                                                             <Form.Label style={{fontWeight: 600}}>Location</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the location here"
+                                                                placeholder="Enter location"
                                                                 name="Location"
                                                                 value={values.Location}
                                                                 onChange={handleChange}
@@ -325,7 +324,7 @@ const InstituteSignup = () => {
                                                             <Form.Label style={{fontWeight: 600}}>Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
-                                                                placeholder="Enter the password here"
+                                                                placeholder="Enter password"
                                                                 name="Password"
                                                                 value={values.Password}
                                                                 onChange={handleChange}
@@ -340,11 +339,11 @@ const InstituteSignup = () => {
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationRPassword">
-                                                            <Form.Label style={{fontWeight: 600}}>Retype
+                                                            <Form.Label style={{fontWeight: 600}}>Re-type
                                                                 Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
-                                                                placeholder="Retype password here"
+                                                                placeholder="Re-type password"
                                                                 name="Confirm_Password"
                                                                 value={values.Confirm_Password}
                                                                 onChange={handleChange}
@@ -361,7 +360,7 @@ const InstituteSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col
                                                         className="d-flex flex-row justify-content-lg-end justify-content-end">
-                                                        <Button type="button" className="px-4"
+                                                        <Button type="button" className="px-4 nextBtn"
                                                                 variant="primary"
                                                                 onClick={
                                                                     () => {
@@ -387,19 +386,19 @@ const InstituteSignup = () => {
                                                 <Row className=" pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationMobile">
-                                                            <Form.Label style={{fontWeight: 600}}>Mobile No</Form.Label>
+                                                            <Form.Label style={{fontWeight: 600}}>Mobile Number</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="077-1234567"
+                                                                placeholder="Enter mobile number in format: 0771234567"
                                                                 name="Mobile"
-                                                                value={values.Mobile}
+                                                                value={values.Mobile_Number}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Mobile ? changeMobileValidate(false) : changeMobileValidate(true)}
-                                                                isValid={touched.Mobile}
+                                                                isInvalid={!!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)}
+                                                                isValid={touched.Mobile_Number}
                                                                 onBlur={handleBlur}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
-                                                                {errors.Mobile}
+                                                                {errors.Mobile_Number}
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
@@ -409,10 +408,10 @@ const InstituteSignup = () => {
                                                         <Form.Group className="mb-3"
                                                                     controlId="validationAddress">
                                                             <Form.Label
-                                                                style={{fontWeight: 600}}>Address</Form.Label>
+                                                                style={{fontWeight: 600}}>Institute's Address</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the address here"
+                                                                placeholder="Enter institute's address "
                                                                 name="Address"
                                                                 value={values.Address}
                                                                 onChange={handleChange}
@@ -432,7 +431,8 @@ const InstituteSignup = () => {
                                                             <Form.Label
                                                                 style={{fontWeight: 600}}>Description</Form.Label>
                                                             <Form.Control as="textarea"
-                                                                          placeholder="Enter the description here"
+                                                                          placeholder="Enter a description for the institute in order to describe
+                                                                            the institute"
                                                                           rows={4}
                                                                           name="Description"
                                                                           value={values.Description}
@@ -450,11 +450,11 @@ const InstituteSignup = () => {
                                                 <Row className="pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between ">
 
-                                                        <Button type="button" className="px-4"
+                                                        <Button type="button" className="px-4 nextBtn"
                                                                 variant="primary"
                                                                 onClick={() => setPageStage(1)}
                                                         >Previous</Button>
-                                                        <Button type="button" className="px-4"
+                                                        <Button type="button" className="px-4 nextBtn"
                                                                 variant="primary"
                                                                 onClick={
                                                                     () => {
@@ -477,11 +477,11 @@ const InstituteSignup = () => {
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationAccountName">
-                                                            <Form.Label style={{fontWeight: 600}}>Account Holder
+                                                            <Form.Label style={{fontWeight: 600}}>Account Holder's
                                                                 Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the account name here"
+                                                                placeholder="Enter account holder's name"
                                                                 name="AccountName"
                                                                 value={values.AccountName}
                                                                 onChange={handleChange}
@@ -501,7 +501,7 @@ const InstituteSignup = () => {
                                                             <Form.Label style={{fontWeight: 600}}>Bank Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the bank here"
+                                                                placeholder="Enter bank name"
                                                                 name="BankName"
                                                                 value={values.BankName}
                                                                 onChange={handleChange}
@@ -520,7 +520,7 @@ const InstituteSignup = () => {
                                                                 Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the branch name here"
+                                                                placeholder="Enter branch name"
                                                                 name="BranchName"
                                                                 value={values.BranchName}
                                                                 onChange={handleChange}
@@ -538,10 +538,10 @@ const InstituteSignup = () => {
                                                     <Col lg={12} md={12} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationAccountNo">
                                                             <Form.Label style={{fontWeight: 600}}>Account
-                                                                No</Form.Label>
+                                                                Number</Form.Label>
                                                             <Form.Control
                                                                 type="text"
-                                                                placeholder="Enter the account no here"
+                                                                placeholder="Enter account number"
                                                                 name="AccountNo"
                                                                 value={values.AccountNo}
                                                                 onChange={handleChange}
@@ -557,12 +557,12 @@ const InstituteSignup = () => {
                                                 </Row>
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between">
-                                                        <Button type="button" className="px-4"
+                                                        <Button type="button" className="px-4 nextBtn"
                                                                 variant="primary"
                                                                 onClick={() => setPageStage(2)}
                                                         >Previous</Button>
 
-                                                        <Button type="submit" className="px-4"
+                                                        <Button type="submit" className="px-4 nextBtn"
                                                                 variant="primary"
                                                                 onClick={() => {
                                                                     if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {

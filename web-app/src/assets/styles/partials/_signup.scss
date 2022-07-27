@@ -10,9 +10,38 @@
 
   .Signup {
     border-radius: 20px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    height: 70vh;
+    height:max-content;
+    width:90vw;
+    .nextBtn{
+      background-color:#1e90ff;
+      border-radius: 20px;
+      border: 2px solid #1e90ff;
+      font-weight:600;
+      color:#fff;
+  }
+    .nextBtn:hover{
+      background-color: #fff;
+      color:#1e90ff;
+    }
+    .Signup-Complete h1{
+      color:#1e90ff;
+    }
 
+
+    .form-label{
+      margin-bottom: 0.2rem;
+      padding-left: 1rem;
+    }
+    .form-select{
+      border-radius: 15px;
+    }
+    .invalid-feedback {
+      color:#e74c3c;
+      padding-left:1rem;
+    }
+    .form-control.is-invalid {
+      border: 1px solid #e74c3c;
+    }
     @media (max-width: $md-screen-size) {
       box-shadow: none;
       height: fit-content;
@@ -20,7 +49,8 @@
 
     .signup-header {
       color: $font-grey-color;
-      font-size: 45px;
+      font-size: 2.4rem;
+      font-weight: 600;
       
       @media (max-width: $xs-screen-size) {
         font-size: 30px;

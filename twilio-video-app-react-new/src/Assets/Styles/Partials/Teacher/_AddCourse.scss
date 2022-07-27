@@ -1,0 +1,41 @@
+.AddCourse {
+    width: 100%;
+    height:100%;
+ 
+ .AddCourseForm {
+  margin-top:30px;
+  padding-top:0;
+  width:800px;
+  height:100vh;
+  display: flex;
+  flex-direction: column;
+
+
+  .AddCourseForm form {
+    margin-top: 10px;
+    width:200px;
+    height:100vh;
+    display: flex;  
+    flex-wrap:nowrap;
+    flex-direction: column;
+    align-items: left;  
+    justify-content: left;
+  }
+  input {
+    width:600px;
+    height:40px;
+    border-radius: 5px;
+    padding:10px;
+    margin-bottom:20px;
+  }
+
+
+  button {
+    width:230px;
+    margin-top:10px;    
+   }
+
+
+ }
+}
+

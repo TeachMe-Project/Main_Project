@@ -106,19 +106,19 @@ const StudentSignup = () => {
     return (
         <Container fluid={true}>
             <Row
-                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start">
+                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start p-lg-3">
                 <Col lg={9} md={12} xs={12}
-                     className="Signup d-flex flex-lg-column justify-content-lg-center p-md-3 mt-md-2 mt-3">
+                     className="Signup d-flex flex-lg-column justify-content-lg-center p-md-3 mt-md-2 mt-3 pb-lg-5">
                     <Row className="d-flex align-items-center">
-                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-3">Signup For Student</h1>
+                        <h1 className="text-center signup-header pt-md-3">Signup For Student</h1>
                         <Col lg={6} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
                             <img src={Images.studentSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
                                  alt="teacher-signup"/>
                         </Col>
                         <Col>
                             <Row>
-                                <Row className="mt-lg-5 pe-lg-4 mt-md-5 mt-4 pe-0">
-                                    <Col lg={10} md={12} className="mb-3 mx-lg-auto px-md-5 px-3">
+                                <Row className="mt-lg-2 pe-lg-4 mt-md-5 mt-4 pe-0">
+                                    <Col lg={10} md={12} className="mb-2 mx-lg-auto px-md-5 px-3">
                                         <LazyLoad once>
                                             <div className="progressbar">
                                                 <div
@@ -147,7 +147,7 @@ const StudentSignup = () => {
                                       validateField,
 
                                   }) => (
-                                    <Row className="pb-md-0 pb-4">
+                                    <Row className="pb-md-0 pb-4 my-lg-auto">
                                         <Form noValidate onSubmit={handleSubmit}>
                                             {(pageStage === 1) && <LazyLoad once>
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">

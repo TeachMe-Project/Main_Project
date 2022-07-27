@@ -1,85 +1,146 @@
-import React, {useState} from 'react';
-import {Card, Col, Container, Row} from "react-bootstrap";
-import ParentSidebar from "./ParentSidebar";
-import ProfileNavBar from "../navBar/profileNavBar";
-import {Pagination} from "react-headless-pagination";
-import axios from 'axios';
+import React from "react";
+import {Card, Col, Row} from "react-bootstrap";
+import ParentLayout from "./ParentLayout";
+import {useMediaQuery} from "react-responsive";
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+// @ts-ignore
+import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 
 type UpComing = {
-    id: number,
-    name: string,
-    class: string,
-    date: Date
+    id: number;
+    name: string;
+    class: string;
+    month: string;
+    payment: number;
+    date: string;
+    attendTime: string;
+    leaveTime: string;
+    classStartTime: string;
+    classEndTime: string;
+};
+
+const handleTime = (x: Date) => {
+    const hour = x.getHours();
+    const time = x.toTimeString().substring(0, 5);
+    if (hour >= 12) {
+        return time + " PM";
+    }
+    return time + " AM";
 }
 
 const data: Array<UpComing> = [
     {
         id: 1,
-        name: 'Upulshanthashantha Sanasagala',
-        class: 'Maths',
-        date: new Date()
+        name: "Nimal Weerasinghe",
+        class: "Mathematics",
+        month: "September",
+        payment: 1500,
+        date: new Date(2022, 7, 20, 15, 30).toDateString(),
+        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
     {
         id: 1,
-        name: 'Upulshanthashantha Sanasagala',
-        class: 'Science',
-        date: new Date()
+        name: "Upulshanthashantha Sanasagala",
+        class: "Science",
+        month: "September",
+        payment: 1500,
+        date: new Date(2022, 7, 21, 15, 30).toDateString(),
+        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
     {
         id: 1,
-        name: 'Upulshanthashantha Sanasagala',
-        class: 'Sinahala',
-        date: new Date()
+        name: "Kamal Weerasinghe",
+        class: "History",
+        month: "September",
+        payment: 1500,
+        date: new Date(2022, 7, 22, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
     {
         id: 1,
-        name: 'Upulshanthashantha Sanasagala',
-        class: 'Sinahala',
-        date: new Date()
+        name: "Upul Sanasagala",
+        class: "English",
+        month: "September",
+        payment: 1500,
+        date: new Date(2022, 7, 23, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
     {
         id: 1,
-        name: 'Upulshanthashantha Sanasagala',
-        class: 'Sinahala',
-        date: new Date()
+        name: "Sameera Weerasinghe",
+        class: "Commerce",
+        month: "September",
+        payment: 1500,
+        date: new Date(2022, 7, 24, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
     {
         id: 1,
-        name: 'Upulshanthashantha Sanasagala',
-        class: 'Sinahala',
-        date: new Date()
+        name: "Upulshanthashantha Sanasagala",
+        class: "Mathematics",
+        month: "September",
+        payment: 1500,
+        date: new Date(2022, 7, 25, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
     {
         id: 1,
-        name: 'Upulshanthashantha Sanasagala',
-        class: 'Sinahala',
-        date: new Date()
+        name: "Upulshanthashantha Sanasagala",
+        class: "Mathematics",
+        month: "September",
+        payment: 1500,
+        date: new Date(2022, 7, 26, 15, 30).toDateString(),
+        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+    },
+
+];
+
+const columns = [
+    {
+        dataField: "id",
+        text: "",
+        hidden: true
     },
     {
-        id: 1,
-        name: 'Upulshanthashantha Sanasagala',
-        class: 'Sinahala',
-        date: new Date()
+        dataField: "class",
+        text: "Class",
     },
     {
-        id: 1,
-        name: 'Upulshanthashantha Sanasagala',
-        class: 'Maths',
-        date: new Date()
+        dataField: "name",
+        text: "Tutor Name",
+    },
+    {
+        dataField: "date",
+        text: "Date"
+    },
+    {
+        dataField: "classStartTime",
+        text: "Class Start Time"
     },
 ];
 
 
-const PUpComingClasses: React.FC = () => {
-
-    const [page, setPage] = useState<number>(0);
-    const [items, setItems] = useState(data);
-    const [loading, setLoading] = useState(false);
-    const [itemPerPage, setItemPerPage] = useState(5);
-
-    const handlePageChange = (page: number) => {
-        setPage(page)
-    }
+const PStudentProgress: React.FC = () => {
 
 
     // console.log(data);
@@ -95,83 +156,93 @@ const PUpComingClasses: React.FC = () => {
     // }, []);
     // // console.log(items);
 
-    const indexOfLastItem = (page + 1) * itemPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemPerPage;
-    const currentItem = items.slice(indexOfFirstItem, indexOfLastItem);
-    const numberOfPages = Math.ceil(items.length / itemPerPage);
+    const isPc = useMediaQuery({minWidth: 991});
+    const {SearchBar} = Search;
 
-    if (loading) {
-        return <h1>Loading.......</h1>
-    }
-
+    // @ts-ignore
     return (
-        <Container fluid={true} className='parent'>
-            <ProfileNavBar/>
-            <Row className='ps-0 upcoming'>
-                <Col lg={12} className="ps-0 d-flex flex-row">
-                    <ParentSidebar/>
-                    <Row className='ms-lg-5 mt-lg-5 w-100 me-5'>
-                        <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
-                            <Col lg={10}>
-                                <h1 className='text-lg-start header'>
-                                    Upcoming Classes
-                                </h1>
-                            </Col>
-                        </Row>
-                        <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
-                            <Col lg={10} className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
 
-                                {currentItem.map((item: UpComing) => (
-                                    <Row key={item.id} className='my-lg-3 w-100 py-lg-2'
-                                         style={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", borderRadius: "20px"}}>
-                                        <Col>
-                                            <h4>{item.class}</h4>
-                                        </Col>
-                                        <Col>
-                                            <h4>{item.name}</h4>
-                                        </Col>
-                                        <Col>
-                                            <h4>{item.date.toDateString()}</h4>
-                                        </Col>
-                                        <Col>
-                                            <h4>01.00 PM</h4>
-                                        </Col>
-                                    </Row>
-                                ))}
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col lg={10} className='d-lg-flex flex-lg-column align-items-end'>
-                                <Pagination
-                                    currentPage={page}
-                                    setCurrentPage={handlePageChange}
-                                    totalPages={numberOfPages}
-                                    edgePageCount={1}
-                                    middlePagesSiblingCount={1}
-                                    className="d-flex flex-row align-items-center justify-content-end"
-                                    truncableText="..."
-                                    truncableClassName=""
-                                >
-                                    <Pagination.PrevButton
-                                        className="btn btn-secondary mx-2">Previous</Pagination.PrevButton>
-
-
-                                    <Pagination.PageButton
-                                        activeClassName="btn btn-secondary"
-                                        inactiveClassName="btn btn-outline-secondary"
-                                        className="btn mx-1"
+        <ParentLayout>
+            <Col lg={12} className='px-lg-5'>
+                <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
+                    <Col lg={12} md={12} xs={12}>
+                        <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
+                            Upcoming Class
+                        </h1>
+                    </Col>
+                </Row>
+                <Row>
+                    {isPc &&
+                    <ToolkitProvider
+                        keyField="id"
+                        data={data}
+                        columns={columns}
+                        search>
+                        {(props: any) =>
+                            (
+                                <Row className='next-table'>
+                                    <SearchBar {...props.searchProps}
+                                               placeholder="Search Class"
                                     />
+                                    <BootstrapTable
+                                        columns={columns} data={data} keyField="id"
+                                        {...props.baseProps}
+                                        bootstrap4={true}
+                                        pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
+                                        rowStyle={{
+                                            fontSize: "16px",
+                                            fontWeight: "500",
+                                            borderCollapse: "separate",
+                                            borderSpacing: "0 30px",
+                                            color: "#95a5a6",
+                                        }}
 
-                                    <Pagination.NextButton
-                                        className="btn btn-secondary mx-2">Next</Pagination.NextButton>
-                                </Pagination>
-                            </Col>
-                        </Row>
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
+                                        headerWrapperClasses="next-table"
+                                        defaultSortDirection="asc"
+
+                                    />
+                                </Row>
+                            )
+                        }
+                    </ToolkitProvider>
+                    }
+                    {!isPc &&
+                    <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
+                        {data.map((item) => {
+                            return (
+                                <Card className='w-100 p-3 mb-2 table-card'>
+                                    <ul className='ps-md-3 ps-0'>
+                                        <li className='d-none'>
+                                            <span className='table-card-label'>{columns[0].text}</span>
+                                            <span className='table-card-data'>{item.id}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[1].text}</span>
+                                            <span className='table-card-data'>{item.class}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[2].text}</span>
+                                            <span className='table-card-data'>{item.name}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[3].text}</span>
+                                            <span className='table-card-data'>{item.date}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[4].text}</span>
+                                            <span className='table-card-data'>{item.classStartTime}</span>
+                                        </li>
+                                    </ul>
+                                </Card>
+                            );
+                        })}
+                    </Col>
+                    }
+                </Row>
+            </Col>
+        </ParentLayout>
     );
+
 };
 
-export default PUpComingClasses;
+export default PStudentProgress;

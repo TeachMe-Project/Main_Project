@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BsFillGridFill, BsFillPersonFill, BsFillChatFill } from 'react-icons/bs';
+import { BsFillGridFill, BsFillPersonFill, BsFillChatFill, BsFillExclamationCircleFill } from 'react-icons/bs';
 import { FaBook } from 'react-icons/fa';
 import { AiOutlineLogout } from 'react-icons/ai';
 
@@ -63,6 +63,19 @@ export const LeftSidebar = () => {
                     <BsFillChatFill />
                   </div>
                   <div className="Sidebar_item_name">Messages</div>
+                </div>
+              </Link>
+            </li>
+          </Row>
+
+          <Row>
+            <li>
+              <Link to="/helpandsupport" className="link">
+                <div className="Sidebar_item">
+                  <div>
+                    <BsFillExclamationCircleFill />
+                  </div>
+                  <div className="Sidebar_item_name">Help & Support</div>
                 </div>
               </Link>
             </li>

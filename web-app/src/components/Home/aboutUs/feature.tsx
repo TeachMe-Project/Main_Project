@@ -12,8 +12,10 @@ const Feature: React.FC<FeatureProps> = (props) => {
 
     return (
         <Col style={{margin: "5px"}}>
-            <Card style={{display: "flex", flexDirection: "column", background: "#fafafa", borderRadius:"10px", boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"}}>
-                <Card.Img src={image} style={{width: "90px", padding: "5px", margin: "5px"}}></Card.Img>
+            <Card style={{display: "flex", flexDirection: "column", background: "#fafafa", borderRadius:"10px",
+                boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px", color:"#95a5a6"
+            }}>
+                <Card.Img src={image} style={{width: "90px", padding: "1rem", margin: "1rem"}}></Card.Img>
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                 </Card.Body>

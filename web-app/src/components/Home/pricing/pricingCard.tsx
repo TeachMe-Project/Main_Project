@@ -20,18 +20,17 @@ const PricingCard: React.FC<PricingCardProps> = (props) => {
                         width: "100%",
                         margin: "auto",
                         fontSize: "25px",
-                        background: "#fadd57",
-                        color: "#363636",
                         border: "none",
-                        fontWeight: "700"
+                        fontWeight: "700",
+                        color:"#2d3436"
                     }}>{title}</Button>
-                    <Card.Text style={{fontSize: "50px", margin: "20px"}}>{description}</Card.Text>
-                    <ListGroup variant="flush" style={{fontSize: "18px", textAlign: "left"}}>
-                        <ListGroup.Item> <FcOk/> Upto 2 hour Class duration</ListGroup.Item>
-                        <ListGroup.Item> <FcOk/> Upto 100 Students</ListGroup.Item>
-                        <ListGroup.Item> <FcOk/> Upto 4 classes for month</ListGroup.Item>
-                        <ListGroup.Item> <FcOk/> Upto 2 Institute administrators</ListGroup.Item>
-                        <ListGroup.Item> <FcOk/> Upto 4 classes for month</ListGroup.Item>
+                    <Card.Text style={{fontSize: "50px", margin: "20px", color:"#012250"}}>{description}</Card.Text>
+                    <ListGroup variant="flush" style={{fontSize: "16px", textAlign: "left", color:"#2d3436"}}>
+                        <ListGroup.Item style ={{color:"#2d3436"}}> <FcOk/> Upto 2 hour Class duration</ListGroup.Item>
+                        <ListGroup.Item style ={{color:"#2d3436"}}> <FcOk/> Upto 100 Students</ListGroup.Item>
+                        <ListGroup.Item style ={{color:"#2d3436"}}> <FcOk/> Upto 4 classes for month</ListGroup.Item>
+                        <ListGroup.Item style ={{color:"#2d3436"}}> <FcOk/> Upto 2 Institute administrators</ListGroup.Item>
+                        <ListGroup.Item style ={{color:"#2d3436"}}> <FcOk/> Upto 4 classes for month</ListGroup.Item>
                     </ListGroup>
                     <IconContext.Provider value={{style:{margin:"5px"}}}>
                         <Button variant="primary" style={{
@@ -41,10 +40,13 @@ const PricingCard: React.FC<PricingCardProps> = (props) => {
                             flexDirection: "row",
                             justifyContent: "center",
                             alignItems: "center",
-                            color: "#363636",
                             marginTop:"20px",
-                            fontSize:"18px"
-                        }}><BsFillCartCheckFill/> Select This Plan</Button>
+                            fontSize:"18px",
+                            color:"#fff",
+                            backgroundColor:"#012250",
+                            borderWidth:"1px",
+                            borderColor:"#012250"
+                        }}><BsFillCartCheckFill/> Select Plan</Button>
                     </IconContext.Provider>
                 </Card.Body>
             </Card>

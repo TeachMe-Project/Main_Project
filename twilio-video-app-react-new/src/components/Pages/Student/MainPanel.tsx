@@ -5,7 +5,9 @@ import MyCourses from './MyCourses';
 import MyTeachers from './MyTeachers';
 import Messages from './Messages';
 import StudentProfile from './StudentProfile';
-import { Course } from './Course';
+import HelpAndSupport from './HelpAndSupport';
+
+import Course from './Course';
 import Twilio from '../../Twilio/Twilio';
 import Notification from '../../Notification/notifications';
 import SearchResults from './SearchResults';
@@ -36,6 +38,7 @@ const VideoApp = () => {
   );
 };
 
+// @ts-ignore
 const routes = [
   {
     path: '/',
@@ -53,6 +56,10 @@ const routes = [
   {
     path: '/messages',
     main: () => <Messages />,
+  },
+  {
+    path: '/helpandsupport',
+    main: () => <HelpAndSupport />,
   },
   {
     path: '/notifications',
