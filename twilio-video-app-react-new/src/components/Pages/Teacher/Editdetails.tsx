@@ -15,7 +15,7 @@ export const Editdetails = () => {
       </div>
       <Container>
         <Form>
-          <Form.Group controlId="form.Name">
+          <Form.Group controlId="form.Name" className="mb-3">
             <Form.Label>Topic</Form.Label>
             <Form.Control type="text" placeholder="Topic" />
           </Form.Group>

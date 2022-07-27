@@ -8,7 +8,7 @@ import PanelContainer from '../../Layout/PanelContainer';
 
 export const MyCourses = () => {
   return (
-    <div className="MyCourses">
+    <div className="MyCoursesTeacher">
       <Container>
         <Row>
           <PanelContainer />
