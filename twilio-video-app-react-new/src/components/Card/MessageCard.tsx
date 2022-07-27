@@ -24,9 +24,8 @@ export const MessageCard: React.FC<MessageCard> = props => {
     <div
       className="ChatCard"
       style={{
-        // backgroundColor: isActive ? 'salmon' : '',
-        // color: isActive ? 'white' : '',
-        // box-shadow: isActive ? '1px 7px 25px rgb(0 0 0 / 13%)' : '',
+        backgroundColor: isActive ? '#ddf3fa' : '',
+        color: isActive ? '#1e90ff' : '',
         boxShadow: isActive ? '1px 7px 25px rgb(0 0 0 / 13%)' : '',
         transform: isActive ? 'translateY(-4px)' : '',
       }}

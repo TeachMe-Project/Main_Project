@@ -5,7 +5,18 @@
   position: absolute;
   width: 40%;
   height: 75vh;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   right: 25vh;
   // margin: auto;
+
+  .small-scrollbar {
+    display: block;
+    overflow: auto;
+  }
+}
+
+.small-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa;
 }

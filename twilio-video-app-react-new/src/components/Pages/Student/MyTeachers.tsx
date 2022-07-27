@@ -11,20 +11,6 @@ export const MyTeachers = () => {
   return (
     <div className="MyTeachers">
       <Container>
-        <div className="PanelHeader">
-          <h2>My Teachers</h2>
-        </div>
-        <div className="PanelContainer">
-          {/* <Card>
-            Search bar
-            <br />
-            jkwnfkjenfejkfnejfnef\efjkenjkn
-          </Card> */}
-          {/* <ChatBox></ChatBox> */}
-          {/* <h5>My Recent Courses</h5> */}
-          <div className="MyCoursesCardBackground"></div>
-        </div>
-
         {/* <Tabs>
         <div label="Gator">
           See ya later, <em>Alligator</em>!
