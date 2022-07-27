@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Button } from '../../Button/Button';
 import { Formik } from 'formik';
@@ -6,7 +6,6 @@ import * as yup from 'yup';
 
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
-import { useState } from 'react';
 
 const schema = yup.object().shape({
   Firstname: yup
@@ -50,7 +49,7 @@ const initialState = {
   Schoolname: '',
 };
 
-export const TutorProfile = () => {
+export const TeacherProfile = () => {
   const [isEditing, setISEditing] = useState(false);
 
   const [pageStage, setPageStage] = useState(2);
@@ -327,4 +326,4 @@ export const TutorProfile = () => {
   );
 };
 
-export default TutorProfile;
+export default TeacherProfile;

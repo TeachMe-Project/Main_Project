@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
-import Notifications from '../../Notifications/Notifications';
+
 import AddCourse from './AddCourse';
 import Addextraclass from './Addextraclass';
 import Course from './Course';
@@ -14,7 +14,9 @@ import Settings from './Settings';
 import { Students } from './Students';
 import Uploadhomework from './Uploadhomework';
 import Uploadnotes from './Uploadnotes';
-import Userprofile, { TutorProfile } from './TutorProfile';
+import TeacherProfile from './TeacherProfile';
+import Notifications from '../../Notification/notifications';
+import Helpandsupport from './Helpandsupport';
 
 const routes = [
   {
@@ -32,8 +34,8 @@ const routes = [
     main: () => <Settings />,
   },
   {
-    path: '/tutorprofile',
-    main: () => <TutorProfile />,
+    path: '/userprofile',
+    main: () => <TeacherProfile />,
   },
   {
     path: '/createcourse',
@@ -70,6 +72,10 @@ const routes = [
   {
     path: '/addextraclass',
     main: () => <Addextraclass />,
+  },
+  {
+    path: '/helpandsupport',
+    main: () => <Helpandsupport />,
   },
 ];
 

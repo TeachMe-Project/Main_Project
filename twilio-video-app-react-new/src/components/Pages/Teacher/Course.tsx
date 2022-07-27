@@ -15,58 +15,28 @@ import { Homework } from './Homework';
 import { Students } from './Students';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+// import Table from '@mui/material/Table';
+// import TableBody from '@mui/material/TableBody';
+// import TableCell from '@mui/material/TableCell';
+// import TableContainer from '@mui/material/TableContainer';
+// import TableHead from '@mui/material/TableHead';
+// import TableRow from '@mui/material/TableRow';
+// import Paper from '@mui/material/Paper';
 
-function createData(
-  name: string,
-  joineddate: string,
-  school: string,
-  grade: number,
-  parentname: string,
-  contact: string
-) {
-  return { name, joineddate, school, grade, parentname, contact };
-}
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+// import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
-function createDataPayment(name: string, contact: string, month: string, amount: string) {
-  return { name, contact, month, amount };
-}
-
-function createDataSchedule(
-  coursename: string,
-  grade: string,
-  topic: string,
-  date: string,
-  starttime: string,
-  duration: string
-) {
-  return { coursename, grade, topic, date, starttime, duration };
-}
-
-const rows = [
-  createData('Arosh Perera', '2022-01-01', 'Ananda College', 10, 'J.B.C Silva', '0112729283'),
-  createData('Arosh Perera', '2022-01-01', 'Ananda College', 10, 'J.B.C Silva', '0112729283'),
-  createData('Arosh Perera', '2022-01-01', 'Ananda College', 10, 'J.B.C Silva', '0112729283'),
-];
-
-const rowsPayment = [
-  createDataPayment('Arosh Perera', '0112729283', 'January', '2000'),
-  createDataPayment('Arosh Perera', '0112729283', 'January', '2000'),
-  createDataPayment('Arosh Perera', '0112729283', 'January', '2000'),
-];
-const rowsSchedule = [
-  createDataSchedule('Mathematics by Tiran', '10', 'Geometry', '2022-07-20', '10:00AM', '2HRS'),
-  createDataSchedule('Mathematics by Tiran', '10', 'Geometry', '2022-07-20', '10:00AM', '2HRS'),
-  createDataSchedule('Mathematics by Tiran', '10', 'Geometry', '2022-07-20', '10:00AM', '2HRS'),
-];
+library.add(fas);
 
 export const Course = () => {
+  const navigate = useNavigate();
+  const directToCourse = () => {
+    navigate('/');
+  };
   return (
     <div className="Course">
       <Container>
@@ -78,9 +48,7 @@ export const Course = () => {
           <div className="Panel">
             <div className="PanelSubHeader">
               <h3>Mathematics Class</h3>
-              <div className="PanelImage">
-                <img src={require('../../../Assets/Images/testimg2.jpeg')} />
-              </div>
+              <div className="PanelImage">{<img src={'/Images/subjects/maths.png'} />}</div>
             </div>
 
             <Tabs>
@@ -151,53 +119,104 @@ export const Course = () => {
 
               <div className="Students">
                 <div className="studentContainer">
-                  <TableContainer component={Paper}>
-                    <Table size="medium" aria-label="a dense table" style={{ textAlign: 'left' }}>
-                      <TableHead style={{ backgroundColor: '#9DD6DF' }}>
-                        <TableRow>
-                          <TableCell>
-                            <b>Student Name</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>Joined Date</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>School</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>Grade</b>
-                          </TableCell>
-
-                          <TableCell align="left">
-                            <b>Parent Name</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>Contact Number</b>
-                          </TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {rows.map(row => (
-                          <TableRow
-                            key={row.name}
-                            sx={{
-                              '&:last-child td, &:last-child th': { border: 0 },
-                            }}
-                          >
-                            <TableCell component="th" scope="row">
-                              {row.name}
-                            </TableCell>
-                            <TableCell align="left">{row.joineddate}</TableCell>
-                            <TableCell align="left">{row.school}</TableCell>
-                            <TableCell align="left">{row.grade}</TableCell>
-
-                            <TableCell align="left">{row.parentname}</TableCell>
-                            <TableCell align="left">{row.contact}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
+                  <table className="booking-table" id="view-booking">
+                    <thead>
+                      <tr className="booking-thead-second-tr">
+                        {/*amc: Institute Manage Courses*/}
+                        <th className="imc-first-th">Course ID</th>
+                        <th className="imc-second-th">Grade</th>
+                        <th className="imc-third-th">Subject</th>
+                        <th className="imc-fourth-th">Tutor's name</th>
+                        <th className="imc-last-th"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-label="Course ID :">10000102345</td>
+                        <td data-label="Grade :">Grade 10</td>
+                        <td data-label="Subject :">Business & Accounting Studies</td>
+                        <td data-label="Tutor's Name :">Amila Banadaranayake</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000102355</td>
+                        <td data-label="Grade :">Grade 10</td>
+                        <td data-label="Subject :">History</td>
+                        <td data-label="Tutor's Name :">Kamal Maggona</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000102320</td>
+                        <td data-label="Grade :">Grade 10</td>
+                        <td data-label="Subject :">Science</td>
+                        <td data-label="Tutor's Name :">Anusha Palpita</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000109945</td>
+                        <td data-label="Grade :">Grade 10</td>
+                        <td data-label="Subject :">Sinhala Lang. & Lit</td>
+                        <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000102300</td>
+                        <td data-label="Grade :">Grade 9</td>
+                        <td data-label="Subject :">History</td>
+                        <td data-label="Tutor's Name :">Vajira Gamage</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000102345</td>
+                        <td data-label="Grade :">Grade 11</td>
+                        <td data-label="Subject :">Business & Accounting Studies</td>
+                        <td data-label="Tutor's Name :">Sameera Rajapakse</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
 
@@ -214,94 +233,206 @@ export const Course = () => {
                       Add Extra Class
                     </Button>
                   </Link>
-                  <TableContainer component={Paper}>
-                    <Table size="medium" aria-label="a dense table" style={{ textAlign: 'left' }}>
-                      <TableHead style={{ backgroundColor: '#9DD6DF' }}>
-                        <TableRow>
-                          <TableCell>
-                            <b>Course Name</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>Grade</b>
-                          </TableCell>
-
-                          <TableCell align="left">
-                            <b>Topic</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>Date</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>Start time</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>Duration</b>
-                          </TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {rowsSchedule.map(row => (
-                          <TableRow
-                            key={row.coursename}
-                            sx={{
-                              '&:last-child td, &:last-child th': { border: 0 },
-                            }}
-                          >
-                            <TableCell component="th" scope="row">
-                              {row.coursename}
-                            </TableCell>
-                            <TableCell align="left">{row.grade}</TableCell>
-                            <TableCell align="left">{row.topic}</TableCell>
-                            <TableCell align="left">{row.date}</TableCell>
-                            <TableCell align="left">{row.starttime}</TableCell>
-                            <TableCell align="left">{row.duration}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
                 </div>
+                <table className="booking-table" id="view-booking">
+                  <thead>
+                    <tr className="booking-thead-second-tr">
+                      {/*amc: Institute Manage Courses*/}
+                      <th className="imc-first-th">Course ID</th>
+                      <th className="imc-second-th">Grade</th>
+                      <th className="imc-third-th">Subject</th>
+                      <th className="imc-fourth-th">Tutor's name</th>
+                      <th className="imc-last-th"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td data-label="Course ID :">10000102345</td>
+                      <td data-label="Grade :">Grade 10</td>
+                      <td data-label="Subject :">Business & Accounting Studies</td>
+                      <td data-label="Tutor's Name :">Amila Banadaranayake</td>
+                      <td>
+                        <div className="Icons">
+                          {/*View Icon*/}
+                          <Button onClick={directToCourse} className="view-icon">
+                            <FontAwesomeIcon icon={['fas', 'eye']} />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Course ID :">10000102355</td>
+                      <td data-label="Grade :">Grade 10</td>
+                      <td data-label="Subject :">History</td>
+                      <td data-label="Tutor's Name :">Kamal Maggona</td>
+                      <td>
+                        <div className="Icons">
+                          {/*View Icon*/}
+                          <Button onClick={directToCourse} className="view-icon">
+                            <FontAwesomeIcon icon={['fas', 'eye']} />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Course ID :">10000102320</td>
+                      <td data-label="Grade :">Grade 10</td>
+                      <td data-label="Subject :">Science</td>
+                      <td data-label="Tutor's Name :">Anusha Palpita</td>
+                      <td>
+                        <div className="Icons">
+                          {/*View Icon*/}
+                          <Button onClick={directToCourse} className="view-icon">
+                            <FontAwesomeIcon icon={['fas', 'eye']} />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Course ID :">10000109945</td>
+                      <td data-label="Grade :">Grade 10</td>
+                      <td data-label="Subject :">Sinhala Lang. & Lit</td>
+                      <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
+                      <td>
+                        <div className="Icons">
+                          {/*View Icon*/}
+                          <Button onClick={directToCourse} className="view-icon">
+                            <FontAwesomeIcon icon={['fas', 'eye']} />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Course ID :">10000102300</td>
+                      <td data-label="Grade :">Grade 9</td>
+                      <td data-label="Subject :">History</td>
+                      <td data-label="Tutor's Name :">Vajira Gamage</td>
+                      <td>
+                        <div className="Icons">
+                          {/*View Icon*/}
+                          <Button onClick={directToCourse} className="view-icon">
+                            <FontAwesomeIcon icon={['fas', 'eye']} />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Course ID :">10000102345</td>
+                      <td data-label="Grade :">Grade 11</td>
+                      <td data-label="Subject :">Business & Accounting Studies</td>
+                      <td data-label="Tutor's Name :">Sameera Rajapakse</td>
+                      <td>
+                        <div className="Icons">
+                          {/*View Icon*/}
+                          <Button onClick={directToCourse} className="view-icon">
+                            <FontAwesomeIcon icon={['fas', 'eye']} />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               <div className="Pending Payments">
                 <div className="paymentsContainer">
-                  <TableContainer component={Paper}>
-                    <Table size="medium" aria-label="a dense table" style={{ textAlign: 'left' }}>
-                      <TableHead style={{ backgroundColor: '#9DD6DF' }}>
-                        <TableRow>
-                          <TableCell>
-                            <b>Student Name</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>Contact</b>
-                          </TableCell>
-
-                          <TableCell align="left">
-                            <b>Month</b>
-                          </TableCell>
-                          <TableCell align="left">
-                            <b>Amount</b>
-                          </TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {rowsPayment.map(row => (
-                          <TableRow
-                            key={row.name}
-                            sx={{
-                              '&:last-child td, &:last-child th': { border: 0 },
-                            }}
-                          >
-                            <TableCell component="th" scope="row">
-                              {row.name}
-                            </TableCell>
-                            <TableCell align="left">{row.contact}</TableCell>
-                            <TableCell align="left">{row.month}</TableCell>
-                            <TableCell align="left">{row.amount}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
+                  <table className="booking-table" id="view-booking">
+                    <thead>
+                      <tr className="booking-thead-second-tr">
+                        {/*amc: Institute Manage Courses*/}
+                        <th className="imc-first-th">Course ID</th>
+                        <th className="imc-second-th">Grade</th>
+                        <th className="imc-third-th">Subject</th>
+                        <th className="imc-fourth-th">Tutor's name</th>
+                        <th className="imc-last-th"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-label="Course ID :">10000102345</td>
+                        <td data-label="Grade :">Grade 10</td>
+                        <td data-label="Subject :">Business & Accounting Studies</td>
+                        <td data-label="Tutor's Name :">Amila Banadaranayake</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000102355</td>
+                        <td data-label="Grade :">Grade 10</td>
+                        <td data-label="Subject :">History</td>
+                        <td data-label="Tutor's Name :">Kamal Maggona</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000102320</td>
+                        <td data-label="Grade :">Grade 10</td>
+                        <td data-label="Subject :">Science</td>
+                        <td data-label="Tutor's Name :">Anusha Palpita</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000109945</td>
+                        <td data-label="Grade :">Grade 10</td>
+                        <td data-label="Subject :">Sinhala Lang. & Lit</td>
+                        <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000102300</td>
+                        <td data-label="Grade :">Grade 9</td>
+                        <td data-label="Subject :">History</td>
+                        <td data-label="Tutor's Name :">Vajira Gamage</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td data-label="Course ID :">10000102345</td>
+                        <td data-label="Grade :">Grade 11</td>
+                        <td data-label="Subject :">Business & Accounting Studies</td>
+                        <td data-label="Tutor's Name :">Sameera Rajapakse</td>
+                        <td>
+                          <div className="Icons">
+                            {/*View Icon*/}
+                            <Button onClick={directToCourse} className="view-icon">
+                              <FontAwesomeIcon icon={['fas', 'eye']} />
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </Tabs>
