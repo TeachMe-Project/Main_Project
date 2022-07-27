@@ -30,123 +30,125 @@ export const MyTeachers = () => {
           </div>
           <div className="Panel">
             <div className="PanelBody">
-              <Link to="/course" className="link">
-                <TeacherCard
-                  grade="Grade 9"
-                  subject="Mathematics"
-                  image={<img src={'/Images/Teachers/mr1.jpg'} />}
-                  teacher="Mr. Lasitha Nuwan"
-                  contact="0771212121"
-                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+              <div className="small-scrollbar">
+                <Link to="/course" className="link">
+                  <TeacherCard
+                    grade="Grade 9"
+                    subject="Mathematics"
+                    image={<img src={'/Images/Teachers/mr1.jpg'} />}
+                    teacher="Mr. Lasitha Nuwan"
+                    contact="0771212121"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
                   elit, sed do eiusmod tempor incididunt ut labore et dolore
                   magna aliqua. Ut enim ad djndkjend edjnedjned..."
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <TeacherCard
-                  grade="Grade 9"
-                  subject="Science"
-                  image={<img src={'/Images/Teachers/ms1.jpg'} />}
-                  teacher="Mr. Nayana Sandamali"
-                  contact="0771212990"
-                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  />
+                </Link>
+                <Link to="/course" className="link">
+                  <TeacherCard
+                    grade="Grade 9"
+                    subject="Science"
+                    image={<img src={'/Images/Teachers/ms1.jpg'} />}
+                    teacher="Mr. Nayana Sandamali"
+                    contact="0771212990"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
                   elit, sed do eiusmod tempor incididunt ut labore et dolore
                   magna aliqua. Ut enim ad djndkjend edjnedjned..."
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <TeacherCard
-                  grade="Grade 9"
-                  subject="History"
-                  image={<img src={'/Images/Teachers/mr2.jpg'} />}
-                  teacher="Mr. Kamal Maggona"
-                  contact="0771212450"
-                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  />
+                </Link>
+                <Link to="/course" className="link">
+                  <TeacherCard
+                    grade="Grade 9"
+                    subject="History"
+                    image={<img src={'/Images/Teachers/mr2.jpg'} />}
+                    teacher="Mr. Kamal Maggona"
+                    contact="0771212450"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
                   elit, sed do eiusmod tempor incididunt ut labore et dolore
                   magna aliqua. Ut enim ad djndkjend edjnedjned..."
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <TeacherCard
-                  grade="Grade 9"
-                  subject="Music"
-                  image={<img src={'/Images/Teachers/mr3.jpg'} />}
-                  teacher="Mr. Anura Kahatagoda"
-                  contact="0771212789"
-                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  />
+                </Link>
+                <Link to="/course" className="link">
+                  <TeacherCard
+                    grade="Grade 9"
+                    subject="Music"
+                    image={<img src={'/Images/Teachers/mr3.jpg'} />}
+                    teacher="Mr. Anura Kahatagoda"
+                    contact="0771212789"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
                   elit, sed do eiusmod tempor incididunt ut labore et dolore
                   magna aliqua. Ut enim ad djndkjend edjnedjned..."
-                />
-              </Link>
-              <Link to="/course" className="link">
-                <TeacherCard
-                  grade="Grade 9"
-                  subject="Art"
-                  image={<img src={'/Images/Teachers/mrs1.jpg'} />}
-                  teacher="Mrs. Shiromi Chandraguptha"
-                  contact="0771215555"
-                  description="Lorem ipsum dolor sit amet, consectetur adipiscing
+                  />
+                </Link>
+                <Link to="/course" className="link">
+                  <TeacherCard
+                    grade="Grade 9"
+                    subject="Art"
+                    image={<img src={'/Images/Teachers/mrs1.jpg'} />}
+                    teacher="Mrs. Shiromi Chandraguptha"
+                    contact="0771215555"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
                   elit, sed do eiusmod tempor incididunt ut labore et dolore
                   magna aliqua. Ut enim ad djndkjend edjnedjned..."
-                />
-              </Link>
+                  />
+                </Link>
 
-              {/*<Link to="/course" className="link">*/}
-              {/*  <CourseCard*/}
-              {/*    header="Science"*/}
-              {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-              {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-              {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-              {/*    time="04:00pm - 06:00pm"*/}
-              {/*    date="Monday"*/}
-              {/*    image={<img src={'/Images/subjects/science.png'} />}*/}
-              {/*    teacher="Ms. Nayana Sandamali"*/}
-              {/*    amount="LKR 2,500"*/}
-              {/*    btn="Unsubscribe"*/}
-              {/*  />*/}
-              {/*</Link>*/}
-              {/*<Link to="/course" className="link">*/}
-              {/*  <CourseCard*/}
-              {/*    header="History"*/}
-              {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-              {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-              {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-              {/*    time="04:00pm - 06:00pm"*/}
-              {/*    date="Saturday"*/}
-              {/*    image={<img src={'/Images/subjects/history.png'} />}*/}
-              {/*    teacher="Mr. Kamal Maggona"*/}
-              {/*    amount="LKR 2,500"*/}
-              {/*    btn="Unsubscribe"*/}
-              {/*  />*/}
-              {/*</Link>*/}
-              {/*<Link to="/course" className="link">*/}
-              {/*  <CourseCard*/}
-              {/*    header="Music"*/}
-              {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-              {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-              {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-              {/*    time="05:00pm - 07:00pm"*/}
-              {/*    date="Tuesday"*/}
-              {/*    image={<img src={'/Images/subjects/music.png'} />}*/}
-              {/*    teacher="Mr. Anura Kahatagoda"*/}
-              {/*    amount="LKR 2,500"*/}
-              {/*    btn="Unsubscribe"*/}
-              {/*  />*/}
-              {/*</Link>*/}
-              {/*<Link to="/course" className="link">*/}
-              {/*  <CourseCard*/}
-              {/*    header="Art"*/}
-              {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-              {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-              {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-              {/*    time="04:00pm - 06:00pm"*/}
-              {/*    date="Sunday"*/}
-              {/*    image={<img src={'/Images/subjects/art.png'} />}*/}
-              {/*    teacher="Mrs. Shiromi Chandraguptha"*/}
-              {/*    amount="LKR 2,500"*/}
-              {/*    btn="Unsubscribe"*/}
-              {/*  />*/}
-              {/*</Link>*/}
+                {/*<Link to="/course" className="link">*/}
+                {/*  <CourseCard*/}
+                {/*    header="Science"*/}
+                {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
+                {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
+                {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
+                {/*    time="04:00pm - 06:00pm"*/}
+                {/*    date="Monday"*/}
+                {/*    image={<img src={'/Images/subjects/science.png'} />}*/}
+                {/*    teacher="Ms. Nayana Sandamali"*/}
+                {/*    amount="LKR 2,500"*/}
+                {/*    btn="Unsubscribe"*/}
+                {/*  />*/}
+                {/*</Link>*/}
+                {/*<Link to="/course" className="link">*/}
+                {/*  <CourseCard*/}
+                {/*    header="History"*/}
+                {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
+                {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
+                {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
+                {/*    time="04:00pm - 06:00pm"*/}
+                {/*    date="Saturday"*/}
+                {/*    image={<img src={'/Images/subjects/history.png'} />}*/}
+                {/*    teacher="Mr. Kamal Maggona"*/}
+                {/*    amount="LKR 2,500"*/}
+                {/*    btn="Unsubscribe"*/}
+                {/*  />*/}
+                {/*</Link>*/}
+                {/*<Link to="/course" className="link">*/}
+                {/*  <CourseCard*/}
+                {/*    header="Music"*/}
+                {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
+                {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
+                {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
+                {/*    time="05:00pm - 07:00pm"*/}
+                {/*    date="Tuesday"*/}
+                {/*    image={<img src={'/Images/subjects/music.png'} />}*/}
+                {/*    teacher="Mr. Anura Kahatagoda"*/}
+                {/*    amount="LKR 2,500"*/}
+                {/*    btn="Unsubscribe"*/}
+                {/*  />*/}
+                {/*</Link>*/}
+                {/*<Link to="/course" className="link">*/}
+                {/*  <CourseCard*/}
+                {/*    header="Art"*/}
+                {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
+                {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
+                {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
+                {/*    time="04:00pm - 06:00pm"*/}
+                {/*    date="Sunday"*/}
+                {/*    image={<img src={'/Images/subjects/art.png'} />}*/}
+                {/*    teacher="Mrs. Shiromi Chandraguptha"*/}
+                {/*    amount="LKR 2,500"*/}
+                {/*    btn="Unsubscribe"*/}
+                {/*  />*/}
+                {/*</Link>*/}
+              </div>
             </div>
           </div>
         </Row>
