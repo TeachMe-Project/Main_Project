@@ -22,14 +22,16 @@ export class ChatArea extends React.Component {
 
     return (
       <section className="StyledChatArea">
-        {/* {messages.map((element: IMessage, idx: number) => {
+        <div className="small-scrollbar">
+          {/* {messages.map((element: IMessage, idx: number) => {
               return (
                 <React.Fragment key={idx}>
                   <Message message={element}/>
                 </React.Fragment>
                ) 
              })}  */}
-        <Message />
+          <Message />
+        </div>
       </section>
     );
   }

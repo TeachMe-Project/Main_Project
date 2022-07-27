@@ -1,5 +1,8 @@
 .Messages {
+  overflow-y: hidden;
+
   .Panel {
+    // overflow-y: hidden;
     .PanelBody {
       display: flex;
       // flex-direction: column;
@@ -7,63 +10,68 @@
       // margin: 0 auto;
       height: 70vh;
 
-      // overflow-y: scroll;
+      // overflow-y: hidden;
       .displayChatters {
         width: 60%;
-        overflow-y: scroll;
 
-        .ChatCard {
-          width: 45%;
-          margin: 1rem 10px;
-          padding: 10px 15px;
-          display: flex;
-          flex-direction: row;
-          cursor: pointer;
-          border-radius: 15px;
-          box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+        // overflow-y: scroll;
+        .small-scrollbar {
+          display: block;
+          overflow: auto;
 
-          .ChatCardImage img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            margin: 0 2rem 0 0;
-          }
+          .ChatCard {
+            width: 45%;
+            margin: 1rem 10px;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
 
-          .CardBody {
-            width: 80%;
-
-            .teacherName {
-              .CardDetails {
-                font-weight: 600;
-                font-size: 1rem;
-                color: $header-primary;
-                margin-bottom: 0.6rem;
-              }
+            .ChatCardImage img {
+              width: 45px;
+              height: 45px;
+              border-radius: 50%;
+              margin: 0 2rem 0 0;
             }
 
-            .teacherSubject {
-              .CardDetails {
-                font-weight: 500;
-                font-size: 0.8rem;
-                color: $header-secondary;
-                margin-bottom: 0.2rem;
+            .CardBody {
+              width: 80%;
+
+              .teacherName {
+                .CardDetails {
+                  font-weight: 600;
+                  font-size: 1rem;
+                  color: $header-primary;
+                  margin-bottom: 0.2rem;
+                }
               }
+
+              .teacherSubject {
+                .CardDetails {
+                  font-weight: 500;
+                  font-size: 0.8rem;
+                  color: $header-secondary;
+                  margin-bottom: 0.2rem;
+                }
+              }
+
+              // .lastRow {
+              //   margin-top: 0.2rem;
+
+              //   .CardDetails {
+              //     font-weight: 500;
+              //     font-size: 0.1rem;
+              //   }
+              // }
             }
-
-            // .lastRow {
-            //   margin-top: 0.2rem;
-
-            //   .CardDetails {
-            //     font-weight: 500;
-            //     font-size: 0.1rem;
-            //   }
-            // }
           }
+
+          // .ChatCard:focus-visible {
+          //   background-color: $testing-color
+          // }
         }
-
-        // .ChatCard:focus-visible {
-        //   background-color: $testing-color
-        // }
       }
     }
   }
