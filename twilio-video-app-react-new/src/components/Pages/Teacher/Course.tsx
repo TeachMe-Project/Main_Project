@@ -55,6 +55,7 @@ export const Course = () => {
               <div className="Details" style={{ marginTop: '50px' }}>
                 <Link to="/editdetails" className="link">
                   <Button
+                    className="cardButton"
                     style={{
                       marginBottom: '20px',
                       marginRight: '20px',

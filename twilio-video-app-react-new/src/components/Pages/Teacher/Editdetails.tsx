@@ -6,26 +6,29 @@ import * as yup from 'yup';
 
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
+import SubmitButton from '../../Button/SubmitButton';
 
 const schema = yup.object().shape({
   title: yup
     .string()
     .required()
-    .label('First Name')
+    .label('Title')
     .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Title must contain only letters'),
   subject: yup
     .string()
     .required()
-    .label('Last Name')
+    .label('Subject')
     .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Subject must contain only letters'),
 
   grade: yup
     .string()
     .required()
+    .label('Grade')
     .matches(/Grade-(?:1[01]|0[1-9])|AL-20\d\d/, 'Grade must be between Grade-03 to A/L-Year-3'),
   fee: yup
     .string()
     .required()
+    .label('Fee')
     .matches(/Grade-(?:1[01]|0[1-9])/, 'Fee must be a numerical value'),
 });
 
@@ -253,7 +256,17 @@ export const TeacherProfile = () => {
                             <Form.Label style={{ fontWeight: 600 }}>Start time </Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="text" placeholder="Start time" name="starttime" />
+                            <Form.Control type="time" placeholder="Start time" name="starttime" />
+                          </Col>
+                        </Form.Group>
+                      </Row>
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}></Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <SubmitButton />
                           </Col>
                         </Form.Group>
                       </Row>
