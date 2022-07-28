@@ -48,6 +48,7 @@ td .pivoted {
   td {
     /* Behave  like a "row" */
     border: none;
+    text-align: center;
     border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 50%;
@@ -72,6 +73,7 @@ td .pivoted {
 }
 .booking-table thead tr {
   display: block;
+  text-align: center;
   width: 100%;
   margin: auto;
   background-color: #012250;
@@ -101,14 +103,14 @@ td .pivoted {
 .booking-table tbody {
   display: block;
   overflow-y: scroll;
-  width: 100%;
+  width: 98%;
   height: 67vh;
   margin: 10px auto;
   text-align: center;
   overflow-x: hidden;
 }
 .booking-table tbody tr {
-  display: block;
+  // display: block;
   box-shadow: #00000026 1.95px 1.95px 2.6px;
   background-color: #fff;
   padding: 5px 10px;

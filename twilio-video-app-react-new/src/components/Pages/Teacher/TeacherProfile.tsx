@@ -261,27 +261,6 @@ export const TeacherProfile = () => {
                           </Col>
                         </Form.Group>
                       </Row>
-                      {/*Grade*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationGrade">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Grade</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter the grade here"
-                              name="Grade"
-                              value={values.Grade}
-                              onChange={handleChange}
-                              isInvalid={!!errors.Grade ? changeGradeValidate(false) : changeGradeValidate(true)}
-                              isValid={touched.Grade}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.Grade}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
 
                       <Row>
                         {isEditing && (

@@ -346,97 +346,48 @@ export const Course = () => {
                     <thead>
                       <tr className="booking-thead-second-tr">
                         {/*amc: Institute Manage Courses*/}
-                        <th className="imc-first-th">Course ID</th>
-                        <th className="imc-second-th">Grade</th>
-                        <th className="imc-third-th">Subject</th>
-                        <th className="imc-fourth-th">Tutor's name</th>
-                        <th className="imc-last-th"></th>
+                        <th className="imc-first-th">Student ID</th>
+                        <th className="imc-second-th">Student Name</th>
+                        <th className="imc-third-th">Month</th>
+                        <th className="imc-fourth-th">Amount</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-label="Course ID :">10000102345</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Business & Accounting Studies</td>
-                        <td data-label="Tutor's Name :">Amila Banadaranayake</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102345</td>
+                        <td data-label="Student Name :">Senith De Silva</td>
+                        <td data-label="Month :">May</td>
+                        <td data-label="Amount :">1500.00</td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102355</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">History</td>
-                        <td data-label="Tutor's Name :">Kamal Maggona</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102345</td>
+                        <td data-label="Student Name :">Senith De Silva</td>
+                        <td data-label="Month :">May</td>
+                        <td data-label="Amount :">1500.00</td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102320</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Science</td>
-                        <td data-label="Tutor's Name :">Anusha Palpita</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102345</td>
+                        <td data-label="Student Name :">Senith De Silva</td>
+                        <td data-label="Month :">May</td>
+                        <td data-label="Amount :">1500.00</td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000109945</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Sinhala Lang. & Lit</td>
-                        <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102345</td>
+                        <td data-label="Student Name :">Senith De Silva</td>
+                        <td data-label="Month :">May</td>
+                        <td data-label="Amount :">1500.00</td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102300</td>
-                        <td data-label="Grade :">Grade 9</td>
-                        <td data-label="Subject :">History</td>
-                        <td data-label="Tutor's Name :">Vajira Gamage</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102345</td>
+                        <td data-label="Student Name :">Senith De Silva</td>
+                        <td data-label="Month :">May</td>
+                        <td data-label="Amount :">1500.00</td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102345</td>
-                        <td data-label="Grade :">Grade 11</td>
-                        <td data-label="Subject :">Business & Accounting Studies</td>
-                        <td data-label="Tutor's Name :">Sameera Rajapakse</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102345</td>
+                        <td data-label="Student Name :">Senith De Silva</td>
+                        <td data-label="Month :">May</td>
+                        <td data-label="Amount :">1500.00</td>
                       </tr>
                     </tbody>
                   </table>
