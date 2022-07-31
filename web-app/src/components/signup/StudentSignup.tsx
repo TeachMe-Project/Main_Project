@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
+import axios from "axios";
 
 const schema = yup.object().shape({
     Grade: yup.string().required().matches(
@@ -100,6 +101,30 @@ const StudentSignup = () => {
             setRPasswordValidate(false);
             return true
         }
+    }
+    const handleOnSubmit = (values: { Firstname: string; Lastname: string; Email: string; Password: string; }) => {
+        const data = JSON.stringify({
+            "email": `${values.Email}`,
+            "Firstname": `${values.Firstname}`,
+            "Lastname": `${values.Lastname}`,
+            "Password": `${values.Password}`
+        });
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/auth/createParent",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res) => {
+                console.log("User created in auth0");
+                console.log(res.data);
+            }
+        ).catch((error)=> {
+            console.log(values);
+            console.log("error")
+            console.log(error.message)
+        })
     }
 
 
@@ -274,6 +299,7 @@ const StudentSignup = () => {
                                                                 onClick={
                                                                     () => {
                                                                         if (gradeValidate && fistNameValidate && lastNameValidate && emailValidate && passwordValidate && rPasswordValidate) {
+                                                                            handleOnSubmit(values);
                                                                             setPageStage(2);
                                                                         }
                                                                     }

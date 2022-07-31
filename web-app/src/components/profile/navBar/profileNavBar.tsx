@@ -85,7 +85,7 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                                         <img src={user?.picture}
                                              style={{height: "40px", borderRadius: "50%", marginRight: "10px"}}
                                              alt='user'/>
-                                        {user?.name}
+                                        {user?.given_name} {user?.name}
                                     </Button>
                                 </Nav.Link>
                                 {isPc &&

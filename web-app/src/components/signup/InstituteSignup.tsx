@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
+import axios from "axios";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
@@ -155,6 +156,31 @@ const InstituteSignup = () => {
                 return true
             }
         };
+
+    const handleOnSubmit = (values: { InstituteName: any; OwnerName: any; Location?: string; Email: any; Password: any; Confirm_Password?: string; Mobile_Number?: string; Description?: string; Address?: string; AccountName?: string; BankName?: string; BranchName?: string; AccountNo?: string; }) => {
+        const data = JSON.stringify({
+            "email": `${values.Email}`,
+            "Firstname": `${values.InstituteName}`,
+            "Lastname": `${values.OwnerName}`,
+            "Password": `${values.Password}`
+        });
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/auth/createParent",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res) => {
+                console.log("User created in auth0");
+                console.log(res.data);
+            }
+        ).catch((error)=> {
+            console.log(values);
+            console.log("error")
+            console.log(error.message)
+        })
+    }
 
 
     return (
@@ -539,6 +565,7 @@ const InstituteSignup = () => {
                                                                 variant="primary"
                                                                 onClick={() => {
                                                                     if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {
+                                                                        handleOnSubmit(values);
                                                                         setPageStage(4);
                                                                     }
                                                                 }
