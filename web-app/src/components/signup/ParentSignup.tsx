@@ -8,6 +8,7 @@ import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
 import NavbarCommon from "../profile/navBar/NavbarCommon";
+import axios from "axios";
 
 const schema = yup.object().shape({
     Firstname: yup.string().required(),
@@ -101,6 +102,30 @@ const ParentSignup = () => {
         }
     }
 
+    const handleOnSubmit = (values: { Firstname: string; Lastname: string; Email: string; Password: string; Confirm_Password: string; Mobile: string; }) => {
+        const data = JSON.stringify({
+            "email": `${values.Email}`,
+            "Firstname": `${values.Firstname}`,
+            "Lastname": `${values.Lastname}`,
+            "Password": `${values.Password}`
+        });
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/auth/createParent",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res) => {
+                console.log("User created in auth0");
+                console.log(res.data);
+            }
+        ).catch((error)=> {
+            console.log(values);
+            console.log("error")
+            console.log(error.message)
+        })
+    }
 
     return (
         <Container fluid className='w-100 p-0 m-0'>
@@ -275,7 +300,7 @@ const ParentSignup = () => {
                                                                 onClick={
                                                                     () => {
                                                                         if (mobileValidate && fistNameValidate && lastNameValidate && emailValidate && passwordValidate && rPasswordValidate) {
-                                                                            setPageStage(2);
+                                                                            handleOnSubmit(values);
                                                                         }
                                                                     }
                                                                 }
