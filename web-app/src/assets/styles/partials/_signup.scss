@@ -2,46 +2,53 @@
 @import "progressBar";
 
 .Signup-Container {
-  height: 100vh;
+  height: fit-content;
   font-family: 'Poppins', sans-serif;
-  .Signup-Image{
+
+  .Signup-Image {
     margin: 0 auto 0 auto;
   }
 
   .Signup {
     border-radius: 20px;
-    height:max-content;
-    width:90vw;
-    .nextBtn{
-      background-color:#1e90ff;
+    height: max-content;
+    width: 90vw;
+    .nextBtn {
+      background-color: #1e90ff;
       border-radius: 20px;
       border: 2px solid #1e90ff;
-      font-weight:600;
-      color:#fff;
-  }
-    .nextBtn:hover{
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .nextBtn:hover {
       background-color: #fff;
-      color:#1e90ff;
+      color: #1e90ff;
     }
-    .Signup-Complete h1{
-      color:#1e90ff;
+
+    .Signup-Complete h1 {
+      color: #1e90ff;
     }
 
 
-    .form-label{
+    .form-label {
       margin-bottom: 0.2rem;
       padding-left: 1rem;
     }
-    .form-select{
+
+    .form-select {
       border-radius: 15px;
     }
+
     .invalid-feedback {
-      color:#e74c3c;
-      padding-left:1rem;
+      color: #e74c3c;
+      padding-left: 1rem;
     }
+
     .form-control.is-invalid {
       border: 1px solid #e74c3c;
     }
+
     @media (max-width: $md-screen-size) {
       box-shadow: none;
       height: fit-content;
@@ -51,7 +58,7 @@
       color: $font-grey-color;
       font-size: 2.4rem;
       font-weight: 600;
-      
+
       @media (max-width: $xs-screen-size) {
         font-size: 30px;
       }

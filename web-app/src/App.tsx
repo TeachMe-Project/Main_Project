@@ -19,13 +19,13 @@ import TutorPayments from "./components/profile/admin/TutorPayments";
 import InstituteTutorsPage from "./components/profile/institute/InstituteTutorsPage";
 import InstituteManageCourses from "./components/profile/institute/InstituteManageCourses";
 import InstituteAddTutor from "./components/profile/institute/InstituteAddTutor";
+import ParentProfile from "./components/profile/parent/ParentProfile";
 
 const App: React.FC = () => {
     return (
         <div>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                {/*<Route path="/admin" element={<ProtectedRoute component={PUpComingClasses}/>}/>*/}
                 <Route path="/dashboard" element={<PStudentProgress/>}/>
                 <Route path="/signup" element={<SignUpCategory/>}/>
                 <Route path="/signup/teacher" element={<TeacherSignup/>}/>
@@ -37,6 +37,7 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={PUpComingPayments} role={'parent'}/>}/>
                 <Route path="/parent/stuSignup" element={<ProtectedRoute component={StudentSignup} role={'parent'}/>}/>
                 <Route path="/parent/history" element={<ProtectedRoute component={PStudentProgress} role={'parent'}/>}/>
+                <Route path="/parent/profile" element={<ProtectedRoute component={ParentProfile} role={'parent'}/>}/>
 
                 <Route path="/admin" element={<ProtectedRoute component={ManageUsers} role={'admin'}/>}/>
                 <Route path="/admin/managecourses"

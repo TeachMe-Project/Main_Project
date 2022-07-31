@@ -80,7 +80,8 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                                                 borderRadius: "20px",
                                                 fontSize: "18px",
                                                 boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
-                                            }}>
+                                            }}
+                                    onClick={()=> navigate("/parent/profile")}>
                                         <img src={user?.picture}
                                              style={{height: "40px", borderRadius: "50%", marginRight: "10px"}}
                                              alt='user'/>
