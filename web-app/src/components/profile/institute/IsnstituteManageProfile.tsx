@@ -1,26 +1,18 @@
 import React, {useState} from 'react';
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
-import Images from "../../assets/images/Images";
+import {Button, Col, Form, Row, Tab, Tabs} from "react-bootstrap";
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+import InstituteLayout from "./InstituteLayout";
+import {useAuth0} from "@auth0/auth0-react";
 import {Formik} from "formik";
-import * as yup from 'yup';
-// @ts-ignore
-import LazyLoad from 'react-lazyload';
-import SignUpComplete from "./signUpComplete";
-import Footer from "../Home/footer/footer";
+import * as yup from "yup";
+import {BsPencilSquare} from "react-icons/bs";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
     OwnerName: yup.string().required().label('Owner Name'),
     Location: yup.string().required(),
     Email: yup.string().email().required(),
-    Password: yup.string().required().matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
-        "Must contain 8 characters including 1 uppercase, 1 lowercase, 1 number & 1 special character"
-    ),
-    Confirm_Password: yup.string().label('Confirm Password').required().matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
-        "Must contain 8 characters including 1 uppercase, 1 lowercase, 1 number & 1 special character"
-    ).oneOf([yup.ref('Password'), null], 'Passwords must match'),
     Description: yup.string().required(),
     Address: yup.string().required(),
     Mobile_Number: yup.string().required().label("Mobile Number").matches(
@@ -33,23 +25,22 @@ const schema = yup.object().shape({
 });
 
 const initialState = {
-    InstituteName: 'sss',
-    OwnerName: '',
-    Location: '',
-    Email: '',
-    Password: '',
-    Confirm_Password: '',
-    Mobile_Number: '',
-    Description: '',
-    Address: '',
-    AccountName: '',
-    BankName: '',
-    BranchName: '',
-    AccountNo: ''
+    InstituteName: 'Sigma Institute',
+    OwnerName: 'Avishka Hettarachchi',
+    Location: 'Malabe',
+    Email: 'sigmainst@gmail.com',
+    Mobile_Number: '0771234567',
+    Description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 15nd more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+    Address: 'Malebe, Colombo 07',
+    AccountName: 'Avishka Hettarachchi',
+    BankName: 'Bank OF Ceylon',
+    BranchName: 'Malabe',
+    AccountNo: '6612345678'
 }
 
-const InstituteSignup = () => {
-    const [pageStage, setPageStage] = useState(1), [instituteNameValidate, setInstituteNameValidate] = useState<boolean>(false), [ownerNameValidate, setOwnerNameValidate] = useState(false), [locationValidate, setLocationValidate] = useState(false), [emailValidate, setEmailValidate] = useState(false), [passwordValidate, setPasswordValidate] = useState(false), [rPasswordValidate, setRPasswordValidate] = useState(false), [descriptionValidate, setDescriptionValidate] = useState(false), [addressValidate, setAddressValidate] = useState(false), [mobileValidate, setMobileValidate] = useState(false), [accountNameValidate, setAccountNameValidate] = useState(false), [bankNameValidate, setBankNameValidate] = useState(false), [branchNameValidate, setBranchNameValidate] = useState(false), [accountNoValidate, setAccountNoValidate] = useState(false),
+
+const InstituteManageProfile = () => {
+    const {user} = useAuth0(), [instituteNameValidate, setInstituteNameValidate] = useState(false), [ownerNameValidate, setOwnerNameValidate] = useState(false), [locationValidate, setLocationValidate] = useState(false), [emailValidate, setEmailValidate] = useState(false), [descriptionValidate, setDescriptionValidate] = useState(false), [addressValidate, setAddressValidate] = useState(false), [mobileValidate, setMobileValidate] = useState(false), [accountNameValidate, setAccountNameValidate] = useState(false), [bankNameValidate, setBankNameValidate] = useState(false), [branchNameValidate, setBranchNameValidate] = useState(false), [accountNoValidate, setAccountNoValidate] = useState(false),
         changeInstituteNameValidate = (status: boolean): boolean => {
             if (status) {
                 setInstituteNameValidate(true);
@@ -80,22 +71,6 @@ const InstituteSignup = () => {
                 return false
             } else {
                 setEmailValidate(false);
-                return true
-            }
-        }, changePasswordValidate = (status: boolean): boolean => {
-            if (status) {
-                setPasswordValidate(true);
-                return false
-            } else {
-                setPasswordValidate(false);
-                return true
-            }
-        }, changeRPasswordValidate = (status: boolean): boolean => {
-            if (status) {
-                setRPasswordValidate(true);
-                return false
-            } else {
-                setRPasswordValidate(false);
                 return true
             }
         }, changeDescriptionValidate = (status: boolean): boolean => {
@@ -156,65 +131,56 @@ const InstituteSignup = () => {
             }
         };
 
+    const [enableEditProfile, setEnableEditProfile] = useState(true);
 
     return (
-        <Container fluid={true}>
-            <Row
-                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start">
-                <Col lg={9} md={12} xs={12}
-                     className="Signup d-flex flex-lg-column justify-content-lg-center p-md-3 mt-md-2 mt-3">
-                    <Row className="d-flex align-items-center">
-                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-3">Signup For Institute</h1>
-                        <Col lg={6} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
-                            <img src={Images.instituteSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
-                                 alt="Institute-signup"/>
-                        </Col>
-                        <Col>
-                            <Row>
-                                <Row className="mt-lg-5 pe-lg-4 mt-md-5 mt-4 pe-0">
-                                    <Col lg={10} md={12} className="mb-3 mx-lg-auto px-md-5 px-3">
-                                        <LazyLoad once>
-                                            <div className="progressbar">
-                                                <div
-                                                    className={pageStage === 1 ? 'progress-step progress-step-active' : 'progress-step'}
-                                                    data-title="Details">
-                                                </div>
-                                                <div
-                                                    className={pageStage === 2 ? 'progress-step progress-step-active' : 'progress-step'}
-                                                    data-title="Description"></div>
-                                                <div
-                                                    className={pageStage === 3 ? 'progress-step progress-step-active' : 'progress-step'}
-                                                    data-title="Bank"></div>
-                                                <div
-                                                    className={pageStage === 4 ? 'progress-step progress-step-active' : 'progress-step'}
-                                                    data-title="Finished"></div>
-                                            </div>
-                                        </LazyLoad>
-                                    </Col>
-                                </Row>
-                            </Row>
-                            <Formik
-                                validationSchema={schema}
-                                onSubmit={console.log}
-                                initialValues={initialState}
-                            >
-                                {({
-                                      handleSubmit,
-                                      handleChange,
-                                      handleBlur,
-                                      values,
-                                      touched,
-                                      errors,
-                                      validateField,
+        <InstituteLayout>
+            <Col lg={12} className='px-lg-5'>
+                <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
+                    <Col lg={12} md={12} xs={12}>
+                        <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
+                            Manage Profile
+                        </h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={3} className='d-flex flex-column justify-content-center align-items-center'>
+                        <img src={user?.picture} className='w-100' style={{borderRadius: "50%"}}/>
+                        <Button className="mt-4 px-3" style={{width: "fit-content", borderRadius: "20px"}}
+                                variant="outline-secondary"
+                                onClick={()=> {
+                                    setEnableEditProfile(false);
+                                    console.log(enableEditProfile);
+                                }}>
+                            <BsPencilSquare style={{marginRight: "10px"}}/>Edit Profile</Button>
+                    </Col>
+                    <Col className='px-lg-5'>
+                        <Formik
+                            validationSchema={schema}
+                            onSubmit={console.log}
+                            initialValues={initialState}
+                        >
+                            {({
+                                  handleSubmit,
+                                  handleChange,
+                                  handleBlur,
+                                  values,
+                                  touched,
+                                  errors,
+                                  validateField,
 
-                                  }) => (
-                                    <Row className="pb-md-0 pb-4">
-                                        <Form noValidate onSubmit={handleSubmit}>
-                                            {(pageStage === 1) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
-
-                                                    <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3"
+                              }) => (
+                                <Row className="pb-md-0 pb-4">
+                                    <Form noValidate onSubmit={handleSubmit}>
+                                        <Tabs
+                                            defaultActiveKey="profile"
+                                            id="uncontrolled-tab-example"
+                                            className="mb-3"
+                                        >
+                                            <Tab eventKey="profile" title="Profile Details">
+                                                <Row className="mt-lg-0 pe-lg-4 mt-md-3 d-flex flex-column">
+                                                    <Col lg={10} md={6} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2"
                                                                     controlId="validationInstituteName">
                                                             <Form.Label style={{fontWeight: 600}}>Institute
                                                                 Name</Form.Label>
@@ -227,15 +193,17 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.InstituteName ? changeInstituteNameValidate(false) : changeInstituteNameValidate(true)}
                                                                 isValid={touched.InstituteName}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.InstituteName}
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
-                                                    <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationEmail">
-                                                            <Form.Label style={{fontWeight: 600}}>Institute's email</Form.Label>
+                                                    <Col lg={10} md={6} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2" controlId="validationEmail">
+                                                            <Form.Label style={{fontWeight: 600}}>Institute's
+                                                                email</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter institute's email"
@@ -245,6 +213,7 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                                                                 isValid={touched.Email}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.Email}
@@ -252,9 +221,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
-                                                    <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationOwnerName">
+                                                <Row className="mt-lg-0 pe-lg-4 mt-md-3 d-flex flex-column">
+                                                    <Col lg={10} md={6} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2" controlId="validationOwnerName">
                                                             <Form.Label style={{fontWeight: 600}}>Owner's
                                                                 name</Form.Label>
                                                             <Form.Control
@@ -266,14 +235,15 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.OwnerName ? changeOwnerNameValidate(false) : changeOwnerNameValidate(true)}
                                                                 isValid={touched.OwnerName}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.OwnerName}
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
-                                                    <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationLocation">
+                                                    <Col lg={10} md={6} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2" controlId="validationLocation">
                                                             <Form.Label style={{fontWeight: 600}}>Location</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -284,6 +254,7 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.Location ? changeLocationValidate(false) : changeLocationValidate(true)}
                                                                 isValid={touched.Location}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.Location}
@@ -291,75 +262,13 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
-                                                    <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationPassword">
-                                                            <Form.Label style={{fontWeight: 600}}>Password</Form.Label>
-                                                            <Form.Control
-                                                                type="password"
-                                                                placeholder="Enter password"
-                                                                name="Password"
-                                                                value={values.Password}
-                                                                onChange={handleChange}
-                                                                isInvalid={!!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
-                                                                isValid={touched.Password}
-                                                                onBlur={handleBlur}
-                                                            />
-                                                            <Form.Control.Feedback type="invalid">
-                                                                {errors.Password}
-                                                            </Form.Control.Feedback>
-                                                        </Form.Group>
-                                                    </Col>
-                                                    <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationRPassword">
-                                                            <Form.Label style={{fontWeight: 600}}>Re-type
-                                                                Password</Form.Label>
-                                                            <Form.Control
-                                                                type="password"
-                                                                placeholder="Re-type password"
-                                                                name="Confirm_Password"
-                                                                value={values.Confirm_Password}
-                                                                onChange={handleChange}
-                                                                isInvalid={!!errors.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
-                                                                isValid={touched.Confirm_Password}
-                                                                onBlur={handleBlur}
-                                                            />
-                                                            <Form.Control.Feedback type="invalid">
-                                                                {errors.Confirm_Password}
-                                                            </Form.Control.Feedback>
-                                                        </Form.Group>
-                                                    </Col>
-                                                </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
-                                                    <Col
-                                                        className="d-flex flex-row justify-content-lg-end justify-content-end">
-                                                        <Button type="button" className="px-4 nextBtn"
-                                                                variant="primary"
-                                                                onClick={
-                                                                    () => {
-                                                                        if (instituteNameValidate && ownerNameValidate && locationValidate && emailValidate && passwordValidate && rPasswordValidate) {
-                                                                            setPageStage(2);
-                                                                        }
-                                                                    }
-                                                                }
-                                                                onClickCapture={() => {
-                                                                    validateField("InstituteName");
-                                                                    validateField("OwnerName");
-                                                                    validateField("Location");
-                                                                    validateField("Email");
-                                                                    validateField("Password");
-                                                                    validateField("Confirm_Password");
-                                                                }
-                                                                }
-                                                        >Next</Button>
-                                                    </Col>
-                                                </Row>
-                                            </LazyLoad>}
-                                            {(pageStage === 2) && <LazyLoad once>
-                                                <Row className=" pe-lg-4 mt-md-3">
-                                                    <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationMobile">
-                                                            <Form.Label style={{fontWeight: 600}}>Mobile Number</Form.Label>
+                                            </Tab>
+                                            <Tab eventKey="description" title="Description">
+                                                <Row className="mt-lg-0 pe-lg-4 mt-md-3">
+                                                    <Col lg={10} md={12} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2" controlId="validationMobile">
+                                                            <Form.Label style={{fontWeight: 600}}>Mobile
+                                                                Number</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter mobile number in format: 0771234567"
@@ -369,6 +278,7 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)}
                                                                 isValid={touched.Mobile_Number}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.Mobile_Number}
@@ -376,12 +286,13 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="pe-lg-4 mt-md-3">
-                                                    <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3"
+                                                <Row className="mt-lg-0 pe-lg-4 mt-md-3">
+                                                    <Col lg={10} md={12} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2"
                                                                     controlId="validationAddress">
                                                             <Form.Label
-                                                                style={{fontWeight: 600}}>Institute's Address</Form.Label>
+                                                                style={{fontWeight: 600}}>Institute's
+                                                                Address</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter institute's address "
@@ -391,6 +302,7 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.Address ? changeAddressValidate(false) : changeAddressValidate(true)}
                                                                 isValid={touched.Address}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.Address}
@@ -398,9 +310,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className=" pe-lg-4 mt-md-3">
-                                                    <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationDescription">
+                                                <Row className="mt-lg-0 pe-lg-4 mt-md-3">
+                                                    <Col lg={10} md={12} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2" controlId="validationDescription">
                                                             <Form.Label
                                                                 style={{fontWeight: 600}}>Description</Form.Label>
                                                             <Form.Control as="textarea"
@@ -413,6 +325,7 @@ const InstituteSignup = () => {
                                                                           isInvalid={!!errors.Description ? changeDescriptionValidate(false) : changeDescriptionValidate(true)}
                                                                           isValid={touched.Description}
                                                                           onBlur={handleBlur}
+                                                                          disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.Description}
@@ -420,36 +333,11 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="pe-lg-4 mt-md-3">
-                                                    <Col className="d-flex flex-row justify-content-between ">
-
-                                                        <Button type="button" className="px-4 nextBtn"
-                                                                variant="primary"
-                                                                onClick={() => setPageStage(1)}
-                                                        >Previous</Button>
-                                                        <Button type="button" className="px-4 nextBtn"
-                                                                variant="primary"
-                                                                onClick={
-                                                                    () => {
-                                                                        if (descriptionValidate && addressValidate && mobileValidate) {
-                                                                            setPageStage(3);
-                                                                        }
-                                                                    }
-                                                                }
-                                                                onClickCapture={() => {
-                                                                    validateField("Description");
-                                                                    validateField("Address");
-                                                                    validateField("Mobile");
-                                                                }
-                                                                }
-                                                        >Next</Button>
-                                                    </Col>
-                                                </Row>
-                                            </LazyLoad>}
-                                            {(pageStage === 3) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
-                                                    <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationAccountName">
+                                            </Tab>
+                                            <Tab eventKey="bankdetails" title="Bank Details">
+                                                <Row className="mt-lg-0 pe-lg-4 mt-md-3">
+                                                    <Col lg={10} md={12} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2" controlId="validationAccountName">
                                                             <Form.Label style={{fontWeight: 600}}>Account Holder's
                                                                 Name</Form.Label>
                                                             <Form.Control
@@ -461,6 +349,7 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.AccountName ? changeAccountNameValidate(false) : changeAccountNameValidate(true)}
                                                                 isValid={touched.AccountName}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.AccountName}
@@ -468,9 +357,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
-                                                    <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationBankName">
+                                                <Row className="mt-lg-0 pe-lg-4 mt-md-3 d-flex flex-column">
+                                                    <Col lg={10} md={6} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2" controlId="validationBankName">
                                                             <Form.Label style={{fontWeight: 600}}>Bank Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -481,14 +370,15 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)}
                                                                 isValid={touched.BankName}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.BankName}
                                                             </Form.Control.Feedback>
                                                         </Form.Group>
                                                     </Col>
-                                                    <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationBranchName">
+                                                    <Col lg={10} md={6} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2" controlId="validationBranchName">
                                                             <Form.Label style={{fontWeight: 600}}>Branch
                                                                 Name</Form.Label>
                                                             <Form.Control
@@ -500,6 +390,7 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)}
                                                                 isValid={touched.BranchName}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.BranchName}
@@ -507,9 +398,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
-                                                    <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationAccountNo">
+                                                <Row className="mt-lg-0 pe-lg-4 mt-md-3">
+                                                    <Col lg={10} md={12} sm={12} xs={12}>
+                                                        <Form.Group className="mb-2" controlId="validationAccountNo">
                                                             <Form.Label style={{fontWeight: 600}}>Account
                                                                 Number</Form.Label>
                                                             <Form.Control
@@ -521,6 +412,7 @@ const InstituteSignup = () => {
                                                                 isInvalid={!!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)}
                                                                 isValid={touched.AccountNo}
                                                                 onBlur={handleBlur}
+                                                                disabled={enableEditProfile}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.AccountNo}
@@ -528,46 +420,21 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
-                                                    <Col className="d-flex flex-row justify-content-between">
-                                                        <Button type="button" className="px-4 nextBtn"
-                                                                variant="primary"
-                                                                onClick={() => setPageStage(2)}
-                                                        >Previous</Button>
-
-                                                        <Button type="submit" className="px-4 nextBtn"
-                                                                variant="primary"
-                                                                onClick={() => {
-                                                                    if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {
-                                                                        setPageStage(4);
-                                                                    }
-                                                                }
-                                                                }
-                                                                onClickCapture={() => {
-                                                                    validateField("AccountName");
-                                                                    validateField("BankName");
-                                                                    validateField("BranchName");
-                                                                    validateField("AccountNo");
-                                                                }
-                                                                }
-                                                        >Next</Button>
-                                                    </Col>
-                                                </Row>
-                                            </LazyLoad>}
-                                            {(pageStage === 4) && <LazyLoad once>
-                                                <SignUpComplete/>
-                                            </LazyLoad>}
-
-                                        </Form>
-                                    </Row>)}
-                            </Formik>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-            <Footer/>
-        </Container>
+                                            </Tab>
+                                        </Tabs>
+                                        <Row className='ms-1 mt-2'>
+                                            <Button style={{width: "fit-content", borderRadius: "20px"}}
+                                                    variant='secondary'>Update Profile</Button>
+                                        </Row>
+                                    </Form>
+                                </Row>)}
+                        </Formik>
+                    </Col>
+                </Row>
+            </Col>
+        </InstituteLayout>
     );
 };
 
-export default InstituteSignup;
+export default InstituteManageProfile;
+
