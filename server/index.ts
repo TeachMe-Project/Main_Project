@@ -17,6 +17,7 @@ import {homeworkRouter} from "./route/homeworkRoutes";
 import {instituteRouter} from "./route/instituteRoutes";
 import {notesRouter} from "./route/notesRoutes";
 import {notificationRouter} from "./route/notificationRoutes";
+import {authRouter} from "./route/authRoutes";
 
 const PORT = process.env.PORT ?? 8081;
 
@@ -53,6 +54,7 @@ app.use('/parent', parentRouter)
 app.use('/student', studentRouter)
 app.use('/teacher', teacherRouter)
 app.use('/user', userRouter)
+app.use('/auth', authRouter)
 
 app.use('/create-checkout-session',paymentGatewayRouter)
 
