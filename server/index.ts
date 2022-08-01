@@ -3,6 +3,7 @@ import { createExpressHandler } from './createExpressHandler';
 import express, { RequestHandler } from 'express';
 import path from 'path';
 import { ServerlessFunction } from './types';
+import cors from "cors";
 
 // importing requires routings
 import {studentRouter} from "./route/studentRoutes";
@@ -41,6 +42,7 @@ const authMiddleware =
 app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
+app.use(cors());
 
 //development endpoints by developers
 app.use('/admin',adminRouter)

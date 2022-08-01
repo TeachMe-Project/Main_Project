@@ -246,3 +246,43 @@ export const createAuthAdmin = async (request: Request, response: Response) => {
             })
     })
 }
+
+export const printRequest = async (request: Request, response: Response) => {
+    console.log(request.body);
+    getAccessToken(() => {
+        axios(
+            {
+                method: 'post',
+                url: 'https://learningsl.us.auth0.com/api/v2/users',
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify(
+                    {
+                        "email": request.body.email,
+                        "blocked": false,
+                        "email_verified": false,
+                        "given_name": request.body.Firstname,
+                        "name": request.body.Lastname,
+                        "nickname": request.body.Firstname + " " + request.body.Lastname,
+                        "password": request.body.Password,
+                        "user_metadata": {
+                            "type": "admin"
+                        },
+                        "family_name": "admin",
+                        "connection": "Username-Password-Authentication",
+                        "verify_email": true
+                    })
+            })
+            .then(function (res) {
+                logging.info(NAMESPACE, 'User Auth Created: ', res.data);
+                return response.status(res.status).json(res.data);
+            })
+            .catch(function (error) {
+                logging.info(NAMESPACE, access_token, 'Hello')
+                logging.error(NAMESPACE, 'Not Done', error.message);
+                return response.status(error.code).json(error.message);
+            })
+    })
+}
