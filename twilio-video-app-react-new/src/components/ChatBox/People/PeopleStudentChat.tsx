@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MessageCard } from '../../Card/MessageCard';
+import { MessageCard } from '../../Card/StudentMessageCard';
 
 export const People = () => {
   return (

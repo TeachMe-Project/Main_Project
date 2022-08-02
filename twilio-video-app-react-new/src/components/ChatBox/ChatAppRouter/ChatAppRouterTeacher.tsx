@@ -1,6 +1,6 @@
 import * as React from 'react';
 // import { HashRouter, Route} from 'react-router-dom';
-import ChatPage from '../ChatPage/ChatPage';
+import ChatPage from '../ChatPage/ChatPageTeacher';
 
 export const ChatAppRouter: React.FunctionComponent = () => {
   return (

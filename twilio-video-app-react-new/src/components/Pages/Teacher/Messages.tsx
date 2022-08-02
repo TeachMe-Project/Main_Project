@@ -1,11 +1,8 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import PanelContainer from '../../Layout/PanelContainer';
-import ChatAppRouter from '../../ChatBox/ChatAppRouter/ChatAppRouterStudent';
-import People from '../../ChatBox/People/PeopleStudentChat';
-import { AiOutlinePlus } from 'react-icons/ai';
-import NewChatPopup from '../../ChatBox/NewChatPopup/NewChatPopup';
+import ChatAppRouter from '../../ChatBox/ChatAppRouter/ChatAppRouterTeacher';
+import People from '../../ChatBox/People/PeopleTeacherChat';
 
 type Messages = {
   name?: string;
@@ -13,12 +10,6 @@ type Messages = {
 };
 
 const Messages: React.FC<Messages> = props => {
-  // const [popupVisible, setPopupVisible] = useState<boolean>(false)
-
-  // function togglePopup() {
-  //   setPopupVisible(!popupVisible)
-  // }
-
   return (
     <div className="Messages">
       <Container>
@@ -29,7 +20,6 @@ const Messages: React.FC<Messages> = props => {
           </div>
           <div className="Panel">
             <div className="PanelBody">
-              <NewChatPopup />
               <People />
               <ChatAppRouter />
             </div>

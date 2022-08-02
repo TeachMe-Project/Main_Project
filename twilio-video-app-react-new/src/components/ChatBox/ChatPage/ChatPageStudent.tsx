@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ChatArea from '../ChatArea/ChatArea';
+import ChatArea from '../ChatArea/ChatAreaStudent';
 import MessageSender from '../MessageSender/MessageSender';
 
 const ChatPage = () => (

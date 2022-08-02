@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Message from '../Message/Message';
+import Message from '../Message/MessageTeacher';
 import { scrollToBottom } from '../Utilities/common';
 // import { IMessage } from '../Message/Message';
 
