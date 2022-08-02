@@ -5,7 +5,8 @@ import {
     createAdmin,
     getAdminByID,
     getAdmins,
-     rejectTeacher
+    newTeacherRequests,
+    rejectTeacher
 } from "../controllers/adminController";
 
 export const adminRouter=express.Router();
@@ -14,6 +15,9 @@ export const adminRouter=express.Router();
 
 adminRouter.route("/alladmins")
     .get(getAdmins);
+
+adminRouter.route("/newTeacherRequests")
+    .get(newTeacherRequests);
 
 adminRouter.route("/:id")
     .get(getAdminByID);

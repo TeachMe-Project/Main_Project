@@ -7,7 +7,12 @@ const prisma = new PrismaClient()
 export const getCourses = async (req: Request, res: Response) => {
 
     try {
-        const data = await prisma.course.findMany()
+        const data = await prisma.course.findMany({
+            include: {
+                teacher: true,
+                
+            }
+        })
         res.status(200).send(data)
     } catch (error) {
         res.status(500).send(error);
