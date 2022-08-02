@@ -45,7 +45,7 @@
     "lint-staged": "^9.5.0",
     "lodash.throttle": "^4.1.1",
     "nanoid": "^3.1.31",
-    "node-sass": "^5.0.0",
+    "node-sass": "^6.0.0",
     "nodemon": "^2.0.18",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
