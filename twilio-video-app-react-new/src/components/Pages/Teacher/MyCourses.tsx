@@ -5,6 +5,10 @@ import CardDetails from '../../Card/CardDetails';
 import { Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PanelContainer from '../../Layout/PanelContainer';
+import { Button } from '../../Button/Button';
+
+import { CardButton } from '../../Card/CardButton';
+import { ButtonCommon } from '../../Button/ButtonCommon';
 
 export const MyCourses = () => {
   return (
@@ -15,6 +19,15 @@ export const MyCourses = () => {
           <div className="PanelHeader">
             <h2>My Courses</h2>
           </div>
+          <div
+            className="AddNewCourse"
+            style={{ width: 'max-content', position: 'relative', marginBottom: '20px', left: '1067px', top: '23px' }}
+          >
+            <Link to="/addcourse" className="link">
+              <ButtonCommon name={'Add New Course'} />
+            </Link>
+          </div>
+
           <div className="Panel">
             <div className="PanelBody">
               <CourseCardTeacher

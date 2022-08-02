@@ -16,7 +16,7 @@ import Uploadhomework from './Uploadhomework';
 import Uploadnotes from './Uploadnotes';
 import TeacherProfile from './TeacherProfile';
 import Notifications from '../../Notification/notifications';
-import Helpandsupport from './Helpandsupport';
+import Helpandsupport from './HelpandSupport';
 
 const routes = [
   {

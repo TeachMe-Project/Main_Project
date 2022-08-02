@@ -7,6 +7,7 @@ import * as yup from 'yup';
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
 import SubmitButton from '../../Button/SubmitButton';
+import { ButtonCommon } from '../../Button/ButtonCommon';
 
 const schema = yup.object().shape({
   title: yup
@@ -265,8 +266,10 @@ export const TeacherProfile = () => {
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}></Form.Label>
                           </Col>
-                          <Col xl={8}>
-                            <SubmitButton />
+                          <Col xl={8} style={{ margin: '0 200px' }}>
+                            <div className="Buttonforsubmit" style={{ margin: '10px -92px' }}>
+                              <ButtonCommon name={'Submit'} />
+                            </div>
                           </Col>
                         </Form.Group>
                       </Row>

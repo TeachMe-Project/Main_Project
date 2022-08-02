@@ -13,11 +13,9 @@ export const Notes: React.FC<Notes> = props => {
   return (
     <div className="Notes">
       <Container>
-        <Col xl={5}>
-          <Row>
-            <Card header={props.topic} detail={props.date} btnname={<FiDownload className="ReactIcon" />} />
-          </Row>
-        </Col>
+        <Row>
+          <Card header={props.topic} detail={props.date} btnname={<FiDownload className="ReactIcon" />} />
+        </Row>
       </Container>
     </div>
   );

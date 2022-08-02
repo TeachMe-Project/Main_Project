@@ -7,6 +7,7 @@ import * as yup from 'yup';
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
 import SubmitButton from '../../Button/SubmitButton';
+import { ButtonCommon } from '../../Button/ButtonCommon';
 
 const schema = yup.object().shape({
   topic: yup
@@ -101,32 +102,6 @@ export const Uploadhomework = () => {
                           </Col>
                         </Form.Group>
                       </Row>
-                      {/*description*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Description</Form.Label>
-                          </Col>
-
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Description"
-                              name="description"
-                              value={values.description}
-                              onChange={handleChange}
-                              isInvalid={
-                                !!errors.description
-                                  ? changedescriptionValidate(false)
-                                  : changedescriptionValidate(true)
-                              }
-                              isValid={touched.description}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.description}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
 
                       {/*Deadline*/}
                       <Row>
@@ -156,8 +131,10 @@ export const Uploadhomework = () => {
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}></Form.Label>
                           </Col>
-                          <Col xl={8}>
-                            <SubmitButton />
+                          <Col xl={8} style={{ margin: '0 108px' }}>
+                            <div className="Buttonforsubmit">
+                              <ButtonCommon name={'Submit'} />
+                            </div>
                           </Col>
                         </Form.Group>
                       </Row>

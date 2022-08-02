@@ -16,7 +16,7 @@ import Averagetimechart from './Averagetimechart';
 
 export const Dashboard = () => {
   return (
-    <div className="Dashboard">
+    <div className="DashboardTeacher">
       <Container>
         <Row>
           <PanelContainer />
