@@ -39,11 +39,14 @@
 
               .lastRow {
                 margin-top: 0.8rem;
+                .row {
+                  width: 60%;
 
-                .CardRow {
-                  .CardDetails {
-                    font-weight: 500;
-                    font-size: 1rem;
+                  .CardRow {
+                    .CardDetails {
+                      font-weight: 500;
+                      font-size: 1rem;
+                    }
                   }
                 }
               }
