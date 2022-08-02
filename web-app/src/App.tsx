@@ -19,13 +19,15 @@ import TutorPayments from "./components/profile/admin/TutorPayments";
 import InstituteTutorsPage from "./components/profile/institute/InstituteTutorsPage";
 import InstituteManageCourses from "./components/profile/institute/InstituteManageCourses";
 import InstituteAddTutor from "./components/profile/institute/InstituteAddTutor";
+import ProfileEdit from "./components/profile/navBar/ProfileEdit";
+import ViewInstituteProfile from "./components/profile/admin/ViewInstituteProfile";
+import InstituteManageProfile from "./components/profile/institute/IsnstituteManageProfile";
 
 const App: React.FC = () => {
     return (
         <div>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                {/*<Route path="/admin" element={<ProtectedRoute component={PUpComingClasses}/>}/>*/}
                 <Route path="/dashboard" element={<PStudentProgress/>}/>
                 <Route path="/signup" element={<SignUpCategory/>}/>
                 <Route path="/signup/teacher" element={<TeacherSignup/>}/>
@@ -45,14 +47,22 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={VerifyTutorsPage} role={'admin'}/>}/>
                 <Route path="/admin/verifyinstitutes"
                        element={<ProtectedRoute component={VerifyInstitutesPage} role={'admin'}/>}/>
+                <Route path="/admin/viewInstitute"
+                       element={<ProtectedRoute component={ViewInstituteProfile} role={'admin'}/>}/>
+
                 <Route path="/admin/tutorpayment"
                        element={<ProtectedRoute component={TutorPayments} role={'admin'}/>}/>
+
                 <Route path="/institute"
                        element={<ProtectedRoute component={InstituteManageCourses} role={'admin'}/>}/>
                 <Route path="/institute/tutors"
                        element={<ProtectedRoute component={InstituteTutorsPage} role={'admin'}/>}/>
+                <Route path="/institute/manageprofile"
+                       element={<ProtectedRoute component={InstituteManageProfile} role={'admin'}/>}/>
                 <Route path="/institute/addtutors"
                        element={<ProtectedRoute component={InstituteAddTutor} role={'admin'}/>}/>
+                <Route path="/parent/profile" element={<ProtectedRoute component={ProfileEdit} role={'parent'}/>}/>
+                <Route path="/admin/profile" element={<ProtectedRoute component={ProfileEdit} role={'admin'}/>}/>
                 <Route path="/*" element={<NotFound/>}/>
             </Routes>
         </div>

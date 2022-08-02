@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
+import axios from "axios";
 
 const schema = yup.object().shape({
     Title: yup.string().required(),
@@ -54,7 +55,7 @@ const initialState = {
 
 const TeacherSignup = () => {
 
-    const [pageStage, setPageStage] = useState(4);
+    const [pageStage, setPageStage] = useState(1);
     const [titleValidate, setTitleValidate] = useState<boolean>(false);
     const [fistNameValidate, setFistNameValidate] = useState(false);
     const [lastNameValidate, setLastNameValidate] = useState(false);
@@ -188,6 +189,30 @@ const TeacherSignup = () => {
         }
     }
 
+    const handleOnSubmit = (values: { Firstname: string; Lastname: string; Email: string; Password: string; Confirm_Password: string; Mobile: string; }) => {
+        const data = JSON.stringify({
+            "email": `${values.Email}`,
+            "Firstname": `${values.Firstname}`,
+            "Lastname": `${values.Lastname}`,
+            "Password": `${values.Password}`
+        });
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/auth/createParent",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res) => {
+                console.log("User created in auth0");
+                console.log(res.data);
+            }
+        ).catch((error)=> {
+            console.log(values);
+            console.log("error")
+            console.log(error.message)
+        })
+    }
 
     return (
         <Container fluid={true}>
@@ -569,6 +594,7 @@ const TeacherSignup = () => {
                                                                 variant="primary"
                                                                 onClick={() => {
                                                                     if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {
+                                                                        handleOnSubmit(values);
                                                                         setPageStage(4);
                                                                     }
                                                                 }

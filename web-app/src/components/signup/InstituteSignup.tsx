@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
+import axios from "axios";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
@@ -33,7 +34,7 @@ const schema = yup.object().shape({
 });
 
 const initialState = {
-    InstituteName: '',
+    InstituteName: 'sss',
     OwnerName: '',
     Location: '',
     Email: '',
@@ -49,139 +50,136 @@ const initialState = {
 }
 
 const InstituteSignup = () => {
+    const [pageStage, setPageStage] = useState(1), [instituteNameValidate, setInstituteNameValidate] = useState<boolean>(false), [ownerNameValidate, setOwnerNameValidate] = useState(false), [locationValidate, setLocationValidate] = useState(false), [emailValidate, setEmailValidate] = useState(false), [passwordValidate, setPasswordValidate] = useState(false), [rPasswordValidate, setRPasswordValidate] = useState(false), [descriptionValidate, setDescriptionValidate] = useState(false), [addressValidate, setAddressValidate] = useState(false), [mobileValidate, setMobileValidate] = useState(false), [accountNameValidate, setAccountNameValidate] = useState(false), [bankNameValidate, setBankNameValidate] = useState(false), [branchNameValidate, setBranchNameValidate] = useState(false), [accountNoValidate, setAccountNoValidate] = useState(false),
+        changeInstituteNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setInstituteNameValidate(true);
+                return false
+            } else {
+                setInstituteNameValidate(false);
+                return true
+            }
+        }, changeOwnerNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setOwnerNameValidate(true);
+                return false
+            } else {
+                setOwnerNameValidate(false);
+                return true
+            }
+        }, changeLocationValidate = (status: boolean): boolean => {
+            if (status) {
+                setLocationValidate(true);
+                return false
+            } else {
+                setLocationValidate(false);
+                return true
+            }
+        }, changeEmailValidate = (status: boolean): boolean => {
+            if (status) {
+                setEmailValidate(true);
+                return false
+            } else {
+                setEmailValidate(false);
+                return true
+            }
+        }, changePasswordValidate = (status: boolean): boolean => {
+            if (status) {
+                setPasswordValidate(true);
+                return false
+            } else {
+                setPasswordValidate(false);
+                return true
+            }
+        }, changeRPasswordValidate = (status: boolean): boolean => {
+            if (status) {
+                setRPasswordValidate(true);
+                return false
+            } else {
+                setRPasswordValidate(false);
+                return true
+            }
+        }, changeDescriptionValidate = (status: boolean): boolean => {
+            if (status) {
+                setDescriptionValidate(true);
+                return false
+            } else {
+                setDescriptionValidate(false);
+                return true
+            }
+        }, changeAddressValidate = (status: boolean): boolean => {
+            if (status) {
+                setAddressValidate(true);
+                return false
+            } else {
+                setAddressValidate(false);
+                return true
+            }
+        }, changeMobileValidate = (status: boolean): boolean => {
+            if (status) {
+                setMobileValidate(true);
+                return false
+            } else {
+                setMobileValidate(false);
+                return true
+            }
+        }, changeAccountNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setAccountNameValidate(true);
+                return false
+            } else {
+                setAccountNameValidate(false);
+                return true
+            }
+        }, changeBankNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setBankNameValidate(true);
+                return false
+            } else {
+                setBankNameValidate(false);
+                return true
+            }
+        }, changeBranchNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setBranchNameValidate(true);
+                return false
+            } else {
+                setBranchNameValidate(false);
+                return true
+            }
+        }, changeAccountNoValidate = (status: boolean): boolean => {
+            if (status) {
+                setAccountNoValidate(true);
+                return false
+            } else {
+                setAccountNoValidate(false);
+                return true
+            }
+        };
 
-    const [pageStage, setPageStage] = useState(4);
-    const [instituteNameValidate, setInstituteNameValidate] = useState<boolean>(false);
-    const [ownerNameValidate, setOwnerNameValidate] = useState(false);
-    const [locationValidate, setLocationValidate] = useState(false);
-    const [emailValidate, setEmailValidate] = useState(false);
-    const [passwordValidate, setPasswordValidate] = useState(false);
-    const [rPasswordValidate, setRPasswordValidate] = useState(false);
-    const [descriptionValidate, setDescriptionValidate] = useState(false);
-    const [addressValidate, setAddressValidate] = useState(false);
-    const [mobileValidate, setMobileValidate] = useState(false);
-    const [accountNameValidate, setAccountNameValidate] = useState(false);
-    const [bankNameValidate, setBankNameValidate] = useState(false);
-    const [branchNameValidate, setBranchNameValidate] = useState(false);
-    const [accountNoValidate, setAccountNoValidate] = useState(false);
-
-
-    const changeInstituteNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setInstituteNameValidate(true);
-            return false
-        } else {
-            setInstituteNameValidate(false);
-            return true
-        }
-    }
-    const changeOwnerNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setOwnerNameValidate(true);
-            return false
-        } else {
-            setOwnerNameValidate(false);
-            return true
-        }
-    }
-    const changeLocationValidate = (status: boolean): boolean => {
-        if (status) {
-            setLocationValidate(true);
-            return false
-        } else {
-            setLocationValidate(false);
-            return true
-        }
-    }
-    const changeEmailValidate = (status: boolean): boolean => {
-        if (status) {
-            setEmailValidate(true);
-            return false
-        } else {
-            setEmailValidate(false);
-            return true
-        }
-    }
-    const changePasswordValidate = (status: boolean): boolean => {
-        if (status) {
-            setPasswordValidate(true);
-            return false
-        } else {
-            setPasswordValidate(false);
-            return true
-        }
-    }
-    const changeRPasswordValidate = (status: boolean): boolean => {
-        if (status) {
-            setRPasswordValidate(true);
-            return false
-        } else {
-            setRPasswordValidate(false);
-            return true
-        }
-    }
-    const changeDescriptionValidate = (status: boolean): boolean => {
-        if (status) {
-            setDescriptionValidate(true);
-            return false
-        } else {
-            setDescriptionValidate(false);
-            return true
-        }
-    }
-    const changeAddressValidate = (status: boolean): boolean => {
-        if (status) {
-            setAddressValidate(true);
-            return false
-        } else {
-            setAddressValidate(false);
-            return true
-        }
-    }
-    const changeMobileValidate = (status: boolean): boolean => {
-        if (status) {
-            setMobileValidate(true);
-            return false
-        } else {
-            setMobileValidate(false);
-            return true
-        }
-    }
-    const changeAccountNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setAccountNameValidate(true);
-            return false
-        } else {
-            setAccountNameValidate(false);
-            return true
-        }
-    }
-    const changeBankNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setBankNameValidate(true);
-            return false
-        } else {
-            setBankNameValidate(false);
-            return true
-        }
-    }
-    const changeBranchNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setBranchNameValidate(true);
-            return false
-        } else {
-            setBranchNameValidate(false);
-            return true
-        }
-    }
-    const changeAccountNoValidate = (status: boolean): boolean => {
-        if (status) {
-            setAccountNoValidate(true);
-            return false
-        } else {
-            setAccountNoValidate(false);
-            return true
-        }
+    const handleOnSubmit = (values: { InstituteName: any; OwnerName: any; Location?: string; Email: any; Password: any; Confirm_Password?: string; Mobile_Number?: string; Description?: string; Address?: string; AccountName?: string; BankName?: string; BranchName?: string; AccountNo?: string; }) => {
+        const data = JSON.stringify({
+            "email": `${values.Email}`,
+            "Firstname": `${values.InstituteName}`,
+            "Lastname": `${values.OwnerName}`,
+            "Password": `${values.Password}`
+        });
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/auth/createParent",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res) => {
+                console.log("User created in auth0");
+                console.log(res.data);
+            }
+        ).catch((error)=> {
+            console.log(values);
+            console.log("error")
+            console.log(error.message)
+        })
     }
 
 
@@ -205,7 +203,8 @@ const InstituteSignup = () => {
                                             <div className="progressbar">
                                                 <div
                                                     className={pageStage === 1 ? 'progress-step progress-step-active' : 'progress-step'}
-                                                    data-title="Details"></div>
+                                                    data-title="Details">
+                                                </div>
                                                 <div
                                                     className={pageStage === 2 ? 'progress-step progress-step-active' : 'progress-step'}
                                                     data-title="Description"></div>
@@ -248,7 +247,7 @@ const InstituteSignup = () => {
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter institute's name"
-                                                                name="Institute's name"
+                                                                name="InstituteName"
                                                                 value={values.InstituteName}
                                                                 onChange={handleChange}
                                                                 isInvalid={!!errors.InstituteName ? changeInstituteNameValidate(false) : changeInstituteNameValidate(true)}
@@ -566,6 +565,7 @@ const InstituteSignup = () => {
                                                                 variant="primary"
                                                                 onClick={() => {
                                                                     if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {
+                                                                        handleOnSubmit(values);
                                                                         setPageStage(4);
                                                                     }
                                                                 }

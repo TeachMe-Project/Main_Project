@@ -1,6 +1,6 @@
 import {Express, Request, Response} from 'express';
 import controller from '../controllers/student';
-import asgardeo from '../asgardio_api/user';
+import asgardeo from '../auth0_api/user';
 import logger from "../utils/logger";
 import validate from "../middleware/validateResource";
 import studentSchema from "../models/studentModel";
