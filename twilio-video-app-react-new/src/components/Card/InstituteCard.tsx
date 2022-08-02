@@ -3,7 +3,7 @@ import { CardDetails } from './CardDetails';
 import { CardHeader } from './CardHeader';
 import { CardButton } from './CardButton';
 import { Link } from 'react-router-dom';
-
+import CloseButton from 'react-bootstrap/CloseButton';
 type InstituteCard = {
   date?: string;
 
@@ -43,6 +43,9 @@ export const InstituteCard: React.FC<InstituteCard> = props => {
             </Link>
           </div>
         </div>
+      </div>
+      <div style={{ position: 'relative', top: '20px', left: '230px' }}>
+        <CloseButton />
       </div>
     </div>
   );
