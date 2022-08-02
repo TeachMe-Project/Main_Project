@@ -13,61 +13,9 @@ import swal from "@sweetalert/with-react";
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {FaEye} from "react-icons/fa";
 import {ImCross} from "react-icons/im";
+import axios from "axios";
 
-const data = [
-    {
-        id: 10000102005,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Sameera Weerasinghe',
-    },
-    {
-        id: 10000102366,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Bandara Ranasinghe',
 
-    },
-    {
-        id: 10000102300,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Kamal Gunarathna',
-    },
-    {
-        id: 10000102300,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Kasun Gunarathna',
-    },
-    {
-        id: 10000102300,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Nimal Gunarathna',
-    },
-    {
-        id: 10000102005,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Sameera Weerasinghe',
-    },
-    {
-        id: 10000102366,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Bandara Ranasinghe',
-
-    },
-    {
-        id: 10000102300,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Kamal Gunarathna',
-    },
-    {
-        id: 10000102300,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Kasun Gunarathna',
-    },
-    {
-        id: 10000102300,
-        applied_date: new Date().toDateString(),
-        tutors_name: 'Nimal Gunarathna',
-    },
-];
 
 const viewItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
     < FaEye
@@ -176,7 +124,7 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
 
 const columns = [
     {
-        dataField: "id",
+        dataField: "teacher_id",
         text: "Application ID",
         sort: true,
     },
@@ -186,7 +134,7 @@ const columns = [
         sort: true,
     },
     {
-        dataField: "tutors_name",
+        dataField: "first_name",
         text: "Tutor's Name",
     },
     {
@@ -214,9 +162,29 @@ const columns = [
 
 
 const VerifyTutorsPage = () => {
+    
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
+    
+    const baseURL = "http://localhost:8081/admin/newTeacherRequests";
+    const [teachers, setTeachers] = React.useState(null);
+
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setTeachers(response.data);
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
+  }, []);
+  console.log(teachers);
+
+  if(teachers === null){
+    return 
+    
+    }
+
 
     // @ts-ignore
     return (
@@ -234,7 +202,7 @@ const VerifyTutorsPage = () => {
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
-                        data={data}
+                        data={teachers}
                         columns={columns}
                         search>
                         {(props: any) =>
@@ -244,7 +212,7 @@ const VerifyTutorsPage = () => {
                                                placeholder="Search Users"
                                     />
                                     <BootstrapTable
-                                        columns={columns} data={data} keyField="id"
+                                        columns={columns} data={teachers} keyField="id"
                                         {...props.baseProps}
                                         bootstrap4={true}
                                         pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
@@ -267,7 +235,7 @@ const VerifyTutorsPage = () => {
                     }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
-                        {data.map((item) => {
+                        {teachers.map((item) => {
                             return (
                                 <Card className='w-100 p-3 mb-2 table-card'>
                                     <ul className='ps-md-3 ps-0'>

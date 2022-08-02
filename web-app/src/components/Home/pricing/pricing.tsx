@@ -3,8 +3,12 @@ import PricingCard from "./pricingCard";
 import {Container, Row} from "react-bootstrap";
 
 const Pricing: React.FC = () => {
+
+
+
+
     return (
-        <Container fluid={true}  id="Pricing" className="pt-4 mb-5">
+        <Container fluid={true} id="Pricing" className="pt-4 mb-5">
             <h1 style={{
                 fontSize: "60px",
                 textAlign: "center",
@@ -17,6 +21,7 @@ const Pricing: React.FC = () => {
                 <PricingCard title={"Plus"} description={"$ 25"}/>
                 <PricingCard title={"Premium"} description={"$ 199"}/>
             </Row>
+
         </Container>
     );
 };
