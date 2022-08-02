@@ -1,0 +1,4 @@
+diff a/twilio-video-app-react-new/src/components/Pages/Student/MyTeachers.tsx b/twilio-video-app-react-new/src/components/Pages/Student/MyTeachers.tsx	(rejected hunks)
+@@ -14 +14 @@ export const MyTeachers = () => {
+-                {/* <Tabs>
++        {/* <Tabs>

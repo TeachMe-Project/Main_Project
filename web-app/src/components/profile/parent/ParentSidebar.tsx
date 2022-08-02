@@ -1,20 +1,19 @@
 import React, {useState} from 'react';
-import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarFooter, SidebarHeader,} from 'react-pro-sidebar';
+import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader,} from 'react-pro-sidebar';
 import {HiOutlineMenu} from "react-icons/hi";
-import Images from "../../../assets/images/Images";
 import {useNavigate} from "react-router-dom";
 import {FaTachometerAlt} from "react-icons/fa";
 import {IoIosSchool} from "react-icons/io";
 import {MdPersonAddAlt} from "react-icons/md";
-import {BsCashCoin} from "react-icons/bs";
 import {useMediaQuery} from 'react-responsive';
+import {BsCashCoin} from "react-icons/bs";
 
-type ParentSidebarProps = {
+type AdminSidebarProps = {
     toggle: boolean,
     handleToggleSidebar: () => void
 }
 
-const ParentSidebar: React.FC<ParentSidebarProps> = (props: ParentSidebarProps) => {
+const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => {
 
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
@@ -24,7 +23,6 @@ const ParentSidebar: React.FC<ParentSidebarProps> = (props: ParentSidebarProps) 
         setCollapsed(!collapsed);
     }
 
-    const isPc = useMediaQuery({minWidth: 991});
     const isTab = useMediaQuery({maxWidth: 991, minWidth: 768});
     const isMobile = useMediaQuery({maxWidth: 768});
 
@@ -35,6 +33,7 @@ const ParentSidebar: React.FC<ParentSidebarProps> = (props: ParentSidebarProps) 
             breakPoint="md"
             style={{
                 height: '90vh',
+                overflowY: "hidden",
                 boxShadow: "rgba(50, 50, 93, 0.1) 0px 50px 100px -20px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
             }}
             onToggle={handleToggleSidebar}
@@ -63,7 +62,7 @@ const ParentSidebar: React.FC<ParentSidebarProps> = (props: ParentSidebarProps) 
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaTachometerAlt/>} onClick={() => navigate('/parent/history')}>
-                        Progress
+                        Student History
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
@@ -77,14 +76,8 @@ const ParentSidebar: React.FC<ParentSidebarProps> = (props: ParentSidebarProps) 
                     </MenuItem>
                 </Menu>
             </SidebarContent>
-            {!collapsed && isPc &&
-            <SidebarFooter>
-                <div style={{width: '100%', padding: "10px"}}>
-                    <img src={Images.logo} style={{maxWidth: "200px"}} alt='logo'/>
-                </div>
-            </SidebarFooter>}
         </ProSidebar>
     );
 };
 
-export default ParentSidebar;
+export default AdminSidebar;

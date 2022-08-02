@@ -1,143 +1,199 @@
 import React from 'react';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {library} from '@fortawesome/fontawesome-svg-core'
-import {fas} from '@fortawesome/free-solid-svg-icons'
-import Button from "react-bootstrap/Button";
-import {useNavigate} from 'react-router-dom';
-import {Col, Row} from "react-bootstrap";
 import AdminLayout from "./AdminLayout";
+import {Card, Col, Row} from "react-bootstrap";
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from "react-bootstrap-table2-paginator";
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+import {useMediaQuery} from "react-responsive";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
+// @ts-ignore
+import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
+import {FaEye} from "react-icons/fa";
+import axios from 'axios';
 
-library.add(fas)
 
 
-export default function ManageCourses() {
-    const navigate = useNavigate();
-    const directToCourse = () => {
-        navigate('/');
-    };
+const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+    < FaEye
+        style={{
+            fontSize: "20px",
+            color: "#181312",
+            padding: "7px",
+            width: "30px",
+            height: "30px",
+            borderRadius: "50%",
+            cursor: "pointer",
+            boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+        }}
+        className='accept-icon'
+        onClick={() => {
+            swal({
+                title: "User Removal",
+                text: `Do you really want to remove ${row.username}?`,
+                icon: "error",
+                buttons: {
+                    cancel: true,
+                    confirm: true
+                },
+                // dangerMode: true,
+            })
+                .then((willDelete: any) => {
+                    if (willDelete) {
+                        swal(`Poof! You have successfully removed ${row.username}`, {
+                            icon: "success",
+                        });
+                    }
+                });
+        }}
+    />
+);
 
+const columns = [
+    {
+        dataField: "course_id",
+        text: "Course ID",
+        sort: true,
+    },
+    {
+        dataField: "grade",
+        text: "Grade",
+        sort: true,
+    },
+    {
+        dataField: "subject",
+        text: "subject",
+    },
+    {
+        dataField: "teacher.first_name",
+        text: "tutor name"
+    },
+    {
+        dataField: "institute.institute_name",
+        text: "institute name"
+    },
+    {
+        dataField: "",
+        text: "",
+        formatter: gotoCourse,
+        headerAttrs: {width: 100},
+        attrs: {width: 100, class: "EditRow"}
+    },
+];
+
+
+const ManageCourses = () => {
+
+    const isPc = useMediaQuery({minWidth: 991});
+    const {SearchBar} = Search;
+
+    const baseURL = "http://localhost:8081/course/allCourses";
+    const [courses, setCourses] = React.useState(null);
+
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setCourses(response.data);
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
+  }, []);
+  console.log(courses);
+
+  if(courses === null){
+    return 
+    
+    }
+
+    // @ts-ignore
     return (
+
         <AdminLayout>
             <Col lg={12} className='px-lg-5'>
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
-                    <Col lg={12}>
-                        <h1 className='text-lg-start header my-lg-3'>
+                    <Col lg={12} md={12} xs={12}>
+                        <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
                             Manage Courses
                         </h1>
                     </Col>
                 </Row>
-                <table className="booking-table" id="view-booking">
-                    <thead>
-                    <tr className="booking-thead-second-tr">
-                        {/*amc: Admin Manage Courses*/}
-                        <th className="amc-first-th">Course ID</th>
-                        <th className="amc-second-th">Grade</th>
-                        <th className="amc-third-th">Subject</th>
-                        <th className="amc-fourth-th">Tutor's name</th>
-                        <th className="amc-fifth-th">Institute's name</th>
-                        <th className="amc-last-th"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <Row>
+                    {isPc &&
+                    <ToolkitProvider
+                        keyField="id"
+                        data={courses}
+                        columns={columns}
+                        search>
+                        {(props: any) =>
+                            (
+                                <Row className='next-table'>
+                                    <SearchBar {...props.searchProps}
+                                               placeholder="Search Courses"
+                                    />
+                                    <BootstrapTable
+                                        columns={columns} data={courses} keyField="id"
+                                        {...props.baseProps}
+                                        bootstrap4={true}
+                                        pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
+                                        rowStyle={{
+                                            fontSize: "16px",
+                                            fontWeight: "500",
+                                            borderCollapse: "separate",
+                                            borderSpacing: "0 30px",
+                                            color: "#95a5a6",
+                                        }}
 
-                    <tr>
-                        <td data-label="Course ID :">10000102345</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Business & Accounting Studies</td>
-                        <td data-label="Tutor's Name :">Amila Banadaranayake</td>
-                        <td data-label="Institute's Name :">Sigma Institute</td>
-                        <td>
-                            <div className="Icons">
-                                {/*View Icon*/}
-                                <Button onClick={directToCourse} className="view-icon">
-                                    <FontAwesomeIcon icon={['fas', 'eye']}/>
-                                </Button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Course ID :">10000102355</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">History</td>
-                        <td data-label="Tutor's Name :">Kamal Maggona</td>
-                        <td data-label="Institute's Name :">Susipwan Institute</td>
-                        <td>
-                            <div className="Icons">
-                                {/*View Icon*/}
-                                <Button onClick={directToCourse} className="view-icon">
-                                    <FontAwesomeIcon icon={['fas', 'eye']}/>
-                                </Button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Course ID :">10000102320</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Science</td>
-                        <td data-label="Tutor's Name :">Anusha Palpita</td>
-                        <td data-label="Institute's Name :">Sigma Institute</td>
-                        <td>
-                            <div className="Icons">
-                                {/*View Icon*/}
-                                <Button onClick={directToCourse} className="view-icon">
-                                    <FontAwesomeIcon icon={['fas', 'eye']}/>
-                                </Button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Course ID :">10000109945</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Sinhala Lang. & Lit</td>
-                        <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
-                        <td data-label="Institute's Name :">Sakya Institute</td>
-                        <td>
-                            <div className="Icons">
-                                {/*View Icon*/}
-                                <Button onClick={directToCourse} className="view-icon">
-                                    <FontAwesomeIcon icon={['fas', 'eye']}/>
-                                </Button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Course ID :">10000102300</td>
-                        <td data-label="Grade :">Grade 9</td>
-                        <td data-label="Subject :">History</td>
-                        <td data-label="Tutor's Name :">Vajira Gamage</td>
-                        <td data-label="Institute's Name :">Susipwan Institute</td>
-                        <td>
-                            <div className="Icons">
-                                {/*View Icon*/}
-                                <Button onClick={directToCourse} className="view-icon">
-                                    <FontAwesomeIcon icon={['fas', 'eye']}/>
-                                </Button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-label="Course ID :">10000102345</td>
-                        <td data-label="Grade :">Grade 11</td>
-                        <td data-label="Subject :">Business & Accounting Studies</td>
-                        <td data-label="Tutor's Name :">Sameera Rajapakse</td>
-                        <td data-label="Institute's Name :">Amiti Institute</td>
-                        <td>
-                            <div className="Icons">
-                                {/*View Icon*/}
-                                <Button onClick={directToCourse} className="view-icon">
-                                    <FontAwesomeIcon icon={['fas', 'eye']}/>
-                                </Button>
-                            </div>
-                        </td>
-                    </tr>
+                                        headerWrapperClasses="next-table"
+                                        defaultSortDirection="asc"
 
-
-                    </tbody>
-                </table>
+                                    />
+                                </Row>
+                            )
+                        }
+                    </ToolkitProvider>
+                    }
+                    {!isPc &&
+                    <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
+                        {courses.map((item:any) => {
+                            return (
+                                <Card className='w-100 p-3 mb-2 table-card'>
+                                    <ul className='ps-md-3 ps-0'>
+                                        <li className='d-none'>
+                                            <span className='table-card-label'>{columns[0].text}</span>
+                                            <span className='table-card-data'>{item.id}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[1].text}</span>
+                                            <span className='table-card-data'>{item.grade}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[2].text}</span>
+                                            <span className='table-card-data'>{item.subject}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[3].text}</span>
+                                            <span className='table-card-data'>{item.tutor_name}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[4].text}</span>
+                                            <span className='table-card-data'>{item.institute_name}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-end mt-2'>
+                                            <span className='me-3'>
+                                                 {gotoCourse(null, item, null, null)}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </Card>
+                            );
+                        })}
+                    </Col>
+                    }
+                </Row>
             </Col>
         </AdminLayout>
     );
-}
+};
 
-
+export default ManageCourses;

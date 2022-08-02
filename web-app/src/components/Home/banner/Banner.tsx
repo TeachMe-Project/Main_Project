@@ -1,7 +1,6 @@
 import React from 'react';
 import {Button, Col, Container, Image, Row} from "react-bootstrap";
 import Images from "../../../assets/images/Images";
-import {MdOutlineAddShoppingCart, MdOutlineSend} from "react-icons/md";
 
 const Banner: React.FC = () => {
     return (
@@ -19,13 +18,13 @@ const Banner: React.FC = () => {
                                 features.
                             </p>
                             <Button className="px-md-4 py-2 mt-3 GetStartedBtn"
-                                style={{marginRight: "5px", fontSize: "1rem", fontWeight: "600"}}> Get Started
+                                    style={{marginRight: "5px", fontSize: "1rem", fontWeight: "600"}}> Get Started
                             </Button>
 
                         </Col>
                     </Row>
                 </Col>
-                <Col lg={7} md={12} >
+                <Col lg={7} md={12}>
                     <Row>
                         <Col lg={12} md={12} className='mx-md-auto'>
                             <Image src={Images.home} className='w-100'></Image>

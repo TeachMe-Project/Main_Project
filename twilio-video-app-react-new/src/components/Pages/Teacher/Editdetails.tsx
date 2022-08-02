@@ -4,7 +4,8 @@ import { Row, Col, Container, Accordion, Button, Form } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import UploadButton from '../../Button/UploadButton';
+
+import SubmitButton from '../../Button/SubmitButton';
 
 export const Editdetails = () => {
   return (
@@ -14,7 +15,7 @@ export const Editdetails = () => {
       </div>
       <Container>
         <Form>
-          <Form.Group controlId="form.Name">
+          <Form.Group controlId="form.Name" className="mb-3">
             <Form.Label>Topic</Form.Label>
             <Form.Control type="text" placeholder="Topic" />
           </Form.Group>
@@ -44,6 +45,14 @@ export const Editdetails = () => {
             </select>
           </Form.Group>
           <Form.Group controlId="form.Name">
+            <Form.Label>Medium</Form.Label>
+            <select className="form-select" aria-label="Default select example">
+              <option selected>English</option>
+              <option>Sinhala</option>
+              <option>Tamil</option>
+            </select>
+          </Form.Group>
+          <Form.Group controlId="form.Name">
             <Form.Label>Start date</Form.Label>
             <Form.Control type="date" />
           </Form.Group>
@@ -61,7 +70,7 @@ export const Editdetails = () => {
             </Form.Label>
             <Form.Control type="file" className="form-control" id="customFile" />
           </Form.Group>
-          <UploadButton />
+          <SubmitButton />
         </Form>
       </Container>
     </Row>

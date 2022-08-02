@@ -1,12 +1,13 @@
-import * as React from "react";
-import { Container, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BsFillGridFill, BsFillBookFill, BsWalletFill, BsFillChatLeftDotsFill, BsBuilding } from "react-icons/bs";
-import { GiTeacher } from "react-icons/gi";
-import { IoMdCog } from "react-icons/io";
-import "../../Assets/Styles/main.scss";
-import { Link } from "react-router-dom";
-import "../Pages/Student/MainPanel";
+import * as React from 'react';
+import { Container, Row } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BsFillGridFill, BsFillBookFill, BsWalletFill, BsFillChatLeftDotsFill, BsBuilding } from 'react-icons/bs';
+import { GiTeacher } from 'react-icons/gi';
+import { IoMdCog } from 'react-icons/io';
+import { MdContactSupport } from 'react-icons/md';
+import '../../Assets/Styles/main.scss';
+import { Link } from 'react-router-dom';
+import '../Pages/Student/MainPanel';
 
 export const LeftSidebarTeacher = () => {
   return (
@@ -46,7 +47,6 @@ export const LeftSidebarTeacher = () => {
               <Link to="/institutes" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    
                     <BsBuilding />
                   </div>
                   <div className="Sidebar_item_name">Institutes</div>
@@ -63,6 +63,14 @@ export const LeftSidebarTeacher = () => {
                     <BsFillChatLeftDotsFill />
                   </div>
                   <div className="Sidebar_item_name">Messages</div>
+                </div>
+              </Link>
+              <Link to="/helpandsupport" className="link">
+                <div className="Sidebar_item">
+                  <div>
+                    <MdContactSupport />
+                  </div>
+                  <div className="Sidebar_item_name">Help and Support</div>
                 </div>
               </Link>
             </li>
