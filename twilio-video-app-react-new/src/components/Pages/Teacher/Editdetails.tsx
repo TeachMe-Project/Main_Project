@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Button } from '../../Button/Button';
-import { Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import * as yup from 'yup';
 
 // @ts-ignore
@@ -31,6 +31,10 @@ const schema = yup.object().shape({
     .required()
     .label('Fee')
     .matches(/Grade-(?:1[01]|0[1-9])/, 'Fee must be a numerical value'),
+  description: yup
+    .string()
+    .required()
+    .label('Description'),
 });
 
 const initialState = {
@@ -38,6 +42,7 @@ const initialState = {
   subject: '',
   grade: '',
   fee: '',
+  description: '',
 };
 
 export const TeacherProfile = () => {
@@ -48,6 +53,7 @@ export const TeacherProfile = () => {
   const [titleValidate, settitleValidate] = useState(false);
   const [subjectValidate, setsubjectValidate] = useState(false);
   const [feeValidate, setfeeValidate] = useState(false);
+  const [descriptionValidate, setdescriptionValidate] = useState(false);
 
   const changegradeValidate = (status: boolean): boolean => {
     if (status) {
@@ -83,6 +89,15 @@ export const TeacherProfile = () => {
       return false;
     } else {
       setfeeValidate(false);
+      return true;
+    }
+  };
+  const changedescriptionValidate = (status: boolean): boolean => {
+    if (status) {
+      setdescriptionValidate(true);
+      return false;
+    } else {
+      setdescriptionValidate(false);
       return true;
     }
   };
@@ -145,6 +160,32 @@ export const TeacherProfile = () => {
                         </Form.Group>
                       </Row>
 
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Description</Form.Label>
+                          </Col>
+
+                          <Col xl={8}>
+                            <Form.Control
+                              type="text"
+                              placeholder="Description"
+                              name="Description"
+                              value={values.description}
+                              onChange={handleChange}
+                              isInvalid={
+                                !!errors.description
+                                  ? changedescriptionValidate(false)
+                                  : changedescriptionValidate(true)
+                              }
+                              isValid={touched.description}
+                              onBlur={handleBlur}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.description}</Form.Control.Feedback>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
                       {/*Grade*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationGrade">
@@ -185,11 +226,33 @@ export const TeacherProfile = () => {
                           </Col>
                         </Form.Group>
                       </Row>
+
+                      {/* Individual or institute */}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationPassword">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Class Conducting Method</Form.Label>
+                          </Col>
+                          <Col xl={4}>
+                            <label style={{ marginRight: '25px' }}>
+                              <Field type="radio" name="picked" value="Individual" />
+                              Individual
+                            </label>
+                            <label style={{ marginRight: '3px' }}>
+                              <Field type="radio" name="picked" value="Institute" />
+                              Institute
+                            </label>
+
+                            <Form.Control.Feedback type="invalid">{errors.fee}</Form.Control.Feedback>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
                       {/*Fee*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationPassword">
                           <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Fee</Form.Label>
+                            <Form.Label style={{ fontWeight: 600 }}>Monthly Fee</Form.Label>
                           </Col>
                           <Col xl={8}>
                             <Form.Control
@@ -206,6 +269,7 @@ export const TeacherProfile = () => {
                           </Col>
                         </Form.Group>
                       </Row>
+
                       {/*Start date*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
@@ -267,7 +331,7 @@ export const TeacherProfile = () => {
                             <Form.Label style={{ fontWeight: 600 }}></Form.Label>
                           </Col>
                           <Col xl={8} style={{ margin: '0 200px' }}>
-                            <div className="Buttonforsubmit" style={{ margin: '10px -92px' }}>
+                            <div className="Buttonforsubmit" style={{ margin: '30px -92px' }}>
                               <ButtonCommon name={'Submit'} />
                             </div>
                           </Col>

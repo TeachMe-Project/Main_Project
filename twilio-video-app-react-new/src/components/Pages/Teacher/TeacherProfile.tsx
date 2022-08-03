@@ -303,7 +303,7 @@ export const TeacherProfile = () => {
                             <Col xl={8}>
                               <Form.Control
                                 type="text"
-                                placeholder="Enter school name here"
+                                placeholder="Bank Branch"
                                 name="Bankbranch"
                                 value={values.Bankbranch}
                                 onChange={handleChange}
@@ -327,7 +327,7 @@ export const TeacherProfile = () => {
                             <Col xl={8}>
                               <Form.Control
                                 type="text"
-                                placeholder="Enter school name here"
+                                placeholder="Enter Account Number here"
                                 name="Bankbranch"
                                 value={values.Accountnumber}
                                 onChange={handleChange}

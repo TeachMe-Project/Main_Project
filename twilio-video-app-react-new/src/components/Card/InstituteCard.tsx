@@ -17,19 +17,16 @@ type InstituteCard = {
 export const InstituteCard: React.FC<InstituteCard> = props => {
   return (
     <div className="SearchResultCard">
-      <Col xl={1}>
+      <Col xl={2}>
         <div className="CardImage">{props.image}</div>
       </Col>
 
       <Col xl={2}>
         <CardDetails details={props.instituteid} />
-      </Col>
-
-      <Col xl={3}>
         <CardDetails details={props.institutename} />
       </Col>
 
-      <Col xl={3}>
+      <Col xl={6}>
         <div className="ViewMore">
           <Link to="/course" className="link ViewMoreBtn">
             <CardButton btnname={props.btn1} />
@@ -42,6 +39,7 @@ export const InstituteCard: React.FC<InstituteCard> = props => {
           <CardButton btnname={props.btn2} />
         </Link>
       </Col>
+
       <Col xl={1}>
         <Link to="/course" className=" link SubscribeBtn">
           <ButtonCommon name={props.btn3} />
