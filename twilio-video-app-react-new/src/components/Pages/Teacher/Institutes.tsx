@@ -50,7 +50,7 @@ export const Institutes = () => {
             <div className="PanelSubHeader"></div>
 
             <Tabs>
-              <div className="Institutes I am working at">
+              <div className="Current Institutes">
                 <Link to="/editdetails" className="link"></Link>
                 <table className="booking-table" id="view-booking">
                   <thead>
@@ -58,46 +58,46 @@ export const Institutes = () => {
                       {/*amc: Institute Manage Courses*/}
                       <th className="imc-first-th">Institute ID </th>
                       <th className="imc-second-th">Institute Name</th>
-                      <th className="imc-third-th">Subject</th>
+                      <th className="imc-second-th">Contact Number</th>
 
-                      <th className="imc-last-th"></th>
+                      {/* <th className="imc-last-th"></th> */}
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td data-label="Course ID :">10000102345</td>
                       <td data-label="Institute Name :">Sigma</td>
-                      <td data-label="Subject :">Business & Accounting Studies</td>
+                      <td data-label="Contact Number :">011 2859684</td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102355</td>
                       <td data-label="Institute Name :">Rotary</td>
-                      <td data-label="Subject :">History</td>
+                      <td data-label="Contact Number :">011 2859684</td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102320</td>
                       <td data-label="Institute Name :">Syzygy</td>
-                      <td data-label="Subject :">Science</td>
+                      <td data-label="Contact Number :">011 2859684</td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000109945</td>
                       <td data-label="Institute Name :">Montana</td>
-                      <td data-label="Subject :">Sinhala Lang. & Lit</td>
+                      <td data-label="Contact Number :">011 2859684</td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102300</td>
                       <td data-label="Institute Name :">Sasip</td>
-                      <td data-label="Subject :">History</td>
+                      <td data-label="Contact Number :">011 2859684</td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102345</td>
                       <td data-label="Institute Name :">Shakthi</td>
-                      <td data-label="Subject :">Business & Accounting Studies</td>
+                      <td data-label="Contact Number :">011 2859684</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div className="New Institute Requests">
+              <div className="New Requests">
                 {/* <Link className="link" to="/uploadnotes"></Link>
                 <br />
                 <Instituterequest name="Syzygy Institute" />
@@ -109,39 +109,27 @@ export const Institutes = () => {
                 <div className="Panel">
                   <div className="PanelBody" style={{ display: 'block' }}>
                     <InstituteCard
-                      header="Sigma Institute"
-                      description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
-                      time="04:00pm - 06:00pm"
-                      date="Sunday"
-                      image={<img src={'/Images/subjects/maths.png'} />}
-                      btn1="View more"
-                      btn2="Accept"
-                    />
-
-                    <InstituteCard
-                      header="Syzygy Institute"
-                      description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
-                      time="04:00pm - 06:00pm"
-                      date="Monday"
+                      institutename="Sigma Institute"
                       image={<img src={'/Images/subjects/science.png'} />}
                       btn1="View more"
                       btn2="Accept"
+                      btn3="Decline"
                     />
 
                     <InstituteCard
-                      header="Rotary Institute"
-                      description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
-                      time="04:00pm - 06:00pm"
-                      date="Saturday"
-                      image={<img src={'/Images/subjects/history.png'} />}
+                      institutename="Sigma Institute"
+                      image={<img src={'/Images/subjects/science.png'} />}
                       btn1="View more"
                       btn2="Accept"
+                      btn3="Decline"
+                    />
+
+                    <InstituteCard
+                      institutename="Sigma Institute"
+                      image={<img src={'/Images/subjects/science.png'} />}
+                      btn1="View more"
+                      btn2="Accept"
+                      btn3="Decline"
                     />
                   </div>
                 </div>

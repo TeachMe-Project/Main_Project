@@ -108,12 +108,12 @@ export const Course = () => {
 
               <div className="Students">
                 <div className="studentContainer" style={{ marginTop: '50px' }}>
-                  <table className="studenttable" id="view-booking">
+                  <table className="booking-table" id="view-booking">
                     <thead>
                       <tr className="booking-thead-second-tr">
                         {/*amc: Institute Manage Courses*/}
                         <th className="imc-first-th">Student ID</th>
-                        <th className="imc-second-th">Student Name</th>
+                        <th className="imc-last-th">Student Name</th>
                       </tr>
                     </thead>
                     <tbody>

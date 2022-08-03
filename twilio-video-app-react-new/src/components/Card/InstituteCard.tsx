@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { CardDetails } from './CardDetails';
-import { CardHeader } from './CardHeader';
 import { CardButton } from './CardButton';
 import { Link } from 'react-router-dom';
-import CloseButton from 'react-bootstrap/CloseButton';
-type InstituteCard = {
-  date?: string;
+import { Col } from 'react-bootstrap';
+import { ButtonCommon } from '../Button/ButtonCommon';
 
-  description?: string;
-  time?: string;
-  header?: string;
-  amount?: string;
+type InstituteCard = {
+  instituteid?: string;
+  institutename?: string;
   image?: JSX.Element;
   btn1?: string;
   btn2?: string;
@@ -19,34 +16,37 @@ type InstituteCard = {
 
 export const InstituteCard: React.FC<InstituteCard> = props => {
   return (
-    <div className="CourseCard">
-      <div className="CardImage">{props.image}</div>
-      <div className="CardBody">
-        <CardHeader header={props.header} />
+    <div className="SearchResultCard">
+      <Col xl={1}>
+        <div className="CardImage">{props.image}</div>
+      </Col>
 
-        <CardDetails details={props.description} />
-        <div className="lastRow">
-          <div className="CardRow">
-            <CardDetails details={props.date} />
-            <CardDetails details={props.time} />
-            <CardDetails details={props.amount} />
-          </div>
-          <div className="ViewMore">
-            <Link to="/course" className="link">
-              <CardButton btnname={props.btn1} />
-            </Link>
-          </div>
+      <Col xl={2}>
+        <CardDetails details={props.instituteid} />
+      </Col>
 
-          <div className="ViewMore" style={{ marginLeft: '20px' }}>
-            <Link to="/course" className="link">
-              <CardButton btnname={props.btn2} />
-            </Link>
-          </div>
+      <Col xl={3}>
+        <CardDetails details={props.institutename} />
+      </Col>
+
+      <Col xl={3}>
+        <div className="ViewMore">
+          <Link to="/course" className="link ViewMoreBtn">
+            <CardButton btnname={props.btn1} />
+          </Link>
         </div>
-      </div>
-      <div style={{ position: 'relative', top: '20px', left: '230px' }}>
-        <CloseButton />
-      </div>
+      </Col>
+
+      <Col xl={1}>
+        <Link to="/course" className=" link SubscribeBtn">
+          <CardButton btnname={props.btn2} />
+        </Link>
+      </Col>
+      <Col xl={1}>
+        <Link to="/course" className=" link SubscribeBtn">
+          <ButtonCommon name={props.btn3} />
+        </Link>
+      </Col>
     </div>
   );
 };

@@ -107,10 +107,10 @@ export const Uploadhomework = () => {
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
                           <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Deadline</Form.Label>
+                            <Form.Label style={{ fontWeight: 600 }}>Upload Date</Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="date" placeholder="Deadline" name="deadline" />
+                            <Form.Control type="date" placeholder="Upload Date" name="deadline" />
                           </Col>
                         </Form.Group>
                       </Row>
@@ -121,7 +121,7 @@ export const Uploadhomework = () => {
                             <Form.Label style={{ fontWeight: 600 }}>Upload File</Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="file" placeholder="Notes" name="deadline" />
+                            <Form.Control type="file" placeholder="Notes" name="fileupload" accept="application/pdf" />
                           </Col>
                         </Form.Group>
                       </Row>

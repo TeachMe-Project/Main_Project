@@ -132,7 +132,7 @@ export const Uploadnotes = () => {
                             <Form.Label style={{ fontWeight: 600 }}>Upload File</Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="file" placeholder="Notes" name="deadline" />
+                            <Form.Control type="file" placeholder="Notes" name="upload" accept="application/pdf" />
                           </Col>
                         </Form.Group>
                       </Row>

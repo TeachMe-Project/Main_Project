@@ -34,10 +34,19 @@ const schema = yup.object().shape({
     .string()
     .required()
     .matches(/Grade-(?:1[01]|0[1-9])|AL-20\d\d/, 'Grade must be between Grade-03 to A/L-Year-3'),
-  Schoolname: yup
+  Bankbranch: yup
     .string()
     .required()
-    .label('School Name'),
+    .label('Bank Branch'),
+  Accountnumber: yup
+    .string()
+    .required()
+    .label('Account Number')
+    .matches(/Grade-(?:1[01]|0[1-9])/, 'Account number should only contain numbers '),
+  Qualifications: yup
+    .string()
+    .required()
+    .label('Qualifications'),
 });
 
 const initialState = {
@@ -46,7 +55,9 @@ const initialState = {
   Email: '',
   Password: '',
   Grade: '',
-  Schoolname: '',
+  Bankbranch: '',
+  Accountnumber: '',
+  Qualifications: '',
 };
 
 export const TeacherProfile = () => {
@@ -58,7 +69,9 @@ export const TeacherProfile = () => {
   const [lastNameValidate, setLastNameValidate] = useState(false);
   const [emailValidate, setEmailValidate] = useState(false);
   const [passwordValidate, setPasswordValidate] = useState(false);
-  const [schoolNameValidate, setSchoolNameValidate] = useState(false);
+  const [BankbranchValidate, setBankbranchValidate] = useState(false);
+  const [AccountnumberValidate, setAccountnumberValidate] = useState(false);
+  const [QualificationsValidate, setQualificationsValidate] = useState(false);
 
   const changeGradeValidate = (status: boolean): boolean => {
     if (status) {
@@ -105,202 +118,272 @@ export const TeacherProfile = () => {
       return true;
     }
   };
-  const changeSchoolNameValidate = (status: boolean): boolean => {
+  const changeBankbranchValidate = (status: boolean): boolean => {
     if (status) {
-      setSchoolNameValidate(true);
+      setBankbranchValidate(true);
       return false;
     } else {
-      setSchoolNameValidate(false);
+      setBankbranchValidate(false);
+      return true;
+    }
+  };
+  const changeAccountnumberValidate = (status: boolean): boolean => {
+    if (status) {
+      setAccountnumberValidate(true);
+      return false;
+    } else {
+      setAccountnumberValidate(false);
+      return true;
+    }
+  };
+  const changeQualificationsValidate = (status: boolean): boolean => {
+    if (status) {
+      setQualificationsValidate(true);
+      return false;
+    } else {
+      setQualificationsValidate(false);
       return true;
     }
   };
 
   return (
     <div className="StudentProfile">
-      <Container>
-        <div className="PanelHeader">
-          <h2>User Profile</h2>
-          {!isEditing && <Button name=" Edit Profile" onClick={() => setISEditing(true)} />}
-        </div>
-        <div className="PanelContainer">
-          <Col xl={4}>
-            <div className="LeftContainer">
-              <div className="ProfileImg">
-                <img src={'/Images/student.png'} />
+      <div className="TeacherProfile">
+        <Container>
+          <div className="PanelHeader">
+            <h2>User Profile</h2>
+            {!isEditing && <Button name=" Edit Profile" onClick={() => setISEditing(true)} />}
+          </div>
+          <div className="PanelContainer">
+            <Col xl={4}>
+              <div className="LeftContainer">
+                <div className="ProfileImg">
+                  <img src={'/Images/student.png'} />
+                </div>
+                <div className="ParentContact">
+                  <div className="ContactHeader">Bank Account Details:</div>
+                  <div className="ParentLabel">Bank Branch:</div>
+                  <div className="ParentValue">Commercial Bank - Maharagama </div>
+                  <div className="ParentLabel">Account No:</div>
+                  <div className="ParentValue">80019238343</div>
+                </div>
               </div>
-              <div className="ParentContact">
-                <div className="ContactHeader">Parent's Contact Details:</div>
-                <div className="ParentLabel">Name:</div>
-                <div className="ParentValue">Pathmani Ranatunga</div>
-                <div className="ParentLabel">Mobile No:</div>
-                <div className="ParentValue">0774832976</div>
-                <div className="ParentLabel">Email:</div>
-                <div className="ParentValue">pathmaniranatunga@gmail.com</div>
+            </Col>
+
+            <Col xl={8}>
+              <div className="RightContainer">
+                <Formik on validationSchema={schema} onSubmit={console.log} initialValues={initialState}>
+                  {({ handleSubmit, handleChange, handleBlur, values, touched, errors, validateField }) => (
+                    <Row>
+                      <Form noValidate onSubmit={handleSubmit}>
+                        {/*FirstName*/}
+                        <Row>
+                          <Form.Group className="ProfileDetailsContainer" controlId="validationFirstName">
+                            <Col xl={4}>
+                              <Form.Label style={{ fontWeight: 600 }}>First Name</Form.Label>
+                            </Col>
+
+                            <Col xl={8}>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter the first name here"
+                                name="Firstname"
+                                value={values.Firstname}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)
+                                }
+                                isValid={touched.Firstname}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">{errors.Firstname}</Form.Control.Feedback>
+                            </Col>
+                          </Form.Group>
+                        </Row>
+                        {/*LastName*/}
+                        <Row>
+                          <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
+                            <Col xl={4}>
+                              <Form.Label style={{ fontWeight: 600 }}>Last Name</Form.Label>
+                            </Col>
+
+                            <Col xl={8}>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter the last name here"
+                                name="Lastname"
+                                value={values.Lastname}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)
+                                }
+                                isValid={touched.Lastname}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">{errors.Lastname}</Form.Control.Feedback>
+                            </Col>
+                          </Form.Group>
+                        </Row>
+                        {/* Qualitifications */}
+                        <Row>
+                          <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
+                            <Col xl={4}>
+                              <Form.Label style={{ fontWeight: 600 }}>Qualitifications</Form.Label>
+                            </Col>
+
+                            <Col xl={8}>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter the Qualitifications here"
+                                name="Qualitifications"
+                                value={values.Qualifications}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.Qualifications
+                                    ? changeQualificationsValidate(false)
+                                    : changeQualificationsValidate(true)
+                                }
+                                isValid={touched.Qualifications}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">{errors.Qualifications}</Form.Control.Feedback>
+                            </Col>
+                          </Form.Group>
+                        </Row>
+                        {/*Email*/}
+                        <Row>
+                          <Form.Group className="ProfileDetailsContainer" controlId="validationEmail">
+                            <Col xl={4}>
+                              <Form.Label style={{ fontWeight: 600 }}>Email</Form.Label>
+                            </Col>
+                            <Col xl={8}>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter the email"
+                                name="Email"
+                                value={values.Email}
+                                onChange={handleChange}
+                                isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
+                                isValid={touched.Email}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">{errors.Email}</Form.Control.Feedback>
+                            </Col>
+                          </Form.Group>
+                        </Row>
+                        {/*Password*/}
+                        <Row>
+                          <Form.Group className="ProfileDetailsContainer" controlId="validationPassword">
+                            <Col xl={4}>
+                              <Form.Label style={{ fontWeight: 600 }}>Password</Form.Label>
+                            </Col>
+                            <Col xl={8}>
+                              <Form.Control
+                                type="password"
+                                placeholder="Enter the password here"
+                                name="Password"
+                                value={values.Password}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)
+                                }
+                                isValid={touched.Password}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">{errors.Password}</Form.Control.Feedback>
+                            </Col>
+                          </Form.Group>
+                        </Row>
+                        {/*Bank Branch*/}
+                        <Row>
+                          <Form.Group className="ProfileDetailsContainer" controlId="validationBankbranch">
+                            <Col xl={4}>
+                              <Form.Label style={{ fontWeight: 600 }}>Bank Branch</Form.Label>
+                            </Col>
+                            <Col xl={8}>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter school name here"
+                                name="Bankbranch"
+                                value={values.Bankbranch}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.Bankbranch ? changeBankbranchValidate(false) : changeBankbranchValidate(true)
+                                }
+                                isValid={touched.Bankbranch}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">{errors.Bankbranch}</Form.Control.Feedback>
+                            </Col>
+                          </Form.Group>
+                        </Row>
+
+                        {/*Account Number*/}
+                        <Row>
+                          <Form.Group className="ProfileDetailsContainer" controlId="validationBankbranch">
+                            <Col xl={4}>
+                              <Form.Label style={{ fontWeight: 600 }}>Account Number</Form.Label>
+                            </Col>
+                            <Col xl={8}>
+                              <Form.Control
+                                type="text"
+                                placeholder="Enter school name here"
+                                name="Bankbranch"
+                                value={values.Accountnumber}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.Accountnumber
+                                    ? changeBankbranchValidate(false)
+                                    : changeBankbranchValidate(true)
+                                }
+                                isValid={touched.Accountnumber}
+                                onBlur={handleBlur}
+                              />
+                              <Form.Control.Feedback type="invalid">{errors.Accountnumber}</Form.Control.Feedback>
+                            </Col>
+                          </Form.Group>
+                        </Row>
+
+                        <Row>
+                          {isEditing && (
+                            <Button
+                              name="Save Changes"
+                              onClick={() => {
+                                if (
+                                  gradeValidate &&
+                                  fistNameValidate &&
+                                  lastNameValidate &&
+                                  emailValidate &&
+                                  passwordValidate &&
+                                  BankbranchValidate
+                                ) {
+                                  setPageStage(2);
+                                }
+                              }}
+                              onClickCapture={() => {
+                                validateField('Grade');
+                                validateField('Firstname');
+                                validateField('Lastname');
+                                validateField('Email');
+                                validateField('Password');
+                                validateField('Bankbranch');
+                              }}
+                            />
+                          )}
+                        </Row>
+                      </Form>
+                    </Row>
+                  )}
+                </Formik>
               </div>
-            </div>
-          </Col>
+            </Col>
 
-          <Col xl={8}>
-            <div className="RightContainer">
-              <Formik on validationSchema={schema} onSubmit={console.log} initialValues={initialState}>
-                {({ handleSubmit, handleChange, handleBlur, values, touched, errors, validateField }) => (
-                  <Row>
-                    <Form noValidate onSubmit={handleSubmit}>
-                      {/*FirstName*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationFirstName">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>First Name</Form.Label>
-                          </Col>
-
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter the first name here"
-                              name="Firstname"
-                              value={values.Firstname}
-                              onChange={handleChange}
-                              isInvalid={
-                                !!errors.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)
-                              }
-                              isValid={touched.Firstname}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.Firstname}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
-                      {/*LastName*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Last Name</Form.Label>
-                          </Col>
-
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter the last name here"
-                              name="Lastname"
-                              value={values.Lastname}
-                              onChange={handleChange}
-                              isInvalid={
-                                !!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)
-                              }
-                              isValid={touched.Lastname}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.Lastname}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
-                      {/*Email*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationEmail">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Email</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter the email"
-                              name="Email"
-                              value={values.Email}
-                              onChange={handleChange}
-                              isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
-                              isValid={touched.Email}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.Email}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
-                      {/*Password*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationPassword">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Password</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="password"
-                              placeholder="Enter the password here"
-                              name="Password"
-                              value={values.Password}
-                              onChange={handleChange}
-                              isInvalid={
-                                !!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)
-                              }
-                              isValid={touched.Password}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.Password}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
-                      {/*SchoolName*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>School Name</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter school name here"
-                              name="Schoolname"
-                              value={values.Schoolname}
-                              onChange={handleChange}
-                              isInvalid={
-                                !!errors.Schoolname ? changeSchoolNameValidate(false) : changeSchoolNameValidate(true)
-                              }
-                              isValid={touched.Schoolname}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.Schoolname}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
-
-                      <Row>
-                        {isEditing && (
-                          <Button
-                            name="Save Changes"
-                            onClick={() => {
-                              if (
-                                gradeValidate &&
-                                fistNameValidate &&
-                                lastNameValidate &&
-                                emailValidate &&
-                                passwordValidate &&
-                                schoolNameValidate
-                              ) {
-                                setPageStage(2);
-                              }
-                            }}
-                            onClickCapture={() => {
-                              validateField('Grade');
-                              validateField('Firstname');
-                              validateField('Lastname');
-                              validateField('Email');
-                              validateField('Password');
-                              validateField('Schoolname');
-                            }}
-                          />
-                        )}
-                      </Row>
-                    </Form>
-                  </Row>
-                )}
-              </Formik>
-            </div>
-          </Col>
-
-          {/*<div className="ProfileButton">*/}
-          {/*  <Button name="Save Changes"/>*/}
-          {/*</div>*/}
-        </div>
-      </Container>
+            {/*<div className="ProfileButton">*/}
+            {/*  <Button name="Save Changes"/>*/}
+            {/*</div>*/}
+          </div>
+        </Container>
+      </div>
     </div>
   );
 };
