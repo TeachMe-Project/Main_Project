@@ -16,7 +16,7 @@ import Averagetimechart from './Averagetimechart';
 
 export const Dashboard = () => {
   return (
-    <div className="Dashboard">
+    <div className="DashboardTeacher">
       <Container>
         <Row>
           <PanelContainer />
@@ -28,23 +28,36 @@ export const Dashboard = () => {
               <h5>Upcoming Classes </h5>
             </div>
             <div className="PanelBody">
-              <Card header="Mathematics" time="04:00pm- 06:00pm" date="23-05-2022" btnname="Start" />
+              <Card
+                header="Mathematics"
+                time="04:00pm- 06:00pm"
+                date="23-05-2022"
+                btnname="Start"
+                image={<img src={'/Images/subjects/maths.png'} />}
+              />
               <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"
                 date="24-05-2022"
                 btnname="Start"
+                image={<img src={'/Images/subjects/maths.png'} />}
                 // image={require("../../Assets/Images/testimg2.jpeg")}
               />
 
-              <Card header="Mathematics" time="04:00pm- 06:00pm" date="25-05-2022" btnname="Start" />
+              <Card
+                header="Mathematics"
+                time="04:00pm- 06:00pm"
+                date="25-05-2022"
+                btnname="Start"
+                image={<img src={'/Images/subjects/maths.png'} />}
+              />
             </div>
           </div>
         </Row>
 
         <Row>
           <div className="PanelSubheader">
-            <h5>Analytics for Teachers </h5>
+            <h5>Analytics </h5>
           </div>
           <div
             className="chartContainer"

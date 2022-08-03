@@ -5,6 +5,7 @@ import CardDetails from '../../Card/CardDetails';
 import { Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PanelContainer from '../../Layout/PanelContainer';
+import { Button } from '../../Button/Button';
 
 export const MyCourses = () => {
   return (
@@ -15,6 +16,7 @@ export const MyCourses = () => {
           <div className="PanelHeader">
             <h2>My Courses</h2>
           </div>
+
           <div className="Panel">
             <div className="PanelBody">
               <CourseCard

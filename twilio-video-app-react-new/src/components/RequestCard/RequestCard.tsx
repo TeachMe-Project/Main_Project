@@ -38,12 +38,7 @@ export const RequestCard: React.FC<RequestCard> = props => {
         <div>
           <RequestCardHeader header={props.header} />
         </div>
-        <div className="Icons">
-          {/*View Icon*/}
-          <Button onClick={directToCourse} className="view-icon">
-            <FontAwesomeIcon icon={['fas', 'eye']} />
-          </Button>
-        </div>
+
         <div style={{ width: '30%', display: 'flex', float: 'right' }}>
           <RequestCardButton requestbtnname={props.acceptbtnname} />
           <RequestCardButton requestbtnname={props.rejectbtnname} />

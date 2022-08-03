@@ -21,7 +21,8 @@
     border-bottom: 5px solid #2c3e50;
   }
   .tab-content {
-    height: 46vh;
+    height: 50vh;
     overflow-y: scroll;
+    overflow-x: hidden;
   }
 }
