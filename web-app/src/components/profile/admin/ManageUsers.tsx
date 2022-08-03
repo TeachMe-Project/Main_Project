@@ -85,7 +85,7 @@ const columns = [
 const ManageUsers = () => {
 
     const baseURL = "http://localhost:8081/user/allUsers";
-    const [users, setUsers] = React.useState(null);
+    const [users, setUsers] = React.useState<any[]>(null!);
 
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {

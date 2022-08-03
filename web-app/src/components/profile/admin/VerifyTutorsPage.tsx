@@ -168,7 +168,7 @@ const VerifyTutorsPage = () => {
     const {SearchBar} = Search;
     
     const baseURL = "http://localhost:8081/admin/newTeacherRequests";
-    const [teachers, setTeachers] = React.useState(null);
+    const [teachers, setTeachers] =  React.useState<any[]>(null!);
 
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
@@ -235,7 +235,7 @@ const VerifyTutorsPage = () => {
                     }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
-                        {teachers.map((item) => {
+                        {teachers.map((item:any) => {
                             return (
                                 <Card className='w-100 p-3 mb-2 table-card'>
                                     <ul className='ps-md-3 ps-0'>
