@@ -22,17 +22,18 @@ const SERVER = {
     port: SERVER_PORT
 };
 
-const ASGARDEO = {
-    org_name : 'prasadkpd',
-    client_id : 'BTWf7qW3eMGHTFsuT_UnrwfjpfEa',
-    client_secret : '_hf0ra2eFUfewc5hxjnEoj707Oga',
-    token_url : `https://api.asgardeo.io/t/prasadkpd/oauth2/token`
+const AUTH0 = {
+    client_id : 'dhGB2Rm3jFLMFI2hnMGsG2xkbrVDb0iT',
+    client_secret : 'WzIOANIsf7Tn51EqHigeds9qDK2uCx_dT-v3Mwa0-PM4vSYdu2VmEt9YdI89l57t',
+    audience : 'https://learningsl.us.auth0.com/api/v2/',
+    grant_type:'client_credentials',
+    token_url : `https://learningsl.us.auth0.com/oauth/token`
 }
 
 const config = {
     mysql: MYSQL,
     server: SERVER,
-    asgardeo: ASGARDEO
+    auth0: AUTH0
 };
 
 export default config;

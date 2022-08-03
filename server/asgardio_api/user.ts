@@ -1,7 +1,7 @@
-import axios, {AxiosResponse} from "axios";
+import axios, { AxiosResponse } from "axios";
 import qs from "qs";
 import config from "../config/config";
-import {response, Response} from "express";
+import { response, Response } from "express";
 import logging from "../utils/logger";
 
 let token_url = config.asgardeo.token_url;
@@ -35,12 +35,12 @@ const getAccessToken = (callback: () => void) => {
             }
         })
         .catch((error) => {
-                logging.error(NAMESPACE, error.message, error)
-                return response.status(500).json({
-                    message: error.message,
-                    error
-                });
-            }
+            logging.error(NAMESPACE, error.message, error)
+            return response.status(500).json({
+                message: error.message,
+                error
+            });
+        }
         )
 }
 
@@ -110,4 +110,4 @@ const getAuthUser = () => {
             })
     });
 }
-export default {createAuthUser, getAuthUser};
+export default { createAuthUser, getAuthUser };

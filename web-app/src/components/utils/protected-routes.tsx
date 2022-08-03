@@ -4,7 +4,7 @@ import Loader from "./Loader";
 import UnAuth from "./unAuth";
 
 interface ProtectedRouteProps {
-    component: ComponentType;
+    component: any;
     role: string
 }
 

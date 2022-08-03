@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Path from 'path';
+// import Path from 'path';
 import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob';
 
 const storageConfigured = isStorageConfigured();
@@ -36,6 +36,8 @@ const AzureCloudStorage = (): JSX.Element => {
     setInputKey(Math.random().toString(36));
   };
 
+  const blobItem = blobList[0];
+
   // display form
   const DisplayForm = () => (
     <div>
@@ -48,16 +50,18 @@ const AzureCloudStorage = (): JSX.Element => {
 
   // display file name and image
   const DisplayImagesFromContainer = () => (
-    <div>
-      <h2>Container items</h2>
+    <div className="ProfileImg">
+      <h6>Container items</h6>
       <ul>
         {blobList.map(item => {
           return (
             <li key={item}>
               <div>
-                {Path.basename(item)}
-                <br />
+                {/* {Path.basename(item)} */}
+                {/* {Path.basename(blobItem)} */}
+                {/* <br /> */}
                 <img src={item} alt={item} height="200" />
+                {/* <img src={blobItem} alt={blobItem} height="200" /> */}
               </div>
             </li>
           );
@@ -68,12 +72,13 @@ const AzureCloudStorage = (): JSX.Element => {
 
   return (
     <div>
-      <h1>Upload file to Azure Blob Storage</h1>
+      {/* <h1>Upload file to Azure Blob Storage</h1> */}
+      {/* {storageConfigured && <div>Storage is configured.</div>} */}
+      {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()}
+      <hr />
+      {!storageConfigured && <div>Storage is not configured.</div>}
       {storageConfigured && !uploading && DisplayForm()}
       {storageConfigured && uploading && <div>Uploading</div>}
-      <hr />
-      {/* {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()} */}
-      {!storageConfigured && <div>Storage is not configured.</div>}
     </div>
   );
 };

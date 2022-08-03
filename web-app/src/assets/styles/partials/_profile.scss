@@ -1,0 +1,9 @@
+@import "../variables/variables";
+
+.profile{
+  height: 90vh;
+
+  &-header{
+    color: $header-primary;
+  }
+}

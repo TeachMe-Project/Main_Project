@@ -7,6 +7,8 @@ import * as yup from 'yup';
 import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
+import NavbarCommon from "../profile/navBar/NavbarCommon";
+import axios from "axios";
 
 const schema = yup.object().shape({
     Firstname: yup.string().required(),
@@ -100,23 +102,48 @@ const ParentSignup = () => {
         }
     }
 
+    const handleOnSubmit = (values: { Firstname: string; Lastname: string; Email: string; Password: string; Confirm_Password: string; Mobile: string; }) => {
+        const data = JSON.stringify({
+            "email": `${values.Email}`,
+            "Firstname": `${values.Firstname}`,
+            "Lastname": `${values.Lastname}`,
+            "Password": `${values.Password}`
+        });
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/auth/createParent",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res) => {
+                console.log("User created in auth0");
+                console.log(res.data);
+            }
+        ).catch((error)=> {
+            console.log(values);
+            console.log("error")
+            console.log(error.message)
+        })
+    }
 
     return (
-        <Container fluid={true}>
+        <Container fluid className='w-100 p-0 m-0'>
+            <NavbarCommon/>
             <Row
-                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start">
+                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start p-0 m-0">
                 <Col lg={9} md={12} xs={12}
                      className="Signup d-flex flex-lg-column justify-content-lg-center p-md-3 mt-md-2 mt-3">
                     <Row className="d-flex align-items-center">
-                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-3">Signup For Parent</h1>
-                        <Col lg={6} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
-                            <img src={Images.parentSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
+                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-2">Signup For Parent</h1>
+                        <Col lg={5} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
+                            <img src={Images.parentSignup} className="Signup-Image w-100 p-lg-2 mt-md-3 my-lg-auto"
                                  alt="teacher-signup"/>
                         </Col>
-                        <Col>
+                        <Col lg={7}>
                             <Row>
-                                <Row className="mt-lg-5 pe-lg-4 mt-md-5 mt-4 pe-0">
-                                    <Col lg={10} md={12} className="mb-3 mx-lg-auto px-md-5 px-3">
+                                <Row className="mt-lg-4 px-lg-5 mt-md-5 mt-4 pe-0">
+                                    <Col lg={12} md={12} className="mb-3 mx-lg-auto px-md-5 px-3">
                                         <LazyLoad once>
                                             <div className="progressbar">
                                                 <div
@@ -148,7 +175,7 @@ const ParentSignup = () => {
                                     <Row className="pb-md-0 pb-4">
                                         <Form noValidate onSubmit={handleSubmit}>
                                             {(pageStage === 1) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationEmail">
                                                             <Form.Label style={{fontWeight: 600}}>Email</Form.Label>
@@ -168,7 +195,7 @@ const ParentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationFirstName">
+                                                        <Form.Group className="mb-1" controlId="validationFirstName">
                                                             <Form.Label style={{fontWeight: 600}}>First
                                                                 name</Form.Label>
                                                             <Form.Control
@@ -187,9 +214,9 @@ const ParentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationLastname">
+                                                        <Form.Group className="mb-2" controlId="validationLastname">
                                                             <Form.Label style={{fontWeight: 600}}>Last name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -207,8 +234,9 @@ const ParentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationMobile">
-                                                            <Form.Label style={{fontWeight: 600}}>Mobile number</Form.Label>
+                                                        <Form.Group className="mb-2" controlId="validationMobile">
+                                                            <Form.Label style={{fontWeight: 600}}>Mobile
+                                                                number</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Mobile no. format: 0771234567"
@@ -225,9 +253,9 @@ const ParentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationPassword">
+                                                        <Form.Group className="mb-2" controlId="validationPassword">
                                                             <Form.Label style={{fontWeight: 600}}>Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
@@ -245,7 +273,7 @@ const ParentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationRPassword">
+                                                        <Form.Group className="mb-2" controlId="validationRPassword">
                                                             <Form.Label style={{fontWeight: 600}}>Confirm
                                                                 password</Form.Label>
                                                             <Form.Control
@@ -272,7 +300,7 @@ const ParentSignup = () => {
                                                                 onClick={
                                                                     () => {
                                                                         if (mobileValidate && fistNameValidate && lastNameValidate && emailValidate && passwordValidate && rPasswordValidate) {
-                                                                            setPageStage(2);
+                                                                            handleOnSubmit(values);
                                                                         }
                                                                     }
                                                                 }

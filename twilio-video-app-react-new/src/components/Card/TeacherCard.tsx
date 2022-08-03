@@ -22,13 +22,22 @@ export const TeacherCard: React.FC<TeacherCard> = props => {
         </div>
         <CardDetails details={props.description} />
         <div className="lastRow">
-          <div className="CardRow">
-            <CardDetails details={props.subject} />
-            <CardDetails details={props.grade} />
-          </div>
-          <div className="teacherLink">
-            <CardDetails details={props.contact} />
-          </div>
+          <Row>
+            {/*<div className="CardRow">*/}
+
+            <Col xl={4} className="d-flex flex-row align-content-left">
+              <CardDetails details={props.subject} />
+            </Col>
+
+            <Col xl={4} className="d-flex flex-row align-content-left">
+              <CardDetails details={props.grade} />
+            </Col>
+
+            <Col xl={4} className="d-flex flex-row align-content-right teacherLink">
+              <CardDetails details={props.contact} />
+            </Col>
+            {/*</div>*/}
+          </Row>
         </div>
       </div>
     </div>
