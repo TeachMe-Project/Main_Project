@@ -29,7 +29,7 @@ const Messages: React.FC<Messages> = props => {
           </div>
           <div className="Panel">
             <div className="PanelBody">
-              <NewChatPopup />
+              {/* <NewChatPopup /> */}
               <People />
               <ChatAppRouter />
             </div>
