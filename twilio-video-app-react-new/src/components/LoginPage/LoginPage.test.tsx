@@ -2,7 +2,7 @@ import React from 'react';
 import LoginPage from './LoginPage';
 import { act, fireEvent, render, waitForElement } from '@testing-library/react';
 import { useAppState } from '../../state';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 jest.mock('react-router-dom', () => {
   return {
@@ -15,7 +15,7 @@ jest.mock('./google-logo.svg', () => ({ ReactComponent: () => null }));
 
 const mockUseAppState = useAppState as jest.Mock<any>;
 const mockUseLocation = useLocation as jest.Mock<any>;
-const mockUseHistory = useHistory as jest.Mock<any>;
+const mockUseHistory = useNavigate as jest.Mock<any>;
 
 const mockReplace = jest.fn();
 mockUseHistory.mockImplementation(() => ({ replace: mockReplace }));
