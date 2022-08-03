@@ -21,6 +21,7 @@ import InstituteManageCourses from "./components/profile/institute/InstituteMana
 import InstituteAddTutor from "./components/profile/institute/InstituteAddTutor";
 
 const App: React.FC = () => {
+    // @ts-ignore
     return (
         <div>
             <Routes>
@@ -38,7 +39,8 @@ const App: React.FC = () => {
                 <Route path="/parent/stuSignup" element={<ProtectedRoute component={StudentSignup} role={'parent'}/>}/>
                 <Route path="/parent/history" element={<ProtectedRoute component={PStudentProgress} role={'parent'}/>}/>
 
-                <Route path="/admin" element={<ProtectedRoute component={ManageUsers} role={'admin'}/>}/>
+                <Route path="/admin"
+                       element={<ProtectedRoute component={ManageUsers} role={'admin'}/>}/>
                 <Route path="/admin/managecourses"
                        element={<ProtectedRoute component={AdminManageCourses} role={'admin'}/>}/>
                 <Route path="/admin/verifytutors"
