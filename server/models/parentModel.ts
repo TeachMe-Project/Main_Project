@@ -1,11 +1,12 @@
 import Joi from 'joi';
 export const parentSchema = Joi.object({
-    user_id: Joi.number().required(),
+    user_id: Joi.string().min(1).required(),
+    username: Joi.string().min(1).required(),
+    profile_image: Joi.string().min(1).required(),
     first_name: Joi.string().min(1).required(),
     last_name: Joi.string().min(1).required(),
     mobile_no: Joi.string().min(10).max(12).required(),
-    security_status: Joi.string().min(1).required(),
-}
+   }
 );
 export const parentPaymentSchema = Joi.object({
     parent_id: Joi.number().required(),
