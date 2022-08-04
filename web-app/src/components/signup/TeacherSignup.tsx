@@ -23,10 +23,10 @@ const schema = yup.object().shape({
         "Must contain 8 characters including 1 uppercase, 1 lowercase, 1 number & 1 special character"
     ).oneOf([yup.ref('Password'), null], 'Passwords must match'),
     Description: yup.string().required(),
-    Qualification: yup
-        .mixed()
-        .required()
-    ,
+    // Qualification: yup
+    //     .mixed()
+    //     .required()
+    // ,
     Mobile: yup.string().required().matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\(\d{2,3}\\)[ \\-]*)|(\d{2,4})[ \\-]*)*?\d{3,4}?[ \\-]*\d{3,4}?$/,
         "Mobile number is invalid"),
@@ -55,6 +55,7 @@ const initialState = {
 
 const TeacherSignup = () => {
 
+    const [loading, setLoading] = useState(false);
     const [pageStage, setPageStage] = useState(1);
     const [titleValidate, setTitleValidate] = useState<boolean>(false);
     const [fistNameValidate, setFistNameValidate] = useState(false);
@@ -189,7 +190,8 @@ const TeacherSignup = () => {
         }
     }
 
-    const handleOnSubmit = (values: { Firstname: string; Lastname: string; Email: string; Password: string; Confirm_Password: string; Mobile: string; }) => {
+    const handleOnSubmit = (values: { Title?: string; Firstname: any; Lastname: any; Email: any; Password: any; Confirm_Password?: string; Mobile: any; Description: any; Qualification?: string; AccountName: any; BankName: any; BranchName: any; AccountNo: any; }) => {
+        setLoading(true);
         const data = JSON.stringify({
             "email": `${values.Email}`,
             "Firstname": `${values.Firstname}`,
@@ -198,7 +200,7 @@ const TeacherSignup = () => {
         });
         axios({
             method: "POST",
-            url: "http://localhost:8081/auth/createParent",
+            url: "http://localhost:8081/auth/createTeacher",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -206,6 +208,40 @@ const TeacherSignup = () => {
         }).then((res) => {
                 console.log("User created in auth0");
                 console.log(res.data);
+
+                const apiData = JSON.stringify({
+                    "user_id": `${res.data.user_id}`,
+                    "username": `${values.Email}`,
+                    "profile_image": `${res.data.picture}`,
+                    "first_name": `${values.Firstname}`,
+                    "last_name": `${values.Lastname}`,
+                    "contact_no": `${values.Mobile}`,
+                    "description": `${values.Description}`,
+                    "account_name": `${values.AccountName}`,
+                    "account_no": `${values.AccountNo}`,
+                    "bank_name": `${values.BankName}`,
+                    "branch_name": `${values.BranchName}`
+                })
+
+                axios({
+                    method: "POST",
+                    url: "http://localhost:8081/teacher/createTeacher",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: apiData
+                }).then((apiRes) => {
+                    console.log(apiData)
+                    console.log("Api user created")
+                    console.log(apiRes.status);
+                    if(apiRes.status=== 200){
+                        setLoading(false);
+                        setPageStage(4)
+                    }
+                }).catch((error) => {
+                    console.log(error.message)
+                })
+
             }
         ).catch((error)=> {
             console.log(values);
@@ -595,7 +631,6 @@ const TeacherSignup = () => {
                                                                 onClick={() => {
                                                                     if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {
                                                                         handleOnSubmit(values);
-                                                                        setPageStage(4);
                                                                     }
                                                                 }
                                                                 }
@@ -606,7 +641,7 @@ const TeacherSignup = () => {
                                                                     validateField("AccountNo");
                                                                 }
                                                                 }
-                                                        >Next</Button>
+                                                        >Submit</Button>
                                                     </Col>
                                                 </Row>
                                             </LazyLoad>}
