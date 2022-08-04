@@ -29,6 +29,26 @@ export const getParentByID = async (req: Request, res: Response) => {
     }
 }
 
+export const getParentByAuthId = async (req: Request, res: Response) => {
+
+    logger.info(NAME_SPACE, req.body.auth0_id)
+    try {
+        const data = await prisma.parent.findMany({
+            where: {
+                user_id:  req.body.auth0_id,
+            }
+        })
+        // @ts-ignore
+        logger.info(NAME_SPACE, data[0].parent_id);
+        res.status(200).json(data[0].parent_id)
+    } catch (error:any) {
+        logger.error(NAME_SPACE, error.message)
+        res.status(500).send(error.message);
+    }
+}
+
+
+
 export const parentDoPayment = async (req: Request, res: Response) => {
 
     try {
@@ -80,6 +100,8 @@ export const createParent = async (req: Request, res: Response) => {
         res.status(500).send(error.details[0].message);
     }
 }
+
+
 
 // data: {
 //
