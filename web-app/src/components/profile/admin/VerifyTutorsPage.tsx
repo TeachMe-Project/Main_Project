@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AdminLayout from "./AdminLayout";
 import {Card, Col, Row} from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -13,11 +13,19 @@ import swal from "@sweetalert/with-react";
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {FaEye} from "react-icons/fa";
 import {ImCross} from "react-icons/im";
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
+import Loader from '../../utils/Loader';
 
+type appliedTutor = {
+    user_id: string,
+    teacher_id: number,
+    applied_date: string,
+    tutor_name:string,
+    first_name: string,
+    last_name: string
+}
 
-
-const viewItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+const viewItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
     < FaEye
         style={{
             fontSize: "20px",
@@ -33,7 +41,7 @@ const viewItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
         onClick={() => {
             swal({
                 title: "View User",
-                text: `Do you really want to remove ${row.username}?`,
+                text: `Do you really want to remove ${row.tutor_name}?`,
                 icon: "error",
                 buttons: {
                     cancel: true,
@@ -43,7 +51,7 @@ const viewItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
             })
                 .then((willDelete: any) => {
                     if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.username}`, {
+                        swal(`Poof! You have successfully removed ${row.tutor_name}`, {
                             icon: "success",
                         });
                     }
@@ -52,7 +60,7 @@ const viewItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
     />
 );
 
-const verifyItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+const verifyItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
     < BsCheckCircleFill
         style={{
             fontSize: "20px",
@@ -68,7 +76,7 @@ const verifyItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
         onClick={() => {
             swal({
                 title: "Tutor Approve",
-                text: `Do you really want to accept ${row.tutors_name}?`,
+                text: `Do you really want to accept ${row.tutor_name}?`,
                 icon: "info",
                 buttons: {
                     cancel: true,
@@ -78,7 +86,7 @@ const verifyItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
             })
                 .then((willDelete: any) => {
                     if (willDelete) {
-                        swal(`Poof! You have successfully approved ${row.tutors_name}`, {
+                        swal(`Poof! You have successfully approved ${row.tutor_name}`, {
                             icon: "success",
                         });
                     }
@@ -87,7 +95,7 @@ const verifyItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
     />
 );
 
-const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+const removeItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
     < ImCross
         style={{
             fontSize: "20px",
@@ -103,7 +111,7 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
         onClick={() => {
             swal({
                 title: "User Removal",
-                text: `Do you really want to reject ${row.tutors_name}?`,
+                text: `Do you really want to reject ${row.tutor_name}?`,
                 icon: "warning",
                 buttons: {
                     cancel: true,
@@ -113,7 +121,7 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
             })
                 .then((willDelete: any) => {
                     if (willDelete) {
-                        swal(`Poof! You have successfully reject ${row.tutors_name}`, {
+                        swal(`Poof! You have successfully reject ${row.tutor_name}`, {
                             icon: "success",
                         });
                     }
@@ -123,6 +131,11 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
 );
 
 const columns = [
+    {
+        dataField: "user_id",
+        text: "Application ID",
+        hidden: true
+    },
     {
         dataField: "teacher_id",
         text: "Application ID",
@@ -134,8 +147,9 @@ const columns = [
         sort: true,
     },
     {
-        dataField: "first_name",
+        dataField: "tutor_name",
         text: "Tutor's Name",
+        attrs: {width: 100}
     },
     {
         dataField: "",
@@ -168,11 +182,16 @@ const VerifyTutorsPage = () => {
     const {SearchBar} = Search;
     
     const baseURL = "http://localhost:8081/admin/newTeacherRequests";
-    const [teachers, setTeachers] =  React.useState<any[]>(null!);
+    const [teachers, setTeachers] =  useState<appliedTutor[]>([]);
 
-  React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setTeachers(response.data);
+  useEffect(() => {
+    axios.get(baseURL).then((res:AxiosResponse) => {
+      setTeachers(res.data.map((item: appliedTutor)=>({
+          user_id: item.user_id,
+          teacher_id: item.teacher_id,
+          applied_date: item.applied_date,
+          tutor_name: item.first_name + " " + item.last_name
+      })));
     })
     .catch((error)=>{
         console.log(error);
@@ -181,9 +200,8 @@ const VerifyTutorsPage = () => {
   console.log(teachers);
 
   if(teachers === null){
-    return 
-    
-    }
+    return <Loader/>
+  }
 
 
     // @ts-ignore
@@ -235,21 +253,25 @@ const VerifyTutorsPage = () => {
                     }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
-                        {teachers.map((item:any) => {
+                        {teachers.map((item:appliedTutor) => {
                             return (
                                 <Card className='w-100 p-3 mb-2 table-card'>
                                     <ul className='ps-md-3 ps-0'>
                                         <li className='d-none'>
                                             <span className='table-card-label'>{columns[0].text}</span>
-                                            <span className='table-card-data'>{item.id}</span>
+                                            <span className='table-card-data'>{item.user_id}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[1].text}</span>
-                                            <span className='table-card-data'>{item.applied_date}</span>
+                                            <span className='table-card-data'>{item.teacher_id}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[2].text}</span>
-                                            <span className='table-card-data'>{item.tutors_name}</span>
+                                            <span className='table-card-data'>{item.applied_date}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[3].text}</span>
+                                            <span className='table-card-data'>{item.tutor_name}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-end mt-2'>
                                             <span className='me-3'>

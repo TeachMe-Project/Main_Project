@@ -130,6 +130,7 @@ export const createTeacher=async (req:Request,res:Response)=>{
                                 account_no: req.body.account_no,
                                 isActive: true,
                                 verification:'pending',
+                                applied_date: new Date().toJSON().slice(0,10)
                             }
                         }
                     }

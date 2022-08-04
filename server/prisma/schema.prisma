@@ -241,6 +241,7 @@ model teacher {
   account_no        String               @db.VarChar(20)
   verification      teacher_verification
   isActive          Boolean
+  applied_date      String               @db.VarChar(30)
   user              user                 @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "FK TO TEACHER FROM USER")
   course            course[]
   institute_teacher institute_teacher[]
