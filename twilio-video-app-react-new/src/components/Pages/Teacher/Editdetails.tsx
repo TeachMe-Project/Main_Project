@@ -109,7 +109,7 @@ export const TeacherProfile = () => {
           <h2>Edit Details</h2>
         </div>
         <div className="PanelContainer">
-          <Col xl={8}>
+          <Col xl={10}>
             <div className="RightContainer">
               <Formik on validationSchema={schema} onSubmit={console.log} initialValues={initialState}>
                 {({ handleSubmit, handleChange, handleBlur, values, touched, errors, validateField }) => (

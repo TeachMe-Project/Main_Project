@@ -48,8 +48,8 @@ export const Course = () => {
           </div>
           <div className="Panel">
             <div className="PanelSubHeader">
-              <h3>Mathematics Class</h3>
               <div className="PanelImage">{<img src={'/Images/subjects/maths.png'} />}</div>
+              <h3>Mathematics Class</h3>
             </div>
 
             <Tabs>
