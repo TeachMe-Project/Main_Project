@@ -16,14 +16,8 @@ import {ImCross} from "react-icons/im";
 import axios, {AxiosResponse} from "axios";
 import Loader from '../../utils/Loader';
 
-type appliedTutor = {
-    user_id: string,
-    teacher_id: number,
-    applied_date: string,
-    tutor_name:string,
-    first_name: string,
-    last_name: string
-}
+
+
 
 const viewItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
     < FaEye
