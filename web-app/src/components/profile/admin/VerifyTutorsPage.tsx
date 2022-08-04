@@ -16,7 +16,14 @@ import {ImCross} from "react-icons/im";
 import axios, {AxiosResponse} from "axios";
 import Loader from '../../utils/Loader';
 
-
+type appliedTutor = {
+    user_id: string,
+    teacher_id: number,
+    applied_date: string,
+    tutor_name: string,
+    first_name: string,
+    last_name: string
+}
 
 
 const viewItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
@@ -170,32 +177,32 @@ const columns = [
 
 
 const VerifyTutorsPage = () => {
-    
+
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
-    
+
     const baseURL = "http://localhost:8081/admin/newTeacherRequests";
-    const [teachers, setTeachers] =  useState<appliedTutor[]>([]);
+    const [teachers, setTeachers] = useState<appliedTutor[]>([]);
 
-  useEffect(() => {
-    axios.get(baseURL).then((res:AxiosResponse) => {
-      setTeachers(res.data.map((item: appliedTutor)=>({
-          user_id: item.user_id,
-          teacher_id: item.teacher_id,
-          applied_date: item.applied_date,
-          tutor_name: item.first_name + " " + item.last_name
-      })));
-    })
-    .catch((error)=>{
-        console.log(error);
-    })
-  }, []);
-  console.log(teachers);
+    useEffect(() => {
+        axios.get(baseURL).then((res: AxiosResponse) => {
+            setTeachers(res.data.map((item: appliedTutor) => ({
+                user_id: item.user_id,
+                teacher_id: item.teacher_id,
+                applied_date: item.applied_date,
+                tutor_name: item.first_name + " " + item.last_name
+            })));
+        })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, []);
+    console.log(teachers);
 
-  if(teachers === null){
-    return <Loader/>
-  }
+    if (teachers === null) {
+        return <Loader/>
+    }
 
 
     // @ts-ignore
@@ -247,7 +254,7 @@ const VerifyTutorsPage = () => {
                     }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
-                        {teachers.map((item:appliedTutor) => {
+                        {teachers.map((item: appliedTutor) => {
                             return (
                                 <Card className='w-100 p-3 mb-2 table-card'>
                                     <ul className='ps-md-3 ps-0'>
