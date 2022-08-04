@@ -6,6 +6,7 @@ import {useAuth0} from "@auth0/auth0-react";
 import {Formik} from "formik";
 import * as yup from "yup";
 import axios from "axios";
+import {BsPencilSquare} from "react-icons/bs";
 
 const schema = yup.object().shape({
     Firstname: yup.string().required(),
@@ -218,36 +219,29 @@ const ProfileEdit = () => {
                                                     </Form.Group>
                                                 </Col>
                                             </Row>
-                                            <Row className="mt-lg-3 pe-lg-4 mt-md-3">
-                                                <Col
-                                                    className="d-flex flex-row justify-content-lg-end justify-content-end">
-                                                    <ButtonGroup>
-                                                        <Button variant="outline-secondary" onClick={changePassword} className='mt-4 mb-2 me-2'
-                                                                style={{borderRadius: "20px"}}>Change Password</Button>
-                                                        <Button variant="outline-secondary" className='mt-4 mb-2' style={{borderRadius: "20px"}}
-                                                                onClick={() => setFormEnable(false)}>Edit Profile</Button>
-                                                    </ButtonGroup>
-                                                    <Button type="submit" className="px-4 nextBtn"
-                                                            variant="primary"
-                                                            disabled={formEnable}
-                                                            style={{borderRadius: "20px"}}
-                                                        // onClick={
-                                                        //     () => {
-                                                        //         if (mobileValidate && fistNameValidate && lastNameValidate && emailValidate && passwordValidate && rPasswordValidate) {
-                                                        //             setPageStage(2);
-                                                        //         }
-                                                        //     }
-                                                        // }
-                                                        // onClickCapture={() => {
-                                                        //     validateField("Mobile");
-                                                        //     validateField("Firstname");
-                                                        //     validateField("Lastname");
-                                                        //     validateField("Email");
-                                                        //     validateField("Password");
-                                                        //     validateField("Confirm_Password");
-                                                        // }
-                                                        //}
-                                                    >Update</Button>
+                                            <Row className="mt-lg-2 mb-lg-1 pe-lg-4 mt-md-3">
+                                                <Col>
+                                                    { formEnable ?
+                                                        <Button className="mt-4 px-3 profile-edit-btn"
+                                                                style={{width: "fit-content", borderRadius: "15px"}}
+                                                                variant="outline-secondary"
+                                                                onClick={() => {
+                                                                    setFormEnable(false);
+                                                                }}>
+                                                            <BsPencilSquare style={{marginRight: "10px"}}/>Edit
+                                                            Profile</Button>
+                                                        : (
+                                                            <>
+                                                                <Button className='mt-4 ms-2 profile-edit-btn'
+                                                                        style={{width: "fit-content", borderRadius: "15px"}}
+                                                                        variant='outline-secondary'>Update Profile</Button>
+                                                                <Button className='mt-4 ms-3 profile-edit-btn'
+                                                                        style={{width: "fit-content", borderRadius: "15px"}}
+                                                                        variant='outline-secondary'
+                                                                        onClick={changePassword}>Change Password</Button>
+                                                            </>)
+                                                    }
+
                                                 </Col>
                                             </Row>
                                         </Form>
