@@ -26,7 +26,7 @@ export const MyTeachers = () => {
         <Row>
           <PanelContainer />
           <div className="PanelHeader">
-            <h2>My Teachers</h2>
+            <h2>My Tutors</h2>
           </div>
           <div className="Panel">
             <div className="PanelBody">

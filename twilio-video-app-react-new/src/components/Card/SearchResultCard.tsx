@@ -34,7 +34,7 @@ export const SearchResultCard: React.FC<SearchResultCard> = props => {
 
       <Col xl={2}>
         <div className="ViewMore">
-          <Link to="/course" className="link ViewMoreBtn">
+          <Link to="/courseDetails" className="link ViewMoreBtn">
             <CardButton btnname={props.btn1} />
           </Link>
         </div>
