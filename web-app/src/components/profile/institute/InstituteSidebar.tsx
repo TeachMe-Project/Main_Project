@@ -69,7 +69,7 @@ const InstituteSidebar: React.FC<InstituteSidebarProps> = (props: InstituteSideb
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
-                    <MenuItem icon={<FaUserAlt/>} onClick={() => navigate('/institute/manageprofile')}>
+                    <MenuItem icon={<FaUserAlt/>} onClick={() => navigate('/institute/profile')}>
                         Manage Profile
                     </MenuItem>
                 </Menu>

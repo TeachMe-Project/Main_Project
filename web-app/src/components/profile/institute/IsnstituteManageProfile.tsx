@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Button, Col, Form, Row, Tab, Tabs} from "react-bootstrap";
+import React, {useEffect, useState} from 'react';
+import {Alert, Button, Col, Form, Row, Tab, Tabs} from "react-bootstrap";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import InstituteLayout from "./InstituteLayout";
@@ -7,6 +7,7 @@ import {useAuth0} from "@auth0/auth0-react";
 import {Formik} from "formik";
 import * as yup from "yup";
 import {BsPencilSquare} from "react-icons/bs";
+import axios from "axios";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
@@ -40,6 +41,7 @@ const initialState = {
 
 
 const InstituteManageProfile = () => {
+
     const {user} = useAuth0(), [instituteNameValidate, setInstituteNameValidate] = useState(false), [ownerNameValidate, setOwnerNameValidate] = useState(false), [locationValidate, setLocationValidate] = useState(false), [emailValidate, setEmailValidate] = useState(false), [descriptionValidate, setDescriptionValidate] = useState(false), [addressValidate, setAddressValidate] = useState(false), [mobileValidate, setMobileValidate] = useState(false), [accountNameValidate, setAccountNameValidate] = useState(false), [bankNameValidate, setBankNameValidate] = useState(false), [branchNameValidate, setBranchNameValidate] = useState(false), [accountNoValidate, setAccountNoValidate] = useState(false),
         changeInstituteNameValidate = (status: boolean): boolean => {
             if (status) {
@@ -132,6 +134,35 @@ const InstituteManageProfile = () => {
         };
 
     const [enableEditProfile, setEnableEditProfile] = useState(true);
+    const [passwordMail, setPasswordMail] = useState(null);
+    const [isEditProfile, setIsEditProfile] = useState(false);
+    useEffect(()=> {
+        if (user?.family_name === "institute") {
+            setIsEditProfile(true);
+        }
+    },[]);
+
+    const changePassword = () => {
+        const options = {
+            method: 'POST',
+            url: "https://learningsl.us.auth0.com/dbconnections/change_password",
+            headers: {'content-type': 'application/json'},
+            data: {
+                client_id: 'MfDW7eqZ6yFDxDukb3rINlB0269uTekx',
+                email: user?.email,
+                connection: "Username-Password-Authentication"
+            }
+        };
+        axios.request(options).then(function (response) {
+            console.log("Success")
+            // @ts-ignore
+            return setPasswordMail("success");
+        }).catch(function (error) {
+            console.log(error.message)
+            return setPasswordMail(error.message);
+        });
+    }
+
 
     return (
         <InstituteLayout>
@@ -146,6 +177,10 @@ const InstituteManageProfile = () => {
                 <Row>
                     <Col lg={3} className='d-flex flex-column justify-content-center align-items-center'>
                         <img src={user?.picture} className='w-100' style={{borderRadius: "50%"}}/>
+
+                        {passwordMail === "success" &&
+                        <Alert variant="success" className="p-1 mt-2"> Check email and reset the password</Alert>
+                        }
 
                     </Col>
                     <Col className='px-lg-5'>
@@ -416,17 +451,33 @@ const InstituteManageProfile = () => {
                                                 </Row>
                                             </Tab>
                                         </Tabs>
-                                        <Row className='ms-1 mt-2'>
-                                            <Button style={{width: "fit-content", borderRadius: "20px"}}
-                                                    variant='secondary'>Update Profile</Button>
-                                            <Button className="mt-4 px-3" style={{width: "fit-content", borderRadius: "15px"}}
-                                                    variant="outline-secondary"
-                                                    onClick={()=> {
-                                                        setEnableEditProfile(false);
-                                                        console.log(enableEditProfile);
-                                                    }}>
-                                                <BsPencilSquare style={{marginRight: "10px"}}/>Edit Profile</Button>
-                                        </Row>
+                                        {isEditProfile &&
+                                        <Row className='ms-1 mt-2 pe-lg-4'>
+                                            <Col lg={10}>
+                                                { enableEditProfile ?
+                                                    <Button className="mt-4 px-3 profile-edit-btn"
+                                                            style={{width: "fit-content", borderRadius: "15px"}}
+                                                            variant="outline-secondary"
+                                                            onClick={() => {
+                                                                setEnableEditProfile(false);
+                                                                console.log(enableEditProfile);
+                                                            }}>
+                                                        <BsPencilSquare style={{marginRight: "10px"}}/>Edit
+                                                        Profile</Button>
+                                                    : (
+                                                        <>
+                                                            <Button className='mt-4 ms-2 profile-edit-btn'
+                                                                    style={{width: "fit-content", borderRadius: "15px"}}
+                                                                    variant='outline-secondary'>Update Profile</Button>
+                                                            <Button className='mt-4 ms-3 profile-edit-btn'
+                                                                    style={{width: "fit-content", borderRadius: "15px"}}
+                                                                    variant='outline-secondary'
+                                                                    onClick={changePassword}>Change Password</Button>
+                                                        </>)
+                                                }
+
+                                            </Col>
+                                        </Row>}
                                     </Form>
                                 </Row>)}
                         </Formik>

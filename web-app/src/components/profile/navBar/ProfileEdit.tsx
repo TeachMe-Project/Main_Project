@@ -84,12 +84,12 @@ const ProfileEdit = () => {
     const changePassword = () => {
         const options = {
             method: 'POST',
-            url: 'https://learningsl.us.auth0.com/dbconnections/change_password',
+            url: "https://learningsl.us.auth0.com/dbconnections/change_password",
             headers: {'content-type': 'application/json'},
             data: {
-                client_id: 'MfDW7eqZ6yFDxDukb3rINlB0269uTekx',
+                client_id: "MfDW7eqZ6yFDxDukb3rINlB0269uTekx",
                 email: user?.email,
-                connection: 'Username-Password-Authentication'
+                connection: "Username-Password-Authentication"
             }
         };
         axios.request(options).then(function (response) {

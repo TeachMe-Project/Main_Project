@@ -54,13 +54,13 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={TutorPayments} role={'admin'}/>}/>
 
                 <Route path="/institute"
-                       element={<ProtectedRoute component={InstituteManageCourses} role={'admin'}/>}/>
+                       element={<ProtectedRoute component={InstituteManageCourses} role={'institute'}/>}/>
                 <Route path="/institute/tutors"
-                       element={<ProtectedRoute component={InstituteTutorsPage} role={'admin'}/>}/>
-                <Route path="/institute/manageprofile"
-                       element={<ProtectedRoute component={InstituteManageProfile} role={'admin'}/>}/>
+                       element={<ProtectedRoute component={InstituteTutorsPage} role={'institute'}/>}/>
+                <Route path="/institute/profile"
+                       element={<ProtectedRoute component={InstituteManageProfile} role={'institute'} />}/>
                 <Route path="/institute/addtutors"
-                       element={<ProtectedRoute component={InstituteAddTutor} role={'admin'}/>}/>
+                       element={<ProtectedRoute component={InstituteAddTutor} role={'institute'}/>}/>
                 <Route path="/parent/profile" element={<ProtectedRoute component={ProfileEdit} role={'parent'}/>}/>
                 <Route path="/admin/profile" element={<ProtectedRoute component={ProfileEdit} role={'admin'}/>}/>
                 <Route path="/*" element={<NotFound/>}/>

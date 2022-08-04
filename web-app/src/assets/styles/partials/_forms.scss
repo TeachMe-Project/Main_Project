@@ -17,14 +17,18 @@ border-color:#ee5253;
 }
 
 .btn-outline-secondary{
+  background: #ffffff;
   color:#1e90ff;
   border:2px solid #1e90ff;
   float:right;
+
+  &:hover{
+    backgorund-color:#1e90ff;
+    color:#fff;
+  }
+
 }
-.btn-outline-secondary:hover{
-  backgorund-color:#1e90ff;
-  color:#fff;
-}
+
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
   color:#012250;
   font-weight:600;
