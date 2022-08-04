@@ -8,6 +8,8 @@ import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
 import axios from "axios";
+import {useAuth0} from "@auth0/auth0-react";
+import Loader from "../utils/Loader";
 
 const schema = yup.object().shape({
     Grade: yup.string().required().matches(
@@ -29,16 +31,17 @@ const schema = yup.object().shape({
 
 
 const initialState = {
-    Grade: '',
-    Firstname: '',
-    Lastname: '',
-    Email: '',
-    Password: '',
-    Confirm_Password: '',
+    Grade: 'Grade-03',
+    Firstname: 'sdas',
+    Lastname: 'asdas',
+    Email: 'mcndd@gmail.com',
+    Password: 'Qwe1234@',
+    Confirm_Password: 'Qwe1234@',
 }
 
 const StudentSignup = () => {
 
+    const [loading, setLoading] = useState(false);
     const [pageStage, setPageStage] = useState(1);
     const [gradeValidate, setGradeValidate] = useState<boolean>(false);
     const [fistNameValidate, setFistNameValidate] = useState(false);
@@ -46,7 +49,7 @@ const StudentSignup = () => {
     const [emailValidate, setEmailValidate] = useState(false);
     const [passwordValidate, setPasswordValidate] = useState(false);
     const [rPasswordValidate, setRPasswordValidate] = useState(false);
-
+const {user} = useAuth0();
 
     const changeGradeValidate = (status: boolean): boolean => {
         if (status) {
@@ -102,7 +105,11 @@ const StudentSignup = () => {
             return true
         }
     }
-    const handleOnSubmit = (values: { Firstname: string; Lastname: string; Email: string; Password: string; }) => {
+
+
+    const handleOnSubmit = (values: { Grade: any; Firstname: any; Lastname: any; Email: any; Password: any; Confirm_Password?: string; }) => {
+        setLoading(true);
+        const parentAuthId = user?.sub;
         const data = JSON.stringify({
             "email": `${values.Email}`,
             "Firstname": `${values.Firstname}`,
@@ -111,17 +118,62 @@ const StudentSignup = () => {
         });
         axios({
             method: "POST",
-            url: "http://localhost:8081/auth/createParent",
+            url: "http://localhost:8081/auth/createStudent",
             headers: {
                 'Content-Type': 'application/json'
             },
             data: data
-        }).then((res) => {
+        }).then((authRes) => {
                 console.log("User created in auth0");
-                console.log(res.data);
+                console.log(authRes.data);
+                console.log(parentAuthId)
+                const auth0data = JSON.stringify({
+                    "auth0_id": `${parentAuthId}`,
+                })
+                axios({
+                    method: "POST",
+                    url: "http://localhost:8081/parent/parentIdByAuth",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: auth0data
+                }).then((parentRes) => {
+
+                    console.log(parentRes);
+                    const apiData = JSON.stringify({
+                        "user_id": `${authRes.data.user_id}`,
+                        "username": `${values.Email}`,
+                        "profile_image": `${authRes.data.picture}`,
+                        "first_name": `${values.Firstname}`,
+                        "last_name": `${values.Lastname}`,
+                        "grade":`${values.Grade}`,
+                        "parent_id": `${parentRes.data}`
+                    })
+
+                    axios({
+                        method: "POST",
+                        url: "http://localhost:8081/student/createStudent",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: apiData
+                    }).then((apiRes) => {
+                        console.log(apiData)
+                        console.log("Api user created")
+                        console.log(apiRes.status);
+                        if (apiRes.status === 200) {
+                            setLoading(false);
+                            setPageStage(2)
+                        }
+                    }).catch((error) => {
+                        console.log(error.message)
+                    })
+                }).catch((error) => {
+                    console.log(error.message)
+                })
             }
-        ).catch((error)=> {
-            console.log(values);
+        ).catch((error) => {
+            console.log(values)
             console.log("error")
             console.log(error.message)
         })
@@ -291,6 +343,8 @@ const StudentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
+                                                {loading && <Loader/>}
+
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col
                                                         className="d-flex flex-row justify-content-lg-end justify-content-end">
@@ -300,7 +354,6 @@ const StudentSignup = () => {
                                                                     () => {
                                                                         if (gradeValidate && fistNameValidate && lastNameValidate && emailValidate && passwordValidate && rPasswordValidate) {
                                                                             handleOnSubmit(values);
-                                                                            setPageStage(2);
                                                                         }
                                                                     }
                                                                 }

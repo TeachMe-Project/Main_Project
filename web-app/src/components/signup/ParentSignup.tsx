@@ -9,6 +9,7 @@ import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
 import NavbarCommon from "../profile/navBar/NavbarCommon";
 import axios from "axios";
+import Loader from "../utils/Loader";
 
 const schema = yup.object().shape({
     Firstname: yup.string().required(),
@@ -39,6 +40,7 @@ const initialState = {
 
 const ParentSignup = () => {
 
+    const [loading, setLoading] = useState(false);
     const [pageStage, setPageStage] = useState(1);
     const [fistNameValidate, setFistNameValidate] = useState(false);
     const [lastNameValidate, setLastNameValidate] = useState(false);
@@ -102,7 +104,8 @@ const ParentSignup = () => {
         }
     }
 
-    const handleOnSubmit = (values: { Firstname: string; Lastname: string; Email: string; Password: string; Confirm_Password: string; Mobile: string; }) => {
+    const handleOnSubmit = (values: { Firstname: any; Lastname: any; Email: any; Password: any; Confirm_Password?: string; Mobile: any; }) => {
+        setLoading(true);
         const data = JSON.stringify({
             "email": `${values.Email}`,
             "Firstname": `${values.Firstname}`,
@@ -119,9 +122,36 @@ const ParentSignup = () => {
         }).then((res) => {
                 console.log("User created in auth0");
                 console.log(res.data);
+                const apiData = JSON.stringify({
+                    "user_id": `${res.data.user_id}`,
+                    "username": `${values.Email}`,
+                    "profile_image": `${res.data.picture}`,
+                    "first_name":`${values.Firstname}`,
+                    "last_name":`${values.Lastname}`,
+                    "mobile_no":`${values.Mobile}`
+                })
+
+                axios({
+                    method: "POST",
+                    url: "http://localhost:8081/parent/createParent",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: apiData
+                }).then((apiRes) => {
+                    console.log(apiData)
+                    console.log("Api user created")
+                    console.log(apiRes.status);
+                    if(apiRes.status=== 200){
+                        setLoading(false);
+                        setPageStage(2)
+                    }
+                }).catch((error) => {
+                    console.log(error.message)
+                })
             }
-        ).catch((error)=> {
-            console.log(values);
+        ).catch((error) => {
+            console.log(values)
             console.log("error")
             console.log(error.message)
         })
@@ -292,6 +322,7 @@ const ParentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
+                                                {loading && <Loader/>}
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col
                                                         className="d-flex flex-row justify-content-lg-end justify-content-end">
@@ -313,7 +344,7 @@ const ParentSignup = () => {
                                                                     validateField("Confirm_Password");
                                                                 }
                                                                 }
-                                                        >Next</Button>
+                                                        >Submit</Button>
                                                     </Col>
                                                 </Row>
                                             </LazyLoad>}
