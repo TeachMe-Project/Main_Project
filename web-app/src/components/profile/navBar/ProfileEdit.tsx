@@ -109,12 +109,7 @@ const ProfileEdit = () => {
                         <h1 className='text-center profile-header'>User Profile</h1>
                         <Col lg={4} className='d-flex flex-column align-items-center'>
                             <img src={user?.picture} style={{borderRadius: "50%"}} className='w-75'/>
-                            <ButtonGroup>
-                                <Button variant="outline-secondary" onClick={changePassword} className='mt-4 mb-2 me-2'
-                                        style={{borderRadius: "20px"}}>Change Password</Button>
-                                <Button variant="outline-secondary" className='mt-4 mb-2' style={{borderRadius: "20px"}}
-                                        onClick={() => setFormEnable(false)}>Edit Profile</Button>
-                            </ButtonGroup>
+
                             {passwordMail === "success" &&
                             <Alert variant="success" className="p-1 mt-2"> Check email and reset the password</Alert>
                             }
@@ -226,6 +221,12 @@ const ProfileEdit = () => {
                                             <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                 <Col
                                                     className="d-flex flex-row justify-content-lg-end justify-content-end">
+                                                    <ButtonGroup>
+                                                        <Button variant="outline-secondary" onClick={changePassword} className='mt-4 mb-2 me-2'
+                                                                style={{borderRadius: "20px"}}>Change Password</Button>
+                                                        <Button variant="outline-secondary" className='mt-4 mb-2' style={{borderRadius: "20px"}}
+                                                                onClick={() => setFormEnable(false)}>Edit Profile</Button>
+                                                    </ButtonGroup>
                                                     <Button type="submit" className="px-4 nextBtn"
                                                             variant="primary"
                                                             disabled={formEnable}

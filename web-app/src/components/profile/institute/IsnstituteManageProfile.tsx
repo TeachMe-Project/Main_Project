@@ -146,13 +146,7 @@ const InstituteManageProfile = () => {
                 <Row>
                     <Col lg={3} className='d-flex flex-column justify-content-center align-items-center'>
                         <img src={user?.picture} className='w-100' style={{borderRadius: "50%"}}/>
-                        <Button className="mt-4 px-3" style={{width: "fit-content", borderRadius: "20px"}}
-                                variant="outline-secondary"
-                                onClick={()=> {
-                                    setEnableEditProfile(false);
-                                    console.log(enableEditProfile);
-                                }}>
-                            <BsPencilSquare style={{marginRight: "10px"}}/>Edit Profile</Button>
+
                     </Col>
                     <Col className='px-lg-5'>
                         <Formik
@@ -425,6 +419,13 @@ const InstituteManageProfile = () => {
                                         <Row className='ms-1 mt-2'>
                                             <Button style={{width: "fit-content", borderRadius: "20px"}}
                                                     variant='secondary'>Update Profile</Button>
+                                            <Button className="mt-4 px-3" style={{width: "fit-content", borderRadius: "15px"}}
+                                                    variant="outline-secondary"
+                                                    onClick={()=> {
+                                                        setEnableEditProfile(false);
+                                                        console.log(enableEditProfile);
+                                                    }}>
+                                                <BsPencilSquare style={{marginRight: "10px"}}/>Edit Profile</Button>
                                         </Row>
                                     </Form>
                                 </Row>)}
