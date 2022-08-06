@@ -4,7 +4,7 @@ import {
     createAuthInstitute,
     createAuthParent,
     createAuthStudent,
-    createAuthTeacher, printRequest
+    createAuthTeacher, printRequest, unBlockAuthUser
 } from '../auth0_api/user';
 
 export const authRouter = express.Router();
@@ -16,5 +16,6 @@ authRouter.route('/createStudent').post(createAuthStudent);
 authRouter.route('/createInstitute').post(createAuthInstitute);
 authRouter.route('/createAdmin').post(createAuthAdmin);
 authRouter.route('/access').post(printRequest);
+authRouter.route('/unblock').post(unBlockAuthUser);
 
 
