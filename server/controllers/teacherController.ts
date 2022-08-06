@@ -18,14 +18,18 @@ export const getTeachers=async (req:Request,res:Response)=>{
 }
 export const getTeacherByID=async (req:Request,res:Response)=>{
 
-
+    console.log(req.params)
     try {
         const data =await prisma.teacher.findMany({
             where:{
-                user_id:Number(req.params.id)
+                user_id:req.params.id
+            },
+            include:{
+                user: true
             }
         })
-        res.status(200).send(data)
+        logger.info(NAME_SPACE, data[0].user_id)
+        res.status(200).json(data)
     }
 
     catch (error) {

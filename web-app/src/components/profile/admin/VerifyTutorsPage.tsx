@@ -15,6 +15,7 @@ import {FaEye} from "react-icons/fa";
 import {ImCross} from "react-icons/im";
 import axios, {AxiosResponse} from "axios";
 import Loader from '../../utils/Loader';
+import {useNavigate} from "react-router-dom";
 
 type appliedTutor = {
     user_id: string,
@@ -26,154 +27,6 @@ type appliedTutor = {
 }
 
 
-const viewItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
-    < FaEye
-        style={{
-            fontSize: "20px",
-            color: "#2f3542",
-            padding: "7px",
-            width: "30px",
-            height: "30px",
-            borderRadius: "50%",
-            cursor: "pointer",
-            boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-        }}
-        className='accept-icon'
-        onClick={() => {
-            swal({
-                title: "View User",
-                text: `Do you really want to remove ${row.tutor_name}?`,
-                icon: "error",
-                buttons: {
-                    cancel: true,
-                    confirm: true
-                },
-                // dangerMode: true,
-            })
-                .then((willDelete: any) => {
-                    if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.tutor_name}`, {
-                            icon: "success",
-                        });
-                    }
-                });
-        }}
-    />
-);
-
-const verifyItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
-    < BsCheckCircleFill
-        style={{
-            fontSize: "20px",
-            color: "#2ed573",
-            padding: "7px",
-            width: "30px",
-            height: "30px",
-            borderRadius: "50%",
-            cursor: "pointer",
-            boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-        }}
-        className='accept-icon'
-        onClick={() => {
-            swal({
-                title: "Tutor Approve",
-                text: `Do you really want to accept ${row.tutor_name}?`,
-                icon: "info",
-                buttons: {
-                    cancel: true,
-                    confirm: true
-                },
-                // dangerMode: true,
-            })
-                .then((willDelete: any) => {
-                    if (willDelete) {
-                        swal(`Poof! You have successfully approved ${row.tutor_name}`, {
-                            icon: "success",
-                        });
-                    }
-                });
-        }}
-    />
-);
-
-const removeItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
-    < ImCross
-        style={{
-            fontSize: "20px",
-            color: "#e74c3c",
-            padding: "7px",
-            width: "30px",
-            height: "30px",
-            borderRadius: "50%",
-            cursor: "pointer",
-            boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-        }}
-        className='accept-icon'
-        onClick={() => {
-            swal({
-                title: "User Removal",
-                text: `Do you really want to reject ${row.tutor_name}?`,
-                icon: "warning",
-                buttons: {
-                    cancel: true,
-                    confirm: true
-                },
-                // dangerMode: true,
-            })
-                .then((willDelete: any) => {
-                    if (willDelete) {
-                        swal(`Poof! You have successfully reject ${row.tutor_name}`, {
-                            icon: "success",
-                        });
-                    }
-                });
-        }}
-    />
-);
-
-const columns = [
-    {
-        dataField: "user_id",
-        text: "Application ID",
-        hidden: true
-    },
-    {
-        dataField: "teacher_id",
-        text: "Application ID",
-        sort: true,
-    },
-    {
-        dataField: "applied_date",
-        text: "Applied Date",
-        sort: true,
-    },
-    {
-        dataField: "tutor_name",
-        text: "Tutor's Name",
-        attrs: {width: 100}
-    },
-    {
-        dataField: "",
-        text: "",
-        formatter: viewItem,
-        headerAttrs: {width: 100},
-        attrs: {width: 100, class: "EditRow"}
-    },
-    {
-        dataField: "",
-        text: "",
-        formatter: verifyItem,
-        headerAttrs: {width: 100},
-        attrs: {width: 100, class: "EditRow"}
-    },
-    {
-        dataField: "",
-        text: "",
-        formatter: removeItem,
-        headerAttrs: {width: 100},
-        attrs: {width: 100, class: "EditRow"}
-    },
-];
 
 
 const VerifyTutorsPage = () => {
@@ -181,9 +34,142 @@ const VerifyTutorsPage = () => {
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
-
+    const navigate = useNavigate();
     const baseURL = "http://localhost:8081/admin/newTeacherRequests";
     const [teachers, setTeachers] = useState<appliedTutor[]>([]);
+
+    const viewItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
+        < FaEye
+            style={{
+                fontSize: "20px",
+                color: "#2f3542",
+                padding: "7px",
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                cursor: "pointer",
+                boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+            }}
+            className='accept-icon'
+            onClick={() => {
+                navigate(`/admin/tutor/${row.user_id}`)
+            }}
+        />
+    );
+
+    const verifyItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
+        < BsCheckCircleFill
+            style={{
+                fontSize: "20px",
+                color: "#2ed573",
+                padding: "7px",
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                cursor: "pointer",
+                boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+            }}
+            className='accept-icon'
+            onClick={() => {
+                swal({
+                    title: "Tutor Approve",
+                    text: `Do you really want to accept ${row.tutor_name}?`,
+                    icon: "info",
+                    buttons: {
+                        cancel: true,
+                        confirm: true
+                    },
+                    // dangerMode: true,
+                })
+                    .then((willDelete: any) => {
+                        if (willDelete) {
+                            swal(`Poof! You have successfully approved ${row.tutor_name}`, {
+                                icon: "success",
+                            });
+                        }
+                    });
+            }}
+        />
+    );
+
+    const removeItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
+        < ImCross
+            style={{
+                fontSize: "20px",
+                color: "#e74c3c",
+                padding: "7px",
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                cursor: "pointer",
+                boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+            }}
+            className='accept-icon'
+            onClick={() => {
+                swal({
+                    title: "User Removal",
+                    text: `Do you really want to reject ${row.tutor_name}?`,
+                    icon: "warning",
+                    buttons: {
+                        cancel: true,
+                        confirm: true
+                    },
+                    // dangerMode: true,
+                })
+                    .then((willDelete: any) => {
+                        if (willDelete) {
+                            swal(`Poof! You have successfully reject ${row.tutor_name}`, {
+                                icon: "success",
+                            });
+                        }
+                    });
+            }}
+        />
+    );
+
+    const columns = [
+        {
+            dataField: "user_id",
+            text: "Application ID",
+            hidden: true
+        },
+        {
+            dataField: "teacher_id",
+            text: "Application ID",
+            sort: true,
+        },
+        {
+            dataField: "applied_date",
+            text: "Applied Date",
+            sort: true,
+        },
+        {
+            dataField: "tutor_name",
+            text: "Tutor's Name",
+            attrs: {width: 100}
+        },
+        {
+            dataField: "",
+            text: "",
+            formatter: viewItem,
+            headerAttrs: {width: 100},
+            attrs: {width: 100, class: "EditRow"}
+        },
+        {
+            dataField: "",
+            text: "",
+            formatter: verifyItem,
+            headerAttrs: {width: 100},
+            attrs: {width: 100, class: "EditRow"}
+        },
+        {
+            dataField: "",
+            text: "",
+            formatter: removeItem,
+            headerAttrs: {width: 100},
+            attrs: {width: 100, class: "EditRow"}
+        },
+    ];
 
     useEffect(() => {
         axios.get(baseURL).then((res: AxiosResponse) => {
@@ -198,14 +184,12 @@ const VerifyTutorsPage = () => {
                 console.log(error);
             })
     }, []);
-    console.log(teachers);
 
     if (teachers === null) {
         return <Loader/>
     }
 
 
-    // @ts-ignore
     return (
 
         <AdminLayout>

@@ -31,11 +31,11 @@ export const getParentByID = async (req: Request, res: Response) => {
 
 export const getParentByAuthId = async (req: Request, res: Response) => {
 
-    logger.info(NAME_SPACE, req.body.auth0_id)
+    console.log(req.params)
     try {
         const data = await prisma.parent.findMany({
             where: {
-                user_id:  req.body.auth0_id,
+                user_id:  req.body.id,
             }
         })
         // @ts-ignore
