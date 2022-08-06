@@ -19,6 +19,7 @@ import {instituteRouter} from "./route/instituteRoutes";
 import {notesRouter} from "./route/notesRoutes";
 import {notificationRouter} from "./route/notificationRoutes";
 import {authRouter} from "./route/authRoutes";
+import logger from "./utils/logger";
 
 const PORT = process.env.PORT ?? 8081;
 
@@ -83,4 +84,4 @@ app.use('/create-checkout-session',paymentGatewayRouter)
 //   res.sendFile(path.join(__dirname, '../build/index.html'), { etag: false, lastModified: false });
 // });
 
-app.listen(PORT, () => console.log(`twilio-video-app-react server running on ${PORT}`));
+app.listen(PORT, () => logger.info("Server",`Server is running on Port:${PORT}`));

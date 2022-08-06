@@ -8,6 +8,8 @@ import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
 import axios from "axios";
+import NavbarCommon from "../profile/navBar/NavbarCommon";
+import Loader from "../utils/Loader";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
@@ -34,22 +36,23 @@ const schema = yup.object().shape({
 });
 
 const initialState = {
-    InstituteName: 'sss',
-    OwnerName: '',
-    Location: '',
-    Email: '',
-    Password: '',
-    Confirm_Password: '',
-    Mobile_Number: '',
-    Description: '',
-    Address: '',
-    AccountName: '',
-    BankName: '',
-    BranchName: '',
-    AccountNo: ''
+    InstituteName: 'ss',
+    OwnerName: 'sss',
+    Location: 'ss',
+    Email: 's@gmail.zom',
+    Password: 'Qwe1234@',
+    Confirm_Password: 'Qwe1234@',
+    Mobile_Number: '0987654321',
+    Description: 'ss',
+    Address: 'sqa',
+    AccountName: 'saw',
+    BankName: 'saw',
+    BranchName: 'sasd',
+    AccountNo: '2222'
 }
 
 const InstituteSignup = () => {
+    const [loading, setLoading] = useState(false);
     const [pageStage, setPageStage] = useState(1), [instituteNameValidate, setInstituteNameValidate] = useState<boolean>(false), [ownerNameValidate, setOwnerNameValidate] = useState(false), [locationValidate, setLocationValidate] = useState(false), [emailValidate, setEmailValidate] = useState(false), [passwordValidate, setPasswordValidate] = useState(false), [rPasswordValidate, setRPasswordValidate] = useState(false), [descriptionValidate, setDescriptionValidate] = useState(false), [addressValidate, setAddressValidate] = useState(false), [mobileValidate, setMobileValidate] = useState(false), [accountNameValidate, setAccountNameValidate] = useState(false), [bankNameValidate, setBankNameValidate] = useState(false), [branchNameValidate, setBranchNameValidate] = useState(false), [accountNoValidate, setAccountNoValidate] = useState(false),
         changeInstituteNameValidate = (status: boolean): boolean => {
             if (status) {
@@ -158,6 +161,7 @@ const InstituteSignup = () => {
         };
 
     const handleOnSubmit = (values: { InstituteName: any; OwnerName: any; Location?: string; Email: any; Password: any; Confirm_Password?: string; Mobile_Number?: string; Description?: string; Address?: string; AccountName?: string; BankName?: string; BranchName?: string; AccountNo?: string; }) => {
+        setLoading(true);
         const data = JSON.stringify({
             "email": `${values.Email}`,
             "Firstname": `${values.InstituteName}`,
@@ -166,7 +170,7 @@ const InstituteSignup = () => {
         });
         axios({
             method: "POST",
-            url: "http://localhost:8081/auth/createParent",
+            url: "http://localhost:8081/auth/createInstitute",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -174,9 +178,40 @@ const InstituteSignup = () => {
         }).then((res) => {
                 console.log("User created in auth0");
                 console.log(res.data);
+                const apiData = JSON.stringify({
+                    "user_id": `${res.data.user_id}`,
+                    "username": `${values.Email}`,
+                    "profile_image": `${res.data.picture}`,
+                    "institute_name": `${values.InstituteName}`,
+                    "contact_no": `${values.Mobile_Number}`,
+                    "description": `${values.Description}`,
+                    "account_name": `${values.AccountName}`,
+                    "account_no": `${values.AccountNo}`,
+                    "bank_name": `${values.BankName}`,
+                    "branch_name": `${values.BranchName}`
+                })
+
+                axios({
+                    method: "POST",
+                    url: "http://localhost:8081/institute/createInstitute",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: apiData
+                }).then((apiRes) => {
+                    console.log(apiData)
+                    console.log("Api user created")
+                    console.log(apiRes.status);
+                    if(apiRes.status=== 200){
+                        setLoading(false);
+                        setPageStage(4)
+                    }
+                }).catch((error) => {
+                    console.log(error.message)
+                })
             }
-        ).catch((error)=> {
-            console.log(values);
+        ).catch((error) => {
+            console.log(values)
             console.log("error")
             console.log(error.message)
         })
@@ -185,20 +220,21 @@ const InstituteSignup = () => {
 
     return (
         <Container fluid={true}>
+            <NavbarCommon/>
             <Row
-                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start">
+                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start p-0 m-0">
                 <Col lg={9} md={12} xs={12}
                      className="Signup d-flex flex-lg-column justify-content-lg-center p-md-3 mt-md-2 mt-3">
                     <Row className="d-flex align-items-center">
-                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-3">Signup For Institute</h1>
-                        <Col lg={6} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
+                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-2">Signup For Institute</h1>
+                        <Col lg={5} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
                             <img src={Images.instituteSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
                                  alt="Institute-signup"/>
                         </Col>
-                        <Col>
+                        <Col lg={7}>
                             <Row>
-                                <Row className="mt-lg-5 pe-lg-4 mt-md-5 mt-4 pe-0">
-                                    <Col lg={10} md={12} className="mb-3 mx-lg-auto px-md-5 px-3">
+                                <Row className="mt-lg-4 px-lg-5 mt-md-5 mt-4 pe-0">
+                                    <Col lg={12} md={12} className="mb-3 mx-lg-auto px-md-5 px-3">
                                         <LazyLoad once>
                                             <div className="progressbar">
                                                 <div
@@ -237,7 +273,7 @@ const InstituteSignup = () => {
                                     <Row className="pb-md-0 pb-4">
                                         <Form noValidate onSubmit={handleSubmit}>
                                             {(pageStage === 1) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
 
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3"
@@ -261,7 +297,8 @@ const InstituteSignup = () => {
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationEmail">
-                                                            <Form.Label style={{fontWeight: 600}}>Institute's email</Form.Label>
+                                                            <Form.Label style={{fontWeight: 600}}>Institute's
+                                                                email</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter institute's email"
@@ -385,11 +422,12 @@ const InstituteSignup = () => {
                                                 <Row className=" pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
                                                         <Form.Group className="mb-3" controlId="validationMobile">
-                                                            <Form.Label style={{fontWeight: 600}}>Mobile Number</Form.Label>
+                                                            <Form.Label style={{fontWeight: 600}}>Mobile
+                                                                Number</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter mobile number in format: 0771234567"
-                                                                name="Mobile"
+                                                                name="Mobile_Number"
                                                                 value={values.Mobile_Number}
                                                                 onChange={handleChange}
                                                                 isInvalid={!!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)}
@@ -407,7 +445,8 @@ const InstituteSignup = () => {
                                                         <Form.Group className="mb-3"
                                                                     controlId="validationAddress">
                                                             <Form.Label
-                                                                style={{fontWeight: 600}}>Institute's Address</Form.Label>
+                                                                style={{fontWeight: 600}}>Institute's
+                                                                Address</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter institute's address "
@@ -554,6 +593,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
+                                                {loading && <Loader/>}
                                                 <Row className="mt-lg-3 pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between">
                                                         <Button type="button" className="px-4 nextBtn"
@@ -566,7 +606,6 @@ const InstituteSignup = () => {
                                                                 onClick={() => {
                                                                     if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {
                                                                         handleOnSubmit(values);
-                                                                        setPageStage(4);
                                                                     }
                                                                 }
                                                                 }
@@ -577,7 +616,7 @@ const InstituteSignup = () => {
                                                                     validateField("AccountNo");
                                                                 }
                                                                 }
-                                                        >Next</Button>
+                                                        >Submit</Button>
                                                     </Col>
                                                 </Row>
                                             </LazyLoad>}

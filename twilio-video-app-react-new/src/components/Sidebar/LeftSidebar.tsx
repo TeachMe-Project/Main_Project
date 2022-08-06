@@ -50,7 +50,7 @@ export const LeftSidebar = () => {
                   <div>
                     <BsFillPersonFill />
                   </div>
-                  <div className="Sidebar_item_name">My Teachers</div>
+                  <div className="Sidebar_item_name">My Tutors</div>
                 </div>
               </Link>
             </li>

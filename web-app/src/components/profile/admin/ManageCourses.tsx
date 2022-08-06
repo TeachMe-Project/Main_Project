@@ -89,7 +89,7 @@ const ManageCourses = () => {
     const {SearchBar} = Search;
 
     const baseURL = "http://localhost:8081/course/allCourses";
-    const [courses, setCourses] = React.useState(null);
+    const [courses, setCourses] =  React.useState<any[]>(null!);
 
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {

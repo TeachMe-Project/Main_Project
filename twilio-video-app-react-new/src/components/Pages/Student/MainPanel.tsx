@@ -6,7 +6,7 @@ import MyTeachers from './MyTeachers';
 import Messages from './Messages';
 import StudentProfile from './StudentProfile';
 import HelpAndSupport from './HelpAndSupport';
-
+import CourseDetails from './CourseDetails';
 import Course from './Course';
 import Twilio from '../../Twilio/Twilio';
 import Notification from '../../Notification/notifications';
@@ -76,6 +76,10 @@ const routes = [
   {
     path: '/course',
     main: () => <Course />,
+  },
+  {
+    path: '/courseDetails',
+    main: () => <CourseDetails />,
   },
   {
     path: '/paymentGateway',

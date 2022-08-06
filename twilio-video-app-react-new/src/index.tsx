@@ -20,7 +20,6 @@ import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/Un
 import Twilio from './components/Twilio/Twilio';
 import Dashboard from './components/Pages/Student/Dashboard';
 import MyTeachers from './components/Pages/Student/MyTeachers';
-import Settings from './components/Pages/Student/Settings';
 import Course from './components/Pages/Student/Course';
 import MyCourses from './components/Pages/Student/MyCourses';
 import StudentProfile from './components/Pages/Student/StudentProfile';

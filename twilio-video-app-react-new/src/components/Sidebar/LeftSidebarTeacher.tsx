@@ -8,6 +8,8 @@ import { MdContactSupport } from 'react-icons/md';
 import '../../Assets/Styles/main.scss';
 import { Link } from 'react-router-dom';
 import '../Pages/Student/MainPanel';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { Button } from '../Button/Button';
 
 export const LeftSidebarTeacher = () => {
   return (
@@ -70,12 +72,20 @@ export const LeftSidebarTeacher = () => {
                   <div>
                     <MdContactSupport />
                   </div>
-                  <div className="Sidebar_item_name">Help and Support</div>
+                  <div className="Sidebar_item_name">Help & Support</div>
                 </div>
               </Link>
             </li>
           </Row>
         </ul>
+
+        <Link to="/" className="link">
+          <div className="LogoutBtn">
+            {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
+            <AiOutlineLogout className="LogoutIcon" />
+            <Button name="Log out" />
+          </div>
+        </Link>
       </Container>
     </div>
   );

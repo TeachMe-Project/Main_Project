@@ -7,6 +7,15 @@
 
   .Signup-Image {
     margin: 0 auto 0 auto;
+
+    @media (max-width: $md-screen-size) {
+      height: 400px;
+      width: auto;
+    }
+    @media (max-width: $xs-screen-size) {
+      margin-top: 20px;
+      height: auto;
+    }
   }
 
   .Signup {

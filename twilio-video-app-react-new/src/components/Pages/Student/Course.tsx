@@ -48,7 +48,6 @@ export const Course = (props: tutorName) => {
             <Tabs>
               <div className="Details">
                 <Details label="Subject" value="Mathematics" symbol=":" />
-                <Details label="Teacher" value="Mr. Lasitha Nuwan" symbol=":" />
                 <Details label="Grade" value="8" symbol=":" />
                 <Details label="Medium" value="English" symbol=":" />
                 <Details

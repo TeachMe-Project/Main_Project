@@ -1,9 +1,10 @@
 import {Request,Response} from "express";
 import { PrismaClient } from '@prisma/client'
 import {teacherSchema} from "../models/teacherModel";
+import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
-
+const NAME_SPACE = "Tutor"
 export const getTeachers=async (req:Request,res:Response)=>{
 
     try {
@@ -108,29 +109,40 @@ export const createTeacher=async (req:Request,res:Response)=>{
 
         if(!error) {
             try {
-                const data = await prisma.teacher.create({
+                const data = await prisma.user.create({
                     data: {
-                        first_name: req.body.first_name,
-                        last_name: req.body.last_name,
-                        gender:req.body.gender,
-                        description:req.body.description,
-                        qualification:req.body.qualification,
-                        account_name:req.body.account_name,
-                        bank_name:req.body.bank_name,
-                        branch_name:req.body.branch_name,
-                        account_no:req.body.account_no,
-                        verification:req.body.verification,
-                        security_status:req.body.security_status,
-                        user_id:req.body.user_id
+                        user_id: req.body.user_id,
+                        username: req.body.username,
+                        type: "teacher",
+                        profile_image: req.body.profile_image,
+                        isActive: true,
+                        teacher: {
+                            create: {
+                                first_name: req.body.first_name,
+                                last_name:req.body.last_name,
+                                gender: "male",
+                                contact_no: req.body.contact_no,
+                                description: req.body.description,
+                                qualification: "none",
+                                account_name: req.body.account_name,
+                                bank_name: req.body.bank_name,
+                                branch_name: req.body.branch_name,
+                                account_no: req.body.account_no,
+                                isActive: true,
+                                verification:'pending',
+                            }
+                        }
                     }
                 })
-                res.status(200).send(data)
-            } catch (error) {
+                logger.info(NAME_SPACE, "Your Tutor Profile Successfully Created");
+                res.status(200).send("Your Tutor Profile Successfully Created");
+            } catch (error: any) {
+                logger.error(NAME_SPACE, error.message);
                 res.status(500).send(error);
             }
-        }
-        else {
+        } else {
+            logger.error(NAME_SPACE, req.body.institute_name)
+            logger.error(NAME_SPACE, error.message)
             res.status(500).send(error.details[0].message);
         }
 }
-
