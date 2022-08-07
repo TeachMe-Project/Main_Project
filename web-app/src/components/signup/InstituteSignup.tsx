@@ -36,19 +36,19 @@ const schema = yup.object().shape({
 });
 
 const initialState = {
-    InstituteName: 'ss',
-    OwnerName: 'sss',
-    Location: 'ss',
-    Email: 's@gmail.zom',
-    Password: 'Qwe1234@',
-    Confirm_Password: 'Qwe1234@',
-    Mobile_Number: '0987654321',
-    Description: 'ss',
-    Address: 'sqa',
-    AccountName: 'saw',
-    BankName: 'saw',
-    BranchName: 'sasd',
-    AccountNo: '2222'
+    InstituteName: '',
+    OwnerName: '',
+    Location: '',
+    Email: '',
+    Password: '',
+    Confirm_Password: '',
+    Mobile_Number: '',
+    Description: '',
+    Address: '',
+    AccountName: '',
+    BankName: '',
+    BranchName: '',
+    AccountNo: ''
 }
 
 const InstituteSignup = () => {
@@ -219,7 +219,7 @@ const InstituteSignup = () => {
 
 
     return (
-        <Container fluid={true}>
+        <Container fluid={true} className='p-0 m-0 w-100'>
             <NavbarCommon/>
             <Row
                 className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start p-0 m-0">
@@ -273,10 +273,10 @@ const InstituteSignup = () => {
                                     <Row className="pb-md-0 pb-4">
                                         <Form noValidate onSubmit={handleSubmit}>
                                             {(pageStage === 1) && <LazyLoad once>
-                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
 
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3"
+                                                        <Form.Group className="mb-2"
                                                                     controlId="validationInstituteName">
                                                             <Form.Label style={{fontWeight: 600}}>Institute
                                                                 Name</Form.Label>
@@ -296,7 +296,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationEmail">
+                                                        <Form.Group className="mb-2" controlId="validationEmail">
                                                             <Form.Label style={{fontWeight: 600}}>Institute's
                                                                 email</Form.Label>
                                                             <Form.Control
@@ -315,9 +315,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationOwnerName">
+                                                        <Form.Group className="mb-2" controlId="validationOwnerName">
                                                             <Form.Label style={{fontWeight: 600}}>Owner's
                                                                 name</Form.Label>
                                                             <Form.Control
@@ -336,7 +336,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationLocation">
+                                                        <Form.Group className="mb-2" controlId="validationLocation">
                                                             <Form.Label style={{fontWeight: 600}}>Location</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -354,9 +354,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationPassword">
+                                                        <Form.Group className="mb-2" controlId="validationPassword">
                                                             <Form.Label style={{fontWeight: 600}}>Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
@@ -374,7 +374,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationRPassword">
+                                                        <Form.Group className="mb-2" controlId="validationRPassword">
                                                             <Form.Label style={{fontWeight: 600}}>Re-type
                                                                 Password</Form.Label>
                                                             <Form.Control
@@ -393,7 +393,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col
                                                         className="d-flex flex-row justify-content-lg-end justify-content-end">
                                                         <Button type="button" className="px-4 nextBtn"
@@ -419,9 +419,9 @@ const InstituteSignup = () => {
                                                 </Row>
                                             </LazyLoad>}
                                             {(pageStage === 2) && <LazyLoad once>
-                                                <Row className=" pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationMobile">
+                                                        <Form.Group className="mb-2" controlId="validationMobile">
                                                             <Form.Label style={{fontWeight: 600}}>Mobile
                                                                 Number</Form.Label>
                                                             <Form.Control
@@ -440,9 +440,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3"
+                                                        <Form.Group className="mb-2"
                                                                     controlId="validationAddress">
                                                             <Form.Label
                                                                 style={{fontWeight: 600}}>Institute's
@@ -463,9 +463,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className=" pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationDescription">
+                                                        <Form.Group className="mb-2" controlId="validationDescription">
                                                             <Form.Label
                                                                 style={{fontWeight: 600}}>Description</Form.Label>
                                                             <Form.Control as="textarea"
@@ -485,7 +485,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between ">
 
                                                         <Button type="button" className="px-4 nextBtn"
@@ -512,9 +512,9 @@ const InstituteSignup = () => {
                                                 </Row>
                                             </LazyLoad>}
                                             {(pageStage === 3) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationAccountName">
+                                                        <Form.Group className="mb-2" controlId="validationAccountName">
                                                             <Form.Label style={{fontWeight: 600}}>Account Holder's
                                                                 Name</Form.Label>
                                                             <Form.Control
@@ -533,9 +533,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationBankName">
+                                                        <Form.Group className="mb-2" controlId="validationBankName">
                                                             <Form.Label style={{fontWeight: 600}}>Bank Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -553,7 +553,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationBranchName">
+                                                        <Form.Group className="mb-2" controlId="validationBranchName">
                                                             <Form.Label style={{fontWeight: 600}}>Branch
                                                                 Name</Form.Label>
                                                             <Form.Control
@@ -572,9 +572,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationAccountNo">
+                                                        <Form.Group className="mb-2" controlId="validationAccountNo">
                                                             <Form.Label style={{fontWeight: 600}}>Account
                                                                 Number</Form.Label>
                                                             <Form.Control
@@ -594,7 +594,7 @@ const InstituteSignup = () => {
                                                     </Col>
                                                 </Row>
                                                 {loading && <Loader/>}
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between">
                                                         <Button type="button" className="px-4 nextBtn"
                                                                 variant="primary"

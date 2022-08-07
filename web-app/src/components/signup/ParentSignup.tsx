@@ -205,9 +205,9 @@ const ParentSignup = () => {
                                     <Row className="pb-md-0 pb-4">
                                         <Form noValidate onSubmit={handleSubmit}>
                                             {(pageStage === 1) && <LazyLoad once>
-                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationEmail">
+                                                        <Form.Group className="mb-2" controlId="validationEmail">
                                                             <Form.Label style={{fontWeight: 600}}>Email</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -225,7 +225,7 @@ const ParentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-1" controlId="validationFirstName">
+                                                        <Form.Group className="mb-2" controlId="validationFirstName">
                                                             <Form.Label style={{fontWeight: 600}}>First
                                                                 name</Form.Label>
                                                             <Form.Control
@@ -244,7 +244,7 @@ const ParentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-2" controlId="validationLastname">
                                                             <Form.Label style={{fontWeight: 600}}>Last name</Form.Label>
@@ -283,7 +283,7 @@ const ParentSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
                                                         <Form.Group className="mb-2" controlId="validationPassword">
                                                             <Form.Label style={{fontWeight: 600}}>Password</Form.Label>

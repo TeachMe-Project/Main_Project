@@ -16,7 +16,7 @@ const NavBar: React.FC = () => {
             <Container fluid={true} >
                 <Row className='w-100'>
                     <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2'>
-                        <Navbar.Brand onClick={()=> navigate('/')} style={{cursor:"pointer"}}>
+                        <Navbar.Brand onClick={()=> navigate(-1)} style={{cursor:"pointer"}}>
                             <img src={Images.logo} style={{maxWidth: "240px"}} alt='logo'/>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" className='ms-2'/>

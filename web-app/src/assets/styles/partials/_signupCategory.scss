@@ -69,7 +69,8 @@ h1{
     }
 
     .formImage {
-      width: 400px;
+      width: 300px;
+      height: auto;
       
       @media (max-width: $xs-screen-size) {
         width: 300px;

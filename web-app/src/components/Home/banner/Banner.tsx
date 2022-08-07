@@ -17,7 +17,7 @@ const Banner: React.FC = () => {
                                 in Sri Lanka to offer reliable education courses with a unique set of
                                 features.
                             </p>
-                            <Button className="px-md-4 py-2 mt-3 GetStartedBtn"
+                            <Button className="px-md-4 py-2 mt-3 GetStartedBtn" href="#About-Us"
                                     style={{marginRight: "5px", fontSize: "1rem", fontWeight: "600"}}> Get Started
                             </Button>
 
