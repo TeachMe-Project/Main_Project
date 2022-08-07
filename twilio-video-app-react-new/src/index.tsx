@@ -27,9 +27,12 @@ import StudentProfile from './components/Pages/Student/StudentProfile';
 
 ReactDOM.render(
   // 👈️ deprecated starting React 18
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  // <StrictMode>
+  //   <App />
+  // </StrictMode>,
+  // document.getElementById('root')
+
+  <App />,
   document.getElementById('root')
 );
 
