@@ -61,7 +61,6 @@ const AzureCloudStorage = (): JSX.Element => {
                 {/* {Path.basename(blobItem)} */}
                 {/* <br /> */}
                 <img src={item} alt={item} height="200" />
-                {/* <img src={blobItem} alt={blobItem} height="200" /> */}
               </div>
             </li>
           );

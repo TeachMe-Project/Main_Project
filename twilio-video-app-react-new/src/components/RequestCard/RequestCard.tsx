@@ -39,7 +39,7 @@ export const RequestCard: React.FC<RequestCard> = props => {
           <RequestCardHeader header={props.header} />
         </div>
 
-        <div style={{ width: '30%', display: 'flex', float: 'right' }}>
+        <div style={{ width: '50%', display: 'flex', float: 'right' }}>
           <RequestCardButton requestbtnname={props.acceptbtnname} />
           <RequestCardButton requestbtnname={props.rejectbtnname} />
         </div>

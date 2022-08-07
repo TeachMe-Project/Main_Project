@@ -72,7 +72,7 @@ export const LeftSidebarTeacher = () => {
                   <div>
                     <MdContactSupport />
                   </div>
-                  <div className="Sidebar_item_name">Help and Support</div>
+                  <div className="Sidebar_item_name">Help & Support</div>
                 </div>
               </Link>
             </li>
