@@ -20,7 +20,7 @@ export const Notes: React.FC<Notes> = props => {
             btnname={
               <a
                 download="note1.pdf"
-                href="https://learninggp2.blob.core.windows.net/gp2-cloudstorage/DiagramSet-UI-Flow.drawio.pdf"
+                href="https://learninggp2.blob.core.windows.net/notes/ProposalPresentationNew.pdf"
                 target="_blank"
               >
                 <FiDownload className="ReactIcon" />

@@ -6,7 +6,7 @@ import * as yup from 'yup';
 
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
-import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorage';
+import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageImages';
 
 const schema = yup.object().shape({
   Firstname: yup
@@ -126,10 +126,10 @@ export const StudentProfile = () => {
         <div className="PanelContainer">
           <Col xl={4}>
             <div className="LeftContainer">
-              {/* <div className="ProfileImg">
-                <img src={'/Images/student.png'} />
-              </div> */}
-              <AzureCloudStorage />
+              <div className="ProfileImg">
+                <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
+                <AzureCloudStorage />
+              </div>
               <div className="ParentContact">
                 <div className="ContactHeader">Parent's Contact Details:</div>
                 <div className="ParentLabel">Name:</div>
