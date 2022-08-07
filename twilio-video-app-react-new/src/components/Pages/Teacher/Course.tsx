@@ -61,6 +61,11 @@ export const Course = () => {
                 </div>
                 <Details label="Title" value="Mathematics By Roshan Senevirathne" symbol=":" />
                 <Details label="subject" value="Mathematics" symbol=":" />
+                <Details
+                  label="description"
+                  value="Mathematics lessons for Student from Grade 6 , Grade 7 , Grade 8 "
+                  symbol=":"
+                />
                 <Details label="Grade" value="8" symbol=":" />
                 <Details label="Medium" value="Sinhala" symbol=":" />
                 <Details label="Fee" value="LKR 2500" symbol=":" />
@@ -113,33 +118,83 @@ export const Course = () => {
                       <tr className="booking-thead-second-tr">
                         {/*amc: Institute Manage Courses*/}
                         <th className="imc-first-th">Student ID</th>
-                        <th className="imc-last-th">Student Name</th>
+                        <th className="imc-second-th">Student Name</th>
+                        <th className="imc-second-th">Parent Contact Number</th>
+                        <th className="imc-last-th">View Profile</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td data-label="Student ID :">10000102345</td>
                         <td data-label="Student Name :">Romesh Perera</td>
+                        <td data-label="Parent Contact :">011 2840231</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} />
+                            </Link>
+                          </div>
+                        </td>
                       </tr>
                       <tr>
                         <td data-label="Student ID :">10000102345</td>
                         <td data-label="Student Name :">Romesh Perera</td>
+                        <td data-label="Parent Contact :">011 2840231</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} />
+                            </Link>
+                          </div>
+                        </td>
                       </tr>
                       <tr>
                         <td data-label="Student ID :">10000102345</td>
                         <td data-label="Student Name :">Romesh Perera</td>
+                        <td data-label="Parent Contact :">011 2840231</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} />
+                            </Link>
+                          </div>
+                        </td>
                       </tr>
                       <tr>
                         <td data-label="Student ID :">10000102345</td>
                         <td data-label="Student Name :">Romesh Perera</td>
+                        <td data-label="Parent Contact :">011 2840231</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} />
+                            </Link>
+                          </div>
+                        </td>
                       </tr>
                       <tr>
                         <td data-label="Student ID :">10000102345</td>
                         <td data-label="Student Name :">Romesh Perera</td>
+                        <td data-label="Parent Contact :">011 2840231</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} />
+                            </Link>
+                          </div>
+                        </td>
                       </tr>
                       <tr>
                         <td data-label="Student ID :">10000102345</td>
                         <td data-label="Student Name :">Romesh Perera</td>
+                        <td data-label="Parent Contact :">011 2840231</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} />
+                            </Link>
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -165,7 +220,7 @@ export const Course = () => {
                       <th className="imc-first-th">Date</th>
                       <th className="imc-second-th">Time</th>
                       <th className="imc-second-th">Duration</th>
-                      <th className="imc-third-th">Topic</th>
+                      <th className="imc-third-th"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -173,37 +228,78 @@ export const Course = () => {
                       <td data-label="Date :">2022-04-02</td>
                       <td data-label="Time :">05:00 pm</td>
                       <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">Trigonometry</td>
+                      <td data-label="Topic :">
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
+                        </div>
+                      </td>
                     </tr>
                     <tr>
                       <td data-label="Date :">2022-04-02</td>
                       <td data-label="Time :">05:00 pm</td>
                       <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">Trigonometry</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
+                        </div>
+                      </td>
                     </tr>
                     <tr>
                       <td data-label="Date :">2022-04-02</td>
                       <td data-label="Time :">05:00 pm</td>
                       <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">Trigonometry</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
+                        </div>
+                      </td>
                     </tr>
                     <tr>
                       <td data-label="Date :">2022-04-02</td>
                       <td data-label="Time :">05:00 pm</td>
                       <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">Trigonometry</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
+                        </div>
+                      </td>
                     </tr>
                     <tr>
                       <td data-label="Date :">2022-04-02</td>
                       <td data-label="Time :">05:00 pm</td>
                       <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">Trigonometry</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
+                        </div>
+                      </td>
                     </tr>
                     <tr>
                       <td data-label="Date :">2022-04-02</td>
                       <td data-label="Time :">05:00 pm</td>
                       <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">Trigonometry</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

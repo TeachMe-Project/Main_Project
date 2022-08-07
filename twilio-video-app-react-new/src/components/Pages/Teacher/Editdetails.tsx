@@ -137,6 +137,7 @@ export const TeacherProfile = () => {
                           </Col>
                         </Form.Group>
                       </Row>
+
                       {/*subject*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
