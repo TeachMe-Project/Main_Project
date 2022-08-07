@@ -13,7 +13,7 @@ const Pricing: React.FC = () => {
                 fontSize: "60px",
                 textAlign: "center",
                 marginBottom: "40px",
-                marginTop:"100px",
+                marginTop:"70px",
                 color:"#2c3e50"
             }}>Pricing</h1>
             <Row className="d-flex justify-content-center flex-row mt-4 mx-0 px-0 mb-5">

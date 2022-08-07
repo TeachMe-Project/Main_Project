@@ -37,8 +37,8 @@ const ContactUs: React.FC = () => {
                     <h1 style={{
                         fontSize: "60px",
                         textAlign: "center",
-                       marginTop:"100px",
-                        marginBottom:"50px",
+                       marginTop:"80px",
+                        marginBottom:"20px",
                         color:"#2c3e50"
                     }}>Contact Us</h1>
                     <Row className="m-0" style={{height: "fit-content"}}>
