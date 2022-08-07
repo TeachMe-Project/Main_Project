@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import Path from 'path';
 import { Form, Button } from 'react-bootstrap';
-import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob-images';
+import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob-images-teacher';
 
 const storageConfigured = isStorageConfigured();
 

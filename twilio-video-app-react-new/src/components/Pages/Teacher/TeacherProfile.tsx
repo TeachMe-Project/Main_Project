@@ -3,6 +3,7 @@ import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Button } from '../../Button/Button';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageImagesTeacher';
 
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
@@ -158,7 +159,8 @@ export const TeacherProfile = () => {
             <Col xl={4}>
               <div className="LeftContainer">
                 <div className="ProfileImg">
-                  <img src={'/Images/student.png'} />
+                  <img src={'https://learninggp2.blob.core.windows.net/images/teacher.jpg'} />
+                  <AzureCloudStorage />
                 </div>
                 <div className="ParentContact">
                   <div className="ContactHeader">Bank Account Details:</div>

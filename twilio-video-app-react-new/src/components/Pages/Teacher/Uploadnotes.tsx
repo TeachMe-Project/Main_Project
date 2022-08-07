@@ -130,7 +130,7 @@ export const Uploadnotes = () => {
                         </Form.Group>
                       </Row>
 
-                      <Row>
+                      {/* <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Upload File</Form.Label>
@@ -152,7 +152,8 @@ export const Uploadnotes = () => {
                             </div>
                           </Col>
                         </Form.Group>
-                      </Row>
+                      </Row> */}
+                      <AzureCloudStorage />
                     </Form>
                   </Row>
                 )}
