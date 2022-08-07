@@ -5,6 +5,7 @@ import { Row, Col, Container, Accordion, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import UploadButton from '../../Button/UploadButton';
+import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageHomework';
 
 export const Uploadhomework = () => {
   return (
@@ -27,13 +28,14 @@ export const Uploadhomework = () => {
             <Form.Label>Deadline</Form.Label>
             <Form.Control type="date" placeholder="Deadline" />
           </Form.Group>
-          <Form.Group controlId="form.Name">
+          {/* <Form.Group controlId="form.Name">
             <Form.Label className="form-label" for="customFile">
               Homework File
             </Form.Label>
             <Form.Control type="file" className="form-control" id="customFile" />
-          </Form.Group>
-          <UploadButton />
+          </Form.Group> */}
+          {/* <UploadButton /> */}
+          <AzureCloudStorage />
         </Form>
       </Container>
     </Row>
