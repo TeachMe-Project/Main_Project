@@ -9,8 +9,18 @@ const prisma = new PrismaClient()
 export const getUsers=async (req:Request,res:Response)=>{
 
     try {
-        const data =await prisma.user.findMany()
-        res.status(200).send(data)
+        const data =await prisma.user.findMany({
+            where: {
+                isActive: true
+            },
+            include: {
+                teacher:true,
+                parent:true,
+                institute:true,
+                student: true
+            }
+        })
+        res.status(200).json(data)
     }
 
     catch (error) {
