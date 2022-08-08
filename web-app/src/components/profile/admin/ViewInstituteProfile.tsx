@@ -34,50 +34,52 @@ const ViewInstituteProfile = () => {
     const [passwordMail, setPasswordMail] = useState(null);
     const [isEditProfile, setIsEditProfile] = useState(false);
     const params = useParams();
-    const [isDataLoading, setIsDataLoading] = useState(true);
+    const [isDataLoading, setIsDataLoading] = useState(false);
     const [error, setError] = useState('');
     const [initialState, setInitialState] = useState<initialStateType>({
-        InstituteName: 'Sigma Institute',
-        OwnerName: 'Avishka Hettarachchi',
-        Location: 'Malabe',
-        Email: 'sigmainst@gmail.com',
-        Mobile_Number: '0771234567',
-        Description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 15nd more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-        Address: 'Malebe, Colombo 07',
-        AccountName: 'Avishka Hettarachchi',
-        BankName: 'Bank OF Ceylon',
-        BranchName: 'Malabe',
-        AccountNo: '6612345678'
+        InstituteName: '',
+        OwnerName: '',
+        Location: '',
+        Email: '',
+        Mobile_Number: '',
+        Description: '',
+        Address: '',
+        AccountName: '',
+        BankName: '',
+        BranchName: '',
+        AccountNo: ''
     });
 
-    // useEffect(() => {
-    //     axios({
-    //         method: "GET",
-    //         url: `http://localhost:8081/teacher/${params.tutor_id}`,
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //     }).then((res: AxiosResponse) => {
-    //         setInitialState({
-    //             Firstname: res.data[0].first_name,
-    //             Lastname: res.data[0].last_name,
-    //             Accountname: res.data[0].account_no,
-    //             Accountno: res.data[0].account_no,
-    //             Bankname: res.data[0].bank_name,
-    //             Branchname: res.data[0].branch_name,
-    //             Description: res.data[0].description,
-    //             Mobile: res.data[0].contact_no,
-    //             Qualification: res.data[0].qualification,
-    //             Email: res.data[0].user.username
-    //         })
-    //         if (res.status === 200) {
-    //             console.log(initialState)
-    //             setIsDataLoading(true);
-    //         }
-    //     }).catch((error) => {
-    //         console.log(error.message)
-    //     })
-    // }, []);
+    useEffect(() => {
+        axios({
+            method: "GET",
+            url: `http://localhost:8081/institute/${params.institute_id}`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res: AxiosResponse) => {
+            console.log(res.data[0].institute_name)
+            setInitialState({
+                InstituteName: res.data[0].institute_name,
+                AccountName: res.data[0].account_name,
+                AccountNo: res.data[0].account_no,
+                Address: res.data[0].address,
+                BankName: res.data[0].bank_name,
+                BranchName: res.data[0].branch_name,
+                Description: res.data[0].description,
+                Email: res.data[0].user.username,
+                Location: res.data[0].location,
+                Mobile_Number: res.data[0].contact_no,
+                OwnerName: res.data[0].owner_name
+            })
+            if (res.status === 200) {
+                console.log(initialState)
+                setIsDataLoading(true);
+            }
+        }).catch((error) => {
+            console.log(error.message)
+        })
+    }, []);
 
     return (
         <AdminLayout>
@@ -164,7 +166,7 @@ const ViewInstituteProfile = () => {
                                                             <Form.Control
                                                                 type="text"
                                                                 name="Location"
-                                                                value={values.OwnerName}
+                                                                value={values.Location}
                                                                 disabled={enableEditProfile}
                                                             />
                                                         </Form.Group>

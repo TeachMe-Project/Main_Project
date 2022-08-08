@@ -18,14 +18,18 @@ export const getInstitutes = async (req: Request, res: Response) => {
 }
 export const getInstituteByID = async (req: Request, res: Response) => {
 
-
+    console.log(req.params)
     try {
         const data = await prisma.institute.findMany({
             where: {
-                institute_id: Number(req.params.id)
+                user_id: req.params.id
+            },
+            include: {
+                user: true
             }
         })
-        res.status(200).send(data)
+        logger.info(NAME_SPACE, data[0].user_id)
+        res.status(200).json(data)
     } catch (error) {
         res.status(500).send(error);
     }
@@ -100,6 +104,9 @@ export const createInstitute = async (req: Request, res: Response) => {
                     institute: {
                         create: {
                             institute_name: req.body.institute_name,
+                            owner_name:req.body.owner_name,
+                            location:req.body.location,
+                            address:req.body.address,
                             contact_no: req.body.contact_no,
                             description: req.body.description,
                             account_name: req.body.account_name,

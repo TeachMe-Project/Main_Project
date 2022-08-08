@@ -47,7 +47,7 @@ const VerifyInstitutesPage = () => {
             }}
             className='accept-icon'
             onClick={() => {
-                navigate(`/admin/institute/${row.id}`)
+                navigate(`/admin/institute/${row.user_id}`)
             }}
         />
     );

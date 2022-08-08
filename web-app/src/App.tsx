@@ -22,7 +22,7 @@ import InstituteAddTutor from "./components/profile/institute/InstituteAddTutor"
 import ProfileEdit from "./components/profile/navBar/ProfileEdit";
 import ViewInstituteProfile from "./components/profile/admin/ViewInstituteProfile";
 import InstituteManageProfile from "./components/profile/institute/IsnstituteManageProfile";
-import TutorViewProfile from "./components/profile/admin/TutorViewProfile";
+import ViewTutorProfile from "./components/profile/admin/ViewTutorProfile";
 
 const App: React.FC = () => {
     return (
@@ -51,7 +51,7 @@ const App: React.FC = () => {
                 <Route path="/admin/viewInstitute"
                        element={<ProtectedRoute component={ViewInstituteProfile} role={'admin'}/>}/>
                 <Route path="/admin/tutor/:tutor_id"
-                       element={<ProtectedRoute component={TutorViewProfile} role={'admin'} />}/>
+                       element={<ProtectedRoute component={ViewTutorProfile} role={'admin'} />}/>
                 <Route path="/admin/institute/:institute_id"
                        element={<ProtectedRoute component={ViewInstituteProfile} role={'admin'} />}/>
                 <Route path="/admin/tutor/:institute_id"
