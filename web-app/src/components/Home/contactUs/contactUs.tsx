@@ -1,9 +1,12 @@
-import React from 'react';
-import {Col, Form, Image, Row, Button, Container, Card} from "react-bootstrap";
+import React, {useState} from 'react';
+import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
 import Images from "../../../assets/images/Images";
 import {GrSend} from "react-icons/gr";
 import {Formik} from "formik";
 import * as yup from 'yup';
+import axios, {AxiosResponse} from "axios";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 
 const schema = yup.object().shape({
     Name: yup.string().required(),
@@ -19,10 +22,46 @@ const initialState = {
     Message: ''
 }
 const ContactUs: React.FC = () => {
+
+    const [loading, setLoading] = useState(false);
+    const handleOnSubmit = (values:any) => {
+        setLoading(true);
+        const data = JSON.stringify({
+            "email": `${values.Email}`,
+            "name": `${values.Name}`,
+            "subject": `${values.Subject}`,
+            "message": `${values.Message}`
+        });
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/contact/contactUs",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res: AxiosResponse) => {
+                if (res.status === 200) {
+                    swal({
+                        title: "Thanks you!",
+                        text: `Thank you for contacting us, we'll be in touch very soon.`,
+                        icon: "success",
+                        buttons: {
+                            confirm: true
+                        },
+                    })
+                }
+            }
+        ).catch((error) => {
+            console.log(values)
+            console.log("error")
+            console.log(error.message)
+        })
+    }
+
     return (
         <Formik
             validationSchema={schema}
-            onSubmit={console.log}
+            onSubmit={handleOnSubmit}
             initialValues={initialState}
         >
             {({
@@ -37,9 +76,9 @@ const ContactUs: React.FC = () => {
                     <h1 style={{
                         fontSize: "60px",
                         textAlign: "center",
-                       marginTop:"80px",
-                        marginBottom:"10px",
-                        color:"#2c3e50"
+                        marginTop: "80px",
+                        marginBottom: "10px",
+                        color: "#2c3e50"
                     }}>Contact Us</h1>
                     <Row className="m-0" style={{height: "fit-content"}}>
                         <Col lg={6} className="d-flex flex-row justify-content-center">
@@ -111,8 +150,9 @@ const ContactUs: React.FC = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Button type="submit" variant="primary" className="mt-2 px-4 py-2"
-                                        style={{borderRadius: "20px", float:"right"}}><GrSend
-                                    style={{marginRight: "3px"}}/> Submit</Button>
+                                        style={{borderRadius: "20px", float: "right"}}><GrSend
+                                    style={{marginRight: "3px"}}
+                                    /> Submit</Button>
                             </Form>
                         </Col>
                     </Row>
@@ -124,8 +164,10 @@ const ContactUs: React.FC = () => {
                                 display: "flex",
                                 flexDirection: "row"
                             }}>
-                                <Card.Img variant="top" src={Images.location} style={{width: "22%", padding: "10px",
-                                    height:"fit-content"}}/>
+                                <Card.Img variant="top" src={Images.location} style={{
+                                    width: "22%", padding: "10px",
+                                    height: "fit-content"
+                                }}/>
                                 <Card.Body style={{padding: "0", paddingTop: "10px"}}>
                                     <Card.Title style={{textAlign: "center"}}>Address</Card.Title>
                                     <Card.Text style={{textAlign: "center"}}>No 35 ,Reid Avenue, Colombo 07</Card.Text>
@@ -139,8 +181,10 @@ const ContactUs: React.FC = () => {
                                 display: "flex",
                                 flexDirection: "row"
                             }}>
-                                <Card.Img variant="top" src={Images.phone} style={{width: "22%", padding: "10px",
-                                    height:"fit-content"}}/>
+                                <Card.Img variant="top" src={Images.phone} style={{
+                                    width: "22%", padding: "10px",
+                                    height: "fit-content"
+                                }}/>
                                 <Card.Body style={{padding: "0", paddingTop: "10px"}}>
                                     <Card.Title style={{textAlign: "center"}}>Phone</Card.Title>
                                     <Card.Text style={{textAlign: "center"}}>+9477-1234567</Card.Text>
@@ -154,8 +198,10 @@ const ContactUs: React.FC = () => {
                                 display: "flex",
                                 flexDirection: "row"
                             }}>
-                                <Card.Img variant="top" src={Images.email} style={{width: "22%", padding: "10px",
-                                    height:"fit-content"}}/>
+                                <Card.Img variant="top" src={Images.email} style={{
+                                    width: "22%", padding: "10px",
+                                    height: "fit-content"
+                                }}/>
                                 <Card.Body style={{padding: "0", paddingTop: "10px"}}>
                                     <Card.Title style={{textAlign: "center"}}>Email</Card.Title>
                                     <Card.Text style={{textAlign: "center"}}>contactus.learning.io@gmail.com</Card.Text>
