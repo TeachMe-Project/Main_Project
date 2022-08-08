@@ -289,7 +289,7 @@ const InstituteSignup = () => {
                                                                 name="InstituteName"
                                                                 value={values.InstituteName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.InstituteName ? changeInstituteNameValidate(false) : changeInstituteNameValidate(true)}
+                                                                isInvalid={!!errors.InstituteName && touched.InstituteName ? changeInstituteNameValidate(false) : changeInstituteNameValidate(true)}
                                                                 isValid={touched.InstituteName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -308,7 +308,7 @@ const InstituteSignup = () => {
                                                                 name="Email"
                                                                 value={values.Email}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
+                                                                isInvalid={!!errors.Email && touched.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                                                                 isValid={touched.Email}
                                                                 onBlur={handleBlur}
                                                             />
@@ -329,7 +329,7 @@ const InstituteSignup = () => {
                                                                 name="OwnerName"
                                                                 value={values.OwnerName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.OwnerName ? changeOwnerNameValidate(false) : changeOwnerNameValidate(true)}
+                                                                isInvalid={!!errors.OwnerName && touched.OwnerName ? changeOwnerNameValidate(false) : changeOwnerNameValidate(true)}
                                                                 isValid={touched.OwnerName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -347,7 +347,7 @@ const InstituteSignup = () => {
                                                                 name="Location"
                                                                 value={values.Location}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Location ? changeLocationValidate(false) : changeLocationValidate(true)}
+                                                                isInvalid={!!errors.Location && touched.Location ? changeLocationValidate(false) : changeLocationValidate(true)}
                                                                 isValid={touched.Location}
                                                                 onBlur={handleBlur}
                                                             />
@@ -367,7 +367,7 @@ const InstituteSignup = () => {
                                                                 name="Password"
                                                                 value={values.Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
+                                                                isInvalid={!!errors.Password && touched.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
                                                                 isValid={touched.Password}
                                                                 onBlur={handleBlur}
                                                             />
@@ -386,7 +386,7 @@ const InstituteSignup = () => {
                                                                 name="Confirm_Password"
                                                                 value={values.Confirm_Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
+                                                                isInvalid={!!errors.Confirm_Password && touched.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
                                                                 isValid={touched.Confirm_Password}
                                                                 onBlur={handleBlur}
                                                             />
@@ -433,7 +433,7 @@ const InstituteSignup = () => {
                                                                 name="Mobile_Number"
                                                                 value={values.Mobile_Number}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)}
+                                                                isInvalid={!!errors.Mobile_Number && touched.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)}
                                                                 isValid={touched.Mobile_Number}
                                                                 onBlur={handleBlur}
                                                             />
@@ -456,7 +456,7 @@ const InstituteSignup = () => {
                                                                 name="Address"
                                                                 value={values.Address}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Address ? changeAddressValidate(false) : changeAddressValidate(true)}
+                                                                isInvalid={!!errors.Address && touched.Address ? changeAddressValidate(false) : changeAddressValidate(true)}
                                                                 isValid={touched.Address}
                                                                 onBlur={handleBlur}
                                                             />
@@ -478,7 +478,7 @@ const InstituteSignup = () => {
                                                                           name="Description"
                                                                           value={values.Description}
                                                                           onChange={handleChange}
-                                                                          isInvalid={!!errors.Description ? changeDescriptionValidate(false) : changeDescriptionValidate(true)}
+                                                                          isInvalid={!!errors.Description && touched.Description ? changeDescriptionValidate(false) : changeDescriptionValidate(true)}
                                                                           isValid={touched.Description}
                                                                           onBlur={handleBlur}
                                                             />
@@ -526,7 +526,7 @@ const InstituteSignup = () => {
                                                                 name="AccountName"
                                                                 value={values.AccountName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.AccountName ? changeAccountNameValidate(false) : changeAccountNameValidate(true)}
+                                                                isInvalid={!!errors.AccountName && touched.AccountName ? changeAccountNameValidate(false) : changeAccountNameValidate(true)}
                                                                 isValid={touched.AccountName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -546,7 +546,7 @@ const InstituteSignup = () => {
                                                                 name="BankName"
                                                                 value={values.BankName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)}
+                                                                isInvalid={!!errors.BankName && touched.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)}
                                                                 isValid={touched.BankName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -565,7 +565,7 @@ const InstituteSignup = () => {
                                                                 name="BranchName"
                                                                 value={values.BranchName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)}
+                                                                isInvalid={!!errors.BranchName && touched.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)}
                                                                 isValid={touched.BranchName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -586,7 +586,7 @@ const InstituteSignup = () => {
                                                                 name="AccountNo"
                                                                 value={values.AccountNo}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)}
+                                                                isInvalid={!!errors.AccountNo && touched.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)}
                                                                 isValid={touched.AccountNo}
                                                                 onBlur={handleBlur}
                                                             />

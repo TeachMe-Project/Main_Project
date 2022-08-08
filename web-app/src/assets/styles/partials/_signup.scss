@@ -72,10 +72,15 @@
   color: #fff;
   width: fit-content;
 
-  &:hover {
+  &:hover,&:active,&:focus {
     background-color: #fff;
     color: #1e90ff;
     border: 2px solid #1e90ff;
+  }
+
+  &:focus,&:active{
+    outline: none !important;
+    box-shadow: none !important;
   }
 }
 

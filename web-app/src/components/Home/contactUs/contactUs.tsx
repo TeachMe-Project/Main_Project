@@ -94,9 +94,9 @@ const ContactUs: React.FC = () => {
                                         name="Name"
                                         value={values.Name}
                                         onChange={handleChange}
-                                        isInvalid={!!errors.Name}
+                                        isInvalid={!!errors.Name && touched.Name}
                                         isValid={touched.Name}
-                                        onBlur={handleBlur}
+                                        onBlur={handleBlur('Name')}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.Name}
@@ -110,9 +110,9 @@ const ContactUs: React.FC = () => {
                                         name="Email"
                                         value={values.Email}
                                         onChange={handleChange}
-                                        isInvalid={!!errors.Email}
+                                        isInvalid={!!errors.Email && touched.Email}
                                         isValid={touched.Email}
-                                        onBlur={handleBlur}
+                                        onBlur={handleBlur("Email")}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.Email}
@@ -126,9 +126,9 @@ const ContactUs: React.FC = () => {
                                         name="Subject"
                                         value={values.Subject}
                                         onChange={handleChange}
-                                        isInvalid={!!errors.Subject}
+                                        isInvalid={!!errors.Subject && touched.Subject}
                                         isValid={touched.Subject}
-                                        onBlur={handleBlur}/>
+                                        onBlur={handleBlur("Subject")}/>
                                     <Form.Control.Feedback type="invalid">
                                         {errors.Subject}
                                     </Form.Control.Feedback>
@@ -141,9 +141,9 @@ const ContactUs: React.FC = () => {
                                                   name="Message"
                                                   value={values.Message}
                                                   onChange={handleChange}
-                                                  isInvalid={!!errors.Message}
+                                                  isInvalid={!!errors.Message && touched.Message}
                                                   isValid={touched.Message}
-                                                  onBlur={handleBlur}
+                                                  onBlur={handleBlur("Message")}
                                     />
                                     <Form.Control.Feedback type="invalid">
                                         {errors.Message}
