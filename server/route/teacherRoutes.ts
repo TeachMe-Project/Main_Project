@@ -4,7 +4,7 @@ import {
     getTeachers,
     createTeacher,
     getTeacherUpcomingClasses,
-    getTeacherCourses, getTeacherInstitutes, getTeacherByUsername, verifyTeacher, rejectTeacher
+    getTeacherCourses, getTeacherInstitutes, getTeacherByUsername
 } from "../controllers/teacherController";
 export const teacherRouter=express.Router();
 
@@ -30,9 +30,3 @@ teacherRouter.route("/:id/teacherInstitutes")
 
 teacherRouter.route("/createTeacher")
     .post(createTeacher);
-
-teacherRouter.route("/verify")
-    .post(verifyTeacher);
-
-teacherRouter.route("/reject")
-    .post(rejectTeacher);

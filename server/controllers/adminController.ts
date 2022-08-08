@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { PrismaClient } from '@prisma/client'
 import adminSchema from "../models/adminModel";
+import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
-
+const NAME_SPACE = "ADMIN"
 export const getAdmins = async (req: Request, res: Response) => {
 
     try {
@@ -64,20 +65,21 @@ export const newTeacherRequests = async (req: Request, res: Response) => {
     }
 }
 
-
-export const acceptTeacher = async (req: Request, res: Response) => {
+export const verifyTeacher = async (req: Request, res: Response) => {
 
     try {
         const data = await prisma.teacher.update({
-            where: { user_id: Number(req.body.user_id) },
+            where: {
+                user_id: req.body.user_id
+            },
             data: {
-                security_status: "active"
+                verification: 'verified'
             }
-        }
-        )
-        res.status(200).send(data)
-    }
-    catch (error) {
+        })
+        logger.info(NAME_SPACE, "Your Tutor Profile Successfully Verified");
+        res.status(200).send("Your Tutor Profile Successfully Verified");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
         res.status(500).send(error);
     }
 }
@@ -86,15 +88,17 @@ export const rejectTeacher = async (req: Request, res: Response) => {
 
     try {
         const data = await prisma.teacher.update({
-            where: { user_id: Number(req.body.user_id) },
+            where: {
+                user_id: req.body.user_id
+            },
             data: {
-                security_status: "inactive"
+                verification: 'rejected'
             }
-        }
-        )
-        res.status(200).send(data)
-    }
-    catch (error) {
+        })
+        logger.info(NAME_SPACE, "Your Tutor Profile Rejected");
+        res.status(200).send("Your Tutor Profile Rejected");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
         res.status(500).send(error);
     }
 }
