@@ -21,19 +21,6 @@
   .Signup {
     border-radius: 20px;
     height: max-content;
-    width: 90vw;
-    .nextBtn {
-      background-color: #1e90ff;
-      border-radius: 20px;
-      border: 2px solid #1e90ff;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .nextBtn:hover {
-      background-color: #fff;
-      color: #1e90ff;
-    }
 
     .Signup-Complete h1 {
       color: #1e90ff;
@@ -75,5 +62,20 @@
 
   }
 
+}
+
+.nextBtn {
+  background-color: #1e90ff;
+  border-radius: 20px;
+  border: 2px solid #1e90ff;
+  font-weight: 600;
+  color: #fff;
+  width: fit-content;
+
+  &:hover {
+    background-color: #fff;
+    color: #1e90ff;
+    border: 2px solid #1e90ff;
+  }
 }
 
