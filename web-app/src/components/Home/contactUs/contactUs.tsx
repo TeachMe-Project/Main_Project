@@ -38,16 +38,16 @@ const ContactUs: React.FC = () => {
                         fontSize: "60px",
                         textAlign: "center",
                        marginTop:"80px",
-                        marginBottom:"20px",
+                        marginBottom:"10px",
                         color:"#2c3e50"
                     }}>Contact Us</h1>
                     <Row className="m-0" style={{height: "fit-content"}}>
                         <Col lg={6} className="d-flex flex-row justify-content-center">
-                            <Image src={Images.contactUs} style={{height: "550px"}}></Image>
+                            <Image src={Images.contactUs} style={{height: "450px"}}></Image>
                         </Col>
                         <Col lg={5} className="d-flex flex-column justify-content-center p-3 ms-5">
                             <Form noValidate onSubmit={handleSubmit}>
-                                <Form.Group className="mb-3" controlId="validationName">
+                                <Form.Group className="mb-1" controlId="validationName">
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control
                                         type="text"
@@ -63,7 +63,7 @@ const ContactUs: React.FC = () => {
                                         {errors.Name}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="validateEmail">
+                                <Form.Group className="mb-1" controlId="validateEmail">
                                     <Form.Label>Email address</Form.Label>
                                     <Form.Control
                                         type="text"
@@ -79,7 +79,7 @@ const ContactUs: React.FC = () => {
                                         {errors.Email}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="validateSubject">
+                                <Form.Group className="mb-1" controlId="validateSubject">
                                     <Form.Label>Subject</Form.Label>
                                     <Form.Control
                                         type="text"
@@ -94,7 +94,7 @@ const ContactUs: React.FC = () => {
                                         {errors.Subject}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="validateMessage">
+                                <Form.Group className="mb-1" controlId="validateMessage">
                                     <Form.Label>Message</Form.Label>
                                     <Form.Control as="textarea"
                                                   placeholder="Enter the message here"
@@ -110,7 +110,7 @@ const ContactUs: React.FC = () => {
                                         {errors.Message}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Button type="submit" variant="primary" className="mt-3 px-4 py-2"
+                                <Button type="submit" variant="primary" className="mt-2 px-4 py-2"
                                         style={{borderRadius: "20px", float:"right"}}><GrSend
                                     style={{marginRight: "3px"}}/> Submit</Button>
                             </Form>

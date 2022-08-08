@@ -39,11 +39,38 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
                 // dangerMode: true,
             })
                 .then((willDelete: any) => {
-                    if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
-                            icon: "success",
-                        });
-                    }
+                    const apiData = JSON.stringify({
+                        "user_id": `${row.user_id}`
+                    })
+                    axios({
+                        method: "POST",
+                        url: "http://localhost:8081/auth/block",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: apiData
+                    }).then((apiRes) => {
+                        axios({
+                            method: "POST",
+                            url: "http://localhost:8081/user/removeUser",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            data: apiData
+                        }).then((apiRes) => {
+                            console.log(apiRes.status);
+                            if (apiRes.status === 200) {
+                                swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
+                                    icon: "success",
+                                });
+                            }
+                        }).catch((error) => {
+                            console.log(error.message)
+                        })
+
+                    }).catch((error) => {
+                        console.log(error.message)
+                    })
                 });
         }}
     />

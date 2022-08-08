@@ -3,9 +3,10 @@ import {Request,Response} from "express";
 import { PrismaClient } from '@prisma/client'
 import {number} from "joi";
 import userSchema from "../models/userModel";
+import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
-
+const NAME_SPACE = "User"
 export const getUsers=async (req:Request,res:Response)=>{
 
     try {
@@ -27,6 +28,7 @@ export const getUsers=async (req:Request,res:Response)=>{
         res.status(500).send(error);
     }
 }
+
 export const getUsersByID=async (req:Request,res:Response)=>{
 
 
@@ -64,6 +66,25 @@ export const  createUser=async (req:Request,res:Response)=>{
     }
     else {
         res.status(500).send(error.details[0].message);
+    }
+}
+
+export const removeUser = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.user.update({
+            where: {
+                user_id: req.body.user_id
+            },
+            data: {
+                isActive: false
+            }
+        })
+        logger.info(NAME_SPACE, "Remove User Successfully");
+        res.status(200).send("Remove User Successfully");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error);
     }
 }
 
