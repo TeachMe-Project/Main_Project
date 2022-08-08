@@ -103,6 +103,60 @@ export const rejectTeacher = async (req: Request, res: Response) => {
     }
 }
 
+export const newInstituteRequests = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.institute.findMany({
+            where: {
+                verification:"pending"
+            }
+        })
+        res.status(200).send(data)
+    }
+
+    catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+export const verifyInstitute = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.institute.update({
+            where: {
+                user_id: req.body.user_id
+            },
+            data: {
+                verification: 'verified'
+            }
+        })
+        logger.info(NAME_SPACE, "Your Institute Profile Successfully Verified");
+        res.status(200).send("Your Institute Profile Successfully Verified");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error);
+    }
+}
+
+export const rejectInstitute = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.institute.update({
+            where: {
+                user_id: req.body.user_id
+            },
+            data: {
+                verification: 'rejected'
+            }
+        })
+        logger.info(NAME_SPACE, "Your Institute Profile Rejected");
+        res.status(200).send("Your Institute Profile Rejected");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error);
+    }
+}
+
 export const createAdmin = async (req: Request, res: Response) => {
 
     const { error, value } = adminSchema.validate(req.body);

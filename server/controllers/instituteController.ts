@@ -107,7 +107,9 @@ export const createInstitute = async (req: Request, res: Response) => {
                             bank_name: req.body.bank_name,
                             branch_name: req.body.branch_name,
                             isActive: true,
-                            verification_code:''
+                            verification_code:'',
+                            verification:'pending',
+                            applied_date: new Date().toJSON().slice(0, 10)
                         }
                     }
                 }
