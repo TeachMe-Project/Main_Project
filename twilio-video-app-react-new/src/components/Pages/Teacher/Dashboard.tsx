@@ -19,7 +19,7 @@ export const Dashboard = () => {
     <div className="DashboardTeacher">
       <Container>
         <Row>
-          <PanelContainer />
+          {/*<PanelContainer />*/}
           <div className="PanelHeader">
             <h2>Dashboard</h2>
           </div>
@@ -31,23 +31,25 @@ export const Dashboard = () => {
               <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"
-                date="23-05-2022"
+                date="23-08-2022"
+                grade="Grade 8"
                 btnname="Start"
                 image={<img src={'/Images/subjects/maths.png'} />}
               />
               <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"
-                date="24-05-2022"
+                date="24-08-2022"
+                grade="Grade 9"
                 btnname="Start"
                 image={<img src={'/Images/subjects/maths.png'} />}
-                // image={require("../../Assets/Images/testimg2.jpeg")}
               />
 
               <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"
-                date="25-05-2022"
+                date="25-08-2022"
+                grade="Grade 7"
                 btnname="Start"
                 image={<img src={'/Images/subjects/maths.png'} />}
               />
@@ -56,80 +58,75 @@ export const Dashboard = () => {
         </Row>
 
         <Row>
-          <div className="PanelSubheader">
-            <h5>Analytics </h5>
-          </div>
-          <div
-            className="chartContainer"
-            style={{
-              height: '400px',
-
-              display: 'flex',
-              position: 'relative',
-              // top: -60,
-              // right: 50,
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}
-          >
-            <div
-              className="chart"
-              style={{
-                position: 'relative',
-                // top: 100,
-                // left: 150,
-              }}
-            >
-              <Paymentpiechart />
+          <div className="Panel">
+            <div className="PanelSubheader">
+              <h5>Analytics </h5>
             </div>
             <div
-              className="chart"
+              className="chartContainer"
               style={{
-                height: '500px',
-                marginRight: '40px',
+                height: '350px',
+                display: 'flex',
                 position: 'relative',
-                top: 100,
-                marginLeft: '155px',
-                // right: -150,
+                alignItems: 'center',
+                justifyContent: 'space-around',
               }}
             >
-              <Monthlyattendancechart />
-            </div>
-          </div>
-          <div
-            className="chartContainer"
-            style={{
-              height: '400px',
-
-              display: 'flex',
-              position: 'relative',
-              top: -60,
-              right: 50,
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}
-          >
-            <div
-              className="chart"
-              style={{
-                height: '500px',
-                position: 'relative',
-                top: 100,
-                left: 0,
-              }}
-            >
-              <Enrollmentchart />
+              <div
+                className="chart"
+                style={{
+                  position: 'relative',
+                }}
+              >
+                <Paymentpiechart />
+              </div>
+              <div
+                className="chart"
+                style={{
+                  height: '350px',
+                  marginRight: '40px',
+                  position: 'relative',
+                  top: 100,
+                  marginLeft: '155px',
+                }}
+              >
+                <Monthlyattendancechart />
+              </div>
             </div>
             <div
-              className="chart"
+              className="chartContainer"
               style={{
-                height: '500px',
+                height: '400px',
+                display: 'flex',
                 position: 'relative',
-                top: 100,
-                // left: 40,
+                top: -60,
+                right: 50,
+                alignItems: 'center',
+                justifyContent: 'space-around',
               }}
             >
-              <Averagetimechart />
+              <div
+                className="chart"
+                style={{
+                  height: '500px',
+                  position: 'relative',
+                  top: 100,
+                  left: 0,
+                }}
+              >
+                <Enrollmentchart />
+              </div>
+              <div
+                className="chart"
+                style={{
+                  height: '500px',
+                  position: 'relative',
+                  top: 100,
+                  // left: 40,
+                }}
+              >
+                <Averagetimechart />
+              </div>
             </div>
           </div>
         </Row>
