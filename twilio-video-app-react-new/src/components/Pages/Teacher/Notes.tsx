@@ -14,7 +14,19 @@ export const Notes: React.FC<Notes> = props => {
     <div className="Notes">
       <Container>
         <Row>
-          <Card header={props.topic} detail={props.date} btnname={<FiDownload className="ReactIcon" />} />
+          <Card
+            header={props.topic}
+            detail={props.date}
+            btnname={
+              <a
+                download="note1.pdf"
+                href="https://learninggp2.blob.core.windows.net/notes/ProposalPresentationNew.pdf"
+                target="_blank"
+              >
+                <FiDownload className="ReactIcon" />
+              </a>
+            }
+          />
         </Row>
       </Container>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import Path from 'path';
-import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob';
+import { Form, Button } from 'react-bootstrap';
+import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob-images-student';
 
 const storageConfigured = isStorageConfigured();
 
@@ -41,10 +42,21 @@ const AzureCloudStorage = (): JSX.Element => {
   // display form
   const DisplayForm = () => (
     <div>
-      <input type="file" onChange={onFileChange} key={inputKey || ''} />
-      <button type="submit" onClick={onFileUpload}>
+      {/* <input type="file" onChange={onFileChange} key={inputKey || ''} /> */}
+      {/* <button type="submit" onClick={onFileUpload}>
         Upload!
-      </button>
+      </button> */}
+      <Form.Group controlId="form.Name">
+        <Form.Control type="file" className="form-control" id="customFile" onChange={onFileChange} />
+      </Form.Group>
+      <Button
+        type="button"
+        className="uploadbtn btn btn-info btn-sm w-100"
+        style={{ marginTop: '2rem' }}
+        onClick={onFileUpload}
+      >
+        Upload
+      </Button>
     </div>
   );
 

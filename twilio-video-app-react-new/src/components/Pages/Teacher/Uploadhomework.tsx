@@ -8,6 +8,10 @@ import * as yup from 'yup';
 import LazyLoad from 'react-lazyload';
 import SubmitButton from '../../Button/SubmitButton';
 import { ButtonCommon } from '../../Button/ButtonCommon';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
+import UploadButton from '../../Button/UploadButton';
+import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageHomework';
 
 const schema = yup.object().shape({
   topic: yup
@@ -115,7 +119,7 @@ export const Uploadhomework = () => {
                         </Form.Group>
                       </Row>
 
-                      <Row>
+                      {/* <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Upload File</Form.Label>
@@ -137,7 +141,8 @@ export const Uploadhomework = () => {
                             </div>
                           </Col>
                         </Form.Group>
-                      </Row>
+                      </Row> */}
+                      <AzureCloudStorage />
                     </Form>
                   </Row>
                 )}
@@ -149,6 +154,28 @@ export const Uploadhomework = () => {
           {/*  <Button name="Save Changes"/>*/}
           {/*</div>*/}
         </div>
+        {/* <Form>
+          <Form.Group controlId="form.Name">
+            <Form.Label>Topic</Form.Label>
+            <Form.Control type="text" placeholder="Topic" />
+          </Form.Group>
+          <Form.Group controlId="form.Name">
+            <Form.Label>Description</Form.Label>
+            <Form.Control type="text" placeholder="Description" />
+          </Form.Group>
+          <Form.Group controlId="form.Name">
+            <Form.Label>Deadline</Form.Label>
+            <Form.Control type="date" placeholder="Deadline" />
+          </Form.Group> */}
+        {/* <Form.Group controlId="form.Name">
+            <Form.Label className="form-label" for="customFile">
+              Homework File
+            </Form.Label>
+            <Form.Control type="file" className="form-control" id="customFile" />
+          </Form.Group> */}
+        {/* <UploadButton /> */}
+        {/* <AzureCloudStorage />
+        </Form> */}
       </Container>
     </div>
   );

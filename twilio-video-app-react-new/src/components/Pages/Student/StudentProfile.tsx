@@ -3,10 +3,10 @@ import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Button } from '../../Button/Button';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageImagesStudent';
 
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
-import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorage';
 
 const schema = yup.object().shape({
   Firstname: yup
@@ -126,10 +126,10 @@ export const StudentProfile = () => {
         <div className="PanelContainer">
           <Col xl={4}>
             <div className="LeftContainer">
-              {/* <div className="ProfileImg">
-                <img src={'/Images/student.png'} />
-              </div> */}
-              <AzureCloudStorage />
+              <div className="ProfileImg">
+                <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
+                <AzureCloudStorage />
+              </div>
               <div className="ParentContact">
                 <div className="ContactHeader">Parent's Contact Details:</div>
                 <div className="ParentLabel">Name:</div>

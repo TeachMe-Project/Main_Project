@@ -35,7 +35,8 @@ const getBlobsInContainer = async (containerClient: ContainerClient) => {
 // <snippet_createBlobInContainer>
 const createBlobInContainer = async (containerClient: ContainerClient, file: File) => {
   // create blobClient for container
-  const blobClient = containerClient.getBlockBlobClient(file.name);
+  // const blobClient = containerClient.getBlockBlobClient(file.name);
+  const blobClient = containerClient.getBlockBlobClient('teacher.jpg');
 
   // set mimetype as determined from browser with file upload control
   const options = { blobHTTPHeaders: { blobContentType: file.type } };

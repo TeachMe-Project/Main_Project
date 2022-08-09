@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import Path from 'path';
-import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob';
+import { Form, Button } from 'react-bootstrap';
+import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob-images-teacher';
 
 const storageConfigured = isStorageConfigured();
 
@@ -41,10 +42,21 @@ const AzureCloudStorage = (): JSX.Element => {
   // display form
   const DisplayForm = () => (
     <div>
-      <input type="file" onChange={onFileChange} key={inputKey || ''} />
-      <button type="submit" onClick={onFileUpload}>
+      {/* <input type="file" onChange={onFileChange} key={inputKey || ''} /> */}
+      {/* <button type="submit" onClick={onFileUpload}>
         Upload!
-      </button>
+      </button> */}
+      <Form.Group controlId="form.Name">
+        <Form.Control type="file" className="form-control" id="customFile" onChange={onFileChange} />
+      </Form.Group>
+      <Button
+        type="button"
+        className="uploadbtn btn btn-info btn-sm w-100"
+        style={{ marginTop: '2rem' }}
+        onClick={onFileUpload}
+      >
+        Upload
+      </Button>
     </div>
   );
 
@@ -61,6 +73,7 @@ const AzureCloudStorage = (): JSX.Element => {
                 {/* {Path.basename(blobItem)} */}
                 {/* <br /> */}
                 <img src={item} alt={item} height="200" />
+                {/* <img src={blobItem} alt={blobItem} height="200" /> */}
               </div>
             </li>
           );
@@ -72,12 +85,11 @@ const AzureCloudStorage = (): JSX.Element => {
   return (
     <div>
       {/* <h1>Upload file to Azure Blob Storage</h1> */}
-      {/* {storageConfigured && <div>Storage is configured.</div>} */}
-      {/* {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()} */}
-      <hr />
-      {!storageConfigured && <div>Storage is not configured.</div>}
       {storageConfigured && !uploading && DisplayForm()}
       {storageConfigured && uploading && <div>Uploading</div>}
+      {/* <hr />
+      {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()} */}
+      {!storageConfigured && <div>Storage is not configured.</div>}
     </div>
   );
 };

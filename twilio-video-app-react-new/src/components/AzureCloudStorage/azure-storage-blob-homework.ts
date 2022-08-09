@@ -4,7 +4,7 @@
 // THIS IS SAMPLE CODE ONLY - NOT MEANT FOR PRODUCTION USE
 import { BlobServiceClient, ContainerClient } from '@azure/storage-blob';
 
-const containerName = `images`;
+const containerName = `homework`;
 const sasToken = process.env.REACT_APP_STORAGESASTOKEN;
 const storageAccountName = process.env.REACT_APP_STORAGERESOURCENAME;
 // </snippet_package>

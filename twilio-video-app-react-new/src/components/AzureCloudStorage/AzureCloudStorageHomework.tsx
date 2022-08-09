@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 // import Path from 'path';
-import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob';
+import { Form, Row, Col } from 'react-bootstrap';
+import { ButtonCommon } from '../Button/ButtonCommon';
+import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob-homework';
 
 const storageConfigured = isStorageConfigured();
 
@@ -13,6 +15,7 @@ const AzureCloudStorage = (): JSX.Element => {
 
   // UI/form management
   const [uploading, setUploading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
   const [inputKey, setInputKey] = useState(Math.random().toString(36));
 
   const onFileChange = (event: any) => {
@@ -22,10 +25,12 @@ const AzureCloudStorage = (): JSX.Element => {
 
   const onFileUpload = async () => {
     // prepare UI
+    setUploaded(false);
     setUploading(true);
 
     // *** UPLOAD TO AZURE STORAGE ***
     const blobsInContainer: string[] = await uploadFileToBlob(fileSelected);
+    // await uploadFileToBlob(fileSelected);
 
     // prepare UI for results
     setBlobList(blobsInContainer);
@@ -33,6 +38,7 @@ const AzureCloudStorage = (): JSX.Element => {
     // reset state/form
     setFileSelected(null);
     setUploading(false);
+    setUploaded(true);
     setInputKey(Math.random().toString(36));
   };
 
@@ -41,10 +47,35 @@ const AzureCloudStorage = (): JSX.Element => {
   // display form
   const DisplayForm = () => (
     <div>
-      <input type="file" onChange={onFileChange} key={inputKey || ''} />
-      <button type="submit" onClick={onFileUpload}>
-        Upload!
-      </button>
+      <Row>
+        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+          <Col xl={4}>
+            <Form.Label style={{ fontWeight: 600 }}>Upload File</Form.Label>
+          </Col>
+          <Col xl={8}>
+            <Form.Control
+              type="file"
+              placeholder="Notes"
+              name="fileupload"
+              accept="application/pdf"
+              onChange={onFileChange}
+            />
+          </Col>
+        </Form.Group>
+      </Row>
+
+      <Row>
+        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+          <Col xl={4}>
+            <Form.Label style={{ fontWeight: 600 }}></Form.Label>
+          </Col>
+          <Col xl={8} style={{ margin: '0 108px' }}>
+            <div className="Buttonforsubmit">
+              <ButtonCommon name={'Submit'} onClick={onFileUpload} />
+            </div>
+          </Col>
+        </Form.Group>
+      </Row>
     </div>
   );
 
@@ -61,7 +92,6 @@ const AzureCloudStorage = (): JSX.Element => {
                 {/* {Path.basename(blobItem)} */}
                 {/* <br /> */}
                 <img src={item} alt={item} height="200" />
-                {/* <img src={blobItem} alt={blobItem} height="200" /> */}
               </div>
             </li>
           );
@@ -73,11 +103,13 @@ const AzureCloudStorage = (): JSX.Element => {
   return (
     <div>
       {/* <h1>Upload file to Azure Blob Storage</h1> */}
+      {/* {storageConfigured && <div>Storage is configured.</div>} */}
+      {/* {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()} */}
+      {/* <hr /> */}
+      {!storageConfigured && <div>Storage is not configured.</div>}
       {storageConfigured && !uploading && DisplayForm()}
       {storageConfigured && uploading && <div>Uploading</div>}
-      {/* <hr />
-      {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()} */}
-      {!storageConfigured && <div>Storage is not configured.</div>}
+      {storageConfigured && uploaded && <div>Successfully uploaded. Go back to page</div>}
     </div>
   );
 };
