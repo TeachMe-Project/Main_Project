@@ -12,7 +12,7 @@ import PendingPayments from './PendingPayments';
 import PanelContainer from '../../Layout/PanelContainer';
 
 type tutorName = {
-  name: string;
+  name?: string;
   image?: HTMLImageElement;
 };
 export const Course = (props: tutorName) => {
