@@ -54,84 +54,148 @@ export const Dashboard = () => {
             </div>
           </div>
         </Row>
-
         <Row>
           <div className="PanelSubheader">
             <h5>Analytics </h5>
           </div>
-          <div
-            className="chartContainer"
-            style={{
-              height: '400px',
 
-              display: 'flex',
-              position: 'relative',
-              // top: -60,
-              // right: 50,
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}
-          >
-            <div
-              className="chart"
-              style={{
-                position: 'relative',
-                // top: 100,
-                // left: 150,
-              }}
-            >
-              <Paymentpiechart />
-            </div>
-            <div
-              className="chart"
-              style={{
-                height: '500px',
-                marginRight: '40px',
-                position: 'relative',
-                top: 100,
-                marginLeft: '155px',
-                // right: -150,
-              }}
-            >
-              <Monthlyattendancechart />
-            </div>
-          </div>
-          <div
-            className="chartContainer"
-            style={{
-              height: '400px',
+          <Row>
+            <Col xl={6}>
+              <div className="chart">
+                <div className="card" style={{ width: '29rem', height: '18rem' }}>
+                  <div className="card-body">
+                    <h5 className="card-title" style={{ marginBottom: '20px' }}>
+                      Monthly Income
+                    </h5>
+                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                      <Col xl={8}>
+                        <p style={{ marginRight: '20px' }}>Mathematics by Keshan</p>
+                      </Col>
+                      <Col xl={4}>
+                        <p>Rs.5,000.00</p>
+                      </Col>
+                    </div>
 
-              display: 'flex',
-              position: 'relative',
-              top: -60,
-              right: 50,
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}
-          >
-            <div
-              className="chart"
-              style={{
-                height: '500px',
-                position: 'relative',
-                top: 100,
-                left: 0,
-              }}
-            >
-              <Enrollmentchart />
-            </div>
-            <div
-              className="chart"
-              style={{
-                height: '500px',
-                position: 'relative',
-                top: 100,
-                // left: 40,
-              }}
-            >
-              <Averagetimechart />
-            </div>
-          </div>
+                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                      <Col xl={8}>
+                        <p style={{ marginRight: '20px' }}>Combined maths</p>
+                      </Col>
+                      <Col xl={4}>
+                        <p>Rs.20,000.00</p>
+                      </Col>
+                    </div>
+                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                      <Col xl={8}>
+                        <p style={{ marginRight: '20px' }}>Pure Maths Revision</p>
+                      </Col>
+                      <Col xl={4}>
+                        <p>Rs.5,000.00</p>
+                      </Col>
+                    </div>
+
+                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                      <Col xl={8}>
+                        <h5 className="card-title">Total Earnings</h5>
+                      </Col>
+                      <Col xl={4}>
+                        <p>
+                          <b>Rs.30,000.00</b>
+                        </p>
+                      </Col>
+                    </div>
+                  </div>
+                </div>
+
+                {/* <Monthlyattendancechart /> */}
+              </div>
+            </Col>
+
+            {/* ------------------------------------------------------------------------------- */}
+
+            <Col xl={6}>
+              <div className="chart">
+                <div className="card" style={{ width: '29rem', height: '18rem' }}>
+                  <div className="card-body">
+                    <h5 className="card-title" style={{ marginBottom: '20px' }}>
+                      Monthly Income
+                    </h5>
+                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                      <Col xl={8}>
+                        <p style={{ marginRight: '20px' }}>Mathematics by Keshan</p>
+                      </Col>
+                      <Col xl={4}>
+                        <p>Rs.5,000.00</p>
+                      </Col>
+                    </div>
+
+                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                      <Col xl={8}>
+                        <p style={{ marginRight: '20px' }}>Combined maths</p>
+                      </Col>
+                      <Col xl={4}>
+                        <p>Rs.20,000.00</p>
+                      </Col>
+                    </div>
+                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                      <Col xl={8}>
+                        <p style={{ marginRight: '20px' }}>Pure Maths Revision</p>
+                      </Col>
+                      <Col xl={4}>
+                        <p>Rs.5,000.00</p>
+                      </Col>
+                    </div>
+
+                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                      <Col xl={8}>
+                        <h5 className="card-title">Total Earnings</h5>
+                      </Col>
+                      <Col xl={4}>
+                        <p>
+                          <b>Rs.30,000.00</b>
+                        </p>
+                      </Col>
+                    </div>
+
+                    <a href="#" className="btn btn-primary" style={{ marginTop: '10px' }}>
+                      Withdraw Funds
+                    </a>
+                  </div>
+                </div>
+
+                {/* <Monthlyattendancechart /> */}
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xl={6}>
+              <div
+                className="chart"
+                style={{
+                  height: '460px',
+                  position: 'relative',
+                  top: 50,
+                  left: -10,
+                }}
+              >
+                <Enrollmentchart />
+              </div>
+            </Col>
+            <Col xl={6}>
+              <div
+                className="chart"
+                style={{
+                  height: '460px',
+                  width: '480px',
+                  position: 'relative',
+                  top: 50,
+                  // left: 40,
+                }}
+              >
+                <Averagetimechart />
+              </div>
+            </Col>
+          </Row>
         </Row>
       </Container>
     </div>

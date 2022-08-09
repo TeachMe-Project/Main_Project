@@ -28,20 +28,20 @@ export const InstituteCard: React.FC<InstituteCard> = props => {
 
       <Col xl={6}>
         <div className="ViewMore">
-          <Link to="/course" className="link ViewMoreBtn">
+          <Link to="" className="link ViewMoreBtn">
             <CardButton btnname={props.btn1} />
           </Link>
         </div>
       </Col>
 
       <Col xl={1}>
-        <Link to="/course" className=" link SubscribeBtn">
+        <Link to="" className=" link SubscribeBtn">
           <CardButton btnname={props.btn2} />
         </Link>
       </Col>
 
       <Col xl={1}>
-        <Link to="/course" className=" link SubscribeBtn">
+        <Link to="" className=" link SubscribeBtn">
           <ButtonCommon name={props.btn3} />
         </Link>
       </Col>
