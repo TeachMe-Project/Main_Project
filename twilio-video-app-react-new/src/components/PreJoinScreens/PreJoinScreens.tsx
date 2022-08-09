@@ -15,20 +15,20 @@ export enum Steps {
 
 export default function PreJoinScreens() {
   const baseURL = 'http://localhost:8081/course/3';
-  const [courses, setCourses] = React.useState(null);
+  // const [courses, setCourses] = React.useState(null);
 
-  React.useEffect(async () => {
-    await axios
-      .get(baseURL)
-      .then(response => {
-        setCourses(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
-
-  console.log(courses);
+  // React.useEffect( () => {
+  //   axios
+  //     .get(baseURL)
+  //     .then(response => {
+  //       setCourses(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }, []);
+  //
+  // console.log(courses ? parseInt(courses[0].course_id) : '');
 
   const { user } = useAppState();
   const { getAudioAndVideoTracks } = useVideoContext();
@@ -47,9 +47,16 @@ export default function PreJoinScreens() {
     //     setStep(Steps.deviceSelectionStep);
     //   }
     // }
-    let c = courses ? parseInt(courses[0].course_id) : '';
-
-    setRoomName(c);
+    // let c = courses ? parseInt(courses[0].course_id) : '';
+    axios
+      .get(baseURL)
+      .then(response => {
+        setRoomName(response.data[0].course_id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // setRoomName(c);
     if (user?.displayName) {
       setStep(Steps.deviceSelectionStep);
     }
