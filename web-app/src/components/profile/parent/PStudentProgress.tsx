@@ -9,6 +9,7 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 // @ts-ignore
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {BsCashCoin} from "react-icons/bs";
+import {useNavigate} from "react-router-dom";
 
 type UpComing = {
     id: number;
@@ -119,62 +120,6 @@ const data: Array<UpComing> = [
 
 ];
 
-const summary = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
-    // < BsTrashFill
-    //     style={{
-    //         fontSize: "20px",
-    //         color: "#e74c3c",
-    //         padding: "7px",
-    //         width: "30px",
-    //         height: "30px",
-    //         borderRadius: "50%",
-    //         cursor: "pointer",
-    //         boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-    //     }}
-    //     className='accept-icon'
-
-    // />
-    <Button
-        className='nextBtn-outline'
-        style={{
-            boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-        }}
-        onClick={() => {
-        }}>
-        Summary
-    </Button>
-);
-const columns = [
-    {
-        dataField: "id",
-        text: "",
-        hidden: true
-    },
-    {
-        dataField: "class",
-        text:"Subject",
-    },
-    {
-        dataField: "date",
-        text: "Date",
-        sort: true
-    },
-    {
-        dataField: "attendTime",
-        text: "Attend Time"
-    },
-    {
-        dataField: "leaveTime",
-        text: "Leave Time"
-    },
-    {
-        dataField: "",
-        text: "",
-        formatter: summary,
-        headerAttrs: {width: 150},
-        attrs: {width: 100, class: "EditRow"}
-    },
-];
 
 
 const PStudentProgress: React.FC = () => {
@@ -195,6 +140,51 @@ const PStudentProgress: React.FC = () => {
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
+const navigate = useNavigate();
+
+    const summary = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+        <Button
+            className='nextBtn-outline'
+            style={{
+                boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+            }}
+            onClick={() => {
+                navigate('/parent/summery')
+            }}>
+            Summary
+        </Button>
+    );
+    const columns = [
+        {
+            dataField: "id",
+            text: "",
+            hidden: true
+        },
+        {
+            dataField: "class",
+            text:"Subject",
+        },
+        {
+            dataField: "date",
+            text: "Date",
+            sort: true
+        },
+        {
+            dataField: "attendTime",
+            text: "Attend Time"
+        },
+        {
+            dataField: "leaveTime",
+            text: "Leave Time"
+        },
+        {
+            dataField: "",
+            text: "",
+            formatter: summary,
+            headerAttrs: {width: 150},
+            attrs: {width: 100, class: "EditRow"}
+        },
+    ];
 
     // @ts-ignore
     return (

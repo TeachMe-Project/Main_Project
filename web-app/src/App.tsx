@@ -23,6 +23,7 @@ import ProfileEdit from "./components/profile/navBar/ProfileEdit";
 import ViewInstituteProfile from "./components/profile/admin/ViewInstituteProfile";
 import InstituteManageProfile from "./components/profile/institute/InstituteManageProfile";
 import ViewTutorProfile from "./components/profile/admin/ViewTutorProfile";
+import PStudentSummery from "./components/profile/parent/PStudentSummery";
 
 const App: React.FC = () => {
     return (
@@ -40,6 +41,9 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={PUpComingPayments} role={'parent'}/>}/>
                 <Route path="/parent/stuSignup" element={<ProtectedRoute component={StudentSignup} role={'parent'}/>}/>
                 <Route path="/parent/history" element={<ProtectedRoute component={PStudentProgress} role={'parent'}/>}/>
+                <Route path="/parent/summery" element={<ProtectedRoute component={PStudentSummery} role={'parent'}/>}/>
+
+
 
                 <Route path="/admin" element={<ProtectedRoute component={ManageUsers} role={'admin'}/>}/>
                 <Route path="/admin/managecourses"
@@ -67,8 +71,11 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={InstituteManageProfile} role={'institute'} />}/>
                 <Route path="/institute/addtutors"
                        element={<ProtectedRoute component={InstituteAddTutor} role={'institute'}/>}/>
+
+
                 <Route path="/parent/profile" element={<ProtectedRoute component={ProfileEdit} role={'parent'}/>}/>
                 <Route path="/admin/profile" element={<ProtectedRoute component={ProfileEdit} role={'admin'}/>}/>
+
                 <Route path="/*" element={<NotFound/>}/>
             </Routes>
         </div>
