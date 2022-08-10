@@ -57,7 +57,7 @@ export function Parentsaveragetimechart() {
         height: '350px',
         width: '565px',
         position: 'relative',
-        bottom: '-58px',
+        bottom: '-30px',
       }}
     />
   );
