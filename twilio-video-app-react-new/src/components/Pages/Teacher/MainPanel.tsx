@@ -9,9 +9,9 @@ import Dashboard from './Dashboard';
 import Editdetails from './Editdetails';
 import Institutes from './Institutes';
 import MyCourses from './MyCourses';
-
+import FreeCard from './FreeCard';
 import Settings from './Settings';
-import { Students } from './Students';
+
 import Uploadhomework from './Uploadhomework';
 import Uploadnotes from './Uploadnotes';
 import TeacherProfile from './TeacherProfile';
@@ -69,6 +69,10 @@ const routes = [
   {
     path: '/institutes',
     main: () => <Institutes />,
+  },
+  {
+    path: '/freecard',
+    main: () => <FreeCard />,
   },
   {
     path: '/addextraclass',
