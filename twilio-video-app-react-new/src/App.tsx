@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../src/Assets/Styles/main.scss';
 import LeftSidebarTeacher from './components/Sidebar/LeftSidebarTeacher';
-import LeftSidebar from './components/Sidebar/LeftSidebar';
+// import LeftSidebar from './components/Sidebar/LeftSidebar';
 import MainPanel from './components/Pages/Teacher/MainPanel';
 // import MainPanel from './components/Pages/Student/MainPanel';
 import { Container, Row, Col } from 'react-bootstrap';

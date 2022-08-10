@@ -18,6 +18,7 @@ import TeacherProfile from './TeacherProfile';
 import Notifications from '../../Notification/notifications';
 import Messages from './Messages';
 import Helpandsupport from './Helpandsupport';
+import Parentscharts from './Parentscharts';
 
 const routes = [
   {
@@ -89,6 +90,10 @@ const routes = [
   {
     path: '/helpandsupport',
     main: () => <Helpandsupport />,
+  },
+  {
+    path: '/parentscharts',
+    main: () => <Parentscharts />,
   },
 ];
 
