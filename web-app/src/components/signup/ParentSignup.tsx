@@ -215,7 +215,7 @@ const ParentSignup = () => {
                                                                 name="Email"
                                                                 value={values.Email}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
+                                                                isInvalid={!!errors.Email && touched.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                                                                 isValid={touched.Email}
                                                                 onBlur={handleBlur}
                                                             />
@@ -234,7 +234,7 @@ const ParentSignup = () => {
                                                                 name="Firstname"
                                                                 value={values.Firstname}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)}
+                                                                isInvalid={!!errors.Firstname && touched.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)}
                                                                 isValid={touched.Firstname}
                                                                 onBlur={handleBlur}
                                                             />
@@ -254,7 +254,7 @@ const ParentSignup = () => {
                                                                 name="Lastname"
                                                                 value={values.Lastname}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
+                                                                isInvalid={!!errors.Lastname && touched.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
                                                                 isValid={touched.Lastname}
                                                                 onBlur={handleBlur}
                                                             />
@@ -273,7 +273,7 @@ const ParentSignup = () => {
                                                                 name="Mobile"
                                                                 value={values.Mobile}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Mobile ? changeMobileValidate(false) : changeMobileValidate(true)}
+                                                                isInvalid={!!errors.Mobile && touched.Mobile ? changeMobileValidate(false) : changeMobileValidate(true)}
                                                                 isValid={touched.Mobile}
                                                                 onBlur={handleBlur}
                                                             />
@@ -293,7 +293,7 @@ const ParentSignup = () => {
                                                                 name="Password"
                                                                 value={values.Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
+                                                                isInvalid={!!errors.Password && touched.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
                                                                 isValid={touched.Password}
                                                                 onBlur={handleBlur}
                                                             />
@@ -312,7 +312,7 @@ const ParentSignup = () => {
                                                                 name="Confirm_Password"
                                                                 value={values.Confirm_Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
+                                                                isInvalid={!!errors.Confirm_Password && touched.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
                                                                 isValid={touched.Confirm_Password}
                                                                 onBlur={handleBlur}
                                                             />

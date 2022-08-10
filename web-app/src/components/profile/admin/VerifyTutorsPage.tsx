@@ -93,7 +93,7 @@ const VerifyTutorsPage = () => {
                         }).then((apiRes) => {
                             axios({
                                 method: "POST",
-                                url: "http://localhost:8081/teacher/verify",
+                                url: "http://localhost:8081/admin/verifyTeacher",
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
@@ -149,7 +149,7 @@ const VerifyTutorsPage = () => {
 
                         axios({
                             method: "POST",
-                            url: "http://localhost:8081/teacher/reject",
+                            url: "http://localhost:8081/admin/rejectTeacher",
                             headers: {
                                 'Content-Type': 'application/json'
                             },

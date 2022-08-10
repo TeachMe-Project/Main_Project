@@ -40,7 +40,7 @@ export const Institutes = () => {
     navigate('/');
   };
   return (
-    <div className="Notifications">
+    <div className="Institutes">
       <Container>
         <Row>
           <PanelContainer />
@@ -68,8 +68,8 @@ export const Institutes = () => {
                   <tbody>
                     <tr>
                       <td data-label="Course ID :">10000102345</td>
-                      <td data-label="Institute Name :">Sigma</td>
-                      <td data-label="Contact Number :">011 2859684</td>
+                      <td data-label="Institute Name :">Sigma Institute</td>
+                      <td data-label="Contact Number :">011 2536472</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
                           <Link to="" className="link ViewMoreBtn">
@@ -80,7 +80,7 @@ export const Institutes = () => {
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102355</td>
-                      <td data-label="Institute Name :">Rotary</td>
+                      <td data-label="Institute Name :">Rotary Institute</td>
                       <td data-label="Contact Number :">011 2859684</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
@@ -92,8 +92,8 @@ export const Institutes = () => {
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102320</td>
-                      <td data-label="Institute Name :">Syzygy</td>
-                      <td data-label="Contact Number :">011 2859684</td>
+                      <td data-label="Institute Name :">Syzygy Institute</td>
+                      <td data-label="Contact Number :">011 2772134</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
                           <Link to="" className="link ViewMoreBtn">
@@ -104,8 +104,8 @@ export const Institutes = () => {
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000109945</td>
-                      <td data-label="Institute Name :">Montana</td>
-                      <td data-label="Contact Number :">011 2859684</td>
+                      <td data-label="Institute Name :">Montana Institute</td>
+                      <td data-label="Contact Number :">011 7234999</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
                           <Link to="" className="link ViewMoreBtn">
@@ -116,8 +116,8 @@ export const Institutes = () => {
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102300</td>
-                      <td data-label="Institute Name :">Sasip</td>
-                      <td data-label="Contact Number :">011 2859684</td>
+                      <td data-label="Institute Name :">Sasip Institute</td>
+                      <td data-label="Contact Number :">033 2999684</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
                           <Link to="" className="link ViewMoreBtn">
@@ -153,7 +153,7 @@ export const Institutes = () => {
                 <div className="Panel">
                   <div className="PanelBody" style={{ display: 'block' }}>
                     <InstituteCard
-                      institutename="Sigma Institute"
+                      institutename="Susipwan Institute, Gampaha"
                       image={<img src={'/Images/subjects/science.png'} />}
                       btn1="View more"
                       btn2="Accept"
@@ -161,16 +161,16 @@ export const Institutes = () => {
                     />
 
                     <InstituteCard
-                      institutename="Sigma Institute"
-                      image={<img src={'/Images/subjects/science.png'} />}
+                      institutename="Shakthi Institute"
+                      image={<img src={'/Images/subjects/art.png'} />}
                       btn1="View more"
                       btn2="Accept"
                       btn3="Decline"
                     />
 
                     <InstituteCard
-                      institutename="Sigma Institute"
-                      image={<img src={'/Images/subjects/science.png'} />}
+                      institutename="Flysky Institute"
+                      image={<img src={'/Images/subjects/maths.png'} />}
                       btn1="View more"
                       btn2="Accept"
                       btn3="Decline"

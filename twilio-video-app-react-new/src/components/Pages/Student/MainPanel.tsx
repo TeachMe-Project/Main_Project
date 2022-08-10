@@ -100,15 +100,15 @@ export default function MainPanel() {
     <div className="MainPanel">
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <UnsupportedBrowserWarning>
-          <AppStateProvider>
-            <Routes>
-              {routes.map((route, index) => (
-                <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
-              ))}
-            </Routes>
-          </AppStateProvider>
-        </UnsupportedBrowserWarning>
+        {/*<UnsupportedBrowserWarning>*/}
+        <AppStateProvider>
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
+            ))}
+          </Routes>
+        </AppStateProvider>
+        {/*</UnsupportedBrowserWarning>*/}
       </MuiThemeProvider>
     </div>
   );

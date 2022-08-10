@@ -313,7 +313,7 @@ const TeacherSignup = () => {
                                                                 name="Title"
                                                                 value={values.Title}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Title ? changeTitleValidate(false) : changeTitleValidate(true)}
+                                                                isInvalid={!!errors.Title && touched.Title ? changeTitleValidate(false) : changeTitleValidate(true)}
                                                                 isValid={touched.Title}
                                                                 onBlur={handleBlur}
                                                             >
@@ -336,7 +336,7 @@ const TeacherSignup = () => {
                                                                 name="Email"
                                                                 value={values.Email}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
+                                                                isInvalid={!!errors.Email && touched.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                                                                 isValid={touched.Email}
                                                                 onBlur={handleBlur}
                                                             />
@@ -357,7 +357,7 @@ const TeacherSignup = () => {
                                                                 name="Firstname"
                                                                 value={values.Firstname}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)}
+                                                                isInvalid={!!errors.Firstname && touched.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)}
                                                                 isValid={touched.Firstname}
                                                                 onBlur={handleBlur}
                                                             />
@@ -375,7 +375,7 @@ const TeacherSignup = () => {
                                                                 name="Lastname"
                                                                 value={values.Lastname}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
+                                                                isInvalid={!!errors.Lastname && touched.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
                                                                 isValid={touched.Lastname}
                                                                 onBlur={handleBlur}
                                                             />
@@ -395,7 +395,7 @@ const TeacherSignup = () => {
                                                                 name="Password"
                                                                 value={values.Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
+                                                                isInvalid={!!errors.Password && touched.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
                                                                 isValid={touched.Password}
                                                                 onBlur={handleBlur}
                                                             />
@@ -414,7 +414,7 @@ const TeacherSignup = () => {
                                                                 name="Confirm_Password"
                                                                 value={values.Confirm_Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
+                                                                isInvalid={!!errors.Confirm_Password && touched.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
                                                                 isValid={touched.Confirm_Password}
                                                                 onBlur={handleBlur}
                                                             />
@@ -460,7 +460,7 @@ const TeacherSignup = () => {
                                                                 name="Mobile"
                                                                 value={values.Mobile}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Mobile ? changeMobileValidate(false) : changeMobileValidate(true)}
+                                                                isInvalid={!!errors.Mobile && touched.Mobile ? changeMobileValidate(false) : changeMobileValidate(true)}
                                                                 isValid={touched.Mobile}
                                                                 onBlur={handleBlur}
                                                             />
@@ -481,7 +481,7 @@ const TeacherSignup = () => {
                                                                           name="Description"
                                                                           value={values.Description}
                                                                           onChange={handleChange}
-                                                                          isInvalid={!!errors.Description ? changeDescriptionValidate(false) : changeDescriptionValidate(true)}
+                                                                          isInvalid={!!errors.Description && touched.Description ? changeDescriptionValidate(false) : changeDescriptionValidate(true)}
                                                                           isValid={touched.Description}
                                                                           onBlur={handleBlur}
                                                             />
@@ -503,7 +503,7 @@ const TeacherSignup = () => {
                                                                 name="Qualification"
                                                                 value={values.Qualification}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Qualification ? changeQualificationValidate(false) : changeQualificationValidate(true)}
+                                                                isInvalid={!!errors.Qualification && touched.Qualification ? changeQualificationValidate(false) : changeQualificationValidate(true)}
                                                                 isValid={touched.Qualification}
                                                                 onBlur={handleBlur}
                                                             />
@@ -551,7 +551,7 @@ const TeacherSignup = () => {
                                                                 name="AccountName"
                                                                 value={values.AccountName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.AccountName ? changeAccountNameValidate(false) : changeAccountNameValidate(true)}
+                                                                isInvalid={!!errors.AccountName && touched.AccountName ? changeAccountNameValidate(false) : changeAccountNameValidate(true)}
                                                                 isValid={touched.AccountName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -571,7 +571,7 @@ const TeacherSignup = () => {
                                                                 name="BankName"
                                                                 value={values.BankName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)}
+                                                                isInvalid={!!errors.BankName && touched.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)}
                                                                 isValid={touched.BankName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -590,7 +590,7 @@ const TeacherSignup = () => {
                                                                 name="BranchName"
                                                                 value={values.BranchName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)}
+                                                                isInvalid={!!errors.BranchName && touched.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)}
                                                                 isValid={touched.BranchName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -611,7 +611,7 @@ const TeacherSignup = () => {
                                                                 name="AccountNo"
                                                                 value={values.AccountNo}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)}
+                                                                isInvalid={!!errors.AccountNo && touched.AccountName ? changeAccountNoValidate(false) : changeAccountNoValidate(true)}
                                                                 isValid={touched.AccountNo}
                                                                 onBlur={handleBlur}
                                                             />

@@ -12,7 +12,7 @@ import PendingPayments from './PendingPayments';
 import PanelContainer from '../../Layout/PanelContainer';
 
 type tutorName = {
-  name: string;
+  name?: string;
   image?: HTMLImageElement;
 };
 export const Course = (props: tutorName) => {
@@ -52,7 +52,9 @@ export const Course = (props: tutorName) => {
                 <Details label="Medium" value="English" symbol=":" />
                 <Details
                   label="Description"
-                  value="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy."
+                  value="This course includes content of grade 8 mathematics
+                of local syllabus in English medium. It contains algebraic concepts and skills needed to
+                graph and solve linear equations and inequalities."
                 />
                 <Details label="Monthly Payment" value="LKR 2500" symbol=":" />
                 <Details label="Started Date" value="2022-03-24" symbol=":" />
@@ -67,6 +69,16 @@ export const Course = (props: tutorName) => {
                 <Notes topic="Note for week 5" date="2022-05-03" />
               </div>
               <div className="Homework">
+                <Homework name="Homework for week 1" date="2022-04-05" />
+                <Homework name="Homework for week 2" date="2022-04-12" />
+                <Homework name="Homework for week 3" date="2022-04-19" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+              </div>
+              <div className="Upcoming Classes">
                 <Homework name="Homework for week 1" date="2022-04-05" />
                 <Homework name="Homework for week 2" date="2022-04-12" />
                 <Homework name="Homework for week 3" date="2022-04-19" />

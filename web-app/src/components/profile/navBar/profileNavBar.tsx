@@ -62,7 +62,7 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                         <Row className='d-flex flex-row-reverse align-items-center'>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" className='p-0 border-none m-0'
                                            style={{width: "fit-content", borderRadius: "50%"}}
-                            ><img src={user?.picture}
+                            ><img src={Images.parentpro}
                                   style={{height: "35px", borderRadius: "50%"}}
                                   alt='user'/></Navbar.Toggle>
                             <BsFillBellFill className='profile-notification me-3'/>
@@ -82,7 +82,7 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                                                 boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
                                             }}
                                     onClick={()=> navigate(`/${user?.family_name}/profile`)}>
-                                        <img src={user?.picture}
+                                        <img src={Images.parentpro}
                                              style={{height: "40px", borderRadius: "50%", marginRight: "10px"}}
                                              alt='user'/>
                                         {user?.given_name} {user?.name}

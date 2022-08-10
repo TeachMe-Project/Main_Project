@@ -216,9 +216,10 @@ export const AddCourse = () => {
                           </Col>
                           <Col xl={8}>
                             <Form.Control as="select">
-                              <option value="Sinhala" selected>
-                                Sinhala
+                              <option value="NotSelected" selected>
+                                Select Medium
                               </option>
+                              <option value="Sinhala">Sinhala</option>
                               <option value="English">English</option>
                               <option value="Tamil">Tamil</option>
                               <option value="Other">Other</option>
@@ -251,17 +252,17 @@ export const AddCourse = () => {
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationPassword">
                           <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Class Conducting Method</Form.Label>
+                            <Form.Label style={{ fontWeight: 600 }}>Institute</Form.Label>
                           </Col>
-                          <Col xl={4}>
-                            <label style={{ marginRight: '25px' }}>
-                              <Field type="radio" name="picked" value="Individual" />
-                              Individual
-                            </label>
-                            <label style={{ marginRight: '3px' }}>
-                              <Field type="radio" name="picked" value="Institute" />
-                              Institute
-                            </label>
+                          <Col xl={8}>
+                            <Form.Control as="select">
+                              <option value="None" selected>
+                                None
+                              </option>
+                              <option value="Institute 1">Sigma Institute</option>
+                              <option value="Wednesday">Sasip Institute, Nugegoda</option>
+                              <option value="Thursday">Sasip Institute, Galle</option>
+                            </Form.Control>
 
                             <Form.Control.Feedback type="invalid">{errors.fee}</Form.Control.Feedback>
                           </Col>
@@ -330,7 +331,7 @@ export const AddCourse = () => {
                           </Col>
                           <Col xl={8}>
                             <div className="Buttonforsubmit" style={{ margin: '0px 163px' }}>
-                              <ButtonCommon name={'Submit'} />
+                              <ButtonCommon name={'Add Course'} />
                             </div>
                           </Col>
                         </Form.Group>

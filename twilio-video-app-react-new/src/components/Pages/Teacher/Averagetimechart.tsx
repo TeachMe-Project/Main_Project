@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Pie } from 'react-chartjs-2';
 import '../../../Assets/Styles/main.scss';
-
+// @ts-ignore
 import { faker } from '@faker-js/faker';
 
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';

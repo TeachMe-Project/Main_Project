@@ -117,25 +117,3 @@
     cursor: pointer;
   }
 }
-
-.cancelbutton {
-  .ButtonCommon {
-    box-shadow: none;
-    width: 100px;
-    text-align: center;
-    color: #fff;
-    background-color: #1e90ff;
-    border: 1px solid #1e90ff;
-    position: relative;
-    bottom: 10px;
-    margin-bottom: 10px;
-  }
-}
-
-.cancelbutton {
-  .ButtonCommon:hover {
-    background-color: #ddf3fa;
-    color: #1e90ff;
-    cursor: pointer;
-  }
-}

@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+    blockAuthUser,
     createAuthAdmin,
     createAuthInstitute,
     createAuthParent,
@@ -17,5 +18,6 @@ authRouter.route('/createInstitute').post(createAuthInstitute);
 authRouter.route('/createAdmin').post(createAuthAdmin);
 authRouter.route('/access').post(printRequest);
 authRouter.route('/unblock').post(unBlockAuthUser);
+authRouter.route('/block').post(blockAuthUser);
 
 

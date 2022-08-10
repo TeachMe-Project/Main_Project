@@ -87,6 +87,7 @@ td .pivoted {
 .booking-table th,
 .booking-table td {
   width: 260px;
+  text-align: center;
 }
 .booking-table thead tr .amu-first-th {
   width: 240px;
@@ -103,11 +104,56 @@ td .pivoted {
 .booking-table tbody {
   display: block;
   overflow-y: scroll;
-  width: 98%;
+  width: 100%;
   height: 67vh;
   margin: 10px auto;
   text-align: center;
   overflow-x: hidden;
+
+  .ButtonCommon {
+    margin: auto;
+  }
+
+  .cancelbutton {
+    .viewBtn {
+      width: max-content;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      color: #fff;
+      background-color: #1e90ff;
+      border: 1px solid #1e90ff;
+      height: max-content;
+      line-height: 1;
+      box-shadow: none;
+      margin: auto;
+    }
+
+    .viewBtn:hover {
+      background-color: #fff;
+      color: #1e90ff;
+    }
+  }
+
+  .CardButton {
+    margin: auto;
+    width: max-content;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 7px 10px;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #1e90ff;
+    border: 1px solid #1e90ff;
+    height: max-content;
+    line-height: 1;
+    box-shadow: none;
+  }
+  .CardButton :hover {
+    background-color: #fff;
+    color: #1e90ff;
+  }
 }
 .booking-table tbody tr {
   display: block;

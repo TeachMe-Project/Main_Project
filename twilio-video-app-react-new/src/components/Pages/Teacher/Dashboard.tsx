@@ -19,7 +19,7 @@ export const Dashboard = () => {
     <div className="DashboardTeacher">
       <Container>
         <Row>
-          <PanelContainer />
+          {/*<PanelContainer />*/}
           <div className="PanelHeader">
             <h2>Dashboard</h2>
           </div>
@@ -31,23 +31,25 @@ export const Dashboard = () => {
               <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"
-                date="23-05-2022"
+                date="23-08-2022"
+                grade="Grade 8"
                 btnname="Start"
                 image={<img src={'/Images/subjects/maths.png'} />}
               />
               <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"
-                date="24-05-2022"
+                date="24-08-2022"
+                grade="Grade 9"
                 btnname="Start"
                 image={<img src={'/Images/subjects/maths.png'} />}
-                // image={require("../../Assets/Images/testimg2.jpeg")}
               />
 
               <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"
-                date="25-05-2022"
+                date="25-08-2022"
+                grade="Grade 7"
                 btnname="Start"
                 image={<img src={'/Images/subjects/maths.png'} />}
               />

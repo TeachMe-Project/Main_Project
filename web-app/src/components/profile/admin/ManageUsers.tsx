@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AdminLayout from "./AdminLayout";
 import {Card, Col, Row} from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -11,7 +11,7 @@ import {useMediaQuery} from "react-responsive";
 import swal from "@sweetalert/with-react";
 // @ts-ignore
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 
 const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
@@ -39,11 +39,38 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
                 // dangerMode: true,
             })
                 .then((willDelete: any) => {
-                    if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
-                            icon: "success",
-                        });
-                    }
+                    const apiData = JSON.stringify({
+                        "user_id": `${row.user_id}`
+                    })
+                    axios({
+                        method: "POST",
+                        url: "http://localhost:8081/auth/block",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: apiData
+                    }).then((apiRes) => {
+                        axios({
+                            method: "POST",
+                            url: "http://localhost:8081/user/removeUser",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            data: apiData
+                        }).then((apiRes) => {
+                            console.log(apiRes.status);
+                            if (apiRes.status === 200) {
+                                swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
+                                    icon: "success",
+                                });
+                            }
+                        }).catch((error) => {
+                            console.log(error.message)
+                        })
+
+                    }).catch((error) => {
+                        console.log(error.message)
+                    })
                 });
         }}
     />
@@ -53,12 +80,13 @@ const columns = [
     {
         dataField: "user_id",
         text: "User ID",
-        sort:true,
+        sort: true,
+        hidden: true
     },
     {
         dataField: "username",
         text: "User Name",
-        sort:true,
+        sort: true,
     },
     {
         dataField: "first_name",
@@ -85,25 +113,64 @@ const columns = [
 const ManageUsers = () => {
 
     const baseURL = "http://localhost:8081/user/allUsers";
-    const [users, setUsers] = React.useState<any[]>(null!);
+    const [users, setUsers] = useState<any[]>([]);
 
-  React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setUsers(response.data);
-    })
-    .catch((error)=>{
-        console.log(error);
-    })
-  }, []);
+    useEffect(() => {
+        axios.get(baseURL).then((res: AxiosResponse) => {
+            res.data.map((item: any) => {
+                if (item.type === 'teacher') {
+
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Teacher",
+                        first_name: item.teacher.first_name,
+                        last_name: item.teacher.last_name
+                    }])
+                } else if (item.type === 'student') {
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Student",
+                        first_name: item.student[0].first_name,
+                        last_name: item.student[0].last_name
+                    }])
+                }
+                else if (item.type === 'institute') {
+                    console.log(item)
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Institute",
+                        first_name: item.institute[0].institute_name,
+                        last_name: '-'
+                    }])
+                }
+                else if (item.type === 'parent') {
+                    console.log(item.parent[0])
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Parent",
+                        first_name: item.parent[0].first_name,
+                        last_name: item.parent[0].last_name
+                    }])
+                }
+            })
+            console.log(users)
+        })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, []);
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
 
-    
 
-  if(users === null){
-    return 
-    
+    if (users === null) {
+        return
+
     }
 
     // @ts-ignore
@@ -114,9 +181,7 @@ const ManageUsers = () => {
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
                         <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
-                        <div>
-     
-    </div>
+                            Manage Users
                         </h1>
                     </Col>
                 </Row>
@@ -157,7 +222,7 @@ const ManageUsers = () => {
                     }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
-                        {users.map((item:any) => {
+                        {users.map((item: any) => {
                             return (
                                 <Card className='w-100 p-3 mb-2 table-card'>
                                     <ul className='ps-md-3 ps-0'>
@@ -169,7 +234,7 @@ const ManageUsers = () => {
                                             <span className='table-card-label'>{columns[1].text}</span>
                                             <span className='table-card-data'>{item.username}</span>
                                         </li>
-                                        
+
                                         <li className='d-flex flex-row align-items-center justify-content-end mt-2'>
                                             <span className='me-3'>
                                                  {removeItem(null, item, null, null)}

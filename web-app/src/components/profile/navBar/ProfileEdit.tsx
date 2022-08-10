@@ -7,6 +7,7 @@ import {Formik} from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import {BsPencilSquare} from "react-icons/bs";
+import Images from "../../../assets/images/Images";
 
 const schema = yup.object().shape({
     Firstname: yup.string().required(),
@@ -42,7 +43,7 @@ const ProfileEdit = () => {
         Email: user?.email,
         Password: '',
         Confirm_Password: '',
-        Mobile: '',
+        Mobile: '077-1234567',
     }
 
 
@@ -109,7 +110,7 @@ const ProfileEdit = () => {
                     <Row className='p-2'>
                         <h1 className='text-center profile-header'>User Profile</h1>
                         <Col lg={4} className='d-flex flex-column align-items-center'>
-                            <img src={user?.picture} style={{borderRadius: "50%"}} className='w-75'/>
+                            <img src={Images.parentpro} style={{borderRadius: "50%"}} className='w-75'/>
 
                             {passwordMail === "success" &&
                             <Alert variant="success" className="p-1 mt-2"> Check email and reset the password</Alert>
