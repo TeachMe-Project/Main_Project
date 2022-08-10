@@ -111,12 +111,12 @@ export const data = {
   labels,
   datasets: [
     {
-      label: 'Course 1',
+      label: 'Mathematics',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 2 })),
       backgroundColor: '#f39c12',
     },
     {
-      label: 'Course 2',
+      label: 'Science',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 2 })),
       backgroundColor: '#003865',
     },
