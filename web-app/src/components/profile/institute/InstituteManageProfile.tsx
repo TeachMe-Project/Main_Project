@@ -8,6 +8,7 @@ import {Formik} from "formik";
 import * as yup from "yup";
 import {BsPencilSquare} from "react-icons/bs";
 import axios from "axios";
+import Images from "../../../assets/images/Images";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
@@ -176,7 +177,7 @@ const InstituteManageProfile = () => {
                 </Row>
                 <Row>
                     <Col lg={3} className='d-flex flex-column justify-content-center align-items-center'>
-                        <img src={user?.picture} className='w-100' style={{borderRadius: "50%"}}/>
+                        <img src={Images.instpro} className='w-100' style={{borderRadius: "50%"}}/>
 
                         {passwordMail === "success" &&
                         <Alert variant="success" className="p-1 mt-2"> Check email and reset the password</Alert>

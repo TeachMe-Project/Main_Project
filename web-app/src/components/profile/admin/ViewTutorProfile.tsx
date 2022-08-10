@@ -24,7 +24,7 @@ type initialStateType = {
 }
 
 
-const TutorViewProfile = () => {
+const ViewTutorProfile = () => {
 
     const navigate = useNavigate();
     const {user} = useAuth0();
@@ -256,5 +256,5 @@ const TutorViewProfile = () => {
     );
 };
 
-export default TutorViewProfile;
+export default ViewTutorProfile;
 

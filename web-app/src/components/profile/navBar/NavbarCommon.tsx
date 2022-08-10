@@ -13,7 +13,7 @@ const NavbarCommon = () => {
                     <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2 py-0'>
                         <Row className='d-flex flex-row align-content-center'>
                             <Col>
-                                <Navbar.Brand onClick={() => navigate('/')} style={{cursor: "pointer"}}>
+                                <Navbar.Brand onClick={() => navigate(-1)} style={{cursor: "pointer"}}>
                                     <img src={Images.logo} style={{maxWidth: "240px"}} alt='logo'
                                          className='profile-nav-logo'/>
                                 </Navbar.Brand>

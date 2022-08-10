@@ -9,7 +9,7 @@ let client_secret = config.auth0.client_secret;
 let audience = config.auth0.audience;
 let grant_type = config.auth0.grant_type;
 let token_url = config.auth0.token_url;
-let access_token: string| undefined;
+let access_token: string | undefined;
 access_token = "Nothing";
 
 const NAMESPACE = 'Auth0 Users';
@@ -24,7 +24,7 @@ export const getAccessToken = (callback: () => void) => {
         data: qs.stringify({
             'client_id': `${client_id}`,
             'client_secret': `${client_secret}`,
-            'audience':`${audience}`,
+            'audience': `${audience}`,
             'grant_type': `${grant_type}`,
         })
     })
@@ -34,7 +34,7 @@ export const getAccessToken = (callback: () => void) => {
             console.log(access_token);
             if (access_token) {
                 callback();
-                logging.info(NAMESPACE, 'Access Token Created: ', access_token);
+                logging.info(NAMESPACE, 'Access Token Created');
             }
         })
         .catch((error) => {
@@ -80,7 +80,6 @@ export const createAuthParent = async (request: Request, response: Response) => 
                 return response.status(res.status).json(res.data);
             })
             .catch(function (error) {
-                logging.info(NAMESPACE, access_token, 'Hello')
                 logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
@@ -120,7 +119,6 @@ export const createAuthStudent = async (request: Request, response: Response) =>
                 return response.status(res.status).json(res.data);
             })
             .catch(function (error) {
-                logging.info(NAMESPACE, access_token, 'Hello')
                 logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
@@ -160,7 +158,6 @@ export const createAuthTeacher = async (request: Request, response: Response) =>
                 return response.status(res.status).json(res.data);
             })
             .catch(function (error) {
-                logging.info(NAMESPACE, access_token, 'Hello')
                 logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
@@ -200,7 +197,6 @@ export const createAuthInstitute = async (request: Request, response: Response) 
                 return response.status(res.status).json(res.data);
             })
             .catch(function (error) {
-                logging.info(NAMESPACE, access_token, 'Hello')
                 logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
@@ -240,7 +236,6 @@ export const createAuthAdmin = async (request: Request, response: Response) => {
                 return response.status(res.status).json(res.data);
             })
             .catch(function (error) {
-                logging.info(NAMESPACE, access_token, 'Hello')
                 logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
@@ -269,12 +264,40 @@ export const unBlockAuthUser = async (request: Request, response: Response) => {
                 return response.status(res.status).json(res.data);
             })
             .catch(function (error) {
-                logging.info(NAMESPACE, access_token, 'Hello')
                 logging.error(NAMESPACE, 'Not Done', error.message);
                 return response.status(error.code).json(error.message);
             })
     })
 }
+
+export const blockAuthUser = async (request: Request, response: Response) => {
+    console.log(request.body);
+    const user_id = request.body.user_id;
+    getAccessToken(() => {
+        axios(
+            {
+                method: 'PATCH',
+                url: `https://learningsl.us.auth0.com/api/v2/users/${user_id}`,
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify(
+                    {
+                        "blocked": true,
+                    })
+            })
+            .then(function (res: AxiosResponse) {
+                logging.info(NAMESPACE, 'User Auth Blocked: ');
+                return response.status(res.status).json(res.data);
+            })
+            .catch(function (error) {
+                logging.error(NAMESPACE, 'Not Done', error.message);
+                return response.status(error.code).json(error.message);
+            })
+    })
+}
+
 
 export const printRequest = async (request: Request, response: Response) => {
     console.log(request.body);

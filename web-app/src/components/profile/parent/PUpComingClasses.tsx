@@ -26,9 +26,9 @@ const handleTime = (x: Date) => {
     const hour = x.getHours();
     const time = x.toTimeString().substring(0, 5);
     if (hour >= 12) {
-        return time + " PM";
+        return time + " h";
     }
-    return time + " AM";
+    return time + " h";
 }
 
 const data: Array<UpComing> = [
@@ -53,7 +53,7 @@ const data: Array<UpComing> = [
         date: new Date(2022, 7, 21, 15, 30).toDateString(),
         attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        classStartTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
     {
@@ -62,7 +62,7 @@ const data: Array<UpComing> = [
         class: "History",
         month: "September",
         payment: 1500,
-        date: new Date(2022, 7, 22, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 7, 22, 17, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -80,11 +80,11 @@ const data: Array<UpComing> = [
     },
     {
         id: 1,
-        name: "Sameera Weerasinghe",
-        class: "Commerce",
+        name: "Nimal Weerasinghe",
+        class: "Mathematics",
         month: "September",
         payment: 1500,
-        date: new Date(2022, 7, 24, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 7, 27, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -123,7 +123,7 @@ const columns = [
     },
     {
         dataField: "class",
-        text: "Class",
+        text: "Subject",
     },
     {
         dataField: "name",
@@ -167,7 +167,7 @@ const PStudentProgress: React.FC = () => {
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
                         <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
-                            Upcoming Class
+                            Upcoming Classes
                         </h1>
                     </Col>
                 </Row>

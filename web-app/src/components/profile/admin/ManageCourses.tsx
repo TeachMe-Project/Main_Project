@@ -70,10 +70,6 @@ const columns = [
         text: "tutor name"
     },
     {
-        dataField: "institute.institute_name",
-        text: "institute name"
-    },
-    {
         dataField: "",
         text: "",
         formatter: gotoCourse,
@@ -89,7 +85,7 @@ const ManageCourses = () => {
     const {SearchBar} = Search;
 
     const baseURL = "http://localhost:8081/course/allCourses";
-    const [courses, setCourses] =  React.useState<any[]>(null!);
+    const [courses, setCourses] =  React.useState<any[]>([]);
 
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {

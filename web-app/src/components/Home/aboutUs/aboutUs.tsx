@@ -26,8 +26,8 @@ const AboutUs: React.FC = () => {
                             title={"Offer parents to have a comprehensive understanding of their children’s online\n" +
                                 "education activities."} image={Images.reading_books}/>
                         <Feature
-                            title={"Offer a built-in user-friendly video conferencing platform which is more convenient for\n" +
-                                "both students and teachers."} image={Images.online_lesson}/>
+                            title={"Offer built-in user-friendly video conferencing platform which is more convenient for\n" +
+                                "students & teachers."} image={Images.online_lesson}/>
                     </Row>
                 </Col>
             </Row>
