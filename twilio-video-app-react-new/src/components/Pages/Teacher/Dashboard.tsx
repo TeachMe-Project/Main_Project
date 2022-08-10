@@ -13,6 +13,7 @@ import Paymentpiechart from './Paymentpiechart';
 import Monthlyattendancechart from './Monthlyattendancechart';
 import Enrollmentchart from './Enrollmentchart';
 import Averagetimechart from './Averagetimechart';
+import Parentsaveragetimechart from './Parentaveragetimechart';
 
 export const Dashboard = () => {
   return (
@@ -169,7 +170,7 @@ export const Dashboard = () => {
             </Col>
           </Row>
 
-          <Row>
+          {/* <Row>
             <Col xl={6}>
               <div
                 className="chart"
@@ -196,6 +197,15 @@ export const Dashboard = () => {
               >
                 <Averagetimechart />
               </div>
+            </Col>
+          </Row> */}
+
+          <Row>
+            <Col xl={6}>
+              <Averagetimechart />
+            </Col>
+            <Col xl={6}>
+              <Enrollmentchart />
             </Col>
           </Row>
         </Row>
