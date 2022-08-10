@@ -83,10 +83,6 @@ const routes = [
     main: () => <Addextraclass />,
   },
   {
-    path: '/twilio',
-    main: () => <VideoApp />,
-  },
-  {
     path: '/messages',
     main: () => <Messages />,
   },

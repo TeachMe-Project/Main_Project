@@ -75,18 +75,18 @@ export const LeftSidebarTeacher = () => {
             </li>
           </Row>
 
-          <Row>
-            <li>
-              <Link to="/messages" className="link">
-                <div className="Sidebar_item">
-                  <div>
-                    <BsFillChatFill />
-                  </div>
-                  <div className="Sidebar_item_name">Messages</div>
-                </div>
-              </Link>
-            </li>
-          </Row>
+          {/*<Row>*/}
+          {/*  <li>*/}
+          {/*    <Link to="/messages" className="link">*/}
+          {/*      <div className="Sidebar_item">*/}
+          {/*        <div>*/}
+          {/*          <BsFillChatFill />*/}
+          {/*        </div>*/}
+          {/*        <div className="Sidebar_item_name">Messages</div>*/}
+          {/*      </div>*/}
+          {/*    </Link>*/}
+          {/*  </li>*/}
+          {/*</Row>*/}
           <Row>
             <li>
               <Link to="/helpandsupport" className="link">
@@ -99,18 +99,18 @@ export const LeftSidebarTeacher = () => {
               </Link>
             </li>
           </Row>
-          <Row>
-            <li>
-              <Link to="/twilio" className="link">
-                <div className="Sidebar_item">
-                  <div>
-                    <BsFillExclamationCircleFill />
-                  </div>
-                  <div className="Sidebar_item_name">Test</div>
-                </div>
-              </Link>
-            </li>
-          </Row>
+          {/*<Row>*/}
+          {/*  <li>*/}
+          {/*    <Link to="/twilio" className="link">*/}
+          {/*      <div className="Sidebar_item">*/}
+          {/*        <div>*/}
+          {/*          <BsFillExclamationCircleFill />*/}
+          {/*        </div>*/}
+          {/*        <div className="Sidebar_item_name">Test</div>*/}
+          {/*      </div>*/}
+          {/*    </Link>*/}
+          {/*  </li>*/}
+          {/*</Row>*/}
         </ul>
 
         <Link to="/" className="link">
