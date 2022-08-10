@@ -9,9 +9,9 @@ import Dashboard from './Dashboard';
 import Editdetails from './Editdetails';
 import Institutes from './Institutes';
 import MyCourses from './MyCourses';
-
+import FreeCard from './FreeCard';
 import Settings from './Settings';
-import { Students } from './Students';
+import StudentAnalytics from './StudentAnalytics';
 import Uploadhomework from './Uploadhomework';
 import Uploadnotes from './Uploadnotes';
 import TeacherProfile from './TeacherProfile';
@@ -63,6 +63,10 @@ const routes = [
     main: () => <Uploadnotes />,
   },
   {
+    path: '/studentanalytics',
+    main: () => <StudentAnalytics />,
+  },
+  {
     path: '/uploadhomework',
     main: () => <Uploadhomework />,
   },
@@ -71,8 +75,16 @@ const routes = [
     main: () => <Institutes />,
   },
   {
+    path: '/freecard',
+    main: () => <FreeCard />,
+  },
+  {
     path: '/addextraclass',
     main: () => <Addextraclass />,
+  },
+  {
+    path: '/twilio',
+    main: () => <VideoApp />,
   },
   {
     path: '/messages',
