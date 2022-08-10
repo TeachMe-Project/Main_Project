@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Col, Row} from "react-bootstrap";
+import {Button, Card, Col, Row} from "react-bootstrap";
 import ParentLayout from "./ParentLayout";
 import {useMediaQuery} from "react-responsive";
 import BootstrapTable from "react-bootstrap-table-next";
@@ -8,6 +8,7 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 // @ts-ignore
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
+import {BsCashCoin} from "react-icons/bs";
 
 type UpComing = {
     id: number;
@@ -26,9 +27,9 @@ const handleTime = (x: Date) => {
     const hour = x.getHours();
     const time = x.toTimeString().substring(0, 5);
     if (hour >= 12) {
-        return time + " PM";
+        return time + " h";
     }
-    return time + " AM";
+    return time + " h";
 }
 
 const data: Array<UpComing> = [
@@ -39,8 +40,8 @@ const data: Array<UpComing> = [
         month: "September",
         payment: 1500,
         date: new Date(2022, 7, 20, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        attendTime: handleTime(new Date(2022, 7, 20, 15, 45)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 5)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
@@ -51,8 +52,8 @@ const data: Array<UpComing> = [
         month: "September",
         payment: 1500,
         date: new Date(2022, 7, 21, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        attendTime: handleTime(new Date(2022, 7, 20, 15, 55)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 25)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
@@ -62,7 +63,8 @@ const data: Array<UpComing> = [
         class: "History",
         month: "September",
         payment: 1500,
-        date: new Date(2022, 7, 22, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 7, 22, 15, 30).toDateString(),
+        attendTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -73,19 +75,21 @@ const data: Array<UpComing> = [
         class: "English",
         month: "September",
         payment: 1500,
-        date: new Date(2022, 7, 23, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        date: new Date(2022, 7, 23, 15, 30).toDateString(),
+        attendTime: handleTime(new Date(2022, 7, 20, 15, 38)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 34)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
     {
         id: 1,
         name: "Sameera Weerasinghe",
-        class: "Commerce",
+        class: "Mathematics",
         month: "September",
         payment: 1500,
-        date: new Date(2022, 7, 24, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
+        date: new Date(2022, 7, 27, 15, 30).toDateString(),
+        attendTime: handleTime(new Date(2022, 7, 20, 15, 33)),
+        leaveTime: handleTime(new Date(2022, 7, 20, 17, 25)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
     },
@@ -115,6 +119,31 @@ const data: Array<UpComing> = [
 
 ];
 
+const summary = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+    // < BsTrashFill
+    //     style={{
+    //         fontSize: "20px",
+    //         color: "#e74c3c",
+    //         padding: "7px",
+    //         width: "30px",
+    //         height: "30px",
+    //         borderRadius: "50%",
+    //         cursor: "pointer",
+    //         boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+    //     }}
+    //     className='accept-icon'
+
+    // />
+    <Button
+        className='nextBtn-outline'
+        style={{
+            boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+        }}
+        onClick={() => {
+        }}>
+        Summary
+    </Button>
+);
 const columns = [
     {
         dataField: "id",
@@ -123,7 +152,7 @@ const columns = [
     },
     {
         dataField: "class",
-        text: "Class",
+        text:"Subject",
     },
     {
         dataField: "date",
@@ -137,6 +166,13 @@ const columns = [
     {
         dataField: "leaveTime",
         text: "Leave Time"
+    },
+    {
+        dataField: "",
+        text: "",
+        formatter: summary,
+        headerAttrs: {width: 150},
+        attrs: {width: 100, class: "EditRow"}
     },
 ];
 
@@ -168,7 +204,7 @@ const PStudentProgress: React.FC = () => {
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
                         <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
-                            History of Student
+                            Student Progress
                         </h1>
                     </Col>
                 </Row>
@@ -199,7 +235,7 @@ const PStudentProgress: React.FC = () => {
                                         }}
 
                                         headerWrapperClasses="next-table"
-                                        defaultSortDirection="asc"
+                                        defaultSortDirection="desc"
 
                                     />
                                 </Row>

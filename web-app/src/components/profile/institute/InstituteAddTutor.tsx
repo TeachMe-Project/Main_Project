@@ -10,7 +10,8 @@ const data = {
     email: "amilabandaranayake@gmail.com",
     subject: 'Business & Accounting Studies',
     contact:"0771234567",
-    descriprtion: 'assadhfjh af In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available '
+    descriprtion: 'I\'m having more than 7 years of experience in teaching at a renowned\n' +
+        '                    government school as a Business & Accounting Studies teacher\n My students were able to produce great results in the examinations.\n'
 };
 
 const InstituteAddTutor = () => {
@@ -41,6 +42,7 @@ const InstituteAddTutor = () => {
                                 <ListGroup.Item className="px-0"><span style={{fontWeight:"700", marginRight:"10px"}}>Subject:</span> {data.subject}</ListGroup.Item>
                                 <ListGroup.Item className="px-0"><span style={{fontWeight:"700", marginRight:"10px"}}>Email:</span> {data.email}</ListGroup.Item>
                                 <ListGroup.Item className="px-0"><span style={{fontWeight:"700", marginRight:"10px"}}>Contact-No:</span> {data.contact}</ListGroup.Item>
+                                <ListGroup.Item className="px-0"><span style={{fontWeight:"700", marginRight:"10px"}}>Description</span></ListGroup.Item>
                             </ListGroup>
                                 <Card.Text>
                                     {data.descriprtion}

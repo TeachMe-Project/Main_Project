@@ -17,8 +17,12 @@ import logo from "./logo.png";
 import formComplete from "./signup/formComplete.png"
 import unAuth from "./auth/401.webp";
 import notFound from "./auth/404.webp";
+import parentpro from "./profile/mr1.jpg"
+import stundetreg from "./profile/st1.jpg"
 
 export default {
+    stundetreg,
+    parentpro,
     banner,
     monitoring,
     online_lesson,

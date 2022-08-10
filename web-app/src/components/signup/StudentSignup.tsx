@@ -32,12 +32,12 @@ const schema = yup.object().shape({
 
 
 const initialState = {
-    Grade: 'Grade-03',
-    Firstname: 'sdas',
-    Lastname: 'asdas',
-    Email: 'mcndd@gmail.com',
-    Password: 'Qwe1234@',
-    Confirm_Password: 'Qwe1234@',
+    Grade: '',
+    Firstname: '',
+    Lastname: '',
+    Email: '',
+    Password: '',
+    Confirm_Password: '',
 }
 
 const StudentSignup = () => {
@@ -187,13 +187,13 @@ const {user} = useAuth0();
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
                         <h1 className='text-lg-center header my-lg-3 text-md-center text-center'>
-                            Sign up a Student
+                            Register Student
                         </h1>
                     </Col>
                 </Row>
                 <Row className="d-flex align-items-center">
                     <Col lg={6} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
-                        <img src={Images.studentSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
+                        <img src={Images.stundetreg} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
                              alt="teacher-signup"/>
                     </Col>
                     <Col>
