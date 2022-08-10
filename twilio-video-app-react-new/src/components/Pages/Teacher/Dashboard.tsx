@@ -62,44 +62,48 @@ export const Dashboard = () => {
           <Row>
             <Col xl={6}>
               <div className="chart">
-                <div className="card" style={{ width: '29rem', height: '18rem' }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: '29rem', height: '18rem' }}>
                   <div className="card-body">
-                    <h5 className="card-title" style={{ marginBottom: '20px' }}>
-                      Monthly Income
-                    </h5>
-                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                    <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
                       <Col xl={8}>
-                        <p style={{ marginRight: '20px' }}>Mathematics by Keshan</p>
+                        <h5 className="card-title" style={{ marginBottom: '20px', color: '#1e90ff' }}>
+                          Course
+                        </h5>
                       </Col>
                       <Col xl={4}>
-                        <p>Rs.5,000.00</p>
+                        <h5 className="card-title" style={{ marginBottom: '20px', color: '#1e90ff' }}>
+                          Student Count
+                        </h5>
+                      </Col>
+                    </div>
+                    <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
+                      <Col xl={8}>
+                        <p style={{ marginRight: '20px' }}>Mathematics</p>
+                      </Col>
+                      <Col xl={4}>
+                        <p>
+                          <center>20</center>
+                        </p>
                       </Col>
                     </div>
 
-                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                    <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
                       <Col xl={8}>
-                        <p style={{ marginRight: '20px' }}>Combined maths</p>
+                        <p style={{ marginRight: '20px' }}>Science</p>
                       </Col>
                       <Col xl={4}>
-                        <p>Rs.20,000.00</p>
+                        <p>
+                          <center>20</center>
+                        </p>
                       </Col>
                     </div>
-                    <div className="fundsRow" style={{ display: 'Flex' }}>
+                    <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
                       <Col xl={8}>
                         <p style={{ marginRight: '20px' }}>Pure Maths Revision</p>
                       </Col>
                       <Col xl={4}>
-                        <p>Rs.5,000.00</p>
-                      </Col>
-                    </div>
-
-                    <div className="fundsRow" style={{ display: 'Flex' }}>
-                      <Col xl={8}>
-                        <h5 className="card-title">Total Earnings</h5>
-                      </Col>
-                      <Col xl={4}>
                         <p>
-                          <b>Rs.30,000.00</b>
+                          <center>20</center>
                         </p>
                       </Col>
                     </div>
@@ -114,14 +118,14 @@ export const Dashboard = () => {
 
             <Col xl={6}>
               <div className="chart">
-                <div className="card" style={{ width: '29rem', height: '18rem' }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: '29rem', height: '18rem' }}>
                   <div className="card-body">
-                    <h5 className="card-title" style={{ marginBottom: '20px' }}>
+                    <h5 className="card-title" style={{ marginBottom: '20px', color: '#1e90ff' }}>
                       Monthly Income
                     </h5>
                     <div className="fundsRow" style={{ display: 'Flex' }}>
                       <Col xl={8}>
-                        <p style={{ marginRight: '20px' }}>Mathematics by Keshan</p>
+                        <p style={{ marginRight: '20px' }}>Mathematics</p>
                       </Col>
                       <Col xl={4}>
                         <p>Rs.5,000.00</p>
@@ -130,7 +134,7 @@ export const Dashboard = () => {
 
                     <div className="fundsRow" style={{ display: 'Flex' }}>
                       <Col xl={8}>
-                        <p style={{ marginRight: '20px' }}>Combined maths</p>
+                        <p style={{ marginRight: '20px' }}>Science</p>
                       </Col>
                       <Col xl={4}>
                         <p>Rs.20,000.00</p>
@@ -155,10 +159,6 @@ export const Dashboard = () => {
                         </p>
                       </Col>
                     </div>
-
-                    <a href="#" className="btn btn-primary" style={{ marginTop: '10px' }}>
-                      Withdraw Funds
-                    </a>
                   </div>
                 </div>
 
