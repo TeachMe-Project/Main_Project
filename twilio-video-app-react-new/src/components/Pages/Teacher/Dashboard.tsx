@@ -65,7 +65,7 @@ export const Dashboard = () => {
           <Row>
             <Col xl={6}>
               <div className="chart">
-                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: '29rem', height: '18rem' }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: '29rem', height: '15rem' }}>
                   <div className="card-body">
                     <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
                       <Col xl={8}>
@@ -96,17 +96,7 @@ export const Dashboard = () => {
                       </Col>
                       <Col xl={4}>
                         <p>
-                          <center>20</center>
-                        </p>
-                      </Col>
-                    </div>
-                    <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
-                      <Col xl={8}>
-                        <p style={{ marginRight: '20px' }}>Pure Maths Revision</p>
-                      </Col>
-                      <Col xl={4}>
-                        <p>
-                          <center>20</center>
+                          <center>18</center>
                         </p>
                       </Col>
                     </div>
@@ -121,7 +111,7 @@ export const Dashboard = () => {
 
             <Col xl={6}>
               <div className="chart">
-                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: '29rem', height: '18rem' }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: '29rem', height: '15rem' }}>
                   <div className="card-body">
                     <h5 className="card-title" style={{ marginBottom: '20px', color: '#1e90ff' }}>
                       Monthly Income
@@ -141,14 +131,6 @@ export const Dashboard = () => {
                       </Col>
                       <Col xl={4}>
                         <p>Rs.20,000.00</p>
-                      </Col>
-                    </div>
-                    <div className="fundsRow" style={{ display: 'Flex' }}>
-                      <Col xl={8}>
-                        <p style={{ marginRight: '20px' }}>Pure Maths Revision</p>
-                      </Col>
-                      <Col xl={4}>
-                        <p>Rs.5,000.00</p>
                       </Col>
                     </div>
 
