@@ -60,12 +60,12 @@ const InstituteSidebar: React.FC<InstituteSidebarProps> = (props: InstituteSideb
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaUsers/>} onClick={() => navigate('/institute/tutors')}>
-                        View Tutors
+                        Manage Tutors
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaUsers/>} onClick={() => navigate('/institute/addtutors')}>
-                        Add Tutors
+                        Add New Tutor
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
