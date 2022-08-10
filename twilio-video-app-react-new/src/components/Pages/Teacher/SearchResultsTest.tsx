@@ -20,24 +20,27 @@ export const SearchResultsTest: React.FC<SearchResultsTest> = props => {
           <div className="PanelBody">
             <SearchResultsTestCard
               student="Nuwani Alubomulla"
-              grade="Grade 9"
+              grade="Gr. 9"
               course="Mathematics"
               image={<img src={'/Images/Students/st3.jpg'} />}
               btn1="View more"
+              btn2="Provide Free Card"
             />
             <SearchResultsTestCard
               student="Amri Faleel"
-              grade="Grade 9"
+              grade="Gr. 9"
               course="Mathematics"
               image={<img src={'/Images/Students/st1.jpg'} />}
               btn1="View more"
+              btn2="Provide Free Card"
             />
             <SearchResultsTestCard
               student="Akila Panwila"
-              grade="Grade 9"
+              grade="Gr. 9"
               course="Mathematics"
               image={<img src={'/Images/Students/st4.jpg'} />}
               btn1="View more"
+              btn2="Provide Free Card"
             />
           </div>
         </div>

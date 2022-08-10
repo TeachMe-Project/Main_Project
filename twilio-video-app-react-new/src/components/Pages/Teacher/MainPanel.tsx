@@ -11,7 +11,7 @@ import Institutes from './Institutes';
 import MyCourses from './MyCourses';
 import FreeCard from './FreeCard';
 import Settings from './Settings';
-
+import StudentAnalytics from './StudentAnalytics';
 import Uploadhomework from './Uploadhomework';
 import Uploadnotes from './Uploadnotes';
 import TeacherProfile from './TeacherProfile';
@@ -61,6 +61,10 @@ const routes = [
   {
     path: '/uploadnotes',
     main: () => <Uploadnotes />,
+  },
+  {
+    path: '/studentanalytics',
+    main: () => <StudentAnalytics />,
   },
   {
     path: '/uploadhomework',

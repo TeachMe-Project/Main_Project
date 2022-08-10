@@ -45,6 +45,18 @@
               color: #1e90ff;
               background-color: #fff;
             }
+            .GreenBtn {
+              .CardButton {
+                color: #fff;
+                background-color: #23f15b;
+                border: 1px solid #23f15b;
+                border-radius: 15px;
+              }
+            }
+            .GreenBtn:hover {
+              background-color: #fff;
+              color: #23f15b;
+            }
           }
         }
       }

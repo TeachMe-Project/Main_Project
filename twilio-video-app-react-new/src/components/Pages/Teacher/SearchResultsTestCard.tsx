@@ -12,6 +12,7 @@ type SearchResultTestCard = {
   course?: string;
   image?: JSX.Element;
   btn1?: string;
+  btn2?: string;
 };
 
 export const SearchResultTestCard: React.FC<SearchResultTestCard> = props => {
@@ -25,18 +26,25 @@ export const SearchResultTestCard: React.FC<SearchResultTestCard> = props => {
         <CardDetails details={props.student} />
       </Col>
 
-      <Col xl={3}>
+      <Col xl={2}>
         <CardDetails details={props.course} />
       </Col>
 
-      <Col xl={2}>
+      <Col xl={1}>
         <CardDetails details={props.grade} />
       </Col>
 
       <Col xl={2}>
         <div className="ViewMore">
-          <Link to="/courseDetails" className="link ViewMoreBtn">
+          <Link to="/studentanalytics" className="link ViewMoreBtn">
             <CardButton btnname={props.btn1} />
+          </Link>
+        </div>
+      </Col>
+      <Col xl={2}>
+        <div className="GreenBtn">
+          <Link to="/" className="link ViewMoreBtn">
+            <CardButton btnname={props.btn2} />
           </Link>
         </div>
       </Col>

@@ -30,11 +30,9 @@ export const FreeCard: React.FC<FreeCard> = props => {
             <div className="PanelBody">
               <Tabs>
                 <div className="Current Free Cards">
-                  <Link to="/editdetails" className="link"></Link>
                   <table className="booking-table" id="view-booking">
                     <thead>
                       <tr className="booking-thead-second-tr" style={{ textAlign: 'left' }}>
-                        {/*amc: Institute Manage Courses*/}
                         <th className="imc-first-th">Course ID</th>
                         <th className="imc-second-th">Course Name</th>
                         <th className="imc-second-th">Student Name</th>
@@ -50,7 +48,7 @@ export const FreeCard: React.FC<FreeCard> = props => {
                         <td data-label="Grade :">9</td>
                         <td>
                           <div className="ViewMore">
-                            <Link to="/course" className="link ViewMoreBtn">
+                            <Link to="/studentanalytics" className="link ViewMoreBtn">
                               <CardButton btnname={'View More'} />
                             </Link>
                           </div>
@@ -63,7 +61,7 @@ export const FreeCard: React.FC<FreeCard> = props => {
                         <td data-label="Grade :">9</td>
                         <td>
                           <div className="ViewMore">
-                            <Link to="/course" className="link ViewMoreBtn">
+                            <Link to="/studentanalytics" className="link ViewMoreBtn">
                               <CardButton btnname={'View More'} />
                             </Link>
                           </div>
@@ -76,7 +74,7 @@ export const FreeCard: React.FC<FreeCard> = props => {
                         <td data-label="Grade :">8</td>
                         <td>
                           <div className="ViewMore">
-                            <Link to="/course" className="link ViewMoreBtn">
+                            <Link to="/studentanalytics" className="link ViewMoreBtn">
                               <CardButton btnname={'View More'} />
                             </Link>
                           </div>
@@ -89,7 +87,7 @@ export const FreeCard: React.FC<FreeCard> = props => {
                         <td data-label="Grade :">8</td>
                         <td>
                           <div className="ViewMore">
-                            <Link to="/course" className="link ViewMoreBtn">
+                            <Link to="/studentanalytics" className="link ViewMoreBtn">
                               <CardButton btnname={'View More'} />
                             </Link>
                           </div>
@@ -102,7 +100,7 @@ export const FreeCard: React.FC<FreeCard> = props => {
                         <td data-label="Grade :">8</td>
                         <td>
                           <div className="ViewMore">
-                            <Link to="/course" className="link ViewMoreBtn">
+                            <Link to="/studentanalytics" className="link ViewMoreBtn">
                               <CardButton btnname={'View More'} />
                             </Link>
                           </div>
