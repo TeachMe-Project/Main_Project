@@ -241,7 +241,7 @@ const {user} = useAuth0();
                                                             name="Email"
                                                             value={values.Email}
                                                             onChange={handleChange}
-                                                            isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
+                                                            isInvalid={!!errors.Email && touched.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                                                             isValid={touched.Email}
                                                             onBlur={handleBlur}
                                                         />
@@ -260,7 +260,7 @@ const {user} = useAuth0();
                                                             name="Firstname"
                                                             value={values.Firstname}
                                                             onChange={handleChange}
-                                                            isInvalid={!!errors.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)}
+                                                            isInvalid={!!errors.Firstname && touched.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)}
                                                             isValid={touched.Firstname}
                                                             onBlur={handleBlur}
                                                         />
@@ -280,7 +280,7 @@ const {user} = useAuth0();
                                                             name="Lastname"
                                                             value={values.Lastname}
                                                             onChange={handleChange}
-                                                            isInvalid={!!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
+                                                            isInvalid={!!errors.Lastname && touched.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
                                                             isValid={touched.Lastname}
                                                             onBlur={handleBlur}
                                                         />
@@ -298,7 +298,7 @@ const {user} = useAuth0();
                                                             name="Grade"
                                                             value={values.Grade}
                                                             onChange={handleChange}
-                                                            isInvalid={!!errors.Grade ? changeGradeValidate(false) : changeGradeValidate(true)}
+                                                            isInvalid={!!errors.Grade && touched.Grade ? changeGradeValidate(false) : changeGradeValidate(true)}
                                                             isValid={touched.Grade}
                                                             onBlur={handleBlur}
                                                         />
@@ -318,7 +318,7 @@ const {user} = useAuth0();
                                                             name="Password"
                                                             value={values.Password}
                                                             onChange={handleChange}
-                                                            isInvalid={!!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
+                                                            isInvalid={!!errors.Password && touched.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
                                                             isValid={touched.Password}
                                                             onBlur={handleBlur}
                                                         />
@@ -337,7 +337,7 @@ const {user} = useAuth0();
                                                             name="Confirm_Password"
                                                             value={values.Confirm_Password}
                                                             onChange={handleChange}
-                                                            isInvalid={!!errors.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
+                                                            isInvalid={!!errors.Confirm_Password && touched.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
                                                             isValid={touched.Confirm_Password}
                                                             onBlur={handleBlur}
                                                         />

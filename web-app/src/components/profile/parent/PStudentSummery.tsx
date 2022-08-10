@@ -1,20 +1,28 @@
 import React from 'react';
 import ParentLayout from "./ParentLayout";
 import {Col, ListGroup, Row, Tab, Tabs} from "react-bootstrap";
+import {AiOutlineCloseCircle} from "react-icons/ai";
+import {useNavigate} from "react-router-dom";
 
 const PStudentSummery = () => {
+
+    const navigate = useNavigate();
+
     return (
         <ParentLayout>
             <Col lg={12} className='px-lg-5'>
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
-                        <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
+                        <h1 className='text-lg-start header my-lg-3 text-md-center text-center d-flex flex-row align-items-center justify-content-between'>
                             Summery
+                            <AiOutlineCloseCircle className='me-lg-4' style={{cursor: "pointer"}}
+                                                  onClick={() => navigate(-1)}/>
                         </h1>
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={3} className='d-flex align-items-center flex-column justify-content-center'>
+                    <Col lg={3} className='d-flex align-items-center flex-column justify-content-center
+                    '>
                         <ListGroup className="list-group-flush text-start p-1" style={{width: "fit-content", border:"2px solid grey", borderRadius:"10px"}}>
                             <ListGroup.Item className="px-0"><span style={{
                                 fontWeight: "700",

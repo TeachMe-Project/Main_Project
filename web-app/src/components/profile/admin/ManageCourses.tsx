@@ -49,10 +49,49 @@ const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
         }}
     />
 );
+const data = [
+    {
+        id: 10000102345,
+        grade: 'Grade 11',
+        subject: 'Business & Accounting Studies',
+        tutor_name: 'Amila Banadaranayake',
+    },
+    {
+        id: 10000102355,
+        grade: 'Grade 07',
+        subject: 'History',
+        tutor_name: 'Kamal Maggona',
+    },
+    {
+        id: 10000102320,
+        grade: "Grade 10",
+        subject: "Science",
+        tutor_name: "Anusha Palpita",
+    },
+    {
+        id: 10000109945,
+        grade: "Grade 06",
+        subject: "Sinhala Lang. & Lit",
+        tutor_name: "Nimali Weeerasinghe",
+    }
+    ,
+    {
+        id: 10000102300,
+        grade: "Grade 9",
+        subject: "History",
+        tutor_name: "Vajira Gamage",
 
+    },
+    {
+        id: 10000102345,
+        grade: "Grade 11",
+        subject: "Business & Accounting Studies",
+        tutor_name: "Sameera Rajapakse",
+    }
+];
 const columns = [
     {
-        dataField: "course_id",
+        dataField: "id",
         text: "Course ID",
         sort: true,
     },
@@ -66,7 +105,7 @@ const columns = [
         text: "subject",
     },
     {
-        dataField: "teacher.first_name",
+        dataField: "tutor_name",
         text: "tutor name"
     },
     {
@@ -118,7 +157,7 @@ const ManageCourses = () => {
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
-                        data={courses}
+                        data={data}
                         columns={columns}
                         search>
                         {(props: any) =>

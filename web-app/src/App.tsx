@@ -24,6 +24,7 @@ import ViewInstituteProfile from "./components/profile/admin/ViewInstituteProfil
 import InstituteManageProfile from "./components/profile/institute/InstituteManageProfile";
 import ViewTutorProfile from "./components/profile/admin/ViewTutorProfile";
 import PStudentSummery from "./components/profile/parent/PStudentSummery";
+import ViewInstituteTutorProfile from "./components/profile/institute/ViewTutorProfile"
 
 const App: React.FC = () => {
     return (
@@ -71,7 +72,8 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={InstituteManageProfile} role={'institute'} />}/>
                 <Route path="/institute/addtutors"
                        element={<ProtectedRoute component={InstituteAddTutor} role={'institute'}/>}/>
-
+                <Route path="/institute/tutors/:tutor_id"
+                       element={<ProtectedRoute component={ViewInstituteTutorProfile} role={'institute'} />}/>
 
                 <Route path="/parent/profile" element={<ProtectedRoute component={ProfileEdit} role={'parent'}/>}/>
                 <Route path="/admin/profile" element={<ProtectedRoute component={ProfileEdit} role={'admin'}/>}/>
