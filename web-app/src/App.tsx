@@ -21,7 +21,7 @@ import InstituteManageCourses from "./components/profile/institute/InstituteMana
 import InstituteAddTutor from "./components/profile/institute/InstituteAddTutor";
 import ProfileEdit from "./components/profile/navBar/ProfileEdit";
 import ViewInstituteProfile from "./components/profile/admin/ViewInstituteProfile";
-import InstituteManageProfile from "./components/profile/institute/IsnstituteManageProfile";
+import InstituteManageProfile from "./components/profile/institute/InstituteManageProfile";
 import ViewTutorProfile from "./components/profile/admin/ViewTutorProfile";
 
 const App: React.FC = () => {

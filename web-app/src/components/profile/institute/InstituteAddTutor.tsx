@@ -35,7 +35,7 @@ const InstituteAddTutor = () => {
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
                         <Card className='d-flex flex-row w-100'>
                             <Card.Img style={{width: "200px",height:"200px", borderRadius: "50%"}} className='my-auto' variant="top"
-                                      src={Images.teacherSignup}/>
+                                      src={Images.tutorpro}/>
                             <Card.Body>
                                 <Card.Title>Tutor Name: {data.tutor_name}</Card.Title>
                             <ListGroup className="list-group-flush" style={{width:"fit-content"}}>
