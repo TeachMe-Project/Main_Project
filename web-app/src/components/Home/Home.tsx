@@ -6,6 +6,7 @@ import ContactUs from "./contactUs/contactUs";
 import FooterHome from "./footer/footerHome";
 import Banner from "./banner/Banner";
 import {Row} from "react-bootstrap";
+import DownloadApp from "./download/DownloadApp";
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
                 <Banner/>
                 <AboutUs/>
                 <Pricing/>
+                <DownloadApp/>
                 <ContactUs/>
                 <FooterHome/>
             </Row>

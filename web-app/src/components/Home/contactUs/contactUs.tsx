@@ -72,19 +72,14 @@ const ContactUs: React.FC = () => {
                   touched,
                   errors,
               }) => (
-                <Container fluid={true} id='ContactUs'>
-                    <h1 style={{
-                        fontSize: "60px",
-                        textAlign: "center",
-                        marginTop: "80px",
-                        marginBottom: "10px",
-                        color: "#2c3e50"
-                    }}>Contact Us</h1>
+                <Container fluid={true} id='ContactUs' className='about-us'>
+                    <h1 className='about-us-header text-center
+                    '>Contact Us</h1>
                     <Row className="m-0" style={{height: "fit-content"}}>
                         <Col lg={6} className="d-flex flex-row justify-content-center">
-                            <Image src={Images.contactUs} style={{height: "450px"}}></Image>
+                            <Image src={Images.contactUs} className='w-75'></Image>
                         </Col>
-                        <Col lg={5} className="d-flex flex-column justify-content-center p-3 ms-5">
+                        <Col lg={5} className="d-flex flex-column justify-content-center p-3 ms-lg-5">
                             <Form noValidate onSubmit={handleSubmit}>
                                 <Form.Group className="mb-1" controlId="validationName">
                                     <Form.Label>Name</Form.Label>
@@ -157,51 +152,36 @@ const ContactUs: React.FC = () => {
                         </Col>
                     </Row>
                     <Row className="d-flex flex-row justify-content-evenly mt-2">
-                        <Col xl={3}>
-                            <Card style={{
+                        <Col xl={3} md={5}>
+                            <Card className='d-flex flex-row' style={{
                                 padding: "10px",
-                                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-                                display: "flex",
-                                flexDirection: "row"
+                                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"
                             }}>
-                                <Card.Img variant="top" src={Images.location} style={{
-                                    width: "22%", padding: "10px",
-                                    height: "fit-content"
-                                }}/>
+                                <Card.Img variant="top" src={Images.location} className='contact-card-img'/>
                                 <Card.Body style={{padding: "0", paddingTop: "10px"}}>
                                     <Card.Title style={{textAlign: "center"}}>Address</Card.Title>
                                     <Card.Text style={{textAlign: "center"}}>No 35 ,Reid Avenue, Colombo 07</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col xl={3}>
-                            <Card style={{
+                        <Col xl={3} md={5}>
+                            <Card className='d-flex flex-row  my-2' style={{
                                 padding: "10px",
                                 boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-                                display: "flex",
-                                flexDirection: "row"
                             }}>
-                                <Card.Img variant="top" src={Images.phone} style={{
-                                    width: "22%", padding: "10px",
-                                    height: "fit-content"
-                                }}/>
+                                <Card.Img variant="top" src={Images.phone} className='contact-card-img'/>
                                 <Card.Body style={{padding: "0", paddingTop: "10px"}}>
                                     <Card.Title style={{textAlign: "center"}}>Phone</Card.Title>
                                     <Card.Text style={{textAlign: "center"}}>+9477-1234567</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col xl={3}>
-                            <Card style={{
+                        <Col xl={3} md={6}>
+                            <Card className='d-flex flex-row' style={{
                                 padding: "10px",
                                 boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-                                display: "flex",
-                                flexDirection: "row"
                             }}>
-                                <Card.Img variant="top" src={Images.email} style={{
-                                    width: "22%", padding: "10px",
-                                    height: "fit-content"
-                                }}/>
+                                <Card.Img variant="top" src={Images.email} className='contact-card-img'/>
                                 <Card.Body style={{padding: "0", paddingTop: "10px"}}>
                                     <Card.Title style={{textAlign: "center"}}>Email</Card.Title>
                                     <Card.Text style={{textAlign: "center"}}>contactus.learning.io@gmail.com</Card.Text>

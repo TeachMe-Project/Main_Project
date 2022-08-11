@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
                                 <Nav.Link href="#Home" className="me-2">Home</Nav.Link>
                                 <Nav.Link href="#About-Us" className="me-2">About us</Nav.Link>
                                 <Nav.Link href="#Pricing" className="me-2">Pricing</Nav.Link>
-                                {/*<Nav.Link href="#Download" className="me-2">Downloads</Nav.Link>*/}
+                                <Nav.Link href="#Download" className="me-2">Downloads</Nav.Link>
                                 <Nav.Link href="#ContactUs" className="me-2">Contact us</Nav.Link>
                             </Nav>
                             <Nav className='ms-md-5 ps-md-4'>
