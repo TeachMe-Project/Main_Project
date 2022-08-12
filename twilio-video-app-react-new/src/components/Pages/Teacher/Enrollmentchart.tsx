@@ -41,13 +41,13 @@ export const data = {
 
   datasets: [
     {
-      label: 'Dataset 1',
+      label: 'Mathematics',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 10 })),
       backgroundColor: 'rgba(255, 139, 143, 0.89)',
       borderColor: 'rgba(255, 139, 143, 0.89)',
     },
     {
-      label: 'Dataset 2',
+      label: 'Science',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 10 })),
       backgroundColor: 'rgba(91, 6, 143, 0.89)',
       borderColor: 'rgba(91, 6, 143, 0.89)',
@@ -87,6 +87,8 @@ export function Enrollmentchart() {
       style={{
         height: '350px',
         width: '565px',
+        position: 'relative',
+        bottom: '-58px',
       }}
     />
   );

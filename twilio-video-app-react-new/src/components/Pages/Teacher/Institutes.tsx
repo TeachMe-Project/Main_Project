@@ -72,7 +72,7 @@ export const Institutes = () => {
                       <td data-label="Contact Number :">011 2536472</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
-                          <Link to="/course" className="link ViewMoreBtn">
+                          <Link to="" className="link ViewMoreBtn">
                             <CardButton btnname={'View More'} />
                           </Link>
                         </div>
@@ -84,7 +84,7 @@ export const Institutes = () => {
                       <td data-label="Contact Number :">011 2859684</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
-                          <Link to="/course" className="link ViewMoreBtn">
+                          <Link to="" className="link ViewMoreBtn">
                             <CardButton btnname={'View More'} />
                           </Link>
                         </div>
@@ -96,7 +96,7 @@ export const Institutes = () => {
                       <td data-label="Contact Number :">011 2772134</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
-                          <Link to="/course" className="link ViewMoreBtn">
+                          <Link to="" className="link ViewMoreBtn">
                             <CardButton btnname={'View More'} />
                           </Link>
                         </div>
@@ -108,7 +108,7 @@ export const Institutes = () => {
                       <td data-label="Contact Number :">011 7234999</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
-                          <Link to="/course" className="link ViewMoreBtn">
+                          <Link to="" className="link ViewMoreBtn">
                             <CardButton btnname={'View More'} />
                           </Link>
                         </div>
@@ -120,7 +120,7 @@ export const Institutes = () => {
                       <td data-label="Contact Number :">033 2999684</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
-                          <Link to="/course" className="link ViewMoreBtn">
+                          <Link to="" className="link ViewMoreBtn">
                             <CardButton btnname={'View More'} />
                           </Link>
                         </div>
@@ -132,7 +132,7 @@ export const Institutes = () => {
                       <td data-label="Contact Number :">011 2859684</td>
                       <td data-label="Contact Number :">
                         <div className="ViewMore">
-                          <Link to="/course" className="link ViewMoreBtn">
+                          <Link to="" className="link ViewMoreBtn">
                             <CardButton btnname={'View More'} />
                           </Link>
                         </div>
