@@ -78,7 +78,7 @@ const InstituteNavBar: React.FC<InstituteNavBarProps> = (props: InstituteNavBarP
                                 className='ps-md-4 ms-auto d-flex flex-lg-row flex-column align-items-end navbar-expand-card'>
                                 {isPc &&
                                 <Nav.Link>
-                                    <BsFillBellFill className='profile-notification'/>
+                                    <BsFillBellFill className='profile-notification' onClick={() => navigate(`/${user?.family_name}/notification`)}/>
                                 </Nav.Link>}
                                 <Nav.Link>
                                     <Button variant="secondary" className="LoginBtn"
