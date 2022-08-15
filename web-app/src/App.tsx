@@ -28,6 +28,8 @@ import ViewInstituteTutorProfile from "./components/profile/institute/ViewTutorP
 import AdminNotification from "./components/profile/admin/AdminNotification";
 import InstituteNotification from "./components/profile/institute/InstituteNotification";
 import ParentNotification from "./components/profile/parent/ParentNotification";
+import CourseProfile from "./components/profile/tutor/CourseProfile";
+import ViewCourse from "./components/profile/admin/ViewCourse";
 
 const App: React.FC = () => {
     return (
@@ -70,6 +72,8 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={TutorPayments} role={'admin'}/>}/>
                 <Route path="/admin/notification"
                        element={<ProtectedRoute component={AdminNotification} role={'admin'}/>}/>
+                <Route path="/admin/course"
+                       element={<ProtectedRoute component={ViewCourse} role={'admin'}/>}/>
 
 
                 <Route path="/institute"
