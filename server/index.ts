@@ -46,6 +46,7 @@ app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 app.use(cors());
 
+
 //development endpoints by developers
 app.use('/admin',adminRouter)
 app.use('/class',classRouter)
