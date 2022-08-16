@@ -90,7 +90,7 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                                 </Nav.Link>
                                 {isPc &&
                                 <Nav.Link>
-                                    <BsFillBellFill className='profile-notification'/>
+                                    <BsFillBellFill className='profile-notification' onClick={() => navigate(`/${user?.family_name}/notification`)}/>
                                 </Nav.Link>}
                                 <Nav.Link>
                                     <Button variant="secondary" className="LoginBtn"

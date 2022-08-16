@@ -21,7 +21,14 @@ import parentpro from "./profile/mr1.jpg"
 import stundetreg from "./profile/st1.jpg"
 import tutorpro from "./profile/mr2.jpg"
 import instpro from "./profile/inst1.png"
+import download from "./aboutUs/download.png"
+import linux from "./aboutUs/linux.png"
+import windows from "./aboutUs/windows.png"
+
 export default {
+    download,
+    linux,
+    windows,
     instpro,
     tutorpro,
     stundetreg,
