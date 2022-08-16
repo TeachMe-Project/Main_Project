@@ -44,6 +44,7 @@ app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 
+
 //development endpoints by developers
 app.use('/admin', adminRouter)
 app.use('/class', classRouter)
