@@ -593,8 +593,8 @@ export default TeacherProfile;
 //         connection: 'Username-Password-Authentication',
 //       },
 //     };
-//     axios
-//       .request(options:any)
+//     // @ts-ignore
+//     axios.request(options)
 //       .then(function(response) {
 //         console.log('Success');
 //         // @ts-ignore

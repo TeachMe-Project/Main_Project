@@ -5,6 +5,7 @@
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
+    "@auth0/auth0-react": "^1.10.2",
     "@azure/storage-blob": "^12.11.0",
     "@faker-js/faker": "^7.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",

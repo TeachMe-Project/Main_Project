@@ -7,6 +7,9 @@ export const Parentscharts = () => {
   return (
     <div className="Parentscharts">
       <Container>
+        <div className="PanelHeader">
+          <h2>Dashboard</h2>
+        </div>
         <Row>
           <Col xl={6}>
             <Parentsaveragetimechart />
@@ -29,22 +32,30 @@ export const Parentscharts = () => {
                   </div>
                   <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
                     <Col xl={8}>
-                      <p style={{ marginRight: '20px' }}>MS Office</p>
+                      <p style={{ marginRight: '20px' }}>
+                        <b>MS Office</b>
+                      </p>
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <center>13</center>
+                        <center>
+                          <b>13</b>
+                        </center>
                       </p>
                     </Col>
                   </div>
 
                   <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
                     <Col xl={8}>
-                      <p style={{ marginRight: '20px' }}>MS PowerPoint</p>
+                      <p style={{ marginRight: '20px' }}>
+                        <b>MS PowerPoint</b>
+                      </p>
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <center>22</center>
+                        <center>
+                          <b>22</b>
+                        </center>
                       </p>
                     </Col>
                   </div>
