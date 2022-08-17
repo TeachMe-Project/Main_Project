@@ -5,9 +5,12 @@ import LeftSidebarTeacher from './components/Sidebar/LeftSidebarTeacher';
 import MainPanel from './components/Pages/Teacher/MainPanel';
 // import MainPanel from './components/Pages/Student/MainPanel';
 import { Container, Row, Col } from 'react-bootstrap';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TopNavbar from './components/Navbars/TopNavbar';
-
+import Home from './home/Home';
+import { useAuth0 } from '@auth0/auth0-react';
+import NavBar from './home/navBar';
+import Banner from './home/Banner';
 // import psList from 'ps-list';
 // import {tasklist} from 'tasklist';
 
@@ -17,26 +20,36 @@ import TopNavbar from './components/Navbars/TopNavbar';
 // }
 
 function App() {
-  // x().then(r => console.log(r));
+  const { user, isAuthenticated } = useAuth0();
 
-  return (
-    <Router>
-      <div className="App">
-        <Row>
-          <TopNavbar />
-        </Row>
-        <Row>
-          <Col xl={2} className="LeftCol">
-            <LeftSidebarTeacher />
-            {/*<LeftSidebar />*/}
-          </Col>
-          <Col xl={10} className={'MiddleCol'}>
-            <MainPanel />
-          </Col>
-        </Row>
-      </div>
-    </Router>
-  );
+  const renderMain = () => {
+    if (user?.family_name == 'teacher') {
+      return (
+        <>
+          <div className="App">
+            <Row>
+              <TopNavbar />
+            </Row>
+            <Row>
+              <Col xl={2} className="LeftCol">
+                <LeftSidebarTeacher />
+                {/*<LeftSidebar />*/}
+              </Col>
+              <Col xl={10} className={'MiddleCol'}>
+                <MainPanel />
+              </Col>
+            </Row>
+          </div>
+        </>
+      );
+    } else if (user?.family_name == 'student') {
+      return <h1>Student</h1>;
+    } else {
+      return <Home />;
+    }
+  };
+
+  return renderMain();
 }
 
 export default App;
