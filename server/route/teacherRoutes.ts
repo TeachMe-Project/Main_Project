@@ -30,5 +30,3 @@ teacherRouter.route("/:id/teacherInstitutes")
 
 teacherRouter.route("/createTeacher")
     .post(createTeacher);
-
-

@@ -9,15 +9,16 @@ import Dashboard from './Dashboard';
 import Editdetails from './Editdetails';
 import Institutes from './Institutes';
 import MyCourses from './MyCourses';
-
+import FreeCard from './FreeCard';
 import Settings from './Settings';
-import { Students } from './Students';
+import StudentAnalytics from './StudentAnalytics';
 import Uploadhomework from './Uploadhomework';
 import Uploadnotes from './Uploadnotes';
 import TeacherProfile from './TeacherProfile';
 import Notifications from '../../Notification/notifications';
 import Messages from './Messages';
 import Helpandsupport from './Helpandsupport';
+import Parentscharts from './Parentscharts';
 
 const routes = [
   {
@@ -63,12 +64,20 @@ const routes = [
     main: () => <Uploadnotes />,
   },
   {
+    path: '/studentanalytics',
+    main: () => <StudentAnalytics />,
+  },
+  {
     path: '/uploadhomework',
     main: () => <Uploadhomework />,
   },
   {
     path: '/institutes',
     main: () => <Institutes />,
+  },
+  {
+    path: '/freecard',
+    main: () => <FreeCard />,
   },
   {
     path: '/addextraclass',
@@ -81,6 +90,10 @@ const routes = [
   {
     path: '/helpandsupport',
     main: () => <Helpandsupport />,
+  },
+  {
+    path: '/parentscharts',
+    main: () => <Parentscharts />,
   },
 ];
 

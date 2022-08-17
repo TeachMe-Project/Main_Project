@@ -1,79 +1,385 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { Col, Container, Form, Row } from 'react-bootstrap';
+import { Button } from '../../Button/Button';
+import { Field, Formik } from 'formik';
+import * as yup from 'yup';
 
-import { Row, Col, Container, Accordion, Button, Form } from 'react-bootstrap';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
-
+// @ts-ignore
+import LazyLoad from 'react-lazyload';
 import SubmitButton from '../../Button/SubmitButton';
+import { ButtonCommon } from '../../Button/ButtonCommon';
 
-export const Editdetails = () => {
+const schema = yup.object().shape({
+  title: yup
+    .string()
+    .required()
+    .label('Title')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Title must contain only letters'),
+  subject: yup
+    .string()
+    .required()
+    .label('Subject')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Subject must contain only letters'),
+
+  grade: yup
+    .string()
+    .required()
+    .label('Grade')
+    .matches(/Grade-(?:1[01]|0[1-9])|AL-20\d\d/, 'Grade must be between Grade-03 to A/L-Year-3'),
+  fee: yup
+    .string()
+    .required()
+    .label('Fee')
+    .matches(/Grade-(?:1[01]|0[1-9])/, 'Fee must be a numerical value'),
+  description: yup
+    .string()
+    .required()
+    .label('Description'),
+});
+
+const initialState = {
+  title: '',
+  subject: '',
+  grade: '',
+  fee: '',
+  description: '',
+};
+
+export const TeacherProfile = () => {
+  const [isEditing, setISEditing] = useState(false);
+
+  const [pageStage, setPageStage] = useState(2);
+  const [gradeValidate, setgradeValidate] = useState<boolean>(false);
+  const [titleValidate, settitleValidate] = useState(false);
+  const [subjectValidate, setsubjectValidate] = useState(false);
+  const [feeValidate, setfeeValidate] = useState(false);
+  const [descriptionValidate, setdescriptionValidate] = useState(false);
+
+  const changegradeValidate = (status: boolean): boolean => {
+    if (status) {
+      setgradeValidate(true);
+      return false;
+    } else {
+      setgradeValidate(false);
+      return true;
+    }
+  };
+  const changetitleValidate = (status: boolean): boolean => {
+    if (status) {
+      settitleValidate(true);
+      return false;
+    } else {
+      settitleValidate(false);
+      return true;
+    }
+  };
+  const changesubjectValidate = (status: boolean): boolean => {
+    if (status) {
+      setsubjectValidate(true);
+      return false;
+    } else {
+      setsubjectValidate(false);
+      return true;
+    }
+  };
+
+  const changefeeValidate = (status: boolean): boolean => {
+    if (status) {
+      setfeeValidate(true);
+      return false;
+    } else {
+      setfeeValidate(false);
+      return true;
+    }
+  };
+  const changedescriptionValidate = (status: boolean): boolean => {
+    if (status) {
+      setdescriptionValidate(true);
+      return false;
+    } else {
+      setdescriptionValidate(false);
+      return true;
+    }
+  };
+
   return (
-    <Row>
-      <div className="PanelHeader">
-        <h2>Edit Course Details</h2>
-      </div>
+    <div className="StudentProfile">
       <Container>
-        <Form>
-          <Form.Group controlId="form.Name" className="mb-3">
-            <Form.Label>Topic</Form.Label>
-            <Form.Control type="text" placeholder="Topic" />
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Description</Form.Label>
-            <Form.Control type="text" placeholder="Description" />
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Grade</Form.Label>
-            <select className="form-select" aria-label="Default select example">
-              <option selected>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
+        <div className="PanelHeader">
+          <h2>Edit Details</h2>
+        </div>
+        <div className="PanelContainer">
+          <Col xl={10}>
+            <div className="RightContainer">
+              <Formik on validationSchema={schema} onSubmit={console.log} initialValues={initialState}>
+                {({ handleSubmit, handleChange, handleBlur, values, touched, errors, validateField }) => (
+                  <Row>
+                    <Form noValidate onSubmit={handleSubmit}>
+                      {/*title*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationFirstName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Title</Form.Label>
+                          </Col>
 
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-              <option>13</option>
-              <option>University</option>
-              <option>Other</option>
-            </select>
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Medium</Form.Label>
-            <select className="form-select" aria-label="Default select example">
-              <option selected>English</option>
-              <option>Sinhala</option>
-              <option>Tamil</option>
-            </select>
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Start date</Form.Label>
-            <Form.Control type="date" />
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>End date</Form.Label>
-            <Form.Control type="date" />
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Monthly Fee</Form.Label>
-            <Form.Control type="text" placeholder="Monthly Fee" />
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label className="form-label" for="customFile">
-              Course Thumbnail Image
-            </Form.Label>
-            <Form.Control type="file" className="form-control" id="customFile" />
-          </Form.Group>
-          <SubmitButton />
-        </Form>
+                          <Col xl={8}>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter the Title of the course"
+                              name="title"
+                              value={values.title}
+                              onChange={handleChange}
+                              isInvalid={!!errors.title ? changetitleValidate(false) : changetitleValidate(true)}
+                              isValid={touched.title}
+                              onBlur={handleBlur}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.title}</Form.Control.Feedback>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+                      {/*subject*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Subject</Form.Label>
+                          </Col>
+
+                          <Col xl={8}>
+                            <Form.Control
+                              type="text"
+                              placeholder="Subject of the course"
+                              name="subject"
+                              value={values.subject}
+                              onChange={handleChange}
+                              isInvalid={!!errors.subject ? changesubjectValidate(false) : changesubjectValidate(true)}
+                              isValid={touched.subject}
+                              onBlur={handleBlur}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.subject}</Form.Control.Feedback>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Description</Form.Label>
+                          </Col>
+
+                          <Col xl={8}>
+                            <Form.Control
+                              type="text"
+                              placeholder="Description"
+                              name="Description"
+                              value={values.description}
+                              onChange={handleChange}
+                              isInvalid={
+                                !!errors.description
+                                  ? changedescriptionValidate(false)
+                                  : changedescriptionValidate(true)
+                              }
+                              isValid={touched.description}
+                              onBlur={handleBlur}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.description}</Form.Control.Feedback>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+                      {/*Grade*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationGrade">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Grade</Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter the grade here"
+                              name="grade"
+                              value={values.grade}
+                              onChange={handleChange}
+                              isInvalid={!!errors.grade ? changegradeValidate(false) : changegradeValidate(true)}
+                              isValid={touched.grade}
+                              onBlur={handleBlur}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.grade}</Form.Control.Feedback>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+                      {/*medium*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationEmail">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Medium</Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <Form.Control as="select">
+                              <option value="Sinhala" selected>
+                                Sinhala
+                              </option>
+                              <option value="English">English</option>
+                              <option value="Tamil">Tamil</option>
+                              <option value="Other">Other</option>
+                            </Form.Control>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+                      {/* Individual or institute */}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationPassword">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Class Conducting Method</Form.Label>
+                          </Col>
+                          <Col xl={4}>
+                            <label style={{ marginRight: '25px' }}>
+                              <Field type="radio" name="picked" value="Individual" />
+                              Individual
+                            </label>
+                            <label style={{ marginRight: '3px' }}>
+                              <Field type="radio" name="picked" value="Institute" />
+                              Institute
+                            </label>
+
+                            <Form.Control.Feedback type="invalid">{errors.fee}</Form.Control.Feedback>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+                      {/*Fee*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationPassword">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Monthly Fee</Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <Form.Control
+                              type="text"
+                              placeholder="Course Fee"
+                              name="fee"
+                              value={values.fee}
+                              onChange={handleChange}
+                              isInvalid={!!errors.fee ? changefeeValidate(false) : changefeeValidate(true)}
+                              isValid={touched.fee}
+                              onBlur={handleBlur}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.fee}</Form.Control.Feedback>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+                      {/*Start date*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Start date</Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <Form.Control type="date" placeholder="Start date" name="startdate" />
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+                      {/*End date*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>End date</Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <Form.Control type="date" placeholder="End date" name="startdate" />
+                          </Col>
+                        </Form.Group>
+                      </Row>
+                      {/*Class Date*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Class Date</Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <Form.Control as="select">
+                              <option value="Monday" selected>
+                                Monday
+                              </option>
+                              <option value="Tuesday">Tuesday</option>
+                              <option value="Wednesday">Wednesday</option>
+                              <option value="Thursday">Thursday</option>
+                              <option value="Friday">Friday</option>
+                              <option value="Saturday">Saturday</option>
+                              <option value="Sunday">Sunday</option>
+                            </Form.Control>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+                      {/*Time*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Start time </Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <Form.Control type="time" placeholder="Start time" name="starttime" />
+                          </Col>
+                        </Form.Group>
+                      </Row>
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}></Form.Label>
+                          </Col>
+                          <Col xl={8} style={{ margin: '0 200px' }}>
+                            <div className="Buttonforsubmit" style={{ margin: '30px -92px' }}>
+                              <ButtonCommon name={'Submit'} />
+                            </div>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+                      {/* <Row>
+                        {isEditing && (
+                          <Button
+                            name="Save Changes"
+                            onClick={() => {
+                              if (
+                                gradeValidate &&
+                                titleValidate &&
+                                subjectValidate &&
+                                gradeValidate &&
+                                mediumValidate &&
+                             
+                              ) {
+                                setPageStage(2);
+                              }
+                            }}
+                            onClickCapture={() => {
+                              validateField('Grade');
+                              validateField('Firstname');
+                              validateField('Lastname');
+                              validateField('Email');
+                              validateField('Password');
+                              validateField('Schoolname');
+                            }}
+                          />
+                        )}
+                      </Row> */}
+                    </Form>
+                  </Row>
+                )}
+              </Formik>
+            </div>
+          </Col>
+
+          {/*<div className="ProfileButton">*/}
+          {/*  <Button name="Save Changes"/>*/}
+          {/*</div>*/}
+        </div>
       </Container>
-    </Row>
+    </div>
   );
 };
-export default Editdetails;
+
+export default TeacherProfile;

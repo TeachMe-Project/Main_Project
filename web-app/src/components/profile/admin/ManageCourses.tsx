@@ -5,11 +5,11 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from "react-bootstrap-table2-paginator";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+// @ts-ignore
+import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {useMediaQuery} from "react-responsive";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
-// @ts-ignore
-import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {FaEye} from "react-icons/fa";
 import axios from 'axios';
 
@@ -49,10 +49,49 @@ const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
         }}
     />
 );
+const data = [
+    {
+        id: 10000102345,
+        grade: 'Grade 11',
+        subject: 'Business & Accounting Studies',
+        tutor_name: 'Amila Banadaranayake',
+    },
+    {
+        id: 10000102355,
+        grade: 'Grade 07',
+        subject: 'History',
+        tutor_name: 'Kamal Maggona',
+    },
+    {
+        id: 10000102320,
+        grade: "Grade 10",
+        subject: "Science",
+        tutor_name: "Anusha Palpita",
+    },
+    {
+        id: 10000109945,
+        grade: "Grade 06",
+        subject: "Sinhala Lang. & Lit",
+        tutor_name: "Nimali Weeerasinghe",
+    }
+    ,
+    {
+        id: 10000102300,
+        grade: "Grade 9",
+        subject: "History",
+        tutor_name: "Vajira Gamage",
 
+    },
+    {
+        id: 10000102345,
+        grade: "Grade 11",
+        subject: "Business & Accounting Studies",
+        tutor_name: "Sameera Rajapakse",
+    }
+];
 const columns = [
     {
-        dataField: "course_id",
+        dataField: "id",
         text: "Course ID",
         sort: true,
     },
@@ -66,12 +105,8 @@ const columns = [
         text: "subject",
     },
     {
-        dataField: "teacher.first_name",
+        dataField: "tutor_name",
         text: "tutor name"
-    },
-    {
-        dataField: "institute.institute_name",
-        text: "institute name"
     },
     {
         dataField: "",
@@ -89,7 +124,7 @@ const ManageCourses = () => {
     const {SearchBar} = Search;
 
     const baseURL = "http://localhost:8081/course/allCourses";
-    const [courses, setCourses] = React.useState(null);
+    const [courses, setCourses] =  React.useState<any[]>([]);
 
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
@@ -122,7 +157,7 @@ const ManageCourses = () => {
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
-                        data={courses}
+                        data={data}
                         columns={columns}
                         search>
                         {(props: any) =>

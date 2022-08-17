@@ -4,7 +4,7 @@ import Images from "../../../assets/images/Images";
 
 const Banner: React.FC = () => {
     return (
-        <Container fluid={true} className='banner mb-lg-5'>
+        <Container fluid={true} className='banner mb-lg-5' id="Home">
             <Row className="mt-3 d-flex flex-lg-row flex-column-reverse">
                 <Col lg={5} md={12} className='d-lg-flex flex-lg-column justify-content-lg-center'>
                     <Row className="ms-lg-3">
@@ -17,7 +17,7 @@ const Banner: React.FC = () => {
                                 in Sri Lanka to offer reliable education courses with a unique set of
                                 features.
                             </p>
-                            <Button className="px-md-4 py-2 mt-3 GetStartedBtn"
+                            <Button className="px-md-4 py-2 mt-3 GetStartedBtn" href="#About-Us"
                                     style={{marginRight: "5px", fontSize: "1rem", fontWeight: "600"}}> Get Started
                             </Button>
 

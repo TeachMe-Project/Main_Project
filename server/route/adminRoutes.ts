@@ -1,23 +1,37 @@
 import express from "express";
 import {
-    acceptTeacher,
     adminRemoveUser,
     createAdmin,
     getAdminByID,
-    getAdmins,
-    newTeacherRequests,
-    rejectTeacher
+    getAdmins, newInstituteRequests,
+    newTeacherRequests, rejectInstitute,
+    rejectTeacher, verifyInstitute, verifyTeacher
 } from "../controllers/adminController";
 
 export const adminRouter=express.Router();
 
 
+adminRouter.route("/newTeacherRequests")
+    .get(newTeacherRequests);
+
+adminRouter.route("/verifyTeacher")
+    .post(verifyTeacher);
+
+adminRouter.route("/rejectTeacher")
+    .post(rejectTeacher);
+
+adminRouter.route("/newInstituteRequests")
+    .get(newInstituteRequests);
+
+adminRouter.route("/verifyInstitute")
+    .post(verifyInstitute);
+
+adminRouter.route("/rejectInstitute")
+    .post(rejectInstitute);
 
 adminRouter.route("/alladmins")
     .get(getAdmins);
 
-adminRouter.route("/newTeacherRequests")
-    .get(newTeacherRequests);
 
 adminRouter.route("/:id")
     .get(getAdminByID);
@@ -27,11 +41,4 @@ adminRouter.route("/removeUser")
 
 adminRouter.route("/createAdmin")
     .post(createAdmin);
-
-adminRouter.route("/acceptTeacher")
-    .post(acceptTeacher);
-
-adminRouter.route("/rejectTeacher")
-    .post(rejectTeacher);
-
 

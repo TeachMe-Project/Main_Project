@@ -2,28 +2,29 @@ import './bootstrap-globals';
 import { createExpressHandler } from './createExpressHandler';
 import express, { RequestHandler } from 'express';
 import path from 'path';
-import cors from 'cors';
 import { ServerlessFunction } from './types';
-
+import cors from "cors";
 
 // importing requires routings
-import { studentRouter } from "./route/studentRoutes";
-import { paymentGatewayRouter } from "./route/paymentGatewayRoutes";
-import { userRouter } from "./route/userRoutes";
-import { teacherRouter } from "./route/teacherRoutes";
-import { parentRouter } from "./route/parentRoutes";
-import { courseRouter } from "./route/courseRoutes";
-import { adminRouter } from "./route/adminRoutes";
-import { classRouter } from "./route/classRoutes";
-import { homeworkRouter } from "./route/homeworkRoutes";
-import { instituteRouter } from "./route/instituteRoutes";
-import { notesRouter } from "./route/notesRoutes";
-import { notificationRouter } from "./route/notificationRoutes";
+import {studentRouter} from "./route/studentRoutes";
+import {paymentGatewayRouter} from "./route/paymentGatewayRoutes";
+import {userRouter} from "./route/userRoutes";
+import {teacherRouter} from "./route/teacherRoutes";
+import {parentRouter} from "./route/parentRoutes";
+import {courseRouter} from "./route/courseRoutes";
+import {adminRouter} from "./route/adminRoutes";
+import {classRouter} from "./route/classRoutes";
+import {homeworkRouter} from "./route/homeworkRoutes";
+import {instituteRouter} from "./route/instituteRoutes";
+import {notesRouter} from "./route/notesRoutes";
+import {notificationRouter} from "./route/notificationRoutes";
+import {authRouter} from "./route/authRoutes";
+import logger from "./utils/logger";
+import {contactRouter} from "./route/contactRoutes";
 
 const PORT = process.env.PORT ?? 8081;
 
 const app = express();
-app.use(cors());
 app.use(express.json());
 
 // This server reuses the serverless endpoints from the "plugin-rtc" Twilio CLI Plugin, which is used when the "npm run deploy:twilio-cli" command is run.
@@ -43,11 +44,12 @@ const authMiddleware =
 app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
+app.use(cors());
 
 
 //development endpoints by developers
-app.use('/admin', adminRouter)
-app.use('/class', classRouter)
+app.use('/admin',adminRouter)
+app.use('/class',classRouter)
 app.use('/course', courseRouter)
 app.use('/homework', homeworkRouter)
 app.use('/institute', instituteRouter)
@@ -57,8 +59,10 @@ app.use('/parent', parentRouter)
 app.use('/student', studentRouter)
 app.use('/teacher', teacherRouter)
 app.use('/user', userRouter)
+app.use('/auth', authRouter)
+app.use('/contact', contactRouter)
 
-app.use('/create-checkout-session', paymentGatewayRouter)
+app.use('/create-checkout-session',paymentGatewayRouter)
 
 
 
@@ -83,4 +87,4 @@ app.use('/create-checkout-session', paymentGatewayRouter)
 //   res.sendFile(path.join(__dirname, '../build/index.html'), { etag: false, lastModified: false });
 // });
 
-app.listen(PORT, () => console.log(`twilio-video-app-react server running on ${PORT}`));
+app.listen(PORT, () => logger.info("Server",`Server is running on Port:${PORT}`));

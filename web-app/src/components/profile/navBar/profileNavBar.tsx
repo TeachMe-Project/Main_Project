@@ -62,7 +62,7 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                         <Row className='d-flex flex-row-reverse align-items-center'>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" className='p-0 border-none m-0'
                                            style={{width: "fit-content", borderRadius: "50%"}}
-                            ><img src={user?.picture}
+                            ><img src={Images.parentpro}
                                   style={{height: "35px", borderRadius: "50%"}}
                                   alt='user'/></Navbar.Toggle>
                             <BsFillBellFill className='profile-notification me-3'/>
@@ -80,16 +80,17 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                                                 borderRadius: "20px",
                                                 fontSize: "18px",
                                                 boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
-                                            }}>
-                                        <img src={user?.picture}
+                                            }}
+                                    onClick={()=> navigate(`/${user?.family_name}/profile`)}>
+                                        <img src={Images.parentpro}
                                              style={{height: "40px", borderRadius: "50%", marginRight: "10px"}}
                                              alt='user'/>
-                                        {user?.name}
+                                        {user?.given_name} {user?.name}
                                     </Button>
                                 </Nav.Link>
                                 {isPc &&
                                 <Nav.Link>
-                                    <BsFillBellFill className='profile-notification'/>
+                                    <BsFillBellFill className='profile-notification' onClick={() => navigate(`/${user?.family_name}/notification`)}/>
                                 </Nav.Link>}
                                 <Nav.Link>
                                     <Button variant="secondary" className="LoginBtn"

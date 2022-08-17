@@ -16,7 +16,7 @@ th:nth-of-type(1):before {
 td,
 th {
   padding: 15px;
-  text-align: center;
+  text-align: left;
 }
 tr,
 td .pivoted {
@@ -48,6 +48,7 @@ td .pivoted {
   td {
     /* Behave  like a "row" */
     border: none;
+    text-align: center;
     border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 50%;
@@ -72,6 +73,7 @@ td .pivoted {
 }
 .booking-table thead tr {
   display: block;
+  text-align: center;
   width: 100%;
   margin: auto;
   background-color: #012250;
@@ -85,6 +87,7 @@ td .pivoted {
 .booking-table th,
 .booking-table td {
   width: 260px;
+  text-align: center;
 }
 .booking-table thead tr .amu-first-th {
   width: 240px;
@@ -106,6 +109,51 @@ td .pivoted {
   margin: 10px auto;
   text-align: center;
   overflow-x: hidden;
+
+  .ButtonCommon {
+    margin: auto;
+  }
+
+  .cancelbutton {
+    .viewBtn {
+      width: max-content;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      color: #fff;
+      background-color: #1e90ff;
+      border: 1px solid #1e90ff;
+      height: max-content;
+      line-height: 1;
+      box-shadow: none;
+      margin: auto;
+    }
+
+    .viewBtn:hover {
+      background-color: #fff;
+      color: #1e90ff;
+    }
+  }
+
+  .CardButton {
+    margin: auto;
+    width: max-content;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 7px 10px;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #1e90ff;
+    border: 1px solid #1e90ff;
+    height: max-content;
+    line-height: 1;
+    box-shadow: none;
+  }
+  .CardButton :hover {
+    background-color: #fff;
+    color: #1e90ff;
+  }
 }
 .booking-table tbody tr {
   display: block;

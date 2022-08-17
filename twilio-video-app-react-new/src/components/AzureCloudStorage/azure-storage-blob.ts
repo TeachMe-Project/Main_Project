@@ -4,7 +4,7 @@
 // THIS IS SAMPLE CODE ONLY - NOT MEANT FOR PRODUCTION USE
 import { BlobServiceClient, ContainerClient } from '@azure/storage-blob';
 
-const containerName = `gp2-cloudstorage`;
+const containerName = `images`;
 const sasToken = process.env.REACT_APP_STORAGESASTOKEN;
 const storageAccountName = process.env.REACT_APP_STORAGERESOURCENAME;
 // </snippet_package>
@@ -50,7 +50,9 @@ const uploadFileToBlob = async (file: File | null): Promise<string[]> => {
   if (!file) return [];
 
   // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
-  const blobService = new BlobServiceClient(`https://${storageAccountName}.blob.core.windows.net/?${sasToken}`);
+  const blobService = new BlobServiceClient(
+    `https://learninggp2.blob.core.windows.net/?sv=2021-06-08&ss=b&srt=sco&sp=rwdlactfx&se=2022-09-06T22:30:39Z&st=2022-08-06T14:30:39Z&spr=https&sig=YKmcbFXrp0pyESl77cFBKB0L2jQzvg44tQSKtYedjjY%3D`
+  );
 
   // get Container - full public read access
   const containerClient: ContainerClient = blobService.getContainerClient(containerName);

@@ -15,6 +15,7 @@
   .link {
     .CardButton {
       margin: auto;
+
       border-radius: 10px;
       font-weight: 600;
     }
@@ -42,4 +43,7 @@
   box-shadow: 1px 7px 25px rgb(0 0 0 / 13%);
   -webkit-transform: translateY(-4px);
   transform: translateY(-4px);
+}
+.ButtonCommon {
+  margin-left: 0;
 }

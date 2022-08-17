@@ -28,6 +28,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import { useNavigate } from 'react-router-dom';
+import { CourseCardTeacher } from '../../Card/CourseCardTeacher';
+import { InstituteCard } from '../../Card/InstituteCard';
+import { CardButton } from '../../Card/CardButton';
 
 library.add(fas);
 
@@ -37,7 +40,7 @@ export const Institutes = () => {
     navigate('/');
   };
   return (
-    <div className="Notifications">
+    <div className="Institutes">
       <Container>
         <Row>
           <PanelContainer />
@@ -48,115 +51,132 @@ export const Institutes = () => {
             <div className="PanelSubHeader"></div>
 
             <Tabs>
-              <div className="Institutes I am working at">
+              <div className="Current Institutes">
                 <Link to="/editdetails" className="link"></Link>
                 <table className="booking-table" id="view-booking">
                   <thead>
-                    <tr className="booking-thead-second-tr">
+                    <tr className="booking-thead-second-tr" style={{ textAlign: 'left' }}>
                       {/*amc: Institute Manage Courses*/}
                       <th className="imc-first-th">Institute ID </th>
                       <th className="imc-second-th">Institute Name</th>
-                      <th className="imc-third-th">Subject</th>
-                      <th className="imc-fourth-th">Tutor's name</th>
+                      <th className="imc-second-th">Contact Number</th>
                       <th className="imc-last-th"></th>
+
+                      {/* <th className="imc-last-th"></th> */}
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td data-label="Course ID :">10000102345</td>
-                      <td data-label="Institute Name :">Sigma</td>
-                      <td data-label="Subject :">Business & Accounting Studies</td>
-                      <td data-label="Tutor's Name :">Amila Banadaranayake</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Institute Name :">Sigma Institute</td>
+                      <td data-label="Contact Number :">011 2536472</td>
+                      <td data-label="Contact Number :">
+                        <div className="ViewMore">
+                          <Link to="" className="link ViewMoreBtn">
+                            <CardButton btnname={'View More'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102355</td>
-                      <td data-label="Institute Name :">Rotary</td>
-                      <td data-label="Subject :">History</td>
-                      <td data-label="Tutor's Name :">Kamal Maggona</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Institute Name :">Rotary Institute</td>
+                      <td data-label="Contact Number :">011 2859684</td>
+                      <td data-label="Contact Number :">
+                        <div className="ViewMore">
+                          <Link to="" className="link ViewMoreBtn">
+                            <CardButton btnname={'View More'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102320</td>
-                      <td data-label="Institute Name :">Syzygy</td>
-                      <td data-label="Subject :">Science</td>
-                      <td data-label="Tutor's Name :">Anusha Palpita</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Institute Name :">Syzygy Institute</td>
+                      <td data-label="Contact Number :">011 2772134</td>
+                      <td data-label="Contact Number :">
+                        <div className="ViewMore">
+                          <Link to="" className="link ViewMoreBtn">
+                            <CardButton btnname={'View More'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000109945</td>
-                      <td data-label="Institute Name :">Montana</td>
-                      <td data-label="Subject :">Sinhala Lang. & Lit</td>
-                      <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Institute Name :">Montana Institute</td>
+                      <td data-label="Contact Number :">011 7234999</td>
+                      <td data-label="Contact Number :">
+                        <div className="ViewMore">
+                          <Link to="" className="link ViewMoreBtn">
+                            <CardButton btnname={'View More'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102300</td>
-                      <td data-label="Institute Name :">Sasip</td>
-                      <td data-label="Subject :">History</td>
-                      <td data-label="Tutor's Name :">Vajira Gamage</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Institute Name :">Sasip Institute</td>
+                      <td data-label="Contact Number :">033 2999684</td>
+                      <td data-label="Contact Number :">
+                        <div className="ViewMore">
+                          <Link to="" className="link ViewMoreBtn">
+                            <CardButton btnname={'View More'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td data-label="Institute ID  :">10000102345</td>
                       <td data-label="Institute Name :">Shakthi</td>
-                      <td data-label="Subject :">Business & Accounting Studies</td>
-                      <td data-label="Tutor's Name :">Sameera Rajapakse</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Contact Number :">011 2859684</td>
+                      <td data-label="Contact Number :">
+                        <div className="ViewMore">
+                          <Link to="" className="link ViewMoreBtn">
+                            <CardButton btnname={'View More'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div className="New Institute Requests">
-                <Link className="link" to="/uploadnotes"></Link>
+              <div className="New Requests">
+                {/* <Link className="link" to="/uploadnotes"></Link>
                 <br />
                 <Instituterequest name="Syzygy Institute" />
                 <Instituterequest name="Sigma Institute" />
                 <Instituterequest name="Sigma Institute" />
                 <Instituterequest name="Sigma Institute" />
-                <Instituterequest name="Sigma Institute" />
+                <Instituterequest name="Sigma Institute" /> */}
+
+                <div className="Panel">
+                  <div className="PanelBody" style={{ display: 'block' }}>
+                    <InstituteCard
+                      institutename="Susipwan Institute, Gampaha"
+                      image={<img src={'/Images/subjects/science.png'} />}
+                      btn1="View more"
+                      btn2="Accept"
+                      btn3="Decline"
+                    />
+
+                    <InstituteCard
+                      institutename="Shakthi Institute"
+                      image={<img src={'/Images/subjects/art.png'} />}
+                      btn1="View more"
+                      btn2="Accept"
+                      btn3="Decline"
+                    />
+
+                    <InstituteCard
+                      institutename="Flysky Institute"
+                      image={<img src={'/Images/subjects/maths.png'} />}
+                      btn1="View more"
+                      btn2="Accept"
+                      btn3="Decline"
+                    />
+                  </div>
+                </div>
               </div>
             </Tabs>
           </div>

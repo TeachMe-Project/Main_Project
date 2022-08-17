@@ -39,9 +39,9 @@ const data: Array<UpComing> = [
         id: 1,
         name: "Nimal Weerasinghe",
         class: "Mathematics",
-        month: "September",
+        month: "August",
         payment: 1500,
-        date: new Date(2022, 7, 20, 15, 30).toDateString(),
+        date: new Date(2022, 8, 20, 15, 30).toDateString(),
         attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -51,9 +51,9 @@ const data: Array<UpComing> = [
         id: 1,
         name: "Upulshanthashantha Sanasagala",
         class: "Science",
-        month: "September",
+        month: "August",
         payment: 1500,
-        date: new Date(2022, 7, 21, 15, 30).toDateString(),
+        date: new Date(2022, 8, 21, 15, 30).toDateString(),
         attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -63,9 +63,9 @@ const data: Array<UpComing> = [
         id: 1,
         name: "Kamal Weerasinghe",
         class: "History",
-        month: "September",
+        month: "August",
         payment: 1500,
-        date: new Date(2022, 7, 22, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 8, 22, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -74,9 +74,9 @@ const data: Array<UpComing> = [
         id: 1,
         name: "Upul Sanasagala",
         class: "English",
-        month: "September",
+        month: "August",
         payment: 1500,
-        date: new Date(2022, 7, 23, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 8, 23, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -85,9 +85,9 @@ const data: Array<UpComing> = [
         id: 1,
         name: "Sameera Weerasinghe",
         class: "Commerce",
-        month: "September",
+        month: "August",
         payment: 1500,
-        date: new Date(2022, 7, 24, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
+        date: new Date(2022, 8, 24, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
         leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
         classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
         classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
@@ -133,10 +133,9 @@ const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
     //     className='accept-icon'
 
     // />
-    <Button style={{
-        borderRadius: "20px",
-        fontWeight: "600",
-        fontSize: "16px",
+    <Button
+        className='success-outline'
+        style={{
         boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
     }}
             onClick={() => {
@@ -170,11 +169,15 @@ const columns = [
     },
     {
         dataField: "class",
-        text: "Class",
+        text: "Subject",
     },
     {
         dataField: "month",
         text: "month",
+    },
+    {
+        dataField: "name",
+        text: "Tutor Name",
     },
     {
         dataField: "payment",
@@ -218,7 +221,7 @@ const PStudentProgress: React.FC = () => {
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
                         <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
-                            History of Student
+                            Pending Payment
                         </h1>
                     </Col>
                 </Row>

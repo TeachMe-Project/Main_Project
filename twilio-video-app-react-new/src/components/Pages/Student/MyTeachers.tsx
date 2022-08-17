@@ -11,84 +11,60 @@ export const MyTeachers = () => {
   return (
     <div className="MyTeachers">
       <Container>
-        {/* <Tabs>
-        <div label="Gator">
-          See ya later, <em>Alligator</em>!
-        </div>
-        <div label="Crocodile">
-          After 'while, <em>Crocodile</em>!
-        </div>
-        <div label="Sarcosuchus">
-          Nothing to see here, this tab is <em>extinct</em>!
-        </div>
-      </Tabs> */}
-
         <Row>
           <PanelContainer />
           <div className="PanelHeader">
-            <h2>My Teachers</h2>
+            <h2>My Tutors</h2>
           </div>
           <div className="Panel">
             <div className="PanelBody">
               <div className="small-scrollbar">
                 <Link to="/course" className="link">
                   <TeacherCard
-                    grade="Grade 9"
+                    grade="Grade 8"
                     subject="Mathematics"
                     image={<img src={'/Images/Teachers/mr1.jpg'} />}
                     teacher="Mr. Lasitha Nuwan"
                     contact="0771212121"
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                    description="I'm having 9 years of experience in teaching at a renowned
+                    government school as a mathematics teacher. I have produced great results
+                   ..."
                   />
                 </Link>
                 <Link to="/course" className="link">
                   <TeacherCard
-                    grade="Grade 9"
+                    grade="Grade 8"
                     subject="Science"
                     image={<img src={'/Images/Teachers/ms1.jpg'} />}
-                    teacher="Mr. Nayana Sandamali"
+                    teacher="Ms. Imalka Sandamali"
                     contact="0771212990"
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                    description="I'm having more than 5 years of experience in teaching at a renowned
+                    government school as a science teacher. I have produced great results
+                   ..."
                   />
                 </Link>
                 <Link to="/course" className="link">
                   <TeacherCard
-                    grade="Grade 9"
+                    grade="Grade 8"
                     subject="History"
                     image={<img src={'/Images/Teachers/mr2.jpg'} />}
                     teacher="Mr. Kamal Maggona"
                     contact="0771212450"
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                    description="I'm having more than 15 years of experience in teaching at a renowned
+                    government school as a history teacher. I have produced great results
+                   ..."
                   />
                 </Link>
                 <Link to="/course" className="link">
                   <TeacherCard
-                    grade="Grade 9"
-                    subject="Music"
+                    grade="Grade 8"
+                    subject="Western Music"
                     image={<img src={'/Images/Teachers/mr3.jpg'} />}
                     teacher="Mr. Anura Kahatagoda"
                     contact="0771212789"
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
-                  />
-                </Link>
-                <Link to="/course" className="link">
-                  <TeacherCard
-                    grade="Grade 9"
-                    subject="Art"
-                    image={<img src={'/Images/Teachers/mrs1.jpg'} />}
-                    teacher="Mrs. Shiromi Chandraguptha"
-                    contact="0771215555"
-                    description="Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad djndkjend edjnedjned..."
+                    description="I'm having more than 7 years of experience in teaching at a renowned
+                    government school as a western music teacher. I have produced...
+                   ..."
                   />
                 </Link>
 

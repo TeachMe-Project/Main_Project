@@ -29,6 +29,7 @@ const SignUpCategory = () => {
 
 
     return (
+       <>
         <Container fluid={true} className="signupCategory d-flex flex-column">
             <Row className="d-flex flex-row align-items-center">
                 <Col lg={6} md={12} sm={12} className="leftSide d-flex flex-column justify-content-center">
@@ -40,7 +41,7 @@ const SignUpCategory = () => {
                                    className="backBtn d-lg-flex flex-row align-items-center text-decoration-none mb-lg-5 d-md-none d-sm-none border-0 bg">
                                     <ImArrowLeft2 style={{marginRight: "4px"}}/> Go Back
                                 </button>
-                                <img src={Images.logo} className="logo mt-lg-3" onClick={() => navigate('/')}
+                                <img src={Images.logo} className="logo mt-lg-2" onClick={() => navigate('/')}
                                      alt="logo"/>
                             </div>
                             <h1 className="mt-lg-4 mt-md-5 mb-md-4 ms-md-2 Header mt-3">
@@ -61,11 +62,11 @@ const SignUpCategory = () => {
                             <img src={Images.bannerSignup} className="formImage" alt="form-category"/>
                             <h1 className="text-center my-lg-2 mt-sm-2">Sign up as</h1>
                             <Button onClick={() => navigate('/signup/teacher')}
-                                    className="userBtn mt-lg-4 mt-md-3 mx-auto  mt-3">Teacher</Button>
+                                    className="userBtn mt-lg-3 mt-md-3 mx-auto  mt-3">Teacher</Button>
                             <Button onClick={() => navigate('/signup/institute')}
-                                    className="userBtn mt-lg-4 mt-md-3 mx-auto  mt-3">Institute</Button>
+                                    className="userBtn mt-lg-3 mt-md-3 mx-auto  mt-3">Institute</Button>
                             <Button onClick={() => navigate('/signup/parent')}
-                                    className="userBtn mt-lg-4 mt-md-3 mx-auto userBtn mt-sm-2 mt-3">Parent</Button>
+                                    className="userBtn mt-lg-3 mt-md-3 mx-auto userBtn mt-sm-2 mt-3">Parent</Button>
                             <Row>
                                 <Col
                                     className="d-flex flex-row align-items-center justify-content-center mt-lg-4 mt-md-3 loginFooter">
@@ -80,8 +81,9 @@ const SignUpCategory = () => {
                     </Row>
                 </Col>
             </Row>
-            <Footer/>
         </Container>
+    <Footer/>
+    </>
     );
 };
 

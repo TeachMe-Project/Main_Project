@@ -7,6 +7,8 @@ import * as yup from 'yup';
 import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
+import axios from "axios";
+import NavbarCommon from "../profile/navBar/NavbarCommon";
 
 const schema = yup.object().shape({
     Title: yup.string().required(),
@@ -22,10 +24,10 @@ const schema = yup.object().shape({
         "Must contain 8 characters including 1 uppercase, 1 lowercase, 1 number & 1 special character"
     ).oneOf([yup.ref('Password'), null], 'Passwords must match'),
     Description: yup.string().required(),
-    Qualification: yup
-        .mixed()
-        .required()
-    ,
+    // Qualification: yup
+    //     .mixed()
+    //     .required()
+    // ,
     Mobile: yup.string().required().matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\(\d{2,3}\\)[ \\-]*)|(\d{2,4})[ \\-]*)*?\d{3,4}?[ \\-]*\d{3,4}?$/,
         "Mobile number is invalid"),
@@ -54,7 +56,8 @@ const initialState = {
 
 const TeacherSignup = () => {
 
-    const [pageStage, setPageStage] = useState(4);
+    const [loading, setLoading] = useState(false);
+    const [pageStage, setPageStage] = useState(1);
     const [titleValidate, setTitleValidate] = useState<boolean>(false);
     const [fistNameValidate, setFistNameValidate] = useState(false);
     const [lastNameValidate, setLastNameValidate] = useState(false);
@@ -188,11 +191,71 @@ const TeacherSignup = () => {
         }
     }
 
+    const handleOnSubmit = (values: { Title?: string; Firstname: any; Lastname: any; Email: any; Password: any; Confirm_Password?: string; Mobile: any; Description: any; Qualification?: string; AccountName: any; BankName: any; BranchName: any; AccountNo: any; }) => {
+        setLoading(true);
+        const data = JSON.stringify({
+            "email": `${values.Email}`,
+            "Firstname": `${values.Firstname}`,
+            "Lastname": `${values.Lastname}`,
+            "Password": `${values.Password}`
+        });
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/auth/createTeacher",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res) => {
+                console.log("User created in auth0");
+                console.log(res.data);
+
+                const apiData = JSON.stringify({
+                    "user_id": `${res.data.user_id}`,
+                    "username": `${values.Email}`,
+                    "profile_image": `${res.data.picture}`,
+                    "first_name": `${values.Firstname}`,
+                    "last_name": `${values.Lastname}`,
+                    "contact_no": `${values.Mobile}`,
+                    "description": `${values.Description}`,
+                    "account_name": `${values.AccountName}`,
+                    "account_no": `${values.AccountNo}`,
+                    "bank_name": `${values.BankName}`,
+                    "branch_name": `${values.BranchName}`
+                })
+
+                axios({
+                    method: "POST",
+                    url: "http://localhost:8081/teacher/createTeacher",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: apiData
+                }).then((apiRes) => {
+                    console.log(apiData)
+                    console.log("Api user created")
+                    console.log(apiRes.status);
+                    if(apiRes.status=== 200){
+                        setLoading(false);
+                        setPageStage(4)
+                    }
+                }).catch((error) => {
+                    console.log(error.message)
+                })
+
+            }
+        ).catch((error)=> {
+            console.log(values);
+            console.log("error")
+            console.log(error.message)
+        })
+    }
 
     return (
-        <Container fluid={true}>
+        <Container fluid={true} className='w-100 p-0 m-0'>
+            <NavbarCommon/>
             <Row
-                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start">
+                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start p-0 m-0">
                 <Col lg={9} md={12} xs={12}
                      className="Signup d-flex flex-lg-column justify-content-lg-center p-md-3 mt-md-2 mt-3">
                     <Row className="d-flex align-items-center">
@@ -242,15 +305,15 @@ const TeacherSignup = () => {
                                     <Row className="pb-md-0 pb-4">
                                         <Form noValidate onSubmit={handleSubmit}>
                                             {(pageStage === 1) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationTitle">
+                                                        <Form.Group className="mb-2" controlId="validationTitle">
                                                             <Form.Label style={{fontWeight: 600}}>Title</Form.Label>
                                                             <Form.Select
                                                                 name="Title"
                                                                 value={values.Title}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Title ? changeTitleValidate(false) : changeTitleValidate(true)}
+                                                                isInvalid={!!errors.Title && touched.Title ? changeTitleValidate(false) : changeTitleValidate(true)}
                                                                 isValid={touched.Title}
                                                                 onBlur={handleBlur}
                                                             >
@@ -265,7 +328,7 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationEmail">
+                                                        <Form.Group className="mb-2" controlId="validationEmail">
                                                             <Form.Label style={{fontWeight: 600}}>Email</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -273,7 +336,7 @@ const TeacherSignup = () => {
                                                                 name="Email"
                                                                 value={values.Email}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
+                                                                isInvalid={!!errors.Email && touched.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                                                                 isValid={touched.Email}
                                                                 onBlur={handleBlur}
                                                             />
@@ -283,9 +346,9 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationFirstName">
+                                                        <Form.Group className="mb-2" controlId="validationFirstName">
                                                             <Form.Label style={{fontWeight: 600}}>First
                                                                 name</Form.Label>
                                                             <Form.Control
@@ -294,7 +357,7 @@ const TeacherSignup = () => {
                                                                 name="Firstname"
                                                                 value={values.Firstname}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)}
+                                                                isInvalid={!!errors.Firstname && touched.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)}
                                                                 isValid={touched.Firstname}
                                                                 onBlur={handleBlur}
                                                             />
@@ -304,7 +367,7 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationLastname">
+                                                        <Form.Group className="mb-2" controlId="validationLastname">
                                                             <Form.Label style={{fontWeight: 600}}>Last name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -312,7 +375,7 @@ const TeacherSignup = () => {
                                                                 name="Lastname"
                                                                 value={values.Lastname}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
+                                                                isInvalid={!!errors.Lastname && touched.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)}
                                                                 isValid={touched.Lastname}
                                                                 onBlur={handleBlur}
                                                             />
@@ -322,9 +385,9 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationPassword">
+                                                        <Form.Group className="mb-2" controlId="validationPassword">
                                                             <Form.Label style={{fontWeight: 600}}>Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
@@ -332,7 +395,7 @@ const TeacherSignup = () => {
                                                                 name="Password"
                                                                 value={values.Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
+                                                                isInvalid={!!errors.Password && touched.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
                                                                 isValid={touched.Password}
                                                                 onBlur={handleBlur}
                                                             />
@@ -342,7 +405,7 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationRPassword">
+                                                        <Form.Group className="mb-2" controlId="validationRPassword">
                                                             <Form.Label style={{fontWeight: 600}}>Confirm
                                                                 password</Form.Label>
                                                             <Form.Control
@@ -351,7 +414,7 @@ const TeacherSignup = () => {
                                                                 name="Confirm_Password"
                                                                 value={values.Confirm_Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
+                                                                isInvalid={!!errors.Confirm_Password && touched.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
                                                                 isValid={touched.Confirm_Password}
                                                                 onBlur={handleBlur}
                                                             />
@@ -361,7 +424,7 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col
                                                         className="d-flex flex-row justify-content-lg-end justify-content-end">
                                                         <Button type="button" className="px-4 nextBtn"
@@ -387,9 +450,9 @@ const TeacherSignup = () => {
                                                 </Row>
                                             </LazyLoad>}
                                             {(pageStage === 2) && <LazyLoad once>
-                                                <Row className=" pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-0 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationMobile">
+                                                        <Form.Group className="mb-1" controlId="validationMobile">
                                                             <Form.Label style={{fontWeight: 600}}>Mobile number</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -397,7 +460,7 @@ const TeacherSignup = () => {
                                                                 name="Mobile"
                                                                 value={values.Mobile}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Mobile ? changeMobileValidate(false) : changeMobileValidate(true)}
+                                                                isInvalid={!!errors.Mobile && touched.Mobile ? changeMobileValidate(false) : changeMobileValidate(true)}
                                                                 isValid={touched.Mobile}
                                                                 onBlur={handleBlur}
                                                             />
@@ -407,9 +470,9 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className=" pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationDescription">
+                                                        <Form.Group className="mb-1" controlId="validationDescription">
                                                             <Form.Label
                                                                 style={{fontWeight: 600}}>Description</Form.Label>
                                                             <Form.Control as="textarea"
@@ -418,7 +481,7 @@ const TeacherSignup = () => {
                                                                           name="Description"
                                                                           value={values.Description}
                                                                           onChange={handleChange}
-                                                                          isInvalid={!!errors.Description ? changeDescriptionValidate(false) : changeDescriptionValidate(true)}
+                                                                          isInvalid={!!errors.Description && touched.Description ? changeDescriptionValidate(false) : changeDescriptionValidate(true)}
                                                                           isValid={touched.Description}
                                                                           onBlur={handleBlur}
                                                             />
@@ -428,9 +491,9 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3"
+                                                        <Form.Group className="mb-1"
                                                                     controlId="validationQualification">
                                                             <Form.Label
                                                                 style={{fontWeight: 600}}>Qualification</Form.Label>
@@ -440,7 +503,7 @@ const TeacherSignup = () => {
                                                                 name="Qualification"
                                                                 value={values.Qualification}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Qualification ? changeQualificationValidate(false) : changeQualificationValidate(true)}
+                                                                isInvalid={!!errors.Qualification && touched.Qualification ? changeQualificationValidate(false) : changeQualificationValidate(true)}
                                                                 isValid={touched.Qualification}
                                                                 onBlur={handleBlur}
                                                             />
@@ -450,7 +513,7 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between ">
 
                                                         <Button type="button" className="px-4 nextBtn"
@@ -477,9 +540,9 @@ const TeacherSignup = () => {
                                                 </Row>
                                             </LazyLoad>}
                                             {(pageStage === 3) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationAccountName">
+                                                        <Form.Group className="mb-2" controlId="validationAccountName">
                                                             <Form.Label style={{fontWeight: 600}}>Account holder's
                                                                 name</Form.Label>
                                                             <Form.Control
@@ -488,7 +551,7 @@ const TeacherSignup = () => {
                                                                 name="AccountName"
                                                                 value={values.AccountName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.AccountName ? changeAccountNameValidate(false) : changeAccountNameValidate(true)}
+                                                                isInvalid={!!errors.AccountName && touched.AccountName ? changeAccountNameValidate(false) : changeAccountNameValidate(true)}
                                                                 isValid={touched.AccountName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -498,9 +561,9 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationBankName">
+                                                        <Form.Group className="mb-2" controlId="validationBankName">
                                                             <Form.Label style={{fontWeight: 600}}>Bank name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -508,7 +571,7 @@ const TeacherSignup = () => {
                                                                 name="BankName"
                                                                 value={values.BankName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)}
+                                                                isInvalid={!!errors.BankName && touched.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)}
                                                                 isValid={touched.BankName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -518,7 +581,7 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationBranchName">
+                                                        <Form.Group className="mb-2" controlId="validationBranchName">
                                                             <Form.Label style={{fontWeight: 600}}>Branch
                                                                 name</Form.Label>
                                                             <Form.Control
@@ -527,7 +590,7 @@ const TeacherSignup = () => {
                                                                 name="BranchName"
                                                                 value={values.BranchName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)}
+                                                                isInvalid={!!errors.BranchName && touched.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)}
                                                                 isValid={touched.BranchName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -537,9 +600,9 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationAccountNo">
+                                                        <Form.Group className="mb-2" controlId="validationAccountNo">
                                                             <Form.Label style={{fontWeight: 600}}>Account
                                                                 number</Form.Label>
                                                             <Form.Control
@@ -548,7 +611,7 @@ const TeacherSignup = () => {
                                                                 name="AccountNo"
                                                                 value={values.AccountNo}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)}
+                                                                isInvalid={!!errors.AccountNo && touched.AccountName ? changeAccountNoValidate(false) : changeAccountNoValidate(true)}
                                                                 isValid={touched.AccountNo}
                                                                 onBlur={handleBlur}
                                                             />
@@ -558,7 +621,7 @@ const TeacherSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between">
                                                         <Button type="button" className="px-4 nextBtn"
                                                                 variant="primary"
@@ -569,7 +632,7 @@ const TeacherSignup = () => {
                                                                 variant="primary"
                                                                 onClick={() => {
                                                                     if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {
-                                                                        setPageStage(4);
+                                                                        handleOnSubmit(values);
                                                                     }
                                                                 }
                                                                 }
@@ -580,7 +643,7 @@ const TeacherSignup = () => {
                                                                     validateField("AccountNo");
                                                                 }
                                                                 }
-                                                        >Next</Button>
+                                                        >Submit</Button>
                                                     </Col>
                                                 </Row>
                                             </LazyLoad>}

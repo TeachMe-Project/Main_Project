@@ -8,11 +8,11 @@ datasource db {
 }
 
 model admin {
+  user_id    String  @db.VarChar(100)
   admin_id   Int     @id @default(autoincrement())
   first_name String  @db.VarChar(255)
   last_name  String  @db.VarChar(255)
   mobile_no  String  @db.VarChar(12)
-  user_id    Int
   isActive   Boolean
   user       user    @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK TO ADMIN FROM USER")
 
@@ -41,6 +41,8 @@ model Renamedclass {
 }
 
 model course {
+  course_id        Int                @id @default(autoincrement())
+  teacher_id       Int
   course_name      String             @db.VarChar(100)
   grade            String             @db.VarChar(3)
   subject          String             @db.VarChar(100)
@@ -51,8 +53,6 @@ model course {
   end_time         DateTime           @db.Time(0)
   day              course_day
   medium           course_medium
-  course_id        Int                @id @default(autoincrement())
-  teacher_id       Int
   price            Int
   isActive         Boolean
   teacher          teacher            @relation(fields: [teacher_id], references: [teacher_id], onDelete: NoAction, map: "FK TO COURSE FROM TEACHER")
@@ -68,10 +68,10 @@ model course {
 
 model homework {
   homework_id   Int      @id @default(autoincrement())
+  student_id    Int
+  course_id     Int
   uploaded_date DateTime @default(now()) @db.Date
   homework      String   @db.VarChar(1000)
-  course_id     Int
-  student_id    Int
   isActive      Boolean
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM COURSE")
   student       student  @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM STUDENT")
@@ -81,18 +81,23 @@ model homework {
 }
 
 model institute {
-  institute_id      Int                 @id @default(autoincrement())
-  institute_name    String              @db.VarChar(255)
-  contact_no        String              @db.VarChar(12)
-  description       String              @db.VarChar(1000)
-  account_name      String              @db.VarChar(100)
-  account_no        String              @db.VarChar(20)
-  bank_name         String              @db.VarChar(100)
-  branch_name       String              @db.VarChar(100)
-  user_id           Int
+  user_id           String                 @db.VarChar(100)
+  institute_id      Int                    @id @default(autoincrement())
+  institute_name    String                 @db.VarChar(255)
+  owner_name        String                 @db.VarChar(150)
+  location          String                 @db.VarChar(300)
+  address           String                 @db.VarChar(500)
+  contact_no        String                 @db.VarChar(12)
+  description       String                 @db.VarChar(1000)
+  account_name      String                 @db.VarChar(100)
+  account_no        String                 @db.VarChar(20)
+  bank_name         String                 @db.VarChar(100)
+  branch_name       String                 @db.VarChar(100)
   isActive          Boolean
-  verification_code String              @db.VarChar(10)
-  user              user                @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "FK TO INSTITUTE FROM USER")
+  verification_code String                 @db.VarChar(10)
+  verification      institute_verification @default(pending)
+  applied_date      String                 @db.VarChar(30)
+  user              user                   @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK TO INSTITUTE FROM USER")
   institute_course  institute_course[]
   institute_teacher institute_teacher[]
   teacher_requests  teacher_requests[]
@@ -139,25 +144,25 @@ model notes {
 }
 
 model notification {
+  user_id         String                   @db.VarChar(100)
   notification_id Int                      @id @default(autoincrement())
-  user_id         Int
   subject         String                   @db.VarChar(300)
   description     String                   @db.VarChar(10000)
   read_status     notification_read_status @default(unread)
   isActive        Boolean
-  user            user                     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK TO NOTIF FROM USER")
+  user            user                     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK TO NOTIFICATION FROM USER")
 
-  @@index([user_id], map: "FK TO NOTIF FROM USER")
+  @@index([user_id], map: "FK TO NOTIFICATION FROM USER")
 }
 
 model parent {
-  parent_id  Int       @id
-  user_id    Int
+  user_id    String    @db.VarChar(100)
+  parent_id  Int       @id @default(autoincrement())
   first_name String    @db.VarChar(100)
   last_name  String    @db.VarChar(100)
   mobile_no  String    @db.VarChar(12)
   isActive   Boolean
-  user       user      @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "FK TO PARENT FROM USER")
+  user       user      @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "FK TO PARENT FROM USER")
   student    student[]
 
   @@index([user_id], map: "FK TO PARENT FROM USER")
@@ -178,16 +183,16 @@ model parent_payment {
 }
 
 model student {
+  user_id         String            @db.VarChar(100)
+  student_id      Int               @id @default(autoincrement())
+  parent_id       Int
   first_name      String            @db.VarChar(30)
   last_name       String            @db.VarChar(30)
   school          String            @db.VarChar(100)
   grade           String            @db.VarChar(3)
   isActive        Boolean
-  student_id      Int               @id
-  user_id         Int
-  parent_id       Int
   parent          parent            @relation(fields: [parent_id], references: [parent_id], onDelete: Cascade, map: "FK TO STUDENT FROM PARENT")
-  user            user              @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "FK TO STUDENT FROM USER")
+  user            user              @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK TO STUDENT FROM USER")
   class           Renamedclass[]    @relation("classTostudent")
   homework        homework[]
   notes           notes[]
@@ -205,11 +210,10 @@ model student_course {
   isActive   Boolean
   status     student_course_status
   course     course                @relation(fields: [course_id], references: [course_id], onDelete: NoAction, map: "FK TO STU_CO FROM COURSE")
-  student    student               @relation(fields: [student_id], references: [student_id], onDelete: NoAction, map: "FK TO STU_CO FROM STUDENT")
+  student    student               @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO STU_CO FROM STUDENT")
 
   @@id([student_id, course_id])
   @@index([course_id], map: "FK TO STU_CO FROM COURSE")
-  @@index([student_id], map: "FK TO STU_CO FROM STUDENT")
 }
 
 model student_payment {
@@ -221,16 +225,18 @@ model student_payment {
   isActive       Boolean
   course         course                         @relation(fields: [course_id], references: [course_id], onUpdate: Restrict, map: "FK TO STUDENT_PAYMENT FROM COURSE")
   parent_payment parent_payment                 @relation(fields: [payment_id], references: [payment_id], onUpdate: Restrict, map: "FK TO STUDENT_PAYMENT FROM PARENT_PAYMENT")
-  student        student                        @relation(fields: [student_id], references: [student_id], onUpdate: Restrict, map: "FK TO STUDENT_PAYMENT FROM STUDENT")
+  student        student                        @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO STUDENT_PAYMENT FROM STUDENT")
 
   @@index([course_id], map: "FK TO STUDENT_PAYMENT FROM COURSE")
   @@index([student_id], map: "FK TO STUDENT_PAYMENT FROM STUDENT")
 }
 
 model teacher {
+  user_id           String               @unique(map: "user_id") @db.VarChar(100)
   teacher_id        Int                  @id @default(autoincrement())
   first_name        String               @db.VarChar(30)
   last_name         String               @db.VarChar(30)
+  contact_no        String               @db.VarChar(15)
   gender            teacher_gender
   description       String               @db.VarChar(255)
   qualification     String               @db.VarChar(255)
@@ -240,13 +246,11 @@ model teacher {
   account_no        String               @db.VarChar(20)
   verification      teacher_verification
   isActive          Boolean
-  user_id           Int
-  user              user                 @relation(fields: [user_id], references: [user_id], onDelete: NoAction, map: "FK TO TEACHER FROM USER")
+  applied_date      String               @db.VarChar(30)
+  user              user                 @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "FK TO TEACHER FROM USER")
   course            course[]
   institute_teacher institute_teacher[]
   teacher_requests  teacher_requests[]
-
-  @@index([user_id], map: "FK TO TEACHER FROM USER")
 }
 
 model teacher_requests {
@@ -263,8 +267,8 @@ model teacher_requests {
 }
 
 model user {
-  user_id       Int            @id @default(autoincrement())
-  username      String         @unique(map: "username") @db.VarChar(50)
+  user_id       String         @id @db.VarChar(100)
+  username      String         @db.VarChar(100)
   type          user_type      @default(student)
   profile_image String         @db.VarChar(255)
   isActive      Boolean
@@ -273,7 +277,7 @@ model user {
   notification  notification[]
   parent        parent[]
   student       student[]
-  teacher       teacher[]
+  teacher       teacher?
 }
 
 enum Renamedclass_status {
@@ -381,4 +385,10 @@ enum user_type {
   teacher
   institute
   admin
+}
+
+enum institute_verification {
+  pending
+  verified
+  rejected
 }

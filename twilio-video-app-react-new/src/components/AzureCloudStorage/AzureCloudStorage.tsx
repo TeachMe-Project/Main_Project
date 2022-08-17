@@ -73,12 +73,11 @@ const AzureCloudStorage = (): JSX.Element => {
   return (
     <div>
       {/* <h1>Upload file to Azure Blob Storage</h1> */}
-      {/* {storageConfigured && <div>Storage is configured.</div>} */}
-      {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()}
-      <hr />
-      {!storageConfigured && <div>Storage is not configured.</div>}
       {storageConfigured && !uploading && DisplayForm()}
       {storageConfigured && uploading && <div>Uploading</div>}
+      {/* <hr />
+      {storageConfigured && blobList.length > 0 && DisplayImagesFromContainer()} */}
+      {!storageConfigured && <div>Storage is not configured.</div>}
     </div>
   );
 };

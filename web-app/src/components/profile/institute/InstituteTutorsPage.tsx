@@ -11,13 +11,17 @@ import swal from "@sweetalert/with-react";
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {FaEye} from "react-icons/fa";
 import InstituteLayout from "./InstituteLayout";
+import {BsTrashFill} from "react-icons/bs";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 
-const gotoTutorProfile = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
-    < FaEye
+
+const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+    < BsTrashFill
         style={{
             fontSize: "20px",
-            color: "#181312",
+            color: "#e74c3c",
             padding: "7px",
             width: "30px",
             height: "30px",
@@ -29,7 +33,7 @@ const gotoTutorProfile = (cell: any, row: any, rowIndex: any, formatExtraData: a
         onClick={() => {
             swal({
                 title: "User Removal",
-                text: `Do you really want to remove ${row.username}?`,
+                text: `Do you really want to remove ${row.first_name} ${row.last_name} ?`,
                 icon: "error",
                 buttons: {
                     cancel: true,
@@ -38,11 +42,38 @@ const gotoTutorProfile = (cell: any, row: any, rowIndex: any, formatExtraData: a
                 // dangerMode: true,
             })
                 .then((willDelete: any) => {
-                    if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.username}`, {
-                            icon: "success",
-                        });
-                    }
+                    const apiData = JSON.stringify({
+                        "user_id": `${row.user_id}`
+                    })
+                    axios({
+                        method: "POST",
+                        url: "http://localhost:8081/auth/block",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: apiData
+                    }).then((apiRes) => {
+                        axios({
+                            method: "POST",
+                            url: "http://localhost:8081/user/removeUser",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            data: apiData
+                        }).then((apiRes) => {
+                            console.log(apiRes.status);
+                            if (apiRes.status === 200) {
+                                swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
+                                    icon: "success",
+                                });
+                            }
+                        }).catch((error) => {
+                            console.log(error.message)
+                        })
+
+                    }).catch((error) => {
+                        console.log(error.message)
+                    })
                 });
         }}
     />
@@ -86,42 +117,71 @@ const data = [{
     }
     ,]
 
-const columns = [
-    {
-        dataField: "id",
-        text: "Tutor ID",
-        sort: true,
-    },
-    {
-        dataField: "username",
-        text: "Username ",
-    },
-    {
-        dataField: "first_name",
-        text: "First Name",
-    },
-    {
-        dataField: "last_name",
-        text: "Last name"
-    },
-    {
-        dataField: "contact_no",
-        text: "Contact No"
-    },
-    {
-        dataField: "",
-        text: "",
-        formatter: gotoTutorProfile,
-        headerAttrs: {width: 100},
-        attrs: {width: 100, class: "EditRow"}
-    },
-];
 
 
 const InstituteTutorsPage = () => {
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
+    const navigate = useNavigate();
+
+    const gotoTutorProfile = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+        < FaEye
+            style={{
+                fontSize: "20px",
+                color: "#181312",
+                padding: "7px",
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                cursor: "pointer",
+                boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+            }}
+            className='accept-icon'
+            onClick={() => {
+                navigate(`/institute/tutors/${row.user_id}`)
+            }}
+        />
+    );
+
+    const columns = [
+        {
+            dataField: "id",
+            text: "Tutor ID",
+            sort: true,
+        },
+        {
+            dataField: "username",
+            text: "Username ",
+        },
+        {
+            dataField: "first_name",
+            text: "First Name",
+        },
+        {
+            dataField: "last_name",
+            text: "Last name"
+        },
+        {
+            dataField: "contact_no",
+            text: "Contact No"
+        },
+        {
+            dataField: "",
+            text: "",
+            formatter: gotoTutorProfile,
+            headerAttrs: {width: 60},
+            attrs: {width: 100, class: "EditRow"}
+        },
+        {
+            dataField: "",
+            text: "",
+            formatter: removeItem,
+            headerAttrs: {width: 60},
+            attrs: {width: 100, class: "EditRow"}
+        },
+    ];
+
 
     // @ts-ignore
     return (
@@ -131,7 +191,7 @@ const InstituteTutorsPage = () => {
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
                         <h1 className='text-lg-start header my-lg-3 text-md-center text-center'>
-                            View Tutors
+                            Manage Tutors
                         </h1>
                     </Col>
                 </Row>
@@ -199,6 +259,9 @@ const InstituteTutorsPage = () => {
                                         <li className='d-flex flex-row align-items-center justify-content-end mt-2'>
                                             <span className='me-3'>
                                                  {gotoTutorProfile(null, item, null, null)}
+                                            </span>
+                                            <span className='me-3'>
+                                                 {removeItem(null, item, null, null)}
                                             </span>
                                         </li>
                                     </ul>

@@ -10,7 +10,7 @@ import AppStateProvider, { useAppState } from './state';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import ErrorDialog from './components/ErrorDialog/ErrorDialog';
 import LoginPage from './components/LoginPage/LoginPage';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+//import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import theme from './theme';
 import './types';
 import { ChatProvider } from './components/ChatProvider';
@@ -20,7 +20,6 @@ import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/Un
 import Twilio from './components/Twilio/Twilio';
 import Dashboard from './components/Pages/Student/Dashboard';
 import MyTeachers from './components/Pages/Student/MyTeachers';
-import Settings from './components/Pages/Student/Settings';
 import Course from './components/Pages/Student/Course';
 import MyCourses from './components/Pages/Student/MyCourses';
 import StudentProfile from './components/Pages/Student/StudentProfile';
