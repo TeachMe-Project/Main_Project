@@ -84,9 +84,7 @@ export const Dashboard = () => {
                         <p style={{ marginRight: '20px' }}>Mathematics</p>
                       </Col>
                       <Col xl={4}>
-                        <p>
-                          <center>20</center>
-                        </p>
+                        <p className="text-center">20</p>
                       </Col>
                     </div>
 
@@ -95,9 +93,7 @@ export const Dashboard = () => {
                         <p style={{ marginRight: '20px' }}>Science</p>
                       </Col>
                       <Col xl={4}>
-                        <p>
-                          <center>18</center>
-                        </p>
+                        <p className="text-center">18</p>
                       </Col>
                     </div>
                   </div>

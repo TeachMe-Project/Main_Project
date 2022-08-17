@@ -124,7 +124,9 @@
     "cypress:ci": "cross-env CYPRESS_baseUrl=http://localhost:8081 start-server-and-test ../server http://localhost:8081 cypress:run",
     "deploy:twilio-cli": "cross-env REACT_APP_SET_AUTH=passcode npm run build && twilio rtc:apps:video:deploy --authentication=passcode --app-directory ./build",
     "electron": "wait-on tcp:3000 && electron .",
-    "temp": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm:electron\""
+    "temp": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm:electron\"",
+    "web": "concurrently npm:dev",
+    "destop": "concurrently -k \"cross-env BROWSER=none npm run web\" \"npm:electron\""
   },
   "eslintConfig": {
     "extends": "react-app",

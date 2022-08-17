@@ -37,10 +37,8 @@ export const Parentscharts = () => {
                       </p>
                     </Col>
                     <Col xl={4}>
-                      <p>
-                        <center>
-                          <b>13</b>
-                        </center>
+                      <p className="text-center">
+                        <b>13</b>
                       </p>
                     </Col>
                   </div>
@@ -52,10 +50,8 @@ export const Parentscharts = () => {
                       </p>
                     </Col>
                     <Col xl={4}>
-                      <p>
-                        <center>
-                          <b>22</b>
-                        </center>
+                      <p className="text-center">
+                        <b>22</b>
                       </p>
                     </Col>
                   </div>
