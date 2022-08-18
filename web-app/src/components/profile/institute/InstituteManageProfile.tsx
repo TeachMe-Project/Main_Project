@@ -9,7 +9,6 @@ import * as yup from "yup";
 import {BsPencilSquare} from "react-icons/bs";
 import axios, {AxiosResponse} from "axios";
 import Images from "../../../assets/images/Images";
-import {useParams} from "react-router-dom";
 import Loader from "../../utils/Loader";
 
 const schema = yup.object().shape({
@@ -141,6 +140,7 @@ const InstituteManageProfile = () => {
     const [isEditProfile, setIsEditProfile] = useState(false);
     const [isDataLoading, setIsDataLoading] = useState(false);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const [initialState, setInitialState] = useState<initialStateType>({
         InstituteName: '',
         OwnerName: '',
@@ -156,7 +156,7 @@ const InstituteManageProfile = () => {
     });
 
 
-    useEffect(()=> {
+    useEffect(() => {
         if (user?.family_name === "institute") {
             setIsEditProfile(true);
         }
@@ -188,8 +188,7 @@ const InstituteManageProfile = () => {
         }).catch((error) => {
             console.log(error.message)
         })
-    },[]);
-
+    }, []);
 
 
     const changePassword = () => {
@@ -211,6 +210,43 @@ const InstituteManageProfile = () => {
             console.log(error.message)
             return setPasswordMail(error.message);
         });
+    }
+
+    const handleOnSubmit = (values: { InstituteName: any; OwnerName: any; Location: any; Email?: string; Mobile_Number: any; Description: any; Address: any; AccountName: any; BankName: any; BranchName: any; AccountNo: any; }) => {
+        setLoading(true)
+        const apiData = JSON.stringify({
+            "user_id": `${user?.sub}`,
+            "institute_name": `${values.InstituteName}`,
+            "owner_name": `${values.OwnerName}`,
+            "location": `${values.Location}`,
+            "address": `${values.Address}`,
+            "contact_no": `${values.Mobile_Number}`,
+            "description": `${values.Description}`,
+            "account_name": `${values.AccountName}`,
+            "account_no": `${values.AccountNo}`,
+            "bank_name": `${values.BankName}`,
+            "branch_name": `${values.BranchName}`
+        })
+
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/institute/updateInstituteDetails",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: apiData
+        }).then((apiRes) => {
+            console.log(apiData)
+            console.log("Api user created")
+            console.log(apiRes.status);
+            if (apiRes.status === 200) {
+                setLoading(false);
+                setIsEditProfile(false);
+            }
+        }).catch((error) => {
+            console.log(error.message)
+        })
+
     }
 
 
@@ -235,6 +271,7 @@ const InstituteManageProfile = () => {
                     </Col>
                     <Col className='px-lg-5'>
                         {!isDataLoading && <Loader/>}
+                        {loading && <Loader/>}
                         {isDataLoading && <Formik
                             validationSchema={schema}
                             onSubmit={console.log}
@@ -352,7 +389,7 @@ const InstituteManageProfile = () => {
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter mobile number in format: 0771234567"
-                                                                name="Mobile"
+                                                                name="Mobile_Number"
                                                                 value={values.Mobile_Number}
                                                                 onChange={handleChange}
                                                                 isInvalid={!!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)}
@@ -505,7 +542,7 @@ const InstituteManageProfile = () => {
                                         {isEditProfile &&
                                         <Row className='ms-1 mt-2 pe-lg-4'>
                                             <Col lg={10}>
-                                                { enableEditProfile ?
+                                                {enableEditProfile ?
                                                     <Button className="mt-4 px-3 profile-edit-btn"
                                                             style={{width: "fit-content", borderRadius: "15px"}}
                                                             variant="outline-secondary"
@@ -519,7 +556,9 @@ const InstituteManageProfile = () => {
                                                         <>
                                                             <Button className='mt-4 ms-2 profile-edit-btn'
                                                                     style={{width: "fit-content", borderRadius: "15px"}}
-                                                                    variant='outline-secondary'>Update Profile</Button>
+                                                                    variant='outline-secondary'
+                                                                    onClick={() => handleOnSubmit(values)}>Update
+                                                                Profile</Button>
                                                             <Button className='mt-4 ms-3 profile-edit-btn'
                                                                     style={{width: "fit-content", borderRadius: "15px"}}
                                                                     variant='outline-secondary'

@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {PrismaClient} from '@prisma/client'
-import {instituteSchema} from "../models/instituteModel";
+import {instituteSchema, instituteUpdateSchema} from "../models/instituteModel";
 import logger from "../utils/logger";
 import {string} from "joi";
 
@@ -18,7 +18,6 @@ export const getInstitutes = async (req: Request, res: Response) => {
 }
 export const getInstituteByID = async (req: Request, res: Response) => {
 
-    console.log(req.params)
     try {
         const data = await prisma.institute.findMany({
             where: {
@@ -51,27 +50,34 @@ export const getInstituteByName = async (req: Request, res: Response) => {
 
 export const updateInstituteDetails = async (req: Request, res: Response) => {
 
-    try {
+    const {error, value} = instituteUpdateSchema.validate(req.body);
+    if(!error) {
+        console.log(req.body)
+        try {
+            const data = await prisma.institute.update({
+                where: {
+                    user_id: req.body.user_id
+                },
+                data: {
+                    institute_name: req.body.institute_name,
+                    owner_name: req.body.owner_name,
+                    location:req.body.location,
+                    address:req.body.address,
+                    contact_no: req.body.contact_no,
+                    description: req.body.description,
+                    account_name: req.body.account_name,
+                    account_no: req.body.account_no,
+                    bank_name: req.body.bank_name,
+                    branch_name: req.body.branch_name
+                }
+            })
+            res.status(200).send(data)
+            logger.info(NAME_SPACE, "Your Institute Profile Successfully Updated");
+        } catch (error:any) {
+            res.status(500).send(error);
+            logger.error(NAME_SPACE, error.message);
 
-        const data = await prisma.institute.update({
-            where: {
-                institute_id: Number(req.params.id)
-            },
-            data: {
-                institute_name: req.body.institute_name,
-                contact_no: req.body.contact_no,
-                description: req.body.description,
-                account_name: req.body.account_name,
-                account_no: req.body.account_no,
-                bank_name: req.body.bank_name,
-                branch_name: req.body.branch_name,
-                user_id: req.body.user_id
-            }
-        })
-        res.status(200).send(data)
-
-    } catch (error) {
-        res.status(500).send(error);
+        }
     }
 }
 export const getAllInstituteCourses = async (req: Request, res: Response) => {

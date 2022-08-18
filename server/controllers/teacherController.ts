@@ -98,7 +98,6 @@ export const getTeacherInstitutes = async (req: Request, res: Response) => {
 export const createTeacher = async (req: Request, res: Response) => {
 
     const {error, value} = teacherSchema.validate(req.body);
-
     if (!error) {
         try {
             const data = await prisma.user.create({
