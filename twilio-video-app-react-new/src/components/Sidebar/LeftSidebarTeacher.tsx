@@ -75,18 +75,18 @@ export const LeftSidebarTeacher = () => {
             </li>
           </Row>
 
-          {/*<Row>*/}
-          {/*  <li>*/}
-          {/*    <Link to="/messages" className="link">*/}
-          {/*      <div className="Sidebar_item">*/}
-          {/*        <div>*/}
-          {/*          <BsFillChatFill />*/}
-          {/*        </div>*/}
-          {/*        <div className="Sidebar_item_name">Messages</div>*/}
-          {/*      </div>*/}
-          {/*    </Link>*/}
-          {/*  </li>*/}
-          {/*</Row>*/}
+          <Row>
+            <li>
+              <Link to="/messages" className="link">
+                <div className="Sidebar_item">
+                  <div>
+                    <BsFillChatFill />
+                  </div>
+                  <div className="Sidebar_item_name">Messages</div>
+                </div>
+              </Link>
+            </li>
+          </Row>
           <Row>
             <li>
               <Link to="/helpandsupport" className="link">
