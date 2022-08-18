@@ -7,8 +7,10 @@ import {useAuth0} from "@auth0/auth0-react";
 import {Formik} from "formik";
 import * as yup from "yup";
 import {BsPencilSquare} from "react-icons/bs";
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import Images from "../../../assets/images/Images";
+import {useParams} from "react-router-dom";
+import Loader from "../../utils/Loader";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
@@ -26,20 +28,20 @@ const schema = yup.object().shape({
     AccountNo: yup.string().label("Account Number").required()
 });
 
-const initialState = {
-    InstituteName: 'Sigma Institute',
-    OwnerName: 'Avishka Hettarachchi',
-    Location: 'Malabe',
-    Email: 'sigmainst@gmail.com',
-    Mobile_Number: '0771234567',
-    Description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 15nd more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    Address: 'Malebe, Colombo 07',
-    AccountName: 'Avishka Hettarachchi',
-    BankName: 'Bank OF Ceylon',
-    BranchName: 'Malabe',
-    AccountNo: '6612345678'
-}
+type initialStateType = {
+    InstituteName: string,
+    OwnerName: string,
+    Location: string,
+    Email: string,
+    Mobile_Number: string,
+    Description: string,
+    Address: string,
+    AccountName: string,
+    BankName: string,
+    BranchName: string,
+    AccountNo: string
 
+}
 
 const InstituteManageProfile = () => {
 
@@ -137,11 +139,58 @@ const InstituteManageProfile = () => {
     const [enableEditProfile, setEnableEditProfile] = useState(true);
     const [passwordMail, setPasswordMail] = useState(null);
     const [isEditProfile, setIsEditProfile] = useState(false);
+    const [isDataLoading, setIsDataLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [initialState, setInitialState] = useState<initialStateType>({
+        InstituteName: '',
+        OwnerName: '',
+        Location: '',
+        Email: '',
+        Mobile_Number: '',
+        Description: '',
+        Address: '',
+        AccountName: '',
+        BankName: '',
+        BranchName: '',
+        AccountNo: ''
+    });
+
+
     useEffect(()=> {
         if (user?.family_name === "institute") {
             setIsEditProfile(true);
         }
+        axios({
+            method: "GET",
+            url: `http://localhost:8081/institute/${user?.sub}`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res: AxiosResponse) => {
+            console.log(res.data[0].institute_name)
+            setInitialState({
+                InstituteName: res.data[0].institute_name,
+                AccountName: res.data[0].account_name,
+                AccountNo: res.data[0].account_no,
+                Address: res.data[0].address,
+                BankName: res.data[0].bank_name,
+                BranchName: res.data[0].branch_name,
+                Description: res.data[0].description,
+                Email: res.data[0].user.username,
+                Location: res.data[0].location,
+                Mobile_Number: res.data[0].contact_no,
+                OwnerName: res.data[0].owner_name
+            })
+            if (res.status === 200) {
+                console.log(initialState)
+                setIsDataLoading(true);
+            }
+        }).catch((error) => {
+            console.log(error.message)
+        })
     },[]);
+
+
 
     const changePassword = () => {
         const options = {
@@ -185,7 +234,8 @@ const InstituteManageProfile = () => {
 
                     </Col>
                     <Col className='px-lg-5'>
-                        <Formik
+                        {!isDataLoading && <Loader/>}
+                        {isDataLoading && <Formik
                             validationSchema={schema}
                             onSubmit={console.log}
                             initialValues={initialState}
@@ -243,7 +293,7 @@ const InstituteManageProfile = () => {
                                                                 isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                                                                 isValid={touched.Email}
                                                                 onBlur={handleBlur}
-                                                                disabled={enableEditProfile}
+                                                                disabled={true}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.Email}
@@ -481,7 +531,7 @@ const InstituteManageProfile = () => {
                                         </Row>}
                                     </Form>
                                 </Row>)}
-                        </Formik>
+                        </Formik>}
                     </Col>
                 </Row>
             </Col>
