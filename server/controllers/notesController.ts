@@ -39,7 +39,7 @@ export const  createNote=async (req:Request,res:Response)=>{
     if(!error) {
         try {
             const data = await prisma.notes.create({
-                data: {
+                data:<any> {
                     uploaded_date: req.body.uploaded_date,
                     note: req.body.note,
                     course_id: req.body.course_id,

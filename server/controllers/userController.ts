@@ -1,12 +1,15 @@
 import express from "express";
 import {Request,Response} from "express";
 import { PrismaClient } from '@prisma/client'
-import {number} from "joi";
+import {number, string} from "joi";
 import userSchema from "../models/userModel";
 import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
 const NAME_SPACE = "User"
+
+
+
 export const getUsers=async (req:Request,res:Response)=>{
 
     try {
@@ -35,7 +38,7 @@ export const getUsersByID=async (req:Request,res:Response)=>{
     try {
         const data =await prisma.user.findMany({
             where:{
-                user_id:Number(req.params.id)
+                user_id: req.params.id
             }
         })
         res.status(200).send(data)
@@ -49,11 +52,10 @@ export const getUsersByID=async (req:Request,res:Response)=>{
 export const  createUser=async (req:Request,res:Response)=>{
 
     const { error, value } = userSchema.validate(req.body);
-
-    if(!error) {
+    if (!error) {
         try {
             const data = await prisma.user.create({
-                data: {
+                data:<any> {
                     username: req.body.username,
                     type: req.body.type,
                     profile_image: req.body.profile_image
@@ -63,8 +65,7 @@ export const  createUser=async (req:Request,res:Response)=>{
         } catch (error) {
             res.status(500).send(error);
         }
-    }
-    else {
+    } else {
         res.status(500).send(error.details[0].message);
     }
 }
