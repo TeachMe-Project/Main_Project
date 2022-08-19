@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AdminLayout from "./AdminLayout";
 import {Card, Col, Row} from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -11,185 +11,8 @@ import {useMediaQuery} from "react-responsive";
 import swal from "@sweetalert/with-react";
 // @ts-ignore
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
+import axios, {AxiosResponse} from "axios";
 
-const data = [
-    {
-        id: 10000102005,
-        username: 'samweerasinghe@gmail.com',
-        first_name: 'Sameera',
-        last_name: 'Weerasinghe',
-        user_type: 'Teacher',
-    },
-    {
-        id: 10000102366,
-        username: 'michaeldass@gmail.com',
-        first_name: 'Michael',
-        last_name: 'Dass',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102300,
-        username: 'thilinamadhushanka@yahoo.com',
-        first_name: 'Thilina',
-        last_name: 'Madushanka',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102775,
-        username: 'anurasenanayake@gmail.com',
-        first_name: 'Anura',
-        last_name: 'Senanayake',
-        user_type: 'Parent',
-    },
-    {
-        id: 10000102345,
-        username: 'manethwijethunga@yahoo.com',
-        first_name: 'Maneth',
-        last_name: 'Wijetunga',
-        user_type: 'Institute',
-    },
-    {
-        id: 10000102405,
-        username: 'samweerasinghe@gmail.com',
-        first_name: 'Sameera',
-        last_name: 'Weerasinghe',
-        user_type: 'Teacher',
-    },
-    {
-        id: 10000102410,
-        username: 'michaeldass@gmail.com',
-        first_name: 'Michael',
-        last_name: 'Dass',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102420,
-        username: 'thilinamadhushanka@yahoo.com',
-        first_name: 'Thilina',
-        last_name: 'Madushanka',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102411,
-        username: 'anurasenanayake@gmail.com',
-        first_name: 'Anura',
-        last_name: 'Senanayake',
-        user_type: 'Parent',
-    },
-    {
-        id: 10000102423,
-        username: 'manethwijethunga@yahoo.com',
-        first_name: 'Maneth',
-        last_name: 'Wijetunga',
-        user_type: 'Institute',
-    },
-    {
-        id: 10000102405,
-        username: 'samweerasinghe@gmail.com',
-        first_name: 'Sameera',
-        last_name: 'Weerasinghe',
-        user_type: 'Teacher',
-    },
-    {
-        id: 10000102410,
-        username: 'michaeldass@gmail.com',
-        first_name: 'Michael',
-        last_name: 'Dass',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102420,
-        username: 'thilinamadhushanka@yahoo.com',
-        first_name: 'Thilina',
-        last_name: 'Madushanka',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102411,
-        username: 'anurasenanayake@gmail.com',
-        first_name: 'Anura',
-        last_name: 'Senanayake',
-        user_type: 'Parent',
-    },
-    {
-        id: 10000102423,
-        username: 'manethwijethunga@yahoo.com',
-        first_name: 'Maneth',
-        last_name: 'Wijetunga',
-        user_type: 'Institute',
-    },
-    {
-        id: 10000102405,
-        username: 'samweerasinghe@gmail.com',
-        first_name: 'Sameera',
-        last_name: 'Weerasinghe',
-        user_type: 'Teacher',
-    },
-    {
-        id: 10000102410,
-        username: 'michaeldass@gmail.com',
-        first_name: 'Michael',
-        last_name: 'Dass',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102420,
-        username: 'thilinamadhushanka@yahoo.com',
-        first_name: 'Thilina',
-        last_name: 'Madushanka',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102411,
-        username: 'anurasenanayake@gmail.com',
-        first_name: 'Anura',
-        last_name: 'Senanayake',
-        user_type: 'Parent',
-    },
-    {
-        id: 10000102423,
-        username: 'manethwijethunga@yahoo.com',
-        first_name: 'Maneth',
-        last_name: 'Wijetunga',
-        user_type: 'Institute',
-    },
-    {
-        id: 10000102405,
-        username: 'samweerasinghe@gmail.com',
-        first_name: 'Sameera',
-        last_name: 'Weerasinghe',
-        user_type: 'Teacher',
-    },
-    {
-        id: 10000102410,
-        username: 'michaeldass@gmail.com',
-        first_name: 'Michael',
-        last_name: 'Dass',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102420,
-        username: 'thilinamadhushanka@yahoo.com',
-        first_name: 'Thilina',
-        last_name: 'Madushanka',
-        user_type: 'Student',
-    },
-    {
-        id: 10000102411,
-        username: 'anurasenanayake@gmail.com',
-        first_name: 'Anura',
-        last_name: 'Senanayake',
-        user_type: 'Parent',
-    },
-    {
-        id: 10000102423,
-        username: 'kamalwijethunga@yahoo.com',
-        first_name: 'kamal',
-        last_name: 'Wijetunga',
-        user_type: 'Institute',
-    },
-
-];
 
 const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
     < BsTrashFill
@@ -216,11 +39,38 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
                 // dangerMode: true,
             })
                 .then((willDelete: any) => {
-                    if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
-                            icon: "success",
-                        });
-                    }
+                    const apiData = JSON.stringify({
+                        "user_id": `${row.user_id}`
+                    })
+                    axios({
+                        method: "POST",
+                        url: "http://localhost:8081/auth/block",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: apiData
+                    }).then((apiRes) => {
+                        axios({
+                            method: "POST",
+                            url: "http://localhost:8081/user/removeUser",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            data: apiData
+                        }).then((apiRes) => {
+                            console.log(apiRes.status);
+                            if (apiRes.status === 200) {
+                                swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
+                                    icon: "success",
+                                });
+                            }
+                        }).catch((error) => {
+                            console.log(error.message)
+                        })
+
+                    }).catch((error) => {
+                        console.log(error.message)
+                    })
                 });
         }}
     />
@@ -228,14 +78,15 @@ const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
 
 const columns = [
     {
-        dataField: "id",
+        dataField: "user_id",
         text: "User ID",
-        sort:true,
+        sort: true,
+        hidden: true
     },
     {
         dataField: "username",
         text: "User Name",
-        sort:true,
+        sort: true,
     },
     {
         dataField: "first_name",
@@ -246,7 +97,7 @@ const columns = [
         text: "Last Name"
     },
     {
-        dataField: "user_type",
+        dataField: "type",
         text: "User Type"
     },
     {
@@ -261,8 +112,66 @@ const columns = [
 
 const ManageUsers = () => {
 
+    const baseURL = "http://localhost:8081/user/allUsers";
+    const [users, setUsers] = useState<any[]>([]);
+
+    useEffect(() => {
+        axios.get(baseURL).then((res: AxiosResponse) => {
+            res.data.map((item: any) => {
+                if (item.type === 'teacher') {
+
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Teacher",
+                        first_name: item.teacher.first_name,
+                        last_name: item.teacher.last_name
+                    }])
+                } else if (item.type === 'student') {
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Student",
+                        first_name: item.student[0].first_name,
+                        last_name: item.student[0].last_name
+                    }])
+                }
+                else if (item.type === 'institute') {
+                    console.log(item)
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Institute",
+                        first_name: item.institute[0].institute_name,
+                        last_name: '-'
+                    }])
+                }
+                else if (item.type === 'parent') {
+                    console.log(item.parent[0])
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Parent",
+                        first_name: item.parent[0].first_name,
+                        last_name: item.parent[0].last_name
+                    }])
+                }
+            })
+            console.log(users)
+        })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, []);
+
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
+
+
+    if (users === null) {
+        return
+
+    }
 
     // @ts-ignore
     return (
@@ -280,7 +189,7 @@ const ManageUsers = () => {
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
-                        data={data}
+                        data={users}
                         columns={columns}
                         search>
                         {(props: any) =>
@@ -290,7 +199,7 @@ const ManageUsers = () => {
                                                placeholder="Search Users"
                                     />
                                     <BootstrapTable
-                                        columns={columns} data={data} keyField="id"
+                                        columns={columns} data={users} keyField="id"
                                         {...props.baseProps}
                                         bootstrap4={true}
                                         pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
@@ -313,30 +222,19 @@ const ManageUsers = () => {
                     }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
-                        {data.map((item) => {
+                        {users.map((item: any) => {
                             return (
                                 <Card className='w-100 p-3 mb-2 table-card'>
                                     <ul className='ps-md-3 ps-0'>
                                         <li className='d-none'>
                                             <span className='table-card-label'>{columns[0].text}</span>
-                                            <span className='table-card-data'>{item.id}</span>
+                                            <span className='table-card-data'>{item.user_id}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[1].text}</span>
                                             <span className='table-card-data'>{item.username}</span>
                                         </li>
-                                        <li className='d-flex flex-row align-items-center justify-content-between'>
-                                            <span className='table-card-label'>{columns[2].text}</span>
-                                            <span className='table-card-data'>{item.first_name}</span>
-                                        </li>
-                                        <li className='d-flex flex-row align-items-center justify-content-between'>
-                                            <span className='table-card-label'>{columns[3].text}</span>
-                                            <span className='table-card-data'>{item.last_name}</span>
-                                        </li>
-                                        <li className='d-flex flex-row align-items-center justify-content-between'>
-                                            <span className='table-card-label'>{columns[4].text}</span>
-                                            <span className='table-card-data'>{item.user_type}</span>
-                                        </li>
+
                                         <li className='d-flex flex-row align-items-center justify-content-end mt-2'>
                                             <span className='me-3'>
                                                  {removeItem(null, item, null, null)}

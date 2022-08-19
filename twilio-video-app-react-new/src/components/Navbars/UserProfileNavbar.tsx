@@ -14,7 +14,7 @@ export const UserProfileNavbar = (props: UserProfileNavbar) => {
       <div className="UserProfileButton">
         <Link to="/userprofile" className="link">
           <div className="UserImg">
-            <img src={'/Images/student.png'} />
+            <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
             {/*<img src={require("../../Assets/Images/testimg2.jpeg")} />*/}
           </div>
           <div className="Name">{props.name}</div>

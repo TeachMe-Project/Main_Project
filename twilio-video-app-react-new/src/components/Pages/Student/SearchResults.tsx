@@ -22,26 +22,26 @@ export const SearchResults: React.FC<SearchResults> = props => {
             <SearchResultCard
               subject="Mathematics"
               image={<img src={'/Images/subjects/maths.png'} />}
-              teacher="Mr. Lasitha Nuwan"
+              teacher="Mr. Indika Prasad"
               amount="LKR 2,500"
               btn1="View more"
-              btn2="Subscribe"
+              btn2="Enroll"
             />
             <SearchResultCard
               subject="Mathematics"
               image={<img src={'/Images/subjects/maths.png'} />}
               teacher="Mr. Lasitha Nuwan"
-              amount="LKR 2,500"
+              amount="LKR 2,000"
               btn1="View more"
-              btn2="Subscribe"
+              btn2="Enroll"
             />
             <SearchResultCard
               subject="Mathematics"
               image={<img src={'/Images/subjects/maths.png'} />}
-              teacher="Mr. Lasitha Nuwan"
-              amount="LKR 2,500"
+              teacher="Mrs. Sepali Wijesundara"
+              amount="LKR 2,400"
               btn1="View more"
-              btn2="Subscribe"
+              btn2="Enroll"
             />
           </div>
         </div>

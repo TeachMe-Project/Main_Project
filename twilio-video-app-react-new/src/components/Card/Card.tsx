@@ -7,6 +7,7 @@ type Card = {
   btnname?: string;
   date?: string;
   teacher?: string;
+  grade?: string;
   detail?: string;
   time?: string;
   header?: string;
@@ -21,6 +22,7 @@ export const Card: React.FC<Card> = props => {
       <div className="CardImage">{props.image}</div>
       <div className="CardBody">
         <CardHeader header={props.header} />
+        <CardDetails details={props.grade} />
         <CardDetails details={props.teacher} />
         <CardDetails details={props.detail} />
         <CardDetails details={props.time} />

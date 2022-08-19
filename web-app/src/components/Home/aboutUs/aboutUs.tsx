@@ -6,11 +6,11 @@ import Images from "../../../assets/images/Images";
 const AboutUs: React.FC = () => {
 
     return (
-        <Container fluid={true} className='about-us mt-lg-5 py-lg-3' id="About-Us">
+        <Container fluid={true} className='about-us mt-lg-1 py-lg-1' id="About-Us">
             <h1 className='about-us-header text-center'>About Learning</h1>
             <Row style={{display: "flex", flexDirection: "row"}}>
-                <Col lg={5}>
-                    <Image src={Images.banner} style={{height: "600px"}} className='d-lg-block d-none '></Image>
+                <Col lg={5} className='d-flex align-items-center'>
+                    <Image src={Images.banner} style={{height: "auto"}} className='d-lg-block d-none w-100 my-auto'></Image>
                 </Col>
                 <Col lg={7} className='d-flex flex-lg-column align-items-center justify-content-evenly my-md-5 flex-md-column-reverse'>
                     <Row className='w-100 ms-md-1'>
@@ -26,8 +26,8 @@ const AboutUs: React.FC = () => {
                             title={"Offer parents to have a comprehensive understanding of their children’s online\n" +
                                 "education activities."} image={Images.reading_books}/>
                         <Feature
-                            title={"Offer a built-in user-friendly video conferencing platform which is more convenient for\n" +
-                                "both students and teachers."} image={Images.online_lesson}/>
+                            title={"Offer built-in user-friendly video conferencing platform which is more convenient for\n" +
+                                "students & teachers."} image={Images.online_lesson}/>
                     </Row>
                 </Col>
             </Row>

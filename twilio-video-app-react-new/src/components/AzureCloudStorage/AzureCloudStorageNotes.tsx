@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import Path from 'path';
-import { Form, Button } from 'react-bootstrap';
-import UploadButton from '../Button/UploadButton';
+import { Form, Row, Col } from 'react-bootstrap';
+import { ButtonCommon } from '../Button/ButtonCommon';
 import uploadFileToBlob, { isStorageConfigured } from './azure-storage-blob-notes';
 
 const storageConfigured = isStorageConfigured();
@@ -47,20 +47,35 @@ const AzureCloudStorage = (): JSX.Element => {
   // display form
   const DisplayForm = () => (
     <div>
-      <Form.Group controlId="form.Name">
-        <Form.Label className="form-label" for="customFile">
-          Notes File
-        </Form.Label>
-        <Form.Control type="file" className="form-control" id="customFile" onChange={onFileChange} />
-      </Form.Group>
-      <Button
-        type="button"
-        className="uploadbtn btn btn-info btn-sm w-100"
-        style={{ marginTop: '2rem' }}
-        onClick={onFileUpload}
-      >
-        Upload
-      </Button>
+      <Row>
+        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+          <Col xl={4}>
+            <Form.Label style={{ fontWeight: 600 }}>Upload File</Form.Label>
+          </Col>
+          <Col xl={8}>
+            <Form.Control
+              type="file"
+              placeholder="Notes"
+              name="fileupload"
+              accept="application/pdf"
+              onChange={onFileChange}
+            />
+          </Col>
+        </Form.Group>
+      </Row>
+
+      <Row>
+        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+          <Col xl={4}>
+            <Form.Label style={{ fontWeight: 600 }}></Form.Label>
+          </Col>
+          <Col xl={8} style={{ margin: '0 108px' }}>
+            <div className="Buttonforsubmit">
+              <ButtonCommon name={'Submit'} onClick={onFileUpload} />
+            </div>
+          </Col>
+        </Form.Group>
+      </Row>
     </div>
   );
 

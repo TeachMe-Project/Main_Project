@@ -27,7 +27,7 @@ export const Dashboard = () => {
                 header="Mathematics"
                 teacher="Mr. Lasitha Nuwan"
                 time="04:00pm- 06:00pm"
-                date="23-05-2022"
+                date="23-08-2022"
                 btnname="Join"
                 image={<img src={'/Images/subjects/maths.png'} />}
               />
@@ -35,7 +35,7 @@ export const Dashboard = () => {
                 header="Science"
                 teacher="Ms. Nayana Sandamali"
                 time="04:00pm- 06:00pm"
-                date="25-05-2022"
+                date="25-08-2022"
                 btnname="Join"
                 image={<img src={'/Images/subjects/science.png'} />}
               />
@@ -44,7 +44,7 @@ export const Dashboard = () => {
                 header="Music"
                 teacher="Mr. Anura Kahatgoda"
                 time="06:00pm- 08:00pm"
-                date="26-05-2022"
+                date="26-08-2022"
                 btnname="Join"
                 image={<img src={'/Images/subjects/music.png'} />}
               />

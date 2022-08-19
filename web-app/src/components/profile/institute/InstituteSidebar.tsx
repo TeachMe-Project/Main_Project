@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader,} from 'react-pro-sidebar';
 import {HiOutlineMenu} from "react-icons/hi";
 import {useNavigate} from "react-router-dom";
-import {FaUsers} from "react-icons/fa";
+import {FaUserAlt, FaUsers} from "react-icons/fa";
 import {SiCoursera} from "react-icons/si";
 import {useMediaQuery} from 'react-responsive';
 
@@ -60,12 +60,17 @@ const InstituteSidebar: React.FC<InstituteSidebarProps> = (props: InstituteSideb
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaUsers/>} onClick={() => navigate('/institute/tutors')}>
-                        View Tutors
+                        Manage Tutors
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaUsers/>} onClick={() => navigate('/institute/addtutors')}>
-                        Add Tutors
+                        Add New Tutor
+                    </MenuItem>
+                </Menu>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<FaUserAlt/>} onClick={() => navigate('/institute/profile')}>
+                        Manage Profile
                     </MenuItem>
                 </Menu>
             </SidebarContent>

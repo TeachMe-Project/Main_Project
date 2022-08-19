@@ -29,6 +29,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 // import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+import { ButtonCommon } from '../../Button/ButtonCommon';
 
 library.add(fas);
 
@@ -47,48 +48,43 @@ export const Course = () => {
           </div>
           <div className="Panel">
             <div className="PanelSubHeader">
-              <h3>Mathematics Class</h3>
               <div className="PanelImage">{<img src={'/Images/subjects/maths.png'} />}</div>
+              <h3>Mathematics Class</h3>
             </div>
 
             <Tabs>
-              <div className="Details">
-                <Link to="/editdetails" className="link">
-                  <Button
-                    style={{
-                      marginBottom: '20px',
-                      marginRight: '20px',
-                      float: 'right',
-                    }}
-                  >
-                    Edit Details
-                  </Button>
-                </Link>
-                <Details label="Subject" value="Mathematics" symbol=":" />
-                <Details label="Teacher" value="Mr. Lasitha Nuwan" symbol=":" />
-                <Details label="Grade" value="8" symbol=":" />
+              <div className="Details" style={{ marginTop: '50px' }}>
+                <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
+                  <Link to="/editdetails" className="link">
+                    <ButtonCommon name={'Edit Details'} />
+                  </Link>
+                </div>
+                <Details label="Title" value="Mathematics By Roshan Senevirathne" symbol=":" />
+                <Details label="subject" value="Mathematics" symbol=":" />
                 <Details
-                  label="Description"
-                  value="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy."
+                  label="description"
+                  value="Mathematics lessons for Student from Grade 6 , Grade 7 , Grade 8 "
+                  symbol=":"
                 />
-                <Details label="Monthly Payment" value="LKR 2500" symbol=":" />
-                <Details label="Started Date" value="2022-03-24" symbol=":" />
-                <Details label="Institute" value="Sigma Institute" symbol=":" />
-                <Details label="Duration" value="12 months" symbol=":" />
+                <Details label="Grade" value="8" symbol=":" />
+                <Details label="Medium" value="Sinhala" symbol=":" />
+                <Details label="Fee" value="LKR 2500" symbol=":" />
+                <Details label="Start Date" value="2022-03-24" symbol=":" />
+                <Details label="End Date" value="2022-03-24" symbol=":" />
+                <Details label="Class Day" value="Thursday" symbol=":" />
+                <Details label="Start time" value="05:00 PM" symbol=":" />
               </div>
-              <div className="Notes">
-                <Link className="link" to="/uploadnotes">
-                  <Button
-                    style={{
-                      float: 'right',
-                      marginRight: '44px',
-                    }}
-                  >
-                    Upload New notes
-                  </Button>
-                </Link>
 
-                <div className="noteContainer">
+              <div className="Notes">
+                {/*<Row>*/}
+
+                <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
+                  <Link to="/uploadnotes" className="link">
+                    <ButtonCommon name={'Upload Notes'} />
+                  </Link>
+                </div>
+
+                <div className="noteContainer" style={{ marginTop: '50px' }}>
                   <Notes topic="Note for week 1" date="04-05-2022" />
                   <Notes topic="Note for week 2" date="04-05-2022" />
                   <Notes topic="Note for week 3" date="04-05-2022" />
@@ -98,17 +94,14 @@ export const Course = () => {
               </div>
               <div className="Homework">
                 <Link className="link" to="/uploadhomework">
-                  <Button
-                    style={{
-                      float: 'right',
-                      marginRight: '44px',
-                    }}
-                  >
-                    Upload Homework
-                  </Button>
+                  <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
+                    <Link to="/uploadhomework" className="link">
+                      <ButtonCommon name={'Upload Homework'} style={{ width: 'max-content' }} />
+                    </Link>
+                  </div>
                 </Link>
 
-                <div className="homeworkContainer">
+                <div className="homeworkContainer" style={{ marginTop: '50px' }}>
                   <Homework topic="Homework for week 1" date="04-05-2022" />
                   <Homework topic="Homework for week 2" date="04-05-2022" />
                   <Homework topic="Homework for week 3" date="04-05-2022" />
@@ -123,95 +116,70 @@ export const Course = () => {
                     <thead>
                       <tr className="booking-thead-second-tr">
                         {/*amc: Institute Manage Courses*/}
-                        <th className="imc-first-th">Course ID</th>
-                        <th className="imc-second-th">Grade</th>
-                        <th className="imc-third-th">Subject</th>
-                        <th className="imc-fourth-th">Tutor's name</th>
+                        <th className="imc-first-th">Student ID</th>
+                        <th className="imc-second-th">Student Name</th>
+                        <th className="imc-second-th">Parent's Contact</th>
                         <th className="imc-last-th"></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-label="Course ID :">10000102345</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Business & Accounting Studies</td>
-                        <td data-label="Tutor's Name :">Amila Banadaranayake</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
+                        <td data-label="Student ID :">10000102345</td>
+                        <td data-label="Student Name :">Romesh Perera</td>
+                        <td data-label="Parent's Contact :">011 2840231</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} className="viewBtn" />
+                            </Link>
                           </div>
                         </td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102355</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">History</td>
-                        <td data-label="Tutor's Name :">Kamal Maggona</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
+                        <td data-label="Student ID :">10000102001</td>
+                        <td data-label="Student Name :">Saduni Weerasinghe</td>
+                        <td data-label="Parent Contact :">071 1450231</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} className="viewBtn" />
+                            </Link>
                           </div>
                         </td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102320</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Science</td>
-                        <td data-label="Tutor's Name :">Anusha Palpita</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
+                        <td data-label="Student ID :">10000102908</td>
+                        <td data-label="Student Name :">Minura Ranasinghe</td>
+                        <td data-label="Parent Contact :">078 2402399</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} className="viewBtn" />
+                            </Link>
                           </div>
                         </td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000109945</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Sinhala Lang. & Lit</td>
-                        <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
+                        <td data-label="Student ID :">10000102111</td>
+                        <td data-label="Student Name :">Neelya Jhones</td>
+                        <td data-label="Parent Contact :">077 2898275</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} className="viewBtn" />
+                            </Link>
                           </div>
                         </td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102300</td>
-                        <td data-label="Grade :">Grade 9</td>
-                        <td data-label="Subject :">History</td>
-                        <td data-label="Tutor's Name :">Vajira Gamage</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-label="Course ID :">10000102345</td>
-                        <td data-label="Grade :">Grade 11</td>
-                        <td data-label="Subject :">Business & Accounting Studies</td>
-                        <td data-label="Tutor's Name :">Sameera Rajapakse</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
+                        <td data-label="Student ID :">10000102343</td>
+                        <td data-label="Student Name :">Kavindu De Silva</td>
+                        <td data-label="Parent Contact :">070 1189377</td>
+                        <td data-label="View Profile :">
+                          <div className="cancelbutton">
+                            <Link to="/addcourse" className="link">
+                              <ButtonCommon name={'View Profile'} className="viewBtn" />
+                            </Link>
                           </div>
                         </td>
                       </tr>
@@ -222,111 +190,101 @@ export const Course = () => {
 
               <div className="Class-Schedules">
                 <div className="scheduleContainer">
-                  <Link className="link" to="/addextraclass">
-                    <Button
-                      style={{
-                        marginBottom: '20px',
-                        marginRight: '20px',
-                        float: 'right',
-                      }}
-                    >
-                      Add Extra Class
-                    </Button>
-                  </Link>
+                  <Row>
+                    <Link className="link" to="/addextraclass">
+                      <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
+                        <Link to="/addextraclass" className="link">
+                          <ButtonCommon name={'Schedule Extra Class'} style={{ width: 'max-content' }} />
+                        </Link>
+                      </div>
+                    </Link>
+                  </Row>
                 </div>
                 <table className="booking-table" id="view-booking">
                   <thead>
                     <tr className="booking-thead-second-tr">
                       {/*amc: Institute Manage Courses*/}
-                      <th className="imc-first-th">Course ID</th>
-                      <th className="imc-second-th">Grade</th>
-                      <th className="imc-third-th">Subject</th>
-                      <th className="imc-fourth-th">Tutor's name</th>
-                      <th className="imc-last-th"></th>
+                      <th className="imc-first-th">Date</th>
+                      <th className="imc-second-th">Time</th>
+                      <th className="imc-second-th">Duration</th>
+                      <th className="imc-third-th"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td data-label="Course ID :">10000102345</td>
-                      <td data-label="Grade :">Grade 10</td>
-                      <td data-label="Subject :">Business & Accounting Studies</td>
-                      <td data-label="Tutor's Name :">Amila Banadaranayake</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Date :">2022-08-20</td>
+                      <td data-label="Time :">05:00 pm</td>
+                      <td data-label="Duration :">2 Hrs</td>
+                      <td data-label="Topic :">
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000102355</td>
-                      <td data-label="Grade :">Grade 10</td>
-                      <td data-label="Subject :">History</td>
-                      <td data-label="Tutor's Name :">Kamal Maggona</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Date :">2022-08-27</td>
+                      <td data-label="Time :">05:00 pm</td>
+                      <td data-label="Duration :">2 Hrs</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000102320</td>
-                      <td data-label="Grade :">Grade 10</td>
-                      <td data-label="Subject :">Science</td>
-                      <td data-label="Tutor's Name :">Anusha Palpita</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Date :">2022-09-04</td>
+                      <td data-label="Time :">05:00 pm</td>
+                      <td data-label="Duration :">2 Hrs</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000109945</td>
-                      <td data-label="Grade :">Grade 10</td>
-                      <td data-label="Subject :">Sinhala Lang. & Lit</td>
-                      <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Date :">2022-09-11</td>
+                      <td data-label="Time :">05:00 pm</td>
+                      <td data-label="Duration :">2 Hrs</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000102300</td>
-                      <td data-label="Grade :">Grade 9</td>
-                      <td data-label="Subject :">History</td>
-                      <td data-label="Tutor's Name :">Vajira Gamage</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Date :">2022-09-18</td>
+                      <td data-label="Time :">05:00 pm</td>
+                      <td data-label="Duration :">2 Hrs</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td data-label="Course ID :">10000102345</td>
-                      <td data-label="Grade :">Grade 11</td>
-                      <td data-label="Subject :">Business & Accounting Studies</td>
-                      <td data-label="Tutor's Name :">Sameera Rajapakse</td>
-                      <td>
-                        <div className="Icons">
-                          {/*View Icon*/}
-                          <Button onClick={directToCourse} className="view-icon">
-                            <FontAwesomeIcon icon={['fas', 'eye']} />
-                          </Button>
+                      <td data-label="Date :">2022-09-25</td>
+                      <td data-label="Time :">05:00 pm</td>
+                      <td data-label="Duration :">2 Hrs</td>
+                      <td data-label="Topic :">
+                        {' '}
+                        <div className="cancelbutton">
+                          <Link to="/addcourse" className="link">
+                            <ButtonCommon name={'Cancel Class'} />
+                          </Link>
                         </div>
                       </td>
                     </tr>
@@ -339,97 +297,42 @@ export const Course = () => {
                     <thead>
                       <tr className="booking-thead-second-tr">
                         {/*amc: Institute Manage Courses*/}
-                        <th className="imc-first-th">Course ID</th>
-                        <th className="imc-second-th">Grade</th>
-                        <th className="imc-third-th">Subject</th>
-                        <th className="imc-fourth-th">Tutor's name</th>
-                        <th className="imc-last-th"></th>
+                        <th className="imc-first-th">Student ID</th>
+                        <th className="imc-second-th">Student Name</th>
+                        <th className="imc-third-th">Month</th>
+                        <th className="imc-fourth-th">Amount</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td data-label="Course ID :">10000102345</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Business & Accounting Studies</td>
-                        <td data-label="Tutor's Name :">Amila Banadaranayake</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102345</td>
+                        <td data-label="Student Name :">Romesh Perera</td>
+                        <td data-label="Month :">July</td>
+                        <td data-label="Amount :">LKR 2500</td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102355</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">History</td>
-                        <td data-label="Tutor's Name :">Kamal Maggona</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102345</td>
+                        <td data-label="Student Name :">Romesh Perera</td>
+                        <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102320</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Science</td>
-                        <td data-label="Tutor's Name :">Anusha Palpita</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102111</td>
+                        <td data-label="Student Name :">Neelya Jhones</td>
+                        <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000109945</td>
-                        <td data-label="Grade :">Grade 10</td>
-                        <td data-label="Subject :">Sinhala Lang. & Lit</td>
-                        <td data-label="Tutor's Name :">Nimali Weeerasinghe</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102908</td>
+                        <td data-label="Student Name :">Minura Ranasinghe</td>
+                        <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td>
                       </tr>
                       <tr>
-                        <td data-label="Course ID :">10000102300</td>
-                        <td data-label="Grade :">Grade 9</td>
-                        <td data-label="Subject :">History</td>
-                        <td data-label="Tutor's Name :">Vajira Gamage</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td data-label="Course ID :">10000102345</td>
-                        <td data-label="Grade :">Grade 11</td>
-                        <td data-label="Subject :">Business & Accounting Studies</td>
-                        <td data-label="Tutor's Name :">Sameera Rajapakse</td>
-                        <td>
-                          <div className="Icons">
-                            {/*View Icon*/}
-                            <Button onClick={directToCourse} className="view-icon">
-                              <FontAwesomeIcon icon={['fas', 'eye']} />
-                            </Button>
-                          </div>
-                        </td>
+                        <td data-label="Student ID :">10000102905</td>
+                        <td data-label="Student Name :">Senith De Silva</td>
+                        <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td>
                       </tr>
                     </tbody>
                   </table>

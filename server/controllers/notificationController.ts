@@ -39,7 +39,7 @@ export const  createNotification=async (req:Request,res:Response)=>{
     if(!error) {
         try {
             const data = await prisma.notification.create({
-                data: {
+                data:<any> {
                     user_id: req.body.user_id,
                     subject: req.body.subject,
                     description: req.body.description,

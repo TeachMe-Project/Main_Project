@@ -5,87 +5,15 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from "react-bootstrap-table2-paginator";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+// @ts-ignore
+import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {useMediaQuery} from "react-responsive";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
-// @ts-ignore
-import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {FaEye} from "react-icons/fa";
-
-const data = [
-    {
-        id: 10000102345,
-        grade: 'Grade 9',
-        subject: 'History',
-        tutor_name: 'Vajira Gamage',
-        institute_name: 'Susipwan Institute'
-    },
-    {
-        id: 10000102340,
-        grade: 'Grade 9',
-        subject: 'Sinhala Lang. & Lit',
-        tutor_name: 'Nimali Weeerasinghe',
-        institute_name: 'Sakya Institute'
-    },
-    {
-        id: 10000102341,
-        grade: 'Grade 10',
-        subject: 'Science',
-        tutor_name: 'Anusha Palpita',
-        institute_name: 'Sigma Institute'
-    },
-    {
-        id: 10000102342,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-    {
-        id: 10000102346,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-    {
-        id: 10000102345,
-        grade: 'Grade 9',
-        subject: 'History',
-        tutor_name: 'Vajira Gamage',
-        institute_name: 'Susipwan Institute'
-    },
-    {
-        id: 10000102340,
-        grade: 'Grade 9',
-        subject: 'Sinhala Lang. & Lit',
-        tutor_name: 'Nimali Weeerasinghe',
-        institute_name: 'Sakya Institute'
-    },
-    {
-        id: 10000102341,
-        grade: 'Grade 10',
-        subject: 'Science',
-        tutor_name: 'Anusha Palpita',
-        institute_name: 'Sigma Institute'
-    },
-    {
-        id: 10000102342,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
-    {
-        id: 10000102346,
-        grade: 'Grade 10',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Sameera Rajapakse',
-        institute_name: 'Amiti Institute'
-    },
+import axios from 'axios';
 
 
-];
 
 const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
     < FaEye
@@ -121,7 +49,46 @@ const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) =>
         }}
     />
 );
+const data = [
+    {
+        id: 10000102345,
+        grade: 'Grade 11',
+        subject: 'Business & Accounting Studies',
+        tutor_name: 'Amila Banadaranayake',
+    },
+    {
+        id: 10000102355,
+        grade: 'Grade 07',
+        subject: 'History',
+        tutor_name: 'Kamal Maggona',
+    },
+    {
+        id: 10000102320,
+        grade: "Grade 10",
+        subject: "Science",
+        tutor_name: "Anusha Palpita",
+    },
+    {
+        id: 10000109945,
+        grade: "Grade 06",
+        subject: "Sinhala Lang. & Lit",
+        tutor_name: "Nimali Weeerasinghe",
+    }
+    ,
+    {
+        id: 10000102300,
+        grade: "Grade 9",
+        subject: "History",
+        tutor_name: "Vajira Gamage",
 
+    },
+    {
+        id: 10000102345,
+        grade: "Grade 11",
+        subject: "Business & Accounting Studies",
+        tutor_name: "Sameera Rajapakse",
+    }
+];
 const columns = [
     {
         dataField: "id",
@@ -142,10 +109,6 @@ const columns = [
         text: "tutor name"
     },
     {
-        dataField: "institute_name",
-        text: "institute name"
-    },
-    {
         dataField: "",
         text: "",
         formatter: gotoCourse,
@@ -159,6 +122,24 @@ const ManageCourses = () => {
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
+
+    const baseURL = "http://localhost:8081/course/allCourses";
+    const [courses, setCourses] =  React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setCourses(response.data);
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
+  }, []);
+  console.log(courses);
+
+  if(courses === null){
+    return 
+    
+    }
 
     // @ts-ignore
     return (
@@ -186,7 +167,7 @@ const ManageCourses = () => {
                                                placeholder="Search Courses"
                                     />
                                     <BootstrapTable
-                                        columns={columns} data={data} keyField="id"
+                                        columns={columns} data={courses} keyField="id"
                                         {...props.baseProps}
                                         bootstrap4={true}
                                         pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
@@ -209,7 +190,7 @@ const ManageCourses = () => {
                     }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
-                        {data.map((item) => {
+                        {courses.map((item:any) => {
                             return (
                                 <Card className='w-100 p-3 mb-2 table-card'>
                                     <ul className='ps-md-3 ps-0'>

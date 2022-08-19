@@ -1,5 +1,11 @@
 import express from "express";
-import {getParentByID, getParents, createParent, parentDoPayment} from "../controllers/parentController";
+import {
+    getParentByID,
+    getParents,
+    createParent,
+    parentDoPayment,
+    getParentByAuthId
+} from "../controllers/parentController";
 export const parentRouter=express.Router();
 
 
@@ -18,3 +24,5 @@ parentRouter.route("/doPayment")
 
 parentRouter.route("/createParent")
     .post(createParent);
+
+parentRouter.route("/parentIdByAuth").post(getParentByAuthId);

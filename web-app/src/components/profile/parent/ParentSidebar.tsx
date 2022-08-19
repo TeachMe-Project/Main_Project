@@ -57,22 +57,22 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
             <SidebarContent>
                 <Menu iconShape="circle">
                     <MenuItem icon={<IoIosSchool/>} onClick={() => navigate('/parent')}>
-                        Upcoming Class
+                        Upcoming Classes
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaTachometerAlt/>} onClick={() => navigate('/parent/history')}>
-                        Student History
+                        Student Progress
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<BsCashCoin/>} onClick={() => navigate('/parent/payments')}>
-                        UpComing Payment
+                        Pending Payments
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <MenuItem icon={<MdPersonAddAlt/>} onClick={() => navigate('/parent/stuSignup')}>
-                        SignUp Student
+                        Register Student
                     </MenuItem>
                 </Menu>
             </SidebarContent>

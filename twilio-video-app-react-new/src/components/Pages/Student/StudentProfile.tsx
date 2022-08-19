@@ -3,10 +3,10 @@ import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Button } from '../../Button/Button';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageImagesStudent';
 
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
-import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageImages';
 
 const schema = yup.object().shape({
   Firstname: yup

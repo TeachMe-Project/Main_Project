@@ -39,31 +39,40 @@
 
               .lastRow {
                 margin-top: 0.8rem;
+                .row {
+                  width: 60%;
 
-                .CardRow {
-                  .CardDetails {
-                    font-weight: 500;
-                    font-size: 1rem;
+                  .CardRow {
+                    .CardDetails {
+                      font-weight: 500;
+                      font-size: 1rem;
+                    }
+                    .CardRow {
+                      .CardDetails {
+                        font-weight: 500;
+                        font-size: 1rem;
+                      }
+                    }
+                  }
+
+                  .CardButton {
+                    margin-left: 4rem;
+                    background-color: #ee5253;
+                    font-weight: 600;
+                    font-size: 12px;
+                    width: max-content;
+                    padding: 7px 10px;
+                    border-radius: 15px;
+                    border: 2px solid #ee5253;
+                    height: max-content;
+                    line-height: 1;
+                  }
+
+                  .teacherLink .CardDetails {
+                    margin-bottom: 0.1rem;
+                    margin-left: 4rem;
                   }
                 }
-              }
-
-              .CardButton {
-                margin-left: 4rem;
-                background-color: #ee5253;
-                font-weight: 600;
-                font-size: 12px;
-                width: max-content;
-                padding: 7px 10px;
-                border-radius: 15px;
-                border: 2px solid #ee5253;
-                height: max-content;
-                line-height: 1;
-              }
-
-              .teacherLink .CardDetails {
-                margin-bottom: 0.1rem;
-                margin-left: 4rem;
               }
             }
           }

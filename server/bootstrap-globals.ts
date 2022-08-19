@@ -48,6 +48,9 @@ declare global {
 }
 
 // Bootstrap globals
+// @ts-ignore
 global.Twilio = require('twilio');
+// @ts-ignore
 global.Twilio.Response = TwilioResponse;
+// @ts-ignore
 global.Runtime = Runtime;

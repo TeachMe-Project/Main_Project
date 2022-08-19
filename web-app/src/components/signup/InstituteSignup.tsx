@@ -7,6 +7,9 @@ import * as yup from 'yup';
 import LazyLoad from 'react-lazyload';
 import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
+import axios from "axios";
+import NavbarCommon from "../profile/navBar/NavbarCommon";
+import Loader from "../utils/Loader";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
@@ -49,163 +52,198 @@ const initialState = {
 }
 
 const InstituteSignup = () => {
+    const [loading, setLoading] = useState(false);
+    const [pageStage, setPageStage] = useState(1), [instituteNameValidate, setInstituteNameValidate] = useState<boolean>(false), [ownerNameValidate, setOwnerNameValidate] = useState(false), [locationValidate, setLocationValidate] = useState(false), [emailValidate, setEmailValidate] = useState(false), [passwordValidate, setPasswordValidate] = useState(false), [rPasswordValidate, setRPasswordValidate] = useState(false), [descriptionValidate, setDescriptionValidate] = useState(false), [addressValidate, setAddressValidate] = useState(false), [mobileValidate, setMobileValidate] = useState(false), [accountNameValidate, setAccountNameValidate] = useState(false), [bankNameValidate, setBankNameValidate] = useState(false), [branchNameValidate, setBranchNameValidate] = useState(false), [accountNoValidate, setAccountNoValidate] = useState(false),
+        changeInstituteNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setInstituteNameValidate(true);
+                return false
+            } else {
+                setInstituteNameValidate(false);
+                return true
+            }
+        }, changeOwnerNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setOwnerNameValidate(true);
+                return false
+            } else {
+                setOwnerNameValidate(false);
+                return true
+            }
+        }, changeLocationValidate = (status: boolean): boolean => {
+            if (status) {
+                setLocationValidate(true);
+                return false
+            } else {
+                setLocationValidate(false);
+                return true
+            }
+        }, changeEmailValidate = (status: boolean): boolean => {
+            if (status) {
+                setEmailValidate(true);
+                return false
+            } else {
+                setEmailValidate(false);
+                return true
+            }
+        }, changePasswordValidate = (status: boolean): boolean => {
+            if (status) {
+                setPasswordValidate(true);
+                return false
+            } else {
+                setPasswordValidate(false);
+                return true
+            }
+        }, changeRPasswordValidate = (status: boolean): boolean => {
+            if (status) {
+                setRPasswordValidate(true);
+                return false
+            } else {
+                setRPasswordValidate(false);
+                return true
+            }
+        }, changeDescriptionValidate = (status: boolean): boolean => {
+            if (status) {
+                setDescriptionValidate(true);
+                return false
+            } else {
+                setDescriptionValidate(false);
+                return true
+            }
+        }, changeAddressValidate = (status: boolean): boolean => {
+            if (status) {
+                setAddressValidate(true);
+                return false
+            } else {
+                setAddressValidate(false);
+                return true
+            }
+        }, changeMobileValidate = (status: boolean): boolean => {
+            if (status) {
+                setMobileValidate(true);
+                return false
+            } else {
+                setMobileValidate(false);
+                return true
+            }
+        }, changeAccountNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setAccountNameValidate(true);
+                return false
+            } else {
+                setAccountNameValidate(false);
+                return true
+            }
+        }, changeBankNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setBankNameValidate(true);
+                return false
+            } else {
+                setBankNameValidate(false);
+                return true
+            }
+        }, changeBranchNameValidate = (status: boolean): boolean => {
+            if (status) {
+                setBranchNameValidate(true);
+                return false
+            } else {
+                setBranchNameValidate(false);
+                return true
+            }
+        }, changeAccountNoValidate = (status: boolean): boolean => {
+            if (status) {
+                setAccountNoValidate(true);
+                return false
+            } else {
+                setAccountNoValidate(false);
+                return true
+            }
+        };
 
-    const [pageStage, setPageStage] = useState(4);
-    const [instituteNameValidate, setInstituteNameValidate] = useState<boolean>(false);
-    const [ownerNameValidate, setOwnerNameValidate] = useState(false);
-    const [locationValidate, setLocationValidate] = useState(false);
-    const [emailValidate, setEmailValidate] = useState(false);
-    const [passwordValidate, setPasswordValidate] = useState(false);
-    const [rPasswordValidate, setRPasswordValidate] = useState(false);
-    const [descriptionValidate, setDescriptionValidate] = useState(false);
-    const [addressValidate, setAddressValidate] = useState(false);
-    const [mobileValidate, setMobileValidate] = useState(false);
-    const [accountNameValidate, setAccountNameValidate] = useState(false);
-    const [bankNameValidate, setBankNameValidate] = useState(false);
-    const [branchNameValidate, setBranchNameValidate] = useState(false);
-    const [accountNoValidate, setAccountNoValidate] = useState(false);
+    const handleOnSubmit = (values: { InstituteName: any; OwnerName: any; Location?: string; Email: any; Password: any; Confirm_Password?: string; Mobile_Number?: string; Description?: string; Address?: string; AccountName?: string; BankName?: string; BranchName?: string; AccountNo?: string; }) => {
+        setLoading(true);
+        const data = JSON.stringify({
+            "email": `${values.Email}`,
+            "Firstname": `${values.InstituteName}`,
+            "Lastname": `${values.OwnerName}`,
+            "Password": `${values.Password}`
+        });
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/auth/createInstitute",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res) => {
+                console.log("User created in auth0");
+                console.log(res.data);
+                const apiData = JSON.stringify({
+                    "user_id": `${res.data.user_id}`,
+                    "username": `${values.Email}`,
+                    "profile_image": `${res.data.picture}`,
+                    "institute_name": `${values.InstituteName}`,
+                    "owner_name":`${values.OwnerName}`,
+                    "location":`${values.Location}`,
+                    "address":`${values.Address}`,
+                    "contact_no": `${values.Mobile_Number}`,
+                    "description": `${values.Description}`,
+                    "account_name": `${values.AccountName}`,
+                    "account_no": `${values.AccountNo}`,
+                    "bank_name": `${values.BankName}`,
+                    "branch_name": `${values.BranchName}`
+                })
 
-
-    const changeInstituteNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setInstituteNameValidate(true);
-            return false
-        } else {
-            setInstituteNameValidate(false);
-            return true
-        }
-    }
-    const changeOwnerNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setOwnerNameValidate(true);
-            return false
-        } else {
-            setOwnerNameValidate(false);
-            return true
-        }
-    }
-    const changeLocationValidate = (status: boolean): boolean => {
-        if (status) {
-            setLocationValidate(true);
-            return false
-        } else {
-            setLocationValidate(false);
-            return true
-        }
-    }
-    const changeEmailValidate = (status: boolean): boolean => {
-        if (status) {
-            setEmailValidate(true);
-            return false
-        } else {
-            setEmailValidate(false);
-            return true
-        }
-    }
-    const changePasswordValidate = (status: boolean): boolean => {
-        if (status) {
-            setPasswordValidate(true);
-            return false
-        } else {
-            setPasswordValidate(false);
-            return true
-        }
-    }
-    const changeRPasswordValidate = (status: boolean): boolean => {
-        if (status) {
-            setRPasswordValidate(true);
-            return false
-        } else {
-            setRPasswordValidate(false);
-            return true
-        }
-    }
-    const changeDescriptionValidate = (status: boolean): boolean => {
-        if (status) {
-            setDescriptionValidate(true);
-            return false
-        } else {
-            setDescriptionValidate(false);
-            return true
-        }
-    }
-    const changeAddressValidate = (status: boolean): boolean => {
-        if (status) {
-            setAddressValidate(true);
-            return false
-        } else {
-            setAddressValidate(false);
-            return true
-        }
-    }
-    const changeMobileValidate = (status: boolean): boolean => {
-        if (status) {
-            setMobileValidate(true);
-            return false
-        } else {
-            setMobileValidate(false);
-            return true
-        }
-    }
-    const changeAccountNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setAccountNameValidate(true);
-            return false
-        } else {
-            setAccountNameValidate(false);
-            return true
-        }
-    }
-    const changeBankNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setBankNameValidate(true);
-            return false
-        } else {
-            setBankNameValidate(false);
-            return true
-        }
-    }
-    const changeBranchNameValidate = (status: boolean): boolean => {
-        if (status) {
-            setBranchNameValidate(true);
-            return false
-        } else {
-            setBranchNameValidate(false);
-            return true
-        }
-    }
-    const changeAccountNoValidate = (status: boolean): boolean => {
-        if (status) {
-            setAccountNoValidate(true);
-            return false
-        } else {
-            setAccountNoValidate(false);
-            return true
-        }
+                axios({
+                    method: "POST",
+                    url: "http://localhost:8081/institute/createInstitute",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: apiData
+                }).then((apiRes) => {
+                    console.log(apiData)
+                    console.log("Api user created")
+                    console.log(apiRes.status);
+                    if(apiRes.status=== 200){
+                        setLoading(false);
+                        setPageStage(4)
+                    }
+                }).catch((error) => {
+                    console.log(error.message)
+                })
+            }
+        ).catch((error) => {
+            console.log(values)
+            console.log("error")
+            console.log(error.message)
+        })
     }
 
 
     return (
-        <Container fluid={true}>
+        <Container fluid={true} className='p-0 m-0 w-100'>
+            <NavbarCommon/>
             <Row
-                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start">
+                className="d-flex flex-column align-items-center justify-content-lg-center Signup-Container justify-content-md-start p-0 m-0">
                 <Col lg={9} md={12} xs={12}
                      className="Signup d-flex flex-lg-column justify-content-lg-center p-md-3 mt-md-2 mt-3">
                     <Row className="d-flex align-items-center">
-                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-3">Signup For Institute</h1>
-                        <Col lg={6} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
+                        <h1 className="text-center mb-lg-2 signup-header pt-md-3 mb-2">Signup For Institute</h1>
+                        <Col lg={5} md={12} sm={12} className="d-flex justify-content-lg-center mx-auto">
                             <img src={Images.instituteSignup} className="Signup-Image w-75 p-lg-2 mt-md-3 my-lg-auto"
                                  alt="Institute-signup"/>
                         </Col>
-                        <Col>
+                        <Col lg={7}>
                             <Row>
-                                <Row className="mt-lg-5 pe-lg-4 mt-md-5 mt-4 pe-0">
-                                    <Col lg={10} md={12} className="mb-3 mx-lg-auto px-md-5 px-3">
+                                <Row className="mt-lg-4 px-lg-5 mt-md-5 mt-4 pe-0">
+                                    <Col lg={12} md={12} className="mb-3 mx-lg-auto px-md-5 px-3">
                                         <LazyLoad once>
                                             <div className="progressbar">
                                                 <div
                                                     className={pageStage === 1 ? 'progress-step progress-step-active' : 'progress-step'}
-                                                    data-title="Details"></div>
+                                                    data-title="Details">
+                                                </div>
                                                 <div
                                                     className={pageStage === 2 ? 'progress-step progress-step-active' : 'progress-step'}
                                                     data-title="Description"></div>
@@ -238,20 +276,20 @@ const InstituteSignup = () => {
                                     <Row className="pb-md-0 pb-4">
                                         <Form noValidate onSubmit={handleSubmit}>
                                             {(pageStage === 1) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
 
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3"
+                                                        <Form.Group className="mb-2"
                                                                     controlId="validationInstituteName">
                                                             <Form.Label style={{fontWeight: 600}}>Institute
                                                                 Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter institute's name"
-                                                                name="Institute's name"
+                                                                name="InstituteName"
                                                                 value={values.InstituteName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.InstituteName ? changeInstituteNameValidate(false) : changeInstituteNameValidate(true)}
+                                                                isInvalid={!!errors.InstituteName && touched.InstituteName ? changeInstituteNameValidate(false) : changeInstituteNameValidate(true)}
                                                                 isValid={touched.InstituteName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -261,15 +299,16 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationEmail">
-                                                            <Form.Label style={{fontWeight: 600}}>Institute's email</Form.Label>
+                                                        <Form.Group className="mb-2" controlId="validationEmail">
+                                                            <Form.Label style={{fontWeight: 600}}>Institute's
+                                                                email</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter institute's email"
                                                                 name="Email"
                                                                 value={values.Email}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
+                                                                isInvalid={!!errors.Email && touched.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                                                                 isValid={touched.Email}
                                                                 onBlur={handleBlur}
                                                             />
@@ -279,9 +318,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationOwnerName">
+                                                        <Form.Group className="mb-2" controlId="validationOwnerName">
                                                             <Form.Label style={{fontWeight: 600}}>Owner's
                                                                 name</Form.Label>
                                                             <Form.Control
@@ -290,7 +329,7 @@ const InstituteSignup = () => {
                                                                 name="OwnerName"
                                                                 value={values.OwnerName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.OwnerName ? changeOwnerNameValidate(false) : changeOwnerNameValidate(true)}
+                                                                isInvalid={!!errors.OwnerName && touched.OwnerName ? changeOwnerNameValidate(false) : changeOwnerNameValidate(true)}
                                                                 isValid={touched.OwnerName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -300,7 +339,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationLocation">
+                                                        <Form.Group className="mb-2" controlId="validationLocation">
                                                             <Form.Label style={{fontWeight: 600}}>Location</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -308,7 +347,7 @@ const InstituteSignup = () => {
                                                                 name="Location"
                                                                 value={values.Location}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Location ? changeLocationValidate(false) : changeLocationValidate(true)}
+                                                                isInvalid={!!errors.Location && touched.Location ? changeLocationValidate(false) : changeLocationValidate(true)}
                                                                 isValid={touched.Location}
                                                                 onBlur={handleBlur}
                                                             />
@@ -318,9 +357,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationPassword">
+                                                        <Form.Group className="mb-2" controlId="validationPassword">
                                                             <Form.Label style={{fontWeight: 600}}>Password</Form.Label>
                                                             <Form.Control
                                                                 type="password"
@@ -328,7 +367,7 @@ const InstituteSignup = () => {
                                                                 name="Password"
                                                                 value={values.Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
+                                                                isInvalid={!!errors.Password && touched.Password ? changePasswordValidate(false) : changePasswordValidate(true)}
                                                                 isValid={touched.Password}
                                                                 onBlur={handleBlur}
                                                             />
@@ -338,7 +377,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationRPassword">
+                                                        <Form.Group className="mb-2" controlId="validationRPassword">
                                                             <Form.Label style={{fontWeight: 600}}>Re-type
                                                                 Password</Form.Label>
                                                             <Form.Control
@@ -347,7 +386,7 @@ const InstituteSignup = () => {
                                                                 name="Confirm_Password"
                                                                 value={values.Confirm_Password}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
+                                                                isInvalid={!!errors.Confirm_Password && touched.Confirm_Password ? changeRPasswordValidate(false) : changeRPasswordValidate(true)}
                                                                 isValid={touched.Confirm_Password}
                                                                 onBlur={handleBlur}
                                                             />
@@ -357,7 +396,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col
                                                         className="d-flex flex-row justify-content-lg-end justify-content-end">
                                                         <Button type="button" className="px-4 nextBtn"
@@ -383,17 +422,18 @@ const InstituteSignup = () => {
                                                 </Row>
                                             </LazyLoad>}
                                             {(pageStage === 2) && <LazyLoad once>
-                                                <Row className=" pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationMobile">
-                                                            <Form.Label style={{fontWeight: 600}}>Mobile Number</Form.Label>
+                                                        <Form.Group className="mb-2" controlId="validationMobile">
+                                                            <Form.Label style={{fontWeight: 600}}>Mobile
+                                                                Number</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter mobile number in format: 0771234567"
-                                                                name="Mobile"
+                                                                name="Mobile_Number"
                                                                 value={values.Mobile_Number}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)}
+                                                                isInvalid={!!errors.Mobile_Number && touched.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)}
                                                                 isValid={touched.Mobile_Number}
                                                                 onBlur={handleBlur}
                                                             />
@@ -403,19 +443,20 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3"
+                                                        <Form.Group className="mb-2"
                                                                     controlId="validationAddress">
                                                             <Form.Label
-                                                                style={{fontWeight: 600}}>Institute's Address</Form.Label>
+                                                                style={{fontWeight: 600}}>Institute's
+                                                                Address</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter institute's address "
                                                                 name="Address"
                                                                 value={values.Address}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.Address ? changeAddressValidate(false) : changeAddressValidate(true)}
+                                                                isInvalid={!!errors.Address && touched.Address ? changeAddressValidate(false) : changeAddressValidate(true)}
                                                                 isValid={touched.Address}
                                                                 onBlur={handleBlur}
                                                             />
@@ -425,9 +466,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className=" pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-1 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationDescription">
+                                                        <Form.Group className="mb-2" controlId="validationDescription">
                                                             <Form.Label
                                                                 style={{fontWeight: 600}}>Description</Form.Label>
                                                             <Form.Control as="textarea"
@@ -437,7 +478,7 @@ const InstituteSignup = () => {
                                                                           name="Description"
                                                                           value={values.Description}
                                                                           onChange={handleChange}
-                                                                          isInvalid={!!errors.Description ? changeDescriptionValidate(false) : changeDescriptionValidate(true)}
+                                                                          isInvalid={!!errors.Description && touched.Description ? changeDescriptionValidate(false) : changeDescriptionValidate(true)}
                                                                           isValid={touched.Description}
                                                                           onBlur={handleBlur}
                                                             />
@@ -447,7 +488,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between ">
 
                                                         <Button type="button" className="px-4 nextBtn"
@@ -474,9 +515,9 @@ const InstituteSignup = () => {
                                                 </Row>
                                             </LazyLoad>}
                                             {(pageStage === 3) && <LazyLoad once>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationAccountName">
+                                                        <Form.Group className="mb-2" controlId="validationAccountName">
                                                             <Form.Label style={{fontWeight: 600}}>Account Holder's
                                                                 Name</Form.Label>
                                                             <Form.Control
@@ -485,7 +526,7 @@ const InstituteSignup = () => {
                                                                 name="AccountName"
                                                                 value={values.AccountName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.AccountName ? changeAccountNameValidate(false) : changeAccountNameValidate(true)}
+                                                                isInvalid={!!errors.AccountName && touched.AccountName ? changeAccountNameValidate(false) : changeAccountNameValidate(true)}
                                                                 isValid={touched.AccountName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -495,9 +536,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationBankName">
+                                                        <Form.Group className="mb-2" controlId="validationBankName">
                                                             <Form.Label style={{fontWeight: 600}}>Bank Name</Form.Label>
                                                             <Form.Control
                                                                 type="text"
@@ -505,7 +546,7 @@ const InstituteSignup = () => {
                                                                 name="BankName"
                                                                 value={values.BankName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)}
+                                                                isInvalid={!!errors.BankName && touched.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)}
                                                                 isValid={touched.BankName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -515,7 +556,7 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                     <Col lg={6} md={6} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationBranchName">
+                                                        <Form.Group className="mb-2" controlId="validationBranchName">
                                                             <Form.Label style={{fontWeight: 600}}>Branch
                                                                 Name</Form.Label>
                                                             <Form.Control
@@ -524,7 +565,7 @@ const InstituteSignup = () => {
                                                                 name="BranchName"
                                                                 value={values.BranchName}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)}
+                                                                isInvalid={!!errors.BranchName && touched.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)}
                                                                 isValid={touched.BranchName}
                                                                 onBlur={handleBlur}
                                                             />
@@ -534,9 +575,9 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
-                                                        <Form.Group className="mb-3" controlId="validationAccountNo">
+                                                        <Form.Group className="mb-2" controlId="validationAccountNo">
                                                             <Form.Label style={{fontWeight: 600}}>Account
                                                                 Number</Form.Label>
                                                             <Form.Control
@@ -545,7 +586,7 @@ const InstituteSignup = () => {
                                                                 name="AccountNo"
                                                                 value={values.AccountNo}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)}
+                                                                isInvalid={!!errors.AccountNo && touched.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)}
                                                                 isValid={touched.AccountNo}
                                                                 onBlur={handleBlur}
                                                             />
@@ -555,7 +596,8 @@ const InstituteSignup = () => {
                                                         </Form.Group>
                                                     </Col>
                                                 </Row>
-                                                <Row className="mt-lg-3 pe-lg-4 mt-md-3">
+                                                {loading && <Loader/>}
+                                                <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col className="d-flex flex-row justify-content-between">
                                                         <Button type="button" className="px-4 nextBtn"
                                                                 variant="primary"
@@ -566,7 +608,7 @@ const InstituteSignup = () => {
                                                                 variant="primary"
                                                                 onClick={() => {
                                                                     if (accountNameValidate && accountNoValidate && branchNameValidate && bankNameValidate) {
-                                                                        setPageStage(4);
+                                                                        handleOnSubmit(values);
                                                                     }
                                                                 }
                                                                 }
@@ -577,7 +619,7 @@ const InstituteSignup = () => {
                                                                     validateField("AccountNo");
                                                                 }
                                                                 }
-                                                        >Next</Button>
+                                                        >Submit</Button>
                                                     </Col>
                                                 </Row>
                                             </LazyLoad>}

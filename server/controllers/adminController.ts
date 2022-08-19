@@ -1,13 +1,14 @@
-import {Request,Response} from "express";
+import { Request, Response } from "express";
 import { PrismaClient } from '@prisma/client'
 import adminSchema from "../models/adminModel";
+import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
-
-export const getAdmins=async (req:Request,res:Response)=>{
+const NAME_SPACE = "ADMIN"
+export const getAdmins = async (req: Request, res: Response) => {
 
     try {
-        const data =await prisma.admin.findMany()
+        const data = await prisma.admin.findMany()
         res.status(200).send(data)
     }
 
@@ -15,13 +16,14 @@ export const getAdmins=async (req:Request,res:Response)=>{
         res.status(500).send(error);
     }
 }
-export const getAdminByID=async (req:Request,res:Response)=>{
+
+export const getAdminByID = async (req: Request, res: Response) => {
 
 
     try {
-        const data =await prisma.admin.findMany({
-            where:{
-                admin_id:Number(req.params.id)
+        const data = await prisma.admin.findMany({
+            where: {
+                admin_id: Number(req.params.id)
             }
         })
         res.status(200).send(data)
@@ -31,13 +33,13 @@ export const getAdminByID=async (req:Request,res:Response)=>{
         res.status(500).send(error);
     }
 }
-export const adminRemoveUser=async (req:Request,res:Response)=>{
+export const adminRemoveUser = async (req: Request, res: Response) => {
 
     try {
-        const data =await prisma.user.update({
-            where:{user_id:Number(req.body.user_id)},
-            data:{
-                is_active:false
+        const data = await prisma.user.update({
+            where: { user_id: req.body.user_id },
+            data: {
+                isActive: false,
             }
         }
         )
@@ -47,49 +49,122 @@ export const adminRemoveUser=async (req:Request,res:Response)=>{
         res.status(500).send(error);
     }
 }
-
-export const acceptTeacher=async (req:Request,res:Response)=>{
-
-        try {
-            const data =await prisma.teacher.update({
-                where:{user_id:Number(req.body.user_id)},
-                data:{
-                    security_status:"active"
-                }
-            }
-            )
-            res.status(200).send(data)
-        }
-        catch (error) {
-            res.status(500).send(error);
-        }
-}
-
-export const rejectTeacher=async (req:Request,res:Response)=>{
+export const newTeacherRequests = async (req: Request, res: Response) => {
 
     try {
-        const data =await prisma.teacher.update({
-                where:{user_id:Number(req.body.user_id)},
-                data:{
-                    security_status:"inactive"
-                }
+        const data = await prisma.teacher.findMany({
+            where: {
+                verification:"pending"
             }
-        )
+        })
         res.status(200).send(data)
     }
+
     catch (error) {
         res.status(500).send(error);
     }
 }
 
-export const  createAdmin=async (req:Request,res:Response)=>{
+export const verifyTeacher = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.teacher.update({
+            where: {
+                user_id: req.body.user_id
+            },
+            data: {
+                verification: 'verified'
+            }
+        })
+        logger.info(NAME_SPACE, "Your Tutor Profile Successfully Verified");
+        res.status(200).send("Your Tutor Profile Successfully Verified");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error);
+    }
+}
+
+export const rejectTeacher = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.teacher.update({
+            where: {
+                user_id: req.body.user_id
+            },
+            data: {
+                verification: 'rejected'
+            }
+        })
+        logger.info(NAME_SPACE, "Your Tutor Profile Rejected");
+        res.status(200).send("Your Tutor Profile Rejected");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error);
+    }
+}
+
+export const newInstituteRequests = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.institute.findMany({
+            where: {
+                verification:"pending"
+            }
+        })
+        res.status(200).send(data)
+    }
+
+    catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+export const verifyInstitute = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.institute.update({
+            where: {
+                user_id: req.body.user_id
+            },
+            data: {
+                verification: 'verified'
+            }
+        })
+        logger.info(NAME_SPACE, "Your Institute Profile Successfully Verified");
+        res.status(200).send("Your Institute Profile Successfully Verified");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error);
+    }
+}
+
+export const rejectInstitute = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.institute.update({
+            where: {
+                user_id: req.body.user_id
+            },
+            data: {
+                verification: 'rejected'
+            }
+        })
+        logger.info(NAME_SPACE, "Your Institute Profile Rejected");
+        res.status(200).send("Your Institute Profile Rejected");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error);
+    }
+}
+
+export const createAdmin = async (req: Request, res: Response) => {
 
     const { error, value } = adminSchema.validate(req.body);
 
-    if(!error) {
+    if (!error) {
         try {
             const data = await prisma.admin.create({
-                data: {
+                data:<any> {
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
                     mobile_no: req.body.mobile_no,

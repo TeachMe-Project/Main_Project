@@ -1,35 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { StrictMode } from 'react';
-
-import { CssBaseline } from '@material-ui/core';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import App from './App';
-import AppStateProvider, { useAppState } from './state';
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
-import ErrorDialog from './components/ErrorDialog/ErrorDialog';
-import LoginPage from './components/LoginPage/LoginPage';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import theme from './theme';
+//import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import './types';
-import { ChatProvider } from './components/ChatProvider';
-import { VideoProvider } from './components/VideoProvider';
-import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions';
-import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning';
-import Twilio from './components/Twilio/Twilio';
-import Dashboard from './components/Pages/Student/Dashboard';
-import MyTeachers from './components/Pages/Student/MyTeachers';
-import Settings from './components/Pages/Student/Settings';
-import Course from './components/Pages/Student/Course';
-import MyCourses from './components/Pages/Student/MyCourses';
-import StudentProfile from './components/Pages/Student/StudentProfile';
+import { BrowserRouter } from 'react-router-dom';
+import { Auth0ProviderWithHistory } from './auth0/auth0-provider-with-history';
 
 ReactDOM.render(
-  // 👈️ deprecated starting React 18
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  <BrowserRouter>
+    <Auth0ProviderWithHistory>
+      <App />
+    </Auth0ProviderWithHistory>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

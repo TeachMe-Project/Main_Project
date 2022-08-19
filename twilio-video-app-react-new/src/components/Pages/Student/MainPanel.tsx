@@ -6,7 +6,7 @@ import MyTeachers from './MyTeachers';
 import Messages from './Messages';
 import StudentProfile from './StudentProfile';
 import HelpAndSupport from './HelpAndSupport';
-
+import CourseDetails from './CourseDetails';
 import Course from './Course';
 import Twilio from '../../Twilio/Twilio';
 import Notification from '../../Notification/notifications';
@@ -78,6 +78,10 @@ const routes = [
     main: () => <Course />,
   },
   {
+    path: '/courseDetails',
+    main: () => <CourseDetails />,
+  },
+  {
     path: '/paymentGateway',
     main: () => <PaymentGateway />,
   },
@@ -96,15 +100,15 @@ export default function MainPanel() {
     <div className="MainPanel">
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <UnsupportedBrowserWarning>
-          <AppStateProvider>
-            <Routes>
-              {routes.map((route, index) => (
-                <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
-              ))}
-            </Routes>
-          </AppStateProvider>
-        </UnsupportedBrowserWarning>
+        {/*<UnsupportedBrowserWarning>*/}
+        <AppStateProvider>
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
+            ))}
+          </Routes>
+        </AppStateProvider>
+        {/*</UnsupportedBrowserWarning>*/}
       </MuiThemeProvider>
     </div>
   );

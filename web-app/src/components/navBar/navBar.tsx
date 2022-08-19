@@ -16,7 +16,7 @@ const NavBar: React.FC = () => {
             <Container fluid={true} >
                 <Row className='w-100'>
                     <Col lg={2} md={12} xs={12} className='d-flex flex-row justify-content-between mt-md-2'>
-                        <Navbar.Brand onClick={()=> navigate('/')} style={{cursor:"pointer"}}>
+                        <Navbar.Brand onClick={()=> navigate(-1)} style={{cursor:"pointer"}}>
                             <img src={Images.logo} style={{maxWidth: "240px"}} alt='logo'/>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" className='ms-2'/>
@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
                                 <Nav.Link href="#Home" className="me-2">Home</Nav.Link>
                                 <Nav.Link href="#About-Us" className="me-2">About us</Nav.Link>
                                 <Nav.Link href="#Pricing" className="me-2">Pricing</Nav.Link>
-                                {/*<Nav.Link href="#Download" className="me-2">Downloads</Nav.Link>*/}
+                                <Nav.Link href="#Download" className="me-2">Downloads</Nav.Link>
                                 <Nav.Link href="#ContactUs" className="me-2">Contact us</Nav.Link>
                             </Nav>
                             <Nav className='ms-md-5 ps-md-4'>

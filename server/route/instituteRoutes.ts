@@ -20,7 +20,7 @@ instituteRouter.route("/:id")
 instituteRouter.route("/getInstituteByName/:name")
     .get(getInstituteByName);
 
-instituteRouter.route("/:id/updateInstituteDetails")
+instituteRouter.route("/updateInstituteDetails")
     .post(updateInstituteDetails);
 
 instituteRouter.route("/:id/getAllInstituteCourses")
