@@ -21,6 +21,7 @@ import {notificationRouter} from "./route/notificationRoutes";
 import {authRouter} from "./route/authRoutes";
 import logger from "./utils/logger";
 import {contactRouter} from "./route/contactRoutes";
+import routes from './route/routes';
 
 const PORT = process.env.PORT ?? 8081;
 
@@ -61,7 +62,7 @@ app.use('/teacher', teacherRouter)
 app.use('/user', userRouter)
 app.use('/auth', authRouter)
 app.use('/contact', contactRouter)
-
+app.use('/api',routes)
 app.use('/create-checkout-session',paymentGatewayRouter)
 
 
