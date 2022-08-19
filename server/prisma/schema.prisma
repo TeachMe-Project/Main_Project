@@ -81,7 +81,7 @@ model homework {
 }
 
 model institute {
-  user_id           String                 @db.VarChar(100)
+  user_id           String                 @unique(map: "user_id") @db.VarChar(100)
   institute_id      Int                    @id @default(autoincrement())
   institute_name    String                 @db.VarChar(255)
   owner_name        String                 @db.VarChar(150)
@@ -273,7 +273,7 @@ model user {
   profile_image String         @db.VarChar(255)
   isActive      Boolean
   admin         admin[]
-  institute     institute[]
+  institute     institute?
   notification  notification[]
   parent        parent[]
   student       student[]

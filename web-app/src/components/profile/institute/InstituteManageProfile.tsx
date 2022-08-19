@@ -7,8 +7,9 @@ import {useAuth0} from "@auth0/auth0-react";
 import {Formik} from "formik";
 import * as yup from "yup";
 import {BsPencilSquare} from "react-icons/bs";
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import Images from "../../../assets/images/Images";
+import Loader from "../../utils/Loader";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
@@ -26,20 +27,20 @@ const schema = yup.object().shape({
     AccountNo: yup.string().label("Account Number").required()
 });
 
-const initialState = {
-    InstituteName: 'Sigma Institute',
-    OwnerName: 'Avishka Hettarachchi',
-    Location: 'Malabe',
-    Email: 'sigmainst@gmail.com',
-    Mobile_Number: '0771234567',
-    Description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 15nd more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-    Address: 'Malebe, Colombo 07',
-    AccountName: 'Avishka Hettarachchi',
-    BankName: 'Bank OF Ceylon',
-    BranchName: 'Malabe',
-    AccountNo: '6612345678'
-}
+type initialStateType = {
+    InstituteName: string,
+    OwnerName: string,
+    Location: string,
+    Email: string,
+    Mobile_Number: string,
+    Description: string,
+    Address: string,
+    AccountName: string,
+    BankName: string,
+    BranchName: string,
+    AccountNo: string
 
+}
 
 const InstituteManageProfile = () => {
 
@@ -137,11 +138,58 @@ const InstituteManageProfile = () => {
     const [enableEditProfile, setEnableEditProfile] = useState(true);
     const [passwordMail, setPasswordMail] = useState(null);
     const [isEditProfile, setIsEditProfile] = useState(false);
-    useEffect(()=> {
+    const [isDataLoading, setIsDataLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [initialState, setInitialState] = useState<initialStateType>({
+        InstituteName: '',
+        OwnerName: '',
+        Location: '',
+        Email: '',
+        Mobile_Number: '',
+        Description: '',
+        Address: '',
+        AccountName: '',
+        BankName: '',
+        BranchName: '',
+        AccountNo: ''
+    });
+
+
+    useEffect(() => {
         if (user?.family_name === "institute") {
             setIsEditProfile(true);
         }
-    },[]);
+        axios({
+            method: "GET",
+            url: `http://localhost:8081/institute/${user?.sub}`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res: AxiosResponse) => {
+            console.log(res.data[0].institute_name)
+            setInitialState({
+                InstituteName: res.data[0].institute_name,
+                AccountName: res.data[0].account_name,
+                AccountNo: res.data[0].account_no,
+                Address: res.data[0].address,
+                BankName: res.data[0].bank_name,
+                BranchName: res.data[0].branch_name,
+                Description: res.data[0].description,
+                Email: res.data[0].user.username,
+                Location: res.data[0].location,
+                Mobile_Number: res.data[0].contact_no,
+                OwnerName: res.data[0].owner_name
+            })
+            if (res.status === 200) {
+                console.log(initialState)
+                setIsDataLoading(true);
+            }
+        }).catch((error) => {
+            console.log(error.message)
+        })
+    }, []);
+
 
     const changePassword = () => {
         const options = {
@@ -162,6 +210,43 @@ const InstituteManageProfile = () => {
             console.log(error.message)
             return setPasswordMail(error.message);
         });
+    }
+
+    const handleOnSubmit = (values: { InstituteName: any; OwnerName: any; Location: any; Email?: string; Mobile_Number: any; Description: any; Address: any; AccountName: any; BankName: any; BranchName: any; AccountNo: any; }) => {
+        setLoading(true)
+        const apiData = JSON.stringify({
+            "user_id": `${user?.sub}`,
+            "institute_name": `${values.InstituteName}`,
+            "owner_name": `${values.OwnerName}`,
+            "location": `${values.Location}`,
+            "address": `${values.Address}`,
+            "contact_no": `${values.Mobile_Number}`,
+            "description": `${values.Description}`,
+            "account_name": `${values.AccountName}`,
+            "account_no": `${values.AccountNo}`,
+            "bank_name": `${values.BankName}`,
+            "branch_name": `${values.BranchName}`
+        })
+
+        axios({
+            method: "POST",
+            url: "http://localhost:8081/institute/updateInstituteDetails",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: apiData
+        }).then((apiRes) => {
+            console.log(apiData)
+            console.log("Api user created")
+            console.log(apiRes.status);
+            if (apiRes.status === 200) {
+                setLoading(false);
+                setIsEditProfile(false);
+            }
+        }).catch((error) => {
+            console.log(error.message)
+        })
+
     }
 
 
@@ -185,7 +270,9 @@ const InstituteManageProfile = () => {
 
                     </Col>
                     <Col className='px-lg-5'>
-                        <Formik
+                        {!isDataLoading && <Loader/>}
+                        {loading && <Loader/>}
+                        {isDataLoading && <Formik
                             validationSchema={schema}
                             onSubmit={console.log}
                             initialValues={initialState}
@@ -243,7 +330,7 @@ const InstituteManageProfile = () => {
                                                                 isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                                                                 isValid={touched.Email}
                                                                 onBlur={handleBlur}
-                                                                disabled={enableEditProfile}
+                                                                disabled={true}
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.Email}
@@ -302,7 +389,7 @@ const InstituteManageProfile = () => {
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="Enter mobile number in format: 0771234567"
-                                                                name="Mobile"
+                                                                name="Mobile_Number"
                                                                 value={values.Mobile_Number}
                                                                 onChange={handleChange}
                                                                 isInvalid={!!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)}
@@ -455,7 +542,7 @@ const InstituteManageProfile = () => {
                                         {isEditProfile &&
                                         <Row className='ms-1 mt-2 pe-lg-4'>
                                             <Col lg={10}>
-                                                { enableEditProfile ?
+                                                {enableEditProfile ?
                                                     <Button className="mt-4 px-3 profile-edit-btn"
                                                             style={{width: "fit-content", borderRadius: "15px"}}
                                                             variant="outline-secondary"
@@ -469,7 +556,9 @@ const InstituteManageProfile = () => {
                                                         <>
                                                             <Button className='mt-4 ms-2 profile-edit-btn'
                                                                     style={{width: "fit-content", borderRadius: "15px"}}
-                                                                    variant='outline-secondary'>Update Profile</Button>
+                                                                    variant='outline-secondary'
+                                                                    onClick={() => handleOnSubmit(values)}>Update
+                                                                Profile</Button>
                                                             <Button className='mt-4 ms-3 profile-edit-btn'
                                                                     style={{width: "fit-content", borderRadius: "15px"}}
                                                                     variant='outline-secondary'
@@ -481,7 +570,7 @@ const InstituteManageProfile = () => {
                                         </Row>}
                                     </Form>
                                 </Row>)}
-                        </Formik>
+                        </Formik>}
                     </Col>
                 </Row>
             </Col>

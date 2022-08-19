@@ -20,7 +20,7 @@ export const getParentByID = async (req: Request, res: Response) => {
     try {
         const data = await prisma.parent.findMany({
             where: {
-                user_id: Number(req.params.id)
+                user_id: req.params.id
             }
         })
         res.status(200).send(data)
@@ -53,7 +53,7 @@ export const parentDoPayment = async (req: Request, res: Response) => {
 
     try {
         const data = await prisma.parent_payment.create({
-            data: {
+            data:<any>{
                 payment_time: req.body.payment_time,
                 amount: req.body.amount,
                 student_id: Number(req.body.student_id),
@@ -100,10 +100,3 @@ export const createParent = async (req: Request, res: Response) => {
         res.status(500).send(error.details[0].message);
     }
 }
-
-
-
-// data: {
-//
-//
-// }

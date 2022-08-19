@@ -56,7 +56,7 @@ export const getTeacherUpcomingClasses = async (req: Request, res: Response) => 
     try {
         const data = await prisma.teacher.findMany({
             where: {
-                user_id: Number(req.params.id)
+                user_id: req.params.id
             },
             include: {course: true}
         })
@@ -71,7 +71,7 @@ export const getTeacherCourses = async (req: Request, res: Response) => {
     try {
         const data = await prisma.teacher.findMany({
             where: {
-                user_id: Number(req.params.id)
+                user_id: req.params.id
             },
             include: {course: true}
         })
@@ -83,11 +83,12 @@ export const getTeacherCourses = async (req: Request, res: Response) => {
 export const getTeacherInstitutes = async (req: Request, res: Response) => {
 
     try {
+        // @ts-ignore
         const data = await prisma.teacher.findMany({
             where: {
-                user_id: Number(req.params.id)
+                user_id: req.params.id
             },
-            include: {institute: true}
+            // include: {institute: true}
         })
         res.status(200).send(data)
     } catch (error) {
@@ -98,7 +99,6 @@ export const getTeacherInstitutes = async (req: Request, res: Response) => {
 export const createTeacher = async (req: Request, res: Response) => {
 
     const {error, value} = teacherSchema.validate(req.body);
-
     if (!error) {
         try {
             const data = await prisma.user.create({

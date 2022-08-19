@@ -94,7 +94,7 @@ export const removeCourse = async (req: Request, res: Response) => {
                 where: {
                     course_id: Number(req.params.id)
                 },
-                data: {
+                data:<any> {
                     is_active: false
                 }
 
@@ -131,17 +131,17 @@ export const getCourseByInstituteName = async (req: Request, res: Response) => {
                 institute_name: req.params.instituteName
 
             },
-            select: {
-                institute_teacher: {
-                    select: {
-                        course: {
-                            select: {
-                                course_name: true,
-                            }
-                        }
-                    }
-                }
-            }
+            // select: {
+            //     institute_teacher: {
+            //         select: {
+            //             course: {
+            //                 select: {
+            //                     course_name: true,
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
 
 
         })
@@ -158,7 +158,7 @@ export const createCourse = async (req: Request, res: Response) => {
     if (!error) {
         try {
             const data = await prisma.course.create({
-                data: {
+                data:<any> {
                     course_name: req.body.course_name,
                     course_description: req.body.course_description,
                     course_image: req.body.course_image

@@ -9,8 +9,11 @@ import '../../Assets/Styles/main.scss';
 import { Link } from 'react-router-dom';
 import '../Pages/Student/MainPanel';
 import Button from '../Button/Button';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const LeftSidebar = () => {
+  const { logout } = useAuth0();
+
   return (
     <div className="LeftSidebar">
       <Container>
@@ -95,7 +98,7 @@ export const LeftSidebar = () => {
           </Row>
         </ul>
 
-        <Link to="/" className="link">
+        <Link to="/" className="link" onClick={() => logout({ returnTo: window.location.origin })}>
           <div className="LogoutBtn">
             {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
             <AiOutlineLogout className="LogoutIcon" />

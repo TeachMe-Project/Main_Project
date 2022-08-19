@@ -4,13 +4,12 @@ import LeftSidebarTeacher from './components/Sidebar/LeftSidebarTeacher';
 import LeftSidebar from './components/Sidebar/LeftSidebar';
 import MainPanel from './components/Pages/Teacher/MainPanel';
 // import MainPanel from './components/Pages/Student/MainPanel';
-import { Container, Row, Col } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Col, Row } from 'react-bootstrap';
 import TopNavbar from './components/Navbars/TopNavbar';
 import Home from './home/Home';
 import { useAuth0 } from '@auth0/auth0-react';
 import NavBar from './home/navBar';
-import Banner from './home/Banner';
+import UnAuth from './auth0/unAuth';
 // import psList from 'ps-list';
 // import {tasklist} from 'tasklist';
 
@@ -44,6 +43,13 @@ function App() {
       );
     } else if (user?.family_name == 'student') {
       return <h1>Student</h1>;
+    } else if (user?.family_name == 'admin' || user?.family_name == 'parent') {
+      return (
+        <>
+          <NavBar />
+          <UnAuth />
+        </>
+      );
     } else {
       return <Home />;
     }
