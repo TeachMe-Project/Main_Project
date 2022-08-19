@@ -37,9 +37,9 @@ export const adminRemoveUser = async (req: Request, res: Response) => {
 
     try {
         const data = await prisma.user.update({
-            where: { user_id: Number(req.body.user_id) },
+            where: { user_id: req.body.user_id },
             data: {
-                is_active: bool(0)
+                isActive: false,
             }
         }
         )
