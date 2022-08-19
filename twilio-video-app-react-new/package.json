@@ -12,6 +12,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@sweetalert/with-react": "^0.1.1",
     "@twilio-labs/plugin-rtc": "^0.8.2",
     "@twilio/conversations": "^1.2.3",
     "@twilio/video-processors": "^1.0.1",
@@ -66,6 +67,8 @@
     "redux": "^4.2.0",
     "rimraf": "3.0.2",
     "strip-color": "^0.1.0",
+    "sweetalert": "^2.1.2",
+    "tasklist": "^5.0.0",
     "ts-node": "^9.1.1",
     "ts-node-dev": "^2.0.0",
     "twilio": "^3.63.1",
@@ -123,7 +126,10 @@
     "cypress:ci": "cross-env CYPRESS_baseUrl=http://localhost:8081 start-server-and-test ../server http://localhost:8081 cypress:run",
     "deploy:twilio-cli": "cross-env REACT_APP_SET_AUTH=passcode npm run build && twilio rtc:apps:video:deploy --authentication=passcode --app-directory ./build",
     "electron": "wait-on tcp:3000 && electron .",
-    "temp": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm:electron\""
+    "temp": "concurrently -k \"cross-env BROWSER=none npm run dev\" \"npm:electron\""
+  },
+  "browser":{
+    "child_process": false
   },
   "eslintConfig": {
     "extends": "react-app",

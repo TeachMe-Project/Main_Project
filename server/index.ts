@@ -4,7 +4,6 @@ import express, { RequestHandler } from 'express';
 import path from 'path';
 import { ServerlessFunction } from './types';
 import cors from "cors";
-
 // importing requires routings
 import {studentRouter} from "./route/studentRoutes";
 import {paymentGatewayRouter} from "./route/paymentGatewayRoutes";
