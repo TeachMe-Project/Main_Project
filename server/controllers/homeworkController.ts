@@ -38,7 +38,7 @@ export const  createHomework=async (req:Request,res:Response)=>{
     if(!error) {
         try {
             const data = await prisma.homework.create({
-                data: {
+                data:<any> {
                     updated_date: req.body.updated_date,
                     homework: req.body.homework,
                     course_id: req.body.course_id,

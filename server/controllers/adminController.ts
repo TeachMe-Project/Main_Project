@@ -164,7 +164,7 @@ export const createAdmin = async (req: Request, res: Response) => {
     if (!error) {
         try {
             const data = await prisma.admin.create({
-                data: {
+                data:<any> {
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
                     mobile_no: req.body.mobile_no,

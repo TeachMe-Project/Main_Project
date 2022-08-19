@@ -87,7 +87,7 @@ export const getAllInstituteCourses = async (req: Request, res: Response) => {
             where: {
                 institute_id: Number(req.params.id)
             },
-            include: {course: true}
+            // include: {course: true}
         })
         res.status(200).send(data)
     } catch (error) {
