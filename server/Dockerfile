@@ -1,30 +1,22 @@
-FROM node:16-alpine AS BUILD_IMAGE
-#RUN apk update && apk add yarn curl bash && rm -rf /var/cache/apk/*
-
-#RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | bash -s -- -b /usr/local/bin
-RUN npm set progress=false
+FROM node:16-alpine AS builder
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci --no-audit --progress=false
-
-ARG node_env=production
-ENV NODE_ENV $node_env
-
+COPY prisma ./prisma/
+COPY .env ./
+RUN npm install
+RUN npx prisma generate
 COPY . .
+RUN npm run build && npm run generate
 
-RUN npm run build
-WORKDIR /app/dist/apps/backend
-RUN npm install --no-audit --progress=false
-# run node prune
-#RUN /usr/local/bin/node-prune
-
-FROM node:16-alpine
+FROM node:16-alpine AS server
 WORKDIR /app
+COPY package* ./
+COPY prisma ./prisma/
+COPY .env ./
+COPY --from=builder ./app/prisma ./prisma
+RUN npm install --production
+RUN npx prisma generate
+COPY --from=builder ./app/build ./build
 
-# copy from build image
-COPY --from=BUILD_IMAGE /app/dist ./dist
-WORKDIR /app/dist/apps/backend
-
-COPY --from=BUILD_IMAGE /app/migrations ./migrations
-
-CMD ["node", "index.js"]
+EXPOSE 8081
+CMD ["npm", "start"]
