@@ -9,7 +9,6 @@ const prisma = new PrismaClient()
 const NAME_SPACE = "User"
 
 
-
 export const getUsers=async (req:Request,res:Response)=>{
 
     try {
@@ -25,10 +24,12 @@ export const getUsers=async (req:Request,res:Response)=>{
             }
         })
         res.status(200).json(data)
+        console.log(data)
     }
 
-    catch (error) {
+    catch (error: any) {
         res.status(500).send(error);
+        logger.error(NAME_SPACE, error.message);
     }
 }
 

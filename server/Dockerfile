@@ -13,7 +13,7 @@ WORKDIR /app
 COPY package* ./
 COPY prisma ./prisma/
 COPY .env ./
-RUN npm install --production
+RUN npm install --production && npm run generate
 COPY --from=builder ./app/build ./build
 COPY --from=builder ./app/prisma ./prisma
 
