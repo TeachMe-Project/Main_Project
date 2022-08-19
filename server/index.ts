@@ -62,11 +62,12 @@ app.use('/teacher', teacherRouter)
 app.use('/user', userRouter)
 app.use('/auth', authRouter)
 app.use('/contact', contactRouter)
-app.use('/api',routes)
 app.use('/create-checkout-session',paymentGatewayRouter)
 
 
-
+app.get('/', (req, res) => {
+    res.send('Server is Running')
+})
 
 // app.use((req, res, next) => {
 //   // Here we add Cache-Control headers in accordance with the create-react-app best practices.
