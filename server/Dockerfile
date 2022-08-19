@@ -4,7 +4,7 @@ COPY package.json package-lock.json ./
 COPY prisma ./prisma/
 COPY .env ./
 RUN npm install
-
+RUN npx prisma generate
 COPY . .
 RUN npm run build && npm run generate
 
@@ -13,9 +13,10 @@ WORKDIR /app
 COPY package* ./
 COPY prisma ./prisma/
 COPY .env ./
-RUN npm install --production && npm run generate
-COPY --from=builder ./app/build ./build
 COPY --from=builder ./app/prisma ./prisma
+RUN npm install --production
+RUN npx prisma generate
+COPY --from=builder ./app/build ./build
 
 EXPOSE 8081
 CMD ["npm", "start"]
