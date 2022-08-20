@@ -5,11 +5,11 @@ COPY server/package.json server/package-lock.json ./
 COPY server/prisma ./prisma/
 COPY server/.env ./
 RUN npm fund
-RUN npm install --force
+RUN npm install
 RUN npx prisma generate
 COPY . .
-RUN npm cache clean --force
-RUN tsc
+COPY server/package.json ./
+RUN npm run build
 RUN npm run generate
 
 FROM node:16-alpine AS server
