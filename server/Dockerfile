@@ -8,7 +8,7 @@ COPY server/tsconfig.json ./
 RUN npm fund
 RUN npm install
 RUN npx prisma generate
-COPY . .
+COPY server ./
 RUN npm run build
 RUN npm run generate
 
