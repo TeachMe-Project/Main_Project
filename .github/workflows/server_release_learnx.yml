@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy container app to Azure Web App - learnx
 
 on:
@@ -7,44 +10,28 @@ on:
   workflow_dispatch:
 
 jobs:
-  route:
-    runs-on: 'ubuntu-latest'
-    
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: Run PWD
-        run: pwd
-      - name: List files
-        run: ls
-      - name: chenage directory
-        run: cd web-app
-      - name: List server file
-        run: ls
-
   build:
     runs-on: 'ubuntu-latest'
-    needs: route
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-          
+
     - name: Log in to registry
       uses: docker/login-action@v1
       with:
         registry: https://learnx.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_a1c2f69e844c4694bbc0fde219c2963d }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_1c82de4ddf144f53ab0d69b40b50abd2 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_82c23dad8b9c469aae9e23d68f634598 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_f1b0f41ec2174050bb15ee91f5f9a221 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: learnx.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_a1c2f69e844c4694bbc0fde219c2963d }}/learnx_server:${{ github.sha }}
-        file: ./Dockerfile
+        tags: learnx.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_82c23dad8b9c469aae9e23d68f634598 }}/learnx_server:${{ github.sha }}
+        file: ./server/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,5 +47,5 @@ jobs:
       with:
         app-name: 'learnx'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_37743c15e2544de98a687c39c6e6a642 }}
-        images: 'learnx.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_a1c2f69e844c4694bbc0fde219c2963d }}/learnx_server:${{ github.sha }}' 
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7f8113fbf69946ec8a9bacccc868bca9 }}
+        images: 'learnx.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_82c23dad8b9c469aae9e23d68f634598 }}/learnx_server:${{ github.sha }}'
