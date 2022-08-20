@@ -6,8 +6,9 @@ COPY server/.env ./
 RUN npm fund
 RUN npm install
 RUN npx prisma generate
-RUN npm run build
 COPY . .
+RUN npm cache clean --force
+RUN npm run build
 RUN npm run generate
 
 FROM node:16-alpine AS server
