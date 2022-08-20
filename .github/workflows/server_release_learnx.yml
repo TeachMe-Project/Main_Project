@@ -10,18 +10,22 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  route:
     runs-on: 'ubuntu-latest'
-
+    
     steps:
-    - uses: actions/checkout@v2
-
     - name: list files
       run: ls
     - name: navigate server  
       run: cd server
     - name: list server files
       run: ls  
+      
+  build:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@v2
       
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
