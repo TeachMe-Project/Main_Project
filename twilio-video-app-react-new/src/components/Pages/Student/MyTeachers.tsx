@@ -45,7 +45,7 @@ export const MyTeachers = () => {
           <div className="Panel">
             <div className="PanelBody">
               <div className="small-scrollbar">
-                {teachers.map((item: any) => {
+                {/* {teachers.map((item: any) => {
                   return (
                     <Link to="/course" className="link">
                       <TeacherCard
@@ -60,8 +60,8 @@ export const MyTeachers = () => {
                       />
                     </Link>
                   );
-                })}
-                {/* <Link to="/course" className="link">
+                })} */}
+                <Link to="/course" className="link">
                   <TeacherCard
                     grade="Grade 8"
                     subject="Science"
@@ -96,7 +96,7 @@ export const MyTeachers = () => {
                     government school as a western music teacher. I have produced...
                    ..."
                   />
-                </Link> */}
+                </Link>
               </div>
             </div>
           </div>

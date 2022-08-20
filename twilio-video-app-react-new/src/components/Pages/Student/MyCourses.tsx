@@ -129,7 +129,7 @@ export const MyCourses = () => {
 
           <div className="Panel">
             <div className="PanelBody">
-              {courses.map((item: any) => {
+              {/* {courses.map((item: any) => {
                 return (
                   <CourseCard
                     header={item.subject}
@@ -143,18 +143,7 @@ export const MyCourses = () => {
                     btn2="Unenroll"
                   />
                 );
-              })}
-              {/* <CourseCard
-                header="Mathematics"
-                description="For A/L"
-                time="04:00pm - 06:00pm"
-                date="Wednesday"
-                image={<img src={'/Images/subjects/maths.png'} />}
-                teacher="Mr. Lasitha Nuwan"
-                amount="2500"
-                btn1="View more"
-                btn2="Unenroll"
-              />
+              })} */}
               <CourseCard
                 header="Mathematics"
                 description="For A/L"
@@ -176,7 +165,18 @@ export const MyCourses = () => {
                 amount="2500"
                 btn1="View more"
                 btn2="Unenroll"
-              /> */}
+              />
+              <CourseCard
+                header="Mathematics"
+                description="For A/L"
+                time="04:00pm - 06:00pm"
+                date="Wednesday"
+                image={<img src={'/Images/subjects/maths.png'} />}
+                teacher="Mr. Lasitha Nuwan"
+                amount="2500"
+                btn1="View more"
+                btn2="Unenroll"
+              />
             </div>
           </div>
         </Row>
