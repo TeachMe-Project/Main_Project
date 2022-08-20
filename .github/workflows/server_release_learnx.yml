@@ -19,7 +19,7 @@ jobs:
     - name: list files
       run: ls
     - name: navigate server  
-      run:  cd ./server
+      run: cd server
     - name: list server files
       run: ls  
       
