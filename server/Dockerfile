@@ -1,8 +1,8 @@
 FROM node:16-alpine AS builder
 WORKDIR /app
-COPY package.json package-lock.json ./
-COPY prisma ./prisma/
-COPY .env ./
+COPY server/package.json server/package-lock.json ./server
+COPY server/prisma ./prisma/
+COPY server/.env ./
 RUN npm install
 RUN npx prisma generate
 COPY . .
