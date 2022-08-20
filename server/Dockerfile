@@ -9,7 +9,6 @@ RUN npm fund
 RUN npm install
 RUN npx prisma generate
 COPY . .
-COPY server/package.json ./
 RUN npm run build
 RUN npm run generate
 
