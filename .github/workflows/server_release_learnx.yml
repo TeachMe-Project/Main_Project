@@ -12,13 +12,11 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+        with:
+          path: server
     
       - name: Run PWD
         run: pwd
-      - name: List server file
-        run: ls
-      - name: Change to serve
-        working-directory: ./server
       - name: List server file
         run: ls
 
