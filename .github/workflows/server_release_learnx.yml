@@ -11,6 +11,8 @@ jobs:
     runs-on: 'ubuntu-latest'
     
     steps:
+      - name: List server file
+        run: ls
       - name: Change to serve
         run: cd server
       - name: List server file
