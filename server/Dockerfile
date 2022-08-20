@@ -13,6 +13,7 @@ RUN npm run build
 RUN npm run generate
 
 FROM node:16-alpine AS server
+ENV NODE_ENV=production
 WORKDIR /app
 RUN npm install -g npm@8.18.0
 COPY package* ./
