@@ -7,8 +7,18 @@ on:
   workflow_dispatch:
 
 jobs:
+  route:
+    runs-on: 'ubuntu-latest'
+    
+    steps:
+      - name: Change to serve
+        run: cd server
+      - name: List server file
+        run: ls
+
   build:
     runs-on: 'ubuntu-latest'
+    needs: route
 
     steps:
     - uses: actions/checkout@v2
