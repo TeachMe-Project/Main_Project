@@ -114,7 +114,7 @@ describe('the ChatInput component', () => {
     expect(mockHandleSendMessage).not.toHaveBeenCalled();
   });
 
-  it('should add the "isTextareaFocused" class to the parent of TextareaAutosize when the focus event is fired, and remove it when the blur event is fired', () => {
+  it('should add the "isTextareaFocused" class to the parentController.ts of TextareaAutosize when the focus event is fired, and remove it when the blur event is fired', () => {
     const wrapper = mount(
       <ChatInput conversation={{ sendMessage: mockHandleSendMessage } as any} isChatWindowOpen={true} />
     );

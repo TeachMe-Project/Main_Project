@@ -3,10 +3,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import MyCourses from './MyCourses';
 import MyTeachers from './MyTeachers';
-import Settings from './Settings';
+import Messages from './Messages';
 import StudentProfile from './StudentProfile';
-import { Course } from './Course';
+import HelpAndSupport from './HelpAndSupport';
+import CourseDetails from './CourseDetails';
+import Course from './Course';
 import Twilio from '../../Twilio/Twilio';
+import Notification from '../../Notification/notifications';
+import SearchResults from './SearchResults';
 
 import AppStateProvider, { useAppState } from '../../../state';
 import ErrorDialog from '../../ErrorDialog/ErrorDialog';
@@ -18,6 +22,7 @@ import theme from '../../../theme';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import UnsupportedBrowserWarning from '../../UnsupportedBrowserWarning/UnsupportedBrowserWarning';
+import PaymentGateway from '../../PaymentGateway/PayementGateway';
 
 const VideoApp = () => {
   const { error, setError } = useAppState();
@@ -33,6 +38,7 @@ const VideoApp = () => {
   );
 };
 
+// @ts-ignore
 const routes = [
   {
     path: '/',
@@ -48,16 +54,36 @@ const routes = [
     main: () => <MyTeachers />,
   },
   {
-    path: '/settings',
-    main: () => <Settings />,
+    path: '/messages',
+    main: () => <Messages />,
+  },
+  {
+    path: '/helpandsupport',
+    main: () => <HelpAndSupport />,
+  },
+  {
+    path: '/notifications',
+    main: () => <Notification />,
   },
   {
     path: '/userprofile',
     main: () => <StudentProfile />,
   },
   {
+    path: '/searchresults',
+    main: () => <SearchResults />,
+  },
+  {
     path: '/course',
     main: () => <Course />,
+  },
+  {
+    path: '/courseDetails',
+    main: () => <CourseDetails />,
+  },
+  {
+    path: '/paymentGateway',
+    main: () => <PaymentGateway />,
   },
   {
     path: '/twilio',
@@ -74,17 +100,16 @@ export default function MainPanel() {
     <div className="MainPanel">
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <UnsupportedBrowserWarning>
-          <AppStateProvider>
-            <Routes>
-              {routes.map((route, index) => (
-                <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
-              ))}
-            </Routes>
-          </AppStateProvider>
-        </UnsupportedBrowserWarning>
+        {/*<UnsupportedBrowserWarning>*/}
+        <AppStateProvider>
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
+            ))}
+          </Routes>
+        </AppStateProvider>
+        {/*</UnsupportedBrowserWarning>*/}
       </MuiThemeProvider>
-      ,
     </div>
   );
 }

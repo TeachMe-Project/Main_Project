@@ -1,18 +1,22 @@
 import * as React from 'react';
-import { Container, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BsFillGridFill, BsFillBookFill } from "react-icons/bs";
-import { GiTeacher } from "react-icons/gi";
-import { IoMdCog } from "react-icons/io";
-import "../../Assets/Styles/main.scss";
-import { Link } from "react-router-dom";
-import "../Pages/Student/MainPanel";
+import { Container, Row } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BsFillGridFill, BsFillPersonFill, BsFillChatFill, BsFillExclamationCircleFill } from 'react-icons/bs';
+import { FaBook } from 'react-icons/fa';
+import { AiOutlineLogout } from 'react-icons/ai';
+
+import '../../Assets/Styles/main.scss';
+import { Link } from 'react-router-dom';
+import '../Pages/Student/MainPanel';
+import Button from '../Button/Button';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const LeftSidebar = () => {
+  const { logout } = useAuth0();
+
   return (
     <div className="LeftSidebar">
       <Container>
-        {/* <div className="Logo">Logo</div> */}
         <ul className="LeftNavbar">
           <Row>
             <li>
@@ -34,7 +38,7 @@ export const LeftSidebar = () => {
               <Link to="/mycourses" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    <BsFillBookFill />
+                    <FaBook />
                   </div>
                   <div className="Sidebar_item_name">My Courses</div>
                 </div>
@@ -47,9 +51,21 @@ export const LeftSidebar = () => {
               <Link to="/myteachers" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    <GiTeacher />
+                    <BsFillPersonFill />
                   </div>
-                  <div className="Sidebar_item_name">My Teachers</div>
+                  <div className="Sidebar_item_name">My Tutors</div>
+                </div>
+              </Link>
+            </li>
+          </Row>
+          <Row>
+            <li>
+              <Link to="/messages" className="link">
+                <div className="Sidebar_item">
+                  <div>
+                    <BsFillChatFill />
+                  </div>
+                  <div className="Sidebar_item_name">Messages</div>
                 </div>
               </Link>
             </li>
@@ -57,18 +73,38 @@ export const LeftSidebar = () => {
 
           <Row>
             <li>
-              <Link to="/settings" className="link">
+              <Link to="/helpandsupport" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    {/* <IoMdCog.Provider value={{ style: { verticalAlign: 'middle' } }} /> */}
-                    <IoMdCog />
+                    <BsFillExclamationCircleFill />
                   </div>
-                  <div className="Sidebar_item_name">Settings</div>
+                  <div className="Sidebar_item_name">Help & Support</div>
+                </div>
+              </Link>
+            </li>
+          </Row>
+
+          <Row>
+            <li>
+              <Link to="/twilio" className="link">
+                <div className="Sidebar_item">
+                  <div>
+                    <BsFillExclamationCircleFill />
+                  </div>
+                  <div className="Sidebar_item_name">test twilio</div>
                 </div>
               </Link>
             </li>
           </Row>
         </ul>
+
+        <Link to="/" className="link" onClick={() => logout({ returnTo: window.location.origin })}>
+          <div className="LogoutBtn">
+            {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
+            <AiOutlineLogout className="LogoutIcon" />
+            <Button name="Log out" />
+          </div>
+        </Link>
       </Container>
     </div>
   );

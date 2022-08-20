@@ -11,10 +11,8 @@ export const TopNavbar = () => {
       <Col xl={2}>
         <Logo />
       </Col>
-      <Col xl={6}>
-        <Searchbar />
-      </Col>
-      <Col xl={4}>
+      <Col xl={7}></Col>
+      <Col xl={3}>
         <UserProfileNavbar name="Maneth Wijetunga" />
       </Col>
     </div>

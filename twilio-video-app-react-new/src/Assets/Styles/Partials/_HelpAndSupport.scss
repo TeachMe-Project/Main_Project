@@ -1,0 +1,27 @@
+.HelpAndSupport {
+  .form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1rem;
+  }
+  .form-control {
+    border-radius: 15px;
+  }
+  .card {
+    border-radius: 15px;
+  }
+  .card-body {
+    color: #2c3e50;
+  }
+  .btn-primary {
+    background-color: #1e90ff;
+    border: 2px solid #1e90ff;
+    color: #fff;
+    font-weight: 600;
+  }
+  .btn-primary:hover {
+    color: #1e90ff;
+    background-color: #fff;
+    border: 2px solid #1e90ff;
+  }
+}

@@ -1,0 +1,31 @@
+.SearchResults {
+  .Searchbar {
+    width: 100%;
+  }
+  .Panel {
+    .PanelTopic {
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: $header-secondary;
+      margin-top: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .PanelBody {
+      margin: auto;
+      dispaly: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      .SearchResultCard {
+        .CardImage img {
+          width: 60px;
+          height: 60px;
+          max-width: 60px;
+          max-height: 60px;
+          margin: 0;
+        }
+        margin-bottom: 0.8rem;
+      }
+    }
+  }
+}

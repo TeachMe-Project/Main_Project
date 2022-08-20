@@ -1,13 +1,119 @@
+.Button {
+  width: max-content;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 12px;
+  border-radius: 12px;
+  padding: 5px 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
 
-  .Button {
-    width: max-content;
-    cursor: pointer;
-    font-weight: 800;
-    font-size: 12px;
-    border-radius: 12px;
-    padding: 5px 10px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-      rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+.ButtonCommon {
+  margin-left: 2rem;
+
+  font-weight: 600;
+  font-size: 12px;
+  width: max-content;
+  padding: 7px 10px;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #ee5253;
+  border: 1px solid #ee5253;
+  height: max-content;
+  line-height: 1;
+  box-shadow: none;
+  // position: absolute;
+  // bottom: 10px;
+  // right: 15px;
+}
+
+.ButtonCommon:hover {
+  border: 1px solid #ee5253;
+  color: #ee5253;
+  background-color: #fff;
+}
+
+.AddNewCourse {
+  .ButtonCommon {
+    box-shadow: none;
+    color: #fff;
+    background-color: #1e90ff;
+    border: 1px solid #1e90ff;
+    position: absolute;
+    bottom: 10px;
+    right: 135px;
   }
-  
+}
+
+.AddNewCourse {
+  .ButtonCommon:hover {
+    background-color: #ddf3fa;
+    color: #1e90ff;
+  }
+}
+
+.Buttonforsubmit {
+  .ButtonCommon {
+    box-shadow: none;
+    width: 100px;
+    text-align: center;
+    color: #fff;
+    background-color: #1e90ff;
+    border: 1px solid #1e90ff;
+    position: relative;
+    bottom: 10px;
+  }
+}
+
+.Buttonforsubmit {
+  .ButtonCommon:hover {
+    background-color: #ddf3fa;
+    color: #1e90ff;
+    cursor: pointer;
+  }
+}
+
+.buttoneditdetails {
+  .ButtonCommon {
+    box-shadow: none;
+    width: 100px;
+    text-align: center;
+    color: #fff;
+    background-color: #1e90ff;
+    border: 1px solid #1e90ff;
+    position: relative;
+    bottom: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.buttoneditdetails {
+  .ButtonCommon:hover {
+    background-color: #ddf3fa;
+    color: #1e90ff;
+    cursor: pointer;
+  }
+}
+
+.acceptbutton {
+  .ButtonCommon {
+    box-shadow: none;
+    width: 100px;
+    text-align: center;
+    color: #fff;
+    background-color: #1e90ff;
+    border: 1px solid #1e90ff;
+    position: relative;
+    bottom: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.acceptbutton {
+  .ButtonCommon:hover {
+    background-color: #ddf3fa;
+    color: #1e90ff;
+    cursor: pointer;
+  }
+}

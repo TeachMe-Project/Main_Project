@@ -1,14 +1,14 @@
-import * as React from "react";
+import * as React from 'react';
 
 type Button = {
-name?: string;
-}
+  name?: string;
+};
 
-export const Button :React.FC<Button>= (props) => {
-    return (
-      <div className='Button'>
-           {props.name}
-      </div>
-    )
-  }
-  export default Button;
+export const Button: React.FC<Button & any> = props => {
+  return (
+    <div className="Button" {...props}>
+      {props.name}
+    </div>
+  );
+};
+export default Button;

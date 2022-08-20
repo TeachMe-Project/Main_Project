@@ -1,17 +1,21 @@
-import * as React from "react";
-import Card from "../../Card/Card";
-import CardHeader from "../../Card/CardHeader";
-import CardDetails from "../../Card/CardDetails";
-import { Row, Col, Container, Tab } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Tabs from "../../Tabs/Tabs";
-import Details from "./Details";
-import Notes from "./Notes";
-import Homework from "./Homework";
-import PendingPayments from "./PendingPayments";
-import PanelContainer from "../../Layout/PanelContainer";
+import * as React from 'react';
+import Card from '../../Card/Card';
+import CardHeader from '../../Card/CardHeader';
+import CardDetails from '../../Card/CardDetails';
+import { Row, Col, Container, Tab } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Tabs from '../../Tabs/Tabs';
+import Details from './Details';
+import Notes from './Notes';
+import Homework from './Homework';
+import PendingPayments from './PendingPayments';
+import PanelContainer from '../../Layout/PanelContainer';
 
-export const Course = () => {
+type tutorName = {
+  name?: string;
+  image?: HTMLImageElement;
+};
+export const Course = (props: tutorName) => {
   return (
     <div className="Course">
       <Container>
@@ -22,60 +26,67 @@ export const Course = () => {
           </div>
           <div className="Panel">
             <div className="PanelSubHeader">
-              <h3>Mathematics Class</h3>
               <div className="PanelImage">
-              <img src={require("../../../Assets/Images/testimg2.jpeg")} />
-            </div>
+                <img src={'/Images/subjects/maths.png'} />
+              </div>
+
+              <div className="PanelTopic">
+                <div className="SubjectName">
+                  <h3>Mathematics</h3>
+                </div>
+                <div className="TutorProfileButton">
+                  <Link to="/userprofile" className="link">
+                    <div className="UserImg">
+                      <img src={'/Images/Teachers/mr1.jpg'} />
+                    </div>
+                    <div className="Name">Mr. Lasitha Nuwan</div>
+                  </Link>
+                </div>
+              </div>
             </div>
 
             <Tabs>
-             
               <div className="Details">
                 <Details label="Subject" value="Mathematics" symbol=":" />
-                <Details label="Teacher" value="Mr. Lasitha Nuwan" symbol=":" />
                 <Details label="Grade" value="8" symbol=":" />
+                <Details label="Medium" value="English" symbol=":" />
                 <Details
                   label="Description"
-                  value="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy."
+                  value="This course includes content of grade 8 mathematics
+                of local syllabus in English medium. It contains algebraic concepts and skills needed to
+                graph and solve linear equations and inequalities."
                 />
-                <Details label="Monthly Payment" value= "LKR 2500" symbol=":" />
+                <Details label="Monthly Payment" value="LKR 2500" symbol=":" />
                 <Details label="Started Date" value="2022-03-24" symbol=":" />
                 <Details label="Institute" value="Sigma Institute" symbol=":" />
                 <Details label="Duration" value="12 months" symbol=":" />
-             
               </div>
               <div className="Notes">
-                <Notes topic="Note for week 1" date="04-05-2022"/>
-                <Notes topic="Note for week 2" date="04-05-2022"/>
-                <Notes topic="Note for week 3" date="04-05-2022"/>
-                <Notes topic="Note for week 4" date="04-05-2022"/>
-                <Notes topic="Note for week 5" date="04-05-2022"/>
+                <Notes topic="Note for week 1" date="2022-04-05" />
+                <Notes topic="Note for week 2" date="2022-04-12" />
+                <Notes topic="Note for week 3" date="2022-04-19" />
+                <Notes topic="Note for week 4" date="2022-04-26" />
+                <Notes topic="Note for week 5" date="2022-05-03" />
               </div>
               <div className="Homework">
-                <Homework name="Differentiaion part 1"
-                date="2022-04-05"
-                btnname="view"/>
-                <Homework name="Differentiaion part 1"
-                date="2022-04-05"
-                btnname="view"/>
-                <Homework name="Differentiaion part 1"
-                date="2022-04-05"
-                btnname="view"/>
-                <Homework name="Differentiaion part 1"
-                date="2022-04-05"
-                btnname="view"/>
-                
+                <Homework name="Homework for week 1" date="2022-04-05" />
+                <Homework name="Homework for week 2" date="2022-04-12" />
+                <Homework name="Homework for week 3" date="2022-04-19" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
               </div>
-              <div className="Pending Payments">
-                <PendingPayments month="January"
-                date="2022-02-24"
-                amount="LKR 3000"/> 
-            <PendingPayments month="February"
-                date="2022-02-24"
-                amount="LKR 3000"/> 
-                <PendingPayments month="March"
-                date="2022-02-24"
-                amount="LKR 3000"/> 
+              <div className="Upcoming Classes">
+                <Homework name="Homework for week 1" date="2022-04-05" />
+                <Homework name="Homework for week 2" date="2022-04-12" />
+                <Homework name="Homework for week 3" date="2022-04-19" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
+                <Homework name="Homework for week 4" date="2022-04-26" />
               </div>
             </Tabs>
           </div>

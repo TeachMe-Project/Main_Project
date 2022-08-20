@@ -1,0 +1,92 @@
+.Messages {
+  overflow-y: hidden;
+
+  .Panel {
+    // overflow-y: hidden;
+    .PanelBody {
+      display: flex;
+      // flex-direction: column;
+      width: 100%;
+      // margin: 0 auto;
+      height: 72vh;
+
+      .addChat {
+        background-color: #1e90ff;
+        color: #fff;
+        width: 120px;
+        height: 50px;
+        border: none;
+        border-radius: 25px;
+        margin-left: 100px;
+        margin-top: 5px;
+      }
+
+      // overflow-y: hidden;
+      .displayChatters {
+        width: 33%;
+        border-radius: 15px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        padding-top: 10px;
+
+        // overflow-y: scroll;
+        .small-scrollbar {
+          display: block;
+          overflow: auto;
+
+          .ChatCard {
+            width: 93%;
+            margin: 1rem 10px;
+            padding: 10px 15px;
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+
+            .ChatCardImage img {
+              width: 45px;
+              height: 45px;
+              border-radius: 50%;
+              margin: 0 2rem 0 0;
+            }
+
+            .CardBody {
+              width: 80%;
+
+              .teacherName {
+                .CardDetails {
+                  font-weight: 600;
+                  font-size: 1rem;
+                  color: $header-primary;
+                  margin-bottom: 0.2rem;
+                }
+              }
+
+              .teacherSubject {
+                .CardDetails {
+                  font-weight: 500;
+                  font-size: 0.8rem;
+                  color: $header-secondary;
+                  margin-bottom: 0.2rem;
+                }
+              }
+
+              // .lastRow {
+              //   margin-top: 0.2rem;
+
+              //   .CardDetails {
+              //     font-weight: 500;
+              //     font-size: 0.1rem;
+              //   }
+              // }
+            }
+          }
+
+          // .ChatCard:focus-visible {
+          //   background-color: $testing-color
+          // }
+        }
+      }
+    }
+  }
+}

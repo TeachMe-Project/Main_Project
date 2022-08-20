@@ -5,18 +5,18 @@ import Dashboard from '../Pages/Student/Dashboard';
 
 const routings = [
   {
-    path: "/x",
+    path: '/x',
     exact: true,
     main: () => <Dashboard />,
   },
   {
-    path: "/twilio",
-    
+    path: '/twilio',
+
     main: () => <Twilio />,
   },
   {
-    path:"/c",
-    
+    path: '/c',
+
     main: () => <div>not found page</div>,
   },
 ];

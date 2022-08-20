@@ -6,6 +6,7 @@ import RoomNameScreen from './RoomNameScreen/RoomNameScreen';
 import { useAppState } from '../../state';
 import { useParams } from 'react-router-dom';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
+import axios from 'axios';
 
 export enum Steps {
   roomNameStep,
@@ -13,6 +14,22 @@ export enum Steps {
 }
 
 export default function PreJoinScreens() {
+  const baseURL = 'http://localhost:8081/course/3';
+  // const [courses, setCourses] = React.useState(null);
+
+  // React.useEffect( () => {
+  //   axios
+  //     .get(baseURL)
+  //     .then(response => {
+  //       setCourses(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }, []);
+  //
+  // console.log(courses ? parseInt(courses[0].course_id) : '');
+
   const { user } = useAppState();
   const { getAudioAndVideoTracks } = useVideoContext();
   const { URLRoomName } = useParams();
@@ -24,11 +41,24 @@ export default function PreJoinScreens() {
   const [mediaError, setMediaError] = useState<Error>();
 
   useEffect(() => {
-    if (URLRoomName) {
-      setRoomName(URLRoomName);
-      if (user?.displayName) {
-        setStep(Steps.deviceSelectionStep);
-      }
+    // if (URLRoomName) {
+    //   setRoomName(URLRoomName);
+    //   if (user?.displayName) {
+    //     setStep(Steps.deviceSelectionStep);
+    //   }
+    // }
+    // let c = courses ? parseInt(courses[0].course_id) : '';
+    axios
+      .get(baseURL)
+      .then(response => {
+        setRoomName(response.data[0].course_id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // setRoomName(c);
+    if (user?.displayName) {
+      setStep(Steps.deviceSelectionStep);
     }
   }, [user, URLRoomName]);
 
@@ -58,6 +88,8 @@ export default function PreJoinScreens() {
         <RoomNameScreen
           name={name}
           roomName={roomName}
+          // roomName={c}
+
           setName={setName}
           setRoomName={setRoomName}
           handleSubmit={handleSubmit}

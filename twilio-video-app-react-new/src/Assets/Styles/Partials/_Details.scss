@@ -1,18 +1,19 @@
-.Details{
-    
-    .DetailItem{
-    display:flex;
+.Details {
+  .DetailItem {
+    display: flex;
     padding: 0 0 0.6rem 0;
-    width:100%;
+    width: 100%;
 
-    .DetailLabel{
-        font-weight:700;
-        font-size:18px;
-        margin: 0 auto 0 0;
+    .DetailLabel {
+      font-weight: 700;
+      font-size: 14px;
+      margin: 0 auto 0 0;
+      color: $header-primary;
     }
-    .DetailValue{
-        font-weight:500;
-        color:$content-primary;
+    .DetailValue {
+      font-weight: 500;
+      //color: $content-primary;
+      color: #95a5a6;
     }
-}
+  }
 }

@@ -1,34 +1,54 @@
-@import "~bootstrap/scss/bootstrap";
-@import "Variables/variables";
+@import '~bootstrap/scss/bootstrap';
+@import 'Variables/variables';
 
-@import "Partials/_App";
-@import "Partials/_MainPanel";
-@import "Partials/_LeftSidebar";
-@import "Partials/_RightSidebar";
-@import "Partials/_CustomCalendar";
-@import "Partials/_UpcomingClasses";
-@import "Partials/_UpcomingCard";
-@import "Partials/_UpcomingCardBtn";
-@import "Partials/_Card";
-@import "Partials/_Button";
-@import "Partials/_Tabs";
-@import "Partials/_UserProfileNavbar";
-@import "Partials/_StudentDashboard";
-@import "Partials/_MyRecentCourses";
-@import "Partials/_PendingHomework";
-@import "Partials/_MyCourses";
-@import "Partials/_Course";
-@import "Partials/_Details";
-@import "Partials/_Notes";
-@import "Partials/_Homework";
-@import "Partials/_PendingPayments";
-@import "Partials/_StudentProfile";
-@import "Partials/_TopNavbar";
-@import "Partials/_Page";
-@import "Partials/_Searchbar";
-// @import "Partials/_"
-// @import "Partials/_"
-// @import "Partials/_"
-// @import "Partials/_"
-// @import "Partials/_"
+@import 'Partials/_App';
+@import 'Partials/_MainPanel';
+@import 'Partials/_LeftSidebar';
+@import 'Partials/_RightSidebar';
+@import 'Partials/_CustomCalendar';
+@import 'Partials/_UpcomingClasses';
+@import 'Partials/_UpcomingCard';
+@import 'Partials/_UpcomingCardBtn';
+@import 'Partials/_Card';
+@import 'Partials/_Button';
+@import 'Partials/_Tabs';
+@import 'Partials/_UserProfileNavbar';
+@import 'Partials/_StudentDashboard';
+@import 'Partials/_MyRecentCourses';
+@import 'Partials/_PendingHomework';
+@import 'Partials/_MyCourses';
+@import 'Partials/_Course';
+@import 'Partials/_Details';
+@import 'Partials/_Notes';
+@import 'Partials/_Homework';
+@import 'Partials/_PendingPayments';
+@import 'Partials/_StudentProfile';
+@import 'Partials/_TopNavbar';
+@import 'Partials/_Page';
+@import 'Partials/_Searchbar';
+@import 'Partials/_CourseCard';
+@import 'Partials/_MyTeachers';
+@import 'Partials/_Notifications';
+@import 'Partials/_SearchResults';
+@import 'Partials/_RequestCard';
+@import 'Partials/_SearchResultCard';
+@import 'Partials/_ChatArea';
+@import 'Partials/_ChatPage';
+@import 'Partials/_Message';
+@import 'Partials/_MessageSender';
+@import 'Partials/_Nickname';
+@import 'Partials/_People';
+@import 'Partials/_Timestamp';
+@import 'Partials/_UnreadMessagesCounter';
 
+@import 'Partials/_HelpAndSupport';
+@import 'Partials/Teacher/_tables';
+@import 'Partials/Teacher/_MyCoursesTeacher';
+@import 'Partials/Teacher/_DashboardTeacher';
+@import 'Partials/Teacher/_AddCourse';
+@import 'Partials/Teacher/_StudentTable';
+@import 'Partials/Teacher/_TeacherProfile';
+@import 'Partials/Teacher/_FreeCard';
+@import 'Partials/Teacher/_StudentAnalytics';
+// @import "Partials/_"
+// @import "Partials/_"

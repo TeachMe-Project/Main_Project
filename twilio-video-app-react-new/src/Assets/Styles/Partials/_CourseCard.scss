@@ -1,0 +1,64 @@
+.CourseCard {
+  margin: 10px auto;
+  border-radius: 15px;
+  padding: 10px 15px;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  position: relative;
+
+  .CardHeader h6 {
+    font-weight: 700;
+    font-size: 18px;
+    color: $header-secondary;
+    margin-bottom: 0.5rem;
+  }
+  .CardBody {
+    .CardDetails {
+      font-size: 14px;
+      font-weight: 400;
+      color: $content-primary;
+    }
+
+    .lastRow {
+      display: flex;
+      flex-direction: row;
+      margin-top: 1rem;
+      .CardRow {
+        display: flex;
+        flex-direction: row;
+        align-content: space-between;
+        .CardDetails {
+          margin-right: 1.5rem;
+          font-weight: 600;
+        }
+      }
+    }
+    .teacherLink {
+      .CardDetails {
+        background-color: #ddf3fa;
+        border: 2px solid #ddf3fa;
+        color: #1e90ff;
+        padding: 3px 10px;
+        width: max-content;
+        border-radius: 10px;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+      }
+    }
+    .teacherLink {
+      .CardDetails:hover {
+        background-color: #fff;
+        border: 2px solid #1e90ff;
+      }
+    }
+  }
+}
+.CourseCard:hover {
+  box-shadow: 1px 7px 25px rgb(0 0 0 / 13%);
+  -webkit-transform: translateY(-4px);
+  transform: translateY(-4px);
+}

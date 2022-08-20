@@ -1,32 +1,25 @@
 .LeftSidebar {
   padding: 3rem 0;
   height: 90vh;
-  background-color: $sidebar-bg;
+  background-color: #fdfdfd;
   z-index: 1;
   transition: all 0.5s;
-  border-radius: 0 20px 20px 0;
+  border-radius: 0 0 20px 0;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  position: relative;
+  .LeftNavbar {
+    padding: 0;
+  }
 
-  .LeftNavbar{
-    padding:0;
-  }
-  .Logo {
-    background-color: $testing-color;
-    margin: auto 0;
-    margin-bottom: 3rem;
-    padding: 12px;
-    font-size: medium;
-    font-weight: 500;
-  }
   .Sidebar_item {
     padding: 0.7em;
     margin: 5px auto;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
-    color: $sidebar-color;
+    color: $header-primary;
 
-    .react-icons{
+    .react-icons {
       vertical-align: middle;
     }
   }
@@ -36,7 +29,36 @@
     font-weight: 600;
   }
   .Sidebar_item:hover {
-    background-color: $sidebar-bg-hover;
-    color: $sidebar-color-hover;
+    background-color: #ddf3fa;
+    color: #1e90ff;
+  }
+  .Sidebar_item .item-active {
+    background-color: #ddf3fa;
+    color: #1e90ff;
+  }
+  .LogoutBtn {
+    position: absolute;
+    left: 3.5rem;
+    bottom: 1rem;
+    color: $content-primary;
+    display: flex;
+    font-size: 1rem;
+    cursor: pointer;
+    .Button {
+      font-size: 1rem;
+      //align-content: center;
+      box-shadow: none;
+      margin: auto;
+      //color:#7c7d87;
+      padding: 0;
+    }
+    .LogoutIcon {
+      font-size: 1.3rem;
+      padding-right: 5px;
+    }
+  }
+  .LogoutBtn:hover,
+  .LogoutIcon:hover {
+    color: $header-primary;
   }
 }
