@@ -18,7 +18,7 @@ jobs:
       - name: List server file
         run: ls
       - name: Change to serve
-        run: cd /home/runner/work/Main_Project/Main_Project/server
+        working-directory: ./server
       - name: List server file
         run: ls
 
