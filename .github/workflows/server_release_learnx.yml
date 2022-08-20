@@ -16,7 +16,7 @@ jobs:
       - name: List server file
         run: ls
       - name: Change to serve
-        run: cd server
+        working-directory: ./server
       - name: List server file
         run: ls
 
