@@ -14,6 +14,8 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
+    - name: naviage to server
+      run: cd server
     - uses: actions/checkout@v2
 
     - name: Set up Docker Buildx
