@@ -1,5 +1,6 @@
 FROM node:16-alpine AS builder
 WORKDIR /app
+RUN npm install -g npm@8.18.0
 COPY server/package.json server/package-lock.json ./
 COPY server/prisma ./prisma/
 COPY server/.env ./
@@ -13,6 +14,7 @@ RUN npm run generate
 
 FROM node:16-alpine AS server
 WORKDIR /app
+RUN npm install -g npm@8.18.0
 COPY package* ./
 COPY server/prisma ./prisma/
 COPY server/.env ./
