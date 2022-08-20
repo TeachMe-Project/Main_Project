@@ -10,9 +10,9 @@ RUN npm run build && npm run generate
 
 FROM node:16-alpine AS server
 WORKDIR /app
-COPY package* ./
-COPY prisma ./prisma/
-COPY .env ./
+COPY server/package* ./
+COPY server/prisma ./prisma/
+COPY server/.env ./
 COPY --from=builder ./app/prisma ./prisma
 RUN npm install --production
 RUN npx prisma generate
