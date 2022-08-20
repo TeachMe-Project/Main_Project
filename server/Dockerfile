@@ -3,6 +3,7 @@ WORKDIR /app
 COPY server/package.json server/package-lock.json ./
 COPY server/prisma ./prisma/
 COPY server/.env ./
+RUN npm fund
 RUN npm install
 RUN npx prisma generate
 COPY . .
