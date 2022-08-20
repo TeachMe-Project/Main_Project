@@ -66,7 +66,7 @@ app.use('/create-checkout-session',paymentGatewayRouter)
 
 
 app.get('/', (req, res) => {
-    res.send('Server is Running')
+    res.send('LearnX Server is Running')
 })
 
 // app.use((req, res, next) => {
