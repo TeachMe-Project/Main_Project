@@ -95,7 +95,7 @@ const routes = [
   },
 ];
 
-export default function MainPanel() {
+export default function MainPanelStudent() {
   return (
     <div className="MainPanel">
       <MuiThemeProvider theme={theme}>
