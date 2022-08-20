@@ -19,7 +19,7 @@ COPY package* ./
 COPY server/prisma ./prisma/
 COPY server/.env ./
 COPY --from=builder ./app/prisma ./prisma
-RUN npm install --production
+RUN npm install --production --force
 RUN npx prisma generate
 COPY --from=builder ./app/build ./build
 
