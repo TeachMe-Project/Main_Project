@@ -11,6 +11,8 @@ jobs:
     runs-on: 'ubuntu-latest'
     
     steps:
+      - uses: actions/checkout@v2
+    
       - name: List server file
         run: ls
       - name: Change to serve
