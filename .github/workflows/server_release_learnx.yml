@@ -18,7 +18,7 @@ jobs:
       - name: List files
         run: ls
       - name: chenage directory
-        run: cd webapp
+        run: cd web-app
       - name: List server file
         run: ls
 
