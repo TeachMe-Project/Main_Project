@@ -15,6 +15,8 @@ jobs:
       
       - name: Run PWD
         run: pwd
+      - name: List files
+        run: ls
       - name: chenage directory
         run: cd webapp
       - name: List server file
