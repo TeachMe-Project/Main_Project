@@ -8,11 +8,7 @@ const NAME_SPACE = "Student"
 export const getStudents = async (req: Request, res: Response) => {
 
     try {
-        const data = await prisma.student.findMany({
-            include: {
-                parent: true
-            }
-        })
+        const data = await prisma.student.findMany()
         res.status(200).send(data)
     } catch (error) {
         res.status(500).send(error);
