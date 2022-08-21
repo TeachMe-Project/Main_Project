@@ -3,9 +3,11 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 
 import { useNavigate } from 'react-router-dom';
 import Images from '../Assets/Images/Images';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const UnAuth: React.FC = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth0();
 
   return (
     <Container fluid={true} className="d-flex align-items-center" style={{ height: '100vh' }}>
@@ -17,7 +19,7 @@ const UnAuth: React.FC = () => {
             variant="secondary"
             className="mt-2 px-4 py-2"
             style={{ borderRadius: '20px' }}
-            onClick={() => navigate('/')}
+            onClick={() => logout({ returnTo: window.location.origin })}
           >
             GO HOME
           </Button>
