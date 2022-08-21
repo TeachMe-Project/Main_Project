@@ -84,18 +84,18 @@ export const LeftSidebar = () => {
             </li>
           </Row>
 
-          <Row>
-            <li>
-              <Link to="/twilio" className="link">
-                <div className="Sidebar_item">
-                  <div>
-                    <BsFillExclamationCircleFill />
-                  </div>
-                  <div className="Sidebar_item_name">test twilio</div>
-                </div>
-              </Link>
-            </li>
-          </Row>
+          {/*<Row>*/}
+          {/*  <li>*/}
+          {/*    <Link to="/twilio" className="link">*/}
+          {/*      <div className="Sidebar_item">*/}
+          {/*        <div>*/}
+          {/*          <BsFillExclamationCircleFill />*/}
+          {/*        </div>*/}
+          {/*        <div className="Sidebar_item_name">test twilio</div>*/}
+          {/*      </div>*/}
+          {/*    </Link>*/}
+          {/*  </li>*/}
+          {/*</Row>*/}
         </ul>
 
         <Link to="/" className="link" onClick={() => logout({ returnTo: window.location.origin })}>
