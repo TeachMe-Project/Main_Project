@@ -20,7 +20,7 @@ type tutorName = {
 };
 
 export const Course = (props: tutorName) => {
-  const baseURLDetails = 'https://learnx.azurewebsites.net/student/:id/courses';
+  const baseURLDetails = 'https://learnx.azurewebsites.net/course/:id';
   const baseURLHomework = 'https://learnx.azurewebsites.net/student/:id/homeworks';
   const [details, setDetails] = useState<any[]>([]);
   const [homework, setHomework] = useState<any[]>([]);
