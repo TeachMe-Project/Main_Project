@@ -19,7 +19,26 @@ import Notifications from '../../Notification/notifications';
 import Messages from './Messages';
 import Helpandsupport from './Helpandsupport';
 import Parentscharts from './Parentscharts';
+import Twilio from '../../Twilio/Twilio';
+import useConnectionOptions from '../../../utils/useConnectionOptions/useConnectionOptions';
+import { VideoProvider } from '../../VideoProvider';
+import ErrorDialog from '../../ErrorDialog/ErrorDialog';
+import { ChatProvider } from '../../ChatProvider';
+import AppStateProvider, { useAppState } from '../../../state';
 
+const VideoApp = () => {
+  const { error, setError } = useAppState();
+  const connectionOptions = useConnectionOptions();
+
+  return (
+    <VideoProvider options={connectionOptions} onError={setError}>
+      <ErrorDialog dismissError={() => setError(null)} error={error} />
+      <ChatProvider>
+        <Twilio />
+      </ChatProvider>
+    </VideoProvider>
+  );
+};
 const routes = [
   {
     path: '/',
@@ -95,16 +114,26 @@ const routes = [
     path: '/parentscharts',
     main: () => <Parentscharts />,
   },
+  {
+    path: '/twilio',
+    main: () => <VideoApp />,
+  },
+  {
+    path: '/room/:URLRoomName',
+    main: () => <VideoApp />,
+  },
 ];
 
 export default function MainPanelTeacher() {
   return (
     <div className="MainPanel">
-      <Routes>
-        {routes.map((route, index) => (
-          <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
-        ))}
-      </Routes>
+      <AppStateProvider>
+        <Routes>
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
+          ))}
+        </Routes>
+      </AppStateProvider>
     </div>
   );
 }
