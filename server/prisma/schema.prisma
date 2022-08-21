@@ -24,7 +24,7 @@ model Renamedclass {
   class_id      Int                        @id @default(autoincrement())
   course_id     Int
   student_id    Int
-  date          DateTime                   @default(now()) @db.Date
+  date          DateTime                   @default(now()) @db.Timestamp(0)
   start_time    DateTime                   @default(now()) @db.Timestamp(0)
   end_time      DateTime                   @default(now()) @db.Timestamp(0)
   status        Renamedclass_status        @default(upcoming)
@@ -32,6 +32,7 @@ model Renamedclass {
   left_time     DateTime                   @default(now()) @db.Timestamp(0)
   online_status Renamedclass_online_status
   isActive      Boolean
+  isStarted     Boolean                    @default(false)
   course        course                     @relation("classTocourse", fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO CLASS FROM COURSE")
   student       student                    @relation("classTostudent", fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO CLASS FROM STUDENT")
 
@@ -70,7 +71,7 @@ model homework {
   homework_id   Int      @id @default(autoincrement())
   student_id    Int
   course_id     Int
-  uploaded_date DateTime @default(now()) @db.Date
+  uploaded_date DateTime @default(now()) @db.Timestamp(0)
   homework      String   @db.VarChar(1000)
   isActive      Boolean
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM COURSE")
@@ -131,7 +132,7 @@ model institute_teacher {
 
 model notes {
   note_id       Int      @id @default(autoincrement())
-  uploaded_date DateTime @default(now()) @db.Date
+  uploaded_date DateTime @default(now()) @db.Timestamp(0)
   note          String   @db.VarChar(1000)
   course_id     Int
   student_id    Int
