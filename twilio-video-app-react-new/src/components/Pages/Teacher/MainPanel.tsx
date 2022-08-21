@@ -25,6 +25,9 @@ import { VideoProvider } from '../../VideoProvider';
 import ErrorDialog from '../../ErrorDialog/ErrorDialog';
 import { ChatProvider } from '../../ChatProvider';
 import AppStateProvider, { useAppState } from '../../../state';
+import theme from '../../../theme';
+import { CssBaseline } from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
 const VideoApp = () => {
   const { error, setError } = useAppState();
@@ -127,13 +130,16 @@ const routes = [
 export default function MainPanelTeacher() {
   return (
     <div className="MainPanel">
-      <AppStateProvider>
-        <Routes>
-          {routes.map((route, index) => (
-            <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
-          ))}
-        </Routes>
-      </AppStateProvider>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppStateProvider>
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} caseSensitive={route.exact} element={<route.main />} />
+            ))}
+          </Routes>
+        </AppStateProvider>
+      </MuiThemeProvider>
     </div>
   );
 }
