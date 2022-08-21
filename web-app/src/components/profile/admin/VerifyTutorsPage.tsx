@@ -33,7 +33,7 @@ const VerifyTutorsPage = () => {
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
     const navigate = useNavigate();
-    const baseURL = "http://localhost:8081/admin/newTeacherRequests";
+    const baseURL = "https://learnx.azurewebsites.net/admin/newTeacherRequests";
     const [teachers, setTeachers] = useState<appliedTutor[]>([]);
 
     const viewItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
