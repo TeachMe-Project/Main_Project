@@ -10,6 +10,7 @@ import LeftSidebar from '../../Sidebar/LeftSidebar';
 import PanelContainer from '../../Layout/PanelContainer';
 import Searchbar from '../../Searchbar/Searchbar';
 import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const convertTime = (x: Date) => {
   const time = x.toLocaleTimeString('it-IT');
@@ -26,7 +27,9 @@ const handleTime = (start: string, end: string) => {
 };
 
 export const Dashboard = () => {
-  const baseURL = 'http://localhost:8081/student/:id/upcomingClasses';
+  const { user } = useAuth0();
+  const studentAuthId = user?.sub;
+  const baseURL = 'http://localhost:8081/student/${studentAuthId}/upcomingClasses';
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {

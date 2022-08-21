@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../../Card/Card';
 import CardHeader from '../../Card/CardHeader';
 import CardDetails from '../../Card/CardDetails';
@@ -10,12 +11,64 @@ import Notes from './Notes';
 import Homework from './Homework';
 import PendingPayments from './PendingPayments';
 import PanelContainer from '../../Layout/PanelContainer';
+import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 type tutorName = {
   name?: string;
   image?: HTMLImageElement;
 };
+
 export const Course = (props: tutorName) => {
+  const baseURLDetails = 'https://learnx.azurewebsites.net/student/:id/courses';
+  const baseURLHomework = 'https://learnx.azurewebsites.net/student/:id/homeworks';
+  const [details, setDetails] = useState<any[]>([]);
+  const [homework, setHomework] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(baseURLDetails)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setDetails(prevState => [
+            ...prevState,
+            {
+              subject: item.subject,
+              teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+              grade: item.grade,
+              medium: item.medium,
+              desc: item.description,
+              price: 'LKR ' + item.price,
+              start_date: item.start_date,
+              institute: item.teacher.institute_teacher.institute,
+              duration: item.duration + ' years',
+            },
+          ]);
+        });
+        console.log(details);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    axios
+      .get(baseURLHomework)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setHomework(prevState => [
+            ...prevState,
+            {
+              date: item.uploaded_date,
+              link: item.homework,
+            },
+          ]);
+        });
+        console.log(homework);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="Course">
       <Container>
@@ -46,21 +99,25 @@ export const Course = (props: tutorName) => {
             </div>
 
             <Tabs>
-              <div className="Details">
-                <Details label="Subject" value="Mathematics" symbol=":" />
-                <Details label="Grade" value="8" symbol=":" />
-                <Details label="Medium" value="English" symbol=":" />
-                <Details
-                  label="Description"
-                  value="This course includes content of grade 8 mathematics
-                of local syllabus in English medium. It contains algebraic concepts and skills needed to
-                graph and solve linear equations and inequalities."
-                />
-                <Details label="Monthly Payment" value="LKR 2500" symbol=":" />
-                <Details label="Started Date" value="2022-03-24" symbol=":" />
-                <Details label="Institute" value="Sigma Institute" symbol=":" />
-                <Details label="Duration" value="12 months" symbol=":" />
-              </div>
+              {details.map((item: any) => {
+                return (
+                  <div className="Details">
+                    <Details label="Subject" value="Mathematics" symbol=":" />
+                    <Details label="Grade" value="8" symbol=":" />
+                    <Details label="Medium" value="English" symbol=":" />
+                    <Details
+                      label="Description"
+                      value="This course includes content of grade 8 mathematics
+                    of local syllabus in English medium. It contains algebraic concepts and skills needed to
+                    graph and solve linear equations and inequalities."
+                    />
+                    <Details label="Monthly Payment" value="LKR 2500" symbol=":" />
+                    <Details label="Started Date" value="2022-03-24" symbol=":" />
+                    <Details label="Institute" value="Sigma Institute" symbol=":" />
+                    <Details label="Duration" value="12 months" symbol=":" />
+                  </div>
+                );
+              })}
               <div className="Notes">
                 <Notes topic="Note for week 1" date="2022-04-05" />
                 <Notes topic="Note for week 2" date="2022-04-12" />
