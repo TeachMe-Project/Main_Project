@@ -66,7 +66,7 @@ export const getStudentCourses = async (req: Request, res: Response) => {
                 include: {
                     course: {
                         include: {
-                            teacher: true,
+                            teacher: true
                         }
                     },
                 }
