@@ -36,7 +36,14 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
     try {
         const data = await prisma.renamedclass.findMany(
             {
-                where: {student_id: Number(req.params.id)}
+                where: {student_id: Number(req.params.id)},
+                include: {
+                    course: {
+                        include: {
+                            teacher: true,
+                    }
+                }
+            }
 
             }
         )
