@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  BsFillGridFill,
-  BsBuilding,
-  BsFillChatFill,
-  BsFillExclamationCircleFill,
-  BsCreditCard2FrontFill,
-} from 'react-icons/bs';
-
+import { BsFillGridFill, BsFillBookFill, BsWalletFill, BsFillChatLeftDotsFill, BsBuilding } from 'react-icons/bs';
+import { GiTeacher } from 'react-icons/gi';
+import { IoMdCog } from 'react-icons/io';
+import { MdContactSupport } from 'react-icons/md';
 import '../../Assets/Styles/main.scss';
 import { Link } from 'react-router-dom';
 import '../Pages/Student/MainPanel';
@@ -18,7 +14,6 @@ import { FaBook } from 'react-icons/fa';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export const LeftSidebarTeacher = () => {
-  const { logout } = useAuth0();
   return (
     <div className="LeftSidebar">
       <Container>
@@ -44,7 +39,7 @@ export const LeftSidebarTeacher = () => {
               <Link to="/mycourses" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    <FaBook />
+                    <BsFillBookFill />
                   </div>
                   <div className="Sidebar_item_name">My Courses</div>
                 </div>
@@ -66,62 +61,25 @@ export const LeftSidebarTeacher = () => {
 
           <Row>
             <li>
-              <Link to="/freecard" className="link">
-                <div className="Sidebar_item">
-                  <div>
-                    <BsCreditCard2FrontFill />
-                  </div>
-                  <div className="Sidebar_item_name">Free Cards</div>
-                </div>
-              </Link>
-            </li>
-          </Row>
-
-          <Row>
-            <li>
               <Link to="/messages" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    <BsFillChatFill />
+                    <BsFillChatLeftDotsFill />
                   </div>
                   <div className="Sidebar_item_name">Messages</div>
                 </div>
               </Link>
-            </li>
-          </Row>
-          <Row>
-            <li>
               <Link to="/helpandsupport" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    <BsFillExclamationCircleFill />
+                    <MdContactSupport />
                   </div>
-                  <div className="Sidebar_item_name">Help & Support</div>
+                  <div className="Sidebar_item_name">Help and Support</div>
                 </div>
               </Link>
             </li>
           </Row>
-          {/*<Row>*/}
-          {/*  <li>*/}
-          {/*    <Link to="/twilio" className="link">*/}
-          {/*      <div className="Sidebar_item">*/}
-          {/*        <div>*/}
-          {/*          <BsFillExclamationCircleFill />*/}
-          {/*        </div>*/}
-          {/*        <div className="Sidebar_item_name">Test</div>*/}
-          {/*      </div>*/}
-          {/*    </Link>*/}
-          {/*  </li>*/}
-          {/*</Row>*/}
         </ul>
-
-        <Link to="/" className="link">
-          <div className="LogoutBtn" onClick={() => logout({ returnTo: window.location.origin })}>
-            {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
-            <AiOutlineLogout className="LogoutIcon" />
-            <Button name="Log out" />
-          </div>
-        </Link>
       </Container>
     </div>
   );
