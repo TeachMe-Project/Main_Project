@@ -10,8 +10,22 @@ import { Button } from '../../Button/Button';
 import axios, { AxiosResponse } from 'axios';
 
 export const MyCourses = () => {
-  const baseURL = 'https://learnx.azurewebsites.net/student/:id/courses';
+  const baseURL = 'http://localhost:8081/student/:id/courses';
   const [courses, setCourses] = useState<any[]>([]);
+
+  const convertTime = (x: Date) => {
+    const time = x.toLocaleTimeString('it-IT');
+    const hour = time.split(':')[0];
+    const intHour = parseInt(hour);
+    const minute = time.split(':')[1];
+    const ampm = intHour >= 12 ? 'PM' : 'AM';
+    const newHour = intHour % 12;
+    return newHour + ':' + minute + ' ' + ampm;
+  };
+
+  const handleTime = (start: string, end: string) => {
+    return start + ' - ' + end;
+  };
 
   useEffect(() => {
     axios
@@ -23,11 +37,10 @@ export const MyCourses = () => {
               ...prevState,
               {
                 subject: item.course.subject,
-                // teacher: item.course.teacher.name,
+                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Monday',
                 desc: item.course.description,
-                start_time: item.course.start_time,
-                end_time: item.course.end_time,
+                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
                 price: item.course.price,
               },
             ]);
@@ -36,11 +49,10 @@ export const MyCourses = () => {
               ...prevState,
               {
                 subject: item.course.subject,
-                // teacher: item.course.teacher.name,
+                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Tuesday',
                 desc: item.course.description,
-                start_time: item.course.start_time,
-                end_time: item.course.end_time,
+                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
                 price: item.course.price,
               },
             ]);
@@ -49,11 +61,10 @@ export const MyCourses = () => {
               ...prevState,
               {
                 subject: item.course.subject,
-                // teacher: item.course.teacher.name,
+                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Wednesday',
                 desc: item.course.description,
-                start_time: item.course.start_time,
-                end_time: item.course.end_time,
+                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
                 price: item.course.price,
               },
             ]);
@@ -62,11 +73,10 @@ export const MyCourses = () => {
               ...prevState,
               {
                 subject: item.course.subject,
-                // teacher: item.course.teacher.name,
+                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Thursday',
                 desc: item.course.description,
-                start_time: item.course.start_time,
-                end_time: item.course.end_time,
+                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
                 price: item.course.price,
               },
             ]);
@@ -75,11 +85,10 @@ export const MyCourses = () => {
               ...prevState,
               {
                 subject: item.course.subject,
-                // teacher: item.course.teacher.name,
+                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Friday',
                 desc: item.course.description,
-                start_time: item.course.start_time,
-                end_time: item.course.end_time,
+                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
                 price: item.course.price,
               },
             ]);
@@ -88,11 +97,10 @@ export const MyCourses = () => {
               ...prevState,
               {
                 subject: item.course.subject,
-                // teacher: item.course.teacher.name,
+                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Saturday',
                 desc: item.course.description,
-                start_time: item.course.start_time,
-                end_time: item.course.end_time,
+                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
                 price: item.course.price,
               },
             ]);
@@ -101,11 +109,10 @@ export const MyCourses = () => {
               ...prevState,
               {
                 subject: item.course.subject,
-                // teacher: item.course.teacher.name,
+                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Sunday',
                 desc: item.course.description,
-                start_time: item.course.start_time,
-                end_time: item.course.end_time,
+                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
                 price: item.course.price,
               },
             ]);
@@ -134,10 +141,10 @@ export const MyCourses = () => {
                   <CourseCard
                     header={item.subject}
                     description={item.desc}
-                    time="04:00pm - 06:00pm"
+                    time={item.time}
                     date={item.day}
                     image={<img src={'/Images/subjects/maths.png'} />}
-                    teacher="Mr. Lasitha Nuwan"
+                    teacher={item.teacher}
                     amount={item.price}
                     btn1="View more"
                     btn2="Unenroll"

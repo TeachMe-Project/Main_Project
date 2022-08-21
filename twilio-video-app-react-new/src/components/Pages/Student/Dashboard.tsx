@@ -11,8 +11,22 @@ import PanelContainer from '../../Layout/PanelContainer';
 import Searchbar from '../../Searchbar/Searchbar';
 import axios, { AxiosResponse } from 'axios';
 
+const convertTime = (x: Date) => {
+  const time = x.toLocaleTimeString('it-IT');
+  const hour = time.split(':')[0];
+  const intHour = parseInt(hour);
+  const minute = time.split(':')[1];
+  const ampm = intHour >= 12 ? 'PM' : 'AM';
+  const newHour = intHour % 12;
+  return newHour + ':' + minute + ' ' + ampm;
+};
+
+const handleTime = (start: string, end: string) => {
+  return start + ' - ' + end;
+};
+
 export const Dashboard = () => {
-  const baseURL = 'https://learnx.azurewebsites.net/student/:id/upcomingClasses';
+  const baseURL = 'http://localhost:8081/student/:id/upcomingClasses';
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {
@@ -24,10 +38,9 @@ export const Dashboard = () => {
             ...prevState,
             {
               subject: item.course.subject,
-              // teacher:
+              teacher: 'Mr. ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
               date: item.date,
-              start_time: item.start_time,
-              end_time: item.end_time,
+              time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
             },
           ]);
         });
@@ -51,19 +64,19 @@ export const Dashboard = () => {
               <h5>Upcoming Classes</h5>
             </div>
             <div className="PanelBody">
-              {/* {upcomingClasses.map((item: any) => {
+              {upcomingClasses.map((item: any) => {
                 return (
                   <Card
                     header={item.subject}
-                    // teacher="Mr. Lasitha Nuwan"
-                    time="04:00pm- 06:00pm"
+                    teacher={item.teacher}
+                    time={item.time}
                     date={item.date}
                     btnname="Join"
                     image={<img src={'/Images/subjects/maths.png'} />}
                   />
                 );
-              })} */}
-              <Card
+              })}
+              {/* <Card
                 header="Mathematics"
                 teacher="Mr. Lasitha Nuwan"
                 time="04:00pm- 06:00pm"
@@ -86,7 +99,7 @@ export const Dashboard = () => {
                 date="24 Aug 2022"
                 btnname="Join"
                 image={<img src={'/Images/subjects/maths.png'} />}
-              />
+              /> */}
             </div>
 
             <div className="PanelSubheader">{/*<h5>Search Courses</h5>*/}</div>
