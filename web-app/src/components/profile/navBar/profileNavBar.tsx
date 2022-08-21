@@ -53,7 +53,7 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                                     className='navbar-toggler-icon'/></Button>
                                 }
                                 <Navbar.Brand onClick={() => navigate('/')} style={{cursor: "pointer"}}>
-                                    <img src={Images.logo} style={{maxWidth: "240px"}} alt='logo'
+                                    <img src={Images.logo} style={{maxWidth: "190px"}} alt='logo'
                                          className='profile-nav-logo'/>
                                 </Navbar.Brand>
                             </Col>
