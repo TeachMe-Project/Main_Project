@@ -14,6 +14,7 @@ import { FaBook } from 'react-icons/fa';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export const LeftSidebarTeacher = () => {
+  const { logout } = useAuth0();
   return (
     <div className="LeftSidebar">
       <Container>
@@ -78,6 +79,14 @@ export const LeftSidebarTeacher = () => {
                 </div>
               </Link>
             </li>
+
+            <Link to="/" className="link" onClick={() => logout({ returnTo: window.location.origin })}>
+              <div className="LogoutBtn">
+                {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
+                <AiOutlineLogout className="LogoutIcon" />
+                <Button name="Log out" />
+              </div>
+            </Link>
           </Row>
         </ul>
       </Container>
