@@ -20,7 +20,7 @@ const Banner: React.FC = () => {
               {/*  courses with a unique set of features.*/}
               {/*</p>*/}
               <Button
-                className="px-md-4 py-2 mt-3 GetStartedBtn"
+                className="px-md-4 py-2 mt-6 GetStartedBtn"
                 style={{ marginRight: '5px', fontSize: '1rem', fontWeight: '600', borderRadius: '20px' }}
                 onClick={loginWithRedirect}
               >

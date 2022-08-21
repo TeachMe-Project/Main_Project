@@ -62,14 +62,15 @@ export const LeftSidebarTeacher = () => {
 
           <Row>
             <li>
-              <Link to="/messages" className="link">
-                <div className="Sidebar_item">
-                  <div>
-                    <BsFillChatLeftDotsFill />
-                  </div>
-                  <div className="Sidebar_item_name">Messages</div>
-                </div>
-              </Link>
+              {/*<Link to="/messages" className="link">*/}
+              {/*  <div className="Sidebar_item">*/}
+              {/*    <div>*/}
+              {/*      <BsFillChatLeftDotsFill />*/}
+              {/*    </div>*/}
+              {/*    <div className="Sidebar_item_name">Messages</div>*/}
+              {/*  </div>*/}
+              {/*</Link>*/}
+
               <Link to="/helpandsupport" className="link">
                 <div className="Sidebar_item">
                   <div>
