@@ -10,29 +10,29 @@ import TeacherCard from '../../Card/TeacherCard';
 import axios, { AxiosResponse } from 'axios';
 
 export const MyTeachers = () => {
-  const baseURL = '';
-  const [teachers, setTeachers] = useState<any[]>([]);
+  // const baseURL = '';
+  // const [teachers, setTeachers] = useState<any[]>([]);
 
-  useEffect(() => {
-    axios
-      .get(baseURL)
-      .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
-          setTeachers(prevState => [
-            ...prevState,
-            {
-              grade: item.course.grade,
-              subject: item.course.subject,
-              // teacher:
-            },
-          ]);
-        });
-        console.log(teachers);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(baseURL)
+  //     .then((res: AxiosResponse) => {
+  //       res.data.map((item: any) => {
+  //         setTeachers(prevState => [
+  //           ...prevState,
+  //           {
+  //             grade: item.course.grade,
+  //             subject: item.course.subject,
+  //             // teacher:
+  //           },
+  //         ]);
+  //       });
+  //       console.log(teachers);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   return (
     <div className="MyTeachers">
