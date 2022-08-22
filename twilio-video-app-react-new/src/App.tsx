@@ -2,8 +2,8 @@ import * as React from 'react';
 import '../src/Assets/Styles/main.scss';
 import LeftSidebarTeacher from './components/Sidebar/LeftSidebarTeacher';
 import LeftSidebar from './components/Sidebar/LeftSidebar';
-import MainPanel from './components/Pages/Teacher/MainPanel';
-// import MainPanel from './components/Pages/Student/MainPanel';
+import TeacherMainPanel from './components/Pages/Teacher/MainPanel';
+import MainPanel from './components/Pages/Student/MainPanel';
 import { Col, Row } from 'react-bootstrap';
 import TopNavbar from './components/Navbars/TopNavbar';
 import Home from './home/Home';
@@ -32,7 +32,25 @@ function App() {
             <Row>
               <Col xl={2} className="LeftCol">
                 <LeftSidebarTeacher />
-                {/*<LeftSidebar />*/}
+              </Col>
+              <Col xl={10} className={'MiddleCol'}>
+                <TeacherMainPanel />
+              </Col>
+            </Row>
+          </div>
+        </>
+      );
+    } else if (user?.family_name == 'student') {
+      return (
+        // return <h1>Student</h1>;
+        <>
+          <div className="App">
+            <Row>
+              <TopNavbar />
+            </Row>
+            <Row>
+              <Col xl={2} className="LeftCol">
+                <LeftSidebar />
               </Col>
               <Col xl={10} className={'MiddleCol'}>
                 <MainPanel />
@@ -41,8 +59,6 @@ function App() {
           </div>
         </>
       );
-    } else if (user?.family_name == 'student') {
-      return <h1>Student</h1>;
     } else if (user?.family_name == 'admin' || user?.family_name == 'parent') {
       return (
         <>

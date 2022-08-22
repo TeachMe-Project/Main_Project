@@ -97,7 +97,7 @@ const routes = [
   },
 ];
 
-export default function MainPanel() {
+export default function TeacherMainPanel() {
   return (
     <div className="MainPanel">
       <Routes>
