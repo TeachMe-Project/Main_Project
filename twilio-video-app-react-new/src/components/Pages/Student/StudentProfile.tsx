@@ -128,7 +128,7 @@ export const StudentProfile = () => {
             <div className="LeftContainer">
               <div className="ProfileImg">
                 <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
-                <AzureCloudStorage />
+                {/*<AzureCloudStorage />*/}
               </div>
               <div className="ParentContact">
                 <div className="ContactHeader">Parent's Contact Details:</div>

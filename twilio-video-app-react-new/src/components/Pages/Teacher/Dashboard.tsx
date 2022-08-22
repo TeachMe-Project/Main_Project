@@ -49,8 +49,8 @@ export const Dashboard = () => {
               <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"
-                date="25-08-2022"
-                grade="Grade 7"
+                date="30-08-2022"
+                grade="Grade 8"
                 btnname="Start"
                 image={<img src={'/Images/subjects/maths.png'} />}
               />
