@@ -11,14 +11,16 @@ import { useAuth0 } from '@auth0/auth0-react';
 import NavBar from './home/navBar';
 import UnAuth from './auth0/unAuth';
 // import psList from 'ps-list';
-// import {tasklist} from 'tasklist';
+const psList=window.require('ps-list');
 
-// const x =async () => {
-//   // return(await psList());
-//   return(await tasklist());
-// }
+console.log( psList());
+const x = () => {
+  console.log(psList());
+}
+
 
 function App() {
+  x();
   const { user, isAuthenticated } = useAuth0();
 
   const renderMain = () => {
