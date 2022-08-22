@@ -10,9 +10,9 @@ export const CardButton: React.FC<CardButton> = props => {
   const navigate = useNavigate();
 
   return (
-    <Button className="CardButton" onClick={() => navigate('./twilio')}>
+    <button className="CardButton" onClick={() => navigate('./twilio')}>
       {props.btnname}
-    </Button>
+    </button>
   );
 };
 export default CardButton;
