@@ -260,7 +260,7 @@ export const Course = () => {
                 </div>
               </div>
 
-              <div className="Class-Schedules">
+              <div className="Schedules">
                 <div className="scheduleContainer">
                   <Row>
                     <Link className="link" to="/addextraclass">
@@ -410,6 +410,66 @@ export const Course = () => {
                   </table>
                 </div>
               </div>
+
+              <div className="Archived Notes">
+                {/*<Row>*/}
+
+
+                <div className="noteContainer" style={{ marginTop: '50px' }}>
+                  <table className="booking-table" id="view-booking">
+
+                    <tbody>
+                    <tr>
+                      <td data-label="Student ID :">Note for week 1</td>
+                      <td data-label="Student Name :">04-05-2022</td>
+                    </tr>
+                    <tr>
+                      <td data-label="Student ID :">Note for week 2</td>
+                      <td data-label="Student Name :">04-05-2022</td>
+
+                    </tr>
+                    <tr>
+                      <td data-label="Student ID :">Note for week 3</td>
+                      <td data-label="Student Name :">04-05-2022</td>
+
+                    </tr>
+                    <tr>
+                      <td data-label="Student ID :">Note for week 4</td>
+                      <td data-label="Student Name :">04-05-2022</td>
+                      {/* <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td> */}
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className="Archived Homework">
+                <table className="booking-table" id="view-booking">
+
+                  <tbody>
+                  <tr>
+                    <td data-label="Student ID :">Homework for week 1</td>
+                    <td data-label="Student Name :">04-05-2022</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Student ID :">Homework for week 2</td>
+                    <td data-label="Student Name :">04-05-2022</td>
+
+                  </tr>
+                  <tr>
+                    <td data-label="Student ID :">Homework for week 3</td>
+                    <td data-label="Student Name :">04-05-2022</td>
+
+                  </tr>
+                  <tr>
+                    <td data-label="Student ID :">Homework for week 4</td>
+                    <td data-label="Student Name :">04-05-2022</td>
+
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
             </Tabs>
           </div>
         </Row>

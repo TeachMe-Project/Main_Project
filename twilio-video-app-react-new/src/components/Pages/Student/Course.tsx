@@ -10,12 +10,23 @@ import Notes from './Notes';
 import Homework from './Homework';
 import PendingPayments from './PendingPayments';
 import PanelContainer from '../../Layout/PanelContainer';
+import {FiDownload} from "react-icons/fi";
+// import renderer from "react-test-renderer;
 
 type tutorName = {
   name?: string;
   image?: HTMLImageElement;
 };
 export const Course = (props: tutorName) => {
+
+  // renderer(){
+  //   const noteheader = {
+  //     color: "#34495e;",
+  //     fontWeight: "700",
+  //    fontSize:"14px",
+  //     marginBottom: "0.2rem"
+  //   };
+  // };
   return (
     <div className="Course">
       <Container>
@@ -62,11 +73,45 @@ export const Course = (props: tutorName) => {
                 <Details label="Duration" value="12 months" symbol=":" />
               </div>
               <div className="Notes">
-                <Notes topic="Note for week 1" date="2022-04-05" />
-                <Notes topic="Note for week 2" date="2022-04-12" />
-                <Notes topic="Note for week 3" date="2022-04-19" />
-                <Notes topic="Note for week 4" date="2022-04-26" />
-                <Notes topic="Note for week 5" date="2022-05-03" />
+                {/*<Notes topic="Note for week 1" date="2022-04-05" />*/}
+                {/*<Notes topic="Note for week 2" date="2022-04-12" />*/}
+                {/*<Notes topic="Note for week 3" date="2022-04-19" />*/}
+                {/*<Notes topic="Note for week 4" date="2022-04-26" />*/}
+                {/*<Notes topic="Note for week 5" date="2022-05-03" />*/}
+                <table className="booking-table note"  id="view-booking">
+                  <tbody>
+                  <tr>
+                    <td data-label="Note ID :"
+                        // style={noteheader}
+                    >
+                      Note for week 1</td>
+                    <td data-label="Uploaded Date :"
+                        // style={notedetails}
+                    >04-05-2022</td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                      >
+                        <div className="Reacticon">
+                        <FiDownload  />
+                        </div>
+                      </a>
+                    </td>
+                  </tr>
+
+
+                    <tr >
+                      <td data-label="Note ID :">Note for week 1</td>
+                      <td data-label="Uploaded Date :">04-05-2022</td>
+                    </tr>
+                  <tr>
+                    <td data-label="Note ID :">Note for week 1</td>
+                    <td data-label="Uploaded Date :">04-05-2022</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
               <div className="Homework">
                 <Homework name="Homework for week 1" date="2022-04-05" />
