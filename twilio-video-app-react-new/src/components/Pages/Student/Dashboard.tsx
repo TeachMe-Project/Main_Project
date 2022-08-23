@@ -29,7 +29,7 @@ const handleTime = (start: string, end: string) => {
 export const Dashboard = () => {
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURL = 'http://localhost:8081/student/${studentAuthId}/upcomingClasses';
+  const baseURL = 'https://learnx.azurewebsites.net/student/' + studentAuthId + '/upcomingClasses';
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {
