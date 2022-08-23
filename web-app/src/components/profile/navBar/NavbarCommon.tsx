@@ -14,7 +14,7 @@ const NavbarCommon = () => {
                         <Row className='d-flex flex-row align-content-center'>
                             <Col>
                                 <Navbar.Brand onClick={() => navigate(-1)} style={{cursor: "pointer"}}>
-                                    <img src={Images.logo} style={{maxWidth: "240px"}} alt='logo'
+                                    <img src={Images.logo} style={{maxWidth: "200px"}} alt='logo'
                                          className='profile-nav-logo'/>
                                 </Navbar.Brand>
                             </Col>

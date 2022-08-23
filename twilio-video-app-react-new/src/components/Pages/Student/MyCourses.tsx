@@ -153,34 +153,45 @@ export const MyCourses = () => {
               })} */}
               <CourseCard
                 header="Mathematics"
-                description="For A/L"
+                description="This course includes content of grade 8 mathematics of local syllabus in English medium. It contains algebraic concepts and skills related to graph and solve linear equations..."
                 time="04:00pm - 06:00pm"
                 date="Wednesday"
                 image={<img src={'/Images/subjects/maths.png'} />}
                 teacher="Mr. Lasitha Nuwan"
-                amount="2500"
+                amount="LKR 2500"
                 btn1="View more"
                 btn2="Unenroll"
               />
               <CourseCard
-                header="Mathematics"
-                description="For A/L"
+                header="Science"
+                description="This course includes content of grade 8 science of local syllabus in English medium. It contains the basics of life, genetics, microbiology, plant science, animal science..."
                 time="04:00pm - 06:00pm"
-                date="Wednesday"
-                image={<img src={'/Images/subjects/maths.png'} />}
-                teacher="Mr. Lasitha Nuwan"
-                amount="2500"
+                date="Sunday"
+                image={<img src={'/Images/subjects/science.png'} />}
+                teacher="Ms. Imalka Sandamali"
+                amount="LKR 2500"
                 btn1="View more"
                 btn2="Unenroll"
               />
               <CourseCard
-                header="Mathematics"
-                description="For A/L"
+                header="History"
+                description="This course includes content of grade 8 history of local syllabus in English medium. It contains about the pre-historic era, Anuradhapura and Polannaruwa kingdoms..."
                 time="04:00pm - 06:00pm"
-                date="Wednesday"
-                image={<img src={'/Images/subjects/maths.png'} />}
-                teacher="Mr. Lasitha Nuwan"
-                amount="2500"
+                date="Saturday"
+                image={<img src={'/Images/subjects/history.png'} />}
+                teacher="Mr. Kamal Maggona"
+                amount="LKR 2500"
+                btn1="View more"
+                btn2="Unenroll"
+              />
+              <CourseCard
+                header="Western Music"
+                description="This course includes content of grade 8 western music of local syllabus in English medium. It contains about the the history of western music, western songs, relationship with plays..."
+                time="05:00pm - 07:00pm"
+                date="Monday"
+                image={<img src={'/Images/subjects/music.png'} />}
+                teacher="Mr. Anura Kahatagoda"
+                amount="LKR 2500"
                 btn1="View more"
                 btn2="Unenroll"
               />

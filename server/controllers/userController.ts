@@ -59,12 +59,14 @@ export const  createUser=async (req:Request,res:Response)=>{
                 data:<any> {
                     username: req.body.username,
                     type: req.body.type,
-                    profile_image: req.body.profile_image
+                    profile_image: req.body.profile_image,
+                    isActive: true,
+                    user_id: req.body.user_id
                 }
             })
             res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
+        } catch (error: any) {
+            res.status(500).send(error.message);
         }
     } else {
         res.status(500).send(error.details[0].message);
