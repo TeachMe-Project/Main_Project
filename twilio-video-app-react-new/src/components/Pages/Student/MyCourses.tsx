@@ -8,9 +8,12 @@ import { Link } from 'react-router-dom';
 import PanelContainer from '../../Layout/PanelContainer';
 import { Button } from '../../Button/Button';
 import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const MyCourses = () => {
-  const baseURL = 'https://learnx.azurewebsites.net/student/:id/courses';
+  const { user } = useAuth0();
+  const studentAuthId = user?.sub;
+  const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/courses`;
   const [courses, setCourses] = useState<any[]>([]);
 
   const convertTime = (x: Date) => {

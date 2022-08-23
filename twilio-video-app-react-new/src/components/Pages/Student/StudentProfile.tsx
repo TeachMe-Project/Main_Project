@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Button } from '../../Button/Button';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageImagesStudent';
+import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
@@ -51,8 +53,12 @@ const initialState = {
 };
 
 export const StudentProfile = () => {
-  const [isEditing, setISEditing] = useState(false);
+  const { user } = useAuth0();
+  const studentAuthId = user?.sub;
+  const baseURL = `https://learnx.azurewebsites.net/user/${studentAuthId}`;
 
+  const [profDetails, setProfDetails] = useState<any[]>([]);
+  const [isEditing, setISEditing] = useState(false);
   const [pageStage, setPageStage] = useState(2);
   const [gradeValidate, setGradeValidate] = useState<boolean>(false);
   const [fistNameValidate, setFistNameValidate] = useState(false);
@@ -116,6 +122,28 @@ export const StudentProfile = () => {
     }
   };
 
+  useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setProfDetails(prevState => [
+            ...prevState,
+            {
+              fullname: item.first_name + ' ' + item.last_name,
+              // contact
+              email: item.user.username,
+              picture: item.user.profile_image
+            },
+          ]);
+        });
+        console.log(profDetails);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="StudentProfile">
       <Container>
@@ -125,21 +153,39 @@ export const StudentProfile = () => {
         </div>
         <div className="PanelContainer">
           <Col xl={4}>
-            <div className="LeftContainer">
-              <div className="ProfileImg">
-                <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
-                {/*<AzureCloudStorage />*/}
-              </div>
-              <div className="ParentContact">
-                <div className="ContactHeader">Parent's Contact Details:</div>
-                <div className="ParentLabel">Name:</div>
-                <div className="ParentValue">Pathmani Ranatunga</div>
-                <div className="ParentLabel">Mobile No:</div>
-                <div className="ParentValue">0774832976</div>
-                <div className="ParentLabel">Email:</div>
-                <div className="ParentValue">pathmaniranatunga@gmail.com</div>
-              </div>
-            </div>
+            {/* {profDetails.map((item: any) => {
+              return (
+                <div className="LeftContainer">
+                  <div className="ProfileImg">
+                    <img src={item.picture} />
+                  </div>
+                  <div className="ParentContact">
+                    <div className="ContactHeader">Student's Contact Details:</div>
+                    <div className="ParentLabel">Name:</div>
+                    <div className="ParentValue">{item.fullname}</div>
+                    <div className="ParentLabel">Mobile No:</div>
+                    <div className="ParentValue">0774832976</div>
+                    <div className="ParentLabel">Email:</div>
+                    <div className="ParentValue">{item.email}</div>
+                  </div>
+                </div>
+              );
+            })} */}
+                <div className="LeftContainer">
+                  <div className="ProfileImg">
+                    <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
+                    {/*<AzureCloudStorage />*/}
+                  </div>
+                  <div className="ParentContact">
+                    <div className="ContactHeader">Student's Contact Details:</div>
+                    <div className="ParentLabel">Name:</div>
+                    <div className="ParentValue">Pathmani Ranatunga</div>
+                    <div className="ParentLabel">Mobile No:</div>
+                    <div className="ParentValue">0774832976</div>
+                    <div className="ParentLabel">Email:</div>
+                    <div className="ParentValue">pathmaniranatunga@gmail.com</div>
+                  </div>
+                </div>
           </Col>
 
           <Col xl={8}>
