@@ -112,67 +112,99 @@ const columns = [
 
 const ManageUsers = () => {
 
-    const baseURL = "http://localhost:8081/user/allUsers";
+    const baseURL = "https://learnx.azurewebsites.net/user/allUsers";
     const [users, setUsers] = useState<any[]>([]);
+    const [isDataLoading, setIsDataLoading] = useState(false);
 
-    useEffect(() => {
-        axios.get(baseURL).then((res: AxiosResponse) => {
-            res.data.map((item: any) => {
-                if (item.type === 'teacher') {
+    // useEffect(() => {
+    //     axios.get(baseURL).then((res: AxiosResponse) => {
+    //         // setIsDataLoading(true);
+    //         res.data.map((item: any) => {
+    //             if (item.type === 'teacher') {
+    //
+    //                 setUsers(prevState => [...prevState, {
+    //                     user_id: item.user_id,
+    //                     username: item.username,
+    //                     type: "Teacher",
+    //                     first_name: item.teacher.first_name,
+    //                     last_name: item.teacher.last_name
+    //                 }])
+    //             } else if (item.type === 'student') {
+    //                 setUsers(prevState => [...prevState, {
+    //                     user_id: item.user_id,
+    //                     username: item.username,
+    //                     type: "Student",
+    //                     first_name: item.student[0].first_name,
+    //                     last_name: item.student[0].last_name
+    //                 }])
+    //             } else if (item.type === 'institute') {
+    //                 console.log(item)
+    //                 setUsers(prevState => [...prevState, {
+    //                     user_id: item.user_id,
+    //                     username: item.username,
+    //                     type: "Institute",
+    //                     first_name: item.institute[0].institute_name,
+    //                     last_name: '-'
+    //                 }])
+    //             } else if (item.type === 'parent') {
+    //                 console.log(item.parent[0])
+    //                 setUsers(prevState => [...prevState, {
+    //                     user_id: item.user_id,
+    //                     username: item.username,
+    //                     type: "Parent",
+    //                     first_name: item.parent[0].first_name,
+    //                     last_name: item.parent[0].last_name
+    //                 }])
+    //             }
+    //         })
+    //         console.log(users)
+    //     })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         })
+    // }, []);
 
-                    setUsers(prevState => [...prevState, {
-                        user_id: item.user_id,
-                        username: item.username,
-                        type: "Teacher",
-                        first_name: item.teacher.first_name,
-                        last_name: item.teacher.last_name
-                    }])
-                } else if (item.type === 'student') {
-                    setUsers(prevState => [...prevState, {
-                        user_id: item.user_id,
-                        username: item.username,
-                        type: "Student",
-                        first_name: item.student[0].first_name,
-                        last_name: item.student[0].last_name
-                    }])
-                }
-                else if (item.type === 'institute') {
-                    console.log(item)
-                    setUsers(prevState => [...prevState, {
-                        user_id: item.user_id,
-                        username: item.username,
-                        type: "Institute",
-                        first_name: item.institute[0].institute_name,
-                        last_name: '-'
-                    }])
-                }
-                else if (item.type === 'parent') {
-                    console.log(item.parent[0])
-                    setUsers(prevState => [...prevState, {
-                        user_id: item.user_id,
-                        username: item.username,
-                        type: "Parent",
-                        first_name: item.parent[0].first_name,
-                        last_name: item.parent[0].last_name
-                    }])
-                }
-            })
-            console.log(users)
-        })
-            .catch((error) => {
-                console.log(error);
-            })
-    }, []);
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
 
-
-    if (users === null) {
-        return
-
-    }
-
+    const data = [
+        {
+            user_id: "100008972",
+            username: "prasadlakshan@gmail.com",
+            type: "Parent",
+            first_name: "Prasad",
+            last_name: "Lakshan"
+        },
+        {
+            user_id: "100008973",
+            username: "manethwijethunga@gmail.com",
+            type: "Teacher",
+            first_name: "Maneth",
+            last_name: "Wijethunga"
+        },
+        {
+            user_id: "100008974",
+            username: "lakshanmadusha@gmail.com",
+            type: "Student",
+            first_name: "Lakshan",
+            last_name: "Madusha"
+        },
+        {
+            user_id: "100008975",
+            username: "sigmainst@gmail.com",
+            type: "Institute",
+            first_name: "Sigma",
+            last_name: "-"
+        },
+        {
+            user_id: "100008976",
+            username: "samanthadeshan@gmail.com",
+            type: "Student",
+            first_name: "Samantha",
+            last_name: "Deshan"
+        }
+    ];
     // @ts-ignore
     return (
 
@@ -189,7 +221,7 @@ const ManageUsers = () => {
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
-                        data={users}
+                        data={data}
                         columns={columns}
                         search>
                         {(props: any) =>

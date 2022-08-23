@@ -6,6 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import axios, {AxiosResponse} from "axios";
 import {useAuth0} from "@auth0/auth0-react";
 import Images from "../../../assets/images/Images";
+import Loader from "../../utils/Loader";
 
 type initialStateType = {
     Firstname: string,
@@ -24,32 +25,33 @@ type initialStateType = {
 const TutorProfile = () => {
     const navigate = useNavigate();
     const [isEditProfile, setIsEditProfile] = useState(false);
+    const [isDataLoading, setIsDataLoading] = useState(false);
     const [initialState, setInitialState] = useState<initialStateType>({
-        Accountname: "K.G.L. Sameera Senevirathne",
-        Accountno: "9923612712",
-        Bankname: "Bank of Ceylon",
-        Branchname: "Galle",
-        Description: "I'm having more than 7 years of experience in teaching at a renowned government school as a ICT teacher My students were able to produce great results in the examinations.",
-        Email: "sameera@gmail.com",
-        Firstname: "Sameera",
-        Lastname: "Senevirathne",
-        Mobile: "077-1234567",
-        Qualification: "Bsc Hons In Information Technology"
+        Accountname: "",
+        Accountno: "",
+        Bankname: "",
+        Branchname: "",
+        Description: "",
+        Email: "",
+        Firstname: "",
+        Lastname: "",
+        Mobile: "",
+        Qualification: ""
     });
     const {user} = useAuth0();
     const params = useParams();
     const [enableEditProfile, setEnableEditProfile] = useState(true);
-    const [isDataLoading, setIsDataLoading] = useState(true);
     const [passwordMail, setPasswordMail] = useState(null);
 
     useEffect(() => {
         axios({
             method: "GET",
-            url: `http://localhost:8081/teacher/${params.tutor_id}`,
+            url: `https://learnx.azurewebsites.net/teacher/${params.tutor_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },
         }).then((res: AxiosResponse) => {
+            console.log(params.tutor_id)
             setInitialState({
                 Firstname: res.data[0].first_name,
                 Lastname: res.data[0].last_name,
@@ -93,6 +95,7 @@ const TutorProfile = () => {
 
                 </Col>
                 <Col className='px-lg-5'>
+                    {!isDataLoading && <Loader/>}
                     {isDataLoading &&
                     <Formik
                         onSubmit={console.log}

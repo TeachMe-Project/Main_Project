@@ -9,6 +9,7 @@ import AdminLayout from "./AdminLayout";
 import {AiOutlineCloseCircle} from "react-icons/ai";
 import {useNavigate, useParams} from "react-router-dom";
 import Images from "../../../assets/images/Images";
+import Loader from "../../utils/Loader";
 
 
 type initialStateType = {
@@ -104,6 +105,7 @@ const ViewInstituteProfile = () => {
 
                     </Col>
                     <Col className='px-lg-5'>
+                        {!isDataLoading && <Loader/>}
                         {isDataLoading &&
                         <Formik
                             onSubmit={console.log}
