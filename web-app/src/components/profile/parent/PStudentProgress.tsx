@@ -150,7 +150,8 @@ const navigate = useNavigate();
             }}
             onClick={() => {
                 navigate('/parent/summery')
-            }}>
+            }}
+        >
             Summary
         </Button>
     );
