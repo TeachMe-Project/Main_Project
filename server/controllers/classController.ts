@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 export const getClasses=async (req:Request,res:Response)=>{
 
     try {
-        const data =await prisma.Renamedclass.findMany({
+        const data =await prisma.renamedclass.findMany({
 
         }
 
@@ -23,9 +23,9 @@ export const getClassByID=async (req:Request,res:Response)=>{
 
 
     try {
-        const data =await prisma.Renamedclass.findMany({
-            where:{
-                user_id:Number(req.params.id)
+        const data =await prisma.renamedclass.findMany({
+            where:<any>{
+                user_id: req.params.id
             }
         })
         res.status(200).send(data)

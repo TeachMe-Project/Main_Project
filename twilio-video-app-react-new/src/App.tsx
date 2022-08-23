@@ -2,8 +2,8 @@ import * as React from 'react';
 import '../src/Assets/Styles/main.scss';
 import LeftSidebarTeacher from './components/Sidebar/LeftSidebarTeacher';
 import LeftSidebar from './components/Sidebar/LeftSidebar';
-import TeacherMainPanel from './components/Pages/Teacher/MainPanel';
-import MainPanel from './components/Pages/Student/MainPanel';
+import MainPanelTeacher from './components/Pages/Teacher/MainPanel';
+import MainPanelStudent from './components/Pages/Student/MainPanel';
 import { Col, Row } from 'react-bootstrap';
 import TopNavbar from './components/Navbars/TopNavbar';
 import Home from './home/Home';
@@ -11,12 +11,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 import NavBar from './home/navBar';
 import UnAuth from './auth0/unAuth';
 // import psList from 'ps-list';
-// import {tasklist} from 'tasklist';
+const psList=window.require('ps-list');
 
-// const x =async () => {
-//   // return(await psList());
-//   return(await tasklist());
-// }
+console.log( psList());
+const x = () => {
+  console.log(psList());
+}
+
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -32,9 +33,10 @@ function App() {
             <Row>
               <Col xl={2} className="LeftCol">
                 <LeftSidebarTeacher />
+                {/*<LeftSidebar />*/}
               </Col>
               <Col xl={10} className={'MiddleCol'}>
-                <TeacherMainPanel />
+                <MainPanelTeacher />
               </Col>
             </Row>
           </div>
@@ -42,7 +44,6 @@ function App() {
       );
     } else if (user?.family_name == 'student') {
       return (
-        // return <h1>Student</h1>;
         <>
           <div className="App">
             <Row>
@@ -53,7 +54,7 @@ function App() {
                 <LeftSidebar />
               </Col>
               <Col xl={10} className={'MiddleCol'}>
-                <MainPanel />
+                <MainPanelStudent />
               </Col>
             </Row>
           </div>

@@ -9,7 +9,6 @@ const prisma = new PrismaClient()
 const NAME_SPACE = "User"
 
 
-
 export const getUsers=async (req:Request,res:Response)=>{
 
     try {
@@ -25,10 +24,12 @@ export const getUsers=async (req:Request,res:Response)=>{
             }
         })
         res.status(200).json(data)
+        console.log(data)
     }
 
-    catch (error) {
+    catch (error: any) {
         res.status(500).send(error);
+        logger.error(NAME_SPACE, error.message);
     }
 }
 
@@ -58,12 +59,14 @@ export const  createUser=async (req:Request,res:Response)=>{
                 data:<any> {
                     username: req.body.username,
                     type: req.body.type,
-                    profile_image: req.body.profile_image
+                    profile_image: req.body.profile_image,
+                    isActive: true,
+                    user_id: req.body.user_id
                 }
             })
             res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
+        } catch (error: any) {
+            res.status(500).send(error.message);
         }
     } else {
         res.status(500).send(error.details[0].message);

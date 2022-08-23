@@ -48,15 +48,18 @@ export default function PreJoinScreens() {
     //   }
     // }
     // let c = courses ? parseInt(courses[0].course_id) : '';
-    axios
-      .get(baseURL)
-      .then(response => {
-        setRoomName(response.data[0].course_id);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    // setRoomName(c);
+
+    //uncomment this code to get the course id from the url
+    // axios
+    //   .get(baseURL)
+    //   .then(response => {
+    //     setRoomName(response.data[0].course_id);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+
+    setRoomName('@2139342');
     if (user?.displayName) {
       setStep(Steps.deviceSelectionStep);
     }

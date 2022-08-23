@@ -8,8 +8,35 @@ import TopNavbar from '../../Navbars/TopNavbar';
 import LeftSidebar from '../../Sidebar/LeftSidebar';
 import PanelContainer from '../../Layout/PanelContainer';
 import Searchbar from '../../Searchbar/Searchbar';
+import axios, { AxiosResponse } from 'axios';
 
 export const Dashboard = () => {
+  const baseURL = 'https://learnx.azurewebsites.net/student/:id/upcomingClasses';
+  const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setUpcomingClasses(prevState => [
+            ...prevState,
+            {
+              subject: item.course.subject,
+              // teacher:
+              date: item.date,
+              start_time: item.start_time,
+              end_time: item.end_time,
+            },
+          ]);
+        });
+        console.log(upcomingClasses);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="Dashboard">
       <Container>

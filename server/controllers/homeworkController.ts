@@ -8,8 +8,13 @@ const prisma = new PrismaClient();
 export const getHomeworks=async (req:Request,res:Response)=>{
 
     try {
-        const data =await prisma.homework.findMany()
-        res.status(200).send(data)
+        const data =await prisma.homework.findMany({
+            include:{
+                student:true
+            }
+        })
+        console.log(data[0].student)
+        res.status(200).send(data[0].student)
     }
 
     catch (error) {

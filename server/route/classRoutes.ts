@@ -1,5 +1,5 @@
 import express from "express";
-import {createClass, getClassByID, getClasses} from "../controllers/classController";
+import {getClassByID, getClasses} from "../controllers/classController";
 
 export const classRouter=express.Router();
 
@@ -11,7 +11,7 @@ classRouter.route("/allClasses")
 classRouter.route("/:id")
     .get(getClassByID);
 
-classRouter.route("/createClass")
-    .post(createClass);
+// classRouter.route("/createClass")
+//     .post(createClass);
 
 

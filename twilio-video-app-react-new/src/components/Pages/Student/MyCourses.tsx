@@ -8,6 +8,114 @@ import PanelContainer from '../../Layout/PanelContainer';
 import { Button } from '../../Button/Button';
 
 export const MyCourses = () => {
+  const baseURL = 'https://learnx.azurewebsites.net/student/:id/courses';
+  const [courses, setCourses] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          if (item.course.day === 'MON') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                subject: item.course.subject,
+                // teacher: item.course.teacher.name,
+                day: 'Monday',
+                desc: item.course.description,
+                start_time: item.course.start_time,
+                end_time: item.course.end_time,
+                price: item.course.price,
+              },
+            ]);
+          } else if (item.course.day === 'TUE') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                subject: item.course.subject,
+                // teacher: item.course.teacher.name,
+                day: 'Tuesday',
+                desc: item.course.description,
+                start_time: item.course.start_time,
+                end_time: item.course.end_time,
+                price: item.course.price,
+              },
+            ]);
+          } else if (item.course.day === 'WED') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                subject: item.course.subject,
+                // teacher: item.course.teacher.name,
+                day: 'Wednesday',
+                desc: item.course.description,
+                start_time: item.course.start_time,
+                end_time: item.course.end_time,
+                price: item.course.price,
+              },
+            ]);
+          } else if (item.course.day === 'THU') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                subject: item.course.subject,
+                // teacher: item.course.teacher.name,
+                day: 'Thursday',
+                desc: item.course.description,
+                start_time: item.course.start_time,
+                end_time: item.course.end_time,
+                price: item.course.price,
+              },
+            ]);
+          } else if (item.course.day === 'FRI') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                subject: item.course.subject,
+                // teacher: item.course.teacher.name,
+                day: 'Friday',
+                desc: item.course.description,
+                start_time: item.course.start_time,
+                end_time: item.course.end_time,
+                price: item.course.price,
+              },
+            ]);
+          } else if (item.course.day === 'SAT') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                subject: item.course.subject,
+                // teacher: item.course.teacher.name,
+                day: 'Saturday',
+                desc: item.course.description,
+                start_time: item.course.start_time,
+                end_time: item.course.end_time,
+                price: item.course.price,
+              },
+            ]);
+          } else if (item.course.day === 'SUN') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                subject: item.course.subject,
+                // teacher: item.course.teacher.name,
+                day: 'Sunday',
+                desc: item.course.description,
+                start_time: item.course.start_time,
+                end_time: item.course.end_time,
+                price: item.course.price,
+              },
+            ]);
+          }
+        });
+        console.log(courses);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="MyCourses">
       <Container>

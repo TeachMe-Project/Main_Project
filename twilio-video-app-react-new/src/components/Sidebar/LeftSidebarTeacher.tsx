@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  BsFillGridFill,
-  BsBuilding,
-  BsFillChatFill,
-  BsFillExclamationCircleFill,
-  BsCreditCard2FrontFill,
-} from 'react-icons/bs';
-
+import { BsFillGridFill, BsFillBookFill, BsWalletFill, BsFillChatLeftDotsFill, BsBuilding } from 'react-icons/bs';
+import { GiTeacher } from 'react-icons/gi';
+import { IoMdCog } from 'react-icons/io';
+import { MdContactSupport } from 'react-icons/md';
 import '../../Assets/Styles/main.scss';
 import { Link } from 'react-router-dom';
 import '../Pages/Student/MainPanel';
@@ -44,7 +40,7 @@ export const LeftSidebarTeacher = () => {
               <Link to="/mycourses" className="link">
                 <div className="Sidebar_item">
                   <div>
-                    <FaBook />
+                    <BsFillBookFill />
                   </div>
                   <div className="Sidebar_item_name">My Courses</div>
                 </div>
@@ -66,16 +62,14 @@ export const LeftSidebarTeacher = () => {
 
           <Row>
             <li>
-              <Link to="/freecard" className="link">
-                <div className="Sidebar_item">
-                  <div>
-                    <BsCreditCard2FrontFill />
-                  </div>
-                  <div className="Sidebar_item_name">Free Cards</div>
-                </div>
-              </Link>
-            </li>
-          </Row>
+              {/*<Link to="/messages" className="link">*/}
+              {/*  <div className="Sidebar_item">*/}
+              {/*    <div>*/}
+              {/*      <BsFillChatLeftDotsFill />*/}
+              {/*    </div>*/}
+              {/*    <div className="Sidebar_item_name">Messages</div>*/}
+              {/*  </div>*/}
+              {/*</Link>*/}
 
           <Row>
             <li>
@@ -115,13 +109,15 @@ export const LeftSidebarTeacher = () => {
           {/*</Row>*/}
         </ul>
 
-        <Link to="/" className="link">
-          <div className="LogoutBtn" onClick={() => logout({ returnTo: window.location.origin })}>
-            {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
-            <AiOutlineLogout className="LogoutIcon" />
-            <Button name="Log out" />
-          </div>
-        </Link>
+            <Link to="/" className="link" onClick={() => logout({ returnTo: window.location.origin })}>
+              <div className="LogoutBtn">
+                {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
+                <AiOutlineLogout className="LogoutIcon" />
+                <Button name="Log out" />
+              </div>
+            </Link>
+          </Row>
+        </ul>
       </Container>
     </div>
   );

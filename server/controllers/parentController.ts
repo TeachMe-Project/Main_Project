@@ -8,7 +8,11 @@ const NAME_SPACE = "Parent"
 export const getParents = async (req: Request, res: Response) => {
 
     try {
-        const data = await prisma.parent.findMany()
+        const data = await prisma.parent.findMany({
+            include: {
+                user: true
+            }
+        })
         res.status(200).send(data)
     } catch (error) {
         res.status(500).send(error);
