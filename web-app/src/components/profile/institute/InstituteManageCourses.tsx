@@ -11,42 +11,9 @@ import swal from "@sweetalert/with-react";
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import {FaEye} from "react-icons/fa";
 import InstituteLayout from "./InstituteLayout";
+import {useNavigate} from "react-router-dom";
 
 
-const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
-    < FaEye
-        style={{
-            fontSize: "20px",
-            color: "#181312",
-            padding: "7px",
-            width: "30px",
-            height: "30px",
-            borderRadius: "50%",
-            cursor: "pointer",
-            boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-        }}
-        className='accept-icon'
-        onClick={() => {
-            swal({
-                title: "User Removal",
-                text: `Do you really want to remove ${row.username}?`,
-                icon: "error",
-                buttons: {
-                    cancel: true,
-                    confirm: true
-                },
-                // dangerMode: true,
-            })
-                .then((willDelete: any) => {
-                    if (willDelete) {
-                        swal(`Poof! You have successfully removed ${row.username}`, {
-                            icon: "success",
-                        });
-                    }
-                });
-        }}
-    />
-);
 
 const data = [
     {
@@ -89,39 +56,58 @@ const data = [
     }
 ];
 
-const columns = [
-    {
-        dataField: "id",
-        text: "Course ID",
-        sort: true,
-    },
-    {
-        dataField: "grade",
-        text: "Grade",
-        sort: true,
-    },
-    {
-        dataField: "subject",
-        text: "subject",
-    },
-    {
-        dataField: "tutor_name",
-        text: "tutor name"
-    },
-    {
-        dataField: "",
-        text: "",
-        formatter: gotoCourse,
-        headerAttrs: {width: 100},
-        attrs: {width: 100, class: "EditRow"}
-    },
-];
 
 
 const InstituteManageCourses = () => {
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
+    const navigate = useNavigate();
+    const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+        < FaEye
+            style={{
+                fontSize: "20px",
+                color: "#181312",
+                padding: "7px",
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                cursor: "pointer",
+                boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+            }}
+            className='accept-icon'
+            onClick={() => navigate("/institute/course")}
+        />
+    );
+
+    const columns = [
+        {
+            dataField: "id",
+            text: "Course ID",
+            sort: true,
+        },
+        {
+            dataField: "grade",
+            text: "Grade",
+            sort: true,
+        },
+        {
+            dataField: "subject",
+            text: "subject",
+        },
+        {
+            dataField: "tutor_name",
+            text: "tutor name"
+        },
+        {
+            dataField: "",
+            text: "",
+            formatter: gotoCourse,
+            headerAttrs: {width: 100},
+            attrs: {width: 100, class: "EditRow"}
+        },
+    ];
+
 
     // @ts-ignore
     return (

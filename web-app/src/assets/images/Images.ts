@@ -24,9 +24,10 @@ import instpro from "./profile/inst1.png"
 import download from "./aboutUs/download.png"
 import linux from "./aboutUs/linux.png"
 import windows from "./aboutUs/windows.png"
-
+import chart from "./chart.png"
 export default {
     download,
+    chart,
     linux,
     windows,
     instpro,

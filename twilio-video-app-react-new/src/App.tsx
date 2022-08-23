@@ -11,12 +11,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 import NavBar from './home/navBar';
 import UnAuth from './auth0/unAuth';
 // import psList from 'ps-list';
-// import {tasklist} from 'tasklist';
-
-// const x =async () => {
-//   // return(await psList());
-//   return(await tasklist());
+// const psList=window.require('ps-list');
+//
+// console.log( psList());
+// const x = () => {
+//   console.log(psList());
 // }
+
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -32,6 +33,7 @@ function App() {
             <Row>
               <Col xl={2} className="LeftCol">
                 <LeftSidebarTeacher />
+                {/*<LeftSidebar />*/}
               </Col>
               <Col xl={10} className={'MiddleCol'}>
                 <MainPanelTeacher />

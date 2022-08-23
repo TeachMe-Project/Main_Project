@@ -15,13 +15,13 @@ const Banner: React.FC = () => {
               <h1 className="banner-header text-lg-start text-center">
                 Step into a brand new learning experience with LearnX
               </h1>
-              {/*<p className="mt-lg-3 banner-text text-md-start ">*/}
-              {/*  It is the convenient mode of learning and #1 online platform in Sri Lanka to offer reliable education*/}
-              {/*  courses with a unique set of features.*/}
-              {/*</p>*/}
+              <p className="mt-lg-3 banner-text text-md-start ">
+                It is the convenient mode of learning and #1 online platform in Sri Lanka to offer reliable education
+                courses with a unique set of features.
+              </p>
               <Button
                 className="px-md-4 py-2 mt-3 GetStartedBtn"
-                style={{ marginRight: '5px', fontSize: '1rem', fontWeight: '600', borderRadius: '20px' }}
+                style={{ marginRight: '5px',marginTop: '3rem', fontSize: '1rem', fontWeight: '600', borderRadius: '20px', }}
                 onClick={loginWithRedirect}
               >
                 Log In
