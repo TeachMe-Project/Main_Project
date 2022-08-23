@@ -10,7 +10,7 @@ import TeacherCard from '../../Card/TeacherCard';
 import axios, { AxiosResponse } from 'axios';
 
 export const MyTeachers = () => {
-  const baseURL = 'http://localhost:8081/student/:id/courses';
+  const baseURL = 'https://learnx.azurewebsites.net/student/:id/courses';
   const [teachers, setTeachers] = useState<any[]>([]);
 
   useEffect(() => {

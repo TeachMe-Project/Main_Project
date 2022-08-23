@@ -10,7 +10,7 @@ import { Button } from '../../Button/Button';
 import axios, { AxiosResponse } from 'axios';
 
 export const MyCourses = () => {
-  const baseURL = 'http://localhost:8081/student/:id/courses';
+  const baseURL = 'https://learnx.azurewebsites.net/student/:id/courses';
   const [courses, setCourses] = useState<any[]>([]);
 
   const convertTime = (x: Date) => {
