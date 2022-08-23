@@ -20,7 +20,6 @@ const x = () => {
 
 
 function App() {
-  x();
   const { user, isAuthenticated } = useAuth0();
 
   const renderMain = () => {
@@ -34,6 +33,7 @@ function App() {
             <Row>
               <Col xl={2} className="LeftCol">
                 <LeftSidebarTeacher />
+                {/*<LeftSidebar />*/}
               </Col>
               <Col xl={10} className={'MiddleCol'}>
                 <MainPanelTeacher />
