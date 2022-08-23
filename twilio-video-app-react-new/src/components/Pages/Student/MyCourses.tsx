@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import CourseCard from '../../Card/CourseCard';
 import CardHeader from '../../Card/CardHeader';
 import CardDetails from '../../Card/CardDetails';
@@ -6,6 +7,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PanelContainer from '../../Layout/PanelContainer';
 import { Button } from '../../Button/Button';
+import axios, { AxiosResponse } from 'axios';
 
 export const MyCourses = () => {
   const baseURL = 'https://learnx.azurewebsites.net/student/:id/courses';
@@ -127,75 +129,65 @@ export const MyCourses = () => {
 
           <div className="Panel">
             <div className="PanelBody">
+              {/* {courses.map((item: any) => {
+                return (
+                  <CourseCard
+                    header={item.subject}
+                    description={item.desc}
+                    time="04:00pm - 06:00pm"
+                    date={item.day}
+                    image={<img src={'/Images/subjects/maths.png'} />}
+                    teacher="Mr. Lasitha Nuwan"
+                    amount={item.price}
+                    btn1="View more"
+                    btn2="Unenroll"
+                  />
+                );
+              })} */}
               <CourseCard
                 header="Mathematics"
-                description="This course includes content of grade 8 mathematics
-                of local syllabus in English medium. It contains algebraic concepts and skills needed to
-                graph and solve linear equations..."
+                description="This course includes content of grade 8 mathematics of local syllabus in English medium. It contains algebraic concepts and skills related to graph and solve linear equations..."
                 time="04:00pm - 06:00pm"
-                date="Sunday"
+                date="Wednesday"
                 image={<img src={'/Images/subjects/maths.png'} />}
                 teacher="Mr. Lasitha Nuwan"
-                amount="LKR 2,500"
+                amount="LKR 2500"
                 btn1="View more"
                 btn2="Unenroll"
               />
-
               <CourseCard
                 header="Science"
-                description="This course includes content of grade 8 science
-                of local syllabus in English medium.It contains the basics of life, genetics, microbiology,
-                plant science, animal science..."
+                description="This course includes content of grade 8 science of local syllabus in English medium. It contains the basics of life, genetics, microbiology, plant science, animal science..."
                 time="04:00pm - 06:00pm"
-                date="Monday"
+                date="Sunday"
                 image={<img src={'/Images/subjects/science.png'} />}
                 teacher="Ms. Imalka Sandamali"
-                amount="LKR 2,500"
+                amount="LKR 2500"
                 btn1="View more"
                 btn2="Unenroll"
               />
-
               <CourseCard
                 header="History"
-                description="This course includes content of grade 8 history
-                of local syllabus in English medium. It contains about the pre-historic era,
-                Anuradhapura and Polonnaruwa kingdoms..."
+                description="This course includes content of grade 8 history of local syllabus in English medium. It contains about the pre-historic era, Anuradhapura and Polannaruwa kingdoms..."
                 time="04:00pm - 06:00pm"
                 date="Saturday"
                 image={<img src={'/Images/subjects/history.png'} />}
                 teacher="Mr. Kamal Maggona"
-                amount="LKR 2,500"
+                amount="LKR 2500"
                 btn1="View more"
                 btn2="Unenroll"
               />
-
               <CourseCard
                 header="Western Music"
-                description="This course includes content of grade 8 western music
-                of local syllabus in English medium. It contains about the history of western music,
-                western songs, relationship with plays..."
+                description="This course includes content of grade 8 western music of local syllabus in English medium. It contains about the the history of western music, western songs, relationship with plays..."
                 time="05:00pm - 07:00pm"
-                date="Tuesday"
+                date="Monday"
                 image={<img src={'/Images/subjects/music.png'} />}
                 teacher="Mr. Anura Kahatagoda"
-                amount="LKR 2,500"
+                amount="LKR 2500"
                 btn1="View more"
                 btn2="Unenroll"
               />
-
-              {/*<CourseCard*/}
-              {/*  header="Art"*/}
-              {/*  description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-              {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-              {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-              {/*  time="04:00pm - 06:00pm"*/}
-              {/*  date="Sunday"*/}
-              {/*  image={<img src={'/Images/subjects/art.png'} />}*/}
-              {/*  teacher="Mrs. Shiromi Chandraguptha"*/}
-              {/*  amount="LKR 2,500"*/}
-              {/*  btn1="View more"*/}
-              {/*  btn2="Unsubscribe"*/}
-              {/*/>*/}
             </div>
           </div>
         </Row>
