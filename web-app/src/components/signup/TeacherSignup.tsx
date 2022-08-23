@@ -211,6 +211,7 @@ const TeacherSignup = () => {
                 console.log(res.data);
 
                 const apiData = JSON.stringify({
+                    "title":`${values.Title}`,
                     "user_id": `${res.data.user_id}`,
                     "username": `${values.Email}`,
                     "profile_image": `${res.data.picture}`,

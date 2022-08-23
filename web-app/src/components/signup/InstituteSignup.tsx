@@ -196,7 +196,7 @@ const InstituteSignup = () => {
 
                 axios({
                     method: "POST",
-                    url: "http://localhost:8081/institute/createInstitute",
+                    url: "https://learnx.azurewebsites.net/institute/createInstitute",
                     headers: {
                         'Content-Type': 'application/json'
                     },
