@@ -338,3 +338,33 @@ export const printRequest = async (request: Request, response: Response) => {
             })
     })
 }
+
+export const changeUserDetails = async (request: Request, response: Response) => {
+    console.log(request.body);
+    const user_id = request.body.user_id;
+    getAccessToken(() => {
+        axios(
+            {
+                method: 'PATCH',
+                url: `https://learningsl.us.auth0.com/api/v2/users/${user_id}`,
+                headers: {
+                    'Authorization': `Bearer ${access_token}`,
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify(
+                    {
+                        "given_name": request.body.Firstname,
+                        "name": request.body.Lastname,
+                        "nickname": request.body.Firstname + " " + request.body.Lastname,
+                    })
+            })
+            .then(function (res: AxiosResponse) {
+                logging.info(NAMESPACE, 'User Details Changed');
+                return response.status(res.status).json(res.data);
+            })
+            .catch(function (error) {
+                logging.error(NAMESPACE, 'Not Done', error.message);
+                return response.status(error.code).json(error.message);
+            })
+    })
+}
