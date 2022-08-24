@@ -86,7 +86,7 @@ const VerifyTutorsPage = () => {
                         })
                         axios({
                             method: "POST",
-                            url: "http://localhost:8081/auth/unblock",
+                            url: "https://learnx.azurewebsites.net/auth/unblock",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
@@ -94,7 +94,7 @@ const VerifyTutorsPage = () => {
                         }).then((apiRes) => {
                             axios({
                                 method: "POST",
-                                url: "http://localhost:8081/admin/verifyTeacher",
+                                url: "https://learnx.azurewebsites.net/admin/verifyTeacher",
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
@@ -105,6 +105,8 @@ const VerifyTutorsPage = () => {
                                     swal(`Poof! You have successfully approved ${row.tutor_name}`, {
                                         icon: "success",
                                     });
+                                    const newTeachersArray = teachers.filter(teacher => row.user_id !== teacher.user_id);
+                                    setTeachers(newTeachersArray);
                                 }
                             }).catch((error) => {
                                 console.log(error.message)
@@ -150,7 +152,7 @@ const VerifyTutorsPage = () => {
 
                         axios({
                             method: "POST",
-                            url: "http://localhost:8081/admin/rejectTeacher",
+                            url: "https://learnx.azurewebsites.net/admin/rejectTeacher",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
@@ -162,6 +164,8 @@ const VerifyTutorsPage = () => {
                                     icon: "success",
                                 });
                             }
+                            const newTeachersArray = teachers.filter(teacher => row.user_id !== teacher.user_id);
+                            setTeachers(newTeachersArray);
                         }).catch((error) => {
                             console.log(error.message)
                         })
