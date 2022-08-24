@@ -29,7 +29,7 @@ const VerifyInstitutesPage = () => {
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
     const navigate = useNavigate();
-    const baseURL = "http://localhost:8081/admin/newInstituteRequests";
+    const baseURL = "https://learnx.azurewebsites.net/admin/newInstituteRequests";
     const [institutes, setInstitutes] = useState<appliedInstitute[]>([]);
 
 

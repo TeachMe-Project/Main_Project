@@ -85,11 +85,47 @@ export const Course = () => {
                 </div>
 
                 <div className="noteContainer" style={{ marginTop: '50px' }}>
-                  <Notes topic="Note for week 1" date="04-05-2022" />
+                  {/* <Notes topic="Note for week 1" date="04-05-2022" />
                   <Notes topic="Note for week 2" date="04-05-2022" />
                   <Notes topic="Note for week 3" date="04-05-2022" />
                   <Notes topic="Note for week 4" date="04-05-2022" />
-                  <Notes topic="Note for week 5" date="04-05-2022" />
+                  <Notes topic="Note for week 5" date="04-05-2022" /> */}
+
+                  <table className="booking-table" id="view-booking">
+                    {/* <thead>
+                      <tr className="booking-thead-second-tr">
+                        {/*amc: Institute Manage Courses
+                        <th className="imc-first-th">Student ID</th>
+                        <th className="imc-second-th">Student Name</th>
+                        <th className="imc-third-th">Month</th>
+                        <th className="imc-fourth-th">Amount</th>
+                      </tr>
+                    </thead> */}
+                    <tbody>
+                      <tr>
+                        <td data-label="Student ID :">Note for week 1</td>
+                        <td data-label="Student Name :">04-05-2022</td>
+                      </tr>
+                      <tr>
+                        <td data-label="Student ID :">Note for week 2</td>
+                        <td data-label="Student Name :">04-05-2022</td>
+                        {/* <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td> */}
+                      </tr>
+                      <tr>
+                        <td data-label="Student ID :">Note for week 3</td>
+                        <td data-label="Student Name :">04-05-2022</td>
+                        {/* <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td> */}
+                      </tr>
+                      <tr>
+                        <td data-label="Student ID :">Note for week 4</td>
+                        <td data-label="Student Name :">04-05-2022</td>
+                        {/* <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td> */}
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
               <div className="Homework">
@@ -101,13 +137,49 @@ export const Course = () => {
                   </div>
                 </Link>
 
-                <div className="homeworkContainer" style={{ marginTop: '50px' }}>
+                {/* <div className="homeworkContainer" style={{ marginTop: '50px' }}>
                   <Homework topic="Homework for week 1" date="04-05-2022" />
                   <Homework topic="Homework for week 2" date="04-05-2022" />
                   <Homework topic="Homework for week 3" date="04-05-2022" />
                   <Homework topic="Homework for week 4" date="04-05-2022" />
                   <Homework topic="Homework for week 5" date="04-05-2022" />
-                </div>
+                </div> */}
+
+                <table className="booking-table" id="view-booking">
+                  {/* <thead>
+                      <tr className="booking-thead-second-tr">
+                        {/*amc: Institute Manage Courses
+                        <th className="imc-first-th">Student ID</th>
+                        <th className="imc-second-th">Student Name</th>
+                        <th className="imc-third-th">Month</th>
+                        <th className="imc-fourth-th">Amount</th>
+                      </tr>
+                    </thead> */}
+                  <tbody>
+                    <tr>
+                      <td data-label="Student ID :">Homework for week 1</td>
+                      <td data-label="Student Name :">04-05-2022</td>
+                    </tr>
+                    <tr>
+                      <td data-label="Student ID :">Homework for week 2</td>
+                      <td data-label="Student Name :">04-05-2022</td>
+                      {/* <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td> */}
+                    </tr>
+                    <tr>
+                      <td data-label="Student ID :">Homework for week 3</td>
+                      <td data-label="Student Name :">04-05-2022</td>
+                      {/* <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td> */}
+                    </tr>
+                    <tr>
+                      <td data-label="Student ID :">Homework for week 4</td>
+                      <td data-label="Student Name :">04-05-2022</td>
+                      {/* <td data-label="Month :">August</td>
+                        <td data-label="Amount :">LKR 2500</td> */}
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
               <div className="Students">

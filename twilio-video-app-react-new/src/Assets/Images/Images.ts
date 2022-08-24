@@ -5,7 +5,7 @@ import phone from './contactUs/phone.webp';
 import unauth from './home/401.webp';
 import error from './home/404.webp';
 import logo from './home/logo.png';
-import home from './home/home.webp';
+import home from './home/home.jpg';
 export default {
   contactUs,
   email,

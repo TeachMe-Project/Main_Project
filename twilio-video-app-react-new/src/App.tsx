@@ -2,8 +2,8 @@ import * as React from 'react';
 import '../src/Assets/Styles/main.scss';
 import LeftSidebarTeacher from './components/Sidebar/LeftSidebarTeacher';
 import LeftSidebar from './components/Sidebar/LeftSidebar';
-import MainPanel from './components/Pages/Teacher/MainPanel';
-// import MainPanel from './components/Pages/Student/MainPanel';
+import MainPanelTeacher from './components/Pages/Teacher/MainPanel';
+import MainPanelStudent from './components/Pages/Student/MainPanel';
 import { Col, Row } from 'react-bootstrap';
 import TopNavbar from './components/Navbars/TopNavbar';
 import Home from './home/Home';
@@ -11,12 +11,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 import NavBar from './home/navBar';
 import UnAuth from './auth0/unAuth';
 // import psList from 'ps-list';
-// import {tasklist} from 'tasklist';
-
-// const x =async () => {
-//   // return(await psList());
-//   return(await tasklist());
+// const psList=window.require('ps-list');
+//
+// console.log( psList());
+// const x = () => {
+//   console.log(psList());
 // }
+
 
 function App() {
   const { user, isAuthenticated } = useAuth0();
@@ -35,14 +36,30 @@ function App() {
                 {/*<LeftSidebar />*/}
               </Col>
               <Col xl={10} className={'MiddleCol'}>
-                <MainPanel />
+                <MainPanelTeacher />
               </Col>
             </Row>
           </div>
         </>
       );
     } else if (user?.family_name == 'student') {
-      return <h1>Student</h1>;
+      return (
+        <>
+          <div className="App">
+            <Row>
+              <TopNavbar />
+            </Row>
+            <Row>
+              <Col xl={2} className="LeftCol">
+                <LeftSidebar />
+              </Col>
+              <Col xl={10} className={'MiddleCol'}>
+                <MainPanelStudent />
+              </Col>
+            </Row>
+          </div>
+        </>
+      );
     } else if (user?.family_name == 'admin' || user?.family_name == 'parent') {
       return (
         <>

@@ -14,6 +14,7 @@ import { FaBook } from 'react-icons/fa';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export const LeftSidebarTeacher = () => {
+  const { logout } = useAuth0();
   return (
     <div className="LeftSidebar">
       <Container>
@@ -61,23 +62,32 @@ export const LeftSidebarTeacher = () => {
 
           <Row>
             <li>
-              <Link to="/messages" className="link">
-                <div className="Sidebar_item">
-                  <div>
-                    <BsFillChatLeftDotsFill />
-                  </div>
-                  <div className="Sidebar_item_name">Messages</div>
-                </div>
-              </Link>
+              {/*<Link to="/messages" className="link">*/}
+              {/*  <div className="Sidebar_item">*/}
+              {/*    <div>*/}
+              {/*      <BsFillChatLeftDotsFill />*/}
+              {/*    </div>*/}
+              {/*    <div className="Sidebar_item_name">Messages</div>*/}
+              {/*  </div>*/}
+              {/*</Link>*/}
+
               <Link to="/helpandsupport" className="link">
                 <div className="Sidebar_item">
                   <div>
                     <MdContactSupport />
                   </div>
-                  <div className="Sidebar_item_name">Help and Support</div>
+                  <div className="Sidebar_item_name">Help & Support</div>
                 </div>
               </Link>
             </li>
+
+            <Link to="/" className="link" onClick={() => logout({ returnTo: window.location.origin })}>
+              <div className="LogoutBtn">
+                {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
+                <AiOutlineLogout className="LogoutIcon" />
+                <Button name="Log out" />
+              </div>
+            </Link>
           </Row>
         </ul>
       </Container>

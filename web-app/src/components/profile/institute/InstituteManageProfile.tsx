@@ -162,7 +162,7 @@ const InstituteManageProfile = () => {
         }
         axios({
             method: "GET",
-            url: `http://localhost:8081/institute/${user?.sub}`,
+            url: `https://learnx.azurewebsites.net/institute/${user?.sub}`,
             headers: {
                 'Content-Type': 'application/json'
             },
