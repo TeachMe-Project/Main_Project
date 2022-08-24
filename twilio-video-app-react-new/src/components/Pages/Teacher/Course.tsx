@@ -13,7 +13,6 @@ import PanelContainer from '../../Layout/PanelContainer';
 import UploadButton from '../../Button/UploadButton';
 import { Homework } from './Homework';
 import { Students } from './Students';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Table from '@mui/material/Table';
 // import TableBody from '@mui/material/TableBody';
@@ -30,6 +29,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 // import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { ButtonCommon } from '../../Button/ButtonCommon';
+import {FiDownload} from "react-icons/fi";
+import {BiArchive} from "react-icons/bi";
+import {MdDelete, MdNotStarted} from "react-icons/md";
 
 library.add(fas);
 
@@ -53,6 +55,7 @@ export const Course = () => {
             </div>
 
             <Tabs>
+
               <div className="Details" style={{ marginTop: '50px' }}>
                 <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
                   <Link to="/editdetails" className="link">
@@ -85,49 +88,262 @@ export const Course = () => {
                 </div>
 
                 <div className="noteContainer" style={{ marginTop: '50px' }}>
-                  {/* <Notes topic="Note for week 1" date="04-05-2022" />
-                  <Notes topic="Note for week 2" date="04-05-2022" />
-                  <Notes topic="Note for week 3" date="04-05-2022" />
-                  <Notes topic="Note for week 4" date="04-05-2022" />
-                  <Notes topic="Note for week 5" date="04-05-2022" /> */}
-
-                  <table className="booking-table" id="view-booking">
-                    {/* <thead>
-                      <tr className="booking-thead-second-tr">
-                        {/*amc: Institute Manage Courses
-                        <th className="imc-first-th">Student ID</th>
-                        <th className="imc-second-th">Student Name</th>
-                        <th className="imc-third-th">Month</th>
-                        <th className="imc-fourth-th">Amount</th>
-                      </tr>
-                    </thead> */}
+                  <table className="booking-table"  id="view-booking">
                     <tbody>
-                      <tr>
-                        <td data-label="Student ID :">Note for week 1</td>
-                        <td data-label="Student Name :">04-05-2022</td>
-                      </tr>
-                      <tr>
-                        <td data-label="Student ID :">Note for week 2</td>
-                        <td data-label="Student Name :">04-05-2022</td>
-                        {/* <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td> */}
-                      </tr>
-                      <tr>
-                        <td data-label="Student ID :">Note for week 3</td>
-                        <td data-label="Student Name :">04-05-2022</td>
-                        {/* <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td> */}
-                      </tr>
-                      <tr>
-                        <td data-label="Student ID :">Note for week 4</td>
-                        <td data-label="Student Name :">04-05-2022</td>
-                        {/* <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td> */}
-                      </tr>
+
+                    <tr>
+                      <td data-label="Note ID :"
+                          className="noteheader"
+                      >
+                        Note for week 1</td>
+                      <td data-label="Uploaded Date :"
+                          className="notedetails">04-05-2022</td>
+
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn download">
+                          <FiDownload  className="Reacticon"/>
+                          Download
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn archive"
+                        >
+                          <BiArchive className="Reacticon" />Archive
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn remove"
+                        >
+                          <MdDelete  className="Reacticon"/>Remove
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Note ID :"
+                          className="noteheader"
+                      >
+                        Note for week 2</td>
+                      <td data-label="Uploaded Date :"
+                          className="notedetails">11-05-2022</td>
+
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn download">
+                          <FiDownload  className="Reacticon"/>
+                          Download
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn archive"
+                        >
+                          <BiArchive className="Reacticon" />Archive
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn remove"
+                        >
+                          <MdDelete  className="Reacticon"/>Remove
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Note ID :"
+                          className="noteheader"
+                      >
+                        Note for week 3</td>
+                      <td data-label="Uploaded Date :"
+                          className="notedetails">18-05-2022</td>
+
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn download">
+                          <FiDownload  className="Reacticon"/>
+                          Download
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn archive"
+                        >
+                          <BiArchive className="Reacticon" />Archive
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn remove"
+                        >
+                          <MdDelete  className="Reacticon"/>Remove
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Note ID :"
+                          className="noteheader"
+                      >
+                        Note for week 4</td>
+                      <td data-label="Uploaded Date :"
+                          className="notedetails">25-05-2022</td>
+
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn download">
+                          <FiDownload  className="Reacticon"/>
+                          Download
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn archive"
+                        >
+                          <BiArchive className="Reacticon" />Archive
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn remove"
+                        >
+                          <MdDelete  className="Reacticon"/>Remove
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Note ID :"
+                          className="noteheader"
+                      >
+                        Note for week 6</td>
+                      <td data-label="Uploaded Date :"
+                          className="notedetails">02-06-2022</td>
+
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn download">
+                          <FiDownload  className="Reacticon"/>
+                          Download
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn archive"
+                        >
+                          <BiArchive className="Reacticon" />Archive
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn remove"
+                        >
+                          <MdDelete  className="Reacticon"/>Remove
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td data-label="Note ID :"
+                          className="noteheader"
+                      >
+                        Note for week 6</td>
+                      <td data-label="Uploaded Date :"
+                          className="notedetails">09-05-2022</td>
+
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn download">
+                          <FiDownload  className="Reacticon"/>
+                          Download
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn archive"
+                        >
+                          <BiArchive className="Reacticon" />Archive
+                        </a>
+
+                      </td>
+                      <td data-label="">
+                        <a
+                            download="note1.pdf"
+                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                            target="_blank"
+                            className="Reacticonbtn remove"
+                        >
+                          <MdDelete  className="Reacticon"/>Remove
+                        </a>
+                      </td>
+                    </tr>
+
                     </tbody>
                   </table>
+
                 </div>
               </div>
+
               <div className="Homework">
                 <Link className="link" to="/uploadhomework">
                   <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
@@ -136,69 +352,271 @@ export const Course = () => {
                     </Link>
                   </div>
                 </Link>
-
-                {/* <div className="homeworkContainer" style={{ marginTop: '50px' }}>
-                  <Homework topic="Homework for week 1" date="04-05-2022" />
-                  <Homework topic="Homework for week 2" date="04-05-2022" />
-                  <Homework topic="Homework for week 3" date="04-05-2022" />
-                  <Homework topic="Homework for week 4" date="04-05-2022" />
-                  <Homework topic="Homework for week 5" date="04-05-2022" />
-                </div> */}
-
-                <table className="booking-table" id="view-booking">
-                  {/* <thead>
-                      <tr className="booking-thead-second-tr">
-                        {/*amc: Institute Manage Courses
-                        <th className="imc-first-th">Student ID</th>
-                        <th className="imc-second-th">Student Name</th>
-                        <th className="imc-third-th">Month</th>
-                        <th className="imc-fourth-th">Amount</th>
-                      </tr>
-                    </thead> */}
+                <table className="booking-table"  id="view-booking">
                   <tbody>
-                    <tr>
-                      <td data-label="Student ID :">Homework for week 1</td>
-                      <td data-label="Student Name :">04-05-2022</td>
-                    </tr>
-                    <tr>
-                      <td data-label="Student ID :">Homework for week 2</td>
-                      <td data-label="Student Name :">04-05-2022</td>
-                      {/* <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td> */}
-                    </tr>
-                    <tr>
-                      <td data-label="Student ID :">Homework for week 3</td>
-                      <td data-label="Student Name :">04-05-2022</td>
-                      {/* <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td> */}
-                    </tr>
-                    <tr>
-                      <td data-label="Student ID :">Homework for week 4</td>
-                      <td data-label="Student Name :">04-05-2022</td>
-                      {/* <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td> */}
-                    </tr>
+
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 1</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">04-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 2</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">11-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 3</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">18-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 4</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">25-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 6</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">02-06-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 6</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">09-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+
                   </tbody>
                 </table>
+
+
               </div>
 
               <div className="Students">
                 <div className="studentContainer">
                   <table className="booking-table" id="view-booking">
-                    <thead>
-                      <tr className="booking-thead-second-tr">
-                        {/*amc: Institute Manage Courses*/}
-                        <th className="imc-first-th">Student ID</th>
-                        <th className="imc-second-th">Student Name</th>
-                        <th className="imc-second-th">Parent's Contact</th>
-                        <th className="imc-last-th"></th>
-                      </tr>
-                    </thead>
+
                     <tbody>
                       <tr>
-                        <td data-label="Student ID :">10000102345</td>
-                        <td data-label="Student Name :">Romesh Perera</td>
-                        <td data-label="Parent's Contact :">011 2840231</td>
+                        <td data-label="Student ID :" className="notedetails">10000102345</td>
+                        <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
+                        <td data-label="Parent's Contact :" className="notedetails">011 2840231</td>
                         <td data-label="View Profile :">
                           <div className="cancelbutton">
                             <Link to="/addcourse" className="link">
@@ -208,9 +626,9 @@ export const Course = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td data-label="Student ID :">10000102001</td>
-                        <td data-label="Student Name :">Saduni Weerasinghe</td>
-                        <td data-label="Parent Contact :">071 1450231</td>
+                        <td data-label="Student ID :" className="notedetails">10000102001</td>
+                        <td data-label="Student Name :" className="noteheader">Saduni Weerasinghe</td>
+                        <td data-label="Parent Contact :" className="notedetails">071 1450231</td>
                         <td data-label="View Profile :">
                           <div className="cancelbutton">
                             <Link to="/addcourse" className="link">
@@ -220,9 +638,9 @@ export const Course = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td data-label="Student ID :">10000102908</td>
-                        <td data-label="Student Name :">Minura Ranasinghe</td>
-                        <td data-label="Parent Contact :">078 2402399</td>
+                        <td data-label="Student ID :" className="notedetails">10000102908</td>
+                        <td data-label="Student Name :" className="noteheader">Minura Ranasinghe</td>
+                        <td data-label="Parent Contact :" className="notedetails">078 2402399</td>
                         <td data-label="View Profile :">
                           <div className="cancelbutton">
                             <Link to="/addcourse" className="link">
@@ -232,9 +650,9 @@ export const Course = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td data-label="Student ID :">10000102111</td>
-                        <td data-label="Student Name :">Neelya Jhones</td>
-                        <td data-label="Parent Contact :">077 2898275</td>
+                        <td data-label="Student ID :" className="notedetails">10000102111</td>
+                        <td data-label="Student Name :" className="noteheader">Neelya Jhones</td>
+                        <td data-label="Parent Contact :" className="notedetails">077 2898275</td>
                         <td data-label="View Profile :">
                           <div className="cancelbutton">
                             <Link to="/addcourse" className="link">
@@ -244,9 +662,9 @@ export const Course = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td data-label="Student ID :">10000102343</td>
-                        <td data-label="Student Name :">Kavindu De Silva</td>
-                        <td data-label="Parent Contact :">070 1189377</td>
+                        <td data-label="Student ID :" className="notedetails">10000102343</td>
+                        <td data-label="Student Name :" className="noteheader">Kavindu De Silva</td>
+                        <td data-label="Parent Contact :" className="notedetails">070 1189377</td>
                         <td data-label="View Profile :">
                           <div className="cancelbutton">
                             <Link to="/addcourse" className="link">
@@ -260,7 +678,7 @@ export const Course = () => {
                 </div>
               </div>
 
-              <div className="Class-Schedules">
+              <div className="Schedules">
                 <div className="scheduleContainer">
                   <Row>
                     <Link className="link" to="/addextraclass">
@@ -272,144 +690,187 @@ export const Course = () => {
                     </Link>
                   </Row>
                 </div>
-                <table className="booking-table" id="view-booking">
-                  <thead>
-                    <tr className="booking-thead-second-tr">
-                      {/*amc: Institute Manage Courses*/}
-                      <th className="imc-first-th">Date</th>
-                      <th className="imc-second-th">Time</th>
-                      <th className="imc-second-th">Duration</th>
-                      <th className="imc-third-th"></th>
-                    </tr>
-                  </thead>
+                <table className="booking-table"  id="view-booking">
                   <tbody>
-                    <tr>
-                      <td data-label="Date :">2022-08-20</td>
-                      <td data-label="Time :">05:00 pm</td>
-                      <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">
-                        <div className="cancelbutton">
-                          <Link to="/addcourse" className="link">
-                            <ButtonCommon name={'Cancel Class'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Date :">2022-08-27</td>
-                      <td data-label="Time :">05:00 pm</td>
-                      <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">
-                        {' '}
-                        <div className="cancelbutton">
-                          <Link to="/addcourse" className="link">
-                            <ButtonCommon name={'Cancel Class'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Date :">2022-09-04</td>
-                      <td data-label="Time :">05:00 pm</td>
-                      <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">
-                        {' '}
-                        <div className="cancelbutton">
-                          <Link to="/addcourse" className="link">
-                            <ButtonCommon name={'Cancel Class'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Date :">2022-09-11</td>
-                      <td data-label="Time :">05:00 pm</td>
-                      <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">
-                        {' '}
-                        <div className="cancelbutton">
-                          <Link to="/addcourse" className="link">
-                            <ButtonCommon name={'Cancel Class'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Date :">2022-09-18</td>
-                      <td data-label="Time :">05:00 pm</td>
-                      <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">
-                        {' '}
-                        <div className="cancelbutton">
-                          <Link to="/addcourse" className="link">
-                            <ButtonCommon name={'Cancel Class'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Date :">2022-09-25</td>
-                      <td data-label="Time :">05:00 pm</td>
-                      <td data-label="Duration :">2 Hrs</td>
-                      <td data-label="Topic :">
-                        {' '}
-                        <div className="cancelbutton">
-                          <Link to="/addcourse" className="link">
-                            <ButtonCommon name={'Cancel Class'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
+
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      04-05-2022</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">04:00 pm</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">06:00 pm </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <MdNotStarted  className="Reacticon"/>
+                        Join Class
+                      </a>
+
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      11-05-2022</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">04:00 pm</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">06:00 pm </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <MdNotStarted  className="Reacticon"/>
+                        Join Class
+                      </a>
+
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      18-05-2022</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">04:00 pm</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">06:00 pm </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <MdNotStarted  className="Reacticon"/>
+                        Join Class
+                      </a>
+
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      25-05-2022</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">04:00 pm</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">06:00 pm </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <MdNotStarted  className="Reacticon"/>
+                        Join Class
+                      </a>
+
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      02-06-2022</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">04:00 pm</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">06:00 pm </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <MdNotStarted  className="Reacticon"/>
+                        Join Class
+                      </a>
+
+                    </td>
+
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      09-06-2022</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">04:00 pm</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">06:00 pm </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <MdNotStarted  className="Reacticon"/>
+                        Join Class
+                      </a>
+
+                    </td>
+
+                  </tr>
                   </tbody>
                 </table>
+
+
+
               </div>
+
               <div className="Pending Payments">
                 <div className="paymentsContainer">
                   <table className="booking-table" id="view-booking">
-                    <thead>
-                      <tr className="booking-thead-second-tr">
-                        {/*amc: Institute Manage Courses*/}
-                        <th className="imc-first-th">Student ID</th>
-                        <th className="imc-second-th">Student Name</th>
-                        <th className="imc-third-th">Month</th>
-                        <th className="imc-fourth-th">Amount</th>
-                      </tr>
-                    </thead>
                     <tbody>
                       <tr>
-                        <td data-label="Student ID :">10000102345</td>
-                        <td data-label="Student Name :">Romesh Perera</td>
-                        <td data-label="Month :">July</td>
-                        <td data-label="Amount :">LKR 2500</td>
+                        <td data-label="Student ID :" className="notedetails">10000102345</td>
+                        <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
+                        <td data-label="Month :" className="notedetails">July</td>
+                        <td data-label="Amount :" className="notedetails">LKR 2500</td>
                       </tr>
                       <tr>
-                        <td data-label="Student ID :">10000102345</td>
-                        <td data-label="Student Name :">Romesh Perera</td>
-                        <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td>
+                        <td data-label="Student ID :" className="notedetails">10000102345</td>
+                        <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
+                        <td data-label="Month :" className="notedetails">August</td>
+                        <td data-label="Amount :" className="notedetails">LKR 2500</td>
                       </tr>
                       <tr>
-                        <td data-label="Student ID :">10000102111</td>
-                        <td data-label="Student Name :">Neelya Jhones</td>
-                        <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td>
+                        <td data-label="Student ID :" className="notedetails">10000102111</td>
+                        <td data-label="Student Name :" className="noteheader">Neelya Jhones</td>
+                        <td data-label="Month :"className="notedetails">August</td>
+                        <td data-label="Amount :" className="notedetails">LKR 2500</td>
                       </tr>
                       <tr>
-                        <td data-label="Student ID :">10000102908</td>
-                        <td data-label="Student Name :">Minura Ranasinghe</td>
-                        <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td>
+                        <td data-label="Student ID :" className="notedetails">10000102908</td>
+                        <td data-label="Student Name :" className="noteheader">Minura Ranasinghe</td>
+                        <td data-label="Month :" className="notedetails">August</td>
+                        <td data-label="Amount :"className="notedetails">LKR 2500</td>
                       </tr>
                       <tr>
-                        <td data-label="Student ID :">10000102905</td>
-                        <td data-label="Student Name :">Senith De Silva</td>
-                        <td data-label="Month :">August</td>
-                        <td data-label="Amount :">LKR 2500</td>
+                        <td data-label="Student ID :" className="notedetails">10000102905</td>
+                        <td data-label="Student Name :" className="noteheader">Senith De Silva</td>
+                        <td data-label="Month :" className="notedetails">August</td>
+                        <td data-label="Amount :" className="notedetails">LKR 2500</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
+
             </Tabs>
           </div>
         </Row>
