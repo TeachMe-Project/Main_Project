@@ -82,7 +82,7 @@ const VerifyInstitutesPage = () => {
                         })
                         axios({
                             method: "POST",
-                            url: "http://localhost:8081/auth/unblock",
+                            url: "https://learnx.azurewebsites.net/auth/unblock",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
@@ -90,7 +90,7 @@ const VerifyInstitutesPage = () => {
                         }).then((apiRes: AxiosResponse) => {
                             axios({
                                 method: "POST",
-                                url: "http://localhost:8081/admin/verifyInstitute",
+                                url: "https://learnx.azurewebsites.net/admin/verifyInstitute",
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
@@ -102,6 +102,8 @@ const VerifyInstitutesPage = () => {
                                         icon: "success",
                                     });
                                 }
+                                const instituteArray = institutes.filter(institute => row.user_id !== institute.user_id);
+                                setInstitutes(instituteArray);
                             }).catch((error) => {
                                 console.log(error.message)
                             })
@@ -146,7 +148,7 @@ const VerifyInstitutesPage = () => {
 
                         axios({
                             method: "POST",
-                            url: "http://localhost:8081/admin/rejectInstitute",
+                            url: "https://learnx.azurewebsites.net/admin/rejectInstitute",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
@@ -157,6 +159,8 @@ const VerifyInstitutesPage = () => {
                                 swal(`Poof! You have successfully reject ${row.institute_name}`, {
                                     icon: "success",
                                 });
+                                const instituteArray = institutes.filter(institute => row.user_id !== institute.user_id);
+                                setInstitutes(instituteArray);
                             }
                         }).catch((error) => {
                             console.log(error.message)
