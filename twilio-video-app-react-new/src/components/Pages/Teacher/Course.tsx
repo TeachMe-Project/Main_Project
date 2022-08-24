@@ -85,11 +85,6 @@ export const Course = () => {
                 </div>
 
                 <div className="noteContainer" style={{ marginTop: '50px' }}>
-                  {/* <Notes topic="Note for week 1" date="04-05-2022" />
-                  <Notes topic="Note for week 2" date="04-05-2022" />
-                  <Notes topic="Note for week 3" date="04-05-2022" />
-                  <Notes topic="Note for week 4" date="04-05-2022" />
-                  <Notes topic="Note for week 5" date="04-05-2022" /> */}
 
                   <table className="booking-table" id="view-booking">
                     {/* <thead>
