@@ -586,6 +586,7 @@ export const Course = (props: tutorName) => {
 
                   </tbody>
                 </table>
+
               </div>
               <div className="Upcoming Classes">
                 <table className="booking-table"  id="view-booking">
