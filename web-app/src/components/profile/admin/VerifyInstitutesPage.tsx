@@ -31,7 +31,7 @@ const VerifyInstitutesPage = () => {
     const navigate = useNavigate();
     const baseURL = "https://learnx.azurewebsites.net/admin/newInstituteRequests";
     const [institutes, setInstitutes] = useState<appliedInstitute[]>([]);
-
+    const [isDataLoading, setIsDataLoading] = useState(false);
 
     const viewItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
         < FaEye
@@ -220,6 +220,7 @@ const VerifyInstitutesPage = () => {
                 applied_date: item.applied_date,
                 institute_name: item.institute_name
             })));
+            setIsDataLoading(true);
         })
             .catch((error) => {
                 console.log(error);
@@ -242,6 +243,7 @@ const VerifyInstitutesPage = () => {
                     </Col>
                 </Row>
                 <Row>
+                    {!isDataLoading && <Loader/>}
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"

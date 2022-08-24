@@ -35,6 +35,7 @@ const VerifyTutorsPage = () => {
     const navigate = useNavigate();
     const baseURL = "https://learnx.azurewebsites.net/admin/newTeacherRequests";
     const [teachers, setTeachers] = useState<appliedTutor[]>([]);
+    const [isDataLoading, setIsDataLoading] = useState(false);
 
     const viewItem = (cell: any, row: appliedTutor, rowIndex: any, formatExtraData: any) => (
         < FaEye
@@ -223,19 +224,15 @@ const VerifyTutorsPage = () => {
                 applied_date: item.applied_date,
                 tutor_name: item.first_name + " " + item.last_name
             })));
+            setIsDataLoading(true);
         })
             .catch((error) => {
                 console.log(error);
             })
     }, []);
 
-    if (teachers === null) {
-        return <Loader/>
-    }
-
 
     return (
-
         <AdminLayout>
             <Col lg={12} className='px-lg-5'>
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
@@ -246,6 +243,7 @@ const VerifyTutorsPage = () => {
                     </Col>
                 </Row>
                 <Row>
+                    {!isDataLoading && <Loader/>}
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"

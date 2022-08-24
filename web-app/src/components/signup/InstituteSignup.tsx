@@ -170,7 +170,7 @@ const InstituteSignup = () => {
         });
         axios({
             method: "POST",
-            url: "http://localhost:8081/auth/createInstitute",
+            url: "https://learnx.azurewebsites.net/auth/createInstitute",
             headers: {
                 'Content-Type': 'application/json'
             },
