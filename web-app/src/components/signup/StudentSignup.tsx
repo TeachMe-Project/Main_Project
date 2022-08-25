@@ -153,7 +153,7 @@ const {user} = useAuth0();
 
                     axios({
                         method: "POST",
-                        url: "http://localhost:8081/student/createStudent",
+                        url: "https://learnx.azurewebsites.net/student/createStudent",
                         headers: {
                             'Content-Type': 'application/json'
                         },

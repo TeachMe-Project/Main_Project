@@ -1,6 +1,7 @@
 import Joi from "joi";
 
 export const teacherSchema = Joi.object({
+        title:Joi.string().min(1).required(),
         user_id: Joi.string().min(1).required(),
         username: Joi.string().min(1).required(),
         profile_image: Joi.string().min(1).required(),
