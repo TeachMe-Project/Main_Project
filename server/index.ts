@@ -4,7 +4,7 @@ import express, { RequestHandler } from 'express';
 import path from 'path';
 import { ServerlessFunction } from './types';
 import cors from "cors";
-
+import {classSchedule} from "./utils/scheduler";
 // importing requires routings
 import {studentRouter} from "./route/studentRoutes";
 import {paymentGatewayRouter} from "./route/paymentGatewayRoutes";
@@ -46,7 +46,7 @@ app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 app.use(cors());
-
+setInterval(classSchedule, 14400000);
 
 //development endpoints by developers
 app.use('/admin',adminRouter)

@@ -10,12 +10,26 @@ import Notes from './Notes';
 import Homework from './Homework';
 import PendingPayments from './PendingPayments';
 import PanelContainer from '../../Layout/PanelContainer';
+import {FiDownload} from "react-icons/fi";
+import {BiArchive} from "react-icons/bi";
+import {MdDelete, MdNotStarted} from "react-icons/md";
+
+// import renderer from "react-test-renderer;
 
 type tutorName = {
   name?: string;
   image?: HTMLImageElement;
 };
 export const Course = (props: tutorName) => {
+
+  // renderer(){
+  //   const noteheader = {
+  //     color: "#34495e;",
+  //     fontWeight: "700",
+  //    fontSize:"14px",
+  //     marginBottom: "0.2rem"
+  //   };
+  // };
   return (
     <div className="Course">
       <Container>
@@ -62,31 +76,658 @@ export const Course = (props: tutorName) => {
                 <Details label="Duration" value="12 months" symbol=":" />
               </div>
               <div className="Notes">
-                <Notes topic="Note for week 1" date="2022-04-05" />
-                <Notes topic="Note for week 2" date="2022-04-12" />
-                <Notes topic="Note for week 3" date="2022-04-19" />
-                <Notes topic="Note for week 4" date="2022-04-26" />
-                <Notes topic="Note for week 5" date="2022-05-03" />
+
+                <table className="booking-table"  id="view-booking">
+                  <tbody>
+
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Note for week 1</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">04-05-2022</td>
+
+                    <td data-label="">
+                          <a
+                              download="note1.pdf"
+                              href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                              target="_blank"
+                              className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                            Download
+                          </a>
+
+                    </td>
+                    <td data-label="">
+                          <a
+                              download="note1.pdf"
+                              href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                              target="_blank"
+                              className="Reacticonbtn archive"
+                          >
+                          <BiArchive className="Reacticon" />Archive
+                          </a>
+
+                    </td>
+                    <td data-label="">
+                          <a
+                              download="note1.pdf"
+                              href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                              target="_blank"
+                              className="Reacticonbtn remove"
+                          >
+                          <MdDelete  className="Reacticon"/>Remove
+                          </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Note for week 2</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">11-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Note for week 3</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">18-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Note for week 4</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">25-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Note for week 6</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">02-06-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Note for week 6</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">09-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+
+
               </div>
               <div className="Homework">
-                <Homework name="Homework for week 1" date="2022-04-05" />
-                <Homework name="Homework for week 2" date="2022-04-12" />
-                <Homework name="Homework for week 3" date="2022-04-19" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
+
+                <table className="booking-table"  id="view-booking">
+                  <tbody>
+
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 1</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">04-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 2</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">11-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 3</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">18-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 4</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">25-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 6</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">02-06-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td data-label="Note ID :"
+                        className="noteheader"
+                    >
+                      Homework for week 6</td>
+                    <td data-label="Uploaded Date :"
+                        className="notedetails">09-05-2022</td>
+
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn download">
+                        <FiDownload  className="Reacticon"/>
+                        Download
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn archive"
+                      >
+                        <BiArchive className="Reacticon" />Archive
+                      </a>
+
+                    </td>
+                    <td data-label="">
+                      <a
+                          download="note1.pdf"
+                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                          target="_blank"
+                          className="Reacticonbtn remove"
+                      >
+                        <MdDelete  className="Reacticon"/>Remove
+                      </a>
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+
               </div>
               <div className="Upcoming Classes">
-                <Homework name="Homework for week 1" date="2022-04-05" />
-                <Homework name="Homework for week 2" date="2022-04-12" />
-                <Homework name="Homework for week 3" date="2022-04-19" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
-                <Homework name="Homework for week 4" date="2022-04-26" />
+                <table className="booking-table"  id="view-booking">
+                  <tbody>
+
+                <tr>
+                  <td data-label="Note ID :"
+                      className="noteheader"
+                  >
+                    04-05-2022</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">04:00 pm</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">06:00 pm </td>
+                  <td data-label="">
+                    <a
+                        download="note1.pdf"
+                        href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                        target="_blank"
+                        className="Reacticonbtn download">
+                      <MdNotStarted  className="Reacticon"/>
+                      Join Class
+                    </a>
+
+                  </td>
+
+                </tr>
+                <tr>
+                  <td data-label="Note ID :"
+                      className="noteheader"
+                  >
+                    11-05-2022</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">04:00 pm</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">06:00 pm </td>
+                  <td data-label="">
+                    <a
+                        download="note1.pdf"
+                        href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                        target="_blank"
+                        className="Reacticonbtn download">
+                      <MdNotStarted  className="Reacticon"/>
+                      Join Class
+                    </a>
+
+                  </td>
+
+                </tr>
+                <tr>
+                  <td data-label="Note ID :"
+                      className="noteheader"
+                  >
+                    18-05-2022</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">04:00 pm</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">06:00 pm </td>
+                  <td data-label="">
+                    <a
+                        download="note1.pdf"
+                        href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                        target="_blank"
+                        className="Reacticonbtn download">
+                      <MdNotStarted  className="Reacticon"/>
+                      Join Class
+                    </a>
+
+                  </td>
+
+                </tr>
+                <tr>
+                  <td data-label="Note ID :"
+                      className="noteheader"
+                  >
+                    25-05-2022</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">04:00 pm</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">06:00 pm </td>
+                  <td data-label="">
+                    <a
+                        download="note1.pdf"
+                        href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                        target="_blank"
+                        className="Reacticonbtn download">
+                      <MdNotStarted  className="Reacticon"/>
+                      Join Class
+                    </a>
+
+                  </td>
+
+                </tr>
+                <tr>
+                  <td data-label="Note ID :"
+                      className="noteheader"
+                  >
+                    02-06-2022</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">04:00 pm</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">06:00 pm </td>
+                  <td data-label="">
+                    <a
+                        download="note1.pdf"
+                        href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                        target="_blank"
+                        className="Reacticonbtn download">
+                      <MdNotStarted  className="Reacticon"/>
+                      Join Class
+                    </a>
+
+                  </td>
+
+                </tr>
+                <tr>
+                  <td data-label="Note ID :"
+                      className="noteheader"
+                  >
+                    09-06-2022</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">04:00 pm</td>
+                  <td data-label="Uploaded Date :"
+                      className="notedetails">06:00 pm </td>
+                  <td data-label="">
+                    <a
+                        download="note1.pdf"
+                        href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                        target="_blank"
+                        className="Reacticonbtn download">
+                      <MdNotStarted  className="Reacticon"/>
+                      Join Class
+                    </a>
+
+                  </td>
+
+                </tr>
+                  </tbody>
+                </table>
+
+
               </div>
             </Tabs>
           </div>

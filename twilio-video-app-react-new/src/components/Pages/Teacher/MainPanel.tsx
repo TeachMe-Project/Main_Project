@@ -125,6 +125,11 @@ const routes = [
     path: '/room/:URLRoomName',
     main: () => <VideoApp />,
   },
+  {
+    path: '/teacherProfile',
+    main: () => <TeacherProfile />,
+  },
+
 ];
 
 export default function MainPanelTeacher() {

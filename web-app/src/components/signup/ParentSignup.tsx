@@ -114,7 +114,7 @@ const ParentSignup = () => {
         });
         axios({
             method: "POST",
-            url: "http://localhost:8081/auth/createParent",
+            url: "https://learnx.azurewebsites.net/auth/createParent",
             headers: {
                 'Content-Type': 'application/json'
             },

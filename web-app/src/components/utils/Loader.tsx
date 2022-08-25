@@ -1,13 +1,18 @@
 import React from 'react';
-// @ts-ignore
-import {DoubleBubble, Spinner} from 'react-spinner-animated';
-import 'react-spinner-animated/dist/index.css'
+import { ThreeDots } from  'react-loader-spinner'
 
 
 const Loader: React.FC = () => {
     return (
-        <div style={{fontSize: "30px"}}>
-            <Spinner width={"200px"} height={"px"}/>
+        <div style={{position:'absolute',top:'48vh', left:'48vw',zIndex:'1', width:"fit-content"}}>
+            <ThreeDots
+                height="100"
+                width="100"
+                radius="15"
+                color="#007dfe "
+                ariaLabel="three-dots-loading"
+                visible={true}
+            />
         </div>
     );
 };

@@ -110,6 +110,7 @@ export const createTeacher = async (req: Request, res: Response) => {
                     isActive: true,
                     teacher: {
                         create: {
+                            title: req.body.title,
                             first_name: req.body.first_name,
                             last_name: req.body.last_name,
                             gender: "male",

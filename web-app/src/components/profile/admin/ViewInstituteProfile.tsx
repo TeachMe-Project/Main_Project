@@ -55,7 +55,7 @@ const ViewInstituteProfile = () => {
     useEffect(() => {
         axios({
             method: "GET",
-            url: `http://localhost:8081/institute/${params.institute_id}`,
+            url: `https://learnx.azurewebsites.net/institute/${params.institute_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },
