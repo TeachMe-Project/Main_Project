@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Button, Col, Form, Row, Tab, Tabs } from 'react-bootstrap';
+import { Alert, Button, Col, Form, Row, Tab, Tabs, Container } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { BsPencilSquare } from 'react-icons/bs';
 import axios from 'axios';
+import PanelContainer from "../../Layout/PanelContainer";
 
 const schema = yup.object().shape({
   InstituteName: yup
@@ -210,13 +211,13 @@ const TeacherProfile = () => {
   };
 
   return (
+      <Container>
+        <Row>
+          <PanelContainer />
+          <div className="PanelHeader">
+            <h2>Tutor Profile</h2>
+          </div>
 
-      <Col lg={12} className="px-lg-5">
-        <Row className="d-lg-flex flex-lg-column align-items-center text-lg-center">
-          <Col lg={12} md={12} xs={12}>
-            <h1 className="text-lg-start header my-lg-3 text-md-center text-center">Manage Profile</h1>
-          </Col>
-        </Row>
         <Row>
           <Col lg={3} className="d-flex flex-column justify-content-center align-items-center">
             <img src={user?.picture} className="w-100" style={{ borderRadius: '50%' }} />
@@ -232,13 +233,13 @@ const TeacherProfile = () => {
             <Formik validationSchema={schema} onSubmit={console.log} initialValues={initialState}>
               {({ handleSubmit, handleChange, handleBlur, values, touched, errors, validateField }) => (
                 <Row className="pb-md-0 pb-4">
-                  <Form noValidate onSubmit={handleSubmit}>
-                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-                      <Tab eventKey="profile" title="Profile Details">
+                  <Form noValidate onSubmit={handleSubmit} >
+                    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 tabs">
+                      <Tab eventKey="profile" title="Profile Details" style={{ fontWeight: 700 }}>
                         <Row className="mt-lg-0 pe-lg-4 mt-md-3 d-flex flex-column">
                           <Col lg={10} md={6} sm={12} xs={12}>
-                            <Form.Group className="mb-2" controlId="validationInstituteName">
-                              <Form.Label style={{ fontWeight: 600 }}>Institute Name</Form.Label>
+                            <Form.Group className="mb-2 ProfileDetailsContainer" controlId="validationInstituteName">
+                              <Form.Label style={{ fontWeight: 600 }}>Tutor Name</Form.Label>
                               <Form.Control
                                 type="text"
                                 placeholder="Enter institute's name"
@@ -248,8 +249,7 @@ const TeacherProfile = () => {
                                 isInvalid={
                                   !!errors.InstituteName
                                     ? changeInstituteNameValidate(false)
-                                    : changeInstituteNameValidate(true)
-                                }
+                                    : changeInstituteNameValidate(true)}
                                 isValid={touched.InstituteName}
                                 onBlur={handleBlur}
                                 disabled={enableEditProfile}
@@ -259,7 +259,7 @@ const TeacherProfile = () => {
                           </Col>
                           <Col lg={10} md={6} sm={12} xs={12}>
                             <Form.Group className="mb-2" controlId="validationEmail">
-                              <Form.Label style={{ fontWeight: 600 }}>Institute's email</Form.Label>
+                              <Form.Label style={{ fontWeight: 600 }}>Tutor's email</Form.Label>
                               <Form.Control
                                 type="text"
                                 placeholder="Enter institute's email"
@@ -275,115 +275,204 @@ const TeacherProfile = () => {
                             </Form.Group>
                           </Col>
                         </Row>
-                        <Row className="mt-lg-0 pe-lg-4 mt-md-3 d-flex flex-column">
-                          <Col lg={10} md={6} sm={12} xs={12}>
-                            <Form.Group className="mb-2" controlId="validationOwnerName">
-                              <Form.Label style={{ fontWeight: 600 }}>Owner's name</Form.Label>
-                              <Form.Control
-                                type="text"
-                                placeholder="Enter owner's name"
-                                name="OwnerName"
-                                value={values.OwnerName}
-                                onChange={handleChange}
-                                isInvalid={
-                                  !!errors.OwnerName ? changeOwnerNameValidate(false) : changeOwnerNameValidate(true)
-                                }
-                                isValid={touched.OwnerName}
-                                onBlur={handleBlur}
-                                disabled={enableEditProfile}
-                              />
-                              <Form.Control.Feedback type="invalid">{errors.OwnerName}</Form.Control.Feedback>
-                            </Form.Group>
-                          </Col>
-                          <Col lg={10} md={6} sm={12} xs={12}>
-                            <Form.Group className="mb-2" controlId="validationLocation">
-                              <Form.Label style={{ fontWeight: 600 }}>Location</Form.Label>
-                              <Form.Control
-                                type="text"
-                                placeholder="Enter location"
-                                name="Location"
-                                value={values.Location}
-                                onChange={handleChange}
-                                isInvalid={
-                                  !!errors.Location ? changeLocationValidate(false) : changeLocationValidate(true)
-                                }
-                                isValid={touched.Location}
-                                onBlur={handleBlur}
-                                disabled={enableEditProfile}
-                              />
-                              <Form.Control.Feedback type="invalid">{errors.Location}</Form.Control.Feedback>
-                            </Form.Group>
-                          </Col>
-                        </Row>
-                      </Tab>
-                      <Tab eventKey="description" title="Description">
+                        {/*<Row className="mt-lg-0 pe-lg-4 mt-md-3 d-flex flex-column">*/}
+                        {/*  <Col lg={10} md={6} sm={12} xs={12}>*/}
+                        {/*    <Form.Group className="mb-2" controlId="validationOwnerName">*/}
+                        {/*      <Form.Label style={{ fontWeight: 600 }}>Owner's name</Form.Label>*/}
+                        {/*      <Form.Control*/}
+                        {/*        type="text"*/}
+                        {/*        placeholder="Enter owner's name"*/}
+                        {/*        name="OwnerName"*/}
+                        {/*        value={values.OwnerName}*/}
+                        {/*        onChange={handleChange}*/}
+                        {/*        isInvalid={*/}
+                        {/*          !!errors.OwnerName ? changeOwnerNameValidate(false) : changeOwnerNameValidate(true)*/}
+                        {/*        }*/}
+                        {/*        isValid={touched.OwnerName}*/}
+                        {/*        onBlur={handleBlur}*/}
+                        {/*        disabled={enableEditProfile}*/}
+                        {/*      />*/}
+                        {/*      <Form.Control.Feedback type="invalid">{errors.OwnerName}</Form.Control.Feedback>*/}
+                        {/*    </Form.Group>*/}
+                        {/*  </Col>*/}
+                        {/*  <Col lg={10} md={6} sm={12} xs={12}>*/}
+                        {/*    <Form.Group className="mb-2" controlId="validationLocation">*/}
+                        {/*      <Form.Label style={{ fontWeight: 600 }}>Location</Form.Label>*/}
+                        {/*      <Form.Control*/}
+                        {/*        type="text"*/}
+                        {/*        placeholder="Enter location"*/}
+                        {/*        name="Location"*/}
+                        {/*        value={values.Location}*/}
+                        {/*        onChange={handleChange}*/}
+                        {/*        isInvalid={*/}
+                        {/*          !!errors.Location ? changeLocationValidate(false) : changeLocationValidate(true)*/}
+                        {/*        }*/}
+                        {/*        isValid={touched.Location}*/}
+                        {/*        onBlur={handleBlur}*/}
+                        {/*        disabled={enableEditProfile}*/}
+                        {/*      />*/}
+                        {/*      <Form.Control.Feedback type="invalid">{errors.Location}</Form.Control.Feedback>*/}
+                        {/*    </Form.Group>*/}
+                        {/*  </Col>*/}
+                        {/*</Row>*/}
                         <Row className="mt-lg-0 pe-lg-4 mt-md-3">
                           <Col lg={10} md={12} sm={12} xs={12}>
                             <Form.Group className="mb-2" controlId="validationMobile">
                               <Form.Label style={{ fontWeight: 600 }}>Mobile Number</Form.Label>
                               <Form.Control
-                                type="text"
-                                placeholder="Enter mobile number in format: 0771234567"
-                                name="Mobile"
-                                value={values.Mobile_Number}
-                                onChange={handleChange}
-                                isInvalid={
-                                  !!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)
-                                }
-                                isValid={touched.Mobile_Number}
-                                onBlur={handleBlur}
-                                disabled={enableEditProfile}
+                                  type="text"
+                                  placeholder="Enter mobile number in format: 0771234567"
+                                  name="Mobile"
+                                  value={values.Mobile_Number}
+                                  onChange={handleChange}
+                                  isInvalid={
+                                    !!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)
+                                  }
+                                  isValid={touched.Mobile_Number}
+                                  onBlur={handleBlur}
+                                  disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.Mobile_Number}</Form.Control.Feedback>
                             </Form.Group>
                           </Col>
-                        </Row>
-                        <Row className="mt-lg-0 pe-lg-4 mt-md-3">
-                          <Col lg={10} md={12} sm={12} xs={12}>
-                            <Form.Group className="mb-2" controlId="validationAddress">
-                              <Form.Label style={{ fontWeight: 600 }}>Institute's Address</Form.Label>
-                              <Form.Control
-                                type="text"
-                                placeholder="Enter institute's address "
-                                name="Address"
-                                value={values.Address}
-                                onChange={handleChange}
-                                isInvalid={
-                                  !!errors.Address ? changeAddressValidate(false) : changeAddressValidate(true)
-                                }
-                                isValid={touched.Address}
-                                onBlur={handleBlur}
-                                disabled={enableEditProfile}
-                              />
-                              <Form.Control.Feedback type="invalid">{errors.Address}</Form.Control.Feedback>
-                            </Form.Group>
-                          </Col>
-                        </Row>
-                        <Row className="mt-lg-0 pe-lg-4 mt-md-3">
                           <Col lg={10} md={12} sm={12} xs={12}>
                             <Form.Group className="mb-2" controlId="validationDescription">
                               <Form.Label style={{ fontWeight: 600 }}>Description</Form.Label>
                               <Form.Control
-                                as="textarea"
-                                placeholder="Enter a description for the institute in order to describe
+                                  as="textarea"
+                                  placeholder="Enter a description for the institute in order to describe
                                                                             the institute"
-                                rows={4}
-                                name="Description"
-                                value={values.Description}
-                                onChange={handleChange}
-                                isInvalid={
-                                  !!errors.Description
-                                    ? changeDescriptionValidate(false)
-                                    : changeDescriptionValidate(true)
-                                }
-                                isValid={touched.Description}
-                                onBlur={handleBlur}
-                                disabled={enableEditProfile}
+                                  rows={4}
+                                  name="Description"
+                                  value={values.Description}
+                                  onChange={handleChange}
+                                  isInvalid={
+                                    !!errors.Description
+                                        ? changeDescriptionValidate(false)
+                                        : changeDescriptionValidate(true)
+                                  }
+                                  isValid={touched.Description}
+                                  onBlur={handleBlur}
+                                  disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.Description}</Form.Control.Feedback>
                             </Form.Group>
                           </Col>
                         </Row>
+
+                      </Tab>
+                      <Tab eventKey="qualifications" title="Qualifications">
+
+                        <Row className="mt-lg-0 pe-lg-4 mt-md-3">
+                          <Col lg={10} md={12} sm={12} xs={12}>
+                            {/*<Form.Group className="mb-2" controlId="validationAddress">*/}
+                            {/*  <Form.Label style={{ fontWeight: 600 }}>Institute's Address</Form.Label>*/}
+                            {/*  <Form.Control*/}
+                            {/*    type="text"*/}
+                            {/*    placeholder="Enter institute's address "*/}
+                            {/*    name="Address"*/}
+                            {/*    value={values.Address}*/}
+                            {/*    onChange={handleChange}*/}
+                            {/*    isInvalid={*/}
+                            {/*      !!errors.Address ? changeAddressValidate(false) : changeAddressValidate(true)*/}
+                            {/*    }*/}
+                            {/*    isValid={touched.Address}*/}
+                            {/*    onBlur={handleBlur}*/}
+                            {/*    disabled={enableEditProfile}*/}
+                            {/*  />*/}
+                            {/*  <Form.Control.Feedback type="invalid">{errors.Address}</Form.Control.Feedback>*/}
+                            {/*</Form.Group>*/}
+                          </Col>
+                        </Row>
+                        <Row className="mt-lg-0 pe-lg-4 mt-md-3">
+
+                        </Row>
+                      </Tab>
+                      <Tab eventKey="coursesconducted" title="Courses Conducted">
+                        {/*<Row className="mt-lg-0 pe-lg-4 mt-md-3">*/}
+                        {/*  <Col lg={10} md={12} sm={12} xs={12}>*/}
+                        {/*    /!*<Form.Group className="mb-2" controlId="validationAccountName">*!/*/}
+                        {/*    /!*  <Form.Label style={{ fontWeight: 600 }}>Account Holder's Name</Form.Label>*!/*/}
+                        {/*    /!*  <Form.Control*!/*/}
+                        {/*    /!*    type="text"*!/*/}
+                        {/*    /!*    placeholder="Enter account holder's name"*!/*/}
+                        {/*    /!*    name="AccountName"*!/*/}
+                        {/*    /!*    value={values.AccountName}*!/*/}
+                        {/*    /!*    onChange={handleChange}*!/*/}
+                        {/*    /!*    isInvalid={*!/*/}
+                        {/*    /!*      !!errors.AccountName*!/*/}
+                        {/*    /!*        ? changeAccountNameValidate(false)*!/*/}
+                        {/*    /!*        : changeAccountNameValidate(true)*!/*/}
+                        {/*    /!*    }*!/*/}
+                        {/*    /!*    isValid={touched.AccountName}*!/*/}
+                        {/*    /!*    onBlur={handleBlur}*!/*/}
+                        {/*    /!*    disabled={enableEditProfile}*!/*/}
+                        {/*    /!*  />*!/*/}
+                        {/*    /!*  <Form.Control.Feedback type="invalid">{errors.AccountName}</Form.Control.Feedback>*!/*/}
+                        {/*    /!*</Form.Group>*!/*/}
+                        {/*  </Col>*/}
+                        {/*</Row>*/}
+                        {/*<Row className="mt-lg-0 pe-lg-4 mt-md-3 d-flex flex-column">*/}
+                        {/*  <Col lg={10} md={6} sm={12} xs={12}>*/}
+                        {/*    <Form.Group className="mb-2" controlId="validationBankName">*/}
+                        {/*      <Form.Label style={{ fontWeight: 600 }}>Bank Name</Form.Label>*/}
+                        {/*      <Form.Control*/}
+                        {/*        type="text"*/}
+                        {/*        placeholder="Enter bank name"*/}
+                        {/*        name="BankName"*/}
+                        {/*        value={values.BankName}*/}
+                        {/*        onChange={handleChange}*/}
+                        {/*        isInvalid={*/}
+                        {/*          !!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)*/}
+                        {/*        }*/}
+                        {/*        isValid={touched.BankName}*/}
+                        {/*        onBlur={handleBlur}*/}
+                        {/*        disabled={enableEditProfile}*/}
+                        {/*      />*/}
+                        {/*      <Form.Control.Feedback type="invalid">{errors.BankName}</Form.Control.Feedback>*/}
+                        {/*    </Form.Group>*/}
+                        {/*  </Col>*/}
+                        {/*  <Col lg={10} md={6} sm={12} xs={12}>*/}
+                        {/*    <Form.Group className="mb-2" controlId="validationBranchName">*/}
+                        {/*      <Form.Label style={{ fontWeight: 600 }}>Branch Name</Form.Label>*/}
+                        {/*      <Form.Control*/}
+                        {/*        type="text"*/}
+                        {/*        placeholder="Enter branch name"*/}
+                        {/*        name="BranchName"*/}
+                        {/*        value={values.BranchName}*/}
+                        {/*        onChange={handleChange}*/}
+                        {/*        isInvalid={*/}
+                        {/*          !!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)*/}
+                        {/*        }*/}
+                        {/*        isValid={touched.BranchName}*/}
+                        {/*        onBlur={handleBlur}*/}
+                        {/*        disabled={enableEditProfile}*/}
+                        {/*      />*/}
+                        {/*      <Form.Control.Feedback type="invalid">{errors.BranchName}</Form.Control.Feedback>*/}
+                        {/*    </Form.Group>*/}
+                        {/*  </Col>*/}
+                        {/*</Row>*/}
+                        {/*<Row className="mt-lg-0 pe-lg-4 mt-md-3">*/}
+                        {/*  <Col lg={10} md={12} sm={12} xs={12}>*/}
+                        {/*    <Form.Group className="mb-2" controlId="validationAccountNo">*/}
+                        {/*      <Form.Label style={{ fontWeight: 600 }}>Account Number</Form.Label>*/}
+                        {/*      <Form.Control*/}
+                        {/*        type="text"*/}
+                        {/*        placeholder="Enter account number"*/}
+                        {/*        name="AccountNo"*/}
+                        {/*        value={values.AccountNo}*/}
+                        {/*        onChange={handleChange}*/}
+                        {/*        isInvalid={*/}
+                        {/*          !!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)*/}
+                        {/*        }*/}
+                        {/*        isValid={touched.AccountNo}*/}
+                        {/*        onBlur={handleBlur}*/}
+                        {/*        disabled={enableEditProfile}*/}
+                        {/*      />*/}
+                        {/*      <Form.Control.Feedback type="invalid">{errors.AccountNo}</Form.Control.Feedback>*/}
+                        {/*    </Form.Group>*/}
+                        {/*  </Col>*/}
+                        {/*</Row>*/}
                       </Tab>
                       <Tab eventKey="bankdetails" title="Bank Details">
                         <Row className="mt-lg-0 pe-lg-4 mt-md-3">
@@ -414,17 +503,17 @@ const TeacherProfile = () => {
                             <Form.Group className="mb-2" controlId="validationBankName">
                               <Form.Label style={{ fontWeight: 600 }}>Bank Name</Form.Label>
                               <Form.Control
-                                type="text"
-                                placeholder="Enter bank name"
-                                name="BankName"
-                                value={values.BankName}
-                                onChange={handleChange}
-                                isInvalid={
-                                  !!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)
-                                }
-                                isValid={touched.BankName}
-                                onBlur={handleBlur}
-                                disabled={enableEditProfile}
+                                  type="text"
+                                  placeholder="Enter bank name"
+                                  name="BankName"
+                                  value={values.BankName}
+                                  onChange={handleChange}
+                                  isInvalid={
+                                    !!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)
+                                  }
+                                  isValid={touched.BankName}
+                                  onBlur={handleBlur}
+                                  disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.BankName}</Form.Control.Feedback>
                             </Form.Group>
@@ -433,17 +522,17 @@ const TeacherProfile = () => {
                             <Form.Group className="mb-2" controlId="validationBranchName">
                               <Form.Label style={{ fontWeight: 600 }}>Branch Name</Form.Label>
                               <Form.Control
-                                type="text"
-                                placeholder="Enter branch name"
-                                name="BranchName"
-                                value={values.BranchName}
-                                onChange={handleChange}
-                                isInvalid={
-                                  !!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)
-                                }
-                                isValid={touched.BranchName}
-                                onBlur={handleBlur}
-                                disabled={enableEditProfile}
+                                  type="text"
+                                  placeholder="Enter branch name"
+                                  name="BranchName"
+                                  value={values.BranchName}
+                                  onChange={handleChange}
+                                  isInvalid={
+                                    !!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)
+                                  }
+                                  isValid={touched.BranchName}
+                                  onBlur={handleBlur}
+                                  disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.BranchName}</Form.Control.Feedback>
                             </Form.Group>
@@ -454,17 +543,17 @@ const TeacherProfile = () => {
                             <Form.Group className="mb-2" controlId="validationAccountNo">
                               <Form.Label style={{ fontWeight: 600 }}>Account Number</Form.Label>
                               <Form.Control
-                                type="text"
-                                placeholder="Enter account number"
-                                name="AccountNo"
-                                value={values.AccountNo}
-                                onChange={handleChange}
-                                isInvalid={
-                                  !!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)
-                                }
-                                isValid={touched.AccountNo}
-                                onBlur={handleBlur}
-                                disabled={enableEditProfile}
+                                  type="text"
+                                  placeholder="Enter account number"
+                                  name="AccountNo"
+                                  value={values.AccountNo}
+                                  onChange={handleChange}
+                                  isInvalid={
+                                    !!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)
+                                  }
+                                  isValid={touched.AccountNo}
+                                  onBlur={handleBlur}
+                                  disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.AccountNo}</Form.Control.Feedback>
                             </Form.Group>
@@ -516,7 +605,9 @@ const TeacherProfile = () => {
             </Formik>
           </Col>
         </Row>
-      </Col>
+
+        </Row>
+      </Container>
 
   );
 };
