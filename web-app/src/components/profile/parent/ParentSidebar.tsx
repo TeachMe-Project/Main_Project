@@ -4,7 +4,7 @@ import {HiOutlineMenu} from "react-icons/hi";
 import {useNavigate} from "react-router-dom";
 import {FaTachometerAlt} from "react-icons/fa";
 import {IoIosSchool} from "react-icons/io";
-import {MdPersonAddAlt} from "react-icons/md";
+import {MdPersonAddAlt, MdAccountCircle} from "react-icons/md";
 import {useMediaQuery} from 'react-responsive';
 import {BsCashCoin} from "react-icons/bs";
 
@@ -63,6 +63,11 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
                 <Menu iconShape="circle">
                     <MenuItem icon={<FaTachometerAlt/>} onClick={() => navigate('/parent/history')}>
                         Student Progress
+                    </MenuItem>
+                </Menu>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<MdAccountCircle/>} onClick={() => navigate('/parent/studentrequests')}>
+                        Student Requests
                     </MenuItem>
                 </Menu>
                 <Menu iconShape="circle">

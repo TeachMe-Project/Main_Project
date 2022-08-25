@@ -23,18 +23,22 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import UnsupportedBrowserWarning from '../../UnsupportedBrowserWarning/UnsupportedBrowserWarning';
 import PaymentGateway from '../../PaymentGateway/PayementGateway';
+import TeacherProfile from "../Teacher/TeacherProfile";
 
 const VideoApp = () => {
   const { error, setError } = useAppState();
   const connectionOptions = useConnectionOptions();
 
   return (
-    <VideoProvider options={connectionOptions} onError={setError}>
-      <ErrorDialog dismissError={() => setError(null)} error={error} />
-      <ChatProvider>
-        <Twilio />
-      </ChatProvider>
-    </VideoProvider>
+
+        <VideoProvider options={connectionOptions} onError={setError} >
+          <ErrorDialog dismissError={() => setError(null)} error={error} />
+          <ChatProvider>
+            <Twilio />
+          </ChatProvider>
+        </VideoProvider>
+
+
   );
 };
 
@@ -92,6 +96,10 @@ const routes = [
   {
     path: '/room/:URLRoomName',
     main: () => <VideoApp />,
+  },
+  {
+    path: '/teacherProfile',
+    main: () => <TeacherProfile />,
   },
 ];
 

@@ -3,6 +3,16 @@ import ParentLayout from "./ParentLayout";
 import {Col, ListGroup, Row, Tab, Tabs} from "react-bootstrap";
 import {AiOutlineCloseCircle} from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
+import Images from "../../../assets/images/Images";
+// @ts-ignore
+import { faker } from '@faker-js/faker';
+// @ts-ignore
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+// @ts-ignore
+import { Bar } from 'react-chartjs-2';
+import Parentsaveragetimechart from "./Parentaveragetimechart";
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const PStudentSummery = () => {
 
@@ -14,56 +24,64 @@ const PStudentSummery = () => {
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
                         <h1 className='text-lg-start header my-lg-3 text-md-center text-center d-flex flex-row align-items-center justify-content-between'>
-                            Summery
+                            Summary
                             <AiOutlineCloseCircle className='me-lg-4' style={{cursor: "pointer"}}
                                                   onClick={() => navigate(-1)}/>
                         </h1>
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={3} className='d-flex align-items-center flex-column justify-content-center
-                    '>
-                        <ListGroup className="list-group-flush text-start p-1" style={{width: "fit-content", border:"2px solid grey", borderRadius:"10px"}}>
-                            <ListGroup.Item className="px-0"><span style={{
-                                fontWeight: "700",
-                                marginRight: "10px"
-                            }}>Subject:</span> Mathematics</ListGroup.Item>
-                            <ListGroup.Item className="px-0"><span style={{
-                                fontWeight: "700",
-                                marginRight: "10px"
-                            }}>Tutor:</span> Saman Karunanayaka</ListGroup.Item>
-                            <ListGroup.Item className="px-0"><span
-                                style={{fontWeight: "700", marginRight: "10px"}}>Date:</span> 2022-08-22
-                            </ListGroup.Item>
-                            <ListGroup.Item className="px-0"><span
-                                style={{fontWeight: "700", marginRight: "10px"}}>Start Time:</span> 15.30 h
-                            </ListGroup.Item>
-                            <ListGroup.Item className="px-0"><span
-                            style={{fontWeight: "700", marginRight: "10px"}}>End Time:</span> 17.30 h
-                        </ListGroup.Item>
-                        </ListGroup>
+
+                    <Col lg={5} >
+                        <Parentsaveragetimechart />
                     </Col>
-                    <Col lg={9} >
-                        <Tabs
-                            defaultActiveKey="analytics"
-                            id="uncontrolled-tab-example"
-                            className="mb-3 mt-2"
-                        >
-                            <Tab eventKey="analytics" title="Analytics">
-                                <h1>Tab 1</h1>
-                                <h1>Tab 1</h1>
-                                <h1>Tab 1</h1>
-                                <h1>Tab 1</h1>
-                                <h1>Tab 1</h1>
-                                <h1>Tab 1</h1>
-                            </Tab>
-                            <Tab eventKey="usedapps" title="Used Unwanted Apps">
-                                <h1>Tab 2</h1>
-                            </Tab>
-                            <Tab eventKey="photos" title="Captures of Student">
-                                <h1>Tab 3</h1>
-                            </Tab>
-                        </Tabs>
+                    <Col lg={5} >
+                        <div className="chart">
+                            <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: '29rem', height: '15rem' }}>
+                                <div className="card-body">
+                                    <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
+                                        <Col xl={8}>
+                                            <h5 className="card-title" style={{ marginBottom: '20px', color: '#1e90ff' }}>
+                                                Apps Used
+                                            </h5>
+                                        </Col>
+                                        <Col xl={4}>
+                                            <h5 className="card-title" style={{ marginBottom: '20px', color: '#1e90ff' }}>
+                                                Time (Mins)
+                                            </h5>
+                                        </Col>
+                                    </div>
+                                    <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
+                                        <Col xl={8}>
+                                            <p style={{ marginRight: '20px' }}>
+                                                <b>MS Office</b>
+                                            </p>
+                                        </Col>
+                                        <Col xl={4}>
+                                            <p className="text-center">
+                                                <b>13</b>
+                                            </p>
+                                        </Col>
+                                    </div>
+
+                                    <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
+                                        <Col xl={8}>
+                                            <p style={{ marginRight: '20px' }}>
+                                                <b>MS PowerPoint</b>
+                                            </p>
+                                        </Col>
+                                        <Col xl={4}>
+                                            <p className="text-center">
+                                                <b>22</b>
+                                            </p>
+                                        </Col>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* <Monthlyattendancechart /> */}
+                        </div>
+
                     </Col>
                 </Row>
             </Col>

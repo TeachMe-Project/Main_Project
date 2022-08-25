@@ -10,18 +10,18 @@ import Home from './home/Home';
 import { useAuth0 } from '@auth0/auth0-react';
 import NavBar from './home/navBar';
 import UnAuth from './auth0/unAuth';
-// import psList from 'ps-list';
-const psList=window.require('ps-list');
+import psList from 'ps-list';
+// const psList=window.require('ps-list');
+//
+// console.log( psList());
 
-
-console.log( psList());
-const x = () => {
-  console.log(psList());
-}
+// const x = async () => {
+//   await psList().then((data)=> console.log(data));
+// }
 
 
 function App() {
-  x();
+  // x();
   const { user, isAuthenticated } = useAuth0();
 
   const renderMain = () => {
@@ -35,6 +35,7 @@ function App() {
             <Row>
               <Col xl={2} className="LeftCol">
                 <LeftSidebarTeacher />
+                {/*<LeftSidebar />*/}
               </Col>
               <Col xl={10} className={'MiddleCol'}>
                 <MainPanelTeacher />

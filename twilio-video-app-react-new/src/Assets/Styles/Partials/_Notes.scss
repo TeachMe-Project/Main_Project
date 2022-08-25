@@ -1,35 +1,53 @@
-.Notes {
-  .Card {
-    width: 95%;
-    margin: 5px auto;
-    display: flex;
-    border-radius: 8px;
-    flex-direction: row;
-
-    .CardBody {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-
-      .CardHeader h6 {
-        font-weight: 600;
-        padding-top: 4px;
-        width: 15vw;
-      }
-      .CardDetails {
-        margin: 0 4rem 0 0;
-        padding-top: 4px;
-      }
-      .CardButton {
-        font-size: 15px;
-        padding: 3px 7px;
-        margin: 0 0 0 3rem;
-        border-radius: 10px;
-      }
-      .CardButton:hover {
-        background-color: $header-secondary;
-        color: $body-bg-primary;
-      }
-    }
+.noteheader {
+    font-weight: 700;
+    font-size: 14px;
+    color: $header-secondary;
+    margin-bottom: 0.2rem;
   }
+.notedetails {
+  font-size: 14px;
+  font-weight: 400;
+  color: $content-primary;
 }
+.Reacticonbtn {
+  width:max-content;
+  border-radius:10px;
+  padding: 4px 7px;
+  font-size: 12px;
+  font-weight:600;
+}
+.Reacticon {
+    border: none;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+.download{
+  color:#2ecc71;
+  border:1px solid #2ecc71;
+}
+.download:hover{
+  background-color:#2ecc71;
+  color:#fff;
+}
+.remove{
+  color:#ee5253;
+  border:1px solid #ee5253;
+}
+.remove:hover{
+  background-color:#ee5253;
+  color:#fff;
+}
+.archive{
+  color:#1e90ff;
+  border:1px solid #1e90ff;
+}
+.archive:hover{
+  background-color:#1e90ff;
+  color:#fff;
+}
+
+
+
+
+
+
