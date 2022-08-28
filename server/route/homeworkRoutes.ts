@@ -1,12 +1,12 @@
 import express from "express";
-import {createHomework, getHomeworkByID, getHomeworks} from "../controllers/homeworkController";
+import {createHomework, getHomeworkByID} from "../controllers/homeworkController";
 
 export const homeworkRouter=express.Router();
 
 
-
-homeworkRouter.route("/allHomeworks")
-    .get(getHomeworks);
+//
+// homeworkRouter.route("/allHomeworks")
+//     .get(getHomeworks);
 
 homeworkRouter.route("/:id")
     .get(getHomeworkByID);

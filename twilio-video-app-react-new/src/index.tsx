@@ -26,6 +26,8 @@ import MyCourses from './components/Pages/Student/MyCourses';
 import StudentProfile from './components/Pages/Student/StudentProfile';
 import { BrowserRouter } from 'react-router-dom';
 import { Auth0ProviderWithHistory } from './auth0/auth0-provider-with-history';
+// import psList from "ps-list"
+// console.log(psList());
 
 ReactDOM.render(
   <BrowserRouter>
