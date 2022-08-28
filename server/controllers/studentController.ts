@@ -25,7 +25,7 @@ export const getStudentByID = async (req: Request, res: Response) => {
     try {
         const data = await prisma.student.findMany({
             where: {
-                student_id: Number(req.params.id)
+                user_id: req.params.id
             },
             include: {
                 user: true,

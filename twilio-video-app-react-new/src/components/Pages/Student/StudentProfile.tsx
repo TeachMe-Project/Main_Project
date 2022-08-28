@@ -55,7 +55,7 @@ const initialState = {
 export const StudentProfile = () => {
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURL = `https://learnx.azurewebsites.net/user/${studentAuthId}`;
+  const baseURL = `http://localhost:8081/student/${studentAuthId}`;
 
   const [profDetails, setProfDetails] = useState<any[]>([]);
   const [isEditing, setISEditing] = useState(false);
@@ -153,7 +153,7 @@ export const StudentProfile = () => {
         </div>
         <div className="PanelContainer">
           <Col xl={4}>
-            {/* {profDetails.map((item: any) => {
+            {profDetails.map((item: any) => {
               return (
                 <div className="LeftContainer">
                   <div className="ProfileImg">
@@ -170,11 +170,11 @@ export const StudentProfile = () => {
                   </div>
                 </div>
               );
-            })} */}
-                <div className="LeftContainer">
+            })}
+                {/* <div className="LeftContainer">
                   <div className="ProfileImg">
                     <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
-                    {/*<AzureCloudStorage />*/}
+                    <AzureCloudStorage />
                   </div>
                   <div className="ParentContact">
                     <div className="ContactHeader">Student's Contact Details:</div>
@@ -185,7 +185,7 @@ export const StudentProfile = () => {
                     <div className="ParentLabel">Email:</div>
                     <div className="ParentValue">pathmaniranatunga@gmail.com</div>
                   </div>
-                </div>
+                </div> */}
           </Col>
 
           <Col xl={8}>
