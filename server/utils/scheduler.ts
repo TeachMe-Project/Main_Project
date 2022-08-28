@@ -43,8 +43,7 @@ export const classSchedule = async () => {
                         date: nextWeek,
                         start_time: startAt,
                         end_time: endAt,
-                        isActive: true,
-                        course: data.course
+                        isActive: true
                     }
                 })
                 // console.log(res)
@@ -56,7 +55,7 @@ export const classSchedule = async () => {
                     course_id: courseId,
                 },
                 data: {
-                    created_date: nextWeek,
+                    created_date: nextWeek.toUTCString(),
                 },
             });
 
@@ -73,7 +72,7 @@ export const classSchedule = async () => {
             // console.log(startAt)
             let endAt = data[i].end_time.toUTCString();
             endAt = endAt.substring(17,22)
-            console.log(endAt)
+            // console.log(endAt)
             // console.log(data[i].start_date)
             let newDate = new Date(data[i].created_date);
             // console.log(newDate)
@@ -98,8 +97,7 @@ export const classSchedule = async () => {
                         date: nextWeek,
                         start_time: startAt,
                         end_time: endAt,
-                        isActive: true,
-                        course: data.course
+                        isActive: true
                     }
                 })
                 // console.log(res)
@@ -111,7 +109,7 @@ export const classSchedule = async () => {
                     course_id: courseId,
                 },
                 data: {
-                    created_date: nextWeek,
+                    created_date: nextWeek.toUTCString(),
                 },
             });
 

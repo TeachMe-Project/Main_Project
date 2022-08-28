@@ -5,22 +5,22 @@ import homeworkSchema from "../models/homeworkModel";
 
 const prisma = new PrismaClient();
 
-export const getHomeworks=async (req:Request,res:Response)=>{
-
-    try {
-        const data =await prisma.homework.findMany({
-            include:{
-                student:true
-            }
-        })
-        console.log(data[0].student)
-        res.status(200).send(data[0].student)
-    }
-
-    catch (error) {
-        res.status(500).send(error);
-    }
-}
+// export const getHomeworks=async (req:Request,res:Response)=>{
+//
+//     try {
+//         const data =await prisma.homework.findMany({
+//             include:{
+//                 student:true
+//             }
+//         })
+//         console.log(data[0].student)
+//         res.status(200).send(data[0].student)
+//     }
+//
+//     catch (error) {
+//         res.status(500).send(error);
+//     }
+// }
 export const getHomeworkByID=async (req:Request,res:Response)=>{
 
 
