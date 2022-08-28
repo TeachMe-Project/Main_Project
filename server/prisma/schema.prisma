@@ -49,16 +49,13 @@ model course {
 
 model homework {
   homework_id   Int      @id @default(autoincrement())
-  student_id    Int
   course_id     Int
   uploaded_date DateTime @default(now()) @db.Date
   homework      String   @db.VarChar(1000)
   isActive      Boolean
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM COURSE")
-  student       student  @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM STUDENT")
 
   @@index([course_id], map: "FK TO HOMEWORK FROM COURSE")
-  @@index([student_id], map: "FK TO HOMEWORK FROM STUDENT")
 }
 
 model institute {
@@ -115,13 +112,10 @@ model notes {
   uploaded_date DateTime @default(now()) @db.Date
   note          String   @db.VarChar(1000)
   course_id     Int
-  student_id    Int
   isActive      Boolean
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO NOTE FROM COURSE")
-  student       student  @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO NOTE FROM STUDENT")
 
   @@index([course_id], map: "FK TO NOTE FROM COURSE")
-  @@index([student_id], map: "FK TO NOTE FROM STUDENT")
 }
 
 model notification {
@@ -174,8 +168,6 @@ model student {
   isActive        Boolean
   parent          parent            @relation(fields: [parent_id], references: [parent_id], onDelete: Cascade, map: "FK TO STUDENT FROM PARENT")
   user            user              @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK TO STUDENT FROM USER")
-  homework        homework[]
-  notes           notes[]
   parent_payment  parent_payment[]
   student_class   student_class[]
   student_course  student_course[]
@@ -218,7 +210,7 @@ model teacher {
   first_name        String               @db.VarChar(30)
   last_name         String               @db.VarChar(30)
   contact_no        String               @db.VarChar(15)
-  gender            teacher_gender
+  title             teacher_title
   description       String               @db.VarChar(255)
   qualification     String               @db.VarChar(255)
   account_name      String               @db.VarChar(255)
@@ -270,8 +262,8 @@ model student_class {
   start_time    String                      @db.VarChar(100)
   end_time      String                      @default(dbgenerated("(current_timestamp())")) @db.VarChar(100)
   status        student_class_status        @default(upcoming)
-  joined_time   DateTime                    @default(now()) @db.Timestamp(0)
-  left_time     DateTime                    @default(now()) @db.Timestamp(0)
+  joined_time   String                      @default(dbgenerated("(current_timestamp())")) @db.VarChar(100)
+  left_time     String                      @default(dbgenerated("(current_timestamp())")) @db.VarChar(100)
   online_status student_class_online_status
   isActive      Boolean
   isStarted     Boolean                     @default(false)
@@ -391,11 +383,6 @@ enum institute_verification {
   rejected
 }
 
-enum teacher_gender {
-  male
-  female
-}
-
 enum student_class_status {
   upcoming
   ended
@@ -405,4 +392,10 @@ enum student_class_status {
 enum student_class_online_status {
   online
   offline
+}
+
+enum teacher_title {
+  Mr
+  Mrs
+  Mis
 }

@@ -35,20 +35,20 @@ export const getStudentByID = async (req: Request, res: Response) => {
 }
 
 
-export const getStudentUpcomingClasses = async (req: Request, res: Response) => {
-
-    try {
-        const data = await prisma.teacher_class.findMany(
-            {
-                where: {student_id: Number(req.params.id)}
-
-            }
-        )
-        res.status(200).send(data)
-    } catch (error) {
-        res.status(500).send(error);
-    }
-}
+// export const getStudentUpcomingClasses = async (req: Request, res: Response) => {
+//
+//     try {
+//         const data = await prisma.teacher_class.findMany(
+//             {
+//                 where: {student_id: Number(req.params.id)}
+//
+//             }
+//         )
+//         res.status(200).send(data)
+//     } catch (error) {
+//         res.status(500).send(error);
+//     }
+// }
 
 export const getStudentCourses = async (req: Request, res: Response) => {
 
@@ -66,53 +66,53 @@ export const getStudentCourses = async (req: Request, res: Response) => {
     }
 }
 
-export const getStudentHomeworks = async (req: Request, res: Response) => {
+// export const getStudentHomeworks = async (req: Request, res: Response) => {
+//
+//     try {
+//         const data = await prisma.homework.findMany(
+//             {
+//                 where: {student_id: Number(req.params.id)},
+//                 include: {course: true},
+//
+//             }
+//         )
+//         res.status(200).send(data);
+//     } catch (error) {
+//         res.status(500).send(error);
+//     }
+// }
 
-    try {
-        const data = await prisma.homework.findMany(
-            {
-                where: {student_id: Number(req.params.id)},
-                include: {course: true},
+// export const getStudentNotes = async (req: Request, res: Response) => {
+//
+//     try {
+//         const data = await prisma.notes.findMany(
+//             {
+//                 where: {student_id: Number(req.params.id)},
+//                 include: {course: true},
+//
+//             }
+//         )
+//         res.status(200).send(data);
+//     } catch (error) {
+//         res.status(500).send(error);
+//     }
+// }
 
-            }
-        )
-        res.status(200).send(data);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-}
-
-export const getStudentNotes = async (req: Request, res: Response) => {
-
-    try {
-        const data = await prisma.notes.findMany(
-            {
-                where: {student_id: Number(req.params.id)},
-                include: {course: true},
-
-            }
-        )
-        res.status(200).send(data);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-}
-
-export const getStudentUpcomingPayments = async (req: Request, res: Response) => {
-
-    try {
-        const data = await prisma.student_payment.findMany(
-            {
-                where: {student_id: Number(req.params.id), payment_status: "unpaid"},
-
-
-            }
-        )
-        res.status(200).send(data);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-}
+// export const getStudentUpcomingPayments = async (req: Request, res: Response) => {
+//
+//     try {
+//         const data = await prisma.student_payment.findMany(
+//             {
+//                 where: {student_id: Number(req.params.id), payment_status: "unpaid"},
+//
+//
+//             }
+//         )
+//         res.status(200).send(data);
+//     } catch (error) {
+//         res.status(500).send(error);
+//     }
+// }
 export const createStudent = async (req: Request, res: Response) => {
     const {error, value} = studentSchema.validate(req.body);
     const parent_id = Number(req.body.parent_id);
@@ -140,7 +140,7 @@ export const createStudent = async (req: Request, res: Response) => {
             })
             logger.info(NAME_SPACE, "Your Profile Successfully Created");
             res.status(200).send("Your Profile Successfully Created");
-        } catch (error) {
+        } catch (error: any) {
             logger.error(NAME_SPACE, error.message);
             res.status(500).send(error.message);
         }
