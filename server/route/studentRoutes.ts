@@ -6,7 +6,7 @@ import {
     getStudents,
     // getStudentUpcomingClasses,
     createStudent,
-    getStudentUpcomingClasses,
+    getStudentUpcomingClasses, getStudentTutors,
     // getStudentNotes
 } from "../controllers/studentController";
 export const studentRouter=express.Router();
@@ -24,6 +24,9 @@ studentRouter.route("/:id/courses")
 
 studentRouter.route("/upcomingClasses/:id")
     .get(getStudentUpcomingClasses);
+
+studentRouter.route("/tutors/:id")
+    .get(getStudentTutors);
 
 // studentRouter.route("/:id/homeWorks")
 //     .get(getStudentHomeworks);

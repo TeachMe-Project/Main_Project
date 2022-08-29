@@ -39,7 +39,6 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
 
     try {
 
-
         // @ts-ignore
         const {student_id} = await prisma.student.findFirst({
             where: {
@@ -80,6 +79,45 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
             }
         }
         res.status(200).send(upcoming_class)
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+export const getStudentTutors = async (req: Request, res: Response) => {
+
+    try {
+        // @ts-ignore
+        const {student_id} = await prisma.student.findFirst({
+            where: {
+                user_id: req.params.id,
+            },
+            select: {
+                student_id: true
+            }
+        });
+
+
+        const data = await prisma.student_course.findMany({
+            where: {
+                student_id: student_id,
+                isActive: true,
+                status: "accepted"
+            },
+            include:{
+                course: {
+                    include: {
+                        teacher:{
+                            include:{
+                                user:true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
+        res.status(200).send(data)
     } catch (error) {
         res.status(500).send(error);
     }
