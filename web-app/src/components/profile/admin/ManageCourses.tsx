@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AdminLayout from "./AdminLayout";
 import {Card, Col, Row} from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -11,52 +11,9 @@ import {useMediaQuery} from "react-responsive";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
 import {FaEye} from "react-icons/fa";
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {useNavigate} from "react-router-dom";
-
-
-
-
-const data = [
-    {
-        id: 10000102345,
-        grade: 'Grade 11',
-        subject: 'Business & Accounting Studies',
-        tutor_name: 'Amila Banadaranayake',
-    },
-    {
-        id: 10000102355,
-        grade: 'Grade 07',
-        subject: 'History',
-        tutor_name: 'Kamal Maggona',
-    },
-    {
-        id: 10000102320,
-        grade: "Grade 10",
-        subject: "Science",
-        tutor_name: "Anusha Palpita",
-    },
-    {
-        id: 10000109945,
-        grade: "Grade 06",
-        subject: "Sinhala Lang. & Lit",
-        tutor_name: "Nimali Weeerasinghe",
-    }
-    ,
-    {
-        id: 10000102300,
-        grade: "Grade 9",
-        subject: "History",
-        tutor_name: "Vajira Gamage",
-
-    },
-    {
-        id: 10000102345,
-        grade: "Grade 11",
-        subject: "Business & Accounting Studies",
-        tutor_name: "Sameera Rajapakse",
-    }
-];
+import Loader from "../../utils/Loader";
 
 
 const ManageCourses = () => {
@@ -64,9 +21,11 @@ const ManageCourses = () => {
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
 
-    const baseURL = "http://localhost:8081/course/allCourses";
-    const [courses, setCourses] =  React.useState<any[]>([]);
+    const baseURL = "https://learnx.azurewebsites.net/course/allCourses";
+    const [courses, setCourses] = React.useState<any[]>([]);
     const navigate = useNavigate();
+    const [isDataLoading, setIsDataLoading] = useState(false);
+
     const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
         < FaEye
             style={{
@@ -80,7 +39,7 @@ const ManageCourses = () => {
                 boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
             }}
             className='accept-icon'
-            onClick={() => navigate('/admin/course')}
+            onClick={() => navigate(`/admin/course/${row.id}`)}
         />
     );
     const columns = [
@@ -111,20 +70,23 @@ const ManageCourses = () => {
         },
     ];
 
-    React.useEffect(() => {
-    axios.get(baseURL).then((response) => {
-      setCourses(response.data);
-    })
-    .catch((error)=>{
-        console.log(error);
-    })
-  }, []);
-  console.log(courses);
-
-  if(courses === null){
-    return 
-    
-    }
+    useEffect(() => {
+        axios.get(baseURL).then((response: AxiosResponse) => {
+            response.data.map((item: any) => {
+                    setCourses(prevState => [...prevState, {
+                        id: item.course_id,
+                        grade: item.grade,
+                        subject: item.subject,
+                        tutor_name: item.teacher.first_name + ' '+ item.teacher.last_name
+                    }])
+                }
+            )
+            setIsDataLoading(true);
+        })
+            .catch((error:any) => {
+                console.log(error.message);
+            })
+    }, []);
 
     // @ts-ignore
     return (
@@ -139,10 +101,11 @@ const ManageCourses = () => {
                     </Col>
                 </Row>
                 <Row>
+                    {!isDataLoading && <Loader/>}
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
-                        data={data}
+                        data={courses}
                         columns={columns}
                         search>
                         {(props: any) =>
@@ -175,7 +138,7 @@ const ManageCourses = () => {
                     }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
-                        {courses.map((item:any) => {
+                        {courses.map((item: any) => {
                             return (
                                 <Card className='w-100 p-3 mb-2 table-card'>
                                     <ul className='ps-md-3 ps-0'>

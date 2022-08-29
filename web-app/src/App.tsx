@@ -75,7 +75,7 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={TutorPayments} role={'admin'}/>}/>
                 <Route path="/admin/notification"
                        element={<ProtectedRoute component={AdminNotification} role={'admin'}/>}/>
-                <Route path="/admin/course"
+                <Route path="/admin/course/:course_id"
                        element={<ProtectedRoute component={ViewCourse} role={'admin'}/>}/>
 
 
