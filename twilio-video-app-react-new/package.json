@@ -268,7 +268,7 @@
 
     "electron": "wait-on tcp:3000 && electron .",
 
-    "temp": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm:electron\"",
+    "temp": "concurrently -k \"cross-env BROWSER=none npm  start\" \"npm:electron\"",
 
     "web": "concurrently npm:dev",
 
