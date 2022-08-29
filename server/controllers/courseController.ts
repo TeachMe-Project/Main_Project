@@ -27,6 +27,9 @@ export const getCourseByID = async (req: Request, res: Response) => {
         const data = await prisma.course.findMany({
             where: {
                 course_id: Number(req.params.id)
+            },
+            include:{
+                teacher: true
             }
 
         })

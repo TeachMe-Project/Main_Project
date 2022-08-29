@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Row, Tab, Tabs, Card} from "react-bootstrap";
 import {AiOutlineCloseCircle} from "react-icons/ai";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
 import {FaEye} from "react-icons/fa";
@@ -18,6 +18,7 @@ const CourseProfile = () => {
     const navigate = useNavigate();
     const {SearchBar} = Search;
     const isPc = useMediaQuery({minWidth: 991});
+    const params = useParams();
 
     const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
         < FaEye
@@ -97,7 +98,7 @@ const CourseProfile = () => {
     ];
 
 
-    const data = [
+    const students = [
         {
             student_id: 12345678,
             username: "samana@gmail.com",
@@ -105,7 +106,7 @@ const CourseProfile = () => {
         }
     ];
 
-    const data2 = [
+    const schedule = [
         {
             date: "2022-02-23",
             time: "05.00PM",
@@ -233,7 +234,7 @@ const CourseProfile = () => {
                         {isPc &&
                         <ToolkitProvider
                             keyField="id"
-                            data={data}
+                            data={students}
                             columns={columns}
                             search>
                             {(props: any) =>
@@ -243,7 +244,7 @@ const CourseProfile = () => {
                                                    placeholder="Search Courses"
                                         />
                                         <BootstrapTable
-                                            columns={columns} data={data} keyField="id"
+                                            columns={columns} data={students} keyField="id"
                                             {...props.baseProps}
                                             bootstrap4={true}
                                             pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
@@ -308,14 +309,14 @@ const CourseProfile = () => {
                         {isPc &&
                         <ToolkitProvider
                             keyField="id"
-                            data={data2}
+                            data={schedule}
                             columns={column2}
                             search>
                             {(props: any) =>
                                 (
                                     <Row className='next-table'>
                                         <BootstrapTable
-                                            columns={column2} data={data2} keyField="id"
+                                            columns={column2} data={schedule} keyField="id"
                                             {...props.baseProps}
                                             bootstrap4={true}
                                             pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
