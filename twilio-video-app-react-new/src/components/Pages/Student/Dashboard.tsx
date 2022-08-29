@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../../Card/Card';
 import { Row, Col, Container } from 'react-bootstrap';
 import '../../../Assets/Styles/main.scss';
@@ -8,8 +9,35 @@ import TopNavbar from '../../Navbars/TopNavbar';
 import LeftSidebar from '../../Sidebar/LeftSidebar';
 import PanelContainer from '../../Layout/PanelContainer';
 import Searchbar from '../../Searchbar/Searchbar';
+import axios, { AxiosResponse } from 'axios';
 
 export const Dashboard = () => {
+  const baseURL = 'https://learnx.azurewebsites.net/student/:id/upcomingClasses';
+  const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setUpcomingClasses(prevState => [
+            ...prevState,
+            {
+              subject: item.course.subject,
+              // teacher:
+              date: item.date,
+              start_time: item.start_time,
+              end_time: item.end_time,
+            },
+          ]);
+        });
+        console.log(upcomingClasses);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="Dashboard">
       <Container>
@@ -23,30 +51,41 @@ export const Dashboard = () => {
               <h5>Upcoming Classes</h5>
             </div>
             <div className="PanelBody">
+              {/* {upcomingClasses.map((item: any) => {
+                return (
+                  <Card
+                    header={item.subject}
+                    // teacher="Mr. Lasitha Nuwan"
+                    time="04:00pm- 06:00pm"
+                    date={item.date}
+                    btnname="Join"
+                    image={<img src={'/Images/subjects/maths.png'} />}
+                  />
+                );
+              })} */}
               <Card
                 header="Mathematics"
                 teacher="Mr. Lasitha Nuwan"
                 time="04:00pm- 06:00pm"
-                date="23-08-2022"
+                date="22 Aug 2022"
                 btnname="Join"
                 image={<img src={'/Images/subjects/maths.png'} />}
               />
               <Card
-                header="Science"
-                teacher="Ms. Nayana Sandamali"
+                header="Mathematics"
+                teacher="Mr. Lasitha Nuwan"
                 time="04:00pm- 06:00pm"
-                date="25-08-2022"
+                date="23 Aug 2022"
                 btnname="Join"
-                image={<img src={'/Images/subjects/science.png'} />}
+                image={<img src={'/Images/subjects/maths.png'} />}
               />
-
               <Card
-                header="Music"
-                teacher="Mr. Anura Kahatgoda"
-                time="06:00pm- 08:00pm"
-                date="26-08-2022"
+                header="Mathematics"
+                teacher="Mr. Lasitha Nuwan"
+                time="04:00pm- 06:00pm"
+                date="24 Aug 2022"
                 btnname="Join"
-                image={<img src={'/Images/subjects/music.png'} />}
+                image={<img src={'/Images/subjects/maths.png'} />}
               />
             </div>
 
