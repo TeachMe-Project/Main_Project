@@ -12,6 +12,7 @@ import swal from "@sweetalert/with-react";
 // @ts-ignore
 import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min';
 import axios, {AxiosResponse} from "axios";
+import Loader from "../../utils/Loader";
 
 
 const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
@@ -116,96 +117,59 @@ const ManageUsers = () => {
     const [users, setUsers] = useState<any[]>([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
 
-    // useEffect(() => {
-    //     axios.get(baseURL).then((res: AxiosResponse) => {
-    //         // setIsDataLoading(true);
-    //         res.data.map((item: any) => {
-    //             if (item.type === 'teacher') {
-    //
-    //                 setUsers(prevState => [...prevState, {
-    //                     user_id: item.user_id,
-    //                     username: item.username,
-    //                     type: "Teacher",
-    //                     first_name: item.teacher.first_name,
-    //                     last_name: item.teacher.last_name
-    //                 }])
-    //             } else if (item.type === 'student') {
-    //                 setUsers(prevState => [...prevState, {
-    //                     user_id: item.user_id,
-    //                     username: item.username,
-    //                     type: "Student",
-    //                     first_name: item.student[0].first_name,
-    //                     last_name: item.student[0].last_name
-    //                 }])
-    //             } else if (item.type === 'institute') {
-    //                 console.log(item)
-    //                 setUsers(prevState => [...prevState, {
-    //                     user_id: item.user_id,
-    //                     username: item.username,
-    //                     type: "Institute",
-    //                     first_name: item.institute[0].institute_name,
-    //                     last_name: '-'
-    //                 }])
-    //             } else if (item.type === 'parent') {
-    //                 console.log(item.parent[0])
-    //                 setUsers(prevState => [...prevState, {
-    //                     user_id: item.user_id,
-    //                     username: item.username,
-    //                     type: "Parent",
-    //                     first_name: item.parent[0].first_name,
-    //                     last_name: item.parent[0].last_name
-    //                 }])
-    //             }
-    //         })
-    //         console.log(users)
-    //     })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         })
-    // }, []);
+    useEffect(() => {
+        axios.get(baseURL).then((res: AxiosResponse) => {
+            // setIsDataLoading(true);
+            res.data.map((item: any) => {
+                if (item.type === 'teacher' ) {
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Teacher",
+                        first_name: item.teacher.first_name,
+                        last_name: item.teacher.last_name
+                    }])
+                }
+                else if (item.type === 'student' ) {
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Student",
+                        first_name: item.student[0].first_name,
+                        last_name: item.student[0].last_name
+                    }])
+                }
+                else if (item.type === 'institute') {
+                    console.log(item)
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Institute",
+                        first_name: item.institute.institute_name,
+                        last_name: '-'
+                    }])
+                }
+                else if (item.type === 'parent') {
+                    setUsers(prevState => [...prevState, {
+                        user_id: item.user_id,
+                        username: item.username,
+                        type: "Parent",
+                        first_name: item.parent[0].first_name,
+                        last_name: item.parent[0].last_name
+                    }])
+                }
+                setIsDataLoading(true);
+            })
+        })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, []);
 
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
 
-    const data = [
-        {
-            user_id: "100008972",
-            username: "prasadlakshan@gmail.com",
-            type: "Parent",
-            first_name: "Prasad",
-            last_name: "Lakshan"
-        },
-        {
-            user_id: "100008973",
-            username: "manethwijethunga@gmail.com",
-            type: "Teacher",
-            first_name: "Maneth",
-            last_name: "Wijethunga"
-        },
-        {
-            user_id: "100008974",
-            username: "lakshanmadusha@gmail.com",
-            type: "Student",
-            first_name: "Lakshan",
-            last_name: "Madusha"
-        },
-        {
-            user_id: "100008975",
-            username: "sigmainst@gmail.com",
-            type: "Institute",
-            first_name: "Sigma",
-            last_name: "-"
-        },
-        {
-            user_id: "100008976",
-            username: "samanthadeshan@gmail.com",
-            type: "Student",
-            first_name: "Samantha",
-            last_name: "Deshan"
-        }
-    ];
-    // @ts-ignore
     return (
 
         <AdminLayout>
@@ -218,10 +182,11 @@ const ManageUsers = () => {
                     </Col>
                 </Row>
                 <Row>
+                    {!isDataLoading && <Loader/>}
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
-                        data={data}
+                        data={users}
                         columns={columns}
                         search>
                         {(props: any) =>
@@ -265,6 +230,18 @@ const ManageUsers = () => {
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[1].text}</span>
                                             <span className='table-card-data'>{item.username}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[2].text}</span>
+                                            <span className='table-card-data'>{item.first_name}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[3].text}</span>
+                                            <span className='table-card-data'>{item.last_name}</span>
+                                        </li>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
+                                            <span className='table-card-label'>{columns[4].text}</span>
+                                            <span className='table-card-data'>{item.type}</span>
                                         </li>
 
                                         <li className='d-flex flex-row align-items-center justify-content-end mt-2'>

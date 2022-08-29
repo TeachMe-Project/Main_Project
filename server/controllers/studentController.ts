@@ -97,18 +97,34 @@ export const getStudentHomeworks = async (req: Request, res: Response) => {
     }
 }
 
+export const getStudentNotes = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.notes.findMany(
+            {
+                where: { student_id: Number(req.params.id) },
+                include: { course: true },
+
+            }
+        )
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
 export const getStudentParentDetails = async (req: Request, res: Response) => {
 
     try {
         const data = await prisma.student.findMany(
             {
                 where: { user_id: req.params.id },
-                include: { 
+                include: {
                     parent: {
                         include: {
                             user: true
                         }
-                    }, 
+                    },
                 }
 
             }

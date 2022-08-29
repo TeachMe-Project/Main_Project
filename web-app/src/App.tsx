@@ -31,6 +31,7 @@ import ParentNotification from "./components/profile/parent/ParentNotification";
 import CourseProfile from "./components/profile/tutor/CourseProfile";
 import ViewCourse from "./components/profile/admin/ViewCourse";
 import InstituteViewCourse from "./components/profile/institute/InstituteViewCourse";
+import ParentSRequest from "./components/profile/parent/ParentSRequest";
 
 const App: React.FC = () => {
     return (
@@ -48,7 +49,8 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={PUpComingPayments} role={'parent'}/>}/>
                 <Route path="/parent/stuSignup" element={<ProtectedRoute component={StudentSignup} role={'parent'}/>}/>
                 <Route path="/parent/history" element={<ProtectedRoute component={PStudentProgress} role={'parent'}/>}/>
-                <Route path="/parent/summery" element={<ProtectedRoute component={PStudentSummery} role={'parent'}/>}/>
+                <Route path="/parent/summary" element={<ProtectedRoute component={PStudentSummery} role={'parent'}/>}/>
+                <Route path="/parent/studentrequests" element={<ProtectedRoute component={ParentSRequest} role={'parent'}/>}/>
                 <Route path="/parent/notification"
                        element={<ProtectedRoute component={ParentNotification} role={'parent'}/>}/>
 
@@ -73,7 +75,7 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={TutorPayments} role={'admin'}/>}/>
                 <Route path="/admin/notification"
                        element={<ProtectedRoute component={AdminNotification} role={'admin'}/>}/>
-                <Route path="/admin/course"
+                <Route path="/admin/course/:course_id"
                        element={<ProtectedRoute component={ViewCourse} role={'admin'}/>}/>
 
 
