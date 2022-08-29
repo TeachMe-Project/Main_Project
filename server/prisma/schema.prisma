@@ -50,7 +50,7 @@ model course {
 model homework {
   homework_id   Int      @id @default(autoincrement())
   course_id     Int
-  uploaded_date DateTime @default(now()) @db.Date
+  uploaded_date DateTime @default(now()) @db.DateTime(0)
   homework      String   @db.VarChar(1000)
   isActive      Boolean
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM COURSE")
@@ -109,7 +109,7 @@ model institute_teacher {
 
 model notes {
   note_id       Int      @id @default(autoincrement())
-  uploaded_date DateTime @default(now()) @db.Date
+  uploaded_date DateTime @default(now()) @db.DateTime(0)
   note          String   @db.VarChar(1000)
   course_id     Int
   isActive      Boolean
@@ -210,7 +210,7 @@ model teacher {
   first_name        String               @db.VarChar(30)
   last_name         String               @db.VarChar(30)
   contact_no        String               @db.VarChar(15)
-  title             teacher_title
+  title             String               @db.VarChar(100)
   description       String               @db.VarChar(255)
   qualification     String               @db.VarChar(255)
   account_name      String               @db.VarChar(255)
@@ -260,10 +260,10 @@ model student_class {
   student_id    Int
   date          DateTime                    @default(now()) @db.Timestamp(0)
   start_time    String                      @db.VarChar(100)
-  end_time      String                      @default(dbgenerated("(current_timestamp())")) @db.VarChar(100)
+  end_time      String                      @db.VarChar(100)
   status        student_class_status        @default(upcoming)
-  joined_time   String                      @default(dbgenerated("(current_timestamp())")) @db.VarChar(100)
-  left_time     String                      @default(dbgenerated("(current_timestamp())")) @db.VarChar(100)
+  joined_time   DateTime                    @default(now()) @db.DateTime(0)
+  left_time     DateTime                    @default(now()) @db.DateTime(0)
   online_status student_class_online_status
   isActive      Boolean
   isStarted     Boolean                     @default(false)
@@ -392,10 +392,4 @@ enum student_class_status {
 enum student_class_online_status {
   online
   offline
-}
-
-enum teacher_title {
-  Mr
-  Mrs
-  Mis
 }

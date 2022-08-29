@@ -8,34 +8,76 @@ export const getCourses = async (req: Request, res: Response) => {
 
     try {
         const data = await prisma.course.findMany({
+            where: {
+                isActive: true,
+            },
             include: {
                 teacher: true,
-                
             }
         })
         res.status(200).send(data)
-    } catch (error) {
-        res.status(500).send(error);
+    } catch (error: any) {
+        res.status(500).send(error.message);
     }
 }
 
-
 export const getCourseByID = async (req: Request, res: Response) => {
-
 
     try {
         const data = await prisma.course.findMany({
             where: {
                 course_id: Number(req.params.id)
             },
-            include:{
-                teacher: true
+            include: {
+                teacher: true,
+                homework: true,
+                notes: true
             }
 
         })
         res.status(200).send(data)
-    } catch (error) {
-        res.status(500).send(error);
+    } catch (error: any) {
+        res.status(500).send(error.message);
+    }
+}
+
+export const getCourseStudentByID = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.student_course.findMany({
+            where: {
+                course_id: Number(req.params.id)
+            },
+            include: {
+                student: {
+                    include: {
+                        user: true,
+                        parent: true
+                    }
+                }
+            }
+
+        })
+        res.status(200).send(data)
+    } catch (error: any) {
+        res.status(500).send(error.message);
+    }
+}
+
+export const getCourseUpcomingByID = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.teacher_class.findMany({
+            where: {
+                course_id: Number(req.params.id),
+                date: {
+                    gte: new Date()
+                }
+            },
+        })
+        res.status(200).send(data)
+    } catch (error: any) {
+        res.status(500).send(error.message);
     }
 }
 
@@ -48,12 +90,12 @@ export const getCourseByGrade = async (req: Request, res: Response) => {
             }
         })
         res.status(200).send(data)
-    } catch (error) {
-        res.status(500).send(error);
+    } catch (error: any) {
+        res.status(500).send(error.message);
     }
 }
 
-export  const updateCourseDetails = async (req: Request, res: Response) => {
+export const updateCourseDetails = async (req: Request, res: Response) => {
 
     const {error, value} = courseSchema.validate(req.body);
 
@@ -82,34 +124,33 @@ export  const updateCourseDetails = async (req: Request, res: Response) => {
 
             })
             res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
+        } catch (error: any) {
+            res.status(500).send(error.message);
         }
     } else {
-        res.status(400).send(error);
+        res.status(400).send(error.message);
     }
 }
 
 export const removeCourse = async (req: Request, res: Response) => {
 
-        try {
-            const data = await prisma.course.update({
-                where: {
-                    course_id: Number(req.params.id)
-                },
-                data:<any> {
-                    is_active: false
-                }
+    try {
+        const data = await prisma.course.update({
+            where: {
+                course_id: Number(req.params.id)
+            },
+            data: <any>{
+                is_active: false
+            }
 
-            })
-            res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
-        }
+        })
+        res.status(200).send(data)
+    } catch (error: any) {
+        res.status(500).send(error.message);
+    }
 }
 
-
-    export const getCourseBySubject = async (req: Request, res: Response) => {
+export const getCourseBySubject = async (req: Request, res: Response) => {
 
     try {
         const data = await prisma.course.findMany({
@@ -118,13 +159,10 @@ export const removeCourse = async (req: Request, res: Response) => {
             }
         })
         res.status(200).send(data)
-    } catch (error) {
-        res.status(500).send(error);
+    } catch (error: any) {
+        res.status(500).send(error.message);
     }
 }
-
-
-
 
 export const getCourseByInstituteName = async (req: Request, res: Response) => {
 
@@ -149,8 +187,8 @@ export const getCourseByInstituteName = async (req: Request, res: Response) => {
 
         })
         res.status(200).send(data)
-    } catch (error) {
-        res.status(500).send(error);
+    } catch (error: any) {
+        res.status(500).send(error.message);
     }
 }
 
@@ -161,7 +199,7 @@ export const createCourse = async (req: Request, res: Response) => {
     if (!error) {
         try {
             const data = await prisma.course.create({
-                data:<any> {
+                data: <any>{
                     course_name: req.body.course_name,
                     course_description: req.body.course_description,
                     course_image: req.body.course_image
