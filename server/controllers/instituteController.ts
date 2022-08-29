@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {PrismaClient} from '@prisma/client'
-import {instituteSchema, instituteUpdateSchema} from "../models/instituteModel";
+import {instituteSchema, instituteTeacherRequest, instituteUpdateSchema} from "../models/instituteModel";
 import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
@@ -187,4 +187,37 @@ export const createInstitute = async (req: Request, res: Response) => {
     }
 }
 
+export const createTeacherRequest = async (req: Request, res: Response) => {
+
+    const {error, value} = instituteTeacherRequest.validate(req.body);
+    if (!error) {
+        try {
+            // @ts-ignore
+            const {institute_id} = await prisma.institute.findUnique({
+                where: {
+                    user_id: req.params.id
+                },
+                select: {
+                    institute_id: true
+                }
+            })
+
+            const data: any = await prisma.teacher_requests.create({
+                data: {
+                    institute_id: institute_id,
+                    request_status: 'pending',
+                    teacher_id: req.body.teacher_id,
+                    isActive: true
+                }
+            })
+            res.status(200).send(data)
+        } catch (error: any) {
+            res.status(500).send(error.message);
+        }
+    } else {
+        logger.error(NAME_SPACE, req.body.institute_name)
+        logger.error(NAME_SPACE, error.message)
+        res.status(500).send(error.details[0].message);
+    }
+}
 

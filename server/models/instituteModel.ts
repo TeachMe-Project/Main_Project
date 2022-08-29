@@ -31,3 +31,7 @@ export const instituteUpdateSchema = Joi.object({
     }
 );
 
+export const instituteTeacherRequest = Joi.object({
+    teacher_id: Joi.number().min(1).required()
+})
+
