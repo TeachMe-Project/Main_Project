@@ -55,9 +55,11 @@ const initialState = {
 export const StudentProfile = () => {
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURL = `http://localhost:8081/student/${studentAuthId}`;
+  const baseURLStudent = `http://localhost:8081/student/${studentAuthId}`;
+  const baseURLParent = `http://localhost:8081/student/${studentAuthId}/parentDetails`;
 
-  const [profDetails, setProfDetails] = useState<any[]>([]);
+  const [studentProfDetails, setStudentProfDetails] = useState<any[]>([]);
+  const [parentProfDetails, setParentProfDetails] = useState<any[]>([]);
   const [isEditing, setISEditing] = useState(false);
   const [pageStage, setPageStage] = useState(2);
   const [gradeValidate, setGradeValidate] = useState<boolean>(false);
@@ -124,20 +126,37 @@ export const StudentProfile = () => {
 
   useEffect(() => {
     axios
-      .get(baseURL)
+      .get(baseURLStudent)
       .then((res: AxiosResponse) => {
         res.data.map((item: any) => {
-          setProfDetails(prevState => [
+          setStudentProfDetails(prevState => [
             ...prevState,
             {
               fullname: item.first_name + ' ' + item.last_name,
-              // contact
               email: item.user.username,
               picture: item.user.profile_image
             },
           ]);
         });
-        console.log(profDetails);
+        console.log(studentProfDetails);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios
+      .get(baseURLParent)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setParentProfDetails(prevState => [
+            ...prevState,
+            {
+              fullname: item.parent.first_name + ' ' + item.parent.last_name,
+              email: item.parent.user.username,
+              contact: item.parent.mobile_no,
+            },
+          ]);
+        });
+        console.log(parentProfDetails);
       })
       .catch(error => {
         console.log(error);
@@ -153,25 +172,29 @@ export const StudentProfile = () => {
         </div>
         <div className="PanelContainer">
           <Col xl={4}>
-            {profDetails.map((item: any) => {
-              return (
-                <div className="LeftContainer">
+            <div className="LeftContainer">
+              {studentProfDetails.map((item: any) => {
+                return (
                   <div className="ProfileImg">
                     <img src={item.picture} />
                   </div>
+                );
+              })}
+              {parentProfDetails.map((item: any) => {
+                return (
                   <div className="ParentContact">
-                    <div className="ContactHeader">Student's Contact Details:</div>
+                    <div className="ContactHeader">Parent's Contact Details:</div>
                     <div className="ParentLabel">Name:</div>
                     <div className="ParentValue">{item.fullname}</div>
                     <div className="ParentLabel">Mobile No:</div>
-                    <div className="ParentValue">0774832976</div>
+                    <div className="ParentValue">{item.contact}</div>
                     <div className="ParentLabel">Email:</div>
                     <div className="ParentValue">{item.email}</div>
                   </div>
-                </div>
-              );
-            })}
-                {/* <div className="LeftContainer">
+                );
+              })}
+            </div>
+            {/* <div className="LeftContainer">
                   <div className="ProfileImg">
                     <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
                     <AzureCloudStorage />

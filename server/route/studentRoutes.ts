@@ -3,11 +3,13 @@ import {
     getStudentByID,
     getStudentCourses,
     getStudentHomeworks,
+    getStudentParentDetails,
     getStudents,
     getStudentUpcomingClasses,
     createStudent, getStudentUpcomingPayments
+    
 } from "../controllers/studentController";
-export const studentRouter=express.Router();
+export const studentRouter = express.Router();
 
 
 
@@ -25,6 +27,9 @@ studentRouter.route("/:id/upcomingClasses")
 
 studentRouter.route("/:id/homeWorks")
     .get(getStudentHomeworks);
+
+studentRouter.route("/:id/parentDetails")
+    .get(getStudentParentDetails);
 
 studentRouter.route("/:id/upcomingPayments")
     .get(getStudentUpcomingPayments);

@@ -97,6 +97,27 @@ export const getStudentHomeworks = async (req: Request, res: Response) => {
     }
 }
 
+export const getStudentParentDetails = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.student.findMany(
+            {
+                where: { user_id: req.params.id },
+                include: { 
+                    parent: {
+                        include: {
+                            user: true
+                        }
+                    }, 
+                }
+
+            }
+        )
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 export const getStudentUpcomingPayments = async (req: Request, res: Response) => {
 
     try {
