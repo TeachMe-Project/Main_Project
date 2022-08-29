@@ -158,7 +158,7 @@ model parent_payment {
 }
 
 model student {
-  user_id         String            @db.VarChar(100)
+  user_id         String            @unique(map: "user_id") @db.VarChar(100)
   student_id      Int               @id @default(autoincrement())
   parent_id       Int
   first_name      String            @db.VarChar(30)
@@ -250,7 +250,7 @@ model user {
   institute     institute?
   notification  notification[]
   parent        parent[]
-  student       student[]
+  student       student?
   teacher       teacher?
 }
 

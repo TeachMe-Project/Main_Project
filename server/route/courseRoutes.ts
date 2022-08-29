@@ -7,7 +7,7 @@ import {
     getCourseBySubject,
     getCourseByInstituteName,
     updateCourseDetails,
-    removeCourse, getCourseStudentByID, getCourseUpcomingByID
+    removeCourse, getCourseStudentByID, getCourseUpcomingByID, unrollCourseStudents
 } from "../controllers/courseController";
 
 export const courseRouter=express.Router();
@@ -40,6 +40,10 @@ courseRouter.route("/:id/updateCourseDetails")
 
 courseRouter.route("removeCourse")
     .post(removeCourse)
+
+courseRouter.route("/unenroll/:id")
+    .post(unrollCourseStudents)
+
 
 
 courseRouter.route("/createCourse")

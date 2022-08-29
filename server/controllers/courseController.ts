@@ -26,12 +26,20 @@ export const getCourseByID = async (req: Request, res: Response) => {
     try {
         const data = await prisma.course.findMany({
             where: {
-                course_id: Number(req.params.id)
+                course_id: Number(req.params.id),
+                isActive: true
             },
             include: {
                 teacher: true,
                 homework: true,
-                notes: true
+                notes: true,
+                teacher_class:{
+                    where: {
+                        date: {
+                            gte: new Date()
+                        }
+                    }
+                }
             }
 
         })
@@ -211,6 +219,40 @@ export const createCourse = async (req: Request, res: Response) => {
         }
     } else {
         res.status(500).send(error.details[0].message);
+    }
+}
+
+export const unrollCourseStudents = async (req: Request, res: Response) => {
+
+    try {
+        // @ts-ignore
+        const {student_id} = await prisma.student.findFirst({
+            where: {
+                user_id: req.params.id,
+            },
+            select: {
+                student_id: true
+            }
+        });
+
+        const course_id = req.body.course_id;
+        const data = await prisma.student_course.update({
+            where: {
+                student_id_course_id:{
+                    student_id: student_id,
+                    course_id: course_id
+                }
+            },
+            data:{
+                isActive:false,
+                status: "rejected"
+            }
+        })
+
+
+        res.status(200).send(data)
+    } catch (error: any) {
+        res.status(500).send(error.message);
     }
 }
 
