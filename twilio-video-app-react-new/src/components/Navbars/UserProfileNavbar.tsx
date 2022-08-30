@@ -8,13 +8,14 @@ import { NavItem } from 'react-bootstrap';
 
 type UserProfileNavbar = {
   name: string;
+  id: string;
   image?: string;
 };
 
 export const UserProfileNavbar = (props: UserProfileNavbar) => {
 
   return (
-    <div className="UserProfileNavbar">
+    <div key='{props.id}' className="UserProfileNavbar">
       <div className="UserProfileButton">
         <Link to="/userprofile" className="link">
           <div className="UserImg">

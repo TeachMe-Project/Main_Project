@@ -19,12 +19,6 @@ export const TopNavbar = () => {
       .get(baseURL)
       .then((res: AxiosResponse) => {
         res.data.map((item: any) => {
-          // setUserDetails(prevState => [
-          //   ...prevState,
-          //   {
-          //     profile_pic: item.profile_image,
-          //   },
-          // ]);
           if (item.type === 'student') {
             setUserDetails(prevState => [
               ...prevState,
@@ -59,7 +53,7 @@ export const TopNavbar = () => {
       <Col xl={3}>
         {userDetails.map((item: any) => {
           return (
-            <UserProfileNavbar name={item.full_name} image={item.profile_pic} />
+            <UserProfileNavbar name={item.full_name} id={userAuthId} image={item.profile_pic}  />
           );
         })}
       </Col>
