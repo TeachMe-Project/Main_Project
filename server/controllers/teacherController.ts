@@ -84,15 +84,138 @@ export const getTeacherInstitutes = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const data = await prisma.teacher.findMany({
+        const {teacher_id} = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
-            // include: {institute: true}
+            select: {
+                teacher_id: true
+            }
+        })
+
+        // @ts-ignore
+        const data = await prisma.institute_teacher.findMany({
+            where: {
+                teacher_id: teacher_id,
+                status: "active",
+                isActive: true
+            },
+            include: {institute: true}
         })
         res.status(200).send(data)
-    } catch (error) {
-        res.status(500).send(error);
+    } catch (error: any) {
+        res.status(500).send(error.message);
+    }
+}
+
+export const getTeacherPendingInstitutes = async (req: Request, res: Response) => {
+
+    try {
+        // @ts-ignore
+        const {teacher_id} = await prisma.teacher.findUnique({
+            where: {
+                user_id: req.params.id
+            },
+            select: {
+                teacher_id: true
+            }
+        })
+
+        // @ts-ignore
+        const data = await prisma.teacher_requests.findMany({
+            where: {
+                teacher_id: teacher_id,
+                isActive: true,
+                request_status: "pending"
+            },
+            include: {
+                institute: true
+            }
+        })
+        res.status(200).send(data)
+    } catch (error: any) {
+        res.status(500).send(error.message);
+    }
+}
+
+export const acceptInstituteRequest = async (req: Request, res: Response) => {
+
+    try {
+        // @ts-ignore
+        const {teacher_id} = await prisma.teacher.findUnique({
+            where: {
+                user_id: req.params.id
+            },
+            select: {
+                teacher_id: true
+            }
+        })
+        // console.log(req.body);
+        const institute_id = req.body.institute_id;
+        const request_time = req.body.request_time;
+
+        // @ts-ignore
+        const data = await prisma.teacher_requests.update({
+            where: {
+                institute_id_teacher_id_date: {
+                    institute_id: institute_id,
+                    teacher_id: teacher_id,
+                    date: request_time
+                }
+            },
+            data:{
+                request_status: "accepted"
+            }
+        })
+
+
+        const institute_teacher = await prisma.institute_teacher.create({
+            data: {
+                institute_id: institute_id,
+                teacher_id: teacher_id,
+                isActive: true,
+                status: "active"
+            }
+        })
+        res.status(200).send(institute_teacher)
+    } catch (error: any) {
+        res.status(500).send(error.message);
+    }
+}
+
+export const rejectInstituteRequest = async (req: Request, res: Response) => {
+
+    try {
+        // @ts-ignore
+        const {teacher_id} = await prisma.teacher.findUnique({
+            where: {
+                user_id: req.params.id
+            },
+            select: {
+                teacher_id: true
+            }
+        })
+        // console.log(req.body);
+        const institute_id = req.body.institute_id;
+        const request_time = req.body.request_time;
+
+        // @ts-ignore
+        const data = await prisma.teacher_requests.update({
+            where: {
+                institute_id_teacher_id_date: {
+                    institute_id: institute_id,
+                    teacher_id: teacher_id,
+                    date: request_time
+                }
+            },
+            data:{
+                request_status: "rejected"
+            }
+        })
+
+        res.status(200).send("Successfully Rejected The Request")
+    } catch (error: any) {
+        res.status(500).send(error.message);
     }
 }
 
