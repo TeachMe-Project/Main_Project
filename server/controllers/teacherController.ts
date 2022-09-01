@@ -4,7 +4,8 @@ import {teacherSchema} from "../models/teacherModel";
 import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
-const NAME_SPACE = "Tutor"
+const NAME_SPACE = "Teacher"
+
 export const getTeachers = async (req: Request, res: Response) => {
 
     try {
@@ -14,6 +15,7 @@ export const getTeachers = async (req: Request, res: Response) => {
         res.status(500).send(error);
     }
 }
+
 export const getTeacherByID = async (req: Request, res: Response) => {
 
     console.log(req.params)
@@ -80,6 +82,7 @@ export const getTeacherCourses = async (req: Request, res: Response) => {
         res.status(500).send(error);
     }
 }
+
 export const getTeacherInstitutes = async (req: Request, res: Response) => {
 
     try {
