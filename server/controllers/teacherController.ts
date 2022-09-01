@@ -22,7 +22,7 @@ export const getTeacherByID = async (req: Request, res: Response) => {
     try {
         const data = await prisma.teacher.findMany({
             where: {
-                user_id: req.params.id
+                teacher_id: Number(req.params.id)
             },
             include: {
                 user: true
