@@ -133,7 +133,11 @@ export const getAllInstituteTeachers = async (req: Request, res: Response) => {
                 status: 'active'
             },
             include: {
-                teacher: true,
+                teacher: {
+                    include: {
+                        user: true
+                    }
+                }
             }
         })
         res.status(200).send(data)
