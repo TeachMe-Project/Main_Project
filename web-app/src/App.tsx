@@ -91,7 +91,7 @@ const App: React.FC = () => {
                        element={<ProtectedRoute component={ViewInstituteTutorProfile} role={'institute'} />}/>
                 <Route path="/institute/notification"
                        element={<ProtectedRoute component={InstituteNotification} role={'institute'}/>}/>
-                <Route path="/institute/course"
+                <Route path="/institute/course/:course_id"
                        element={<ProtectedRoute component={InstituteViewCourse} role={'institute'}/>}/>
 
                 <Route path="/parent/profile" element={<ProtectedRoute component={ProfileEdit} role={'parent'}/>}/>

@@ -85,7 +85,7 @@ const TutorProfile = () => {
                     </h1>
                 </Col>
             </Row>
-            <Row className='mt-5'>
+            <Row className='mt-3'>
                 <Col lg={3} className='d-flex flex-column justify-content-center align-items-center'>
                     <img src={Images.tutorpro} className='w-100' style={{borderRadius: "50%"}}/>
 
