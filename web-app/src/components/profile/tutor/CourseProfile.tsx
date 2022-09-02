@@ -1,5 +1,5 @@
-import React from 'react';
-import {Col, Row, Tab, Tabs, Card} from "react-bootstrap";
+import React, {useEffect, useState} from 'react';
+import {Col, Row, Tab, Tabs} from "react-bootstrap";
 import {AiOutlineCloseCircle} from "react-icons/ai";
 import {useNavigate, useParams} from "react-router-dom";
 // @ts-ignore
@@ -12,14 +12,19 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from "react-bootstrap-table2-paginator";
 import {useMediaQuery} from "react-responsive";
+import axios, {AxiosResponse} from "axios";
+import Loader from "../../utils/Loader";
 
 
 const CourseProfile = () => {
     const navigate = useNavigate();
     const {SearchBar} = Search;
     const isPc = useMediaQuery({minWidth: 991});
-    const params = useParams();
-
+    const {course_id} = useParams();
+    const [course, setCourse] = useState<any>();
+    // const [students, setStudents] = useState<any>();
+    // const [classes, setClasses] = useState<any>();
+    const [isDataLoading, setIsDataLoading] = useState(false);
     const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
         < FaEye
             style={{
@@ -54,6 +59,38 @@ const CourseProfile = () => {
             }}
         />
     );
+
+    useEffect(() => {
+        const days= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        console.log(course_id)
+        axios.get(`https://learnx.azurewebsites.net/course/${course_id}`)
+            .then((res: AxiosResponse) => {
+                // setIsDataLoading(true);
+                const data = res.data[0];
+                console.log(data)
+                setCourse({
+                    subject: data.subject,
+                    subtitle: data.teacher.title + " " + data.teacher.first_name + " " + data.teacher.last_name,
+                    title: data.subject + " By " + data.teacher.title + " " + data.teacher.first_name + " " + data.teacher.last_name,
+                    grade: data.grade,
+                    description: data.description,
+                    fee: data.price,
+                    medium: data.medium,
+                    start_date: new Date(data.start_date).toDateString(),
+                    end_date: new Date(data.start_date).toDateString(),
+                    class_day: new Date(data.start_date).getDay(),
+                    start_time: new Date(data.start_time).toString(),
+                    end_time: new Date(data.end_time).getTime().toLocaleString(),
+                });
+
+                console.log(course);
+                setIsDataLoading(true);
+
+            })
+            .catch((error: any) => {
+                console.log(error.message);
+            })
+    }, []);
 
 
     const columns = [
@@ -110,24 +147,29 @@ const CourseProfile = () => {
         {
             date: "2022-02-23",
             time: "05.00PM",
-            duration:"2hrs"
+            duration: "2hrs"
         }
     ]
 
 
     return (
         <Row className='view-courses'>
+            {!isDataLoading && <Loader/>}
+            {isDataLoading &&
             <Col lg={12} className='px-5'>
                 <h1 style={{color: "#2c3e50"}}
-                    className='text-lg-start header my-lg-3 text-md-center text-center d-flex flex-row align-items-center justify-content-between'>Mathematics
+                    className='text-lg-start header my-lg-3 text-md-center text-center d-flex flex-row align-items-center justify-content-between'>
+                    {course.subject}
                     <AiOutlineCloseCircle className='me-lg-4' style={{cursor: "pointer"}}
                                           onClick={() => navigate(-1)}/>
                 </h1>
-                <h3 style={{color: "#2c3e50"}}>Mr. Saman Kamalanath</h3>
+                <h3 style={{color: "#2c3e50"}}>
+                    {course.subtitle}
+                </h3>
                 <Tabs
                     defaultActiveKey="details"
                     id="uncontrolled-tab-example"
-                    className="mt-0"
+                    className="mt-2 ms-0"
                 >
                     <Tab eventKey="details" title="Course Details">
                         <Row>
@@ -197,150 +239,114 @@ const CourseProfile = () => {
                             </Col>
                             <Col lg={7} className='d-flex flex-column ms-3'>
                             <span className='mt-4 mb-2'>
-                                Mathematics By Mr Saman Kamalanath
+                                    {course.title}
+                            </span>
+                            <span className='my-2'>
+                                {course.subject}
                             </span>
                                 <span className='my-2'>
-                                Mathematics
+                                {course.grade}
+                            </span>
+                            <span className='my-2'>
+                                {course.description}
+                            </span>
+                            <span className='my-2'>
+                                {course.medium}
+                            </span>
+                            <span className='my-2'>
+                                LKR {course.fee}
                             </span>
                                 <span className='my-2'>
-                                Grade 08
+                                {course.start_date}
                             </span>
                                 <span className='my-2'>
-                                Mathematics lessons for Student from Grade 6 , Grade 7 , Grade 8
+                                {course.end_date}
                             </span>
                                 <span className='my-2'>
-                                Sinhala
+                                {course.day}
                             </span>
                                 <span className='my-2'>
-                                LKR 2500
-                            </span>
-                                <span className='my-2'>
-                                2022-03-24
-                            </span>
-                                <span className='my-2'>
-                                2022-03-24
-                            </span>
-                                <span className='my-2'>
-                                Thursday
-                            </span>
-                                <span className='my-2'>
-                                05:00 PM
+                                {course.start_time}
                             </span>
                             </Col>
                         </Row>
                     </Tab>
                     <Tab eventKey="students" title="Students">
                         <Col className='mt-2'>
-                        {isPc &&
-                        <ToolkitProvider
-                            keyField="id"
-                            data={students}
-                            columns={columns}
-                            search>
-                            {(props: any) =>
-                                (
-                                    <Row className='next-table'>
-                                        <SearchBar {...props.searchProps}
-                                                   placeholder="Search Courses"
-                                        />
-                                        <BootstrapTable
-                                            columns={columns} data={students} keyField="id"
-                                            {...props.baseProps}
-                                            bootstrap4={true}
-                                            pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
-                                            rowStyle={{
-                                                fontSize: "16px",
-                                                fontWeight: "500",
-                                                borderCollapse: "separate",
-                                                borderSpacing: "0 30px",
-                                                color: "#95a5a6",
-                                            }}
+                            {isPc &&
+                            <ToolkitProvider
+                                keyField="id"
+                                data={students}
+                                columns={columns}
+                                search>
+                                {(props: any) =>
+                                    (
+                                        <Row className='next-table'>
+                                            <SearchBar {...props.searchProps}
+                                                       placeholder="Search Courses"
+                                            />
+                                            <BootstrapTable
+                                                columns={columns} data={students} keyField="id"
+                                                {...props.baseProps}
+                                                bootstrap4={true}
+                                                pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
+                                                rowStyle={{
+                                                    fontSize: "16px",
+                                                    fontWeight: "500",
+                                                    borderCollapse: "separate",
+                                                    borderSpacing: "0 30px",
+                                                    color: "#95a5a6",
+                                                }}
 
-                                            headerWrapperClasses="next-table"
-                                            defaultSortDirection="asc"
+                                                headerWrapperClasses="next-table"
+                                                defaultSortDirection="asc"
 
-                                        />
-                                    </Row>
-                                )
+                                            />
+                                        </Row>
+                                    )
+                                }
+                            </ToolkitProvider>
                             }
-                        </ToolkitProvider>
-                        }
-                        {/*{!isPc &&*/}
-                        {/*<Col md={12} className='d-flex flex-column align-items-center  next-table-list'>*/}
-                        {/*    {data.map((item:any) => {*/}
-                        {/*        return (*/}
-                        {/*            <Card className='w-100 p-3 mb-2 table-card'>*/}
-                        {/*                <ul className='ps-md-3 ps-0'>*/}
-                        {/*                    <li className='d-none'>*/}
-                        {/*                        <span className='table-card-label'>{columns[0].text}</span>*/}
-                        {/*                        <span className='table-card-data'>{item.id}</span>*/}
-                        {/*                    </li>*/}
-                        {/*                    <li className='d-flex flex-row align-items-center justify-content-between'>*/}
-                        {/*                        <span className='table-card-label'>{columns[1].text}</span>*/}
-                        {/*                        <span className='table-card-data'>{item.grade}</span>*/}
-                        {/*                    </li>*/}
-                        {/*                    <li className='d-flex flex-row align-items-center justify-content-between'>*/}
-                        {/*                        <span className='table-card-label'>{columns[2].text}</span>*/}
-                        {/*                        <span className='table-card-data'>{item.subject}</span>*/}
-                        {/*                    </li>*/}
-                        {/*                    <li className='d-flex flex-row align-items-center justify-content-between'>*/}
-                        {/*                        <span className='table-card-label'>{columns[3].text}</span>*/}
-                        {/*                        <span className='table-card-data'>{item.tutor_name}</span>*/}
-                        {/*                    </li>*/}
-                        {/*                    <li className='d-flex flex-row align-items-center justify-content-between'>*/}
-                        {/*                        <span className='table-card-label'>{columns[4].text}</span>*/}
-                        {/*                        <span className='table-card-data'>{item.institute_name}</span>*/}
-                        {/*                    </li>*/}
-                        {/*                    <li className='d-flex flex-row align-items-center justify-content-end mt-2'>*/}
-                        {/*                    <span className='me-3'>*/}
-                        {/*                         {gotoCourse(null, item, null, null)}*/}
-                        {/*                    </span>*/}
-                        {/*                    </li>*/}
-                        {/*                </ul>*/}
-                        {/*            </Card>*/}
-                        {/*        );*/}
-                        {/*    })}*/}
-                        {/*</Col>*/}
-                        {/*}*/}
                         </Col>
                     </Tab>
                     <Tab eventKey="schedule" title="Class-Schedules">
                         <Col className='mt-3'>
-                        {isPc &&
-                        <ToolkitProvider
-                            keyField="id"
-                            data={schedule}
-                            columns={column2}
-                            search>
-                            {(props: any) =>
-                                (
-                                    <Row className='next-table'>
-                                        <BootstrapTable
-                                            columns={column2} data={schedule} keyField="id"
-                                            {...props.baseProps}
-                                            bootstrap4={true}
-                                            pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
-                                            rowStyle={{
-                                                fontSize: "16px",
-                                                fontWeight: "500",
-                                                borderCollapse: "separate",
-                                                borderSpacing: "0 30px",
-                                                color: "#95a5a6",
-                                            }}
+                            {isPc &&
+                            <ToolkitProvider
+                                keyField="id"
+                                data={schedule}
+                                columns={column2}
+                                search>
+                                {(props: any) =>
+                                    (
+                                        <Row className='next-table'>
+                                            <BootstrapTable
+                                                columns={column2} data={schedule} keyField="id"
+                                                {...props.baseProps}
+                                                bootstrap4={true}
+                                                pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
+                                                rowStyle={{
+                                                    fontSize: "16px",
+                                                    fontWeight: "500",
+                                                    borderCollapse: "separate",
+                                                    borderSpacing: "0 30px",
+                                                    color: "#95a5a6",
+                                                }}
 
-                                            headerWrapperClasses="next-table"
-                                            defaultSortDirection="asc"
+                                                headerWrapperClasses="next-table"
+                                                defaultSortDirection="asc"
 
-                                        />
-                                    </Row>
-                                )
+                                            />
+                                        </Row>
+                                    )
+                                }
+                            </ToolkitProvider>
                             }
-                        </ToolkitProvider>
-                        }
                         </Col>
                     </Tab>
                 </Tabs>
             </Col>
+            }
         </Row>
     );
 };

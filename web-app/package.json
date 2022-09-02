@@ -1,6 +1,6 @@
 {
-  "name": "web-app",
-  "version": "0.1.0",
+  "name": "LearnX-Web-App",
+  "version": "1.1.0",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.10.2",
