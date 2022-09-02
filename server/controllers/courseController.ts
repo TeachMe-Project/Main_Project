@@ -33,10 +33,19 @@ export const getCourseByID = async (req: Request, res: Response) => {
                 teacher: true,
                 homework: true,
                 notes: true,
-                teacher_class:{
+                teacher_class: {
                     where: {
                         date: {
                             gte: new Date()
+                        }
+                    }
+                },
+                student_course: {
+                    include: {
+                        student: {
+                            include:{
+                                parent: true
+                            }
                         }
                     }
                 }
@@ -238,13 +247,13 @@ export const unrollCourseStudents = async (req: Request, res: Response) => {
         const course_id = req.body.course_id;
         const data = await prisma.student_course.update({
             where: {
-                student_id_course_id:{
+                student_id_course_id: {
                     student_id: student_id,
                     course_id: course_id
                 }
             },
-            data:{
-                isActive:false,
+            data: {
+                isActive: false,
                 status: "rejected"
             }
         })
