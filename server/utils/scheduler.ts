@@ -13,12 +13,9 @@ export const classSchedule = async () => {
             // console.log(courseId)
             let teacherId = data[i].teacher_id;
             // console.log(teacherId)
-            let startAt = data[i].start_time.toUTCString();
-            startAt = startAt.substring(17, 22)
+            let startAt = data[i].start_time;
             // console.log(startAt)
-            let endAt = data[i].end_time.toUTCString();
-            endAt = endAt.substring(17, 22)
-            console.log(endAt)
+            let endAt = data[i].end_time;
             // console.log(data[i].start_date)
             let newDate = new Date(data[i].start_date);
             // console.log(newDate)
@@ -67,11 +64,9 @@ export const classSchedule = async () => {
             // console.log(courseId)
             let teacherId = data[i].teacher_id;
             // console.log(teacherId)
-            let startAt = data[i].start_time.toUTCString();
-            startAt = startAt.substring(17,22)
+            let startAt = data[i].start_time;
             // console.log(startAt)
-            let endAt = data[i].end_time.toUTCString();
-            endAt = endAt.substring(17,22)
+            let endAt = data[i].end_time;
             // console.log(endAt)
             // console.log(data[i].start_date)
             let newDate = new Date(data[i].created_date);

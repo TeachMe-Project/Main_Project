@@ -124,19 +124,17 @@ export const updateCourseDetails = async (req: Request, res: Response) => {
                 },
                 data: {
                     course_name: req.body.course_name,
+                    description: req.body.description,
+                    teacher_id: req.body.teacher_id,
+                    price: req.body.fee,
+                    day: req.body.class_date,
                     grade: req.body.grade,
                     subject: req.body.subject,
-                    description: req.body.description,
-                    duration: req.body.duration,
                     start_date: req.body.start_date,
+                    end_date: req.body.end_date,
                     start_time: req.body.start_time,
                     end_time: req.body.end_time,
-                    day: req.body.day,
-                    course_id: req.body.course_id,
-                    teacher_id: req.body.teacher_id,
-                    price: req.body.price
-
-
+                    medium: req.body.medium
                 }
 
             })
@@ -216,10 +214,21 @@ export const createCourse = async (req: Request, res: Response) => {
     if (!error) {
         try {
             const data = await prisma.course.create({
-                data: <any>{
+                data:{
                     course_name: req.body.course_name,
-                    course_description: req.body.course_description,
-                    course_image: req.body.course_image
+                    description: req.body.description,
+                    teacher_id: req.body.teacher_id,
+                    price: req.body.fee,
+                    day: req.body.class_date,
+                    grade: req.body.grade,
+                    subject: req.body.subject,
+                    start_date: req.body.start_date,
+                    end_date: req.body.end_date,
+                    start_time: req.body.start_time,
+                    end_time: req.body.end_time,
+                    isActive: true,
+                    medium: req.body.medium,
+                    created_date: "-"
                 }
             })
             res.status(200).send(data)
