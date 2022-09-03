@@ -34,7 +34,7 @@ model course {
   medium           course_medium
   price            Int
   isActive         Boolean
-  created_date     String?            @db.VarChar(100)
+  created_date     String             @db.VarChar(100)
   teacher          teacher            @relation(fields: [teacher_id], references: [teacher_id], onDelete: NoAction, map: "FK TO COURSE FROM TEACHER")
   homework         homework[]
   institute_course institute_course[]
