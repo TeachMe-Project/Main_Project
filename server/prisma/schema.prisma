@@ -23,11 +23,11 @@ model course {
   course_id        Int                @id @default(autoincrement())
   teacher_id       Int
   course_name      String             @db.VarChar(100)
-  grade            String             @db.VarChar(3)
+  grade            String             @db.VarChar(30)
   subject          String             @db.VarChar(100)
   description      String             @db.VarChar(255)
   end_date         String             @db.VarChar(50)
-  start_date       DateTime           @db.Date
+  start_date       String             @db.VarChar(50)
   start_time       String             @db.VarChar(50)
   end_time         String             @db.VarChar(50)
   day              String             @db.VarChar(50)
@@ -151,8 +151,8 @@ model parent_payment {
   month           parent_payment_month
   year            Int
   isActive        Boolean
+  student_payment student_payment      @relation(fields: [payment_id], references: [payment_id], onDelete: Cascade, map: "FK TO PARENT_PAYMENT FROM STUDENT_PAYMENT")
   student         student              @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO PARENT_PAYMENT FROM STUDENT")
-  student_payment student_payment?
 
   @@index([student_id], map: "FK TO PARENT_PAYMENT FROM STUDENT")
 }
@@ -193,12 +193,12 @@ model student_payment {
   payment_id     Int                            @id @default(autoincrement())
   student_id     Int
   course_id      Int
-  month          student_payment_month
+  month          String                         @db.VarChar(30)
   payment_status student_payment_payment_status
   isActive       Boolean
   course         course                         @relation(fields: [course_id], references: [course_id], onUpdate: Restrict, map: "FK TO STUDENT_PAYMENT FROM COURSE")
-  parent_payment parent_payment                 @relation(fields: [payment_id], references: [payment_id], onUpdate: Restrict, map: "FK TO STUDENT_PAYMENT FROM PARENT_PAYMENT")
   student        student                        @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO STUDENT_PAYMENT FROM STUDENT")
+  parent_payment parent_payment?
 
   @@index([course_id], map: "FK TO STUDENT_PAYMENT FROM COURSE")
   @@index([student_id], map: "FK TO STUDENT_PAYMENT FROM STUDENT")
@@ -325,21 +325,6 @@ enum student_course_status {
   accepted
   pending
   rejected
-}
-
-enum student_payment_month {
-  Jan
-  Feb
-  Mar
-  Apr
-  May
-  Jun
-  Jul
-  Aug
-  Sep
-  Oct
-  Nov
-  Dec
 }
 
 enum student_payment_payment_status {

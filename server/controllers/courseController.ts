@@ -218,8 +218,8 @@ export const createCourse = async (req: Request, res: Response) => {
                     course_name: req.body.course_name,
                     description: req.body.description,
                     teacher_id: req.body.teacher_id,
-                    price: req.body.fee,
-                    day: req.body.class_date,
+                    price: req.body.price,
+                    day: req.body.day,
                     grade: req.body.grade,
                     subject: req.body.subject,
                     start_date: req.body.start_date,
@@ -231,9 +231,13 @@ export const createCourse = async (req: Request, res: Response) => {
                     created_date: "-"
                 }
             })
+
+            if(req.body.institute != "NoInstitute"){
+
+            }
             res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
+        } catch (error:any) {
+            res.status(500).send(error.message);
         }
     } else {
         res.status(500).send(error.details[0].message);
