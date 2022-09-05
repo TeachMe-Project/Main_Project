@@ -2,9 +2,9 @@ import express from "express";
 import {
     getStudentByID,
     getStudentCourses,
-    getStudentHomeworks,
-    getStudentNotes,
-    getStudentParentDetails,
+    // getStudentHomeworks,
+    // getStudentNotes,
+    // getStudentParentDetails,
     getStudents,
     // getStudentUpcomingClasses,
     createStudent,
@@ -37,8 +37,8 @@ studentRouter.route("/tutors/:id")
 // studentRouter.route("/:id/notes")
 //     .get(getStudentNotes);
 
-studentRouter.route("/:id/upcomingPayments")
-    .get(getStudentUpcomingPayments);
+// studentRouter.route("/:id/upcomingPayments")
+//     .get(getStudentUpcomingPayments);
 
 studentRouter.route("/createStudent")
     .post(createStudent);
