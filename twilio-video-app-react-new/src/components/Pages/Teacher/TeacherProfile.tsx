@@ -4,7 +4,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { BsPencilSquare } from 'react-icons/bs';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import PanelContainer from "../../Layout/PanelContainer";
 
 const schema = yup.object().shape({
@@ -66,6 +66,9 @@ const initialState = {
 
 const TeacherProfile = () => {
   const { user } = useAuth0(),
+    teacherAuthId = user?.sub,
+    baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}`,
+    [profDetails,setProfDetails] =useState<any[]>([]),
     [instituteNameValidate, setInstituteNameValidate] = useState(false),
     [ownerNameValidate, setOwnerNameValidate] = useState(false),
     [locationValidate, setLocationValidate] = useState(false),
@@ -199,24 +202,39 @@ const TeacherProfile = () => {
     };
     // @ts-ignore
     axios.request(options)
-      .then(function(response) {
+      .then(function (response) {
         console.log('Success');
         // @ts-ignore
         return setPasswordMail('success');
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error.message);
         return setPasswordMail(error.message);
       });
   };
 
+  useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setProfDetails(prevState => [
+            ...prevState,
+            {
+              
+            }
+          ])
+        })
+      })
+  })
+
   return (
-      <Container>
-        <Row>
-          <PanelContainer />
-          <div className="PanelHeader">
-            <h2>Tutor Profile</h2>
-          </div>
+    <Container>
+      <Row>
+        <PanelContainer />
+        <div className="PanelHeader">
+          <h2>Tutor Profile</h2>
+        </div>
 
         <Row>
           <Col lg={3} className="d-flex flex-column justify-content-center align-items-center">
@@ -320,17 +338,17 @@ const TeacherProfile = () => {
                             <Form.Group className="mb-2" controlId="validationMobile">
                               <Form.Label style={{ fontWeight: 600 }}>Mobile Number</Form.Label>
                               <Form.Control
-                                  type="text"
-                                  placeholder="Enter mobile number in format: 0771234567"
-                                  name="Mobile"
-                                  value={values.Mobile_Number}
-                                  onChange={handleChange}
-                                  isInvalid={
-                                    !!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)
-                                  }
-                                  isValid={touched.Mobile_Number}
-                                  onBlur={handleBlur}
-                                  disabled={enableEditProfile}
+                                type="text"
+                                placeholder="Enter mobile number in format: 0771234567"
+                                name="Mobile"
+                                value={values.Mobile_Number}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.Mobile_Number ? changeMobileValidate(false) : changeMobileValidate(true)
+                                }
+                                isValid={touched.Mobile_Number}
+                                onBlur={handleBlur}
+                                disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.Mobile_Number}</Form.Control.Feedback>
                             </Form.Group>
@@ -339,21 +357,21 @@ const TeacherProfile = () => {
                             <Form.Group className="mb-2" controlId="validationDescription">
                               <Form.Label style={{ fontWeight: 600 }}>Description</Form.Label>
                               <Form.Control
-                                  as="textarea"
-                                  placeholder="Enter a description for the institute in order to describe
+                                as="textarea"
+                                placeholder="Enter a description for the institute in order to describe
                                                                             the institute"
-                                  rows={4}
-                                  name="Description"
-                                  value={values.Description}
-                                  onChange={handleChange}
-                                  isInvalid={
-                                    !!errors.Description
-                                        ? changeDescriptionValidate(false)
-                                        : changeDescriptionValidate(true)
-                                  }
-                                  isValid={touched.Description}
-                                  onBlur={handleBlur}
-                                  disabled={enableEditProfile}
+                                rows={4}
+                                name="Description"
+                                value={values.Description}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.Description
+                                    ? changeDescriptionValidate(false)
+                                    : changeDescriptionValidate(true)
+                                }
+                                isValid={touched.Description}
+                                onBlur={handleBlur}
+                                disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.Description}</Form.Control.Feedback>
                             </Form.Group>
@@ -503,17 +521,17 @@ const TeacherProfile = () => {
                             <Form.Group className="mb-2" controlId="validationBankName">
                               <Form.Label style={{ fontWeight: 600 }}>Bank Name</Form.Label>
                               <Form.Control
-                                  type="text"
-                                  placeholder="Enter bank name"
-                                  name="BankName"
-                                  value={values.BankName}
-                                  onChange={handleChange}
-                                  isInvalid={
-                                    !!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)
-                                  }
-                                  isValid={touched.BankName}
-                                  onBlur={handleBlur}
-                                  disabled={enableEditProfile}
+                                type="text"
+                                placeholder="Enter bank name"
+                                name="BankName"
+                                value={values.BankName}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.BankName ? changeBankNameValidate(false) : changeBankNameValidate(true)
+                                }
+                                isValid={touched.BankName}
+                                onBlur={handleBlur}
+                                disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.BankName}</Form.Control.Feedback>
                             </Form.Group>
@@ -522,17 +540,17 @@ const TeacherProfile = () => {
                             <Form.Group className="mb-2" controlId="validationBranchName">
                               <Form.Label style={{ fontWeight: 600 }}>Branch Name</Form.Label>
                               <Form.Control
-                                  type="text"
-                                  placeholder="Enter branch name"
-                                  name="BranchName"
-                                  value={values.BranchName}
-                                  onChange={handleChange}
-                                  isInvalid={
-                                    !!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)
-                                  }
-                                  isValid={touched.BranchName}
-                                  onBlur={handleBlur}
-                                  disabled={enableEditProfile}
+                                type="text"
+                                placeholder="Enter branch name"
+                                name="BranchName"
+                                value={values.BranchName}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.BranchName ? changeBranchNameValidate(false) : changeBranchNameValidate(true)
+                                }
+                                isValid={touched.BranchName}
+                                onBlur={handleBlur}
+                                disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.BranchName}</Form.Control.Feedback>
                             </Form.Group>
@@ -543,17 +561,17 @@ const TeacherProfile = () => {
                             <Form.Group className="mb-2" controlId="validationAccountNo">
                               <Form.Label style={{ fontWeight: 600 }}>Account Number</Form.Label>
                               <Form.Control
-                                  type="text"
-                                  placeholder="Enter account number"
-                                  name="AccountNo"
-                                  value={values.AccountNo}
-                                  onChange={handleChange}
-                                  isInvalid={
-                                    !!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)
-                                  }
-                                  isValid={touched.AccountNo}
-                                  onBlur={handleBlur}
-                                  disabled={enableEditProfile}
+                                type="text"
+                                placeholder="Enter account number"
+                                name="AccountNo"
+                                value={values.AccountNo}
+                                onChange={handleChange}
+                                isInvalid={
+                                  !!errors.AccountNo ? changeAccountNoValidate(false) : changeAccountNoValidate(true)
+                                }
+                                isValid={touched.AccountNo}
+                                onBlur={handleBlur}
+                                disabled={enableEditProfile}
                               />
                               <Form.Control.Feedback type="invalid">{errors.AccountNo}</Form.Control.Feedback>
                             </Form.Group>
@@ -606,8 +624,8 @@ const TeacherProfile = () => {
           </Col>
         </Row>
 
-        </Row>
-      </Container>
+      </Row>
+    </Container>
 
   );
 };

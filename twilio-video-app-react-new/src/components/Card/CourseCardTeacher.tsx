@@ -13,7 +13,7 @@ type CourseCardTeacher = {
   header?: string;
   amount?: string;
   image?: JSX.Element;
-  btn1?: string;
+  // btn1?: string;
   grade?: string;
   medium?: string;
 };
@@ -39,11 +39,11 @@ export const CourseCardTeacher: React.FC<CourseCardTeacher> = props => {
             <CardDetails details={props.amount} />
             <CardDetails details={props.medium} />
           </div>
-          <div className="ViewMore">
+          {/* <div className="ViewMore">
             <Link to="/course" className="link">
               <CardButton btnname={props.btn1} />
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

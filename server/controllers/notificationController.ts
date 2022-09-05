@@ -21,7 +21,7 @@ export const getNotificationByID=async (req:Request,res:Response)=>{
     try {
         const data =await prisma.notification.findMany({
             where:{
-                notification_id:Number(req.params.id)
+                user_id:req.params.id
             }
         })
         res.status(200).send(data)

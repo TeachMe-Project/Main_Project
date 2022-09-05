@@ -50,7 +50,7 @@ model course {
 model homework {
   homework_id   Int      @id @default(autoincrement())
   course_id     Int
-  uploaded_date DateTime @default(now()) @db.DateTime(0)
+  uploaded_date DateTime @default(now()) @db.DateTime(0)Time(0)
   homework      String   @db.VarChar(1000)
   isActive      Boolean
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM COURSE")
@@ -109,7 +109,7 @@ model institute_teacher {
 
 model notes {
   note_id       Int      @id @default(autoincrement())
-  uploaded_date DateTime @default(now()) @db.DateTime(0)
+  uploaded_date DateTime @default(now()) @db.DateTime(0)Time(0)
   note          String   @db.VarChar(1000)
   course_id     Int
   isActive      Boolean
@@ -158,7 +158,7 @@ model parent_payment {
 }
 
 model student {
-  user_id         String            @unique(map: "user_id") @db.VarChar(100)
+  user_id         String            @unique(map: "user_id") @unique(map: "user_id") @db.VarChar(100)
   student_id      Int               @id @default(autoincrement())
   parent_id       Int
   first_name      String            @db.VarChar(30)

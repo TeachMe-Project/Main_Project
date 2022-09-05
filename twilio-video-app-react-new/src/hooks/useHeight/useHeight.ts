@@ -6,7 +6,7 @@ export default function useHeight() {
 
   useEffect(() => {
     const onResize = () => {
-      setHeight(window.innerHeight * (window.visualViewport?.scale || 1));
+      setHeight(100);
     };
 
     window.addEventListener('resize', onResize);

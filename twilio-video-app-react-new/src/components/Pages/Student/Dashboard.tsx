@@ -10,9 +10,24 @@ import LeftSidebar from '../../Sidebar/LeftSidebar';
 import PanelContainer from '../../Layout/PanelContainer';
 import Searchbar from '../../Searchbar/Searchbar';
 import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+
+const convertTime = (x: Date) => {
+  const time = x.toLocaleTimeString('it-IT');
+  const hour = time.split(':')[0];
+  const intHour = parseInt(hour);
+  const minute = time.split(':')[1];
+  const ampm = intHour >= 12 ? 'PM' : 'AM';
+  const newHour = intHour % 12;
+  return newHour + ':' + minute + ' ' + ampm;
+};
 
 export const Dashboard = () => {
-  const baseURL = 'https://learnx.azurewebsites.net/student/:id/upcomingClasses';
+  const { user } = useAuth0();
+  const studentAuthId = user?.sub;
+  console.log({ studentAuthId });
+  const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
+  // const baseURL = `http://localhost:8081/student/${studentAuthId}/upcomingClasses`;
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {
@@ -24,10 +39,9 @@ export const Dashboard = () => {
             ...prevState,
             {
               subject: item.course.subject,
-              // teacher:
+              teacher: 'Mr. ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
               date: item.date,
-              start_time: item.start_time,
-              end_time: item.end_time,
+              time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
             },
           ]);
         });
@@ -55,8 +69,8 @@ export const Dashboard = () => {
                 return (
                   <Card
                     header={item.subject}
-                    // teacher="Mr. Lasitha Nuwan"
-                    time="04:00pm- 06:00pm"
+                    teacher={item.teacher}
+                    time={item.time}
                     date={item.date}
                     btnname="Join"
                     image={<img src={'/Images/subjects/maths.png'} />}
