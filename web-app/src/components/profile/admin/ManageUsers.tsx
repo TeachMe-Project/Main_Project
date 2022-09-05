@@ -120,6 +120,7 @@ const ManageUsers = () => {
     useEffect(() => {
         axios.get(baseURL).then((res: AxiosResponse) => {
             // setIsDataLoading(true);
+            console.log(res.data);
             res.data.map((item: any) => {
                 if (item.type === 'teacher' ) {
                     setUsers(prevState => [...prevState, {
@@ -135,8 +136,8 @@ const ManageUsers = () => {
                         user_id: item.user_id,
                         username: item.username,
                         type: "Student",
-                        first_name: item.student[0].first_name,
-                        last_name: item.student[0].last_name
+                        first_name: item.student.first_name,
+                        last_name: item.student.last_name
                     }])
                 }
                 else if (item.type === 'institute') {
