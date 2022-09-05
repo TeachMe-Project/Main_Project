@@ -2,14 +2,16 @@ import express from "express";
 import {
     getStudentByID,
     getStudentCourses,
-    // getStudentHomeworks,
+    getStudentHomeworks,
+    getStudentNotes,
+    getStudentParentDetails,
     getStudents,
     // getStudentUpcomingClasses,
     createStudent,
     getStudentUpcomingClasses, getStudentTutors,
     // getStudentNotes
 } from "../controllers/studentController";
-export const studentRouter=express.Router();
+export const studentRouter = express.Router();
 
 
 
@@ -35,8 +37,8 @@ studentRouter.route("/tutors/:id")
 // studentRouter.route("/:id/notes")
 //     .get(getStudentNotes);
 
-// studentRouter.route("/:id/upcomingPayments")
-//     .get(getStudentUpcomingPayments);
+studentRouter.route("/:id/upcomingPayments")
+    .get(getStudentUpcomingPayments);
 
 studentRouter.route("/createStudent")
     .post(createStudent);

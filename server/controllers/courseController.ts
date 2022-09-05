@@ -21,13 +21,14 @@ export const getCourses = async (req: Request, res: Response) => {
     }
 }
 
+
 export const getCourseByID = async (req: Request, res: Response) => {
+
 
     try {
         const data = await prisma.course.findMany({
             where: {
-                course_id: Number(req.params.id),
-                isActive: true
+                course_id: Number(req.params.id)
             },
             include: {
                 teacher: true,
