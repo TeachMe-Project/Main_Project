@@ -6,8 +6,10 @@ import {
     getStudentNotes,
     getStudentParentDetails,
     getStudents,
-    getStudentUpcomingClasses,
-    createStudent, getStudentUpcomingPayments
+    // getStudentUpcomingClasses,
+    createStudent,
+    getStudentUpcomingClasses, getStudentTutors,
+    // getStudentNotes
 } from "../controllers/studentController";
 export const studentRouter = express.Router();
 
@@ -22,17 +24,18 @@ studentRouter.route("/:id")
 studentRouter.route("/:id/courses")
     .get(getStudentCourses);
 
-studentRouter.route("/:id/upcomingClasses")
+studentRouter.route("/upcomingClasses/:id")
     .get(getStudentUpcomingClasses);
 
-studentRouter.route("/:id/homeWorks")
-    .get(getStudentHomeworks);
+studentRouter.route("/tutors/:id")
+    .get(getStudentTutors);
 
-studentRouter.route("/:id/notes")
-    .get(getStudentNotes);
+// studentRouter.route("/:id/homeWorks")
+//     .get(getStudentHomeworks);
 
-studentRouter.route("/:id/parentDetails")
-    .get(getStudentParentDetails);
+//
+// studentRouter.route("/:id/notes")
+//     .get(getStudentNotes);
 
 studentRouter.route("/:id/upcomingPayments")
     .get(getStudentUpcomingPayments);
