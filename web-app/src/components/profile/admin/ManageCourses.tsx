@@ -72,6 +72,7 @@ const ManageCourses = () => {
 
     useEffect(() => {
         axios.get(baseURL).then((response: AxiosResponse) => {
+            // console.log(response.data)
             response.data.map((item: any) => {
                     setCourses(prevState => [...prevState, {
                         id: item.course_id,
