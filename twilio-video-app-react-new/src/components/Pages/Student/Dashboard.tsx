@@ -22,16 +22,12 @@ const convertTime = (x: Date) => {
   return newHour + ':' + minute + ' ' + ampm;
 };
 
-const handleTime = (start: string, end: string) => {
-  return start + ' - ' + end;
-};
-
 export const Dashboard = () => {
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
   console.log({ studentAuthId });
-  // const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
-  const baseURL = `http://localhost:8081/student/${studentAuthId}/upcomingClasses`;
+  const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
+  // const baseURL = `http://localhost:8081/student/${studentAuthId}/upcomingClasses`;
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {
@@ -45,7 +41,7 @@ export const Dashboard = () => {
               subject: item.course.subject,
               teacher: 'Mr. ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
               date: item.date,
-              time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
+              time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
             },
           ]);
         });

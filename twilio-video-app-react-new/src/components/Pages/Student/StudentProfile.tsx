@@ -55,8 +55,8 @@ const initialState = {
 export const StudentProfile = () => {
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURLStudent = `http://localhost:8081/student/${studentAuthId}`;
-  const baseURLParent = `http://localhost:8081/student/${studentAuthId}/parentDetails`;
+  const baseURLStudent = `https://learnx.azurewebsites.net/student/${studentAuthId}`;
+  const baseURLParent = `https://learnx.azurewebsites.net/student/${studentAuthId}/parentDetails`;
 
   const [studentProfDetails, setStudentProfDetails] = useState<any[]>([]);
   const [parentProfDetails, setParentProfDetails] = useState<any[]>([]);

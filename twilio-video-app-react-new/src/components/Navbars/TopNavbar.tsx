@@ -11,7 +11,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 export const TopNavbar = () => {
   const { user } = useAuth0();
   const userAuthId = user?.sub;
-  const baseURL = `http://localhost:8081/user/${userAuthId}`;
+  const baseURL = `https://learnx.azurewebsites.net/user/${userAuthId}`;
   const [userDetails, setUserDetails] = useState<any[]>([]);
 
   useEffect(() => {

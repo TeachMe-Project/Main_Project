@@ -26,10 +26,6 @@ export const MyCourses = () => {
     return newHour + ':' + minute + ' ' + ampm;
   };
 
-  const handleTime = (start: string, end: string) => {
-    return start + ' - ' + end;
-  };
-
   useEffect(() => {
     axios
       .get(baseURL)
@@ -43,7 +39,7 @@ export const MyCourses = () => {
                 teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Monday',
                 desc: item.course.description,
-                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
+                time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
                 price: item.course.price,
               },
             ]);
@@ -55,7 +51,7 @@ export const MyCourses = () => {
                 teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Tuesday',
                 desc: item.course.description,
-                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
+                time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
                 price: item.course.price,
               },
             ]);
@@ -67,7 +63,7 @@ export const MyCourses = () => {
                 teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Wednesday',
                 desc: item.course.description,
-                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
+                time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
                 price: item.course.price,
               },
             ]);
@@ -79,7 +75,7 @@ export const MyCourses = () => {
                 teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Thursday',
                 desc: item.course.description,
-                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
+                time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
                 price: item.course.price,
               },
             ]);
@@ -91,7 +87,7 @@ export const MyCourses = () => {
                 teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Friday',
                 desc: item.course.description,
-                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
+                time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
                 price: item.course.price,
               },
             ]);
@@ -103,7 +99,7 @@ export const MyCourses = () => {
                 teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Saturday',
                 desc: item.course.description,
-                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
+                time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
                 price: item.course.price,
               },
             ]);
@@ -115,7 +111,7 @@ export const MyCourses = () => {
                 teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                 day: 'Sunday',
                 desc: item.course.description,
-                time: handleTime(convertTime(item.course.start_time), convertTime(item.course.end_time)),
+                time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
                 price: item.course.price,
               },
             ]);
