@@ -1,16 +1,164 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import CourseCardTeacher from '../../Card/CourseCardTeacher';
 import CardHeader from '../../Card/CardHeader';
 import CardDetails from '../../Card/CardDetails';
 import { Row, Col, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PanelContainer from '../../Layout/PanelContainer';
 import { Button } from '../../Button/Button';
 
 import { CardButton } from '../../Card/CardButton';
 import { ButtonCommon } from '../../Button/ButtonCommon';
+import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+
+// const convertTime = (x: Date) => {
+//   const time = x.toLocaleTimeString('it-IT');
+//   const hour = time.split(':')[0];
+//   const intHour = parseInt(hour);
+//   const minute = time.split(':')[1];
+//   const ampm = intHour >= 12 ? 'PM' : 'AM';
+//   const newHour = intHour % 12;
+//   return newHour + ':' + minute + ' ' + ampm;
+// };
 
 export const MyCourses = () => {
+  const { user } = useAuth0();
+  const teacherAuthId = user?.sub;
+  console.log(teacherAuthId);
+  const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/courses`;
+  const [courses, setCourses] = useState<any[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          if (item.course.day === 'MON') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                id: item.course.course_id,
+                subject: item.course.subject,
+                day: 'Monday',
+                desc: item.course.description,
+                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+                time: item.course.start_time,
+                price: item.course.price,
+                grade: item.course.grade,
+                medium: item.course.medium,
+              },
+            ]);
+          } else if (item.course.day === 'TUE') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                id: item.course.course_id,
+                subject: item.course.subject,
+                day: 'Tuesday',
+                desc: item.course.description,
+                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+                time: item.course.start_time,
+                price: item.course.price,
+                grade: item.course.grade,
+                medium: item.course.medium,
+              },
+            ]);
+          } else if (item.course.day === 'WED') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                id: item.course.course_id,
+                subject: item.course.subject,
+                day: 'Wednesday',
+                desc: item.course.description,
+                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+                time: item.course.start_time,
+                price: item.course.price,
+                grade: item.course.grade,
+                medium: item.course.medium,
+              },
+            ]);
+          } else if (item.course.day === 'THU') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                id: item.course.course_id,
+                subject: item.course.subject,
+                day: 'Thursday',
+                desc: item.course.description,
+                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+                time: item.course.start_time,
+                price: item.course.price,
+                grade: item.course.grade,
+                medium: item.course.medium,
+              },
+            ]);
+          } else if (item.course.day === 'FRI') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                id: item.course.course_id,
+                subject: item.course.subject,
+                day: 'Friday',
+                desc: item.course.description,
+                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+                time: item.course.start_time,
+                price: item.course.price,
+                grade: item.course.grade,
+                medium: item.course.medium,
+              },
+            ]);
+          } else if (item.course.day === 'SAT') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                id: item.course.course_id,
+                subject: item.course.subject,
+                day: 'Saturday',
+                desc: item.course.description,
+                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+                time: item.course.start_time,
+                price: item.course.price,
+                grade: item.course.grade,
+                medium: item.course.medium,
+              },
+            ]);
+          } else if (item.course.day === 'SUN') {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                id: item.course.course_id,
+                subject: item.course.subject,
+                day: 'Sunday',
+                desc: item.course.description,
+                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+                time: item.course.start_time,
+                price: item.course.price,
+                grade: item.course.grade,
+                medium: item.course.medium,
+              },
+            ]);
+          }
+        });
+        console.log(courses);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  const goToCoursePage = (id: any) => (
+    <div className="ViewMore">
+      {/* <button className="CardButton" onClick={() => navigate('/course')}> */}
+      <button className="CardButton" onClick={() => navigate(`/course/${id}`)}>
+        View More
+      </button>
+    </div>
+  );
+
   return (
     <div className="MyCoursesTeacher">
       <Container>
@@ -30,7 +178,24 @@ export const MyCourses = () => {
 
           <div className="Panel">
             <div className="PanelBody">
-              <CourseCardTeacher
+              {courses.map((item: any) => {
+                return (
+                  <CourseCardTeacher
+                    header={item.subject}
+                    description={item.desc}
+                    time={item.time}
+                    date={item.day}
+                    grade={item.grade}
+                    medium={item.medium}
+                    image={<img src={'/Images/subjects/maths.png'} />}
+                    amount={item.price}
+                    // btn1="View more"
+                  >
+                    {goToCoursePage(item.id)}
+                  </CourseCardTeacher>
+                );
+              })}
+              {/* <CourseCardTeacher
                 header="Mathematics"
                 description="This course includes content of grade 8 mathematics
                 of local syllabus in English medium. It contains algebraic concepts and skills needed to
@@ -41,7 +206,7 @@ export const MyCourses = () => {
                 medium="English Medium"
                 image={<img src={'/Images/subjects/maths.png'} />}
                 amount="LKR 2,500"
-                btn1="View more"
+                // btn1="View more"
               />
 
               <CourseCardTeacher
@@ -55,7 +220,7 @@ export const MyCourses = () => {
                 medium="English Medium"
                 image={<img src={'/Images/subjects/science.png'} />}
                 amount="LKR 2,500"
-                btn1="View more"
+                // btn1="View more"
               />
 
               <CourseCardTeacher
@@ -69,7 +234,7 @@ export const MyCourses = () => {
                 medium="English Medium"
                 image={<img src={'/Images/subjects/maths.png'} />}
                 amount="LKR 2,500"
-                btn1="View more"
+                // btn1="View more"
               />
 
               <CourseCardTeacher
@@ -81,8 +246,8 @@ export const MyCourses = () => {
                 date="Tuesday"
                 image={<img src={'/Images/subjects/science.png'} />}
                 amount="LKR 2,500"
-                btn1="View more"
-              />
+                // btn1="View more"
+              /> */}
             </div>
           </div>
         </Row>

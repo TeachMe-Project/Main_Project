@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../../Card/Card';
 
 import { Row, Col, Container } from 'react-bootstrap';
@@ -14,8 +15,47 @@ import Monthlyattendancechart from './Monthlyattendancechart';
 import Enrollmentchart from './Enrollmentchart';
 import Averagetimechart from './Averagetimechart';
 import Parentsaveragetimechart from './Parentaveragetimechart';
+import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
+
+const convertTime = (x: Date) => {
+  const time = x.toLocaleTimeString('it-IT');
+  const hour = time.split(':')[0];
+  const intHour = parseInt(hour);
+  const minute = time.split(':')[1];
+  const ampm = intHour >= 12 ? 'PM' : 'AM';
+  const newHour = intHour % 12;
+  return newHour + ':' + minute + ' ' + ampm;
+};
 
 export const Dashboard = () => {
+  const { user } = useAuth0();
+  const teacherAuthId = user?.sub;
+  const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
+  const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setUpcomingClasses(prevState => [
+            ...prevState,
+            {
+              subject: item.course.subject,
+              grade: item.course.grade,
+              date: item.date,
+              time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+            },
+          ]);
+        });
+        console.log(upcomingClasses);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="DashboardTeacher">
       <Container>
@@ -29,6 +69,18 @@ export const Dashboard = () => {
               <h5>Upcoming Classes </h5>
             </div>
             <div className="PanelBody">
+              {/* {upcomingClasses.map((item: any) => {
+                return (
+                  <Card
+                    header={item.subject}
+                    time={item.time}
+                    date={item.date}
+                    grade={item.grade}
+                    btnname="Start"
+                    image={<img src={'/Images/subjects/maths.png'} />}
+                  />
+                );
+              })} */}
               <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"

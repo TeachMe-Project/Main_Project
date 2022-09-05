@@ -40,6 +40,12 @@ export const getUsersByID=async (req:Request,res:Response)=>{
         const data =await prisma.user.findMany({
             where:{
                 user_id: req.params.id
+            },
+            include: {
+                teacher:true,
+                parent:true,
+                institute:true,
+                student: true
             }
         })
         res.status(200).send(data)

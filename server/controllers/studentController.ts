@@ -1,6 +1,6 @@
-import {Request, Response} from "express";
-import {PrismaClient} from '@prisma/client'
-import {studentSchema} from "../models/studentModel";
+import { Request, Response } from "express";
+import { PrismaClient } from '@prisma/client'
+import { studentSchema } from "../models/studentModel";
 import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
@@ -22,6 +22,9 @@ export const getStudentByID = async (req: Request, res: Response) => {
         const data = await prisma.student.findMany({
             where: {
                 user_id: req.params.id
+            },
+            include: {
+                user: true,
             }
         })
         res.status(200).send(data)
@@ -147,56 +150,23 @@ export const getStudentCourses = async (req: Request, res: Response) => {
         res.status(500).send(error);
     }
 }
+export const getStudentUpcomingPayments = async (req: Request, res: Response) => {
 
-// export const getStudentHomeworks = async (req: Request, res: Response) => {
-//
-//     try {
-//         const data = await prisma.homework.findMany(
-//             {
-//                 where: {student_id: Number(req.params.id)},
-//                 include: {course: true},
-//
-//             }
-//         )
-//         res.status(200).send(data);
-//     } catch (error) {
-//         res.status(500).send(error);
-//     }
-// }
+    try {
+        const data = await prisma.student_payment.findMany(
+            {
+                where: { student_id: Number(req.params.id), payment_status: "unpaid" },
 
-// export const getStudentNotes = async (req: Request, res: Response) => {
-//
-//     try {
-//         const data = await prisma.notes.findMany(
-//             {
-//                 where: {student_id: Number(req.params.id)},
-//                 include: {course: true},
-//
-//             }
-//         )
-//         res.status(200).send(data);
-//     } catch (error) {
-//         res.status(500).send(error);
-//     }
-// }
 
-// export const getStudentUpcomingPayments = async (req: Request, res: Response) => {
-//
-//     try {
-//         const data = await prisma.student_payment.findMany(
-//             {
-//                 where: {student_id: Number(req.params.id), payment_status: "unpaid"},
-//
-//
-//             }
-//         )
-//         res.status(200).send(data);
-//     } catch (error) {
-//         res.status(500).send(error);
-//     }
-// }
+            }
+        )
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 export const createStudent = async (req: Request, res: Response) => {
-    const {error, value} = studentSchema.validate(req.body);
+    const { error, value } = studentSchema.validate(req.body);
     const parent_id = Number(req.body.parent_id);
 
     if (!error) {
@@ -212,7 +182,7 @@ export const createStudent = async (req: Request, res: Response) => {
                         create: {
                             first_name: req.body.first_name,
                             last_name: req.body.last_name,
-                            school: 'ss',
+                            school:  'ss',
                             grade: req.body.grade,
                             parent_id: parent_id,
                             isActive: true,

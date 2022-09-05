@@ -8,6 +8,7 @@ import { FiDownload } from 'react-icons/fi';
 type Homework = {
   name?: string;
   date?: string;
+  link?: string;
 };
 
 const Homework: React.FC<Homework> = props => {
@@ -20,8 +21,8 @@ const Homework: React.FC<Homework> = props => {
             detail={props.date}
             btnname={
               <a
-                download="note1.pdf"
-                href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
+                download="homework.pdf"
+                href={props.link}
                 target="_blank"
               >
                 <FiDownload className="ReactIcon" />
