@@ -27,7 +27,7 @@ model course {
   subject          String             @db.VarChar(100)
   description      String             @db.VarChar(255)
   end_date         String             @db.VarChar(50)
-  start_date       DateTime           @db.Date
+  start_date       String             @db.VarChar(50)
   start_time       String             @db.VarChar(50)
   end_time         String             @db.VarChar(50)
   day              String             @db.VarChar(50)

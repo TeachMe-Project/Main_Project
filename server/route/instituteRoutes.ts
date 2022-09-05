@@ -3,7 +3,7 @@ import {
     createInstitute, createTeacherRequest, getAllInstituteCourses, getAllInstituteTeachers,
     getInstituteByID,
     getInstituteByName,
-    getInstitutes,
+    getInstitutes, searchTeacher,
     updateInstituteDetails
 } from "../controllers/instituteController";
 
@@ -28,6 +28,10 @@ instituteRouter.route("/getAllInstituteCourses/:id")
 
 instituteRouter.route("/getAllInstituteTeacher/:id")
     .get(getAllInstituteTeachers);
+
+instituteRouter.route("/searchTeacher")
+    .post(searchTeacher);
+
 
 instituteRouter.route("/createInstitute")
     .post(createInstitute);

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import {Field, Formik} from 'formik';
 import * as yup from 'yup';
@@ -7,6 +7,8 @@ import * as yup from 'yup';
 import LazyLoad from 'react-lazyload';
 import SubmitButton from '../../Button/SubmitButton';
 import {ButtonCommon} from '../../Button/ButtonCommon';
+import axios, {AxiosResponse} from "axios";
+import {useAuth0} from "@auth0/auth0-react";
 
 const schema = yup.object().shape({
     title: yup.string().required().label('Title'),
@@ -161,6 +163,29 @@ export const AddCourse = () => {
             return true;
         }
     };
+
+    const {user} = useAuth0();
+    const user_id = user?.sub;
+    const [institutes, setInstitutes] = useState<any[]>([]);
+    const [isDataLoading, setIsDataLoading] = useState(false);
+    useEffect(() => {
+        axios.get(`https://learnx.azurewebsites.net/teacher/teacherInstitutes/${user_id}`).then((res: AxiosResponse) => {
+            // setIsDataLoading(true);
+            // console.log(res.data)
+            res.data.map((item: any) => {
+                setInstitutes(prevState => [...prevState, {
+                    institute_id: item.institute_id,
+                    institute_name: item.institute.institute_name
+                }])
+                console.log(institutes)
+            })
+
+        })
+            .catch((error: any) => {
+                console.log(error.message);
+            })
+    }, []);
+
 
     return (
         <div className="AddCourse">
@@ -345,11 +370,12 @@ export const AddCourse = () => {
                                                                       isInvalid={!!errors.institute && touched.institute ? changeInstituteValidate(false) : changeInstituteValidate(true)}
                                                                       isValid={touched.institute}
                                                                       onBlur={handleBlur}>
-                                                            <option value="None" selected> None</option>
-                                                            <option value="Institute 1">Sigma Institute</option>
-                                                            <option value="Wednesday">Sasip Institute, Nugegoda</option>
-                                                            <option value="Thursday">Sasip Institute, Galle</option>
-                                                        </Form.Control>
+                                                            <option value="NoInstitute" selected> None</option>
+                                                            {institutes.map((item) => {
+                                                                return (
+                                                                    <option value={item.institute_id}>{item.institute_name}</option>
+                                                                )})}
+                                                            </Form.Control>
 
                                                         <Form.Control.Feedback
                                                             type="invalid">{errors.fee}</Form.Control.Feedback>

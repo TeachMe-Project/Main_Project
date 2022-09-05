@@ -191,6 +191,27 @@ export const createInstitute = async (req: Request, res: Response) => {
     }
 }
 
+export const searchTeacher = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.user.findMany({
+            where: {
+                username: {
+                    contains: req.body.teacher_email,
+                },
+                type: "teacher"
+            },
+            include: {
+                teacher: true
+            }
+        })
+        res.status(200).send(data)
+    } catch (error: any) {
+        res.status(500).send(error.message);
+    }
+}
+
+
 export const createTeacherRequest = async (req: Request, res: Response) => {
 
     const {error, value} = instituteTeacherRequest.validate(req.body);
