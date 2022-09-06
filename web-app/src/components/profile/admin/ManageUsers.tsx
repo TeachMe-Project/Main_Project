@@ -160,6 +160,7 @@ const ManageUsers = () => {
                     }])
                 }
                 setIsDataLoading(true);
+                console.log(users)
             })
         })
             .catch((error) => {
