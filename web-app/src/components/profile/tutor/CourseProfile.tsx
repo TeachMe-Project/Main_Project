@@ -22,8 +22,8 @@ const CourseProfile = () => {
     const isPc = useMediaQuery({minWidth: 991});
     const {course_id} = useParams();
     const [course, setCourse] = useState<any>();
-    // const [students, setStudents] = useState<any>();
-    // const [classes, setClasses] = useState<any>();
+    const [student, setStudent] = useState<any>([]);
+    const [upcoming, setUpcoming] = useState<any>([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
     const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
         < FaEye
@@ -61,13 +61,13 @@ const CourseProfile = () => {
     );
 
     useEffect(() => {
-        const days= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         console.log(course_id)
         axios.get(`https://learnx.azurewebsites.net/course/${course_id}`)
             .then((res: AxiosResponse) => {
                 // setIsDataLoading(true);
                 const data = res.data[0];
-                console.log(data)
+                // console.log(data)
                 setCourse({
                     subject: data.subject,
                     subtitle: data.teacher.title + " " + data.teacher.first_name + " " + data.teacher.last_name,
@@ -83,7 +83,28 @@ const CourseProfile = () => {
                     end_time: new Date(data.end_time).getTime().toLocaleString(),
                 });
 
-                console.log(course);
+                const course_student = data.student_course;
+                course_student.map((item:any) => {
+                    console.log(item.student)
+                    setStudent( (prevState: any) => [...prevState, {
+                        student_id: item.student_id,
+                        name: item.student.first_name + ' '+ item.student.last_name,
+                        username: item.student.user.username,
+                        contact: item.student.parent.mobile_no
+                    }])
+                })
+                const course_upcoming = data.teacher_class;
+                // console.log(course_upcoming)
+                course_upcoming.map((item:any) => {
+                    setUpcoming( (prevState: any) => [...prevState, {
+                        date: item.date.substring(0,10),
+                        start_time: item.start_time,
+                        end_time: item.end_time
+                    }])
+                    console.log(upcoming)
+                })
+
+                // console.log(upcoming);
                 setIsDataLoading(true);
 
             })
@@ -97,11 +118,16 @@ const CourseProfile = () => {
         {
             dataField: "student_id",
             text: "Student ID",
+            hidden:true,
+        },
+        {
+            dataField: "name",
+            text: "Student Name",
             sort: true,
         },
         {
             dataField: "username",
-            text: "Student Name",
+            text: "Student Email",
             sort: true,
         },
         {
@@ -119,37 +145,29 @@ const CourseProfile = () => {
 
     const column2 = [
         {
+            dataField: "class_id",
+            text: "Class Id",
+            hidden: true
+        },
+        {
             dataField: "date",
             text: "Date",
             sort: true,
         },
         {
-            dataField: "time",
-            text: "Time",
+            dataField: "start_time",
+            text: "Start Time",
             sort: true,
         },
         {
-            dataField: "duration",
-            text: "Duration",
+            dataField: "end_time",
+            text: "End Time",
         }
     ];
 
 
-    const students = [
-        {
-            student_id: 12345678,
-            username: "samana@gmail.com",
-            contact: "0987654321"
-        }
-    ];
 
-    const schedule = [
-        {
-            date: "2022-02-23",
-            time: "05.00PM",
-            duration: "2hrs"
-        }
-    ]
+
 
 
     return (
@@ -158,7 +176,7 @@ const CourseProfile = () => {
             {isDataLoading &&
             <Col lg={12} className='px-5'>
                 <h1 style={{color: "#2c3e50"}}
-                    className='text-lg-start header my-lg-3 text-md-center text-center d-flex flex-row align-items-center justify-content-between'>
+                    className='text-lg-start header mt-lg-2 mb-lg-1 text-md-center text-center d-flex flex-row align-items-center justify-content-between'>
                     {course.subject}
                     <AiOutlineCloseCircle className='me-lg-4' style={{cursor: "pointer"}}
                                           onClick={() => navigate(-1)}/>
@@ -241,19 +259,19 @@ const CourseProfile = () => {
                             <span className='mt-4 mb-2'>
                                     {course.title}
                             </span>
-                            <span className='my-2'>
+                                <span className='my-2'>
                                 {course.subject}
                             </span>
                                 <span className='my-2'>
                                 {course.grade}
                             </span>
-                            <span className='my-2'>
+                                <span className='my-2'>
                                 {course.description}
                             </span>
-                            <span className='my-2'>
+                                <span className='my-2'>
                                 {course.medium}
                             </span>
-                            <span className='my-2'>
+                                <span className='my-2'>
                                 LKR {course.fee}
                             </span>
                                 <span className='my-2'>
@@ -276,7 +294,7 @@ const CourseProfile = () => {
                             {isPc &&
                             <ToolkitProvider
                                 keyField="id"
-                                data={students}
+                                data={student}
                                 columns={columns}
                                 search>
                                 {(props: any) =>
@@ -286,10 +304,10 @@ const CourseProfile = () => {
                                                        placeholder="Search Courses"
                                             />
                                             <BootstrapTable
-                                                columns={columns} data={students} keyField="id"
+                                                columns={columns} data={student} keyField="id"
                                                 {...props.baseProps}
                                                 bootstrap4={true}
-                                                pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
+                                                pagination={paginationFactory({sizePerPage: 4, hideSizePerPage: true})}
                                                 rowStyle={{
                                                     fontSize: "16px",
                                                     fontWeight: "500",
@@ -314,17 +332,17 @@ const CourseProfile = () => {
                             {isPc &&
                             <ToolkitProvider
                                 keyField="id"
-                                data={schedule}
+                                data={upcoming}
                                 columns={column2}
                                 search>
                                 {(props: any) =>
                                     (
                                         <Row className='next-table'>
                                             <BootstrapTable
-                                                columns={column2} data={schedule} keyField="id"
+                                                columns={column2} data={upcoming} keyField="id"
                                                 {...props.baseProps}
                                                 bootstrap4={true}
-                                                pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
+                                                pagination={paginationFactory({sizePerPage: 4, hideSizePerPage: true})}
                                                 rowStyle={{
                                                     fontSize: "16px",
                                                     fontWeight: "500",
