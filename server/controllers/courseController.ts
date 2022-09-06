@@ -45,7 +45,8 @@ export const getCourseByID = async (req: Request, res: Response) => {
                     include: {
                         student: {
                             include:{
-                                parent: true
+                                parent: true,
+                                user:true
                             }
                         }
                     }
@@ -69,8 +70,8 @@ export const getCourseStudentByID = async (req: Request, res: Response) => {
             include: {
                 student: {
                     include: {
-                        user: true,
-                        parent: true
+                        parent: true,
+                        user:true
                     }
                 }
             }
