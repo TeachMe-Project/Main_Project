@@ -1,5 +1,10 @@
 import express from "express";
-import {createNotification, getNotificationByID, getNotifications} from "../controllers/notificationController";
+import {
+    createNotification,
+    getNotificationByID,
+    getNotificationByUserId,
+    getNotifications
+} from "../controllers/notificationController";
 
 export const notificationRouter=express.Router();
 
@@ -14,4 +19,6 @@ notificationRouter.route("/:id")
 notificationRouter.route("/createNotification")
     .post(createNotification);
 
+notificationRouter.route("/user/:id")
+    .get(getNotificationByUserId);
 
