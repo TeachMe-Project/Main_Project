@@ -154,7 +154,7 @@ export const Institutes = () => {
                   <div className="PanelBody" style={{ display: 'block' }}>
                     <InstituteCard
                       institutename="Susipwan Institute, Gampaha"
-                      image={<img src={'/Images/subjects/science.png'} />}
+                      image={<img src={'/Images/subjects/Science.png'} />}
                       btn1="View more"
                       btn2="Accept"
                       btn3="Decline"
@@ -170,7 +170,7 @@ export const Institutes = () => {
 
                     <InstituteCard
                       institutename="Flysky Institute"
-                      image={<img src={'/Images/subjects/maths.png'} />}
+                      image={<img src={'/Images/subjects/Mathematics.png'} />}
                       btn1="View more"
                       btn2="Accept"
                       btn3="Decline"

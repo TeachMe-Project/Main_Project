@@ -25,40 +25,7 @@ const CourseProfile = () => {
     const [student, setStudent] = useState<any>([]);
     const [upcoming, setUpcoming] = useState<any>([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
-    const gotoCourse = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
-        < FaEye
-            style={{
-                fontSize: "20px",
-                color: "#181312",
-                padding: "7px",
-                width: "30px",
-                height: "30px",
-                borderRadius: "50%",
-                cursor: "pointer",
-                boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-            }}
-            className='accept-icon'
-            onClick={() => {
-                swal({
-                    title: "User Removal",
-                    text: `Do you really want to remove ${row.username}?`,
-                    icon: "error",
-                    buttons: {
-                        cancel: true,
-                        confirm: true
-                    },
-                    // dangerMode: true,
-                })
-                    .then((willDelete: any) => {
-                        if (willDelete) {
-                            swal(`Poof! You have successfully removed ${row.username}`, {
-                                icon: "success",
-                            });
-                        }
-                    });
-            }}
-        />
-    );
+
 
     useEffect(() => {
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -67,7 +34,7 @@ const CourseProfile = () => {
             .then((res: AxiosResponse) => {
                 // setIsDataLoading(true);
                 const data = res.data[0];
-                // console.log(data)
+                console.log(data)
                 setCourse({
                     subject: data.subject,
                     subtitle: data.teacher.title + " " + data.teacher.first_name + " " + data.teacher.last_name,
@@ -78,18 +45,19 @@ const CourseProfile = () => {
                     medium: data.medium,
                     start_date: new Date(data.start_date).toDateString(),
                     end_date: new Date(data.start_date).toDateString(),
-                    class_day: new Date(data.start_date).getDay(),
-                    start_time: new Date(data.start_time).toString(),
-                    end_time: new Date(data.end_time).getTime().toLocaleString(),
+                    class_day: data.day,
+                    start_time: data.start_time,
+                    end_time: data.end_time,
                 });
 
                 const course_student = data.student_course;
                 course_student.map((item:any) => {
-                    console.log(item.student)
+                    // console.log(item.student)
                     setStudent( (prevState: any) => [...prevState, {
                         student_id: item.student_id,
                         name: item.student.first_name + ' '+ item.student.last_name,
                         username: item.student.user.username,
+                        parent_name: item.student.parent.first_name + ' ' + item.student.parent.last_name,
                         contact: item.student.parent.mobile_no
                     }])
                 })
@@ -103,7 +71,13 @@ const CourseProfile = () => {
                     }])
                     console.log(upcoming)
                 })
-
+                // const upcoming_class = upcoming.slice(0,12)
+                // console.log(upcoming_class)
+                // console.log(upcoming_class)
+                // setUpcoming(upcoming.slice(0,12))
+                // for (let i = 0; i < 12; i++) {
+                //    console.log(upcoming[i])
+                // }
                 // console.log(upcoming);
                 setIsDataLoading(true);
 
@@ -131,15 +105,12 @@ const CourseProfile = () => {
             sort: true,
         },
         {
-            dataField: "contact",
-            text: "Parent",
+            dataField: "parent_name",
+            text: "Parent Name",
         },
         {
-            dataField: "",
-            text: "",
-            formatter: gotoCourse,
-            headerAttrs: {width: 100},
-            attrs: {width: 100, class: "EditRow"}
+            dataField: "contact",
+            text: "Parent Contact",
         },
     ];
 
@@ -181,7 +152,7 @@ const CourseProfile = () => {
                     <AiOutlineCloseCircle className='me-lg-4' style={{cursor: "pointer"}}
                                           onClick={() => navigate(-1)}/>
                 </h1>
-                <h3 style={{color: "#2c3e50"}}>
+                <h3 style={{color: "#2c3e50"}} className='mb-3'>
                     {course.subtitle}
                 </h3>
                 <Tabs
@@ -222,6 +193,9 @@ const CourseProfile = () => {
                                 <span className='my-2'>
                                 Start Time
                             </span>
+                                <span className='my-2'>
+                                End Time
+                            </span>
                             </Col>
                             <Col lg={1} className='d-flex flex-column'>
                             <span className='mt-4 mb-2'>
@@ -253,6 +227,8 @@ const CourseProfile = () => {
                             </span>
                                 <span className='my-2'>
                                 :
+                            </span><span className='my-2'>
+                                :
                             </span>
                             </Col>
                             <Col lg={7} className='d-flex flex-column ms-3'>
@@ -281,10 +257,12 @@ const CourseProfile = () => {
                                 {course.end_date}
                             </span>
                                 <span className='my-2'>
-                                {course.day}
+                                {course.class_day}
                             </span>
                                 <span className='my-2'>
                                 {course.start_time}
+                            </span> <span className='my-2'>
+                                {course.end_time}
                             </span>
                             </Col>
                         </Row>

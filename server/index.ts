@@ -47,7 +47,7 @@ app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 app.use(cors());
 setInterval(classSchedule, 432000000);
-payment_schedule();
+setInterval(payment_schedule, 432000000);
 // classSchedule();
 //development endpoints by developers
 app.use('/admin',adminRouter)
