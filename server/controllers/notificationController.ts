@@ -56,3 +56,17 @@ export const  createNotification=async (req:Request,res:Response)=>{
     }
 }
 
+export const getNotificationByUserId = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.notification.findMany({
+            where: {
+                user_id: req.params.id,
+            }
+        })
+        res.status(200).send(data)
+    } catch (error: any) {
+        res.status(500).send(error.message);
+    }
+}
+
