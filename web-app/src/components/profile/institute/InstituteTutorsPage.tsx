@@ -68,66 +68,59 @@ const InstituteTutorsPage = () => {
         />
     );
     const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
-        < BsTrashFill
-            style={{
-                fontSize: "20px",
-                color: "#e74c3c",
-                padding: "7px",
-                width: "30px",
-                height: "30px",
-                borderRadius: "50%",
-                cursor: "pointer",
-                boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-            }}
-            className='accept-icon'
-            onClick={() => {
-                swal({
-                    title: "User Removal",
-                    text: `Do you really want to remove ${row.first_name} ${row.last_name} ?`,
-                    icon: "error",
-                    buttons: {
-                        cancel: true,
-                        confirm: true
-                    },
-                    // dangerMode: true,
-                })
-                    .then((willDelete: any) => {
-                        const apiData = JSON.stringify({
-                            "user_id": `${row.user_id}`
-                        })
-                        axios({
-                            method: "POST",
-                            url: "http://localhost:8081/auth/block",
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            data: apiData
-                        }).then((apiRes) => {
+            < BsTrashFill
+                style={{
+                    fontSize: "20px",
+                    color: "#e74c3c",
+                    padding: "7px",
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "50%",
+                    cursor: "pointer",
+                    boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+                }}
+                className='accept-icon'
+                onClick={() => {
+                    swal({
+                        title: "User Removal",
+                        text: `Do you really want to remove ${row.first_name} ${row.last_name} ?`,
+                        icon: "error",
+                        buttons: {
+                            cancel: true,
+                            confirm: true
+                        },
+                        // dangerMode: true,
+                    })
+                        .then((willDelete: any) => {
+                            setIsDataLoading(false)
+                            const apiData = JSON.stringify({
+                                "teacher_id": `${row.user_id}`
+                            })
                             axios({
                                 method: "POST",
-                                url: "http://localhost:8081/user/removeUser",
+                                url: `https://learnx.azurewebsites.net/institute/removeTeacher/${user_id}`,
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
                                 data: apiData
                             }).then((apiRes) => {
-                                console.log(apiRes.status);
                                 if (apiRes.status === 200) {
                                     swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
                                         icon: "success",
                                     });
+                                    const newTeachersArray = teachers.filter(teacher => row.user_id !== teacher.user_id);
+                                    setTeachers(newTeachersArray);
                                 }
-                            }).catch((error) => {
+                                setIsDataLoading(true)
+
+                            }).catch((error: any) => {
                                 console.log(error.message)
                             })
-
-                        }).catch((error) => {
-                            console.log(error.message)
-                        })
-                    });
-            }}
-        />
-    );
+                        });
+                }}
+            />
+        )
+    ;
 
     const columns = [
         {
