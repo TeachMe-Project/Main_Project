@@ -62,7 +62,12 @@ export const getNotificationByUserId = async (req: Request, res: Response) => {
         const data = await prisma.notification.findMany({
             where: {
                 user_id: req.params.id,
-            }
+            },
+            orderBy:[
+                {
+                    notification_id: 'desc'
+                }
+            ]
         })
         res.status(200).send(data)
     } catch (error: any) {
