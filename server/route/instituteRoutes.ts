@@ -3,7 +3,7 @@ import {
     createInstitute, createTeacherRequest, getAllInstituteCourses, getAllInstituteTeachers,
     getInstituteByID,
     getInstituteByName,
-    getInstitutes, searchTeacher,
+    getInstitutes, removeInstituteTeacher, searchTeacher,
     updateInstituteDetails
 } from "../controllers/instituteController";
 
@@ -39,4 +39,6 @@ instituteRouter.route("/createInstitute")
 instituteRouter.route("/addTeacher/:id")
     .post(createTeacherRequest);
 
+instituteRouter.route("/removeTeacher/:id")
+    .post(removeInstituteTeacher);
 

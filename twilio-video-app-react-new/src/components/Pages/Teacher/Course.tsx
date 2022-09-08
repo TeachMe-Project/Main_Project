@@ -107,7 +107,7 @@ export const Course = () => {
               return (
                 <div>
                   <div className="PanelSubHeader">
-                    <div className="PanelImage">{<img src={'/Images/subjects/maths.png'} />}</div>
+                    <div className="PanelImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
                     <h3>{item.subject} Class</h3>
                   </div>
 
@@ -137,7 +137,7 @@ export const Course = () => {
             })} */}
 
             <div className="PanelSubHeader">
-              <div className="PanelImage">{<img src={'/Images/subjects/maths.png'} />}</div>
+              <div className="PanelImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
               <h3>Mathematics Class</h3>
             </div>
 

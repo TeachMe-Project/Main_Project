@@ -77,7 +77,7 @@ export const Dashboard = () => {
                     date={item.date}
                     grade={item.grade}
                     btnname="Start"
-                    image={<img src={'/Images/subjects/maths.png'} />}
+                    image={<img src={'/Images/subjects/Mathematics.png'} />}
                   />
                 );
               })} */}
@@ -87,7 +87,7 @@ export const Dashboard = () => {
                 date="23-08-2022"
                 grade="Grade 8"
                 btnname="Start"
-                image={<img src={'/Images/subjects/maths.png'} />}
+                image={<img src={'/Images/subjects/Mathematics.png'} />}
               />
               <Card
                 header="Mathematics"
@@ -95,7 +95,7 @@ export const Dashboard = () => {
                 date="24-08-2022"
                 grade="Grade 9"
                 btnname="Start"
-                image={<img src={'/Images/subjects/maths.png'} />}
+                image={<img src={'/Images/subjects/Mathematics.png'} />}
               />
 
               <Card
@@ -104,7 +104,7 @@ export const Dashboard = () => {
                 date="30-08-2022"
                 grade="Grade 8"
                 btnname="Start"
-                image={<img src={'/Images/subjects/maths.png'} />}
+                image={<img src={'/Images/subjects/Mathematics.png'} />}
               />
             </div>
           </div>
