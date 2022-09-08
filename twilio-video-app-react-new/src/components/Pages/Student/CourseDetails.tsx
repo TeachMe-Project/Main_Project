@@ -27,7 +27,7 @@ export const CourseDetails = () => {
           <div className="Panel">
             <div className="PanelSubHeader">
               <div className="PanelImage">
-                <img src={'/Images/subjects/maths.png'} />
+                <img src={'/Images/subjects/Mathematics.png'} />
               </div>
 
               <div className="PanelTopic">

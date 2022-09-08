@@ -187,7 +187,7 @@ export const MyCourses = () => {
                     date={item.day}
                     grade={item.grade}
                     medium={item.medium}
-                    image={<img src={'/Images/subjects/maths.png'} />}
+                    image={<img src={'/Images/subjects/Mathematics.png'} />}
                     amount={item.price}
                     // btn1="View more"
                   >
@@ -204,7 +204,7 @@ export const MyCourses = () => {
                 date="Sunday"
                 grade="Grade 8"
                 medium="English Medium"
-                image={<img src={'/Images/subjects/maths.png'} />}
+                image={<img src={'/Images/subjects/Mathematics.png'} />}
                 amount="LKR 2,500"
                 // btn1="View more"
               />
@@ -218,7 +218,7 @@ export const MyCourses = () => {
                 date="Monday"
                 grade="Grade 8"
                 medium="English Medium"
-                image={<img src={'/Images/subjects/science.png'} />}
+                image={<img src={'/Images/subjects/Science.png'} />}
                 amount="LKR 2,500"
                 // btn1="View more"
               />
@@ -232,7 +232,7 @@ export const MyCourses = () => {
                 date="Saturday"
                 grade="Grade 9"
                 medium="English Medium"
-                image={<img src={'/Images/subjects/maths.png'} />}
+                image={<img src={'/Images/subjects/Mathematics.png'} />}
                 amount="LKR 2,500"
                 // btn1="View more"
               />
@@ -244,7 +244,7 @@ export const MyCourses = () => {
                 plant science, animal science..."
                 time="05:00pm - 07:00pm"
                 date="Tuesday"
-                image={<img src={'/Images/subjects/science.png'} />}
+                image={<img src={'/Images/subjects/Science.png'} />}
                 amount="LKR 2,500"
                 // btn1="View more"
               /> */}

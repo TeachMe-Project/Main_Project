@@ -21,7 +21,7 @@ export const SearchResults: React.FC<SearchResults> = props => {
           <div className="PanelBody">
             <SearchResultCard
               subject="Mathematics"
-              image={<img src={'/Images/subjects/maths.png'} />}
+              image={<img src={'/Images/subjects/Mathematics.png'} />}
               teacher="Mr. Indika Prasad"
               amount="LKR 2,500"
               btn1="View more"
@@ -29,7 +29,7 @@ export const SearchResults: React.FC<SearchResults> = props => {
             />
             <SearchResultCard
               subject="Mathematics"
-              image={<img src={'/Images/subjects/maths.png'} />}
+              image={<img src={'/Images/subjects/Mathematics.png'} />}
               teacher="Mr. Lasitha Nuwan"
               amount="LKR 2,000"
               btn1="View more"
@@ -37,7 +37,7 @@ export const SearchResults: React.FC<SearchResults> = props => {
             />
             <SearchResultCard
               subject="Mathematics"
-              image={<img src={'/Images/subjects/maths.png'} />}
+              image={<img src={'/Images/subjects/Mathematics.png'} />}
               teacher="Mrs. Sepali Wijesundara"
               amount="LKR 2,400"
               btn1="View more"

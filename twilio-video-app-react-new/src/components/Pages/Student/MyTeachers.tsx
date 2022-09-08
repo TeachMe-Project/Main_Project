@@ -13,13 +13,14 @@ import { useAuth0 } from '@auth0/auth0-react';
 export const MyTeachers = () => {
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/courses`;
+  const baseURL = `https://learnx.azurewebsites.net/student/tutors/${studentAuthId}`;
   const [teachers, setTeachers] = useState<any[]>([]);
 
   useEffect(() => {
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {
+          console.log(res.data)
         res.data.map((item: any) => {
           setTeachers(prevState => [
             ...prevState,
@@ -32,7 +33,7 @@ export const MyTeachers = () => {
             },
           ]);
         });
-        console.log(teachers);
+        // console.log(teachers);
       })
       .catch(error => {
         console.log(error);

@@ -230,7 +230,7 @@ const InstituteManageProfile = () => {
 
         axios({
             method: "POST",
-            url: "http://localhost:8081/institute/updateInstituteDetails",
+            url: "https://learnx.azurewebsites.net/institute/updateInstituteDetails",
             headers: {
                 'Content-Type': 'application/json'
             },
