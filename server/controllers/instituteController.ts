@@ -257,17 +257,20 @@ export const removeInstituteTeacher = async (req: Request, res: Response) => {
                 institute_id: true
             }
         })
+        console.log(institute_id)
+        const teacher_id = Number(req.body.teacher_id);
         const data: any = await prisma.institute_teacher.update({
-            data: {
-                status: "inactive"
-            },
             where:{
                 institute_id_teacher_id:{
                     institute_id: institute_id,
-                    teacher_id: req.body.teacher_id
+                    teacher_id: teacher_id
                 }
+            },
+            data: {
+                status: "inactive"
             }
         })
+        console.log(data)
         res.status(200).send(data)
     } catch (error: any) {
         res.status(500).send(error.message);
