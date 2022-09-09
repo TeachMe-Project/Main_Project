@@ -8,7 +8,7 @@ import {
     getStudents,
     // getStudentUpcomingClasses,
     createStudent,
-    getStudentUpcomingClasses, getStudentTutors,
+    getStudentUpcomingClasses, getStudentTutors, getStudentUpcomingPayments,
     // getStudentNotes
 } from "../controllers/studentController";
 export const studentRouter = express.Router();

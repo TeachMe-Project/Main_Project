@@ -27,14 +27,14 @@ export const TopNavbar = () => {
                 full_name: item.student.first_name + ' ' + item.student.last_name,
               },
             ]);
-            // } else if (item.type === 'teacher') {
-            //   setUserDetails(prevState => [
-            //     ...prevState,
-            //     {
-            //       profile_pic: item.profile_image,
-            //       full_name: item.teacher.first_name + ' ' + item.teacher.last_name,
-            //     },
-            //   ]);
+            } else if (item.type === 'teacher') {
+              setUserDetails(prevState => [
+                ...prevState,
+                {
+                  profile_pic: item.profile_image,
+                  full_name: item.teacher.first_name + ' ' + item.teacher.last_name,
+                },
+              ]);
           }
         });
         console.log(userDetails);

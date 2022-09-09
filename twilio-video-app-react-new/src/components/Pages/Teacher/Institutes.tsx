@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../../Card/Card';
 import CardHeader from '../../Card/CardHeader';
 import CardDetails from '../../Card/CardDetails';
@@ -31,6 +32,8 @@ import { useNavigate } from 'react-router-dom';
 import { CourseCardTeacher } from '../../Card/CourseCardTeacher';
 import { InstituteCard } from '../../Card/InstituteCard';
 import { CardButton } from '../../Card/CardButton';
+import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 library.add(fas);
 
@@ -39,6 +42,52 @@ export const Institutes = () => {
   const directToCourse = () => {
     navigate('/');
   };
+
+  const { user } = useAuth0();
+  const teacherAuthId = user?.sub;
+  console.log(teacherAuthId);
+  const baseURLCurrent = `https://learnx.azurewebsites.net/teacher/teacherInstitutes/${teacherAuthId}`;
+  const baseURLNew = `https://learnx.azurewebsites.net/teacher/teacherPendingInstitutes/${teacherAuthId}`;
+  const [institutes, setInstitutes] = useState<any[]>([]);
+  const [newInstitutes, setNewInstitutes] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(baseURLCurrent)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setInstitutes(prevState => [
+            ...prevState,
+            {
+              id: item.institute_id,
+              name: item.institute.institute_name,
+              contact: item.institute.contact_no,
+            }
+          ]);
+        });
+        console.log(institutes);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios
+      .get(baseURLNew)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setNewInstitutes(prevState => [
+            ...prevState,
+            {
+              name: item.institute.institute_name,
+            }
+          ]);
+        });
+        console.log(newInstitutes);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="Institutes">
       <Container>
@@ -66,8 +115,24 @@ export const Institutes = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td data-label="Course ID :">10000102345</td>
+                    {institutes.map((item: any) => {
+                      return (
+                        <tr>
+                          <td data-label="Institute ID :">{item.id}</td>
+                          <td data-label="Institute Name :">{item.name}</td>
+                          <td data-label="Contact Number :">{item.contact}</td>
+                          <td data-label="Contact Number :">
+                            <div className="ViewMore">
+                              <Link to="" className="link ViewMoreBtn">
+                                <CardButton btnname={'View More'} />
+                              </Link>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                    {/* <tr>
+                      <td data-label="Institute ID :">10000102345</td>
                       <td data-label="Institute Name :">Sigma Institute</td>
                       <td data-label="Contact Number :">011 2536472</td>
                       <td data-label="Contact Number :">
@@ -137,7 +202,7 @@ export const Institutes = () => {
                           </Link>
                         </div>
                       </td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
               </div>
@@ -152,7 +217,18 @@ export const Institutes = () => {
 
                 <div className="Panel">
                   <div className="PanelBody" style={{ display: 'block' }}>
-                    <InstituteCard
+                    {newInstitutes.map((item: any) => {
+                      return (
+                        <InstituteCard
+                          institutename={item.name}
+                          image={<img src={'/Images/subjects/science.png'} />}
+                          btn1="View more"
+                          btn2="Accept"
+                          btn3="Decline"
+                        />
+                      );
+                    })}
+                    {/* <InstituteCard
                       institutename="Susipwan Institute, Gampaha"
                       image={<img src={'/Images/subjects/science.png'} />}
                       btn1="View more"
@@ -174,7 +250,7 @@ export const Institutes = () => {
                       btn1="View more"
                       btn2="Accept"
                       btn3="Decline"
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>

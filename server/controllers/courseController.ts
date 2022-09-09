@@ -275,3 +275,16 @@ export const unrollCourseStudents = async (req: Request, res: Response) => {
     }
 }
 
+export const getStudentPendingPayments = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.student_payment.findMany(
+            {
+                where: { course_id: Number(req.params.id), payment_status: "unpaid" },
+            }
+        )
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}

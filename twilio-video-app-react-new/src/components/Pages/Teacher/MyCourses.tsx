@@ -30,124 +30,60 @@ export const MyCourses = () => {
   const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/courses`;
   const [courses, setCourses] = useState<any[]>([]);
   const navigate = useNavigate();
-
+  console.log("this is test");
   useEffect(() => {
-    axios
+    try {
+      console.log("this is succcess 1");
+      axios
       .get(baseURL)
       .then((res: AxiosResponse) => {
         res.data.map((item: any) => {
-          if (item.course.day === 'MON') {
-            setCourses(prevState => [
-              ...prevState,
-              {
-                id: item.course.course_id,
-                subject: item.course.subject,
-                day: 'Monday',
-                desc: item.course.description,
-                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-                time: item.course.start_time,
-                price: item.course.price,
-                grade: item.course.grade,
-                medium: item.course.medium,
-              },
-            ]);
-          } else if (item.course.day === 'TUE') {
-            setCourses(prevState => [
-              ...prevState,
-              {
-                id: item.course.course_id,
-                subject: item.course.subject,
-                day: 'Tuesday',
-                desc: item.course.description,
-                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-                time: item.course.start_time,
-                price: item.course.price,
-                grade: item.course.grade,
-                medium: item.course.medium,
-              },
-            ]);
-          } else if (item.course.day === 'WED') {
-            setCourses(prevState => [
-              ...prevState,
-              {
-                id: item.course.course_id,
-                subject: item.course.subject,
-                day: 'Wednesday',
-                desc: item.course.description,
-                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-                time: item.course.start_time,
-                price: item.course.price,
-                grade: item.course.grade,
-                medium: item.course.medium,
-              },
-            ]);
-          } else if (item.course.day === 'THU') {
-            setCourses(prevState => [
-              ...prevState,
-              {
-                id: item.course.course_id,
-                subject: item.course.subject,
-                day: 'Thursday',
-                desc: item.course.description,
-                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-                time: item.course.start_time,
-                price: item.course.price,
-                grade: item.course.grade,
-                medium: item.course.medium,
-              },
-            ]);
-          } else if (item.course.day === 'FRI') {
-            setCourses(prevState => [
-              ...prevState,
-              {
-                id: item.course.course_id,
-                subject: item.course.subject,
-                day: 'Friday',
-                desc: item.course.description,
-                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-                time: item.course.start_time,
-                price: item.course.price,
-                grade: item.course.grade,
-                medium: item.course.medium,
-              },
-            ]);
-          } else if (item.course.day === 'SAT') {
-            setCourses(prevState => [
-              ...prevState,
-              {
-                id: item.course.course_id,
-                subject: item.course.subject,
-                day: 'Saturday',
-                desc: item.course.description,
-                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-                time: item.course.start_time,
-                price: item.course.price,
-                grade: item.course.grade,
-                medium: item.course.medium,
-              },
-            ]);
-          } else if (item.course.day === 'SUN') {
-            setCourses(prevState => [
-              ...prevState,
-              {
-                id: item.course.course_id,
-                subject: item.course.subject,
-                day: 'Sunday',
-                desc: item.course.description,
-                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-                time: item.course.start_time,
-                price: item.course.price,
-                grade: item.course.grade,
-                medium: item.course.medium,
-              },
-            ]);
-          }
+          setCourses(prevState => [
+            ...prevState,
+            {
+              id: item.course.course_id,
+              subject: item.course.subject,
+              day: item.course.day,
+              desc: item.course.description,
+              // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+              time: item.course.start_time,
+              price: item.course.price,
+              grade: item.course.grade,
+              medium: item.course.medium,
+            },
+          ]);
         });
         console.log(courses);
       })
-      .catch(error => {
-        console.log(error);
-      });
+      console.log("this is succcess 2");
+    } catch (error) {
+      console.log("my error");
+      console.log(error);
+    }
+    // axios
+    //   .get(baseURL)
+    //   .then((res: AxiosResponse) => {
+    //     res.data.map((item: any) => {
+    //       setCourses(prevState => [
+    //         ...prevState,
+    //         {
+    //           id: item.course.course_id,
+    //           subject: item.course.subject,
+    //           day: item.course.day,
+    //           desc: item.course.description,
+    //           // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+    //           time: item.course.start_time,
+    //           price: item.course.price,
+    //           grade: item.course.grade,
+    //           medium: item.course.medium,
+    //         },
+    //       ]);
+    //     });
+    //     console.log(courses);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   }, []);
 
   const goToCoursePage = (id: any) => (
@@ -181,6 +117,7 @@ export const MyCourses = () => {
               {courses.map((item: any) => {
                 return (
                   <CourseCardTeacher
+                    key={item.id}
                     header={item.subject}
                     description={item.desc}
                     time={item.time}
@@ -190,9 +127,9 @@ export const MyCourses = () => {
                     image={<img src={'/Images/subjects/maths.png'} />}
                     amount={item.price}
                     // btn1="View more"
-                  >
-                    {goToCoursePage(item.id)}
-                  </CourseCardTeacher>
+                  />
+                  // goToCoursePage(item.id)
+                  // </CourseCardTeacher>
                 );
               })}
               {/* <CourseCardTeacher
