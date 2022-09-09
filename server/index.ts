@@ -45,7 +45,7 @@ const authMiddleware =
 app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
-app.use(cors());
+// app.use(cors());
 setInterval(classSchedule, 432000000);
 setInterval(payment_schedule, 432000000);
 // classSchedule();
