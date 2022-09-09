@@ -20,7 +20,7 @@ const ManageUsers = () => {
     const baseURL = "https://learnx.azurewebsites.net/user/allUsers";
     const [users, setUsers] = useState<any[]>([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
-
+    const [deleteLoading, setDeleteLoading] = useState(false);
     const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
         < BsTrashFill
             style={{
@@ -46,6 +46,7 @@ const ManageUsers = () => {
                     // dangerMode: true,
                 })
                     .then((willDelete: any) => {
+                        setDeleteLoading(true)
                         const apiData = JSON.stringify({
                             "user_id": `${row.user_id}`
                         })
@@ -57,6 +58,7 @@ const ManageUsers = () => {
                             },
                             data: apiData
                         }).then((apiRes) => {
+                            console.log(row.user_id)
                             axios({
                                 method: "POST",
                                 url: "https://learnx.azurewebsites.net/user/removeUser",
@@ -73,6 +75,7 @@ const ManageUsers = () => {
                                 }
                                 const newUserArray = users.filter(user => row.user_id !== user.user_id);
                                 setUsers(newUserArray);
+                                setDeleteLoading(false);
                             }).catch((error) => {
                                 console.log(error.message)
                             })
@@ -183,6 +186,7 @@ const ManageUsers = () => {
                 </Row>
                 <Row>
                     {!isDataLoading && <Loader/>}
+                    {deleteLoading && <Loader/>}
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
