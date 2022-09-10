@@ -72,6 +72,7 @@ export const getTeacherUpcomingClasses = async (req: Request, res: Response) => 
             },
             include: {course: true}
         })
+        console.log(data);
         res.status(200).send(data)
     } catch (error) {
         res.status(500).send(error);

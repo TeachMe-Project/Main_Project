@@ -27,7 +27,8 @@ export const MyCourses = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
   console.log(teacherAuthId);
-  const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/courses`;
+  // const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/courses`;
+  const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/courses`;
   const [courses, setCourses] = useState<any[]>([]);
   const navigate = useNavigate();
   console.log("this is test");
@@ -41,6 +42,15 @@ export const MyCourses = () => {
           setCourses(prevState => [
             ...prevState,
             {
+              // id: item.course_id,
+              // subject: item.subject,
+              // day: item.day,
+              // desc: item.description,
+              // // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+              // time: item.start_time,
+              // price: item.price,
+              // grade: item.grade,
+              // medium: item.medium,
               id: item.course.course_id,
               subject: item.course.subject,
               day: item.course.day,
@@ -117,7 +127,6 @@ export const MyCourses = () => {
               {courses.map((item: any) => {
                 return (
                   <CourseCardTeacher
-                    key={item.id}
                     header={item.subject}
                     description={item.desc}
                     time={item.time}
