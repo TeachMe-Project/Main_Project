@@ -18,7 +18,7 @@ const ParentNotification = () => {
     useEffect(() => {
         axios.get(`https://learnx.azurewebsites.net/notification/user/${user_id}`).then((res: AxiosResponse) => {
             // setIsDataLoading(true);
-            // console.log(res.data)
+            console.log(user_id)
             res.data.map((item: any) => {
                 setNotification(prevState => [...prevState, {
                     notification_id: item.notification_id,

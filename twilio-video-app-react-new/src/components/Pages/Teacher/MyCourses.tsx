@@ -1,17 +1,12 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import CourseCardTeacher from '../../Card/CourseCardTeacher';
-import CardHeader from '../../Card/CardHeader';
-import CardDetails from '../../Card/CardDetails';
-import { Row, Col, Container } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import PanelContainer from '../../Layout/PanelContainer';
-import { Button } from '../../Button/Button';
-
-import { CardButton } from '../../Card/CardButton';
-import { ButtonCommon } from '../../Button/ButtonCommon';
-import axios, { AxiosResponse } from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
+import * as React from "react";
+import { useEffect, useState } from "react";
+import CourseCardTeacher from "../../Card/CourseCardTeacher";
+import { Container, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import PanelContainer from "../../Layout/PanelContainer";
+import { ButtonCommon } from "../../Button/ButtonCommon";
+import axios, { AxiosResponse } from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // const convertTime = (x: Date) => {
 //   const time = x.toLocaleTimeString('it-IT');
@@ -36,35 +31,35 @@ export const MyCourses = () => {
     try {
       console.log("this is succcess 1");
       axios
-      .get(baseURL)
-      .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
-          setCourses(prevState => [
-            ...prevState,
-            {
-              // id: item.course_id,
-              // subject: item.subject,
-              // day: item.day,
-              // desc: item.description,
-              // // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-              // time: item.start_time,
-              // price: item.price,
-              // grade: item.grade,
-              // medium: item.medium,
-              id: item.course.course_id,
-              subject: item.course.subject,
-              day: item.course.day,
-              desc: item.course.description,
-              // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-              time: item.course.start_time,
-              price: item.course.price,
-              grade: item.course.grade,
-              medium: item.course.medium,
-            },
-          ]);
+        .get(baseURL)
+        .then((res: AxiosResponse) => {
+          res.data.map((item: any) => {
+            setCourses(prevState => [
+              ...prevState,
+              {
+                // id: item.course_id,
+                // subject: item.subject,
+                // day: item.day,
+                // desc: item.description,
+                // // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+                // time: item.start_time,
+                // price: item.price,
+                // grade: item.grade,
+                // medium: item.medium,
+                id: item.course.course_id,
+                subject: item.course.subject,
+                day: item.course.day,
+                desc: item.course.description,
+                // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+                time: item.course.start_time,
+                price: item.course.price,
+                grade: item.course.grade,
+                medium: item.course.medium
+              }
+            ]);
+          });
+          console.log(courses);
         });
-        console.log(courses);
-      })
       console.log("this is succcess 2");
     } catch (error) {
       console.log("my error");
@@ -115,10 +110,10 @@ export const MyCourses = () => {
           </div>
           <div
             className="AddNewCourse"
-            style={{ width: 'max-content', position: 'relative', marginBottom: '20px', left: '1067px', top: '23px' }}
+            style={{ width: "max-content", position: "relative", marginBottom: "20px", left: "1067px", top: "23px" }}
           >
             <Link to="/addcourse" className="link">
-              <ButtonCommon name={'Add New Course'} />
+              <ButtonCommon name={"Add New Course"} />
             </Link>
           </div>
 
@@ -133,7 +128,7 @@ export const MyCourses = () => {
                     date={item.day}
                     grade={item.grade}
                     medium={item.medium}
-                    image={<img src={'/Images/subjects/Mathematics.png'} />}
+                    image={<img src={"/Images/subjects/Mathematics.png"} />}
                     amount={item.price}
                     // btn1="View more"
                   />

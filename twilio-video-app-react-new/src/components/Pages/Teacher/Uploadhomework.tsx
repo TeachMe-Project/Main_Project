@@ -1,38 +1,33 @@
-import React, { useState } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { Button } from '../../Button/Button';
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import React, { useState } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import { Formik } from "formik";
+import * as yup from "yup";
 
 // @ts-ignore
-import LazyLoad from 'react-lazyload';
-import SubmitButton from '../../Button/SubmitButton';
-import { ButtonCommon } from '../../Button/ButtonCommon';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
-import UploadButton from '../../Button/UploadButton';
-import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageHomework';
+import LazyLoad from "react-lazyload";
+import "bootstrap/dist/css/bootstrap.min.css";
+import AzureCloudStorage from "../../AzureCloudStorage/AzureCloudStorageHomework";
 
 const schema = yup.object().shape({
   topic: yup
     .string()
     .required()
-    .label('Topic')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Topic must contain only letters'),
+    .label("Topic")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, "Topic must contain only letters"),
   description: yup
     .string()
     .required()
-    .label('Description'),
+    .label("Description"),
   deadline: yup
     .string()
     .required()
-    .label('Deadline'),
+    .label("Deadline")
 });
 
 const initialState = {
-  topic: '',
-  description: '',
-  deadline: '',
+  topic: "",
+  description: "",
+  deadline: ""
 };
 
 export const Uploadhomework = () => {
