@@ -56,12 +56,27 @@ export const getTeacherByUsername = async (req: Request, res: Response) => {
 export const getTeacherUpcomingClasses = async (req: Request, res: Response) => {
 
     try {
-        const data = await prisma.teacher.findMany({
+        // @ts-ignore
+        const {teacher_id} = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
+            select: {
+                teacher_id: true
+            }
+        })
+        
+        const data = await prisma.teacher_class.findMany({
+            take: 3,
+            where: {
+                teacher_id: teacher_id
+            },
+            orderBy: {
+                date: "asc"
+            },
             include: {course: true}
         })
+        console.log(data);
         res.status(200).send(data)
     } catch (error) {
         res.status(500).send(error);

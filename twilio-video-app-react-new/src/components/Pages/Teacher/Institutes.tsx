@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Card from '../../Card/Card';
 import CardHeader from '../../Card/CardHeader';
 import CardDetails from '../../Card/CardDetails';
@@ -26,11 +27,15 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 import { useNavigate } from 'react-router-dom';
 import { CourseCardTeacher } from '../../Card/CourseCardTeacher';
 import { InstituteCard } from '../../Card/InstituteCard';
 import { CardButton } from '../../Card/CardButton';
+import { ButtonCommon } from '../../Button/ButtonCommon';
+import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 library.add(fas);
 
@@ -39,6 +44,104 @@ export const Institutes = () => {
   const directToCourse = () => {
     navigate('/');
   };
+
+  const { user } = useAuth0();
+  const teacherAuthId = user?.sub;
+  console.log(teacherAuthId);
+  const baseURLCurrent = `https://learnx.azurewebsites.net/teacher/teacherInstitutes/${teacherAuthId}`;
+  const baseURLNew = `https://learnx.azurewebsites.net/teacher/teacherPendingInstitutes/${teacherAuthId}`;
+  const [institutes, setInstitutes] = useState<any[]>([]);
+  const [newInstitutes, setNewInstitutes] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(baseURLCurrent)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setInstitutes(prevState => [
+            ...prevState,
+            {
+              id: item.institute_id,
+              name: item.institute.institute_name,
+              contact: item.institute.contact_no,
+            }
+          ]);
+        });
+        console.log(institutes);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios
+      .get(baseURLNew)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setNewInstitutes(prevState => [
+            ...prevState,
+            {
+              id: item.institute_id,
+              name: item.institute.institute_name,
+            }
+          ]);
+        });
+        console.log(newInstitutes);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  const acceptInstitute = (id: any) => (
+    <Col xl={1}>
+      {/* <Link to="" className=" link SubscribeBtn"> */}
+        {/* <CardButton btnname="Accept" /> */}
+        <button
+          className="CardButton"
+          onClick={() => {
+            swal({
+              title: "Request Acception",
+              text: `Do you really want to accept this institute?`,
+              icon: "error",
+              buttons: {
+                cancel: true,
+                confirm: true
+              },
+              // dangerMode: true,
+            })
+              .then((willDelete: any) => {
+                const apiData = JSON.stringify({
+                  "institute_id": `${id}`,
+                  "request_time": new Date(),
+                })
+                axios({
+                  method: "POST",
+                  url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  data: apiData
+                }).then((apiRes) => {
+                  console.log(apiRes.status);
+                  if (apiRes.status === 200) {
+                    swal(`Poof! You have successfully removed`, {
+                      icon: "success",
+                    });
+                  }
+                  console.log(`Successfully removed ${id}`);
+                }).catch((error) => {
+                  console.log(error.message)
+                }).catch((error) => {
+                  console.log(error.message)
+                })
+              });
+          }}
+        >
+          Accept
+        </button>
+      {/* </Link> */}
+    </Col>
+  );
+
   return (
     <div className="Institutes">
       <Container>
@@ -66,8 +169,24 @@ export const Institutes = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td data-label="Course ID :">10000102345</td>
+                    {institutes.map((item: any) => {
+                      return (
+                        <tr>
+                          <td data-label="Institute ID :">{item.id}</td>
+                          <td data-label="Institute Name :">{item.name}</td>
+                          <td data-label="Contact Number :">{item.contact}</td>
+                          <td data-label="Contact Number :">
+                            <div className="ViewMore">
+                              <Link to="" className="link ViewMoreBtn">
+                                <CardButton btnname={'View More'} />
+                              </Link>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                    {/* <tr>
+                      <td data-label="Institute ID :">10000102345</td>
                       <td data-label="Institute Name :">Sigma Institute</td>
                       <td data-label="Contact Number :">011 2536472</td>
                       <td data-label="Contact Number :">
@@ -137,22 +256,52 @@ export const Institutes = () => {
                           </Link>
                         </div>
                       </td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
               </div>
               <div className="New Requests">
-                {/* <Link className="link" to="/uploadnotes"></Link>
-                <br />
-                <Instituterequest name="Syzygy Institute" />
-                <Instituterequest name="Sigma Institute" />
-                <Instituterequest name="Sigma Institute" />
-                <Instituterequest name="Sigma Institute" />
-                <Instituterequest name="Sigma Institute" /> */}
-
                 <div className="Panel">
                   <div className="PanelBody" style={{ display: 'block' }}>
-                    <InstituteCard
+                    {newInstitutes.map((item: any) => {
+                      return (
+                        <div className="SearchResultCard">
+                          <Col xl={2}>
+                            <div className="CardImage">
+                              <img src='/Images/subjects/science.png' />
+                            </div>
+                          </Col>
+
+                          <Col xl={2}>
+                            <CardDetails details={item.name} />
+                          </Col>
+
+                          <Col xl={6}>
+                            <div className="ViewMore">
+                              <Link to="" className="link ViewMoreBtn">
+                                <CardButton btnname="View More" />
+                              </Link>
+                            </div>
+                          </Col>
+
+                          <Col xl={1}>
+                            {/* <Link to="" className=" link SubscribeBtn">
+                              <CardButton btnname="Accept" />
+                            </Link> */}
+                            {acceptInstitute(item.id)}
+                          </Col>
+
+
+                          <Col xl={1}>
+                            <Link to="" className=" link SubscribeBtn">
+                              <ButtonCommon name="Decline" />
+                            </Link>
+                          </Col>
+                          {/* </InstituteCard> */}
+                        </div>
+                      );
+                    })}
+                    {/* <InstituteCard
                       institutename="Susipwan Institute, Gampaha"
                       image={<img src={'/Images/subjects/Science.png'} />}
                       btn1="View more"
@@ -174,7 +323,7 @@ export const Institutes = () => {
                       btn1="View more"
                       btn2="Accept"
                       btn3="Decline"
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
