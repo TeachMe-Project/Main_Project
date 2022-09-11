@@ -18,20 +18,26 @@ import Parentsaveragetimechart from './Parentaveragetimechart';
 import axios, { AxiosResponse } from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const convertTime = (x: Date) => {
-  const time = x.toLocaleTimeString('it-IT');
+const convertTime = (time: String) => {
+  // const time = x.toLocaleTimeString('it-IT');
   const hour = time.split(':')[0];
   const intHour = parseInt(hour);
-  const minute = time.split(':')[1];
+  const minute = time.split(':')[1] || time.split('.')[1];
   const ampm = intHour >= 12 ? 'PM' : 'AM';
   const newHour = intHour % 12;
   return newHour + ':' + minute + ' ' + ampm;
 };
 
+const convertDate = (date: Date) => {
+  const d = new Date(date);
+  return d.toDateString();
+}
+
 export const Dashboard = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
-  const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
+  // const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
+  const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {
@@ -42,19 +48,21 @@ export const Dashboard = () => {
           setUpcomingClasses(prevState => [
             ...prevState,
             {
+              id: item.course.course_id,
               subject: item.course.subject,
               grade: item.course.grade,
-              date: item.date,
+              date: convertDate(item.date),
               time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+              // time: item.course.start_time + ' - ' + item.course.end_time,
             },
           ]);
         });
-        console.log(upcomingClasses);
       })
       .catch(error => {
         console.log(error);
       });
-  }, []);
+    }, []);
+    console.log(upcomingClasses);
 
   return (
     <div className="DashboardTeacher">
@@ -69,9 +77,10 @@ export const Dashboard = () => {
               <h5>Upcoming Classes </h5>
             </div>
             <div className="PanelBody">
-              {/* {upcomingClasses.map((item: any) => {
+              {upcomingClasses.map((item: any) => {
                 return (
                   <Card
+                    key={item.id}
                     header={item.subject}
                     time={item.time}
                     date={item.date}
@@ -80,8 +89,8 @@ export const Dashboard = () => {
                     image={<img src={'/Images/subjects/Mathematics.png'} />}
                   />
                 );
-              })} */}
-              <Card
+              })}
+              {/* <Card
                 header="Mathematics"
                 time="04:00pm- 06:00pm"
                 date="23-08-2022"
@@ -104,8 +113,8 @@ export const Dashboard = () => {
                 date="30-08-2022"
                 grade="Grade 8"
                 btnname="Start"
-                image={<img src={'/Images/subjects/Mathematics.png'} />}
-              />
+                image={<img src={'/Images/subjects/maths.png'} />}
+              /> */}
             </div>
           </div>
         </Row>

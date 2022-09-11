@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export const Notifications = () => {
   const { user } = useAuth0();
   const userAuthId = user?.sub;
-  const baseURL = `http://localhost:8081/notification/${userAuthId}`;
+  const baseURL = `https://learnx.azurewebsites.net/notification/${userAuthId}`;
   const [notifications, setNotifications] = useState<any[]>([]);
   const [eventKey, setEventKey] = useState<number>(0)
 

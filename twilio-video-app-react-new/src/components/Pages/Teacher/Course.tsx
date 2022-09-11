@@ -32,7 +32,7 @@ import { useNavigate } from 'react-router-dom';
 import { ButtonCommon } from '../../Button/ButtonCommon';
 import { FiDownload } from "react-icons/fi";
 import { BiArchive } from "react-icons/bi";
-import { MdDelete, MdNotStarted } from "react-icons/md";
+import { MdDelete, MdNotStarted, MdScheduleSend } from "react-icons/md";
 import axios, { AxiosResponse } from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -58,16 +58,20 @@ export const Course = () => {
   const teacherAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  const baseURLDetails = `https://learnx.azurewebsites.net/course/${teacherAuthId}`;
-  const baseURLNotes = `https://learnx.azurewebsites.net/student/${teacherAuthId}/notes`;
-  const baseURLHomework = `https://learnx.azurewebsites.net/student/${teacherAuthId}/homeworks`;
+  const baseURLCourse = `https://learnx.azurewebsites.net/course/${params}`;
+  const baseURLStudents = `https://learnx.azurewebsites.net/course/courseStudents/${params}`;
+  const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params}`;
+
   const [details, setDetails] = useState<any[]>([]);
-  const [homework, setHomework] = useState<any[]>([]);
   const [notes, setNotes] = useState<any[]>([]);
+  const [homework, setHomework] = useState<any[]>([]);
+  const [students, setStudents] = useState<any[]>([]);
+  const [schedule, setSchedule] = useState<any[]>([]);
+  const [payments, setPayments] = useState<any[]>([]);
 
   useEffect(() => {
     axios
-      .get(baseURLDetails)
+      .get(baseURLCourse)
       .then((res: AxiosResponse) => {
         res.data.map((item: any) => {
           setDetails(prevState => [
@@ -87,6 +91,76 @@ export const Course = () => {
           ]);
         });
         console.log(details);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    axios
+      .get(baseURLCourse)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setNotes(prevState => [
+            ...prevState,
+            {
+              date: item.notes.uploaded_date,
+              link: item.notes.note,
+            },
+          ]);
+        });
+        console.log(notes);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    axios
+      .get(baseURLCourse)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setHomework(prevState => [
+            ...prevState,
+            {
+              date: item.notes.uploaded_date,
+              link: item.notes.homework,
+            },
+          ]);
+        });
+        console.log(homework);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    axios
+      .get(baseURLStudents)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setStudents(prevState => [
+            ...prevState,
+            {
+              id: item.student_id,
+              name: item.student.first_name + ' ' + item.student.last_name,
+              contact: item.student.parent.mobile_no,
+            },
+          ]);
+        });
+        console.log(students);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    axios
+      .get(baseURLSchedule)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          setSchedule(prevState => [
+            ...prevState,
+            {
+              date: item.date,
+              start_time: item.start_time,
+              end_time: item.end_time,
+            },
+          ]);
+        });
+        console.log(schedule);
       })
       .catch(err => {
         console.log(err);
@@ -178,7 +252,42 @@ export const Course = () => {
                   <table className="booking-table" id="view-booking">
                     <tbody>
 
-                      <tr>
+                      {notes.map((item: any) => {
+                        return (
+                          <tr>
+                            <td data-label="Note ID :"
+                              className="noteheader"
+                            >
+                              Note for week 1</td>
+                            <td data-label="Uploaded Date :"
+                              className="notedetails">{item.date}</td>
+
+                            <td data-label="">
+                              <a
+                                download="note1.pdf"
+                                href={item.link}
+                                target="_blank"
+                                className="Reacticonbtn download">
+                                <FiDownload className="Reacticon" />
+                                Download
+                              </a>
+
+                            </td>
+                            <td data-label="">
+                              <a
+                                download="note1.pdf"
+                                href=""
+                                target="_blank"
+                                className="Reacticonbtn remove"
+                              >
+                                <MdDelete className="Reacticon" />Remove
+                              </a>
+                            </td>
+                          </tr>
+                        );
+                      })}
+
+                      {/* <tr>
                         <td data-label="Note ID :"
                           className="noteheader"
                         >
@@ -194,17 +303,6 @@ export const Course = () => {
                             className="Reacticonbtn download">
                             <FiDownload className="Reacticon" />
                             Download
-                          </a>
-
-                        </td>
-                        <td data-label="">
-                          <a
-                            download="note1.pdf"
-                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                            target="_blank"
-                            className="Reacticonbtn archive"
-                          >
-                            <BiArchive className="Reacticon" />Archive
                           </a>
 
                         </td>
@@ -243,17 +341,6 @@ export const Course = () => {
                             download="note1.pdf"
                             href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
                             target="_blank"
-                            className="Reacticonbtn archive"
-                          >
-                            <BiArchive className="Reacticon" />Archive
-                          </a>
-
-                        </td>
-                        <td data-label="">
-                          <a
-                            download="note1.pdf"
-                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                            target="_blank"
                             className="Reacticonbtn remove"
                           >
                             <MdDelete className="Reacticon" />Remove
@@ -276,17 +363,6 @@ export const Course = () => {
                             className="Reacticonbtn download">
                             <FiDownload className="Reacticon" />
                             Download
-                          </a>
-
-                        </td>
-                        <td data-label="">
-                          <a
-                            download="note1.pdf"
-                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                            target="_blank"
-                            className="Reacticonbtn archive"
-                          >
-                            <BiArchive className="Reacticon" />Archive
                           </a>
 
                         </td>
@@ -325,17 +401,6 @@ export const Course = () => {
                             download="note1.pdf"
                             href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
                             target="_blank"
-                            className="Reacticonbtn archive"
-                          >
-                            <BiArchive className="Reacticon" />Archive
-                          </a>
-
-                        </td>
-                        <td data-label="">
-                          <a
-                            download="note1.pdf"
-                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                            target="_blank"
                             className="Reacticonbtn remove"
                           >
                             <MdDelete className="Reacticon" />Remove
@@ -358,17 +423,6 @@ export const Course = () => {
                             className="Reacticonbtn download">
                             <FiDownload className="Reacticon" />
                             Download
-                          </a>
-
-                        </td>
-                        <td data-label="">
-                          <a
-                            download="note1.pdf"
-                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                            target="_blank"
-                            className="Reacticonbtn archive"
-                          >
-                            <BiArchive className="Reacticon" />Archive
                           </a>
 
                         </td>
@@ -407,23 +461,12 @@ export const Course = () => {
                             download="note1.pdf"
                             href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
                             target="_blank"
-                            className="Reacticonbtn archive"
-                          >
-                            <BiArchive className="Reacticon" />Archive
-                          </a>
-
-                        </td>
-                        <td data-label="">
-                          <a
-                            download="note1.pdf"
-                            href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                            target="_blank"
                             className="Reacticonbtn remove"
                           >
                             <MdDelete className="Reacticon" />Remove
                           </a>
                         </td>
-                      </tr>
+                      </tr> */}
 
                     </tbody>
                   </table>
@@ -442,7 +485,42 @@ export const Course = () => {
                 <table className="booking-table" id="view-booking">
                   <tbody>
 
-                    <tr>
+                    {homework.map((item: any) => {
+                      return (
+                        <tr>
+                          <td data-label="Note ID :"
+                            className="noteheader"
+                          >
+                            Homework for week 1</td>
+                          <td data-label="Uploaded Date :"
+                            className="notedetails">{item.date}</td>
+
+                          <td data-label="">
+                            <a
+                              download="note1.pdf"
+                              href={item.link}
+                              target="_blank"
+                              className="Reacticonbtn download">
+                              <FiDownload className="Reacticon" />
+                              Download
+                            </a>
+
+                          </td>
+                          <td data-label="">
+                            <a
+                              download="note1.pdf"
+                              href=""
+                              target="_blank"
+                              className="Reacticonbtn remove"
+                            >
+                              <MdDelete className="Reacticon" />Remove
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
+
+                    {/* <tr>
                       <td data-label="Note ID :"
                         className="noteheader"
                       >
@@ -458,17 +536,6 @@ export const Course = () => {
                           className="Reacticonbtn download">
                           <FiDownload className="Reacticon" />
                           Download
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
                         </a>
 
                       </td>
@@ -507,17 +574,6 @@ export const Course = () => {
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
                           target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
                           className="Reacticonbtn remove"
                         >
                           <MdDelete className="Reacticon" />Remove
@@ -540,17 +596,6 @@ export const Course = () => {
                           className="Reacticonbtn download">
                           <FiDownload className="Reacticon" />
                           Download
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
                         </a>
 
                       </td>
@@ -589,17 +634,6 @@ export const Course = () => {
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
                           target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
                           className="Reacticonbtn remove"
                         >
                           <MdDelete className="Reacticon" />Remove
@@ -622,17 +656,6 @@ export const Course = () => {
                           className="Reacticonbtn download">
                           <FiDownload className="Reacticon" />
                           Download
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
                         </a>
 
                       </td>
@@ -671,23 +694,12 @@ export const Course = () => {
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
                           target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
                           className="Reacticonbtn remove"
                         >
                           <MdDelete className="Reacticon" />Remove
                         </a>
                       </td>
-                    </tr>
+                    </tr> */}
 
                   </tbody>
                 </table>
@@ -700,7 +712,23 @@ export const Course = () => {
                   <table className="booking-table" id="view-booking">
 
                     <tbody>
-                      <tr>
+                      {students.map((item: any) => {
+                        return (
+                          <tr>
+                            <td data-label="Student ID :" className="notedetails">{item.id}</td>
+                            <td data-label="Student Name :" className="noteheader">{item.name}</td>
+                            <td data-label="Parent's Contact :" className="notedetails">{item.contact}</td>
+                            <td data-label="View Profile :">
+                              <div className="cancelbutton">
+                                <Link to="/addcourse" className="link">
+                                  <ButtonCommon name={'View Profile'} className="viewBtn" />
+                                </Link>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                      {/* <tr>
                         <td data-label="Student ID :" className="notedetails">10000102345</td>
                         <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
                         <td data-label="Parent's Contact :" className="notedetails">011 2840231</td>
@@ -759,7 +787,7 @@ export const Course = () => {
                             </Link>
                           </div>
                         </td>
-                      </tr>
+                      </tr> */}
                     </tbody>
                   </table>
                 </div>
@@ -780,7 +808,32 @@ export const Course = () => {
                 <table className="booking-table" id="view-booking">
                   <tbody>
 
-                    <tr>
+                    {schedule.map((item: any) => {
+                      return (
+                        <tr>
+                          <td data-label="Note ID :"
+                            className="noteheader"
+                          >
+                            {item.date}</td>
+                          <td data-label="Uploaded Date :"
+                            className="notedetails">{item.start_time}</td>
+                          <td data-label="Uploaded Date :"
+                            className="notedetails">{item.end_time}</td>
+                          <td data-label="">
+                            <a
+                              download="note1.pdf"
+                              href=""
+                              target="_blank"
+                              className="Reacticonbtn download">
+                              <MdNotStarted className="Reacticon" />
+                              Join Class
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
+
+                    {/* <tr>
                       <td data-label="Note ID :"
                         className="noteheader"
                       >
@@ -911,7 +964,7 @@ export const Course = () => {
 
                       </td>
 
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
 
@@ -923,6 +976,16 @@ export const Course = () => {
                 <div className="paymentsContainer">
                   <table className="booking-table" id="view-booking">
                     <tbody>
+                      {payments.map((item: any) => {
+                        return (
+                          <tr>
+                            <td data-label="Student ID :" className="notedetails">10000102345</td>
+                            <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
+                            <td data-label="Month :" className="notedetails">July</td>
+                            <td data-label="Amount :" className="notedetails">LKR 2500</td>
+                          </tr>
+                        );
+                      })}
                       <tr>
                         <td data-label="Student ID :" className="notedetails">10000102345</td>
                         <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
