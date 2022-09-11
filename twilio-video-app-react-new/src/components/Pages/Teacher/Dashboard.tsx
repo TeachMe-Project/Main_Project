@@ -18,20 +18,26 @@ import Parentsaveragetimechart from './Parentaveragetimechart';
 import axios, { AxiosResponse } from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 
-// const convertTime = (x: Date) => {
-//   const time = x.toLocaleTimeString('it-IT');
-//   const hour = time.split(':')[0];
-//   const intHour = parseInt(hour);
-//   const minute = time.split(':')[1];
-//   const ampm = intHour >= 12 ? 'PM' : 'AM';
-//   const newHour = intHour % 12;
-//   return newHour + ':' + minute + ' ' + ampm;
-// };
+const convertTime = (time: String) => {
+  // const time = x.toLocaleTimeString('it-IT');
+  const hour = time.split(':')[0];
+  const intHour = parseInt(hour);
+  const minute = time.split(':')[1] || time.split('.')[1];
+  const ampm = intHour >= 12 ? 'PM' : 'AM';
+  const newHour = intHour % 12;
+  return newHour + ':' + minute + ' ' + ampm;
+};
+
+const convertDate = (date: Date) => {
+  const d = new Date(date);
+  return d.toDateString();
+}
 
 export const Dashboard = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
-  const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
+  // const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
+  const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {
@@ -45,9 +51,9 @@ export const Dashboard = () => {
               id: item.course.course_id,
               subject: item.course.subject,
               grade: item.course.grade,
-              date: item.date,
-              // time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
-              time: item.course.start_time + ' - ' + item.course.end_time,
+              date: convertDate(item.date),
+              time: convertTime(item.course.start_time) + ' - ' + convertTime(item.course.end_time),
+              // time: item.course.start_time + ' - ' + item.course.end_time,
             },
           ]);
         });
