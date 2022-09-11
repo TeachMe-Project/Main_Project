@@ -63,14 +63,17 @@ const CourseProfile = () => {
                 })
                 const course_upcoming = data.teacher_class;
                 // console.log(course_upcoming)
-                course_upcoming.map((item:any) => {
-                    setUpcoming( (prevState: any) => [...prevState, {
-                        date: item.date.substring(0,10),
-                        start_time: item.start_time,
-                        end_time: item.end_time
-                    }])
-                    console.log(upcoming)
+                course_upcoming.map((item:any, index: any) => {
+                    if(index < 12){
+                        setUpcoming( (prevState: any) => [...prevState, {
+                            date: item.date.substring(0,10),
+                            start_time: item.start_time,
+                            end_time: item.end_time
+                        }])
+                    }
+                    // console.log(index)
                 })
+
                 // const upcoming_class = upcoming.slice(0,12)
                 // console.log(upcoming_class)
                 // console.log(upcoming_class)
