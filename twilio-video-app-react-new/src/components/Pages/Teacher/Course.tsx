@@ -54,6 +54,7 @@ export const Course = () => {
       .get(baseURLCourse)
       .then((res: AxiosResponse) => {
         res.data.map((item: any) => {
+          console.log("Hello")
           setDetails(prevState => [
             ...prevState,
             {
@@ -70,7 +71,6 @@ export const Course = () => {
             }
           ]);
         });
-        console.log(details);
       })
       .catch(err => {
         console.log(err);

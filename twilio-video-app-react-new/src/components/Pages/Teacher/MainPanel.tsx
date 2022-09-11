@@ -69,7 +69,7 @@ const routes = [
     main: () => <AddCourse />
   },
   {
-    path: "/course",
+    path: "/course/:course_id",
     main: () => <Course />
   },
   {
