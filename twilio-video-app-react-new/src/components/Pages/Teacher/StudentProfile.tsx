@@ -1,55 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { Button } from '../../Button/Button';
-import { Formik } from 'formik';
-import * as yup from 'yup';
-import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageImagesStudent';
-import axios, { AxiosResponse } from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
+import React, { useEffect, useState } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import { Button } from "../../Button/Button";
+import { Formik } from "formik";
+import * as yup from "yup";
+import axios, { AxiosResponse } from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 // @ts-ignore
-import LazyLoad from 'react-lazyload';
+import LazyLoad from "react-lazyload";
 
 const schema = yup.object().shape({
   Firstname: yup
     .string()
     .required()
-    .label('First Name')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'First Name must contain only letters'),
+    .label("First Name")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, "First Name must contain only letters"),
   Lastname: yup
     .string()
     .required()
-    .label('Last Name')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Last Name must contain only letters'),
+    .label("Last Name")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, "Last Name must contain only letters"),
   Email: yup
     .string()
     .email()
     .required()
-    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Enter a valid Email address'),
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Enter a valid Email address"),
   Password: yup
     .string()
     .required()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
-      'Must contain 8 characters with 1 uppercase letter, 1 lowercase letter, 1 number & 1 special character'
+      "Must contain 8 characters with 1 uppercase letter, 1 lowercase letter, 1 number & 1 special character"
     ),
   Grade: yup
     .string()
     .required()
-    .matches(/Grade-(?:1[01]|0[1-9])|AL-20\d\d/, 'Grade must be between Grade-03 to A/L-Year-3'),
+    .matches(/Grade-(?:1[01]|0[1-9])|AL-20\d\d/, "Grade must be between Grade-03 to A/L-Year-3"),
   Schoolname: yup
     .string()
     .required()
-    .label('School Name'),
+    .label("School Name")
 });
 
 const initialState = {
-  Firstname: '',
-  Lastname: '',
-  Email: '',
-  Password: '',
-  Grade: '',
-  Schoolname: '',
+  Firstname: "",
+  Lastname: "",
+  Email: "",
+  Password: "",
+  Grade: "",
+  Schoolname: ""
 };
 
 export const StudentProfile = () => {
@@ -132,10 +131,10 @@ export const StudentProfile = () => {
           setStudentProfDetails(prevState => [
             ...prevState,
             {
-              fullname: item.first_name + ' ' + item.last_name,
+              fullname: item.first_name + " " + item.last_name,
               email: item.user.username,
               picture: item.user.profile_image
-            },
+            }
           ]);
         });
         console.log(studentProfDetails);
@@ -150,10 +149,10 @@ export const StudentProfile = () => {
           setParentProfDetails(prevState => [
             ...prevState,
             {
-              fullname: item.parent.first_name + ' ' + item.parent.last_name,
+              fullname: item.parent.first_name + " " + item.parent.last_name,
               email: item.parent.user.username,
-              contact: item.parent.mobile_no,
-            },
+              contact: item.parent.mobile_no
+            }
           ]);
         });
         console.log(parentProfDetails);
@@ -371,12 +370,12 @@ export const StudentProfile = () => {
                               }
                             }}
                             onClickCapture={() => {
-                              validateField('Grade');
-                              validateField('Firstname');
-                              validateField('Lastname');
-                              validateField('Email');
-                              validateField('Password');
-                              validateField('Schoolname');
+                              validateField("Grade");
+                              validateField("Firstname");
+                              validateField("Lastname");
+                              validateField("Email");
+                              validateField("Password");
+                              validateField("Schoolname");
                             }}
                           />
                         )}

@@ -1,48 +1,29 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import Card from '../../Card/Card';
-import CardHeader from '../../Card/CardHeader';
-import CardDetails from '../../Card/CardDetails';
-import { Row, Col, Container, Tab, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Tabs from '../../Tabs/Tabs';
-import Details from './Details';
-import Notes from './Notes';
+import * as React from "react";
+import { useEffect, useState } from "react";
+import CardDetails from "../../Card/CardDetails";
+import { Col, Container, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import Tabs from "../../Tabs/Tabs";
+import PanelContainer from "../../Layout/PanelContainer";
 
-import PendingPayments from './PendingPayments';
-import PanelContainer from '../../Layout/PanelContainer';
-import UploadButton from '../../Button/UploadButton';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableHead from '@mui/material/TableHead';
-// import TableRow from '@mui/material/TableRow';
-// import Paper from '@mui/material/Paper';
-import { Instituterequest } from './Instituterequest';
-
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
-import { useNavigate } from 'react-router-dom';
-import { CourseCardTeacher } from '../../Card/CourseCardTeacher';
-import { InstituteCard } from '../../Card/InstituteCard';
-import { CardButton } from '../../Card/CardButton';
-import { ButtonCommon } from '../../Button/ButtonCommon';
-import axios, { AxiosResponse } from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
+import { CardButton } from "../../Card/CardButton";
+import { ButtonCommon } from "../../Button/ButtonCommon";
+import axios, { AxiosResponse } from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 library.add(fas);
 
 export const Institutes = () => {
   const navigate = useNavigate();
   const directToCourse = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const { user } = useAuth0();
@@ -63,7 +44,7 @@ export const Institutes = () => {
             {
               id: item.institute_id,
               name: item.institute.institute_name,
-              contact: item.institute.contact_no,
+              contact: item.institute.contact_no
             }
           ]);
         });
@@ -80,7 +61,7 @@ export const Institutes = () => {
             ...prevState,
             {
               id: item.institute_id,
-              name: item.institute.institute_name,
+              name: item.institute.institute_name
             }
           ]);
         });
@@ -94,50 +75,50 @@ export const Institutes = () => {
   const acceptInstitute = (id: any) => (
     <Col xl={1}>
       {/* <Link to="" className=" link SubscribeBtn"> */}
-        {/* <CardButton btnname="Accept" /> */}
-        <button
-          className="CardButton"
-          onClick={() => {
-            swal({
-              title: "Request Acception",
-              text: `Do you really want to accept this institute?`,
-              icon: "error",
-              buttons: {
-                cancel: true,
-                confirm: true
-              },
-              // dangerMode: true,
-            })
-              .then((willDelete: any) => {
-                const apiData = JSON.stringify({
-                  "institute_id": `${id}`,
-                  "request_time": new Date(),
-                })
-                axios({
-                  method: "POST",
-                  url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  data: apiData
-                }).then((apiRes) => {
-                  console.log(apiRes.status);
-                  if (apiRes.status === 200) {
-                    swal(`Poof! You have successfully removed`, {
-                      icon: "success",
-                    });
-                  }
-                  console.log(`Successfully removed ${id}`);
-                }).catch((error) => {
-                  console.log(error.message)
-                }).catch((error) => {
-                  console.log(error.message)
-                })
+      {/* <CardButton btnname="Accept" /> */}
+      <button
+        className="CardButton"
+        onClick={() => {
+          swal({
+            title: "Request Acception",
+            text: `Do you really want to accept this institute?`,
+            icon: "error",
+            buttons: {
+              cancel: true,
+              confirm: true
+            }
+            // dangerMode: true,
+          })
+            .then((willDelete: any) => {
+              const apiData = JSON.stringify({
+                "institute_id": `${id}`,
+                "request_time": new Date()
               });
-          }}
-        >
-          Accept
-        </button>
+              axios({
+                method: "POST",
+                url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                data: apiData
+              }).then((apiRes) => {
+                console.log(apiRes.status);
+                if (apiRes.status === 200) {
+                  swal(`Poof! You have successfully removed`, {
+                    icon: "success"
+                  });
+                }
+                console.log(`Successfully removed ${id}`);
+              }).catch((error) => {
+                console.log(error.message);
+              }).catch((error) => {
+                console.log(error.message);
+              });
+            });
+        }}
+      >
+        Accept
+      </button>
       {/* </Link> */}
     </Col>
   );
@@ -158,34 +139,34 @@ export const Institutes = () => {
                 <Link to="/editdetails" className="link"></Link>
                 <table className="booking-table" id="view-booking">
                   <thead>
-                    <tr className="booking-thead-second-tr" style={{ textAlign: 'left' }}>
-                      {/*amc: Institute Manage Courses*/}
-                      <th className="imc-first-th">Institute ID </th>
-                      <th className="imc-second-th">Institute Name</th>
-                      <th className="imc-second-th">Contact Number</th>
-                      <th className="imc-last-th"></th>
+                  <tr className="booking-thead-second-tr" style={{ textAlign: "left" }}>
+                    {/*amc: Institute Manage Courses*/}
+                    <th className="imc-first-th">Institute ID</th>
+                    <th className="imc-second-th">Institute Name</th>
+                    <th className="imc-second-th">Contact Number</th>
+                    <th className="imc-last-th"></th>
 
-                      {/* <th className="imc-last-th"></th> */}
-                    </tr>
+                    {/* <th className="imc-last-th"></th> */}
+                  </tr>
                   </thead>
                   <tbody>
-                    {institutes.map((item: any) => {
-                      return (
-                        <tr>
-                          <td data-label="Institute ID :">{item.id}</td>
-                          <td data-label="Institute Name :">{item.name}</td>
-                          <td data-label="Contact Number :">{item.contact}</td>
-                          <td data-label="Contact Number :">
-                            <div className="ViewMore">
-                              <Link to="" className="link ViewMoreBtn">
-                                <CardButton btnname={'View More'} />
-                              </Link>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                    {/* <tr>
+                  {institutes.map((item: any) => {
+                    return (
+                      <tr>
+                        <td data-label="Institute ID :">{item.id}</td>
+                        <td data-label="Institute Name :">{item.name}</td>
+                        <td data-label="Contact Number :">{item.contact}</td>
+                        <td data-label="Contact Number :">
+                          <div className="ViewMore">
+                            <Link to="" className="link ViewMoreBtn">
+                              <CardButton btnname={"View More"} />
+                            </Link>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                  {/* <tr>
                       <td data-label="Institute ID :">10000102345</td>
                       <td data-label="Institute Name :">Sigma Institute</td>
                       <td data-label="Contact Number :">011 2536472</td>
@@ -262,13 +243,13 @@ export const Institutes = () => {
               </div>
               <div className="New Requests">
                 <div className="Panel">
-                  <div className="PanelBody" style={{ display: 'block' }}>
+                  <div className="PanelBody" style={{ display: "block" }}>
                     {newInstitutes.map((item: any) => {
                       return (
                         <div className="SearchResultCard">
                           <Col xl={2}>
                             <div className="CardImage">
-                              <img src='/Images/subjects/science.png' />
+                              <img src="/Images/subjects/science.png" />
                             </div>
                           </Col>
 

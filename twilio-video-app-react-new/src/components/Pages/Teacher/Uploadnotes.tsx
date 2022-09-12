@@ -1,44 +1,34 @@
-import React, { useState } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { Button } from '../../Button/Button';
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import React, { useState } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import { Formik } from "formik";
+import * as yup from "yup";
 
-// @ts-ignore
-import LazyLoad from 'react-lazyload';
-import SubmitButton from '../../Button/SubmitButton';
-import { ButtonCommon } from '../../Button/ButtonCommon';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
-import UploadButton from '../../Button/UploadButton';
-import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageNotes';
+import "bootstrap/dist/css/bootstrap.min.css";
+import AzureCloudStorage from "../../AzureCloudStorage/AzureCloudStorageNotes";
 
 const schema = yup.object().shape({
   topic: yup
     .string()
     .required()
-    .label('Topic')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Topic must contain only letters'),
+    .label("Topic")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, "Topic must contain only letters"),
   description: yup
     .string()
     .required()
-    .label('Description'),
+    .label("Description"),
   subtopic: yup
     .string()
     .required()
-    .label('Subtopic'),
+    .label("Subtopic")
 });
 
 const initialState = {
-  topic: '',
-  description: '',
-  subtopic: '',
+  topic: "",
+  description: "",
+  subtopic: ""
 };
 
 export const Uploadnotes = () => {
-  const [isEditing, setISEditing] = useState(false);
-
-  const [pageStage, setPageStage] = useState(2);
   const [topicValidate, settopicValidate] = useState<boolean>(false);
   const [descriptionValidate, setdescriptionValidate] = useState(false);
   const [subtopicValidate, setsubtopicValidate] = useState(false);
@@ -49,24 +39,6 @@ export const Uploadnotes = () => {
       return false;
     } else {
       settopicValidate(false);
-      return true;
-    }
-  };
-  const changedescriptionValidate = (status: boolean): boolean => {
-    if (status) {
-      setdescriptionValidate(true);
-      return false;
-    } else {
-      setdescriptionValidate(false);
-      return true;
-    }
-  };
-  const changesubtopicValidate = (status: boolean): boolean => {
-    if (status) {
-      setsubtopicValidate(true);
-      return false;
-    } else {
-      setsubtopicValidate(false);
       return true;
     }
   };
