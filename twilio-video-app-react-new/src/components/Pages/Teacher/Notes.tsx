@@ -1,9 +1,7 @@
-import * as React from 'react';
-import Card from '../../Card/Card';
-import CardHeader from '../../Card/CardHeader';
-import CardDetails from '../../Card/CardDetails';
-import { Container, Row, Col } from 'react-bootstrap';
-import { FiDownload } from 'react-icons/fi';
+import * as React from "react";
+import Card from "../../Card/Card";
+import { Container, Row } from "react-bootstrap";
+import { FiDownload } from "react-icons/fi";
 
 type Notes = {
   topic?: string;

@@ -73,7 +73,7 @@ export const Dashboard = () => {
                     time={item.time}
                     date={item.date}
                     btnname="Join"
-                    image={<img src={'/Images/subjects/maths.png'} />}
+                    image={<img src={'/Images/subjects/Mathematics.png'} />}
                   />
                 );
               })} */}
@@ -83,7 +83,7 @@ export const Dashboard = () => {
                 time="04:00pm- 06:00pm"
                 date="22 Aug 2022"
                 btnname="Join"
-                image={<img src={'/Images/subjects/maths.png'} />}
+                image={<img src={'/Images/subjects/Mathematics.png'} />}
               />
               <Card
                 header="Mathematics"
@@ -91,7 +91,7 @@ export const Dashboard = () => {
                 time="04:00pm- 06:00pm"
                 date="23 Aug 2022"
                 btnname="Join"
-                image={<img src={'/Images/subjects/maths.png'} />}
+                image={<img src={'/Images/subjects/Mathematics.png'} />}
               />
               <Card
                 header="Mathematics"
@@ -99,7 +99,7 @@ export const Dashboard = () => {
                 time="04:00pm- 06:00pm"
                 date="24 Aug 2022"
                 btnname="Join"
-                image={<img src={'/Images/subjects/maths.png'} />}
+                image={<img src={'/Images/subjects/Mathematics.png'} />}
               />
             </div>
 

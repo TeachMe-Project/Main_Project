@@ -1,12 +1,12 @@
 import React from 'react';
 import {useAuth0} from "@auth0/auth0-react";
 import {Button, Col, Container, Nav, Navbar,Row} from 'react-bootstrap';
-import Images from "../../assets/images/Images";
+import Images from "../../../assets/images/Images";
 import {useNavigate} from "react-router-dom";
 
 const NavBar: React.FC = () => {
 
-    const {loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently, user} = useAuth0();
+    const {loginWithRedirect, logout, isAuthenticated, user} = useAuth0();
     const navigate = useNavigate();
 
     console.log(user);
@@ -26,7 +26,7 @@ const NavBar: React.FC = () => {
                             <Nav className="me-lg-auto ms-lg-3 ms-md-5 ps-md-4">
                                 <Nav.Link href="#Home" className="me-2">Home</Nav.Link>
                                 <Nav.Link href="#About-Us" className="me-2">About us</Nav.Link>
-                                <Nav.Link href="#Pricing" className="me-2">Pricing</Nav.Link>
+                                {/*<Nav.Link href="#Pricing" className="me-2">Pricing</Nav.Link>*/}
                                 <Nav.Link href="#Download" className="me-2">Downloads</Nav.Link>
                                 <Nav.Link href="#ContactUs" className="me-2">Contact us</Nav.Link>
                             </Nav>

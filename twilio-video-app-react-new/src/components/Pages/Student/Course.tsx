@@ -145,7 +145,7 @@ export const Course = (props: tutorName) => {
           <div className="Panel">
             <div className="PanelSubHeader">
               <div className="PanelImage">
-                <img src={'/Images/subjects/maths.png'} />
+                <img src={'/Images/subjects/Mathematics.png'} />
               </div>
 
               {/* {details.map((item: any) => {

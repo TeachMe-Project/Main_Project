@@ -15,107 +15,111 @@ import axios, {AxiosResponse} from "axios";
 import Loader from "../../utils/Loader";
 
 
-const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
-    < BsTrashFill
-        style={{
-            fontSize: "20px",
-            color: "#e74c3c",
-            padding: "7px",
-            width: "30px",
-            height: "30px",
-            borderRadius: "50%",
-            cursor: "pointer",
-            boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-        }}
-        className='accept-icon'
-        onClick={() => {
-            swal({
-                title: "User Removal",
-                text: `Do you really want to remove ${row.first_name} ${row.last_name} ?`,
-                icon: "error",
-                buttons: {
-                    cancel: true,
-                    confirm: true
-                },
-                // dangerMode: true,
-            })
-                .then((willDelete: any) => {
-                    const apiData = JSON.stringify({
-                        "user_id": `${row.user_id}`
-                    })
-                    axios({
-                        method: "POST",
-                        url: "http://localhost:8081/auth/block",
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        data: apiData
-                    }).then((apiRes) => {
-                        axios({
-                            method: "POST",
-                            url: "http://localhost:8081/user/removeUser",
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            data: apiData
-                        }).then((apiRes) => {
-                            console.log(apiRes.status);
-                            if (apiRes.status === 200) {
-                                swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
-                                    icon: "success",
-                                });
-                            }
-                        }).catch((error) => {
-                            console.log(error.message)
-                        })
-
-                    }).catch((error) => {
-                        console.log(error.message)
-                    })
-                });
-        }}
-    />
-);
-
-const columns = [
-    {
-        dataField: "user_id",
-        text: "User ID",
-        sort: true,
-        hidden: true
-    },
-    {
-        dataField: "username",
-        text: "User Name",
-        sort: true,
-    },
-    {
-        dataField: "first_name",
-        text: "First Name",
-    },
-    {
-        dataField: "last_name",
-        text: "Last Name"
-    },
-    {
-        dataField: "type",
-        text: "User Type"
-    },
-    {
-        dataField: "",
-        text: "",
-        formatter: removeItem,
-        headerAttrs: {width: 100},
-        attrs: {width: 100, class: "EditRow"}
-    },
-];
-
-
 const ManageUsers = () => {
 
     const baseURL = "https://learnx.azurewebsites.net/user/allUsers";
     const [users, setUsers] = useState<any[]>([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
+    const [deleteLoading, setDeleteLoading] = useState(false);
+    const removeItem = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
+        < BsTrashFill
+            style={{
+                fontSize: "20px",
+                color: "#e74c3c",
+                padding: "7px",
+                width: "30px",
+                height: "30px",
+                borderRadius: "50%",
+                cursor: "pointer",
+                boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
+            }}
+            className='accept-icon'
+            onClick={() => {
+                swal({
+                    title: "User Removal",
+                    text: `Do you really want to remove ${row.first_name} ${row.last_name} ?`,
+                    icon: "error",
+                    buttons: {
+                        cancel: true,
+                        confirm: true
+                    },
+                    // dangerMode: true,
+                })
+                    .then((willDelete: any) => {
+                        setDeleteLoading(true)
+                        const apiData = JSON.stringify({
+                            "user_id": `${row.user_id}`
+                        })
+                        axios({
+                            method: "POST",
+                            url: "https://learnx.azurewebsites.net/auth/block",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            data: apiData
+                        }).then((apiRes) => {
+                            console.log(row.user_id)
+                            axios({
+                                method: "POST",
+                                url: "https://learnx.azurewebsites.net/user/removeUser",
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                data: apiData
+                            }).then((apiRes) => {
+                                console.log(apiRes.status);
+                                if (apiRes.status === 200) {
+                                    swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
+                                        icon: "success",
+                                    });
+                                }
+                                const newUserArray = users.filter(user => row.user_id !== user.user_id);
+                                setUsers(newUserArray);
+                                setDeleteLoading(false);
+                            }).catch((error) => {
+                                console.log(error.message)
+                            })
+
+                        }).catch((error) => {
+                            console.log(error.message)
+                        })
+                    });
+            }}
+        />
+    );
+
+    const columns = [
+        {
+            dataField: "user_id",
+            text: "User ID",
+            sort: true,
+            hidden: true
+        },
+        {
+            dataField: "username",
+            text: "User Name",
+            sort: true,
+        },
+        {
+            dataField: "first_name",
+            text: "First Name",
+        },
+        {
+            dataField: "last_name",
+            text: "Last Name"
+        },
+        {
+            dataField: "type",
+            text: "User Type"
+        },
+        {
+            dataField: "",
+            text: "",
+            formatter: removeItem,
+            headerAttrs: {width: 100},
+            attrs: {width: 100, class: "EditRow"}
+        },
+    ];
 
     useEffect(() => {
         axios.get(baseURL).then((res: AxiosResponse) => {
@@ -135,12 +139,11 @@ const ManageUsers = () => {
                         user_id: item.user_id,
                         username: item.username,
                         type: "Student",
-                        first_name: item.student[0].first_name,
-                        last_name: item.student[0].last_name
+                        first_name: item.student.first_name,
+                        last_name: item.student.last_name
                     }])
                 }
                 else if (item.type === 'institute') {
-                    console.log(item)
                     setUsers(prevState => [...prevState, {
                         user_id: item.user_id,
                         username: item.username,
@@ -183,6 +186,7 @@ const ManageUsers = () => {
                 </Row>
                 <Row>
                     {!isDataLoading && <Loader/>}
+                    {deleteLoading && <Loader/>}
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"

@@ -27,7 +27,7 @@ model course {
   subject          String             @db.VarChar(100)
   description      String             @db.VarChar(255)
   end_date         String             @db.VarChar(50)
-  start_date       DateTime           @db.Date
+  start_date       String             @db.VarChar(50)
   start_time       String             @db.VarChar(50)
   end_time         String             @db.VarChar(50)
   day              String             @db.VarChar(50)
@@ -50,7 +50,7 @@ model course {
 model homework {
   homework_id   Int      @id @default(autoincrement())
   course_id     Int
-  uploaded_date DateTime @default(now()) @db.DateTime(0)Time(0)
+  uploaded_date DateTime @default(now()) @db.DateTime(0)
   homework      String   @db.VarChar(1000)
   isActive      Boolean
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO HOMEWORK FROM COURSE")
@@ -109,7 +109,7 @@ model institute_teacher {
 
 model notes {
   note_id       Int      @id @default(autoincrement())
-  uploaded_date DateTime @default(now()) @db.DateTime(0)Time(0)
+  uploaded_date DateTime @default(now()) @db.DateTime(0)
   note          String   @db.VarChar(1000)
   course_id     Int
   isActive      Boolean
@@ -158,7 +158,7 @@ model parent_payment {
 }
 
 model student {
-  user_id         String            @unique(map: "user_id") @unique(map: "user_id") @db.VarChar(100)
+  user_id         String            @unique(map: "user_id") @db.VarChar(100)
   student_id      Int               @id @default(autoincrement())
   parent_id       Int
   first_name      String            @db.VarChar(30)
@@ -175,6 +175,26 @@ model student {
 
   @@index([parent_id], map: "FK TO STUDENT FROM PARENT")
   @@index([user_id], map: "FK TO STUDENT FROM USER")
+}
+
+model student_class {
+  class_id      Int                         @id @default(autoincrement())
+  course_id     Int
+  student_id    Int
+  date          DateTime                    @default(now()) @db.Timestamp(0)
+  start_time    String                      @db.VarChar(100)
+  end_time      String                      @db.VarChar(100)
+  status        student_class_status        @default(upcoming)
+  joined_time   DateTime                    @default(now()) @db.DateTime(0)
+  left_time     DateTime                    @default(now()) @db.DateTime(0)
+  online_status student_class_online_status
+  isActive      Boolean
+  isStarted     Boolean                     @default(false)
+  course        course                      @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO CLASS FROM COURSE")
+  student       student                     @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO CLASS FROM STUDENT")
+
+  @@index([course_id], map: "FK TO CLASS FROM COURSE")
+  @@index([student_id], map: "FK TO CLASS FROM STUDENT")
 }
 
 model student_course {
@@ -227,6 +247,22 @@ model teacher {
   teacher_requests  teacher_requests[]
 }
 
+model teacher_class {
+  class_id   Int      @id @default(autoincrement())
+  course_id  Int
+  teacher_id Int
+  date       DateTime @default(now()) @db.Timestamp(0)
+  start_time String   @db.VarChar(100)
+  end_time   String   @db.VarChar(100)
+  isActive   Boolean
+  isStarted  Boolean  @default(false)
+  course     course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO COURSE FROM TEACHER_CLASS")
+  teacher    teacher  @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade, map: "FK TO TEACHER FROM TEACHER_CLASS")
+
+  @@index([course_id], map: "FK TO COURSE FROM TEACHER_CLASS")
+  @@index([teacher_id], map: "FK TO TEACHER FROM TEACHER_CLASS")
+}
+
 model teacher_requests {
   institute_id   Int
   teacher_id     Int
@@ -254,46 +290,16 @@ model user {
   teacher       teacher?
 }
 
-model student_class {
-  class_id      Int                         @id @default(autoincrement())
-  course_id     Int
-  student_id    Int
-  date          DateTime                    @default(now()) @db.Timestamp(0)
-  start_time    String                      @db.VarChar(100)
-  end_time      String                      @db.VarChar(100)
-  status        student_class_status        @default(upcoming)
-  joined_time   DateTime                    @default(now()) @db.DateTime(0)
-  left_time     DateTime                    @default(now()) @db.DateTime(0)
-  online_status student_class_online_status
-  isActive      Boolean
-  isStarted     Boolean                     @default(false)
-  course        course                      @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO CLASS FROM COURSE")
-  student       student                     @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO CLASS FROM STUDENT")
-
-  @@index([course_id], map: "FK TO CLASS FROM COURSE")
-  @@index([student_id], map: "FK TO CLASS FROM STUDENT")
-}
-
-model teacher_class {
-  class_id   Int      @id @default(autoincrement())
-  course_id  Int
-  teacher_id Int
-  date       DateTime @default(now()) @db.Timestamp(0)
-  start_time String   @db.VarChar(100)
-  end_time   String   @db.VarChar(100)
-  isActive   Boolean
-  isStarted  Boolean  @default(false)
-  course     course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO COURSE FROM TEACHER_CLASS")
-  teacher    teacher  @relation(fields: [teacher_id], references: [teacher_id], onDelete: Cascade, map: "FK TO TEACHER FROM TEACHER_CLASS")
-
-  @@index([course_id], map: "FK TO COURSE FROM TEACHER_CLASS")
-  @@index([teacher_id], map: "FK TO TEACHER FROM TEACHER_CLASS")
-}
-
 enum course_medium {
   Sinhala
   English
   Tamil
+}
+
+enum institute_verification {
+  pending
+  verified
+  rejected
 }
 
 enum institute_teacher_status {
@@ -319,6 +325,17 @@ enum parent_payment_month {
   Oct
   Nov
   Dec
+}
+
+enum student_class_status {
+  upcoming
+  ended
+  cancelled
+}
+
+enum student_class_online_status {
+  online
+  offline
 }
 
 enum student_course_status {
@@ -350,21 +367,4 @@ enum user_type {
   teacher
   institute
   admin
-}
-
-enum institute_verification {
-  pending
-  verified
-  rejected
-}
-
-enum student_class_status {
-  upcoming
-  ended
-  cancelled
-}
-
-enum student_class_online_status {
-  online
-  offline
 }
