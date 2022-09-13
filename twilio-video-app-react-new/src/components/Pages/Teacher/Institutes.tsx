@@ -72,7 +72,7 @@ export const Institutes = () => {
       });
   }, []);
 
-  const acceptInstitute = (id: any) => (
+  const acceptInstitute = (item: any) => (
     <Col xl={1}>
       {/* <Link to="" className=" link SubscribeBtn"> */}
       {/* <CardButton btnname="Accept" /> */}
@@ -91,24 +91,24 @@ export const Institutes = () => {
           })
             .then((willDelete: any) => {
               const apiData = JSON.stringify({
-                "institute_id": `${id}`,
-                "request_time": new Date()
+                "institute_id": item.id,
+                "request_time": new Date(),
               });
               axios({
                 method: "POST",
                 url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
                 headers: {
-                  "Content-Type": "application/json"
+                  "Content-Type": "application/json",
                 },
-                data: apiData
+                data: apiData,
               }).then((apiRes) => {
                 console.log(apiRes.status);
                 if (apiRes.status === 200) {
-                  swal(`Poof! You have successfully removed`, {
-                    icon: "success"
+                  swal(`Poof! You have successfully removed ${item.name}`, {
+                    icon: "success",
                   });
                 }
-                console.log(`Successfully removed ${id}`);
+                console.log(`Successfully removed ${item.name}`);
               }).catch((error) => {
                 console.log(error.message);
               }).catch((error) => {
@@ -269,7 +269,7 @@ export const Institutes = () => {
                             {/* <Link to="" className=" link SubscribeBtn">
                               <CardButton btnname="Accept" />
                             </Link> */}
-                            {acceptInstitute(item.id)}
+                            {acceptInstitute(item)}
                           </Col>
 
 
