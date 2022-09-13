@@ -38,9 +38,9 @@ export const Course = () => {
   const teacherAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  const baseURLCourse = `https://learnx.azurewebsites.net/course/${params}`;
-  const baseURLStudents = `https://learnx.azurewebsites.net/course/courseStudents/${params}`;
-  const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params}`;
+  const baseURLCourse = `https://learnx.azurewebsites.net/course/${params.course_id}`;
+  const baseURLStudents = `https://learnx.azurewebsites.net/course/courseStudents/${params.course_id}`;
+  const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
 
   const [details, setDetails] = useState<any[]>([]);
   const [notes, setNotes] = useState<any[]>([]);
@@ -65,9 +65,9 @@ export const Course = () => {
               desc: item.description,
               price: "LKR " + item.price,
               start_date: item.start_date,
+              end_date: item.end_date,
               start_time: item.start_time,
-              institute: item.teacher.institute_teacher.institute,
-              duration: item.duration + " years"
+              day: item.day
             }
           ]);
         });
@@ -78,12 +78,13 @@ export const Course = () => {
     axios
       .get(baseURLCourse)
       .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
+        const note = res.data[0].notes;
+        note.map((item: any) => {
           setNotes(prevState => [
             ...prevState,
             {
-              date: item.notes.uploaded_date,
-              link: item.notes.note
+              date: item.uploaded_date,
+              link: item.note
             }
           ]);
         });
@@ -95,12 +96,13 @@ export const Course = () => {
     axios
       .get(baseURLCourse)
       .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
+        const hw = res.data[0].homework;
+        hw.map((item: any) => {
           setHomework(prevState => [
             ...prevState,
             {
-              date: item.notes.uploaded_date,
-              link: item.notes.homework
+              date: item.uploaded_date,
+              link: item.homework
             }
           ]);
         });
@@ -157,14 +159,19 @@ export const Course = () => {
           </div>
           <div className="Panel">
 
-            {/* {details.map((item: any) => {
+            {details.map((item: any) => {
               return (
-                <div>
-                  <div className="PanelSubHeader">
-                    <div className="PanelImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
-                    <h3>{item.subject} Class</h3>
-                  </div>
+                <div className="PanelSubHeader">
+                  <div className="PanelImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
+                  <h3>{item.subject} Class</h3>
+                </div>
+              );
+            })}
 
+            <Tabs>
+
+              {/* {details.map((item: any) => {
+                return (
                   <div className="Details" style={{ marginTop: '50px' }}>
                     <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
                       <Link to="/editdetails" className="link">
@@ -186,11 +193,10 @@ export const Course = () => {
                     <Details label="Class Day" value="Thursday" symbol=":" />
                     <Details label="Start time" value={item.start_time} symbol=":" />
                   </div>
-                </div>
-              );
-            })} */}
+                );
+              })} */}
 
-            <div className="PanelSubHeader">
+              {/* <div className="PanelSubHeader">
               <div className="PanelImage">{<img src={"/Images/subjects/Mathematics.png"} />}</div>
               <h3>Mathematics Class</h3>
             </div>
@@ -217,7 +223,7 @@ export const Course = () => {
                 <Details label="End Date" value="2022-03-24" symbol=":" />
                 <Details label="Class Day" value="Thursday" symbol=":" />
                 <Details label="Start time" value="05:00 PM" symbol=":" />
-              </div>
+              </div> */}
 
               <div className="Notes">
                 {/*<Row>*/}
@@ -232,43 +238,43 @@ export const Course = () => {
                   <table className="booking-table" id="view-booking">
                     <tbody>
 
-                    {notes.map((item: any) => {
-                      return (
-                        <tr>
-                          <td data-label="Note ID :"
+                      {notes.map((item: any) => {
+                        return (
+                          <tr>
+                            <td data-label="Note ID :"
                               className="noteheader"
-                          >
-                            Note for week 1
-                          </td>
-                          <td data-label="Uploaded Date :"
+                            >
+                              Note for week 1
+                            </td>
+                            <td data-label="Uploaded Date :"
                               className="notedetails">{item.date}</td>
 
-                          <td data-label="">
-                            <a
-                              download="note1.pdf"
-                              href={item.link}
-                              target="_blank"
-                              className="Reacticonbtn download">
-                              <FiDownload className="Reacticon" />
-                              Download
-                            </a>
+                            <td data-label="">
+                              <a
+                                download="note1.pdf"
+                                href={item.link}
+                                target="_blank"
+                                className="Reacticonbtn download">
+                                <FiDownload className="Reacticon" />
+                                Download
+                              </a>
 
-                          </td>
-                          <td data-label="">
-                            <a
-                              download="note1.pdf"
-                              href=""
-                              target="_blank"
-                              className="Reacticonbtn remove"
-                            >
-                              <MdDelete className="Reacticon" />Remove
-                            </a>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                            </td>
+                            <td data-label="">
+                              <a
+                                download="note1.pdf"
+                                href=""
+                                target="_blank"
+                                className="Reacticonbtn remove"
+                              >
+                                <MdDelete className="Reacticon" />Remove
+                              </a>
+                            </td>
+                          </tr>
+                        );
+                      })}
 
-                    {/* <tr>
+                      {/* <tr>
                         <td data-label="Note ID :"
                           className="noteheader"
                         >
@@ -466,43 +472,43 @@ export const Course = () => {
                 <table className="booking-table" id="view-booking">
                   <tbody>
 
-                  {homework.map((item: any) => {
-                    return (
-                      <tr>
-                        <td data-label="Note ID :"
+                    {homework.map((item: any) => {
+                      return (
+                        <tr>
+                          <td data-label="Note ID :"
                             className="noteheader"
-                        >
-                          Homework for week 1
-                        </td>
-                        <td data-label="Uploaded Date :"
+                          >
+                            Homework for week 1
+                          </td>
+                          <td data-label="Uploaded Date :"
                             className="notedetails">{item.date}</td>
 
-                        <td data-label="">
-                          <a
-                            download="note1.pdf"
-                            href={item.link}
-                            target="_blank"
-                            className="Reacticonbtn download">
-                            <FiDownload className="Reacticon" />
-                            Download
-                          </a>
+                          <td data-label="">
+                            <a
+                              download="note1.pdf"
+                              href={item.link}
+                              target="_blank"
+                              className="Reacticonbtn download">
+                              <FiDownload className="Reacticon" />
+                              Download
+                            </a>
 
-                        </td>
-                        <td data-label="">
-                          <a
-                            download="note1.pdf"
-                            href=""
-                            target="_blank"
-                            className="Reacticonbtn remove"
-                          >
-                            <MdDelete className="Reacticon" />Remove
-                          </a>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                          </td>
+                          <td data-label="">
+                            <a
+                              download="note1.pdf"
+                              href=""
+                              target="_blank"
+                              className="Reacticonbtn remove"
+                            >
+                              <MdDelete className="Reacticon" />Remove
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
 
-                  {/* <tr>
+                    {/* <tr>
                       <td data-label="Note ID :"
                         className="noteheader"
                       >
@@ -694,23 +700,26 @@ export const Course = () => {
                   <table className="booking-table" id="view-booking">
 
                     <tbody>
-                    {students.map((item: any) => {
-                      return (
-                        <tr>
-                          <td data-label="Student ID :" className="notedetails">{item.id}</td>
-                          <td data-label="Student Name :" className="noteheader">{item.name}</td>
-                          <td data-label="Parent's Contact :" className="notedetails">{item.contact}</td>
-                          <td data-label="View Profile :">
-                            <div className="cancelbutton">
-                              <Link to="/addcourse" className="link">
-                                <ButtonCommon name={"View Profile"} className="viewBtn" />
-                              </Link>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                    {/* <tr>
+                      {students.map((item: any) => {
+                        return (
+                          <tr>
+                            <td data-label="Student ID :" className="notedetails">{item.id}</td>
+                            <td data-label="Student Name :" className="noteheader">{item.name}</td>
+                            <td data-label="Parent's Contact :" className="notedetails">{item.contact}</td>
+                            <td data-label="View Profile :">
+                              <div className="cancelbutton">
+                                {/* <Link to="/studentProfile/${}" className="link">
+                                  <ButtonCommon name={"View Profile"} className="viewBtn" />
+                                </Link> */}
+                                <div className="ButtonCommon viewBtn" onClick={() => navigate(`/studentProfile/${item.id}`)}>
+                                  View Profile
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                      {/* <tr>
                         <td data-label="Student ID :" className="notedetails">10000102345</td>
                         <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
                         <td data-label="Parent's Contact :" className="notedetails">011 2840231</td>
@@ -790,32 +799,32 @@ export const Course = () => {
                 <table className="booking-table" id="view-booking">
                   <tbody>
 
-                  {schedule.map((item: any) => {
-                    return (
-                      <tr>
-                        <td data-label="Note ID :"
+                    {schedule.map((item: any) => {
+                      return (
+                        <tr>
+                          <td data-label="Note ID :"
                             className="noteheader"
-                        >
-                          {item.date}</td>
-                        <td data-label="Uploaded Date :"
+                          >
+                            {item.date}</td>
+                          <td data-label="Uploaded Date :"
                             className="notedetails">{item.start_time}</td>
-                        <td data-label="Uploaded Date :"
+                          <td data-label="Uploaded Date :"
                             className="notedetails">{item.end_time}</td>
-                        <td data-label="">
-                          <a
-                            download="note1.pdf"
-                            href=""
-                            target="_blank"
-                            className="Reacticonbtn download">
-                            <MdNotStarted className="Reacticon" />
-                            Join Class
-                          </a>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                          <td data-label="">
+                            <a
+                              download="note1.pdf"
+                              href=""
+                              target="_blank"
+                              className="Reacticonbtn download">
+                              <MdNotStarted className="Reacticon" />
+                              Join Class
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
 
-                  {/* <tr>
+                    {/* <tr>
                       <td data-label="Note ID :"
                         className="noteheader"
                       >
@@ -957,46 +966,46 @@ export const Course = () => {
                 <div className="paymentsContainer">
                   <table className="booking-table" id="view-booking">
                     <tbody>
-                    {payments.map((item: any) => {
-                      return (
-                        <tr>
-                          <td data-label="Student ID :" className="notedetails">10000102345</td>
-                          <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
-                          <td data-label="Month :" className="notedetails">July</td>
-                          <td data-label="Amount :" className="notedetails">LKR 2500</td>
-                        </tr>
-                      );
-                    })}
-                    <tr>
-                      <td data-label="Student ID :" className="notedetails">10000102345</td>
-                      <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
-                      <td data-label="Month :" className="notedetails">July</td>
-                      <td data-label="Amount :" className="notedetails">LKR 2500</td>
-                    </tr>
-                    <tr>
-                      <td data-label="Student ID :" className="notedetails">10000102345</td>
-                      <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
-                      <td data-label="Month :" className="notedetails">August</td>
-                      <td data-label="Amount :" className="notedetails">LKR 2500</td>
-                    </tr>
-                    <tr>
-                      <td data-label="Student ID :" className="notedetails">10000102111</td>
-                      <td data-label="Student Name :" className="noteheader">Neelya Jhones</td>
-                      <td data-label="Month :" className="notedetails">August</td>
-                      <td data-label="Amount :" className="notedetails">LKR 2500</td>
-                    </tr>
-                    <tr>
-                      <td data-label="Student ID :" className="notedetails">10000102908</td>
-                      <td data-label="Student Name :" className="noteheader">Minura Ranasinghe</td>
-                      <td data-label="Month :" className="notedetails">August</td>
-                      <td data-label="Amount :" className="notedetails">LKR 2500</td>
-                    </tr>
-                    <tr>
-                      <td data-label="Student ID :" className="notedetails">10000102905</td>
-                      <td data-label="Student Name :" className="noteheader">Senith De Silva</td>
-                      <td data-label="Month :" className="notedetails">August</td>
-                      <td data-label="Amount :" className="notedetails">LKR 2500</td>
-                    </tr>
+                      {payments.map((item: any) => {
+                        return (
+                          <tr>
+                            <td data-label="Student ID :" className="notedetails">10000102345</td>
+                            <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
+                            <td data-label="Month :" className="notedetails">July</td>
+                            <td data-label="Amount :" className="notedetails">LKR 2500</td>
+                          </tr>
+                        );
+                      })}
+                      <tr>
+                        <td data-label="Student ID :" className="notedetails">10000102345</td>
+                        <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
+                        <td data-label="Month :" className="notedetails">July</td>
+                        <td data-label="Amount :" className="notedetails">LKR 2500</td>
+                      </tr>
+                      <tr>
+                        <td data-label="Student ID :" className="notedetails">10000102345</td>
+                        <td data-label="Student Name :" className="noteheader">Romesh Perera</td>
+                        <td data-label="Month :" className="notedetails">August</td>
+                        <td data-label="Amount :" className="notedetails">LKR 2500</td>
+                      </tr>
+                      <tr>
+                        <td data-label="Student ID :" className="notedetails">10000102111</td>
+                        <td data-label="Student Name :" className="noteheader">Neelya Jhones</td>
+                        <td data-label="Month :" className="notedetails">August</td>
+                        <td data-label="Amount :" className="notedetails">LKR 2500</td>
+                      </tr>
+                      <tr>
+                        <td data-label="Student ID :" className="notedetails">10000102908</td>
+                        <td data-label="Student Name :" className="noteheader">Minura Ranasinghe</td>
+                        <td data-label="Month :" className="notedetails">August</td>
+                        <td data-label="Amount :" className="notedetails">LKR 2500</td>
+                      </tr>
+                      <tr>
+                        <td data-label="Student ID :" className="notedetails">10000102905</td>
+                        <td data-label="Student Name :" className="noteheader">Senith De Silva</td>
+                        <td data-label="Month :" className="notedetails">August</td>
+                        <td data-label="Amount :" className="notedetails">LKR 2500</td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>

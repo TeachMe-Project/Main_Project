@@ -166,7 +166,7 @@ export const StudentProfile = () => {
     <div className="StudentProfile">
       <Container>
         <div className="PanelHeader">
-          <h2>User Profile</h2>
+          <h2>Student Profile</h2>
           {!isEditing && <Button name=" Edit Profile" onClick={() => setISEditing(true)} />}
         </div>
         <div className="PanelContainer">

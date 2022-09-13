@@ -5,6 +5,8 @@ import * as yup from "yup";
 
 // @ts-ignore
 import LazyLoad from "react-lazyload";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 import axios, { AxiosResponse } from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -184,6 +186,40 @@ export const AddCourse = () => {
       });
   }, []);
 
+  const courseCreate = (values: any) => {
+    const data = JSON.stringify({
+      "user_id": user_id,
+      "course_name": values.title,
+      "description": values.description,
+      "price": values.fee,
+      "day": values.class_date,
+      "grade": values.grade,
+      "subject": values.subject,
+      "start_date": values.start_date,
+      "end_date": values.end_date,
+      "start_time": values.start_time,
+      "end_time": values.end_time,
+      "medium": values.medium,
+      "created_date": new Date(),
+    });
+    axios({
+      method: "POST",
+      url: "https://learnx.azurewebsites.net/course/createCourse",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    }).then((res: AxiosResponse) => {
+      if (res.status == 200) {
+        console.log("Done")
+        swal(`Poof! You have successfully added this course`, {
+          icon: "success",
+        });
+      }
+    }).catch(function (error) {
+      console.log(error.message)
+    })
+  }
 
   return (
     <div className="AddCourse">
@@ -196,20 +232,20 @@ export const AddCourse = () => {
             <div className="RightContainer">
               <Formik on validationSchema={schema} onSubmit={console.log} initialValues={initialState}>
                 {({
-                    handleSubmit,
-                    handleChange,
-                    handleBlur,
-                    values,
-                    touched,
-                    errors,
-                    validateField
-                  }) => (
+                  handleSubmit,
+                  handleChange,
+                  handleBlur,
+                  values,
+                  touched,
+                  errors,
+                  validateField
+                }) => (
                   <Row>
                     <Form noValidate onSubmit={handleSubmit}>
                       {/*title*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationFirstName">
+                          controlId="validationFirstName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Title</Form.Label>
                           </Col>
@@ -233,7 +269,7 @@ export const AddCourse = () => {
                       {/*subject*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationLastname">
+                          controlId="validationLastname">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Subject</Form.Label>
                           </Col>
@@ -256,7 +292,7 @@ export const AddCourse = () => {
                       </Row>
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationLastname">
+                          controlId="validationLastname">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Description</Form.Label>
                           </Col>
@@ -280,7 +316,7 @@ export const AddCourse = () => {
                       {/*Grade*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationGrade">
+                          controlId="validationGrade">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Grade</Form.Label>
                           </Col>
@@ -304,19 +340,19 @@ export const AddCourse = () => {
                       {/*medium*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationEmail">
+                          controlId="validationEmail">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Medium</Form.Label>
                           </Col>
                           <Col xl={8}>
                             <Form.Control as="select"
-                                          placeholder="Select the Medium here"
-                                          name="medium"
-                                          value={values.medium}
-                                          onChange={handleChange}
-                                          isInvalid={!!errors.medium && touched.medium ? changeMediumValidate(false) : changeMediumValidate(true)}
-                                          isValid={touched.medium}
-                                          onBlur={handleBlur}
+                              placeholder="Select the Medium here"
+                              name="medium"
+                              value={values.medium}
+                              onChange={handleChange}
+                              isInvalid={!!errors.medium && touched.medium ? changeMediumValidate(false) : changeMediumValidate(true)}
+                              isValid={touched.medium}
+                              onBlur={handleBlur}
                             >
                               <option value="NotSelected" selected>
                                 Select Medium
@@ -332,7 +368,7 @@ export const AddCourse = () => {
                       {/*Fee*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationPassword">
+                          controlId="validationPassword">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Fee</Form.Label>
                           </Col>
@@ -355,19 +391,19 @@ export const AddCourse = () => {
                       {/* Individual or institute */}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationPassword">
+                          controlId="validationPassword">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Institute</Form.Label>
                           </Col>
                           <Col xl={8}>
                             <Form.Control as="select"
-                                          placeholder="Select the Institute here"
-                                          name="institute"
-                                          value={values.institute}
-                                          onChange={handleChange}
-                                          isInvalid={!!errors.institute && touched.institute ? changeInstituteValidate(false) : changeInstituteValidate(true)}
-                                          isValid={touched.institute}
-                                          onBlur={handleBlur}>
+                              placeholder="Select the Institute here"
+                              name="institute"
+                              value={values.institute}
+                              onChange={handleChange}
+                              isInvalid={!!errors.institute && touched.institute ? changeInstituteValidate(false) : changeInstituteValidate(true)}
+                              isValid={touched.institute}
+                              onBlur={handleBlur}>
                               <option value="NoInstitute" selected> None</option>
                               {institutes.map((item) => {
                                 return (
@@ -385,19 +421,19 @@ export const AddCourse = () => {
                       {/*Start date*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationschoolName">
+                          controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Start date</Form.Label>
                           </Col>
                           <Col xl={8}>
                             <Form.Control type="date"
-                                          placeholder="Enter Start date here"
-                                          name="start_date"
-                                          value={values.start_date}
-                                          onChange={handleChange}
-                                          isInvalid={!!errors.start_date && touched.start_date ? changeStartDateValidate(false) : changeStartDateValidate(true)}
-                                          isValid={touched.start_date}
-                                          onBlur={handleBlur}
+                              placeholder="Enter Start date here"
+                              name="start_date"
+                              value={values.start_date}
+                              onChange={handleChange}
+                              isInvalid={!!errors.start_date && touched.start_date ? changeStartDateValidate(false) : changeStartDateValidate(true)}
+                              isValid={touched.start_date}
+                              onBlur={handleBlur}
                             />
                           </Col>
                         </Form.Group>
@@ -406,37 +442,37 @@ export const AddCourse = () => {
                       {/*End date*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationschoolName">
+                          controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>End date</Form.Label>
                           </Col>
                           <Col xl={8}>
                             <Form.Control type="date"
-                                          placeholder="Enter End date here"
-                                          name="end_date"
-                                          value={values.end_date}
-                                          onChange={handleChange}
-                                          isInvalid={!!errors.end_date && touched.end_date ? changeEndDateValidate(false) : changeEndDateValidate(true)}
-                                          isValid={touched.end_date}
-                                          onBlur={handleBlur} />
+                              placeholder="Enter End date here"
+                              name="end_date"
+                              value={values.end_date}
+                              onChange={handleChange}
+                              isInvalid={!!errors.end_date && touched.end_date ? changeEndDateValidate(false) : changeEndDateValidate(true)}
+                              isValid={touched.end_date}
+                              onBlur={handleBlur} />
                           </Col>
                         </Form.Group>
                       </Row>
                       {/*Class Date*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationschoolName">
+                          controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Class Date</Form.Label>
                           </Col>
                           <Col xl={8}>
                             <Form.Control as="select"
-                                          name="class_date"
-                                          value={values.class_date}
-                                          onChange={handleChange}
-                                          isInvalid={!!errors.class_date && touched.class_date ? changeClassDateValidate(false) : changeClassDateValidate(true)}
-                                          isValid={touched.class_date}
-                                          onBlur={handleBlur}
+                              name="class_date"
+                              value={values.class_date}
+                              onChange={handleChange}
+                              isInvalid={!!errors.class_date && touched.class_date ? changeClassDateValidate(false) : changeClassDateValidate(true)}
+                              isValid={touched.class_date}
+                              onBlur={handleBlur}
                             >
                               <option value="Monday" selected> Monday</option>
                               <option value="Tuesday">Tuesday</option>
@@ -452,51 +488,51 @@ export const AddCourse = () => {
                       {/*Time*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationschoolName">
+                          controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Start time </Form.Label>
                           </Col>
                           <Col xl={8}>
                             <Form.Control type="time"
-                                          placeholder="Enter Class Start time Here"
-                                          name="start_time"
-                                          value={values.start_time}
-                                          onChange={handleChange}
-                                          isInvalid={!!errors.start_time && touched.start_time ? changeStartTimeValidate(false) : changeStartTimeValidate(true)}
-                                          isValid={touched.start_time}
-                                          onBlur={handleBlur}
+                              placeholder="Enter Class Start time Here"
+                              name="start_time"
+                              value={values.start_time}
+                              onChange={handleChange}
+                              isInvalid={!!errors.start_time && touched.start_time ? changeStartTimeValidate(false) : changeStartTimeValidate(true)}
+                              isValid={touched.start_time}
+                              onBlur={handleBlur}
                             />
                           </Col>
                         </Form.Group>
                       </Row>
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationschoolName">
+                          controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>End time </Form.Label>
                           </Col>
                           <Col xl={8}>
                             <Form.Control type="time"
-                                          placeholder="Enter Class End time Here"
-                                          name="end_time"
-                                          value={values.end_time}
-                                          onChange={handleChange}
-                                          isInvalid={!!errors.end_time && touched.end_time ? changeEndTimeValidate(false) : changeEndTimeValidate(true)}
-                                          isValid={touched.end_time}
-                                          onBlur={handleBlur}
+                              placeholder="Enter Class End time Here"
+                              name="end_time"
+                              value={values.end_time}
+                              onChange={handleChange}
+                              isInvalid={!!errors.end_time && touched.end_time ? changeEndTimeValidate(false) : changeEndTimeValidate(true)}
+                              isValid={touched.end_time}
+                              onBlur={handleBlur}
                             />
                           </Col>
                         </Form.Group>
                       </Row>
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
-                                    controlId="validationschoolName">
+                          controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}></Form.Label>
                           </Col>
                           <Col xl={8}>
                             <div className="Buttonforsubmit" style={{ margin: "0px 163px" }}>
-                              <Button type="submit" onClick={() => console.log(values)}>Add Course</Button>
+                              <Button type="submit" onClick={() => courseCreate(values)}>Add Course</Button>
                             </div>
                           </Col>
                         </Form.Group>

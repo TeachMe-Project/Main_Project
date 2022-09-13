@@ -15,6 +15,7 @@ import StudentAnalytics from "./StudentAnalytics";
 import Uploadhomework from "./Uploadhomework";
 import Uploadnotes from "./Uploadnotes";
 import TeacherProfile from "./TeacherProfile";
+import StudentProfile from "./StudentProfile";
 import Notifications from "../../Notification/notifications";
 import Helpandsupport from "./Helpandsupport";
 import Parentscharts from "./Parentscharts";
@@ -123,6 +124,10 @@ const routes = [
   {
     path: "/teacherProfile",
     main: () => <TeacherProfile />
+  },
+  {
+    path: "/studentProfile",
+    main: () => <StudentProfile />
   }
 
 ];
