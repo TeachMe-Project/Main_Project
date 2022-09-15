@@ -53,7 +53,6 @@ export const Dashboard = () => {
 
 
 
-  const baseURL = 'https://learnx.azurewebsites.net/student/:id/upcomingClasses';
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {
