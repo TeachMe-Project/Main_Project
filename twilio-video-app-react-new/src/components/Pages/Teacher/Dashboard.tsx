@@ -11,7 +11,7 @@ import axios, { AxiosResponse } from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const convertTime = (time: String) => {
-  const hour = time.split(":")[0];
+  const hour = time.split(":")[0] || time.split(".")[0];
   const intHour = parseInt(hour);
   const minute = time.split(":")[1] || time.split(".")[1];
   const ampm = intHour >= 12 ? "PM" : "AM";

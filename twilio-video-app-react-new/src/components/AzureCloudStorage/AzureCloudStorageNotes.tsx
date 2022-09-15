@@ -40,6 +40,8 @@ const AzureCloudStorage = (): JSX.Element => {
     setUploading(false);
     setUploaded(true);
     setInputKey(Math.random().toString(36));
+
+    // return blobsInContainer[0];
   };
 
   const blobItem = blobList[0];

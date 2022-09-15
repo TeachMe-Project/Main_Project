@@ -6,6 +6,8 @@ import Tabs from "../../Tabs/Tabs";
 import Details from "./Details";
 import PanelContainer from "../../Layout/PanelContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -28,6 +30,11 @@ const convertTime = (x: Date) => {
   return newHour + ":" + minute + " " + ampm;
 };
 
+const convertDate = (date: Date) => {
+  const d = new Date(date);
+  return d.toDateString();
+};
+
 export const Course = () => {
   const navigate = useNavigate();
   const directToCourse = () => {
@@ -42,6 +49,7 @@ export const Course = () => {
   const baseURLStudents = `https://learnx.azurewebsites.net/course/courseStudents/${params.course_id}`;
   const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
 
+  const [display, setDisplay] = useState<any[]>([]);
   const [details, setDetails] = useState<any[]>([]);
   const [notes, setNotes] = useState<any[]>([]);
   const [homework, setHomework] = useState<any[]>([]);
@@ -54,7 +62,6 @@ export const Course = () => {
       .get(baseURLCourse)
       .then((res: AxiosResponse) => {
         res.data.map((item: any) => {
-          console.log("Hello")
           setDetails(prevState => [
             ...prevState,
             {
@@ -71,6 +78,7 @@ export const Course = () => {
             }
           ]);
         });
+        console.log(details);
       })
       .catch(err => {
         console.log(err);
@@ -118,7 +126,8 @@ export const Course = () => {
           setStudents(prevState => [
             ...prevState,
             {
-              id: item.student_id,
+              student_id: item.student_id,
+              user_id: item.student.user_id,
               name: item.student.first_name + " " + item.student.last_name,
               contact: item.student.parent.mobile_no
             }
@@ -136,7 +145,7 @@ export const Course = () => {
           setSchedule(prevState => [
             ...prevState,
             {
-              date: item.date,
+              date: convertDate(item.date),
               start_time: item.start_time,
               end_time: item.end_time
             }
@@ -148,6 +157,56 @@ export const Course = () => {
         console.log(err);
       });
   }, []);
+
+  const removeNote = (item: any) => (
+    // <a
+    //   download="note1.pdf"
+    //   href=""
+    //   target="_blank"
+    //   className="Reacticonbtn remove"
+    // >
+      <MdDelete 
+        className="Reacticonbtn remove Reacticon" 
+        onClick={() => {
+          swal({
+            title: "Request Acception",
+            text: `Do you really want to accept this institute?`,
+            icon: "error",
+            buttons: {
+              cancel: true,
+              confirm: true
+            }
+            // dangerMode: true,
+          })
+            .then((willDelete: any) => {
+              const apiData = JSON.stringify({
+                "institute_id": item.id,
+                "request_time": new Date(),
+              });
+              axios({
+                method: "POST",
+                url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                data: apiData,
+              }).then((apiRes) => {
+                console.log(apiRes.status);
+                if (apiRes.status === 200) {
+                  swal(`Poof! You have successfully removed ${item.name}`, {
+                    icon: "success",
+                  });
+                }
+                console.log(`Successfully removed ${item.name}`);
+              }).catch((error) => {
+                console.log(error.message);
+              }).catch((error) => {
+                console.log(error.message);
+              });
+            });
+        }}/>
+    // </a>
+  );
 
   return (
     <div className="Course">
@@ -170,31 +229,33 @@ export const Course = () => {
 
             <Tabs>
 
-              {/* {details.map((item: any) => {
-                return (
-                  <div className="Details" style={{ marginTop: '50px' }}>
-                    <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
-                      <Link to="/editdetails" className="link">
-                        <ButtonCommon name={'Edit Details'} />
-                      </Link>
+              <div className="Details" style={{ marginTop: '50px' }}>
+                {details.map((item: any) => {
+                  return (
+                    <div>
+                      <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
+                        <Link to="/editdetails" className="link">
+                          <ButtonCommon name={'Edit Details'} />
+                        </Link>
+                      </div>
+                      <Details label="Title" value={item.title} symbol=":" />
+                      <Details label="subject" value={item.subject} symbol=":" />
+                      <Details
+                        label="description"
+                        value={item.desc}
+                        symbol=":"
+                      />
+                      <Details label="Grade" value={item.grade} symbol=":" />
+                      <Details label="Medium" value={item.medium} symbol=":" />
+                      <Details label="Fee" value={item.price} symbol=":" />
+                      <Details label="Start Date" value={item.start_date} symbol=":" />
+                      <Details label="End Date" value="2022-03-24" symbol=":" />
+                      <Details label="Class Day" value="Thursday" symbol=":" />
+                      <Details label="Start time" value={item.start_time} symbol=":" />
                     </div>
-                    <Details label="Title" value={item.title} symbol=":" />
-                    <Details label="subject" value={item.subject} symbol=":" />
-                    <Details
-                      label="description"
-                      value={item.desc}
-                      symbol=":"
-                    />
-                    <Details label="Grade" value={item.grade} symbol=":" />
-                    <Details label="Medium" value={item.medium} symbol=":" />
-                    <Details label="Fee" value={item.price} symbol=":" />
-                    <Details label="Start Date" value={item.start_date} symbol=":" />
-                    <Details label="End Date" value="2022-03-24" symbol=":" />
-                    <Details label="Class Day" value="Thursday" symbol=":" />
-                    <Details label="Start time" value={item.start_time} symbol=":" />
-                  </div>
-                );
-              })} */}
+                  );
+                })}
+              </div>
 
               {/* <div className="PanelSubHeader">
               <div className="PanelImage">{<img src={"/Images/subjects/Mathematics.png"} />}</div>
@@ -703,7 +764,7 @@ export const Course = () => {
                       {students.map((item: any) => {
                         return (
                           <tr>
-                            <td data-label="Student ID :" className="notedetails">{item.id}</td>
+                            <td data-label="Student ID :" className="notedetails">{item.student_id}</td>
                             <td data-label="Student Name :" className="noteheader">{item.name}</td>
                             <td data-label="Parent's Contact :" className="notedetails">{item.contact}</td>
                             <td data-label="View Profile :">
@@ -711,7 +772,7 @@ export const Course = () => {
                                 {/* <Link to="/studentProfile/${}" className="link">
                                   <ButtonCommon name={"View Profile"} className="viewBtn" />
                                 </Link> */}
-                                <div className="ButtonCommon viewBtn" onClick={() => navigate(`/studentProfile/${item.id}`)}>
+                                <div className="ButtonCommon viewBtn" onClick={() => navigate(`/studentProfile/${item.user_id}`)}>
                                   View Profile
                                 </div>
                               </div>

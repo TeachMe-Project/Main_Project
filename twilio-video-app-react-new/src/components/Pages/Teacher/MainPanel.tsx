@@ -126,7 +126,7 @@ const routes = [
     main: () => <TeacherProfile />
   },
   {
-    path: "/studentProfile",
+    path: "/studentProfile/:user_id",
     main: () => <StudentProfile />
   }
 
