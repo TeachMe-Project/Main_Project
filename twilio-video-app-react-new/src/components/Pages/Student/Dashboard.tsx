@@ -12,6 +12,31 @@ import Searchbar from '../../Searchbar/Searchbar';
 import axios, { AxiosResponse } from 'axios';
 
 export const Dashboard = () => {
+
+  const [apps,setApps] = useState<any>([]);
+
+  const updateApps = (()=>{
+    // calling IPC exposed from preload script
+
+    const x = new Promise((resolve, reject) => {
+      // @ts-ignore
+      window.electron.ipcRenderer.on('ipc-example', (arg) => {
+        // eslint-disable-next-line no-console
+        resolve(arg);
+
+      });
+      // @ts-ignore
+      window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
+    })
+    x.then((r:any)=>{
+      setApps(Array.from(r));
+      console.log(r);
+    })
+
+  })
+
+
+
   const baseURL = 'https://learnx.azurewebsites.net/student/:id/upcomingClasses';
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
@@ -45,8 +70,10 @@ export const Dashboard = () => {
           <PanelContainer />
           <div className="PanelHeader">
             <h2>Dashboard</h2>
+            <button onClick={updateApps}>GET APPS</button>
           </div>
           <div className="Panel">
+            <div>{JSON.stringify(apps)}</div>
             <div className="PanelSubheader">
               <h5>Upcoming Classes</h5>
             </div>
