@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { Formik } from "formik";
+import { ButtonCommon } from '../../Button/ButtonCommon';
 import * as yup from "yup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import AzureCloudStorage from "../../AzureCloudStorage/AzureCloudStorageNotes";
+import uploadFileToBlob, { isStorageConfigured } from '../../AzureCloudStorage/azure-storage-blob-notes';
+// import AzureCloudStorage from "../../AzureCloudStorage/AzureCloudStorageNotes";
+
+const storageConfigured = isStorageConfigured();
+
 
 const schema = yup.object().shape({
   topic: yup
@@ -23,15 +28,24 @@ const schema = yup.object().shape({
 });
 
 const initialState = {
-  topic: "",
-  description: "",
-  subtopic: ""
+  topic: ""
 };
 
 export const Uploadnotes = () => {
   const [topicValidate, settopicValidate] = useState<boolean>(false);
-  const [descriptionValidate, setdescriptionValidate] = useState(false);
-  const [subtopicValidate, setsubtopicValidate] = useState(false);
+  // const [descriptionValidate, setdescriptionValidate] = useState(false);
+  // const [subtopicValidate, setsubtopicValidate] = useState(false);
+
+  // all blobs in container
+  const [blobList, setBlobList] = useState<string[]>([]);
+
+  // current file to upload into container
+  const [fileSelected, setFileSelected] = useState(null);
+
+  // UI/form management
+  const [uploading, setUploading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
+  const [inputKey, setInputKey] = useState(Math.random().toString(36));
 
   const changetopicValidate = (status: boolean): boolean => {
     if (status) {
@@ -43,7 +57,33 @@ export const Uploadnotes = () => {
     }
   };
 
-  return (
+  const onFileChange = (event: any) => {
+    // capture file into state
+    setFileSelected(event.target.files[0]);
+  };
+
+  const onFileUpload = async () => {
+    // prepare UI
+    setUploaded(false);
+    setUploading(true);
+
+    // *** UPLOAD TO AZURE STORAGE ***
+    const blobsInContainer: string[] = await uploadFileToBlob(fileSelected);
+    // await uploadFileToBlob(fileSelected);
+
+    // prepare UI for results
+    setBlobList(blobsInContainer);
+
+    // reset state/form
+    setFileSelected(null);
+    setUploading(false);
+    setUploaded(true);
+    setInputKey(Math.random().toString(36));
+
+    // return blobsInContainer[0];
+  };
+
+  const DisplayForm = () => (
     <div className="StudentProfile">
       <Container>
         <div className="PanelHeader">
@@ -79,36 +119,18 @@ export const Uploadnotes = () => {
                         </Form.Group>
                       </Row>
 
-                      {/*subtopic*/}
                       <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationFirstName">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Sub Topic</Form.Label>
-                          </Col>
-
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Sub Topic of the lesson"
-                              name="subtopic"
-                              value={values.subtopic}
-                              onChange={handleChange}
-                              isInvalid={!!errors.subtopic ? changetopicValidate(false) : changetopicValidate(true)}
-                              isValid={touched.subtopic}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.subtopic}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
-
-                      {/* <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Upload File</Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="file" placeholder="Notes" name="upload" accept="application/pdf" />
+                            <Form.Control
+                              type="file"
+                              placeholder="Notes"
+                              name="upload"
+                              accept="application/pdf"
+                              onChange={onFileChange} />
                           </Col>
                         </Form.Group>
                       </Row>
@@ -120,46 +142,29 @@ export const Uploadnotes = () => {
                           </Col>
                           <Col xl={8} style={{ margin: '0 108px' }}>
                             <div className="Buttonforsubmit">
-                              <ButtonCommon name={'Submit'} />
+                              <ButtonCommon name={'Submit'} onClick={onFileUpload} />
                             </div>
                           </Col>
                         </Form.Group>
-                      </Row> */}
-                      <AzureCloudStorage />
+                      </Row>
+                      {/* <AzureCloudStorage /> */}
                     </Form>
                   </Row>
                 )}
               </Formik>
             </div>
           </Col>
-
-          {/*<div className="ProfileButton">*/}
-          {/*  <Button name="Save Changes"/>*/}
-          {/*</div>*/}
         </div>
-        {/* <Form>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Topic</Form.Label>
-            <Form.Control type="text" placeholder="Topic" />
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Description</Form.Label>
-            <Form.Control type="text" placeholder="Description" />
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Deadline</Form.Label>
-            <Form.Control type="date" placeholder="Deadline" />
-          </Form.Group> */}
-        {/* <Form.Group controlId="form.Name">
-            <Form.Label className="form-label" for="customFile">
-              Notes File
-            </Form.Label>
-            <Form.Control type="file" className="form-control" id="customFile" />
-          </Form.Group> */}
-        {/* <UploadButton /> */}
-        {/* <AzureCloudStorage />
-        </Form> */}
       </Container>
+    </div>
+  );
+
+  return (
+    <div>
+      {!storageConfigured && <div>Storage is not configured.</div>}
+      {storageConfigured && !uploading && DisplayForm()}
+      {storageConfigured && uploading && <div>Uploading</div>}
+      {storageConfigured && uploaded && <div>Successfully uploaded. Go back to page</div>}
     </div>
   );
 };
