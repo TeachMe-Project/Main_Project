@@ -1,17 +1,14 @@
-import * as React from 'react';
-import { Container, Row } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BsFillGridFill, BsFillBookFill, BsWalletFill, BsFillChatLeftDotsFill, BsBuilding } from 'react-icons/bs';
-import { GiTeacher } from 'react-icons/gi';
-import { IoMdCog } from 'react-icons/io';
-import { MdContactSupport } from 'react-icons/md';
-import '../../Assets/Styles/main.scss';
-import { Link } from 'react-router-dom';
-import '../Pages/Student/MainPanel';
-import { AiOutlineLogout } from 'react-icons/ai';
-import { Button } from '../Button/Button';
-import { FaBook } from 'react-icons/fa';
-import { useAuth0 } from '@auth0/auth0-react';
+import * as React from "react";
+import { Container, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BsBuilding, BsFillBookFill, BsFillGridFill } from "react-icons/bs";
+import { MdContactSupport } from "react-icons/md";
+import "../../Assets/Styles/main.scss";
+import { Link } from "react-router-dom";
+import "../Pages/Student/MainPanel";
+import { AiOutlineLogout } from "react-icons/ai";
+import { Button } from "../Button/Button";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const LeftSidebarTeacher = () => {
   const { logout } = useAuth0();

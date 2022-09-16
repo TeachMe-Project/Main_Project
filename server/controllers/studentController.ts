@@ -25,6 +25,7 @@ export const getStudentByID = async (req: Request, res: Response) => {
             },
             include: {
                 user: true,
+                parent:true,
             }
         })
         res.status(200).send(data)

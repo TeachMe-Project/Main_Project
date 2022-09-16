@@ -1,8 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { Row, Col, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { Button } from '../../Button/Button';
+import { Col, Container, Row } from "react-bootstrap";
 
 export const CreateCourse = () => {
   return (
@@ -14,7 +12,7 @@ export const CreateCourse = () => {
         <div className="PanelContainer">
           <Row>
             <div className="CourseImg">
-              <img src={require('../../../Assets/Images/testimg2.jpeg')} />
+              <img src={require("../../../Assets/Images/testimg2.jpeg")} />
             </div>
           </Row>
           <div className="CourseDetailsContainer">

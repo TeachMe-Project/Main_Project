@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Container, Col, Row, Button } from 'react-bootstrap';
+import * as React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 
 type Details = {
   label?: string;

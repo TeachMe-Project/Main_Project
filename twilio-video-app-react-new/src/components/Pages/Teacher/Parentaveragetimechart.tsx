@@ -1,12 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { Pie } from 'react-chartjs-2';
-import '../../../Assets/Styles/main.scss';
+import { Bar } from "react-chartjs-2";
+import "../../../Assets/Styles/main.scss";
 // @ts-ignore
-import { faker } from '@faker-js/faker';
+import { faker } from "@faker-js/faker";
 
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -14,38 +13,38 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top' as const,
+      position: "top" as const
     },
     title: {
       display: true,
-      text: 'Monthly Student Average Attendance time for Course',
-    },
+      text: "Monthly Student Average Attendance time for Course"
+    }
   },
   scales: {
     x: {
       grid: {
-        display: false,
-      },
+        display: false
+      }
     },
     y: {
       grid: {
-        display: false,
-      },
-    },
-  },
+        display: false
+      }
+    }
+  }
 };
 
-const labels = ['1st Week', '2nd Week', '3rd Week', '4th Week '];
+const labels = ["1st Week", "2nd Week", "3rd Week", "4th Week "];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: 'Mathematics',
+      label: "Mathematics",
       data: labels.map(() => faker.datatype.number({ min: 0, max: 3 })),
-      backgroundColor: '#f39c12',
-    },
-  ],
+      backgroundColor: "#f39c12"
+    }
+  ]
 };
 
 export function Parentsaveragetimechart() {
@@ -54,10 +53,10 @@ export function Parentsaveragetimechart() {
       options={options}
       data={data}
       style={{
-        height: '350px',
-        width: '565px',
-        position: 'relative',
-        bottom: '-30px',
+        height: "350px",
+        width: "565px",
+        position: "relative",
+        bottom: "-30px"
       }}
     />
   );

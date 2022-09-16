@@ -1,6 +1,5 @@
-import * as React from 'react';
-import { BiSearch } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import { BiSearch } from "react-icons/bi";
 
 const SearchbarTest = () => {
   return (

@@ -9,9 +9,9 @@ type InstituteCard = {
   instituteid?: string;
   institutename?: string;
   image?: JSX.Element;
-  btn1?: string;
-  btn2?: string;
-  btn3?: string;
+  // btn1?: string;
+  // btn2?: string;
+  // btn3?: string;
 };
 
 export const InstituteCard: React.FC<InstituteCard> = props => {
@@ -26,7 +26,7 @@ export const InstituteCard: React.FC<InstituteCard> = props => {
         <CardDetails details={props.institutename} />
       </Col>
 
-      <Col xl={6}>
+      {/* <Col xl={6}>
         <div className="ViewMore">
           <Link to="" className="link ViewMoreBtn">
             <CardButton btnname={props.btn1} />
@@ -44,7 +44,7 @@ export const InstituteCard: React.FC<InstituteCard> = props => {
         <Link to="" className=" link SubscribeBtn">
           <ButtonCommon name={props.btn3} />
         </Link>
-      </Col>
+      </Col> */}
     </div>
   );
 };

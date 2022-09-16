@@ -4,7 +4,7 @@ import Images from '../Assets/Images/Images';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Banner: React.FC = () => {
-  const { loginWithRedirect, logout, isAuthenticated, getAccessTokenSilently, user } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
 
   return (
     <Container fluid={true} className="banner mb-lg-5" id="Home">
