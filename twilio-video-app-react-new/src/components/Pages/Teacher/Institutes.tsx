@@ -72,55 +72,50 @@ export const Institutes = () => {
       });
   }, []);
 
-  const acceptInstitute = (id: any) => (
-    <Col xl={1}>
-      {/* <Link to="" className=" link SubscribeBtn"> */}
-      {/* <CardButton btnname="Accept" /> */}
-      <button
-        className="CardButton"
-        onClick={() => {
-          swal({
-            title: "Request Acception",
-            text: `Do you really want to accept this institute?`,
-            icon: "error",
-            buttons: {
-              cancel: true,
-              confirm: true
-            }
-            // dangerMode: true,
-          })
-            .then((willDelete: any) => {
-              const apiData = JSON.stringify({
-                "institute_id": `${id}`,
-                "request_time": new Date()
-              });
-              axios({
-                method: "POST",
-                url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                data: apiData
-              }).then((apiRes) => {
-                console.log(apiRes.status);
-                if (apiRes.status === 200) {
-                  swal(`Poof! You have successfully removed`, {
-                    icon: "success"
-                  });
-                }
-                console.log(`Successfully removed ${id}`);
-              }).catch((error) => {
-                console.log(error.message);
-              }).catch((error) => {
-                console.log(error.message);
-              });
+  const acceptInstitute = (item: any) => (
+    <button
+      className="CardButton"
+      onClick={() => {
+        swal({
+          title: "Request Acception",
+          text: `Do you really want to accept this institute?`,
+          icon: "error",
+          buttons: {
+            cancel: true,
+            confirm: true
+          }
+          // dangerMode: true,
+        })
+          .then((willDelete: any) => {
+            const apiData = JSON.stringify({
+              "institute_id": item.id,
+              "request_time": new Date(),
             });
-        }}
-      >
-        Accept
-      </button>
-      {/* </Link> */}
-    </Col>
+            axios({
+              method: "POST",
+              url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
+              headers: {
+                "Content-Type": "application/json",
+              },
+              data: apiData,
+            }).then((apiRes) => {
+              console.log(apiRes.status);
+              if (apiRes.status === 200) {
+                swal(`Poof! You have successfully removed ${item.name}`, {
+                  icon: "success",
+                });
+              }
+              console.log(`Successfully removed ${item.name}`);
+            }).catch((error) => {
+              console.log(error.message);
+            }).catch((error) => {
+              console.log(error.message);
+            });
+          });
+      }}
+    >
+      Accept
+    </button>
   );
 
   return (
@@ -139,34 +134,34 @@ export const Institutes = () => {
                 <Link to="/editdetails" className="link"></Link>
                 <table className="booking-table" id="view-booking">
                   <thead>
-                  <tr className="booking-thead-second-tr" style={{ textAlign: "left" }}>
-                    {/*amc: Institute Manage Courses*/}
-                    <th className="imc-first-th">Institute ID</th>
-                    <th className="imc-second-th">Institute Name</th>
-                    <th className="imc-second-th">Contact Number</th>
-                    <th className="imc-last-th"></th>
+                    <tr className="booking-thead-second-tr" style={{ textAlign: "left" }}>
+                      {/*amc: Institute Manage Courses*/}
+                      <th className="imc-first-th">Institute ID</th>
+                      <th className="imc-second-th">Institute Name</th>
+                      <th className="imc-second-th">Contact Number</th>
+                      <th className="imc-last-th"></th>
 
-                    {/* <th className="imc-last-th"></th> */}
-                  </tr>
+                      {/* <th className="imc-last-th"></th> */}
+                    </tr>
                   </thead>
                   <tbody>
-                  {institutes.map((item: any) => {
-                    return (
-                      <tr>
-                        <td data-label="Institute ID :">{item.id}</td>
-                        <td data-label="Institute Name :">{item.name}</td>
-                        <td data-label="Contact Number :">{item.contact}</td>
-                        <td data-label="Contact Number :">
-                          <div className="ViewMore">
-                            <Link to="" className="link ViewMoreBtn">
-                              <CardButton btnname={"View More"} />
-                            </Link>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                  {/* <tr>
+                    {institutes.map((item: any) => {
+                      return (
+                        <tr>
+                          <td data-label="Institute ID :">{item.id}</td>
+                          <td data-label="Institute Name :">{item.name}</td>
+                          <td data-label="Contact Number :">{item.contact}</td>
+                          <td data-label="Contact Number :">
+                            <div className="ViewMore">
+                              <Link to="" className="link ViewMoreBtn">
+                                <CardButton btnname={"View More"} />
+                              </Link>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                    {/* <tr>
                       <td data-label="Institute ID :">10000102345</td>
                       <td data-label="Institute Name :">Sigma Institute</td>
                       <td data-label="Contact Number :">011 2536472</td>
@@ -269,7 +264,7 @@ export const Institutes = () => {
                             {/* <Link to="" className=" link SubscribeBtn">
                               <CardButton btnname="Accept" />
                             </Link> */}
-                            {acceptInstitute(item.id)}
+                            {acceptInstitute(item)}
                           </Col>
 
 

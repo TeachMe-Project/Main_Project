@@ -1,6 +1,6 @@
-import {Request, Response} from "express";
-import {PrismaClient} from '@prisma/client'
-import {courseSchema} from "../models/courseModel";
+import { Request, Response } from "express";
+import { PrismaClient } from '@prisma/client'
+import { courseSchema } from "../models/courseModel";
 
 const prisma = new PrismaClient()
 
@@ -44,9 +44,9 @@ export const getCourseByID = async (req: Request, res: Response) => {
                 student_course: {
                     include: {
                         student: {
-                            include:{
+                            include: {
                                 parent: true,
-                                user:true
+                                user: true
                             }
                         }
                     }
@@ -71,7 +71,7 @@ export const getCourseStudentByID = async (req: Request, res: Response) => {
                 student: {
                     include: {
                         parent: true,
-                        user:true
+                        user: true
                     }
                 }
             }
@@ -116,7 +116,7 @@ export const getCourseByGrade = async (req: Request, res: Response) => {
 
 export const updateCourseDetails = async (req: Request, res: Response) => {
 
-    const {error, value} = courseSchema.validate(req.body);
+    const { error, value } = courseSchema.validate(req.body);
 
     if (!error) {
         try {
@@ -211,15 +211,25 @@ export const getCourseByInstituteName = async (req: Request, res: Response) => {
 
 
 export const createCourse = async (req: Request, res: Response) => {
-    const {error, value} = courseSchema.validate(req.body);
+    const { error, value } = courseSchema.validate(req.body);
 
     if (!error) {
         try {
+            // @ts-ignore
+            const { teacher_id } = await prisma.teacher.findUnique({
+                where: {
+                    user_id: req.body.user_id
+                },
+                select: {
+                    teacher_id: true
+                }
+            })
+
             const data = await prisma.course.create({
-                data:{
+                data: {
                     course_name: req.body.course_name,
                     description: req.body.description,
-                    teacher_id: req.body.teacher_id,
+                    teacher_id: teacher_id,
                     price: req.body.price,
                     day: req.body.day,
                     grade: req.body.grade,
@@ -230,15 +240,15 @@ export const createCourse = async (req: Request, res: Response) => {
                     end_time: req.body.end_time,
                     isActive: true,
                     medium: req.body.medium,
-                    created_date: "-"
+                    created_date: req.body.created_date,
                 }
             })
 
-            if(req.body.institute != "NoInstitute"){
+            if (req.body.institute != "NoInstitute") {
 
             }
             res.status(200).send(data)
-        } catch (error:any) {
+        } catch (error: any) {
             res.status(500).send(error.message);
         }
     } else {
@@ -250,7 +260,7 @@ export const unrollCourseStudents = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const {student_id} = await prisma.student.findFirst({
+        const { student_id } = await prisma.student.findFirst({
             where: {
                 user_id: req.params.id,
             },

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { Button } from "../../Button/Button";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -54,8 +55,10 @@ const initialState = {
 export const StudentProfile = () => {
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURLStudent = `https://learnx.azurewebsites.net/student/${studentAuthId}`;
-  const baseURLParent = `https://learnx.azurewebsites.net/student/${studentAuthId}/parentDetails`;
+  const params = useParams();
+  console.log(params);
+  const baseURLStudent = `https://learnx.azurewebsites.net/student/${params.user_id}`;
+  const baseURLParent = `https://learnx.azurewebsites.net/student/${params.user_id}/parentDetails`;
 
   const [studentProfDetails, setStudentProfDetails] = useState<any[]>([]);
   const [parentProfDetails, setParentProfDetails] = useState<any[]>([]);
@@ -166,8 +169,8 @@ export const StudentProfile = () => {
     <div className="StudentProfile">
       <Container>
         <div className="PanelHeader">
-          <h2>User Profile</h2>
-          {!isEditing && <Button name=" Edit Profile" onClick={() => setISEditing(true)} />}
+          <h2>Student Profile</h2>
+          {/* {!isEditing && <Button name=" Edit Profile" onClick={() => setISEditing(true)} />} */}
         </div>
         <div className="PanelContainer">
           <Col xl={4}>
@@ -193,21 +196,6 @@ export const StudentProfile = () => {
                 );
               })}
             </div>
-            {/* <div className="LeftContainer">
-                  <div className="ProfileImg">
-                    <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
-                    <AzureCloudStorage />
-                  </div>
-                  <div className="ParentContact">
-                    <div className="ContactHeader">Student's Contact Details:</div>
-                    <div className="ParentLabel">Name:</div>
-                    <div className="ParentValue">Pathmani Ranatunga</div>
-                    <div className="ParentLabel">Mobile No:</div>
-                    <div className="ParentValue">0774832976</div>
-                    <div className="ParentLabel">Email:</div>
-                    <div className="ParentValue">pathmaniranatunga@gmail.com</div>
-                  </div>
-                </div> */}
           </Col>
 
           <Col xl={8}>
@@ -229,13 +217,8 @@ export const StudentProfile = () => {
                               placeholder="Enter the first name here"
                               name="Firstname"
                               value={values.Firstname}
-                              onChange={handleChange}
-                              isInvalid={
-                                !!errors.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)
-                              }
-                              isValid={touched.Firstname}
-                              onBlur={handleBlur}
-                            />
+                              
+                             />
                             <Form.Control.Feedback type="invalid">{errors.Firstname}</Form.Control.Feedback>
                           </Col>
                         </Form.Group>
