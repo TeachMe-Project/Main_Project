@@ -9,6 +9,7 @@ export const teacherSchema = Joi.object({
         last_name: Joi.string().min(1).required(),
         contact_no: Joi.string().min(10).required(),
         description: Joi.string().min(1).required(),
+        qualification: Joi.string().min(1).required(),
         account_name: Joi.string().min(1).required(),
         bank_name: Joi.string().min(1).required(),
         branch_name: Joi.string().min(1).required(),
