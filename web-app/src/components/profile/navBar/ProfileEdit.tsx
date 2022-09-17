@@ -8,6 +8,7 @@ import * as yup from "yup";
 import axios from "axios";
 import {BsPencilSquare} from "react-icons/bs";
 import Images from "../../../assets/images/Images";
+import ImageUpload from "./imageUpload";
 
 const schema = yup.object().shape({
     Firstname: yup.string().required(),
@@ -252,6 +253,8 @@ const ProfileEdit = () => {
                     </Row>
                 </Col>
             </Row>
+            <ImageUpload/>
+
         </Container>
     );
 };
