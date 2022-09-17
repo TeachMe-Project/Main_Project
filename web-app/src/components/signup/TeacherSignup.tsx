@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import Images from "../../assets/images/Images";
 import {Formik} from "formik";
@@ -9,6 +9,11 @@ import SignUpComplete from "./signUpComplete";
 import Footer from "../Home/footer/footer";
 import axios from "axios";
 import NavbarCommon from "../profile/navBar/NavbarCommon";
+import {storage} from "../utils/fireBaseConfig";
+import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
+// @ts-ignore
+import {v4 as uuidv4} from "uuid"
+
 
 const schema = yup.object().shape({
     Title: yup.string().required(),
@@ -24,10 +29,6 @@ const schema = yup.object().shape({
         "Must contain 8 characters including 1 uppercase, 1 lowercase, 1 number & 1 special character"
     ).oneOf([yup.ref('Password'), null], 'Passwords must match'),
     Description: yup.string().required(),
-    // Qualification: yup
-    //     .mixed()
-    //     .required()
-    // ,
     Mobile: yup.string().required().matches(
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\(\d{2,3}\\)[ \\-]*)|(\d{2,4})[ \\-]*)*?\d{3,4}?[ \\-]*\d{3,4}?$/,
         "Mobile number is invalid"),
@@ -201,7 +202,7 @@ const TeacherSignup = () => {
         });
         axios({
             method: "POST",
-            url: "http://localhost:8081/auth/createTeacher",
+            url: "https://learnx.azurewebsites.net/auth/createTeacher",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -211,10 +212,11 @@ const TeacherSignup = () => {
                 console.log(res.data);
 
                 const apiData = JSON.stringify({
-                    "title":`${values.Title}`,
+                    "title": `${values.Title}`,
                     "user_id": `${res.data.user_id}`,
                     "username": `${values.Email}`,
                     "profile_image": `${res.data.picture}`,
+                    "qualification": `${file}`,
                     "first_name": `${values.Firstname}`,
                     "last_name": `${values.Lastname}`,
                     "contact_no": `${values.Mobile}`,
@@ -227,7 +229,7 @@ const TeacherSignup = () => {
 
                 axios({
                     method: "POST",
-                    url: "http://localhost:8081/teacher/createTeacher",
+                    url: "https://learnx.azurewebsites.net/teacher/createTeacher",
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -236,7 +238,7 @@ const TeacherSignup = () => {
                     console.log(apiData)
                     console.log("Api user created")
                     console.log(apiRes.status);
-                    if(apiRes.status=== 200){
+                    if (apiRes.status === 200) {
                         setLoading(false);
                         setPageStage(4)
                     }
@@ -245,13 +247,43 @@ const TeacherSignup = () => {
                 })
 
             }
-        ).catch((error)=> {
+        ).catch((error) => {
             console.log(values);
             console.log("error")
             console.log(error.message)
         })
     }
 
+    const [fileUpload, setFileUpload] = useState<any>(null);
+    const [file, setFile] = useState<any>(null);
+    const [progress, setProgress] = useState(0);
+
+    const uploadFile = (event:any) => {
+        console.log(event.name)
+        console.log("Commng")
+        const fileRef = ref(storage, `/Qualification/${event.name + uuidv4()}`);
+        const uploadTask = uploadBytesResumable(fileRef, event);
+        uploadTask.on("state_changed", (snapshot) => {
+                const prog = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                setProgress(prog)
+            },
+            (err) => console.log(err),
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    console.log(url);
+                    setFile(url)
+                })
+            }
+        )
+    }
+
+
+
+
+    // @ts-ignore
+    // @ts-ignore
     return (
         <Container fluid={true} className='w-100 p-0 m-0'>
             <NavbarCommon/>
@@ -454,7 +486,8 @@ const TeacherSignup = () => {
                                                 <Row className="mt-lg-0 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
                                                         <Form.Group className="mb-1" controlId="validationMobile">
-                                                            <Form.Label style={{fontWeight: 600}}>Mobile number</Form.Label>
+                                                            <Form.Label style={{fontWeight: 600}}>Mobile
+                                                                number</Form.Label>
                                                             <Form.Control
                                                                 type="text"
                                                                 placeholder="077-1234567"
@@ -502,11 +535,11 @@ const TeacherSignup = () => {
                                                                 type="file"
                                                                 placeholder="Enter your qualifications"
                                                                 name="Qualification"
-                                                                value={values.Qualification}
-                                                                onChange={handleChange}
+                                                                onChange={(event: any) => uploadFile(event.target.files[0])}
                                                                 isInvalid={!!errors.Qualification && touched.Qualification ? changeQualificationValidate(false) : changeQualificationValidate(true)}
                                                                 isValid={touched.Qualification}
                                                                 onBlur={handleBlur}
+                                                                accept=".pdf"
                                                             />
                                                             <Form.Control.Feedback type="invalid">
                                                                 {errors.Qualification}

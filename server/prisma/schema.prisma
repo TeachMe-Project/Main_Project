@@ -190,6 +190,7 @@ model student_class {
   online_status student_class_online_status
   isActive      Boolean
   isStarted     Boolean                     @default(false)
+  usedApps      String?                     @db.VarChar(1600)
   course        course                      @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO CLASS FROM COURSE")
   student       student                     @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO CLASS FROM STUDENT")
 
