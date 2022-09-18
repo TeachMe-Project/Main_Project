@@ -22,9 +22,12 @@ export const getParentByID = async (req: Request, res: Response) => {
 
 
     try {
-        const data = await prisma.parent.findMany({
+        const data = await prisma.user.findUnique({
             where: {
                 user_id: req.params.id
+            },
+            include:{
+                parent: true
             }
         })
         res.status(200).send(data)
@@ -50,6 +53,42 @@ export const getParentByAuthId = async (req: Request, res: Response) => {
         res.status(500).send(error.message);
     }
 }
+
+export const updateParent = async (req: Request, res: Response) => {
+
+    console.log(req.params)
+    try {
+        const user_id = req.body.user_id;
+        // @ts-ignore
+        const {parent_id} = await prisma.parent.findFirst({
+            where: {
+                user_id: user_id,
+            },
+            select: {
+                parent_id: true
+            }
+        });
+
+        const data = await prisma.parent.update({
+            where:{
+                parent_id: parent_id
+            },
+            data:{
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                mobile_no: req.body.mobile_no
+            }
+        })
+
+        // @ts-ignore
+        logger.info(NAME_SPACE, "Parent Updated");
+        res.status(200).send("Parent Updated")
+    } catch (error:any) {
+        logger.error(NAME_SPACE, error.message)
+        res.status(500).send(error.message);
+    }
+}
+
 
 
 

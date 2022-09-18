@@ -4,7 +4,7 @@ import {
     getParents,
     createParent,
     parentDoPayment,
-    getParentByAuthId
+    getParentByAuthId, updateParent
 } from "../controllers/parentController";
 export const parentRouter=express.Router();
 
@@ -24,5 +24,7 @@ parentRouter.route("/doPayment")
 
 parentRouter.route("/createParent")
     .post(createParent);
+parentRouter.route("/updateParent")
+    .post(updateParent);
 
 parentRouter.route("/parentIdByAuth").post(getParentByAuthId);
