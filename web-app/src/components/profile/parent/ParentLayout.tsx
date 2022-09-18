@@ -3,6 +3,7 @@ import ProfileNavBar from "../navBar/profileNavBar";
 import {Col, Container, Row} from "react-bootstrap";
 import ParentSidebar from "./ParentSidebar";
 import {useMediaQuery} from "react-responsive";
+import {useAuth0} from "@auth0/auth0-react";
 
 type ParentLayoutProps = {
     children: React.ReactNode
@@ -13,7 +14,8 @@ const ParentLayout: React.FC<ParentLayoutProps> = (props: ParentLayoutProps) => 
     const {children} = props;
     const [toggled, setToggled] = useState(false);
     const isMobile = useMediaQuery({maxWidth: 768});
-
+    const {user} = useAuth0();
+    console.log(user?.sub)
     const handleToggleSidebar = () => {
         if (!toggled) {
             setToggled(true);
@@ -21,6 +23,8 @@ const ParentLayout: React.FC<ParentLayoutProps> = (props: ParentLayoutProps) => 
         }
         setToggled(false);
     };
+
+
 
     return (
         <Container fluid={true} className="profile-actions m-0 px-0 py-0">
