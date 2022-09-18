@@ -98,3 +98,22 @@ export const removeUser = async (req: Request, res: Response) => {
     }
 }
 
+export const changeUserImage = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.user.update({
+            where: {
+                user_id: req.body.user_id
+            },
+            data: {
+                profile_image: req.body.image_url
+            }
+        })
+        logger.info(NAME_SPACE, "Image Change");
+        res.status(200).send("Image Changed");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error);
+    }
+}
+
