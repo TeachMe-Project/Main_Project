@@ -1,99 +1,203 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import CourseCard from '../../Card/CourseCard';
-import CardHeader from '../../Card/CardHeader';
-import CardDetails from '../../Card/CardDetails';
-import { Row, Col, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {Container, Row} from 'react-bootstrap';
 import PanelContainer from '../../Layout/PanelContainer';
-import { Button } from '../../Button/Button';
+import axios, {AxiosResponse} from 'axios';
+import {useAuth0} from '@auth0/auth0-react';
 
 export const MyCourses = () => {
-  return (
-    <div className="MyCourses">
-      <Container>
-        <Row>
-          <PanelContainer />
-          <div className="PanelHeader">
-            <h2>My Courses</h2>
-          </div>
+    const {user} = useAuth0();
+    const studentAuthId = user?.sub;
+    const baseURL = `https://learnx.azurewebsites.net/student/tutors/${studentAuthId}`;
+    const [courses, setCourses] = useState<any[]>([]);
 
-          <div className="Panel">
-            <div className="PanelBody">
-              <CourseCard
-                header="Mathematics"
-                description="This course includes content of grade 8 mathematics
-                of local syllabus in English medium. It contains algebraic concepts and skills needed to
-                graph and solve linear equations..."
-                time="04:00pm - 06:00pm"
-                date="Sunday"
-                image={<img src={'/Images/subjects/maths.png'} />}
-                teacher="Mr. Lasitha Nuwan"
-                amount="LKR 2,500"
-                btn1="View more"
-                btn2="Unenroll"
-              />
+    // const convertTime = (x: Date) => {
+    //   const time = x.toLocaleTimeString('it-IT');
+    //   const hour = time.split(':')[0];
+    //   const intHour = parseInt(hour);
+    //   const minute = time.split(':')[1];
+    //   const ampm = intHour >= 12 ? 'PM' : 'AM';
+    //   const newHour = intHour % 12;
+    //   return newHour + ':' + minute + ' ' + ampm;
+    // };
 
-              <CourseCard
-                header="Science"
-                description="This course includes content of grade 8 science
-                of local syllabus in English medium.It contains the basics of life, genetics, microbiology,
-                plant science, animal science..."
-                time="04:00pm - 06:00pm"
-                date="Monday"
-                image={<img src={'/Images/subjects/science.png'} />}
-                teacher="Ms. Imalka Sandamali"
-                amount="LKR 2,500"
-                btn1="View more"
-                btn2="Unenroll"
-              />
+    useEffect(() => {
+        axios
+            .get(baseURL)
+            .then((res: AxiosResponse) => {
+                res.data.map((item: any) => {
+                    if (item.course.day === 'MON') {
+                        setCourses(prevState => [
+                            ...prevState,
+                            {
+                                subject: item.course.subject,
+                                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+                                day: 'Monday',
+                                desc: item.course.description,
+                                time: item.course.start_time + ' - ' + item.course.end_time,
+                                price: item.course.price,
+                            },
+                        ]);
+                    } else if (item.course.day === 'TUE') {
+                        setCourses(prevState => [
+                            ...prevState,
+                            {
+                                subject: item.course.subject,
+                                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+                                day: 'Tuesday',
+                                desc: item.course.description,
+                                time: item.course.start_time + ' - ' + item.course.end_time,
+                                price: item.course.price,
+                            },
+                        ]);
+                    } else if (item.course.day === 'WED') {
+                        setCourses(prevState => [
+                            ...prevState,
+                            {
+                                subject: item.course.subject,
+                                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+                                day: 'Wednesday',
+                                desc: item.course.description,
+                                time: item.course.start_time + ' - ' + item.course.end_time,
+                                price: item.course.price,
+                            },
+                        ]);
+                    } else if (item.course.day === 'THU') {
+                        setCourses(prevState => [
+                            ...prevState,
+                            {
+                                subject: item.course.subject,
+                                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+                                day: 'Thursday',
+                                desc: item.course.description,
+                                time: item.course.start_time + ' - ' + item.course.end_time,
+                                price: item.course.price,
+                            },
+                        ]);
+                    } else if (item.course.day === 'FRI') {
+                        setCourses(prevState => [
+                            ...prevState,
+                            {
+                                subject: item.course.subject,
+                                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+                                day: 'Friday',
+                                desc: item.course.description,
+                                time: item.course.start_time + ' - ' + item.course.end_time,
+                                price: item.course.price,
+                            },
+                        ]);
+                    } else if (item.course.day === 'SAT') {
+                        setCourses(prevState => [
+                            ...prevState,
+                            {
+                                subject: item.course.subject,
+                                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+                                day: 'Saturday',
+                                desc: item.course.description,
+                                time: item.course.start_time + ' - ' + item.course.end_time,
+                                price: item.course.price,
+                            },
+                        ]);
+                    } else if (item.course.day === 'SUN') {
+                        setCourses(prevState => [
+                            ...prevState,
+                            {
+                                subject: item.course.subject,
+                                teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+                                day: 'Sunday',
+                                desc: item.course.description,
+                                time: item.course.start_time + ' - ' + item.course.end_time,
+                                price: "LKR " + item.course.price,
+                            },
+                        ]);
+                    }
+                });
+                console.log(courses);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
 
-              <CourseCard
-                header="History"
-                description="This course includes content of grade 8 history
-                of local syllabus in English medium. It contains about the pre-historic era,
-                Anuradhapura and Polonnaruwa kingdoms..."
-                time="04:00pm - 06:00pm"
-                date="Saturday"
-                image={<img src={'/Images/subjects/history.png'} />}
-                teacher="Mr. Kamal Maggona"
-                amount="LKR 2,500"
-                btn1="View more"
-                btn2="Unenroll"
-              />
+    return (
+        <div className="MyCourses">
+            <Container>
+                <Row>
+                    <PanelContainer/>
+                    <div className="PanelHeader">
+                        <h2>My Courses</h2>
+                    </div>
 
-              <CourseCard
-                header="Western Music"
-                description="This course includes content of grade 8 western music
-                of local syllabus in English medium. It contains about the history of western music,
-                western songs, relationship with plays..."
-                time="05:00pm - 07:00pm"
-                date="Tuesday"
-                image={<img src={'/Images/subjects/music.png'} />}
-                teacher="Mr. Anura Kahatagoda"
-                amount="LKR 2,500"
-                btn1="View more"
-                btn2="Unenroll"
-              />
-
-              {/*<CourseCard*/}
-              {/*  header="Art"*/}
-              {/*  description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-              {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-              {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-              {/*  time="04:00pm - 06:00pm"*/}
-              {/*  date="Sunday"*/}
-              {/*  image={<img src={'/Images/subjects/art.png'} />}*/}
-              {/*  teacher="Mrs. Shiromi Chandraguptha"*/}
-              {/*  amount="LKR 2,500"*/}
-              {/*  btn1="View more"*/}
-              {/*  btn2="Unsubscribe"*/}
-              {/*/>*/}
-            </div>
-          </div>
-        </Row>
-      </Container>
-    </div>
-  );
+                    <div className="Panel">
+                        <div className="PanelBody">
+                            {/* {courses.map((item: any) => {
+                return (
+                  <CourseCard
+                    header={item.subject}
+                    description={item.desc}
+                    time={item.time}
+                    date={item.day}
+                    image={<img src={'/Images/subjects/Mathematics.png'} />}
+                    teacher={item.teacher}
+                    amount={item.price}
+                    btn1="View more"
+                    btn2="Unenroll"
+                  />
+                );
+              })} */}
+                            {courses.map((item: any) => {
+                                return ( <CourseCard
+                                    header={item.subject}
+                                    description={item.description}
+                                    time={item.time}
+                                    date={item.day}
+                                    image={<img src={`/Images/subjects/${item.subject}.png`}/>}
+                                    teacher={item.teacher}
+                                    amount= {item.price}
+                                    btn1="View more"
+                                    btn2="Unenroll"
+                                />)
+                            })}
+                            {/*<CourseCard*/}
+                            {/*  header="Science"*/}
+                            {/*  description="This course includes content of grade 8 science of local syllabus in English medium. It contains the basics of life, genetics, microbiology, plant science, animal science..."*/}
+                            {/*  time="04:00pm - 06:00pm"*/}
+                            {/*  date="Sunday"*/}
+                            {/*  image={<img src={'/Images/subjects/Science.png'} />}*/}
+                            {/*  teacher="Ms. Imalka Sandamali"*/}
+                            {/*  amount="LKR 2500"*/}
+                            {/*  btn1="View more"*/}
+                            {/*  btn2="Unenroll"*/}
+                            {/*/>*/}
+                            {/*<CourseCard*/}
+                            {/*  header="History"*/}
+                            {/*  description="This course includes content of grade 8 history of local syllabus in English medium. It contains about the pre-historic era, Anuradhapura and Polannaruwa kingdoms..."*/}
+                            {/*  time="04:00pm - 06:00pm"*/}
+                            {/*  date="Saturday"*/}
+                            {/*  image={<img src={'/Images/subjects/History.png'} />}*/}
+                            {/*  teacher="Mr. Kamal Maggona"*/}
+                            {/*  amount="LKR 2500"*/}
+                            {/*  btn1="View more"*/}
+                            {/*  btn2="Unenroll"*/}
+                            {/*/>*/}
+                            {/*<CourseCard*/}
+                            {/*  header="Western Music"*/}
+                            {/*  description="This course includes content of grade 8 western music of local syllabus in English medium. It contains about the the history of western music, western songs, relationship with plays..."*/}
+                            {/*  time="05:00pm - 07:00pm"*/}
+                            {/*  date="Monday"*/}
+                            {/*  image={<img src={'/Images/subjects/music.png'} />}*/}
+                            {/*  teacher="Mr. Anura Kahatagoda"*/}
+                            {/*  amount="LKR 2500"*/}
+                            {/*  btn1="View more"*/}
+                            {/*  btn2="Unenroll"*/}
+                            {/*/>*/}
+                        </div>
+                    </div>
+                </Row>
+            </Container>
+        </div>
+    );
 };
 
 export default MyCourses;

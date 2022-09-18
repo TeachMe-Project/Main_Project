@@ -2,12 +2,16 @@ import express from "express";
 import {
     getStudentByID,
     getStudentCourses,
-    getStudentHomeworks,
+    // getStudentHomeworks,
+    // getStudentNotes,
+    // getStudentParentDetails,
     getStudents,
-    getStudentUpcomingClasses,
-    createStudent, getStudentUpcomingPayments
+    // getStudentUpcomingClasses,
+    createStudent,
+    getStudentUpcomingClasses, getStudentTutors, getStudentUpcomingPayments,
+    // getStudentNotes
 } from "../controllers/studentController";
-export const studentRouter=express.Router();
+export const studentRouter = express.Router();
 
 
 
@@ -20,14 +24,21 @@ studentRouter.route("/:id")
 studentRouter.route("/:id/courses")
     .get(getStudentCourses);
 
-studentRouter.route("/:id/upcomingClasses")
+studentRouter.route("/upcomingClasses/:id")
     .get(getStudentUpcomingClasses);
 
-studentRouter.route("/:id/homeWorks")
-    .get(getStudentHomeworks);
+studentRouter.route("/tutors/:id")
+    .get(getStudentTutors);
 
-studentRouter.route("/:id/upcomingPayments")
-    .get(getStudentUpcomingPayments);
+// studentRouter.route("/:id/homeWorks")
+//     .get(getStudentHomeworks);
+
+//
+// studentRouter.route("/:id/notes")
+//     .get(getStudentNotes);
+
+// studentRouter.route("/:id/upcomingPayments")
+//     .get(getStudentUpcomingPayments);
 
 studentRouter.route("/createStudent")
     .post(createStudent);

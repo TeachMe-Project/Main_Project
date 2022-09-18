@@ -4,7 +4,7 @@ import express, { RequestHandler } from 'express';
 import path from 'path';
 import { ServerlessFunction } from './types';
 import cors from "cors";
-
+import {classSchedule, payment_schedule} from "./utils/scheduler";
 // importing requires routings
 import {studentRouter} from "./route/studentRoutes";
 import {paymentGatewayRouter} from "./route/paymentGatewayRoutes";
@@ -46,8 +46,9 @@ app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 app.use(cors());
-
-
+setInterval(classSchedule, 432000000);
+setInterval(payment_schedule, 432000000);
+// classSchedule();
 //development endpoints by developers
 app.use('/admin',adminRouter)
 app.use('/class',classRouter)

@@ -40,6 +40,12 @@ export const getUsersByID=async (req:Request,res:Response)=>{
         const data =await prisma.user.findMany({
             where:{
                 user_id: req.params.id
+            },
+            include: {
+                teacher:true,
+                parent:true,
+                institute:true,
+                student: true
             }
         })
         res.status(200).send(data)
@@ -59,12 +65,14 @@ export const  createUser=async (req:Request,res:Response)=>{
                 data:<any> {
                     username: req.body.username,
                     type: req.body.type,
-                    profile_image: req.body.profile_image
+                    profile_image: req.body.profile_image,
+                    isActive: true,
+                    user_id: req.body.user_id
                 }
             })
             res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
+        } catch (error: any) {
+            res.status(500).send(error.message);
         }
     } else {
         res.status(500).send(error.details[0].message);
@@ -84,6 +92,25 @@ export const removeUser = async (req: Request, res: Response) => {
         })
         logger.info(NAME_SPACE, "Remove User Successfully");
         res.status(200).send("Remove User Successfully");
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error);
+    }
+}
+
+export const changeUserImage = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.user.update({
+            where: {
+                user_id: req.body.user_id
+            },
+            data: {
+                profile_image: req.body.image_url
+            }
+        })
+        logger.info(NAME_SPACE, "Image Change");
+        res.status(200).send("Image Changed");
     } catch (error: any) {
         logger.error(NAME_SPACE, error.message);
         res.status(500).send(error);

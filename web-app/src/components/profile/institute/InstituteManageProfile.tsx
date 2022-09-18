@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Alert, Button, Col, Form, Row, Tab, Tabs} from "react-bootstrap";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
@@ -8,8 +8,12 @@ import {Formik} from "formik";
 import * as yup from "yup";
 import {BsPencilSquare} from "react-icons/bs";
 import axios, {AxiosResponse} from "axios";
-import Images from "../../../assets/images/Images";
 import Loader from "../../utils/Loader";
+import {storage} from "../../utils/fireBaseConfig";
+import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
+// @ts-ignore
+import {v4 as uuidv4} from "uuid"
+import {AiOutlinePlusCircle} from "react-icons/ai";
 
 const schema = yup.object().shape({
     InstituteName: yup.string().required().label('Institute Name'),
@@ -162,7 +166,7 @@ const InstituteManageProfile = () => {
         }
         axios({
             method: "GET",
-            url: `http://localhost:8081/institute/${user?.sub}`,
+            url: `https://learnx.azurewebsites.net/institute/${user?.sub}`,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -181,6 +185,8 @@ const InstituteManageProfile = () => {
                 Mobile_Number: res.data[0].contact_no,
                 OwnerName: res.data[0].owner_name
             })
+            setProfileImage(res.data[0].user.profile_image)
+            console.log(profileImage)
             if (res.status === 200) {
                 console.log(initialState)
                 setIsDataLoading(true);
@@ -230,7 +236,7 @@ const InstituteManageProfile = () => {
 
         axios({
             method: "POST",
-            url: "http://localhost:8081/institute/updateInstituteDetails",
+            url: "https://learnx.azurewebsites.net/institute/updateInstituteDetails",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -249,6 +255,52 @@ const InstituteManageProfile = () => {
 
     }
 
+    const [file, setFile] = useState<any>(null);
+    const [progress, setProgress] = useState(0);
+    const [profileImage, setProfileImage] = useState("");
+    const hiddenFileInput = useRef(null);
+
+    const uploadFile = (event: any) => {
+        setProfileImage(URL.createObjectURL(event));
+        console.log(event.name)
+        console.log("Commng")
+        const fileRef = ref(storage, `/Qualification/${event.name + uuidv4()}`);
+        const uploadTask = uploadBytesResumable(fileRef, event);
+        uploadTask.on("state_changed", (snapshot) => {
+                const prog = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                setProgress(prog)
+            },
+            (err) => console.log(err),
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+
+                    const user_id = user?.sub;
+
+                    const data = JSON.stringify({
+                        "user_id": `${user_id}`,
+                        "image_url": `${url}`
+                    })
+
+                    axios({
+                        method: "POST",
+                        url: "https://learnx.azurewebsites.net/user/changeImage",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data: data
+                    }).then((apiRes) => {
+                        console.log(apiRes)
+                    }).catch((error) => {
+                        console.log(error.message)
+                    })
+
+                })
+            }
+        )
+    }
+
 
     return (
         <InstituteLayout>
@@ -262,8 +314,20 @@ const InstituteManageProfile = () => {
                 </Row>
                 <Row>
                     <Col lg={3} className='d-flex flex-column justify-content-center align-items-center'>
-                        <img src={Images.instpro} className='w-100' style={{borderRadius: "50%"}}/>
-
+                        {isDataLoading &&
+                        <img src={profileImage} style={{borderRadius: "50%", width: "300px", height: "300px"}}/>}
+                        {
+                            !enableEditProfile && (
+                                <>
+                                    <input type="file" accept=".png, .jpg" style={{display: "none"}}
+                                           ref={hiddenFileInput}
+                                           onChange={(event: any) => uploadFile(event.target.files[0])}/>
+                                    <Button variant='outline-secondary' onClick={(event) => { // @ts-ignore
+                                        hiddenFileInput.current.click()
+                                    }}><AiOutlinePlusCircle/></Button>
+                                </>
+                            )
+                        }
                         {passwordMail === "success" &&
                         <Alert variant="success" className="p-1 mt-2"> Check email and reset the password</Alert>
                         }

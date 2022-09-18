@@ -1,102 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import AdminLayout from "./AdminLayout";
 import {Accordion, Col, Row} from "react-bootstrap";
-import {useMediaQuery} from "react-responsive";
 import axios, {AxiosResponse} from "axios";
-
-// const columns = [
-//     {
-//         dataField: "user_id",
-//         text: "User ID",
-//         sort: true,
-//         hidden: true
-//     },
-//     {
-//         dataField: "username",
-//         text: "User Name",
-//         sort: true,
-//     },
-//     {
-//         dataField: "first_name",
-//         text: "First Name",
-//     },
-//     {
-//         dataField: "last_name",
-//         text: "Last Name"
-//     },
-//     {
-//         dataField: "type",
-//         text: "User Type"
-//     },
-//     {
-//         dataField: "",
-//         text: "",
-//         formatter: removeItem,
-//         headerAttrs: {width: 100},
-//         attrs: {width: 100, class: "EditRow"}
-//     },
-// ];
+import Loader from "../../utils/Loader";
+import {useAuth0} from "@auth0/auth0-react";
 
 
 const AdminNotification = () => {
 
-    // const baseURL = "http://localhost:8081/user/allUsers";
-    // const [users, setUsers] = useState<any[]>([]);
 
-    // useEffect(() => {
-    //     axios.get(baseURL).then((res: AxiosResponse) => {
-    //         res.data.map((item: any) => {
-    //             if (item.type === 'teacher') {
-    //
-    //                 setUsers(prevState => [...prevState, {
-    //                     user_id: item.user_id,
-    //                     username: item.username,
-    //                     type: "Teacher",
-    //                     first_name: item.teacher.first_name,
-    //                     last_name: item.teacher.last_name
-    //                 }])
-    //             } else if (item.type === 'student') {
-    //                 setUsers(prevState => [...prevState, {
-    //                     user_id: item.user_id,
-    //                     username: item.username,
-    //                     type: "Student",
-    //                     first_name: item.student[0].first_name,
-    //                     last_name: item.student[0].last_name
-    //                 }])
-    //             } else if (item.type === 'institute') {
-    //                 console.log(item)
-    //                 setUsers(prevState => [...prevState, {
-    //                     user_id: item.user_id,
-    //                     username: item.username,
-    //                     type: "Institute",
-    //                     first_name: item.institute[0].institute_name,
-    //                     last_name: '-'
-    //                 }])
-    //             } else if (item.type === 'parent') {
-    //                 console.log(item.parent[0])
-    //                 setUsers(prevState => [...prevState, {
-    //                     user_id: item.user_id,
-    //                     username: item.username,
-    //                     type: "Parent",
-    //                     first_name: item.parent[0].first_name,
-    //                     last_name: item.parent[0].last_name
-    //                 }])
-    //             }
-    //         })
-    //         console.log(users)
-    //     })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         })
-    // }, []);
+    const [notification, setNotification] = useState<any[]>([]);
+    const {user} = useAuth0();
+    const user_id = user?.sub;
+    const [isDataLoading, setIsDataLoading] = useState(false);
 
-    const isPc = useMediaQuery({minWidth: 991});
+    useEffect(() => {
+        axios.get(`https://learnx.azurewebsites.net/notification/user/${user_id}`).then((res: AxiosResponse) => {
+            // setIsDataLoading(true);
+            console.log(user_id)
+            res.data.map((item: any) => {
+                setNotification(prevState => [...prevState, {
+                    notification_id: item.notification_id,
+                    subject: item.subject,
+                    description: item.description,
+                }])
 
+                setIsDataLoading(true);
+            })
+        })
+            .catch((error: any) => {
+                console.log(error.message);
+            })
+    }, []);
 
-    // if (users === null) {
-    //     return
-    //
-    // }
 
     return (
 
@@ -110,46 +46,23 @@ const AdminNotification = () => {
                     </Col>
                 </Row>
                 <Row className="Notifications">
-                   <Col lg={12} className="PanelBody">
-                       <Accordion defaultActiveKey="0">
-                           <Accordion.Item eventKey="0" className="mb-2">
-                               <Accordion.Header>Your payment for Course Science by D.H.Silva is successful !"</Accordion.Header>
-                               <Accordion.Body>
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                   eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                   minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                   aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                   culpa qui officia deserunt mollit anim id est laborum.
-                               </Accordion.Body>
-                           </Accordion.Item>
-                       <Accordion.Item eventKey="2" className="mb-2">
-                               <Accordion.Header>Your payment for Course "Mathematics by D.H.Silva is successful !"</Accordion.Header>
-                               <Accordion.Body>
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                   eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                   minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                   aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                   culpa qui officia deserunt mollit anim id est laborum.
-                               </Accordion.Body>
-                           </Accordion.Item>
-                       <Accordion.Item eventKey="3" className="mb-2">
-                               <Accordion.Header>Your payment for Course "History by D.H.Silva is successful !"</Accordion.Header>
-                               <Accordion.Body>
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                   eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                   minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                   aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                   culpa qui officia deserunt mollit anim id est laborum.
-                               </Accordion.Body>
-                           </Accordion.Item>
-                       </Accordion>
-                   </Col>
+                    {!isDataLoading && <Loader/>}
+                    {isDataLoading &&
+                    <Col lg={12} className="PanelBody">
+                        <Accordion defaultActiveKey="0">
+                            {notification.map((item) => {
+                                return (
+                                    <Accordion.Item eventKey={item.notification_id} className="mb-2">
+                                        <Accordion.Header>{item.subject}
+                                            !"</Accordion.Header>
+                                        <Accordion.Body>
+                                            {item.description}
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                )
+                            })}
+                        </Accordion>
+                    </Col>}
                 </Row>
             </Col>
         </AdminLayout>

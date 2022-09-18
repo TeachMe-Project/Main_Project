@@ -1,38 +1,36 @@
-import React, { useState } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { Button } from '../../Button/Button';
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import React, { useState } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import { Formik } from "formik";
+import { ButtonCommon } from '../../Button/ButtonCommon';
+import * as yup from "yup";
 
 // @ts-ignore
-import LazyLoad from 'react-lazyload';
-import SubmitButton from '../../Button/SubmitButton';
-import { ButtonCommon } from '../../Button/ButtonCommon';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
-import UploadButton from '../../Button/UploadButton';
-import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageHomework';
+import LazyLoad from "react-lazyload";
+import "bootstrap/dist/css/bootstrap.min.css";
+import uploadFileToBlob, { isStorageConfigured } from '../../AzureCloudStorage/azure-storage-blob-homework';
+// import AzureCloudStorage from "../../AzureCloudStorage/AzureCloudStorageHomework";
+
+const storageConfigured = isStorageConfigured();
+
 
 const schema = yup.object().shape({
   topic: yup
     .string()
     .required()
-    .label('Topic')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Topic must contain only letters'),
+    .label("Topic")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, "Topic must contain only letters"),
   description: yup
     .string()
     .required()
-    .label('Description'),
+    .label("Description"),
   deadline: yup
     .string()
     .required()
-    .label('Deadline'),
+    .label("Deadline")
 });
 
 const initialState = {
-  topic: '',
-  description: '',
-  deadline: '',
+  topic: ""
 };
 
 export const Uploadhomework = () => {
@@ -40,8 +38,19 @@ export const Uploadhomework = () => {
 
   const [pageStage, setPageStage] = useState(2);
   const [topicValidate, settopicValidate] = useState<boolean>(false);
-  const [descriptionValidate, setdescriptionValidate] = useState(false);
-  const [deadlineValidate, setdeadlineValidate] = useState(false);
+  // const [descriptionValidate, setdescriptionValidate] = useState(false);
+  // const [deadlineValidate, setdeadlineValidate] = useState(false);
+
+  // all blobs in container
+  const [blobList, setBlobList] = useState<string[]>([]);
+
+  // current file to upload into container
+  const [fileSelected, setFileSelected] = useState(null);
+
+  // UI/form management
+  const [uploading, setUploading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
+  const [inputKey, setInputKey] = useState(Math.random().toString(36));
 
   const changetopicValidate = (status: boolean): boolean => {
     if (status) {
@@ -52,26 +61,32 @@ export const Uploadhomework = () => {
       return true;
     }
   };
-  const changedescriptionValidate = (status: boolean): boolean => {
-    if (status) {
-      setdescriptionValidate(true);
-      return false;
-    } else {
-      setdescriptionValidate(false);
-      return true;
-    }
-  };
-  const changedeadlineValidate = (status: boolean): boolean => {
-    if (status) {
-      setdeadlineValidate(true);
-      return false;
-    } else {
-      setdeadlineValidate(false);
-      return true;
-    }
+
+  const onFileChange = (event: any) => {
+    // capture file into state
+    setFileSelected(event.target.files[0]);
   };
 
-  return (
+  const onFileUpload = async () => {
+    // prepare UI
+    setUploaded(false);
+    setUploading(true);
+
+    // *** UPLOAD TO AZURE STORAGE ***
+    const blobsInContainer: string[] = await uploadFileToBlob(fileSelected);
+    // await uploadFileToBlob(fileSelected);
+
+    // prepare UI for results
+    setBlobList(blobsInContainer);
+
+    // reset state/form
+    setFileSelected(null);
+    setUploading(false);
+    setUploaded(true);
+    setInputKey(Math.random().toString(36));
+  };
+
+  const DisplayForm = () => (
     <div className="StudentProfile">
       <Container>
         <div className="PanelHeader">
@@ -108,7 +123,7 @@ export const Uploadhomework = () => {
                       </Row>
 
                       {/*Deadline*/}
-                      <Row>
+                      {/* <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Upload Date</Form.Label>
@@ -117,15 +132,20 @@ export const Uploadhomework = () => {
                             <Form.Control type="date" placeholder="Upload Date" name="deadline" />
                           </Col>
                         </Form.Group>
-                      </Row>
+                      </Row> */}
 
-                      {/* <Row>
+                      <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Upload File</Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="file" placeholder="Notes" name="fileupload" accept="application/pdf" />
+                            <Form.Control 
+                              type="file" 
+                              placeholder="Notes" 
+                              name="fileupload" 
+                              accept="application/pdf"
+                              onChange={onFileChange} />
                           </Col>
                         </Form.Group>
                       </Row>
@@ -137,46 +157,29 @@ export const Uploadhomework = () => {
                           </Col>
                           <Col xl={8} style={{ margin: '0 108px' }}>
                             <div className="Buttonforsubmit">
-                              <ButtonCommon name={'Submit'} />
+                              <ButtonCommon name={'Submit'} onClick={onFileUpload} />
                             </div>
                           </Col>
                         </Form.Group>
-                      </Row> */}
-                      <AzureCloudStorage />
+                      </Row>
+                      {/* <AzureCloudStorage /> */}
                     </Form>
                   </Row>
                 )}
               </Formik>
             </div>
           </Col>
-
-          {/*<div className="ProfileButton">*/}
-          {/*  <Button name="Save Changes"/>*/}
-          {/*</div>*/}
         </div>
-        {/* <Form>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Topic</Form.Label>
-            <Form.Control type="text" placeholder="Topic" />
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Description</Form.Label>
-            <Form.Control type="text" placeholder="Description" />
-          </Form.Group>
-          <Form.Group controlId="form.Name">
-            <Form.Label>Deadline</Form.Label>
-            <Form.Control type="date" placeholder="Deadline" />
-          </Form.Group> */}
-        {/* <Form.Group controlId="form.Name">
-            <Form.Label className="form-label" for="customFile">
-              Homework File
-            </Form.Label>
-            <Form.Control type="file" className="form-control" id="customFile" />
-          </Form.Group> */}
-        {/* <UploadButton /> */}
-        {/* <AzureCloudStorage />
-        </Form> */}
       </Container>
+    </div>
+  );
+
+  return (
+    <div>
+      {!storageConfigured && <div>Storage is not configured.</div>}
+      {storageConfigured && !uploading && DisplayForm()}
+      {storageConfigured && uploading && <div>Uploading</div>}
+      {storageConfigured && uploaded && <div>Successfully uploaded. Go back to page</div>}
     </div>
   );
 };

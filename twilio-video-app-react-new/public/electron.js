@@ -1,7 +1,10 @@
+
+
 const path = require('path');
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
+const psList =require('ps-list');
 
 function createWindow() {
   // Create the browser window.
@@ -9,9 +12,13 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
+      contextIsolation:true,
+      enableRemoteModule:true,
 
     },
+
   });
 
   // and load the index.html of the app.
@@ -22,10 +29,23 @@ function createWindow() {
       : `file://${path.join(__dirname, '../build/index.html')}`
   );
   // Open the DevTools.
-  if (isDev) {
-    win.webContents.openDevTools({ mode: 'detach' });
-  }
+  // if (isDev) {
+  //   win.webContents.openDevTools({ mode: 'detach' });
+  // }
 }
+
+ipcMain.on('ipc-example', async (event, arg) => {
+  const msgTemplate = (pingPong) => `IPC test: ${pingPong}`;
+  console.log(msgTemplate(arg));
+  // console.log(psList());
+  const test = psList().then((r) => {
+    const j = new Set(r.map((i) => i.name));
+    event.reply('ipc-example', j);
+  });
+
+  console.log(test);
+
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

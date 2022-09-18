@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 
 import Card from '../../Card/Card';
 import { Row, Col, Container } from 'react-bootstrap';
@@ -6,8 +7,39 @@ import { Row, Col, Container } from 'react-bootstrap';
 import PanelContainer from '../../Layout/PanelContainer';
 import { Link } from 'react-router-dom';
 import TeacherCard from '../../Card/TeacherCard';
+import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const MyTeachers = () => {
+  const { user } = useAuth0();
+  const studentAuthId = user?.sub;
+  const baseURL = `https://learnx.azurewebsites.net/student/tutors/${studentAuthId}`;
+  const [teachers, setTeachers] = useState<any[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((res: AxiosResponse) => {
+          console.log(res.data)
+        res.data.map((item: any) => {
+          setTeachers(prevState => [
+            ...prevState,
+            {
+              grade: item.course.grade,
+              subject: item.course.subject,
+              teacher: 'Mr. ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+              contact: item.course.teacher.contact_no,
+              desc: item.course.teacher.description,
+            },
+          ]);
+        });
+        // console.log(teachers);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div className="MyTeachers">
       <Container>
@@ -19,19 +51,23 @@ export const MyTeachers = () => {
           <div className="Panel">
             <div className="PanelBody">
               <div className="small-scrollbar">
-                <Link to="/course" className="link">
-                  <TeacherCard
-                    grade="Grade 8"
-                    subject="Mathematics"
-                    image={<img src={'/Images/Teachers/mr1.jpg'} />}
-                    teacher="Mr. Lasitha Nuwan"
-                    contact="0771212121"
-                    description="I'm having 9 years of experience in teaching at a renowned
+                {teachers.map((item: any) => {
+                  return (
+                    <Link to="/course" className="link">
+                      <TeacherCard
+                        grade={item.grade}
+                        subject={item.subject}
+                        image={<img src={'/Images/Teachers/mr1.jpg'} />}
+                        teacher={item.teacher}
+                        contact="0771212121"
+                        description="I'm having 9 years of experience in teaching at a renowned
                     government school as a mathematics teacher. I have produced great results
                    ..."
-                  />
-                </Link>
-                <Link to="/course" className="link">
+                      />
+                    </Link>
+                  );
+                })}
+                {/* <Link to="/course" className="link">
                   <TeacherCard
                     grade="Grade 8"
                     subject="Science"
@@ -66,64 +102,7 @@ export const MyTeachers = () => {
                     government school as a western music teacher. I have produced...
                    ..."
                   />
-                </Link>
-
-                {/*<Link to="/course" className="link">*/}
-                {/*  <CourseCard*/}
-                {/*    header="Science"*/}
-                {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-                {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-                {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-                {/*    time="04:00pm - 06:00pm"*/}
-                {/*    date="Monday"*/}
-                {/*    image={<img src={'/Images/subjects/science.png'} />}*/}
-                {/*    teacher="Ms. Nayana Sandamali"*/}
-                {/*    amount="LKR 2,500"*/}
-                {/*    btn="Unsubscribe"*/}
-                {/*  />*/}
-                {/*</Link>*/}
-                {/*<Link to="/course" className="link">*/}
-                {/*  <CourseCard*/}
-                {/*    header="History"*/}
-                {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-                {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-                {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-                {/*    time="04:00pm - 06:00pm"*/}
-                {/*    date="Saturday"*/}
-                {/*    image={<img src={'/Images/subjects/history.png'} />}*/}
-                {/*    teacher="Mr. Kamal Maggona"*/}
-                {/*    amount="LKR 2,500"*/}
-                {/*    btn="Unsubscribe"*/}
-                {/*  />*/}
-                {/*</Link>*/}
-                {/*<Link to="/course" className="link">*/}
-                {/*  <CourseCard*/}
-                {/*    header="Music"*/}
-                {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-                {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-                {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-                {/*    time="05:00pm - 07:00pm"*/}
-                {/*    date="Tuesday"*/}
-                {/*    image={<img src={'/Images/subjects/music.png'} />}*/}
-                {/*    teacher="Mr. Anura Kahatagoda"*/}
-                {/*    amount="LKR 2,500"*/}
-                {/*    btn="Unsubscribe"*/}
-                {/*  />*/}
-                {/*</Link>*/}
-                {/*<Link to="/course" className="link">*/}
-                {/*  <CourseCard*/}
-                {/*    header="Art"*/}
-                {/*    description="Lorem ipsum dolor sit amet, consectetur adipiscing*/}
-                {/*    elit, sed do eiusmod tempor incididunt ut labore et dolore*/}
-                {/*    magna aliqua. Ut enim ad djndkjend edjnedjned..."*/}
-                {/*    time="04:00pm - 06:00pm"*/}
-                {/*    date="Sunday"*/}
-                {/*    image={<img src={'/Images/subjects/art.png'} />}*/}
-                {/*    teacher="Mrs. Shiromi Chandraguptha"*/}
-                {/*    amount="LKR 2,500"*/}
-                {/*    btn="Unsubscribe"*/}
-                {/*  />*/}
-                {/*</Link>*/}
+                </Link> */}
               </div>
             </div>
           </div>

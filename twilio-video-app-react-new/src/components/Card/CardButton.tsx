@@ -1,14 +1,18 @@
-import * as React from "react";
+import * as React from 'react';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 type CardButton = {
   btnname?: string;
-}
+};
 
-export const CardButton :React.FC<CardButton>= (props) => {
+export const CardButton: React.FC<CardButton> = props => {
+  const navigate = useNavigate();
+
   return (
-    <div className='CardButton'>
-         {props.btnname}
-    </div>
-  )
-}
+    <button className="CardButton" onClick={() => navigate('./twilio')}>
+      {props.btnname}
+    </button>
+  );
+};
 export default CardButton;

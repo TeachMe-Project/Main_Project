@@ -21,7 +21,7 @@ export const getNotificationByID=async (req:Request,res:Response)=>{
     try {
         const data =await prisma.notification.findMany({
             where:{
-                notification_id:Number(req.params.id)
+                user_id:req.params.id
             }
         })
         res.status(200).send(data)
@@ -53,6 +53,25 @@ export const  createNotification=async (req:Request,res:Response)=>{
     }
     else {
         res.status(500).send(error.details[0].message);
+    }
+}
+
+export const getNotificationByUserId = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.notification.findMany({
+            where: {
+                user_id: req.params.id,
+            },
+            orderBy:[
+                {
+                    notification_id: 'desc'
+                }
+            ]
+        })
+        res.status(200).send(data)
+    } catch (error: any) {
+        res.status(500).send(error.message);
     }
 }
 

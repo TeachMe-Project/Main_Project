@@ -9,6 +9,7 @@ import AdminLayout from "./AdminLayout";
 import {AiOutlineCloseCircle} from "react-icons/ai";
 import {useNavigate, useParams} from "react-router-dom";
 import Images from "../../../assets/images/Images";
+import Loader from "../../utils/Loader";
 
 
 type initialStateType = {
@@ -54,7 +55,7 @@ const ViewInstituteProfile = () => {
     useEffect(() => {
         axios({
             method: "GET",
-            url: `http://localhost:8081/institute/${params.institute_id}`,
+            url: `https://learnx.azurewebsites.net/institute/${params.institute_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -104,6 +105,7 @@ const ViewInstituteProfile = () => {
 
                     </Col>
                     <Col className='px-lg-5'>
+                        {!isDataLoading && <Loader/>}
                         {isDataLoading &&
                         <Formik
                             onSubmit={console.log}

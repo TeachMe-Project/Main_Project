@@ -1,7 +1,7 @@
-import * as React from 'react';
-import PanelContainer from '../../Layout/PanelContainer';
-import { Row, Col, Container } from 'react-bootstrap';
-import ContactUs from '../Student/contactUs';
+import * as React from "react";
+import PanelContainer from "../../Layout/PanelContainer";
+import { Container, Row } from "react-bootstrap";
+import ContactUs from "../Student/contactUs";
 
 export const HelpAndSupport = () => {
   return (
