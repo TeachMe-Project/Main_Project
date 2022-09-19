@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
-import { PrismaClient } from '@prisma/client'
-import { studentSchema } from "../models/studentModel";
+import {Request, Response} from "express";
+import {PrismaClient} from '@prisma/client'
+import {studentSchema} from "../models/studentModel";
 import logger from "../utils/logger";
+import userSchema from "../models/userModel";
 
 const prisma = new PrismaClient()
 const NAME_SPACE = "Student"
@@ -29,7 +30,7 @@ export const getStudentByID = async (req: Request, res: Response) => {
             },
             include: {
                 user: true,
-                parent:true,
+                parent: true,
             }
         })
         res.status(200).send(data)
@@ -108,12 +109,12 @@ export const getStudentTutors = async (req: Request, res: Response) => {
                 isActive: true,
                 status: "accepted"
             },
-            include:{
+            include: {
                 course: {
                     include: {
-                        teacher:{
-                            include:{
-                                user:true
+                        teacher: {
+                            include: {
+                                user: true
                             }
                         }
                     }
@@ -160,7 +161,7 @@ export const getStudentUpcomingPayments = async (req: Request, res: Response) =>
     try {
         const data = await prisma.student_payment.findMany(
             {
-                where: { student_id: Number(req.params.id), payment_status: "unpaid" },
+                where: {student_id: Number(req.params.id), payment_status: "unpaid"},
 
 
             }
@@ -171,7 +172,7 @@ export const getStudentUpcomingPayments = async (req: Request, res: Response) =>
     }
 }
 export const createStudent = async (req: Request, res: Response) => {
-    const { error, value } = studentSchema.validate(req.body);
+    const {error, value} = studentSchema.validate(req.body);
     const parent_id = Number(req.body.parent_id);
 
     if (!error) {
@@ -187,7 +188,7 @@ export const createStudent = async (req: Request, res: Response) => {
                         create: {
                             first_name: req.body.first_name,
                             last_name: req.body.last_name,
-                            school:  'ss',
+                            school: 'ss',
                             grade: req.body.grade,
                             parent_id: parent_id,
                             isActive: true,
@@ -197,12 +198,81 @@ export const createStudent = async (req: Request, res: Response) => {
             })
             logger.info(NAME_SPACE, "Your Profile Successfully Created");
             res.status(200).send("Your Profile Successfully Created");
-        } catch (error: any) {
+        } catch (error) {
             logger.error(NAME_SPACE, error.message);
             res.status(500).send(error.message);
         }
     } else {
         logger.error(NAME_SPACE, error.message)
         res.status(500).send(error.details[0].message);
+    }
+}
+
+
+export const insertUsedApps = async (req: Request, res: Response) => {
+    try {
+        const data = await prisma.student_class.updateMany(
+            {
+                where: {
+                    student_id: Number(req.params.id)
+                },
+                data: {
+                    usedApps:req.body.apps
+                }
+            }
+        )
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
+export const getUsedApps = async (req: Request, res: Response) => {
+
+    let compApps={facebook:0,whatsapp:0}
+    let appKeys = Object.keys(compApps);
+    console.log(appKeys)
+    let appValues= Object.values(compApps);
+    let appStudents={"facebook":[],"whatsapp":[]}
+
+
+    try {
+        const data = await prisma.student_class.findMany({
+
+            where: {class_id: Number(req.body.class_id),
+                course_id:Number(req.body.course_id)},
+
+            select:{
+                class_id:true,
+                course_id:true,
+                usedApps:true,
+                student:true
+            },
+
+        })
+
+        for(let j = 0; j < appKeys.length; j++ ){
+
+            for(let i = 0; i < data.length; i++){
+                // @ts-ignore
+                const Apps = data[i].usedApps.split(",");
+                console.log(Apps)
+
+
+                for (let k = 0; k < Apps.length; j++ ){
+                    if(Apps[k]==appKeys[j]){
+                        // @ts-ignore
+                        compApps["facebook"] +=1;
+                        // @ts-ignore
+                        appStudents[key].push(student.student.first_name)
+                    }
+                }
+            }
+
+        }
+
+        res.status(200).send({compApps,appStudents})
+    } catch (error) {
+        res.status(500).send(error.message);
     }
 }

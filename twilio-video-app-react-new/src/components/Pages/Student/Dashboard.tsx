@@ -27,35 +27,56 @@ export const Dashboard = () => {
   const studentAuthId = user?.sub;
   console.log({ studentAuthId });
   const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
-  // const baseURL = `http://localhost:8081/student/${studentAuthId}/upcomingClasses`;
 
   const [apps,setApps] = useState<any>([]);
 
-  const updateApps = (()=>{
-    // calling IPC exposed from preload script
+  // const updateApps = (()=>{
+  //
+  //   // calling IPC exposed from preload script
+  //       const x = new Promise((resolve, reject) => {
+  //
+  //     // @ts-ignore
+  //     window.electron.ipcRenderer.on('ipc-example', (arg) => {
+  //       // eslint-disable-next-line no-console
+  //       resolve(arg);
+  //
+  //     });
+  //     // @ts-ignore
+  //     window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
+  //   })
+  //   x.then((r:any)=>{
+  //     setApps(Array.from(r));
+  //     console.log(r);
+  //   })
+  //
+  //   axios.post('http://localhost:8081/student/1/insertUsedApps', {
+  //     // apps:"dfd,erere"
+  //   apps:apps.toString()
+  //   })
+  //
+  // })
 
-    const x = new Promise((resolve, reject) => {
-      // @ts-ignore
-      window.electron.ipcRenderer.on('ipc-example', (arg) => {
-        // eslint-disable-next-line no-console
-        resolve(arg);
-
-      });
-      // @ts-ignore
-      window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
-    })
-    x.then((r:any)=>{
-      setApps(Array.from(r));
-      console.log(r);
-    })
-
-  })
 
 
 
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {
+
+    // @ts-ignore
+    window.electron.ipcRenderer.on('ipc-example', (arg) => {
+      // eslint-disable-next-line no-console
+      axios.post('http://localhost:8081/student/1/insertUsedApps', {
+
+        apps:Array.from(arg).toString()
+      })
+
+    });
+    // @ts-ignore
+    window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
+
+
+
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {
@@ -77,6 +98,8 @@ export const Dashboard = () => {
       });
   }, []);
 
+
+
   return (
     <div className="Dashboard">
       <Container>
@@ -84,10 +107,10 @@ export const Dashboard = () => {
           <PanelContainer />
           <div className="PanelHeader">
             <h2>Dashboard</h2>
-            <button onClick={updateApps}>GET APPS</button>
+            {/*<button onClick={updateApps}>GET APPS</button>*/}
           </div>
           <div className="Panel">
-            <div>{JSON.stringify(apps)}</div>
+            {/*<div>{JSON.stringify(apps)}</div>*/}
             <div className="PanelSubheader">
               <h5>Upcoming Classes</h5>
             </div>

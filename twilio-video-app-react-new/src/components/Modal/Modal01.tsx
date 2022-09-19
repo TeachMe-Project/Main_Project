@@ -55,11 +55,37 @@ function Modal01() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
+    const [showapp, setappShow] = useState(false);
+
+    const handleappClose = () => setappShow(false);
+    const handleappShow = () => setappShow(true);
+
     return (
         <>
             <Button variant="light" onClick={handleShow}>
                 <SearchIcon />Monitor
             </Button>
+
+
+            <Modal  size={"sm"}   show={showapp} onHide={handleappClose}  >
+                <Modal.Header closeButton>
+
+                    <Modal.Title > Students</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <tr>prasad lakshan</tr>
+                    <tr>maneth wijethunga</tr>
+                    <tr>jonathon dass</tr>
+                    <tr>bhashitha ranasinghe</tr>
+                    <tr>avishka hettiarachchi</tr>
+
+                </Modal.Body>
+
+            </Modal>
+
+
+
 
 
 
@@ -77,7 +103,11 @@ function Modal01() {
                             <td data-label="Contact Number :">
                                 <div className="ViewMore">
                                     <Link to="" className="link ViewMoreBtn">
-                                        <CardButton btnname={'View More'} />
+
+
+                                        <Button variant="light"  onClick={handleappShow}>
+                                            <CardButton btnname={'View More(5)'} />
+                                        </Button>
                                     </Link>
                                 </div>
                             </td>
