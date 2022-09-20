@@ -51,7 +51,7 @@ const uploadFileToBlob = async (file: File | null): Promise<string[]> => {
 
   // get BlobService = notice `?` is pulled out of sasToken - if created in Azure portal
   const blobService = new BlobServiceClient(
-    `https://learninggp2.blob.core.windows.net/?sv=2021-06-08&ss=b&srt=sco&sp=rwdlactfx&se=2022-09-06T22:30:39Z&st=2022-08-06T14:30:39Z&spr=https&sig=YKmcbFXrp0pyESl77cFBKB0L2jQzvg44tQSKtYedjjY%3D`
+    `https://learninggp2.blob.core.windows.net/?sv=2021-06-08&ss=b&srt=sco&sp=rwdlactfx&se=2022-11-14T18:36:51Z&st=2022-09-14T10:36:51Z&spr=https&sig=%2FESG77qy3mDdgyXUgHst5wkn8OjxIWAyA5L3nJU7PtA%3D`
   );
 
   // get Container - full public read access
