@@ -35,12 +35,12 @@ students through their account and keep track of student learning activities.
 
 
 ## Technologies Used
-- React JS
-- Node JS
-- Express JS
-- MYSQL
-- Electron JS 
-- Twilio 
+- `React JS`
+- `Node JS`
+- `Express JS`
+- `MYSQL`
+- `Electron JS` 
+- `Twilio` 
 
 
 
