@@ -58,6 +58,40 @@ List the ready features here:
 ![Example screenshot](./img/screenshot.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
+## Prerequisites
+
+### Install Node JS
+Refer to https://nodejs.org/en/ to install nodejs
+
+
+
+```bash
+npm install -g create-react-app
+```
+## Live Application URL
+
+The Application is deployed in https://aditya-sridhar.github.io/simple-reactjs-app
+
+Click on the link to see the application
+
+## Cloning and Running the Application in local
+
+Clone the project into local
+
+Install all the npm packages. Go into the project folder and type the following command to install all npm packages
+
+```bash
+npm install
+```
+
+In order to run the application Type the following command
+
+```bash
+npm start
+```
+
+The Application Runs on **localhost:3000**
+
 
 ## Installation and Setup Instructions
 
@@ -81,10 +115,39 @@ localhost:3000/
 
 
 ## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
 
-`write-your-code-here`
+### Serving the app
+
+```sh
+$ npm start
+```
+
+### Running the tests
+
+```sh
+$ npm test
+```
+
+### Building a distribution version
+
+```sh
+$ npm run build
+```
+
+This task will create a distribution version of the project
+inside your local `dist/` folder
+
+### Serving the distribution version
+
+```sh
+$ npm run serve:dist
+```
+
+This will use `lite-server` for servign your already
+generated distribution version of the project.
+
+*Note* this requires
+[Building a distribution version](#building-a-distribution-version) first.
 
 
 ## Project Status
