@@ -1,7 +1,7 @@
 # LearnX
-> “LearnX” is an online platform which facilitates students to attend online classes,
+> “LearnX” is an online education platform which facilitates students to join online classes,
 tutors to conduct online classes monitoring students’ activities and parents to track
-the active participation of students in the class.
+the active participation of students during the class.
 > Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
@@ -19,43 +19,27 @@ the active participation of students in the class.
 
 
 ## General Information
+LearnX offers two products for its users. 
+ * Desktop Application - For students and tutors
+ * Web Application - For parents and institutes
 
-- It was understood that since virtual learning has become the new norm, from
-preschool to higher education, the majority of the community has become familiar
-with online learning platforms and comfortable in learning through online video
-conferencing tools.However, one major issue that can be seen in the online education domain is that
-students easily get distracted by other applications, social media and websites on
-their devices. This has led to students not reaping the maximum benefit of online
-tutoring sessions. Existing virtual platforms do not offer any solution to track if
-students are actually paying attention to the lessons or if they have got distracted by
-any other applications while listening to the lecture.
+Desktop application allow conducting online classes. Desktop application has the unique feature where while conducting online 
+classes tutors can identify if any student is using any other application other than the LearnX application. 
 
-
-- There are many platforms already in the market which offer online courses and
-platforms which conduct live online classes. Although there are a lot of pros of online
-teaching platforms, there are many drawbacks that have not been addressed to
-improve the quality of online education. One major issue that can be seen is the
-communication gap between the tutors and students. Usually, the student attends
-the online classes but there is no proper feedback loop to evaluate the student
-engagement, existing in most of the online education platforms.
+Web application is for parents and insitutes. Institutes can manage tutors and offer courses through LearnX. Parents can register
+students through their account and keep track of student learning activities.
 
 
-- One of the biggest reasons for us to initiate this project is to uplift the education
-industry of Sri Lanka, which affected massively during the covid-19 and the recent
-difficulties faced in the transportation industry. As responsible undergraduates of
-University of Colombo School of Computing, we thought of initializing such a project
-for the betterment of school children’s education considering our members’ capacity.
 
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
 ## Technologies Used
-- React JS - version 1.0
-- Node JS - version 2.0
-- Express JS - version 2.0
-- MYSQL - version 3.0
-- MYSQL - version 3.0
-- Electron JS - version 1.0
+- React JS
+- Node JS
+- Express JS
+- MYSQL
+- Electron JS 
 - Twilio 
 
 
@@ -63,8 +47,11 @@ for the betterment of school children’s education considering our members’ c
 ## Features
 List the ready features here:
 - Teachers can track if students are using any other application apart from LearnX desktop application
-- Awesome feature 2
-- Awesome feature 3
+- Analytics 
+- Transaction processing 
+- Chat component
+- Online Streaming component
+
 
 
 ## Screenshots
@@ -72,10 +59,25 @@ List the ready features here:
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
-## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
+## Installation and Setup Instructions
 
-Proceed to describe how to install / setup one's local environment / get started with the project.
+Clone down this repository. You will need node and npm installed globally on your machine.
+
+Installation:
+
+npm install
+
+To Run Test Suite:
+
+npm test
+
+To Start Server:
+
+npm start
+
+To Visit App:
+
+localhost:3000/
 
 
 ## Usage
@@ -89,24 +91,40 @@ Provide various use cases and code examples here.
 Project is: _in progress_ 
 
 ## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
+
 
 Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
+- Enhance the number of participants that can attend an online class
+- Track student activity categorized by each application 
 
-To do:
-- Feature to be added 1
-- Feature to be added 2
+## Development
 
+Want to contribute? Great!
+
+To fix a bug or enhance an existing module, follow these steps:
+
+    Fork the repo
+    Create a new branch (git checkout -b improve-feature)
+    Make the appropriate changes in the files
+    Add changes to reflect the changes made
+    Commit your changes (git commit -am 'Improve feature')
+    Push to the branch (git push origin improve-feature)
+    Create a Pull Request
 
 ## Acknowledgements
 
-- Many thanks to Dr.Thilina Halloluwa for guiding us to make this project a reality. 
+- 
 
+## Team
+* Maneth Wijetunga
+* Jonathan Dass
+* Bhashitha 
+* Prasad Lakshan
+* Avishka Hettiarachchi
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+* Maneth Wijetunga - manethwijetunga@yahoo.com
+
 
 
 <!-- Optional -->
