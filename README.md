@@ -178,7 +178,7 @@ To fix a bug or enhance an existing module, follow these steps:
 
 - 
 
-## Team
+## Contributors
 * Maneth Wijetunga
 * Jonathan Dass
 * Bhashitha 
