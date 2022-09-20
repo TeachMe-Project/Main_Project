@@ -29,18 +29,6 @@ classes tutors can identify if any student is using any other application other 
 Web application is for parents and insitutes. Institutes can manage tutors and offer courses through LearnX. Parents can register
 students through their account and keep track of student learning activities.
 
-There are several objectives of developing LearnX platform
-
-* Offer cost-effective and more convenient online education for the student
-community.
-* Enable tutors to keep track of student online activities during live classroom
-sessions.
-* Offer a built-in user-friendly video conferencing platform which is more
-convenient for both students and tutors.
-* Offer parents to have a comprehensive understanding of their children’s online
-education activities.
-* Enable Institutes to recruit tutors to conduct online courses and improve their
-online presence.
 
 
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
@@ -171,6 +159,7 @@ Project is: _in progress_
 Room for improvement:
 - Enhance the number of participants that can attend an online class
 - Track student activity categorized by each application 
+- Developing a mobile application for the proposed system
 
 ## Development
 
@@ -200,7 +189,7 @@ To fix a bug or enhance an existing module, follow these steps:
 ## Contact
 * Maneth Wijetunga - manethwijetunga@yahoo.com
 
-
+## License
 
 <!-- Optional -->
 <!-- ## License -->
