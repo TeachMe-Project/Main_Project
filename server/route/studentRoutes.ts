@@ -8,7 +8,7 @@ import {
     getStudents,
     // getStudentUpcomingClasses,
     createStudent,
-    getStudentUpcomingClasses, getStudentTutors, getStudentUpcomingPayments, insertUsedApps,
+    getStudentUpcomingClasses, getStudentTutors, getStudentUpcomingPayments, insertUsedApps, getUsedApps,
     // getStudentNotes
 } from "../controllers/studentController";
 export const studentRouter = express.Router();
@@ -45,8 +45,8 @@ studentRouter.route("/createStudent")
 
 studentRouter.route("/:id/insertUsedApps")
     .post(insertUsedApps)
-//
-// studentRouter.route("/getUsedApps")
-//     .post(getUsedApps)
+
+studentRouter.route("/getUsedApps")
+    .post(getUsedApps)
 
 

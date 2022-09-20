@@ -229,12 +229,10 @@ export const insertUsedApps = async (req: Request, res: Response) => {
 
 export const getUsedApps = async (req: Request, res: Response) => {
 
-    let compApps={facebook:0,whatsapp:0}
-    let appKeys = Object.keys(compApps);
-    console.log(appKeys)
-    let appValues= Object.values(compApps);
-    let appStudents={"facebook":[],"whatsapp":[]}
-
+    let apps=[
+                    {name:"facebook",students:[""],count:0},
+                    {name:"whatsApp",students:[""],count:0}
+                 ]
 
     try {
         const data = await prisma.student_class.findMany({
@@ -251,27 +249,25 @@ export const getUsedApps = async (req: Request, res: Response) => {
 
         })
 
-        for(let j = 0; j < appKeys.length; j++ ){
 
-            for(let i = 0; i < data.length; i++){
+        for(let appIndex=0 ; appIndex<apps.length ;appIndex++){
+            for(let dataIndex=0;dataIndex<data.length ;dataIndex++){
+
                 // @ts-ignore
-                const Apps = data[i].usedApps.split(",");
-                console.log(Apps)
-
-
-                for (let k = 0; k < Apps.length; j++ ){
-                    if(Apps[k]==appKeys[j]){
-                        // @ts-ignore
-                        compApps["facebook"] +=1;
-                        // @ts-ignore
-                        appStudents[key].push(student.student.first_name)
+                let stdentsApps=data[dataIndex].usedApps.split(",")
+                for(let studentAppsIndex=0;studentAppsIndex<stdentsApps.length;studentAppsIndex++){
+                    if(apps[appIndex].name==stdentsApps[studentAppsIndex]){
+                        apps[appIndex].count+=1
+                        apps[appIndex].students.push(data[dataIndex].student.first_name)
                     }
                 }
+
             }
+
 
         }
 
-        res.status(200).send({compApps,appStudents})
+        res.status(200).send(apps)
     } catch (error) {
         res.status(500).send(error.message);
     }
