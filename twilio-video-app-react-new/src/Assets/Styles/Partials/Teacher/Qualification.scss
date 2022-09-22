@@ -1,0 +1,26 @@
+.Qualification{
+  .Homework{
+    .container {
+      .row {
+        .Card {
+          .CardBody {
+            display: flex;
+
+            justify-content: space-evenly;
+            .CardHeader{
+              padding-top:10px;
+            }
+            .CardButton{
+              border:none;
+              background-color:#fff;
+              font-size:14px;
+            }
+            .CardButton:hover {
+              background-color: #cadffa;
+            }
+            }
+          }
+        }
+      }
+    }
+  }

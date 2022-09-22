@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { BsPencilSquare } from 'react-icons/bs';
 import axios, { AxiosResponse } from 'axios';
 import PanelContainer from "../../Layout/PanelContainer";
-
+import Homework from "../Teacher/Homework";
 const schema = yup.object().shape({
   InstituteName: yup
     .string()
@@ -184,7 +184,7 @@ const TeacherProfile = () => {
   const [passwordMail, setPasswordMail] = useState(null);
   const [isEditProfile, setIsEditProfile] = useState(false);
   useEffect(() => {
-    if (user?.family_name === 'institute') {
+    if (user?.family_name === 'teacher') {
       setIsEditProfile(true);
     }
   }, []);
@@ -379,10 +379,12 @@ const TeacherProfile = () => {
                         </Row>
 
                       </Tab>
-                      <Tab eventKey="qualifications" title="Qualifications">
+                      <Tab eventKey="qualifications" title="Qualifications" className="Qualification">
 
                         <Row className="mt-lg-0 pe-lg-4 mt-md-3">
                           <Col lg={10} md={12} sm={12} xs={12}>
+                            <Homework topic={"Qualification 1"} />
+                            <Homework topic={"Qualification 2"} />
                             {/*<Form.Group className="mb-2" controlId="validationAddress">*/}
                             {/*  <Form.Label style={{ fontWeight: 600 }}>Institute's Address</Form.Label>*/}
                             {/*  <Form.Control*/}
