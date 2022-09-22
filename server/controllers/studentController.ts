@@ -197,7 +197,7 @@ export const createStudent = async (req: Request, res: Response) => {
       });
       logger.info(NAME_SPACE, "Your Profile Successfully Created");
       res.status(200).send("Your Profile Successfully Created");
-    } catch (error) {
+    } catch (error: any) {
       logger.error(NAME_SPACE, error.message);
       res.status(500).send(error.message);
     }
@@ -225,7 +225,7 @@ export const searchCourses = async (req: Request, res: Response) => {
       }
     );
     res.status(200).send(data);
-  } catch (error) {
+  } catch (error:any) {
     res.status(500).send(error.message);
   }
 };
@@ -267,7 +267,7 @@ export const makeCourseRequest = async (req: Request, res: Response) => {
     } else {
       res.status(200).send("Course Already Added");
     }
-  } catch (error) {
+  } catch (error:any) {
     console.log(error)
     res.status(500).send(error.message);
   }
