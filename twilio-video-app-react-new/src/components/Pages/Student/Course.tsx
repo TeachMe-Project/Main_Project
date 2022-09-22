@@ -281,7 +281,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -291,7 +291,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -322,7 +322,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -332,7 +332,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -363,7 +363,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -373,7 +373,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -404,7 +404,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -414,7 +414,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -445,7 +445,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -455,7 +455,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -486,7 +486,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -496,7 +496,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -580,7 +580,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -590,7 +590,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -621,7 +621,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -631,7 +631,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -662,7 +662,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -672,7 +672,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -703,7 +703,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -713,7 +713,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -744,7 +744,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -754,7 +754,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"
@@ -785,7 +785,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
+                      {/* <td data-label="">
                         <a
                           download="note1.pdf"
                           href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
@@ -795,7 +795,7 @@ export const Course = (props: tutorName) => {
                           <BiArchive className="Reacticon" />Archive
                         </a>
 
-                      </td>
+                      </td> */}
                       <td data-label="">
                         <a
                           download="note1.pdf"

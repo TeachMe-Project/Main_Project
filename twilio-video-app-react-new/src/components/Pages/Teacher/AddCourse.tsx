@@ -525,6 +525,20 @@ export const AddCourse = () => {
                         </Form.Group>
                       </Row>
                       <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Upload Image</Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <Form.Control
+                              type="file"
+                              placeholder="Notes"
+                              name="upload"
+                              accept="image/*"/>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+                      <Row>
                         <Form.Group className="ProfileDetailsContainer"
                           controlId="validationschoolName">
                           <Col xl={4}>

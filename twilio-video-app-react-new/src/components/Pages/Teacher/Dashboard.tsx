@@ -92,10 +92,6 @@ export const Dashboard = () => {
         console.log(error);
       });
   }, []);
-  console.log(upcomingClasses);
-  console.log(chart1);
-  console.log(chart2);
-  console.log(totalAmount);
   
   return (
     <div className="DashboardTeacher">
@@ -134,7 +130,7 @@ export const Dashboard = () => {
           <Row>
             <Col xl={6}>
               <div className="chart">
-                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem" }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem", overflow: 'scroll' }}>
                   <div className="card-body">
                     <div className="fundsRow" style={{ display: "Flex", marginBottom: "20px" }}>
                       <Col xl={8}>
@@ -171,7 +167,7 @@ export const Dashboard = () => {
 
             <Col xl={6}>
               <div className="chart">
-                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem" }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem", overflow: 'scroll' }}>
                   <div className="card-body">
                     <h5 className="card-title" style={{ marginBottom: "20px", color: "#1e90ff" }}>
                       Monthly Income
