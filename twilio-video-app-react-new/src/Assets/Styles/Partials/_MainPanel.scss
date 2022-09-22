@@ -52,24 +52,24 @@
         }
       }
       .SearchContainer {
-        display: flex;
+        //display: flex;
         justify-content: right;
         padding-top: 1rem;
         .SearchDescr h2 {
-          padding-top: 3.4rem;
-          padding-left: 1rem;
+          padding-top: 2.4rem;
+          padding-bottom: 1rem;
+          padding-left: 7rem;
+          margin:auto;
           font-weight: 800;
           font-size: 2.4rem;
           color: #012250;
         }
         img {
-          max-width: 60%;
-          align-content: center;
-          position: relative;
+          margin:1rem 14rem;
         }
         .Searchbar {
           position: absolute;
-          top: 77vh;
+          top: 80vh;
           left: 29vw;
         }
       }

@@ -8,6 +8,7 @@ import CreateCourse from "./CreateCourse";
 import Dashboard from "./Dashboard";
 import Editdetails from "./Editdetails";
 import Institutes from "./Institutes";
+import InstituteProfile from "./Instituteprofileview";
 import MyCourses from "./MyCourses";
 import FreeCard from "./FreeCard";
 import Settings from "./Settings";
@@ -96,6 +97,10 @@ const routes = [
   {
     path: "/institutes",
     main: () => <Institutes />
+  },
+  {
+    path: "/instituteView/:instituteId",
+    main: () => <InstituteProfile />
   },
   {
     path: "/freecard",

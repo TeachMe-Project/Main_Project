@@ -134,10 +134,10 @@ export const Dashboard = () => {
             <div className="PanelBody">
               <div className="SearchContainer">
                 <div className="SearchDescr">
-                  <h2> Get the best out of Online Learning</h2>
+                  <h2 className="SearchHeading"> Get the best out of Online Learning</h2>
                 </div>
                 <img src={'/Images/landingpage.png'} />
-                <Searchbar />
+                {/*<Searchbar />*/}
               </div>
             </div>
           </div>
