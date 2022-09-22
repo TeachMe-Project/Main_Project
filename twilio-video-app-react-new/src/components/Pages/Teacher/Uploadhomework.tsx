@@ -99,6 +99,30 @@ export const Uploadhomework = () => {
                 {({ handleSubmit, handleChange, handleBlur, values, touched, errors, validateField }) => (
                   <Row>
                     <Form noValidate onSubmit={handleSubmit}>
+                      {/*topic*/}
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationFirstName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Topic</Form.Label>
+                          </Col>
+
+                          <Col xl={8}>
+                            <Form.Control
+                              type="text"
+                              placeholder="Topic of the lesson"
+                              name="topic"
+                              value={values.topic}
+                              onChange={handleChange}
+                              isInvalid={!!errors.topic ? changetopicValidate(false) : changetopicValidate(true)}
+                              isValid={touched.topic}
+                              onBlur={handleBlur}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.topic}</Form.Control.Feedback>
+                          </Col>
+                        </Form.Group>
+                      </Row>
+
+
 
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
@@ -121,8 +145,8 @@ export const Uploadhomework = () => {
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}></Form.Label>
                           </Col>
-                          <Col xl={8}>
-                            <div className="Buttonforsubmit" style={{ marginTop: '1rem' }}>
+                          <Col xl={8} style={{ margin: '0 108px' }}>
+                            <div className="Buttonforsubmit">
                               <ButtonCommon name={'Submit'} onClick={onFileUpload} />
                             </div>
                           </Col>
