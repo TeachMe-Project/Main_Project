@@ -279,28 +279,6 @@ export const Course = (props: tutorName) => {
                           <FiDownload className="Reacticon" />
                           Download
                         </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
                       </td>
                     </tr>
                     <tr>
@@ -319,28 +297,6 @@ export const Course = (props: tutorName) => {
                           className="Reacticonbtn download">
                           <FiDownload className="Reacticon" />
                           Download
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
                         </a>
                       </td>
                     </tr>
@@ -363,27 +319,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
 
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
-                      </td>
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -401,110 +337,6 @@ export const Course = (props: tutorName) => {
                           className="Reacticonbtn download">
                           <FiDownload className="Reacticon" />
                           Download
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Note for week 6</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">02-06-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Note for week 6</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">09-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
-
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
                         </a>
                       </td>
                     </tr>
@@ -580,27 +412,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
 
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
-                      </td>
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -621,27 +433,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
 
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
-                      </td>
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -662,27 +454,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
 
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
-                      </td>
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -703,27 +475,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
 
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
-                      </td>
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -744,27 +496,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
 
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
-                      </td>
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -785,27 +517,7 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn archive"
-                        >
-                          <BiArchive className="Reacticon" />Archive
-                        </a>
 
-                      </td>
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn remove"
-                        >
-                          <MdDelete className="Reacticon" />Remove
-                        </a>
-                      </td>
                     </tr>
 
                   </tbody>
