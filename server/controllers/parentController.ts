@@ -266,7 +266,7 @@ export const getParentUpComingPayment = async (req: Request, res: Response) => {
                     course: true
                 }
             })
-        console.log(data);
+        // console.log(data);
         // @ts-ignore
         // logger.info(NAME_SPACE, data[0].parent_id);
         res.status(200).send(data);
@@ -276,3 +276,48 @@ export const getParentUpComingPayment = async (req: Request, res: Response) => {
     }
 };
 
+export const getStudentProgress = async (req: Request, res: Response) => {
+
+    try {
+        // @ts-ignore
+        const {parent_id} = await prisma.parent.findFirst({
+            where: {
+                user_id: req.params.id
+            },
+            select: {
+                parent_id: true
+            }
+        });
+        console.log(parent_id)
+        // @ts-ignore
+        const {student_id} = await prisma.student.findFirst({
+            where: {
+                parent_id: parent_id
+            },
+            select: {
+                student_id: true
+            }
+        });
+        console.log(student_id)
+        const data = await prisma.student_class.findMany(
+            {
+                where: {
+                    student_id: student_id,
+                    status: "ended"
+                },
+                orderBy:{
+                  date:'desc'
+                },
+                include:{
+                    course: true
+                }
+            })
+        console.log(data);
+        // @ts-ignore
+        // logger.info(NAME_SPACE, data[0].parent_id);
+        res.status(200).send(data);
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error.message);
+    }
+};
