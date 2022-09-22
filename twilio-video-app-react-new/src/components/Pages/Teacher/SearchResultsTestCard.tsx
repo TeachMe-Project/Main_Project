@@ -1,9 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
 // import CardDetails from '../../Card/'
-import { CardDetails } from '../../Card/CardDetails';
-import { CardButton } from '../../Card/CardButton';
-import { Link } from 'react-router-dom';
-import { Col } from 'react-bootstrap';
+import { CardDetails } from "../../Card/CardDetails";
+import { CardButton } from "../../Card/CardButton";
+import { Link } from "react-router-dom";
+import { Col } from "react-bootstrap";
 
 type SearchResultTestCard = {
   student?: string;

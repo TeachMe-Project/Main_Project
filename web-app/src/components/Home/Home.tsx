@@ -1,7 +1,6 @@
 import React from 'react';
-import NavBar from "../navBar/navBar";
+import NavBar from "./navBar/navBar";
 import AboutUs from "./aboutUs/aboutUs";
-import Pricing from "./pricing/pricing";
 import ContactUs from "./contactUs/contactUs";
 import FooterHome from "./footer/footerHome";
 import Banner from "./banner/Banner";
@@ -24,7 +23,8 @@ const Home = () => {
                 confirm: true
             },
         })
-    };
+    }
+    ;
 
 
     return (
@@ -33,7 +33,7 @@ const Home = () => {
             <Row className='p-0 m-0'>
                 <Banner/>
                 <AboutUs/>
-                <Pricing/>
+                {/*<Pricing/>*/}
                 <DownloadApp/>
                 <ContactUs/>
                 <FooterHome/>

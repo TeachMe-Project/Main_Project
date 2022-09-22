@@ -4,7 +4,14 @@ import {
     getTeachers,
     createTeacher,
     getTeacherUpcomingClasses,
-    getTeacherCourses, getTeacherInstitutes, getTeacherByUsername
+    getTeacherCourses,
+    getTeacherInstitutes,
+    getTeacherByUsername,
+    getTeacherPendingInstitutes,
+    acceptInstituteRequest,
+    rejectInstituteRequest,
+    getStudentCountAnalytics,
+    getAvgAttendanceAnalytics
 } from "../controllers/teacherController";
 export const teacherRouter=express.Router();
 
@@ -25,8 +32,23 @@ teacherRouter.route("/:id/upcomingClasses")
 teacherRouter.route("/:id/courses")
     .get(getTeacherCourses);
 
-teacherRouter.route("/:id/teacherInstitutes")
+teacherRouter.route("/teacherInstitutes/:id")
     .get(getTeacherInstitutes);
+    
+    teacherRouter.route("/teacherPendingInstitutes/:id")
+    .get(getTeacherPendingInstitutes);
+    
+teacherRouter.route("/acceptInstituteRequest/:id")
+.post(acceptInstituteRequest);
+
+teacherRouter.route("/rejectInstituteRequest/:id")
+.post(rejectInstituteRequest);
 
 teacherRouter.route("/createTeacher")
-    .post(createTeacher);
+.post(createTeacher);
+
+teacherRouter.route("/chart1/:id")
+    .get(getStudentCountAnalytics);
+
+    teacherRouter.route("/chart3/:id")
+    .get(getAvgAttendanceAnalytics);

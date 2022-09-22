@@ -1,11 +1,7 @@
-import * as React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { FiDownload } from 'react-icons/fi';
+import * as React from "react";
+import { Button, Container, Row } from "react-bootstrap";
 
-import { RequestCard } from '../../RequestCard/RequestCard';
-import { RequestCardHeader } from '../../RequestCard/RequestCardHeader';
-import { RequestCardDetails } from '../../RequestCard/RequestCardDetails';
-import { AiFillPropertySafety } from 'react-icons/ai';
+import { RequestCard } from "../../RequestCard/RequestCard";
 
 type Instituterequest = {
   name?: string;

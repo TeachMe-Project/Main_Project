@@ -13,10 +13,11 @@ type CourseCardTeacher = {
   header?: string;
   amount?: string;
   image?: JSX.Element;
-  btn1?: string;
+  // btn1?: string;
   grade?: string;
   medium?: string;
 };
+
 
 export const CourseCardTeacher: React.FC<CourseCardTeacher> = props => {
   return (
@@ -41,7 +42,7 @@ export const CourseCardTeacher: React.FC<CourseCardTeacher> = props => {
           </div>
           <div className="ViewMore">
             <Link to="/course" className="link">
-              <CardButton btnname={props.btn1} />
+              <CardButton />
             </Link>
           </div>
         </div>

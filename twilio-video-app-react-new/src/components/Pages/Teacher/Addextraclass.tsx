@@ -1,35 +1,32 @@
-import React, { useState } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { Button } from '../../Button/Button';
-import { Formik } from 'formik';
-import * as yup from 'yup';
+import React, { useState } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import { Formik } from "formik";
+import * as yup from "yup";
 
 // @ts-ignore
-import LazyLoad from 'react-lazyload';
-import SubmitButton from '../../Button/SubmitButton';
-import AddExtraClassButton from '../../Button/AddExtraClassButton';
-import { ButtonCommon } from '../../Button/ButtonCommon';
+import LazyLoad from "react-lazyload";
+import { ButtonCommon } from "../../Button/ButtonCommon";
 
 const schema = yup.object().shape({
   topic: yup
     .string()
     .required()
-    .label('Topic')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Topic must contain only letters'),
+    .label("Topic")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, "Topic must contain only letters"),
   description: yup
     .string()
     .required()
-    .label('Description'),
+    .label("Description"),
   date: yup
     .string()
     .required()
-    .label('Deadline'),
+    .label("Deadline")
 });
 
 const initialState = {
-  topic: '',
-  description: '',
-  date: '',
+  topic: "",
+  description: "",
+  date: ""
 };
 
 export const Addextraclass = () => {
@@ -143,9 +140,9 @@ export const Addextraclass = () => {
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}></Form.Label>
                           </Col>
-                          <Col xl={8} style={{ margin: '0 108px' }}>
+                          <Col xl={8} style={{ margin: "0 108px" }}>
                             <div className="Buttonforsubmit">
-                              <ButtonCommon name={'Add Extra Class'} style={{ width: 'max-content' }} />
+                              <ButtonCommon name={"Add Extra Class"} style={{ width: "max-content" }} />
                             </div>
                           </Col>
                         </Form.Group>

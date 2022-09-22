@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { Container, Row } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BsFillGridFill, BsFillPersonFill, BsFillChatFill, BsFillExclamationCircleFill } from 'react-icons/bs';
-import { FaBook } from 'react-icons/fa';
-import { AiOutlineLogout } from 'react-icons/ai';
+import * as React from "react";
+import { Container, Row } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BsFillExclamationCircleFill, BsFillGridFill, BsFillPersonFill } from "react-icons/bs";
+import { FaBook } from "react-icons/fa";
+import { AiOutlineLogout } from "react-icons/ai";
 
-import '../../Assets/Styles/main.scss';
-import { Link } from 'react-router-dom';
-import '../Pages/Student/MainPanel';
-import Button from '../Button/Button';
-import { useAuth0 } from '@auth0/auth0-react';
+import "../../Assets/Styles/main.scss";
+import { Link } from "react-router-dom";
+import "../Pages/Student/MainPanel";
+import Button from "../Button/Button";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const LeftSidebar = () => {
   const { logout } = useAuth0();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Col, Container, Nav, Navbar, Row} from "react-bootstrap";
 import Images from "../../../assets/images/Images";
 import {useAuth0} from "@auth0/auth0-react";
@@ -8,6 +8,7 @@ import {FiMenu} from 'react-icons/fi';
 import {useMediaQuery} from "react-responsive";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
+import axios, {AxiosResponse} from "axios";
 
 
 type ProfileNavBarProps = {
@@ -21,7 +22,8 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
     const navigate = useNavigate();
     const {isMobile, handleToggleSidebar} = props;
     const isPc = useMediaQuery({minWidth: 991});
-
+    const [userDetails, setUserDetails] = useState<any>({});
+    const user_id = user?.sub;
     const userLogOut = () => {
         swal({
             title: "Log out",
@@ -38,6 +40,23 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                 }
             })
     };
+
+    useEffect(() => {
+        axios.get(`https://learnx.azurewebsites.net/parent/${user_id}`).then((res: AxiosResponse) => {
+            // setIsDataLoading(true);
+            console.log(res)
+           setUserDetails({
+               first_name: res.data.parent[0].first_name,
+               last_name: res.data.parent[0].last_name,
+               profile: res.data.profile_image
+           })
+        })
+            .catch((error: any) => {
+                console.log(error.message);
+            })
+    }, []);
+
+
 
     return (
         <Navbar collapseOnSelect expand="lg" variant="light" className="profile-navbar"
@@ -62,7 +81,7 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                         <Row className='d-flex flex-row-reverse align-items-center'>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" className='p-0 border-none m-0'
                                            style={{width: "fit-content", borderRadius: "50%"}}
-                            ><img src={Images.parentpro}
+                            ><img src={userDetails.profile}
                                   style={{height: "35px", borderRadius: "50%"}}
                                   alt='user'/></Navbar.Toggle>
                             <BsFillBellFill className='profile-notification me-3'/>
@@ -82,10 +101,10 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                                                 boxShadow: "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
                                             }}
                                     onClick={()=> navigate(`/${user?.family_name}/profile`)}>
-                                        <img src={Images.parentpro}
+                                        <img src={userDetails.profile}
                                              style={{height: "40px", borderRadius: "50%", marginRight: "10px"}}
                                              alt='user'/>
-                                        {user?.given_name} {user?.name}
+                                        {userDetails.first_name} {userDetails.last_name}
                                     </Button>
                                 </Nav.Link>
                                 {isPc &&

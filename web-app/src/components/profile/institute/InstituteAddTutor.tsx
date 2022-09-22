@@ -1,20 +1,78 @@
-import React from 'react';
+import React, {useState} from 'react';
 import InstituteLayout from "./InstituteLayout";
-import {Button, Card, Col, ListGroup, Row, Form} from "react-bootstrap";
+import {Button, Card, Col, Form, ListGroup, Row} from "react-bootstrap";
 import Images from "../../../assets/images/Images";
 import {FaSearch} from "react-icons/fa";
+import axios, {AxiosResponse} from "axios";
+import {useParams} from "react-router-dom";
+import {useAuth0} from "@auth0/auth0-react";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 
-const data = {
-    id: 10000102345,
-    tutor_name: 'Amila Banadaranayake',
-    email: "amilabandaranayake@gmail.com",
-    subject: 'Business & Accounting Studies',
-    contact:"0771234567",
-    descriprtion: 'I\'m having more than 7 years of experience in teaching at a renowned\n' +
-        '                    government school as a Business & Accounting Studies teacher\n My students were able to produce great results in the examinations.\n'
-};
 
 const InstituteAddTutor = () => {
+    const [tutor, setTutor] = useState({
+        tutor_name: '',
+        email: '',
+        contact: '',
+        description: '',
+        teacher_id: ''
+    });
+    const [loading, setLoading] = useState(false);
+    const params = useParams();
+    const {user} = useAuth0();
+    const user_id = user?.sub;
+
+    const searchTeacher = (email: String) => {
+        const data = JSON.stringify({
+            "teacher_email": `${email}`,
+        });
+        axios({
+            method: "POST",
+            url: `https://learnx.azurewebsites.net/institute/searchTeacher`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res: AxiosResponse) => {
+            const data = res.data[0];
+            console.log(data)
+            setTutor({
+                tutor_name: data.teacher.first_name + " " + data.teacher.last_name,
+                email: data.username,
+                contact: data.teacher.contact_no,
+                description: data.teacher.description,
+                teacher_id: data.teacher.teacher_id
+            })
+            setLoading(true)
+        })
+    }
+
+    const tutorRequest = (teacher_id: String) => {
+        const data = JSON.stringify({
+            "teacher_id": teacher_id,
+        });
+        axios({
+            method: "POST",
+            url: `https://learnx.azurewebsites.net/institute/addTeacher/${user_id}`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        }).then((res: AxiosResponse) => {
+            if (res.status == 200) {
+                console.log("Done")
+                swal(`Poof! You have successfully added Tutor to your institute`, {
+                    icon: "success",
+                });
+                setLoading(false);
+            }
+        }).catch(function (error) {
+            console.log(error.message)
+        })
+    }
+
+    // @ts-ignore
     return (
         <InstituteLayout>
             <Col lg={12} className='px-lg-5'>
@@ -27,30 +85,47 @@ const InstituteAddTutor = () => {
                 </Row>
                 <Row>
                     <Col className="px-3 d-flex flex-row align-items-center">
-                        <Form.Control type="text" placeholder="Enter email of the tutor" className='mb-3'/>
-                        <Button variant='secondary' className='mb-3 ms-2' style={{borderRadius:"50%"}}><FaSearch/></Button>
+                        <Form.Control type="text" placeholder="Enter email of the tutor" className='mb-3'
+                                      onChange={(event) => searchTeacher(event.target.value)}/>
+                        <Button variant='secondary' className='mb-3 ms-2'
+                                style={{borderRadius: "50%"}}><FaSearch/></Button>
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
+                    {loading && <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
                         <Card className='d-flex flex-row w-100'>
-                            <Card.Img style={{width: "200px",height:"200px", borderRadius: "50%"}} className='my-auto' variant="top"
+                            <Card.Img style={{width: "200px", height: "200px", borderRadius: "50%"}} className='my-auto'
+                                      variant="top"
                                       src={Images.tutorpro}/>
                             <Card.Body>
-                                <Card.Title>Tutor Name: {data.tutor_name}</Card.Title>
-                            <ListGroup className="list-group-flush" style={{width:"fit-content"}}>
-                                <ListGroup.Item className="px-0"><span style={{fontWeight:"700", marginRight:"10px"}}>Subject:</span> {data.subject}</ListGroup.Item>
-                                <ListGroup.Item className="px-0"><span style={{fontWeight:"700", marginRight:"10px"}}>Email:</span> {data.email}</ListGroup.Item>
-                                <ListGroup.Item className="px-0"><span style={{fontWeight:"700", marginRight:"10px"}}>Contact-No:</span> {data.contact}</ListGroup.Item>
-                                <ListGroup.Item className="px-0"><span style={{fontWeight:"700", marginRight:"10px"}}>Description</span></ListGroup.Item>
-                            </ListGroup>
+                                <Card.Title>Tutor Name: {tutor.tutor_name}</Card.Title>
+                                <ListGroup className="list-group-flush" style={{width: "fit-content"}}>
+                                    <ListGroup.Item className="px-0"><span
+                                        style={{fontWeight: "700", marginRight: "10px"}}>Email:</span> {tutor.email}
+                                    </ListGroup.Item>
+                                    <ListGroup.Item className="px-0"><span style={{
+                                        fontWeight: "700",
+                                        marginRight: "10px"
+                                    }}>Contact-No:</span> {tutor.contact}</ListGroup.Item>
+                                    <ListGroup.Item className="px-0"><span style={{
+                                        fontWeight: "700",
+                                        marginRight: "10px"
+                                    }}>Description</span></ListGroup.Item>
+                                </ListGroup>
                                 <Card.Text>
-                                    {data.descriprtion}
+                                    {tutor.description}
                                 </Card.Text>
-                                <Button style={{float:"right", borderRadius:"15px"}} variant='secondary'>Add to Institute</Button>
+                                <Button style={{float: "right", borderRadius: "15px"}} variant='secondary'
+                                        onClick={() => tutorRequest(tutor.teacher_id)}>Add to Institute</Button>
                             </Card.Body>
                         </Card>
                     </Col>
+                    }
+                    {!loading &&
+                    <Col md={12} className='d-flex flex-column align-items-center next-table-list my-auto '>
+                        <h1 style={{fontSize: "2.5rem"}} className='my-3'>Let's recruit a tutor to our institute</h1>
+                        <img src={Images.teacherSignup} className='mt-2' style={{width: '400px'}}/>
+                    </Col>}
                 </Row>
             </Col>
         </InstituteLayout>

@@ -29,3 +29,19 @@
 .buttoneditdetails .ButtonCommon {
   width: 110px;
 }
+
+  .nav-tabs {
+    border-bottom: 0.1px solid #95a5a6;
+    font-weight: 500;
+    color: #95a5a6;
+    padding-left: 0;
+    cursor: pointer;
+  }
+  nav-tabs .nav-link.active{
+    border-color: #fff;
+    border-bottom: 5px solid #2c3e50;
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+

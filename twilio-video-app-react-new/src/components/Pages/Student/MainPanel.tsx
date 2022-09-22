@@ -30,12 +30,15 @@ const VideoApp = () => {
   const connectionOptions = useConnectionOptions();
 
   return (
-    <VideoProvider options={connectionOptions} onError={setError}>
-      <ErrorDialog dismissError={() => setError(null)} error={error} />
-      <ChatProvider>
-        <Twilio />
-      </ChatProvider>
-    </VideoProvider>
+
+        <VideoProvider options={connectionOptions} onError={setError} >
+          <ErrorDialog dismissError={() => setError(null)} error={error} />
+          <ChatProvider>
+            <Twilio />
+          </ChatProvider>
+        </VideoProvider>
+
+
   );
 };
 
