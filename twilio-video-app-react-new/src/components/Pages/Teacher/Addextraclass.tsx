@@ -105,10 +105,10 @@ export const Addextraclass = () => {
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
                           <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Duration </Form.Label>
+                            <Form.Label style={{ fontWeight: 600 }}>End time </Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="text" placeholder="Duration hrs" name="duration" />
+                            <Form.Control type="time" placeholder="End time" name="endtime" />
                           </Col>
                         </Form.Group>
                       </Row>
@@ -118,8 +118,8 @@ export const Addextraclass = () => {
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}></Form.Label>
                           </Col>
-                          <Col xl={8} style={{ margin: "0 108px" }}>
-                            <div className="Buttonforsubmit">
+                          <Col xl={8} >
+                            <div className="Buttonforsubmit" style={{ marginTop: '1rem', marginLeft: '8rem' }}>
                               <ButtonCommon name={"Add Extra Class"} style={{ width: "max-content" }} />
                             </div>
                           </Col>
