@@ -1,6 +1,23 @@
-.StudentProfile {
-  .TeacherProfile {
-    height: 80vh;
-    overflow-y: scroll;
+.teacherprofiletabcontent {
+
+  height: 55vh;
+  overflow-y: scroll;
+  .form-control{
+    border-radius: 20px;
+  }
+  .form-control:disabled{
+    background-color: #f0f0f0;
+  }
+  .form-label{
+    color:$header-primary;
   }
 }
+  .CoursesConducted {
+    .SearchResultCard {
+      width: 80%;
+    }
+  }
+
+
+
+
