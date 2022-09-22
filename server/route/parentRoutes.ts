@@ -9,7 +9,7 @@ import {
     getParentCourseRequest,
     acceptCourseRequest,
     rejectCourseRequest,
-    getParentUpComingPayment, getStudentProgress
+    getParentUpComingPayment, getStudentProgress, getStudentUpcomingClass
 } from "../controllers/parentController";
 export const parentRouter=express.Router();
 
@@ -38,3 +38,4 @@ parentRouter.route("/acceptCourse").post(acceptCourseRequest);
 parentRouter.route("/rejectCourse").post(rejectCourseRequest);
 parentRouter.route("/upcomingPayment/:id").get(getParentUpComingPayment);
 parentRouter.route("/studentProgress/:id").get(getStudentProgress);
+parentRouter.route("/upcomingClass/:id").get(getStudentUpcomingClass);
