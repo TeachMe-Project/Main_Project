@@ -143,3 +143,89 @@ export const createParent = async (req: Request, res: Response) => {
         res.status(500).send(error.details[0].message);
     }
 }
+
+export const getParentCourseRequest = async (req: Request, res: Response) => {
+
+    console.log(req.params)
+    try {
+        const {parent_id} = await prisma.parent.findFirst({
+            where: {
+                user_id:  req.params.id,
+            },
+            select:{
+                parent_id:true
+            }
+        })
+
+        const {student_id} = await prisma.student.findFirst({
+            where:{
+                parent_id: parent_id
+            },
+            select:{
+                student_id:true
+            }
+        })
+
+        const data = await prisma.student_course.findMany({
+            where:{
+                student_id: student_id,
+                status:"pending"
+            },
+            include:{
+                course: {
+                    include:{
+                        teacher:true
+                    }
+                }
+            }
+        })
+        console.log()
+        // @ts-ignore
+        // logger.info(NAME_SPACE, data[0].parent_id);
+        res.status(200).send(data)
+    } catch (error:any) {
+        logger.error(NAME_SPACE, error.message)
+        res.status(500).send(error.message);
+    }
+}
+
+export const acceptCourseRequest = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.student_course.update({
+            where: {
+                course_id:  req.body.course_id,
+                student_id: req.body.student_id
+            },
+            data:{
+                status:"accepted"
+            }
+        })
+
+        res.status(200).send(data)
+    } catch (error:any) {
+        logger.error(NAME_SPACE, error.message)
+        res.status(500).send(error.message);
+    }
+}
+
+export const rejectCourseRequest = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.student_course.update({
+            where: {
+                course_id:  req.body.course_id,
+                student_id: req.body.student_id
+            },
+            data:{
+                status:"rejected"
+            }
+        })
+
+        res.status(200).send(data)
+    } catch (error:any) {
+        logger.error(NAME_SPACE, error.message)
+        res.status(500).send(error.message);
+    }
+}
+

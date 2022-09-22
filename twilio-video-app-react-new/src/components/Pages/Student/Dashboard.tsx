@@ -137,7 +137,7 @@ export const Dashboard = () => {
                   <h2> Get the best out of Online Learning</h2>
                 </div>
                 <img src={'/Images/landingpage.png'} />
-                <Searchbar />
+                {/*<Searchbar />*/}
               </div>
             </div>
           </div>

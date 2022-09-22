@@ -153,9 +153,12 @@ export const Institutes = () => {
                           <td data-label="Contact Number :">{item.contact}</td>
                           <td data-label="Contact Number :">
                             <div className="ViewMore">
-                              <Link to="" className="link ViewMoreBtn">
+                              {/* <Link to="" className="link ViewMoreBtn">
                                 <CardButton btnname={"View More"} />
-                              </Link>
+                              </Link> */}
+                              <button className="CardButton" onClick={() => navigate(`/instituteView/${item.id}`)}>
+                                View More
+                              </button>
                             </div>
                           </td>
                         </tr>
@@ -254,9 +257,12 @@ export const Institutes = () => {
 
                           <Col xl={6}>
                             <div className="ViewMore">
-                              <Link to="" className="link ViewMoreBtn">
+                              {/* <Link to="" className="link ViewMoreBtn">
                                 <CardButton btnname="View More" />
-                              </Link>
+                              </Link> */}
+                              <button className="ViewMoreBtn CardButton" onClick={() => navigate(`/instituteView/${item.id}`)}>
+                                View More
+                              </button>
                             </div>
                           </Col>
 
