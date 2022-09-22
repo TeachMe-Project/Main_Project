@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Container, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BsFillExclamationCircleFill, BsFillGridFill, BsFillPersonFill } from "react-icons/bs";
+import { BsBookHalf, BsFillExclamationCircleFill, BsFillGridFill, BsFillPersonFill } from "react-icons/bs";
 import { FaBook } from "react-icons/fa";
 import { AiOutlineLogout } from "react-icons/ai";
 
@@ -54,6 +54,18 @@ export const LeftSidebar = () => {
                     <BsFillPersonFill />
                   </div>
                   <div className="Sidebar_item_name">My Tutors</div>
+                </div>
+              </Link>
+            </li>
+          </Row>
+          <Row>
+            <li>
+              <Link to="/searchresults" className="link">
+                <div className="Sidebar_item">
+                  <div>
+                    <BsBookHalf/>
+                  </div>
+                  <div className="Sidebar_item_name">Search Course</div>
                 </div>
               </Link>
             </li>
