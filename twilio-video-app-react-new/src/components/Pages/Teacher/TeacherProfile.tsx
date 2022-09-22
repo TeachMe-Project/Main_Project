@@ -11,7 +11,8 @@ import Homework from "../Teacher/Homework";
 import Card from "../../Card/Card";
 import SearchResultsTestCard from "./SearchResultsTestCard";
 import CardDetails from "../../Card/CardDetails";
-
+import {FiDownload} from "react-icons/fi";
+import { MdDelete, MdNotStarted } from "react-icons/md";
 
 const schema = yup.object().shape({
   InstituteName: yup
@@ -189,11 +190,7 @@ const TeacherProfile = () => {
   const [enableEditProfile, setEnableEditProfile] = useState(true);
   const [passwordMail, setPasswordMail] = useState(null);
   const [isEditProfile, setIsEditProfile] = useState(false);
-  useEffect(() => {
-    if (user?.family_name === 'teacher') {
-      setIsEditProfile(true);
-    }
-  }, []);
+
 
   const changePassword = () => {
     const options = {
@@ -233,6 +230,14 @@ const TeacherProfile = () => {
         })
       })
   })
+  useEffect(() => {
+    if (user?.family_name === 'teacher') {
+      setIsEditProfile(true);
+    }
+    else if (user?.family_name === 'student') {
+      setIsEditProfile(false);
+    }
+  }, []);
 
   return (
     <Container>
@@ -259,6 +264,7 @@ const TeacherProfile = () => {
                 <Row className="pb-md-0 pb-4">
                   <Form noValidate onSubmit={handleSubmit} >
                     <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 tabs ">
+
                       <Tab eventKey="profile" title="Profile Details" className="teacherprofiletabcontent" style={{ fontWeight: 700 }}>
                         <Row className="mt-lg-0 pe-lg-4 mt-md-3 d-flex flex-column">
                           <Col lg={10} md={6} sm={12} xs={12}>
@@ -383,6 +389,7 @@ const TeacherProfile = () => {
                             </Form.Group>
                           </Col>
                         </Row>
+                        {isEditProfile && (
                         <Button
                             className="mt-4 ms-3 profile-edit-btn CardButton"
                             style={{ width: 'fit-content', borderRadius: '15px' ,float:'right', marginRight:'8rem' }}
@@ -391,20 +398,144 @@ const TeacherProfile = () => {
                         >
                           Change Password
                         </Button>
+                            )}
 
                       </Tab>
+
                       <Tab eventKey="qualifications" title="Qualifications" className="teacherprofiletabcontent Qualification">
 
                         <Row className="mt-lg-0 pe-lg-4 mt-md-3">
                           <Col lg={10} md={12} sm={12} xs={12}>
-                            <Homework topic={"Qualification 1"} />
-                            <Homework topic={"Qualification 2"} />
+                            <div className="SearchResultCard">
+
+                              <Col xl={8} className="me-4">
+                                <CardDetails details={"Qualification 1"} />
+                              </Col>
+
+                              <Col xl={2} className="me-4">
+                                <div className="CardButton">
+                              <button className="QualificationBtn">
+                                <Link to="/" className="link " >
+                                <FiDownload className="ReactIcon DownloadBtn" />
+                              </Link>
+                                </button>
+                                </div>
+                              </Col>
+
+                              {isEditProfile && (
+                              <Col xl={2} className="me-4">
+                                <div className="CardButton">
+                                  <Link to="/" className="link " >
+                                    <button className="QualificationBtn">
+                                      <MdDelete className="ReactIcon DeleteBtn" />
+                                    </button>
+                                  </Link>
+                                </div>
+                              </Col>
+                                  )}
+
+
+</div>
+                            <div className="SearchResultCard">
+
+                              <Col xl={8} className="me-4">
+                                <CardDetails details={"Qualification 2"} />
+                              </Col>
+
+                              <Col xl={2} className="me-4">
+                                <div className="CardButton">
+                                  <button className="QualificationBtn">
+                                    <Link to="/" className="link " >
+                                      <FiDownload className="ReactIcon DownloadBtn" />
+                                    </Link>
+                                  </button>
+                                </div>
+                              </Col>
+                              {isEditProfile && (
+                              <Col xl={2} className="me-4">
+                                <div className="CardButton">
+                                  <Link to="/" className="link " >
+                                    <button className="QualificationBtn">
+                                      <MdDelete className="ReactIcon DeleteBtn" />
+                                    </button>
+                                  </Link>
+                                </div>
+                              </Col>
+
+                                  )}
+
+                            </div>
+
+                            <div className="SearchResultCard">
+
+                              <Col xl={8} className="me-4">
+                                <CardDetails details={"Qualification 3"} />
+                              </Col>
+
+                              <Col xl={2} className="me-4">
+                                <div className="CardButton">
+                                  <button className="QualificationBtn">
+                                    <Link to="/" className="link " >
+                                      <FiDownload className="ReactIcon DownloadBtn" />
+                                    </Link>
+                                  </button>
+                                </div>
+                              </Col>
+
+                              {isEditProfile && (
+                              <Col xl={2} className="me-4">
+                                <div className="CardButton">
+                                  <Link to="/" className="link " >
+                                    <button className="QualificationBtn">
+                                      <MdDelete className="ReactIcon DeleteBtn" />
+                                    </button>
+                                  </Link>
+                                </div>
+                              </Col>
+                                  )}
+
+
+
+                            </div>
+                            <div className="SearchResultCard">
+
+                              <Col xl={8} className="me-4">
+                                <CardDetails details={"Qualification 4"} />
+                              </Col>
+
+                              <Col xl={2} className="me-4">
+                                <div className="CardButton">
+                                  <button className="QualificationBtn">
+                                    <Link to="/" className="link " >
+                                      <FiDownload className="ReactIcon DownloadBtn" />
+                                    </Link>
+                                  </button>
+                                </div>
+                              </Col>
+                              {isEditProfile && (
+                              <Col xl={2} className="me-4">
+                                <div className="CardButton">
+                                  <Link to="/" className="link " >
+                                    <button className="QualificationBtn">
+                                      <MdDelete className="ReactIcon DeleteBtn" />
+                                    </button>
+                                  </Link>
+                                </div>
+                              </Col>
+                                  )}
+
+
+
+                            </div>
                           </Col>
+
                         </Row>
                         <Row className="mt-lg-0 pe-lg-4 mt-md-3">
 
                         </Row>
                       </Tab>
+
+
                       <Tab eventKey="coursesconducted" title="Courses Conducted" className="teacherprofiletabcontent CoursesConducted">
                         {/*Put title as card header*/}
                         <div className="SearchResultCard">
@@ -493,6 +624,7 @@ const TeacherProfile = () => {
                       </Tab>
 
 
+                      {isEditProfile && (
                       <Tab eventKey="bankdetails" title="Bank Details" className="teacherprofiletabcontent">
                         <Row className="mt-lg-0 pe-lg-4 mt-md-3">
                           <Col lg={10} md={12} sm={12} xs={12}>
@@ -579,6 +711,7 @@ const TeacherProfile = () => {
                           </Col>
                         </Row>
                       </Tab>
+                      )}
                     </Tabs>
                     {isEditProfile && (
                       <Row className="ms-1 mt-2 pe-lg-4">

@@ -23,4 +23,25 @@
         }
       }
     }
+  .CardButton {
+    //padding:0;
+border-radius: 50%;
+    cursor: pointer;
+
+    .QualificationBtn {
+      margin-right: 0;
+      border:0;
+      font-size:18px;
+      background-color: transparent;
+
+      .DeleteBtn{
+        color:#ee5253;
+      }
+      .DownloadBtn{
+        color:#1e90ff;
+      }
+
+      }
+    }
   }
+
