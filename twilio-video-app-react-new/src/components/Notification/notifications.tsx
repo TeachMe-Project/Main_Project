@@ -24,7 +24,7 @@ export const Notifications = () => {
             {
               subject: item.subject,
               desc: item.description,
-              eventKey: String(setEventKey(eventKey+1)),
+              eventKey: item.notification_id,
               // date and time
             },
           ]);

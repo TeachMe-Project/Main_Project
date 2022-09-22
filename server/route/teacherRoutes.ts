@@ -9,7 +9,9 @@ import {
     getTeacherByUsername,
     getTeacherPendingInstitutes,
     acceptInstituteRequest,
-    rejectInstituteRequest
+    rejectInstituteRequest,
+    getStudentCountAnalytics,
+    getAvgAttendanceAnalytics
 } from "../controllers/teacherController";
 export const teacherRouter=express.Router();
 
@@ -32,15 +34,21 @@ teacherRouter.route("/:id/courses")
 
 teacherRouter.route("/teacherInstitutes/:id")
     .get(getTeacherInstitutes);
-
-teacherRouter.route("/teacherPendingInstitutes/:id")
+    
+    teacherRouter.route("/teacherPendingInstitutes/:id")
     .get(getTeacherPendingInstitutes);
-
+    
 teacherRouter.route("/acceptInstituteRequest/:id")
-    .post(acceptInstituteRequest);
+.post(acceptInstituteRequest);
 
 teacherRouter.route("/rejectInstituteRequest/:id")
-    .post(rejectInstituteRequest);
+.post(rejectInstituteRequest);
 
 teacherRouter.route("/createTeacher")
-    .post(createTeacher);
+.post(createTeacher);
+
+teacherRouter.route("/chart1/:id")
+    .get(getStudentCountAnalytics);
+
+    teacherRouter.route("/chart3/:id")
+    .get(getAvgAttendanceAnalytics);
