@@ -4,7 +4,12 @@ import {
     getParents,
     createParent,
     parentDoPayment,
-    getParentByAuthId, updateParent
+    getParentByAuthId,
+    updateParent,
+    getParentCourseRequest,
+    acceptCourseRequest,
+    rejectCourseRequest,
+    getParentUpComingPayment, getStudentProgress
 } from "../controllers/parentController";
 export const parentRouter=express.Router();
 
@@ -28,3 +33,8 @@ parentRouter.route("/updateParent")
     .post(updateParent);
 
 parentRouter.route("/parentIdByAuth").post(getParentByAuthId);
+parentRouter.route("/parentCourseRequest/:id").get(getParentCourseRequest);
+parentRouter.route("/acceptCourse").post(acceptCourseRequest);
+parentRouter.route("/rejectCourse").post(rejectCourseRequest);
+parentRouter.route("/upcomingPayment/:id").get(getParentUpComingPayment);
+parentRouter.route("/studentProgress/:id").get(getStudentProgress);
