@@ -5,6 +5,7 @@ import Images from '../../../images/SanFrancisco.jpg';
 import { GrSend } from 'react-icons/gr';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import ImageUpload from "./ImageUpload";
 
 const schema = yup.object().shape({
   Name: yup.string().required(),
@@ -24,6 +25,7 @@ const initialState = {
 };
 const ContactUs: React.FC = () => {
   return (
+<>
     <Formik validationSchema={schema} onSubmit={console.log} initialValues={initialState}>
       {({ handleSubmit, handleChange, handleBlur, values, touched, errors }) => (
         <Container fluid={true} id="ContactUs">
@@ -104,6 +106,8 @@ const ContactUs: React.FC = () => {
         </Container>
       )}
     </Formik>
+      <ImageUpload/>
+  </>
   );
 };
 
