@@ -8,8 +8,8 @@ export const contactUs = async (req: Request, res: Response) => {
         host: "smtp-relay.sendinblue.com",
         port: 587,
         auth: {
-            user: "contactus.learning.io@gmail.com",
-            pass: "xsmtpsib-f5468792801bcc70270ae5f9b77b8bebab31406827d77f42a89be2b535f0e496-TmnSqQOzrhXWUkB4",
+            user: "contact.sportizza@gmail.com",
+            pass: "xsmtpsib-00b295ba66e33e320d390ef855798bcac8b4c69a4c26930f55f6bc9a8b4bce01-YDzTM27OsGWytmxp",
         },
     });
     let mailOptions = {

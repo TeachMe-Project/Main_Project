@@ -307,7 +307,7 @@ export const getStudentCountAnalytics = async (req: Request, res: Response) => {
                 }
             }
         })
-        console.log(courses);
+        // console.log(courses);
 
         res.status(200).send(courses)
     } catch (error: any) {
@@ -333,24 +333,16 @@ export const getAvgAttendanceAnalytics = async (req: Request, res: Response) => 
             where: {
                 teacher_id: teacher_id
             },
-            select: {
-                course_id: true,
-                course_name: true
+            include: {
+                student_class: {
+                    where: {
+                        status: 'ended'
+                    }
+                }
             }
         })
-
-        // @ts-ignore
-        // courses.map((item: any) => {
-        const data = await prisma.student_class.groupBy({
-            by: ['course_id', 'date'],
-            where: {
-                // course_id: { in: courses },
-                isStarted: true,
-                status: 'ended'
-            }
-        })
-        // console.log(data);
-        res.status(200).send(data)
+        console.log(courses);
+        res.status(200).send(courses)
     } catch (error: any) {
         res.status(500).send(error.message);
     }
