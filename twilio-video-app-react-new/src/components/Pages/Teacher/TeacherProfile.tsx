@@ -191,7 +191,7 @@ const TeacherProfile = () => {
   const [enableEditProfile, setEnableEditProfile] = useState(true);
   const [passwordMail, setPasswordMail] = useState(null);
   const [isEditProfile, setIsEditProfile] = useState(false);
-
+    const navigate = useNavigate();
 
   const changePassword = () => {
     const options = {

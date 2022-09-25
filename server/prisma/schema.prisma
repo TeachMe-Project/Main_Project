@@ -256,9 +256,9 @@ model teacher_class {
   class_id   Int     @id @default(autoincrement())
   course_id  Int
   teacher_id Int
-  date       String  @db.VarChar(100)
-  start_time String  @db.VarChar(100)
-  end_time   String  @db.VarChar(100)
+  date       DateTime @default(now()) @db.DateTime(0)
+  start_time String   @db.VarChar(100)
+  end_time   String   @db.VarChar(100)
   isActive   Boolean
   isStarted  Boolean @default(false)
   course     course  @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO COURSE FROM TEACHER_CLASS")
