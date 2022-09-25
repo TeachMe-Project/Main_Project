@@ -382,13 +382,11 @@ export const Course = () => {
               <div className="Schedules">
                 <div className="scheduleContainer">
                   <Row>
-                    <Link className="link" to="/addextraclass">
-                      <div className="buttoneditdetails" style={{ float: "right", position: "relative", top: "10px" }}>
-                        <Link to="/addextraclass" className="link">
-                          <ButtonCommon name={"Schedule Extra Class"} style={{ width: "max-content" }} />
-                        </Link>
+                      <div className="buttoneditdetails">
+                        <div className="ButtonCommon" style={{ float: "right", position: "relative", top: "10px", width: "max-content" }} onClick={() => navigate(`/addextraclass/${params.course_id}`)}>
+                          Schedule Extra Class
+                        </div>
                       </div>
-                    </Link>
                   </Row>
                 </div>
                 <table className="booking-table" id="view-booking">

@@ -216,20 +216,21 @@ export const createCourse = async (req: Request, res: Response) => {
     if (!error) {
         try {
             // @ts-ignore
-            const { teacher_id } = await prisma.teacher.findUnique({
-                where: {
-                    user_id: req.body.user_id
-                },
-                select: {
-                    teacher_id: true
-                }
-            })
+            // const { teacher_id } = await prisma.teacher.findUnique({
+            //     where: {
+            //         user_id: req.body.user_id
+            //     },
+            //     select: {
+            //         teacher_id: true
+            //     }
+            // })
 
             const data = await prisma.course.create({
                 data: {
                     course_name: req.body.course_name,
                     description: req.body.description,
-                    teacher_id: teacher_id,
+                    // teacher_id: teacher_id,
+                    teacher_id: req.body.user_id,
                     price: req.body.price,
                     day: req.body.day,
                     grade: req.body.grade,
@@ -244,9 +245,9 @@ export const createCourse = async (req: Request, res: Response) => {
                 }
             })
 
-            if (req.body.institute != "NoInstitute") {
+            // if (req.body.institute != "NoInstitute") {
 
-            }
+            // }
             res.status(200).send(data)
         } catch (error: any) {
             res.status(500).send(error.message);

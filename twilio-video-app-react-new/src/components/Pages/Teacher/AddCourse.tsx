@@ -200,6 +200,7 @@ export const AddCourse = () => {
       "start_time": values.start_time,
       "end_time": values.end_time,
       "medium": values.medium,
+      // "institute": values.institute,
       "created_date": new Date(),
     });
     axios({

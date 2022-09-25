@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { Formik } from "formik";
 import * as yup from "yup";
 
 // @ts-ignore
 import LazyLoad from "react-lazyload";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 import { ButtonCommon } from "../../Button/ButtonCommon";
+import axios, { AxiosResponse } from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const schema = yup.object().shape({
   topic: yup
@@ -24,37 +29,44 @@ const schema = yup.object().shape({
 });
 
 const initialState = {
-  topic: "",
-  description: "",
-  date: ""
+  date: "",
+  start_time: "",
+  end_time: ""
 };
 
 export const Addextraclass = () => {
+  const { user } = useAuth0();
+  const teacherAuthId = user?.sub;
+  const params = useParams();
+  console.log(params);
+  
   const [isEditing, setISEditing] = useState(false);
 
   const [pageStage, setPageStage] = useState(2);
-  const [topicValidate, settopicValidate] = useState<boolean>(false);
-  const [descriptionValidate, setdescriptionValidate] = useState(false);
+  // const [topicValidate, settopicValidate] = useState<boolean>(false);
+  // const [descriptionValidate, setdescriptionValidate] = useState(false);
   const [dateValidate, setdateValidate] = useState(false);
+  const [starttimeValidate, setstarttimeValidate] = useState(false);
+  const [endtimeValidate, setendtimeValidate] = useState(false);
 
-  const changetopicValidate = (status: boolean): boolean => {
-    if (status) {
-      settopicValidate(true);
-      return false;
-    } else {
-      settopicValidate(false);
-      return true;
-    }
-  };
-  const changedescriptionValidate = (status: boolean): boolean => {
-    if (status) {
-      setdescriptionValidate(true);
-      return false;
-    } else {
-      setdescriptionValidate(false);
-      return true;
-    }
-  };
+  // const changetopicValidate = (status: boolean): boolean => {
+  //   if (status) {
+  //     settopicValidate(true);
+  //     return false;
+  //   } else {
+  //     settopicValidate(false);
+  //     return true;
+  //   }
+  // };
+  // const changedescriptionValidate = (status: boolean): boolean => {
+  //   if (status) {
+  //     setdescriptionValidate(true);
+  //     return false;
+  //   } else {
+  //     setdescriptionValidate(false);
+  //     return true;
+  //   }
+  // };
   const changedateValidate = (status: boolean): boolean => {
     if (status) {
       setdateValidate(true);
@@ -64,6 +76,51 @@ export const Addextraclass = () => {
       return true;
     }
   };
+  const changestarttimeValidate = (status: boolean): boolean => {
+    if (status) {
+      setstarttimeValidate(true);
+      return false;
+    } else {
+      setstarttimeValidate(false);
+      return true;
+    }
+  };
+  const changeendtimeValidate = (status: boolean): boolean => {
+    if (status) {
+      setendtimeValidate(true);
+      return false;
+    } else {
+      setendtimeValidate(false);
+      return true;
+    }
+  };
+
+  const extraClassCreate = (values: any) => {
+    const data = JSON.stringify({
+      "user_id": teacherAuthId,
+      "course_id": params.course_id,
+      // "date": values.class_date,
+      "start_time": values.start_time,
+      "end_time": values.end_time,
+    });
+    axios({
+      method: "POST",
+      url: "http://localhost:8081/class/createClass",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    }).then((res: AxiosResponse) => {
+      if (res.status == 200) {
+        console.log("Done")
+        swal(`Poof! You have successfully added this extra class`, {
+          icon: "success",
+        });
+      }
+    }).catch(function (error) {
+      console.log(error.message)
+    })
+  }
 
   return (
     <div className="StudentProfile">
@@ -79,7 +136,7 @@ export const Addextraclass = () => {
                   <Row>
                     <Form noValidate onSubmit={handleSubmit}>
                       {/*topic*/}
-                      <Row>
+                      {/* <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationFirstName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}>Topic</Form.Label>
@@ -99,7 +156,7 @@ export const Addextraclass = () => {
                             <Form.Control.Feedback type="invalid">{errors.topic}</Form.Control.Feedback>
                           </Col>
                         </Form.Group>
-                      </Row>
+                      </Row> */}
 
                       {/*date*/}
                       <Row>
@@ -108,7 +165,16 @@ export const Addextraclass = () => {
                             <Form.Label style={{ fontWeight: 600 }}>Date</Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="date" placeholder="Date" name="date" />
+                            <Form.Control 
+                              type="date" 
+                              placeholder="Date" 
+                              name="date"
+                              value={values.date}
+                              onChange={handleChange}
+                              isInvalid={!!errors.date ? changedateValidate(false) : changedateValidate(true)}
+                              isValid={touched.date}
+                              onBlur={handleBlur}
+                            />
                           </Col>
                         </Form.Group>
                       </Row>
@@ -120,17 +186,35 @@ export const Addextraclass = () => {
                             <Form.Label style={{ fontWeight: 600 }}>Start time </Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="time" placeholder="Start time" name="starttime" />
+                            <Form.Control 
+                              type="time" 
+                              placeholder="Start time" 
+                              name="starttime" 
+                              value={values.start_time}
+                              onChange={handleChange}
+                              isInvalid={!!errors.start_time ? changestarttimeValidate(false) : changestarttimeValidate(true)}
+                              isValid={touched.start_time}
+                              onBlur={handleBlur}
+                            />
                           </Col>
                         </Form.Group>
                       </Row>
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
                           <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Duration </Form.Label>
+                            <Form.Label style={{ fontWeight: 600 }}>End time </Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control type="text" placeholder="Duration hrs" name="duration" />
+                            <Form.Control 
+                              type="text" 
+                              placeholder="End time" 
+                              name="endtime" 
+                              value={values.end_time}
+                              onChange={handleChange}
+                              isInvalid={!!errors.end_time ? changeendtimeValidate(false) : changeendtimeValidate(true)}
+                              isValid={touched.end_time}
+                              onBlur={handleBlur}
+                            />
                           </Col>
                         </Form.Group>
                       </Row>
@@ -142,7 +226,7 @@ export const Addextraclass = () => {
                           </Col>
                           <Col xl={8} style={{ margin: "0 108px" }}>
                             <div className="Buttonforsubmit">
-                              <ButtonCommon name={"Add Extra Class"} style={{ width: "max-content" }} />
+                              <ButtonCommon name={"Add Extra Class"} style={{ width: "max-content" }} onClick={() => extraClassCreate(values)} />
                             </div>
                           </Col>
                         </Form.Group>
