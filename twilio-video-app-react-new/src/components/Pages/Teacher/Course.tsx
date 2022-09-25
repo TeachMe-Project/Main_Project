@@ -45,9 +45,11 @@ export const Course = () => {
   const teacherAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  const baseURLCourse = `https://learnx.azurewebsites.net/course/${params.course_id}`;
+  // const baseURLCourse = `https://learnx.azurewebsites.net/course/${params.course_id}`;
+  const baseURLCourse = `http://localhost:8081/course/${params.course_id}`;
   const baseURLStudents = `https://learnx.azurewebsites.net/course/courseStudents/${params.course_id}`;
-  const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
+  // const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
+  const baseURLSchedule = `http://localhost:8081/course/courseUpcoming/${params.course_id}`;
 
   const [display, setDisplay] = useState<any[]>([]);
   const [details, setDetails] = useState<any[]>([]);
@@ -91,6 +93,7 @@ export const Course = () => {
           setNotes(prevState => [
             ...prevState,
             {
+              id: item.note_id,
               topic: item.topic,
               date: convertDate(item.uploaded_date),
               link: item.note
@@ -110,6 +113,7 @@ export const Course = () => {
           setHomework(prevState => [
             ...prevState,
             {
+              id: item.homework_id,
               topic: item.topic,
               date: convertDate(item.uploaded_date),
               link: item.homework

@@ -57,7 +57,7 @@ export const createClass = async (req: Request, res: Response) => {
                 data: {
                     course_id: req.body.course_id,
                     teacher_id: teacher_id,
-                    // date: req.body.date,
+                    date: req.body.date,
                     start_time: req.body.start_time,
                     end_time: req.body.end_time,
                     isActive: true,

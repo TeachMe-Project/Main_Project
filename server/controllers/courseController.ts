@@ -32,8 +32,20 @@ export const getCourseByID = async (req: Request, res: Response) => {
             },
             include: {
                 teacher: true,
-                homework: true,
-                notes: true,
+                homework: 
+                {
+                    where: {
+                        isActive: true
+                    }
+                }
+                ,
+                notes: 
+                {
+                    where: {
+                        isActive: true
+                    }
+                }
+                ,
                 teacher_class: {
                     where: {
                         date: {
@@ -215,7 +227,7 @@ export const createCourse = async (req: Request, res: Response) => {
 
     if (!error) {
         try {
-            // @ts-ignore
+            // // @ts-ignore
             // const { teacher_id } = await prisma.teacher.findUnique({
             //     where: {
             //         user_id: req.body.user_id
@@ -225,6 +237,7 @@ export const createCourse = async (req: Request, res: Response) => {
             //     }
             // })
 
+            // @ts-ignore
             const data = await prisma.course.create({
                 data: {
                     course_name: req.body.course_name,

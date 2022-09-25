@@ -99,7 +99,7 @@ export const Addextraclass = () => {
     const data = JSON.stringify({
       "user_id": teacherAuthId,
       "course_id": params.course_id,
-      // "date": values.class_date,
+      "date": new Date(values.class_date),
       "start_time": values.start_time,
       "end_time": values.end_time,
     });
@@ -167,7 +167,7 @@ export const Addextraclass = () => {
                             <Form.Control 
                               type="time" 
                               placeholder="Start time" 
-                              name="starttime" 
+                              name="start_time" 
                               value={values.start_time}
                               onChange={handleChange}
                               isInvalid={!!errors.start_time ? changestarttimeValidate(false) : changestarttimeValidate(true)}
@@ -184,9 +184,9 @@ export const Addextraclass = () => {
                           </Col>
                           <Col xl={8}>
                             <Form.Control 
-                              type="text" 
+                              type="time" 
                               placeholder="End time" 
-                              name="endtime" 
+                              name="end_time" 
                               value={values.end_time}
                               onChange={handleChange}
                               isInvalid={!!errors.end_time ? changeendtimeValidate(false) : changeendtimeValidate(true)}
