@@ -10,6 +10,14 @@ import Averagetimechart from "./Averagetimechart";
 import axios, { AxiosResponse } from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
+// import MyRecentCourses from "./MyRecentCourses";
+import TopNavbar from '../../Navbars/TopNavbar';
+import LeftSidebar from '../../Sidebar/LeftSidebar';
+import PanelContainer from '../../Layout/PanelContainer';
+import { AiOutlineHistory } from 'react-icons/ai';
+import Paymentpiechart from './Paymentpiechart';
+import Monthlyattendancechart from './Monthlyattendancechart';
+
 const convertTime = (time: String) => {
   const hour = time.split(":")[0] || time.split(".")[0];
   const intHour = parseInt(hour);
@@ -24,6 +32,16 @@ const convertDate = (date: Date) => {
   return d.toDateString();
 };
 
+
+// @ts-ignore
+/*
+window.electron.ipcRenderer.on('ipc-example', (arg) => {
+  // eslint-disable-next-line no-console
+ // setApps(arg);
+  console.log(arg);
+});
+
+ */
 let totalAmount = 0;
 
 export const Dashboard = () => {
@@ -92,16 +110,42 @@ export const Dashboard = () => {
         console.log(error);
       });
   }, []);
-  
+  console.log(upcomingClasses);
+
+
+  const [apps,setApps] = useState<any>([]);
+
+  const updateApps = (()=>{
+    // calling IPC exposed from preload script
+
+    const x = new Promise((resolve, reject) => {
+      // @ts-ignore
+      window.electron.ipcRenderer.on('ipc-example', (arg) => {
+        // eslint-disable-next-line no-console
+        resolve(arg);
+
+      });
+      // @ts-ignore
+      window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
+    })
+    x.then((r:any)=>{
+      setApps(Array.from(r));
+      console.log(r);
+    })
+
+  })
+
   return (
     <div className="DashboardTeacher">
       <Container>
         <Row>
           {/*<PanelContainer />*/}
           <div className="PanelHeader">
-            <h2>Dashboard</h2>
+            <h2>Dashboard </h2>
+            {/*<button onClick={updateApps}>GET APPS</button>*/}
           </div>
           <div className="Panel">
+            {/*<div>{JSON.stringify(apps)}</div>*/}
             <div className="PanelSubheader">
               <h5>Upcoming Classes </h5>
             </div>

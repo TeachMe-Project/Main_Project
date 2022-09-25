@@ -1,7 +1,7 @@
 import express from "express";
-import {createUser, getUsers, getUsersByID, removeUser} from "../controllers/userController";
-export const userRouter=express.Router();
+import {changeUserImage, createUser, getUsers, getUsersByID, removeUser} from "../controllers/userController";
 
+export const userRouter = express.Router();
 
 
 userRouter.route("/allUsers")
@@ -15,3 +15,6 @@ userRouter.route("/createUser")
 
 userRouter.route("/removeUser")
     .post(removeUser);
+
+userRouter.route("/changeImage")
+    .post(changeUserImage);

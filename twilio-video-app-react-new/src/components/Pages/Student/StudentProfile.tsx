@@ -286,52 +286,7 @@ export const StudentProfile = () => {
                           </Col>
                         </Form.Group>
                       </Row>
-                      {/*Password*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationPassword">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Password</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="password"
-                              placeholder="Enter the password here"
-                              name="Password"
-                              value={values.Password}
-                              onChange={handleChange}
-                              isInvalid={
-                                !!errors.Password ? changePasswordValidate(false) : changePasswordValidate(true)
-                              }
-                              isValid={touched.Password}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.Password}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
-                      {/*SchoolName*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>School Name</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter school name here"
-                              name="Schoolname"
-                              value={values.Schoolname}
-                              onChange={handleChange}
-                              isInvalid={
-                                !!errors.Schoolname ? changeSchoolNameValidate(false) : changeSchoolNameValidate(true)
-                              }
-                              isValid={touched.Schoolname}
-                              onBlur={handleBlur}
-                            />
-                            <Form.Control.Feedback type="invalid">{errors.Schoolname}</Form.Control.Feedback>
-                          </Col>
-                        </Form.Group>
-                      </Row>
+
                       {/*Grade*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationGrade">
@@ -364,7 +319,7 @@ export const StudentProfile = () => {
                                 fistNameValidate &&
                                 lastNameValidate &&
                                 emailValidate &&
-                                passwordValidate &&
+
                                 schoolNameValidate
                               ) {
                                 setPageStage(2);
@@ -375,7 +330,7 @@ export const StudentProfile = () => {
                               validateField('Firstname');
                               validateField('Lastname');
                               validateField('Email');
-                              validateField('Password');
+
                               validateField('Schoolname');
                             }}
                           />

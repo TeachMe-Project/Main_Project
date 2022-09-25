@@ -323,15 +323,30 @@ export const AddCourse = () => {
                           </Col>
                           <Col xl={8}>
                             <Form.Control
-                              type="text"
-                              placeholder="Enter the grade here"
-                              name="grade"
+                                as="select"
+                                placeholder="Select the grade here" name="grade"
                               value={values.grade}
                               onChange={handleChange}
                               isInvalid={!!errors.grade && touched.grade ? changeGradeValidate(false) : changeGradeValidate(true)}
                               isValid={touched.grade}
                               onBlur={handleBlur}
-                            />
+                            >
+                            <option value="NotSelected" selected>
+                              Select Grade
+                            </option>
+                            <option value="Grade 3">Grade 3</option>
+                            <option value="Grade 3">Grade 4</option>
+                            <option value="Grade 3">Grade 5</option>
+                            <option value="Grade 3">Grade 6</option>
+                            <option value="Grade 3">Grade 7</option>
+                            <option value="Grade 3">Grade 8</option>
+                            <option value="Grade 3">Grade 9</option>
+                            <option value="Grade 3">Grade 10</option>
+                            <option value="Grade 3">Grade 11</option>
+                            <option value="Grade 3">Grade 12</option>
+                            <option value="Grade 3">Grade 13</option>
+                            <option value="Other">Other</option>
+                            </Form.Control>
                             <Form.Control.Feedback
                               type="invalid">{errors.grade}</Form.Control.Feedback>
                           </Col>
@@ -376,7 +391,7 @@ export const AddCourse = () => {
                           <Col xl={8}>
                             <Form.Control
                               type="text"
-                              placeholder="Enter Course Fee Here"
+                              placeholder="Enter Monthly Course Fee Here"
                               name="fee"
                               value={values.fee}
                               onChange={handleChange}
@@ -464,7 +479,7 @@ export const AddCourse = () => {
                         <Form.Group className="ProfileDetailsContainer"
                           controlId="validationschoolName">
                           <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Class Date</Form.Label>
+                            <Form.Label style={{ fontWeight: 600 }}>General class day</Form.Label>
                           </Col>
                           <Col xl={8}>
                             <Form.Control as="select"

@@ -256,7 +256,7 @@ export const createTeacher = async (req: Request, res: Response) => {
                             last_name: req.body.last_name,
                             contact_no: req.body.contact_no,
                             description: req.body.description,
-                            qualification: "none",
+                            qualification: req.body.qualification,
                             account_name: req.body.account_name,
                             bank_name: req.body.bank_name,
                             branch_name: req.body.branch_name,
