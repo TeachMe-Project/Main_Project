@@ -106,7 +106,7 @@ export const Uploadnotes = () => {
                           <Col xl={8}>
                             <Form.Control
                               type="text"
-                              placeholder="Topic of the lesson"
+                              placeholder="Enter name of the lesson"
                               name="topic"
                               value={values.topic}
                               onChange={handleChange}
@@ -140,8 +140,8 @@ export const Uploadnotes = () => {
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}></Form.Label>
                           </Col>
-                          <Col xl={8} style={{ margin: '0 108px' }}>
-                            <div className="Buttonforsubmit">
+                          <Col xl={8} >
+                            <div className="Buttonforsubmit" style={{ marginTop: '1rem', marginLeft: '8rem' }}>
                               <ButtonCommon name={'Submit'} onClick={onFileUpload} />
                             </div>
                           </Col>

@@ -50,6 +50,7 @@ model course {
 model homework {
   homework_id   Int      @id @default(autoincrement())
   course_id     Int
+  topic         String?  @db.VarChar(100)
   uploaded_date DateTime @default(now()) @db.DateTime(0)
   homework      String   @db.VarChar(1000)
   isActive      Boolean
@@ -109,9 +110,10 @@ model institute_teacher {
 
 model notes {
   note_id       Int      @id @default(autoincrement())
+  course_id     Int
+  topic         String?  @db.VarChar(100)
   uploaded_date DateTime @default(now()) @db.DateTime(0)
   note          String   @db.VarChar(1000)
-  course_id     Int
   isActive      Boolean
   course        course   @relation(fields: [course_id], references: [course_id], onDelete: Cascade, map: "FK TO NOTE FROM COURSE")
 
@@ -123,6 +125,8 @@ model notification {
   notification_id Int                      @id @default(autoincrement())
   subject         String                   @db.VarChar(300)
   description     String                   @db.VarChar(10000)
+  date            String?                  @db.VarChar(50)
+  time            String?                  @db.VarChar(50)
   read_status     notification_read_status @default(unread)
   isActive        Boolean
   user            user                     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, map: "FK TO NOTIFICATION FROM USER")
@@ -252,7 +256,7 @@ model teacher_class {
   class_id   Int      @id @default(autoincrement())
   course_id  Int
   teacher_id Int
-  date       DateTime @default(now()) @db.Timestamp(0)
+  date       DateTime @default(now()) @db.DateTime(0)
   start_time String   @db.VarChar(100)
   end_time   String   @db.VarChar(100)
   isActive   Boolean

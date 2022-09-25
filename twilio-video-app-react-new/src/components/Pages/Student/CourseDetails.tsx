@@ -35,7 +35,7 @@ export const CourseDetails = () => {
                   <h3>Mathematics</h3>
                 </div>
                 <div className="TutorProfileButton">
-                  <Link to="/userprofile" className="link">
+                  <Link to="/teacherProfile" className="link">
                     <div className="UserImg">
                       <img src={'/Images/Teachers/mr1.jpg'} />
                     </div>

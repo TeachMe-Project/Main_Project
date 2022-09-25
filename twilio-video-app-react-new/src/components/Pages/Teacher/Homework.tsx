@@ -2,6 +2,7 @@ import * as React from "react";
 import Card from "../../Card/Card";
 import { Container, Row } from "react-bootstrap";
 import { FiDownload } from "react-icons/fi";
+import { AiFillDelete } from "react-icons/ai";
 
 type Homework = {
   topic?: string;
@@ -22,6 +23,8 @@ export const Homework: React.FC<Homework> = props => {
                 target="_blank"
               >
                 <FiDownload className="ReactIcon" />
+                  <AiFillDelete className="Reacticon" />
+
               </a>
             }
           />

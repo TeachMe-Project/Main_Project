@@ -319,7 +319,6 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -412,7 +411,6 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -433,7 +431,6 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -454,7 +451,6 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -475,7 +471,6 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -496,7 +491,6 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-
                     </tr>
                     <tr>
                       <td data-label="Note ID :"
@@ -517,7 +511,6 @@ export const Course = (props: tutorName) => {
                         </a>
 
                       </td>
-
                     </tr>
 
                   </tbody>

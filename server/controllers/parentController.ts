@@ -321,3 +321,65 @@ export const getStudentProgress = async (req: Request, res: Response) => {
         res.status(500).send(error.message);
     }
 };
+
+export const getStudentUpcomingClass = async (req: Request, res: Response) => {
+
+    try {
+        // @ts-ignore
+        const {parent_id} = await prisma.parent.findFirst({
+            where: {
+                user_id: req.params.id
+            },
+            select: {
+                parent_id: true
+            }
+        });
+
+        // @ts-ignore
+        const { student_id } = await prisma.student.findFirst({
+            where: {
+                parent_id: parent_id
+            },
+            select: {
+                student_id: true
+            }
+        });
+
+
+        const student_courses = await prisma.student_course.findMany({
+            where: {
+                student_id: student_id,
+                isActive: true,
+                status: "accepted"
+            },
+            select: {
+                course_id: true
+            }
+        });
+        console.log(student_courses);
+        let upcoming_class = [];
+        for await (const course of student_courses) {
+            const data = await prisma.teacher_class.findFirst(
+                {
+                    where: {
+                        course_id: course.course_id,
+                        date: {
+                            gte: new Date()
+                        },
+                    },
+                    include:{
+                        course:true
+                    }
+                }
+            );
+            console.log(data);
+            if (data) {
+                upcoming_class.push(data);
+            }
+        }
+        // console.log(upcoming_class)
+        res.status(200).send(upcoming_class);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+};

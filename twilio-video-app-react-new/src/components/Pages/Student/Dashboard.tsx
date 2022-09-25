@@ -92,7 +92,7 @@ export const Dashboard = () => {
               <h5>Upcoming Classes</h5>
             </div>
             <div className="PanelBody">
-              {/* {upcomingClasses.map((item: any) => {
+              {upcomingClasses.map((item: any) => {
                 return (
                   <Card
                     header={item.subject}
@@ -103,8 +103,8 @@ export const Dashboard = () => {
                     image={<img src={'/Images/subjects/Mathematics.png'} />}
                   />
                 );
-              })} */}
-              <Card
+              })}
+              {/* <Card
                 header="Mathematics"
                 teacher="Mr. Lasitha Nuwan"
                 time="04:00pm- 06:00pm"
@@ -127,7 +127,7 @@ export const Dashboard = () => {
                 date="24 Aug 2022"
                 btnname="Join"
                 image={<img src={'/Images/subjects/Mathematics.png'} />}
-              />
+              /> */}
             </div>
 
             <div className="PanelSubheader">{/*<h5>Search Courses</h5>*/}</div>

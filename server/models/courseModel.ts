@@ -1,9 +1,8 @@
 import Joi from "joi";
 
 export const courseSchema = Joi.object({
-        course_name: Joi.string().min(1).required(),
         description: Joi.string().min(1).required(),
-        teacher_id: Joi.number().required(),
+        user_id: Joi.string().required(),
         price: Joi.number().required(),
         day: Joi.string().min(1).required(),
         grade: Joi.string().min(1).required(),
@@ -13,6 +12,6 @@ export const courseSchema = Joi.object({
         start_time: Joi.string().min(1).required(),
         end_time: Joi.string().min(1).required(),
         medium: Joi.string().min(1).required(),
-        institute: Joi.string().min(1).required()
+        institute: Joi.required()
     }
 );
