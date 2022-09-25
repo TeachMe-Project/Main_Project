@@ -200,6 +200,7 @@ export const AddCourse = () => {
       "start_time": values.start_time,
       "end_time": values.end_time,
       "medium": values.medium,
+      // "institute": values.institute,
       "created_date": new Date(),
     });
     axios({
@@ -536,6 +537,20 @@ export const AddCourse = () => {
                               isValid={touched.end_time}
                               onBlur={handleBlur}
                             />
+                          </Col>
+                        </Form.Group>
+                      </Row>
+                      <Row>
+                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
+                          <Col xl={4}>
+                            <Form.Label style={{ fontWeight: 600 }}>Upload Image</Form.Label>
+                          </Col>
+                          <Col xl={8}>
+                            <Form.Control
+                              type="file"
+                              placeholder="Notes"
+                              name="upload"
+                              accept="image/*"/>
                           </Col>
                         </Form.Group>
                       </Row>
