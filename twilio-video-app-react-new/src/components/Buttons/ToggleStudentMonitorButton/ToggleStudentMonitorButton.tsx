@@ -58,6 +58,8 @@ const useStyles = makeStyles({
     },
 });
 
+
+
 export default function ToggleStudentMonitorButton() {
     const classes = useStyles();
 
@@ -82,7 +84,7 @@ export default function ToggleStudentMonitorButton() {
             {/*    Monitor*/}
             {/*</Button>*/}
 
-            <Modal01/>
+            <Modal01 />
         </div>
 
     );
