@@ -188,8 +188,8 @@ export const AddCourse = () => {
 
   const courseCreate = (values: any) => {
     const data = JSON.stringify({
-      "user_id": user_id,
-      "course_name": values.title,
+      "user_id": 1000010223,
+      "course_name": "values.title",
       "description": values.description,
       "price": values.fee,
       "day": values.class_date,
@@ -205,7 +205,7 @@ export const AddCourse = () => {
     });
     axios({
       method: "POST",
-      url: "https://learnx.azurewebsites.net/course/createCourse",
+      url: "http://localhost:8081/course/createCourse",
       headers: {
         'Content-Type': 'application/json'
       },
@@ -244,7 +244,7 @@ export const AddCourse = () => {
                   <Row>
                     <Form noValidate onSubmit={handleSubmit}>
                       {/*title*/}
-                      <Row>
+                      {/* <Row>
                         <Form.Group className="ProfileDetailsContainer"
                           controlId="validationFirstName">
                           <Col xl={4}>
@@ -266,7 +266,7 @@ export const AddCourse = () => {
                               type="invalid">{errors.title}</Form.Control.Feedback>
                           </Col>
                         </Form.Group>
-                      </Row>
+                      </Row> */}
                       {/*subject*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer"
@@ -334,17 +334,17 @@ export const AddCourse = () => {
                             <option value="NotSelected" selected>
                               Select Grade
                             </option>
-                            <option value="Grade 3">Grade 3</option>
-                            <option value="Grade 3">Grade 4</option>
-                            <option value="Grade 3">Grade 5</option>
-                            <option value="Grade 3">Grade 6</option>
-                            <option value="Grade 3">Grade 7</option>
-                            <option value="Grade 3">Grade 8</option>
-                            <option value="Grade 3">Grade 9</option>
-                            <option value="Grade 3">Grade 10</option>
-                            <option value="Grade 3">Grade 11</option>
-                            <option value="Grade 3">Grade 12</option>
-                            <option value="Grade 3">Grade 13</option>
+                            <option value="Grade-03">Grade 3</option>
+                            <option value="Grade-04">Grade 4</option>
+                            <option value="Grade-05">Grade 5</option>
+                            <option value="Grade-06">Grade 6</option>
+                            <option value="Grade-07">Grade 7</option>
+                            <option value="Grade-08">Grade 8</option>
+                            <option value="Grade-09">Grade 9</option>
+                            <option value="Grade-10">Grade 10</option>
+                            <option value="Grade-11">Grade 11</option>
+                            <option value="Grade-12">Grade 12</option>
+                            <option value="Grade-13">Grade 13</option>
                             <option value="Other">Other</option>
                             </Form.Control>
                             <Form.Control.Feedback
