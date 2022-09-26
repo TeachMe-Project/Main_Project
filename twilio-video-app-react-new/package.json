@@ -156,6 +156,8 @@
 
     "@types/enzyme-adapter-react-16": "^1.0.5",
 
+    "@types/react-bootstrap": "^0.32.30",
+
     "concurrently": "^6.5.1",
 
     "cypress": "^6.8.0",
