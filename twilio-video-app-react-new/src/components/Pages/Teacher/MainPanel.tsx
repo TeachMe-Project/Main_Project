@@ -83,7 +83,7 @@ const routes = [
     main: () => <Editdetails />
   },
   {
-    path: "/uploadnotes",
+    path: "/uploadnotes/:course_id",
     main: () => <Uploadnotes />
   },
   {
@@ -91,7 +91,7 @@ const routes = [
     main: () => <StudentAnalytics />
   },
   {
-    path: "/uploadhomework",
+    path: "/uploadhomework/:course_id",
     main: () => <Uploadhomework />
   },
   {
