@@ -28,8 +28,6 @@ import AppStateProvider, { useAppState } from "../../../state";
 import theme from "../../../theme";
 import { CssBaseline } from "@material-ui/core";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import AdminDashboard from "./AdminDashboard";
-import Userdistribution from "./Admincharts/Userdistribution";
 
 const VideoApp = () => {
   const { error, setError } = useAppState();
@@ -46,95 +44,91 @@ const VideoApp = () => {
 };
 const routes = [
   {
-    path: '/',
+    path: "/",
     exact: true,
-    main: () => <Dashboard />,
+    main: () => <Dashboard />
   },
   {
-    path: '/mycourses',
-    main: () => <MyCourses />,
+    path: "/mycourses",
+    main: () => <MyCourses />
   },
 
   {
-    path: '/settings',
-    main: () => <Settings />,
+    path: "/settings",
+    main: () => <Settings />
   },
   {
-    path: '/userprofile',
-    main: () => <TeacherProfile />,
+    path: "/userprofile",
+    main: () => <TeacherProfile />
   },
   {
-    path: '/createcourse',
-    main: () => <CreateCourse />,
+    path: "/createcourse",
+    main: () => <CreateCourse />
   },
   {
-    path: '/addcourse',
-    main: () => <AddCourse />,
+    path: "/addcourse",
+    main: () => <AddCourse />
   },
   {
-    path: '/course/:course_id',
-    main: () => <Course />,
+    path: "/course/:course_id",
+    main: () => <Course />
   },
   {
-    path: '/notifications',
-    main: () => <Notifications />,
+    path: "/notifications",
+    main: () => <Notifications />
   },
   {
-    path: '/editdetails',
-    main: () => <Editdetails />,
+    path: "/editdetails",
+    main: () => <Editdetails />
   },
   {
-    path: '/uploadnotes',
-    main: () => <Uploadnotes />,
+    path: "/uploadnotes",
+    main: () => <Uploadnotes />
   },
   {
-    path: '/studentanalytics',
-    main: () => <StudentAnalytics />,
+    path: "/studentanalytics",
+    main: () => <StudentAnalytics />
   },
   {
-    path: '/uploadhomework',
-    main: () => <Uploadhomework />,
+    path: "/uploadhomework",
+    main: () => <Uploadhomework />
   },
   {
-    path: '/institutes',
-    main: () => <Institutes />,
+    path: "/institutes",
+    main: () => <Institutes />
   },
   {
-    path: '/freecard',
-    main: () => <FreeCard />,
+    path: "/freecard",
+    main: () => <FreeCard />
   },
   {
-    path: '/addextraclass',
-    main: () => <Addextraclass />,
+    path: "/addextraclass",
+    main: () => <Addextraclass />
   },
   {
-    path: '/helpandsupport',
-    main: () => <Helpandsupport />,
+    path: "/helpandsupport",
+    main: () => <Helpandsupport />
   },
   {
-    path: '/parentscharts',
-    main: () => <Parentscharts />,
+    path: "/parentscharts",
+    main: () => <Parentscharts />
   },
   {
-    path: '/twilio',
-    main: () => <VideoApp />,
+    path: "/twilio",
+    main: () => <VideoApp />
   },
   {
-    path: '/room/:URLRoomName',
-    main: () => <VideoApp />,
+    path: "/room/:URLRoomName",
+    main: () => <VideoApp />
   },
   {
-    path: '/teacherProfile',
-    main: () => <TeacherProfile />,
+    path: "/teacherProfile",
+    main: () => <TeacherProfile />
   },
   {
-    path: '/studentProfile/:user_id',
-    main: () => <StudentProfile />,
-  },
-  {
-    path: '/admindashboard',
-    main: () => <AdminDashboard />,
-  },
+    path: "/studentProfile/:user_id",
+    main: () => <StudentProfile />
+  }
 
 ];
 
