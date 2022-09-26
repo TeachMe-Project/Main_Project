@@ -45,11 +45,9 @@ export const Course = () => {
   const teacherAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  // const baseURLCourse = `https://learnx.azurewebsites.net/course/${params.course_id}`;
-  const baseURLCourse = `http://localhost:8081/course/${params.course_id}`;
+  const baseURLCourse = `https://learnx.azurewebsites.net/course/${params.course_id}`;
   const baseURLStudents = `https://learnx.azurewebsites.net/course/courseStudents/${params.course_id}`;
-  // const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
-  const baseURLSchedule = `http://localhost:8081/course/courseUpcoming/${params.course_id}`;
+  const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
 
   const [display, setDisplay] = useState<any[]>([]);
   const [details, setDetails] = useState<any[]>([]);
@@ -68,7 +66,7 @@ export const Course = () => {
             ...prevState,
             {
               subject: item.subject,
-              title: item.subject + " " + item.grade + " " + item.medium + " medium",
+              title: item.subject + " by " + item.first_name + " " + item.last_name,
               grade: item.grade,
               medium: item.medium,
               desc: item.description,
@@ -93,9 +91,8 @@ export const Course = () => {
           setNotes(prevState => [
             ...prevState,
             {
-              id: item.note_id,
               topic: item.topic,
-              date: convertDate(item.uploaded_date),
+              date: item.uploaded_date.substring(0,10),
               link: item.note
             }
           ]);
@@ -113,9 +110,8 @@ export const Course = () => {
           setHomework(prevState => [
             ...prevState,
             {
-              id: item.homework_id,
-              topic: item.topic,
-              date: convertDate(item.uploaded_date),
+              topic:item.topic,
+              date: item.uploaded_date.substring(0,10),
               link: item.homework
             }
           ]);
@@ -257,9 +253,10 @@ export const Course = () => {
                 })}
               </div>
 
+
               <div className="Notes">
                 <div className="buttoneditdetails" style={{ float: "right", position: "relative", top: "10px" }}>
-                  <Link to="/uploadnotes" className="link">
+                  <Link to={`/uploadnotes/${params.course_id}`} className="link">
                     <ButtonCommon name={"Upload Notes"} />
                   </Link>
                 </div>
@@ -291,9 +288,6 @@ export const Course = () => {
                             </td>
                             <td data-label="">
                               <a
-                                download="note1.pdf"
-                                href=""
-                                target="_blank"
                                 className="Reacticonbtn remove"
                               >
                                 <MdDelete className="Reacticon" />Remove
@@ -311,7 +305,7 @@ export const Course = () => {
               <div className="Homework">
                 <Link className="link" to="/uploadhomework">
                   <div className="buttoneditdetails" style={{ float: "right", position: "relative", top: "10px" }}>
-                    <Link to="/uploadhomework" className="link">
+                    <Link to={`/uploadhomework/${params.course_id}`} className="link">
                       <ButtonCommon name={"Upload Homework"} style={{ width: "max-content" }} />
                     </Link>
                   </div>
@@ -370,6 +364,9 @@ export const Course = () => {
                             <td data-label="Parent's Contact :" className="notedetails">{item.contact}</td>
                             <td data-label="View Profile :">
                               <div className="cancelbutton">
+                                {/* <Link to="/studentProfile/${}" className="link">
+                                  <ButtonCommon name={"View Profile"} className="viewBtn" />
+                                </Link> */}
                                 <div className="ButtonCommon viewBtn" onClick={() => navigate(`/studentProfile/${item.user_id}`)}>
                                   View Profile
                                 </div>
@@ -391,6 +388,7 @@ export const Course = () => {
                           Schedule Extra Class
                         </div>
                       </div>
+                    </Link>
                   </Row>
                 </div>
                 <table className="booking-table" id="view-booking">
