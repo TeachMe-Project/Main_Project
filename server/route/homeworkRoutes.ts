@@ -1,5 +1,5 @@
 import express from "express";
-import {createHomework, getHomeworkByID} from "../controllers/homeworkController";
+import {createHomework, getHomeworkByID, removeHomework} from "../controllers/homeworkController";
 
 export const homeworkRouter=express.Router();
 
@@ -13,5 +13,8 @@ homeworkRouter.route("/:id")
 
 homeworkRouter.route("/createHomework")
     .post(createHomework);
+
+homeworkRouter.route("/removeHomework")
+    .post(removeHomework);
 
 

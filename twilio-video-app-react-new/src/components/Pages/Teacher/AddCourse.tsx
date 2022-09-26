@@ -188,8 +188,8 @@ export const AddCourse = () => {
 
   const courseCreate = (values: any) => {
     const data = JSON.stringify({
-      "user_id": 1000010223,
-      "course_name": "values.title",
+      "user_id": user_id,
+      // "course_name": "values.title",
       "description": values.description,
       "price": values.fee,
       "day": values.class_date,
@@ -200,12 +200,12 @@ export const AddCourse = () => {
       "start_time": values.start_time,
       "end_time": values.end_time,
       "medium": values.medium,
-      // "institute": values.institute,
-      "created_date": new Date(),
+      "institute": values.institute,
+      // "created_date": new Date(),
     });
     axios({
       method: "POST",
-      url: "http://localhost:8081/course/createCourse",
+      url: "https://learnx.azurewebsites.net/course/createCourse",
       headers: {
         'Content-Type': 'application/json'
       },

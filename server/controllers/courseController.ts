@@ -255,7 +255,7 @@ export const createCourse = async (req: Request, res: Response) => {
                     end_time: req.body.end_time,
                     isActive: true,
                     medium: req.body.medium,
-                    created_date: "-",
+                    created_date: String(new Date()),
                     teacher_id: teacher_id,
                 }
             })
