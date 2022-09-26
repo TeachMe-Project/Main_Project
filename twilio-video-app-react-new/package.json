@@ -116,6 +116,8 @@
 
     "react-scripts": "5.0.1",
 
+    "react-spinner-animated": "^3.1.1",
+
     "react-spring": "^9.4.5",
 
     "react-super-responsive-table": "^5.2.1",

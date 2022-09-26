@@ -45,11 +45,11 @@ export const Course = () => {
   const teacherAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  // const baseURLCourse = `https://learnx.azurewebsites.net/course/${params.course_id}`;
-  const baseURLCourse = `http://localhost:8081/course/${params.course_id}`;
+  const baseURLCourse = `https://learnx.azurewebsites.net/course/${params.course_id}`;
+  // const baseURLCourse = `http://localhost:8081/course/${params.course_id}`;
   const baseURLStudents = `https://learnx.azurewebsites.net/course/courseStudents/${params.course_id}`;
-  // const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
-  const baseURLSchedule = `http://localhost:8081/course/courseUpcoming/${params.course_id}`;
+  const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
+  // const baseURLSchedule = `http://localhost:8081/course/courseUpcoming/${params.course_id}`;
 
   const [display, setDisplay] = useState<any[]>([]);
   const [details, setDetails] = useState<any[]>([]);
@@ -164,13 +164,13 @@ export const Course = () => {
       });
   }, []);
 
-  const removeNote = (item: any) => (
+  const removeHomework = (item: any) => (
     <MdDelete
       className="Reacticonbtn remove Reacticon"
       onClick={() => {
         swal({
-          title: "Request Acception",
-          text: `Do you really want to accept this institute?`,
+          title: "Request Removaal",
+          text: `Do you really want to remove this homework?`,
           icon: "error",
           buttons: {
             cancel: true,
