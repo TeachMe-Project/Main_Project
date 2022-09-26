@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { PrismaClient } from '@prisma/client'
-import { courseSchema } from "../models/courseModel";
+import {Request, Response} from "express";
+import {PrismaClient} from '@prisma/client'
+import {courseSchema} from "../models/courseModel";
 
 const prisma = new PrismaClient()
 
@@ -32,8 +32,20 @@ export const getCourseByID = async (req: Request, res: Response) => {
             },
             include: {
                 teacher: true,
-                homework: true,
-                notes: true,
+                homework: 
+                {
+                    where: {
+                        isActive: true
+                    }
+                }
+                ,
+                notes: 
+                {
+                    where: {
+                        isActive: true
+                    }
+                }
+                ,
                 teacher_class: {
                     where: {
                         date: {
@@ -116,7 +128,7 @@ export const getCourseByGrade = async (req: Request, res: Response) => {
 
 export const updateCourseDetails = async (req: Request, res: Response) => {
 
-    const { error, value } = courseSchema.validate(req.body);
+    const {error, value} = courseSchema.validate(req.body);
 
     if (!error) {
         try {
@@ -211,25 +223,28 @@ export const getCourseByInstituteName = async (req: Request, res: Response) => {
 
 
 export const createCourse = async (req: Request, res: Response) => {
-    const { error, value } = courseSchema.validate(req.body);
+    const {error, value} = courseSchema.validate(req.body);
 
     if (!error) {
         try {
             // @ts-ignore
-            const { teacher_id } = await prisma.teacher.findUnique({
+            const {teacher_id, first_name, last_name} = await prisma.teacher.findUnique({
                 where: {
                     user_id: req.body.user_id
                 },
                 select: {
-                    teacher_id: true
+                    teacher_id: true,
+                    first_name: true,
+                    last_name: true
                 }
             })
+            console.log(teacher_id)
 
+            // @ts-ignore
             const data = await prisma.course.create({
                 data: {
-                    course_name: req.body.course_name,
+                    course_name: req.body.subject + " for " + req.body.grade + " in " + req.body.medium + " medium by " + first_name + " " + last_name,
                     description: req.body.description,
-                    teacher_id: teacher_id,
                     price: req.body.price,
                     day: req.body.day,
                     grade: req.body.grade,
@@ -240,14 +255,24 @@ export const createCourse = async (req: Request, res: Response) => {
                     end_time: req.body.end_time,
                     isActive: true,
                     medium: req.body.medium,
-                    created_date: req.body.created_date,
+                    created_date: "-",
+                    teacher_id: teacher_id,
                 }
             })
-
+            // console.log(data.course_id);
+            const added_course_id = data.course_id;
             if (req.body.institute != "NoInstitute") {
-
+                const add_institute_course = await prisma.institute_course.create({
+                    data: {
+                        institute_id: req.body.institute,
+                        course_id: added_course_id,
+                        isActive: true
+                    }
+                })
+                res.status(200).send(add_institute_course);
+            } else {
+                res.status(200).send(data)
             }
-            res.status(200).send(data)
         } catch (error: any) {
             res.status(500).send(error.message);
         }
@@ -260,7 +285,7 @@ export const unrollCourseStudents = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const { student_id } = await prisma.student.findFirst({
+        const {student_id} = await prisma.student.findFirst({
             where: {
                 user_id: req.params.id,
             },
@@ -295,7 +320,7 @@ export const getStudentPendingPayments = async (req: Request, res: Response) => 
     try {
         const data = await prisma.student_payment.findMany(
             {
-                where: { course_id: Number(req.params.id), payment_status: "unpaid" },
+                where: {course_id: Number(req.params.id), payment_status: "unpaid"},
             }
         )
         res.status(200).send(data);

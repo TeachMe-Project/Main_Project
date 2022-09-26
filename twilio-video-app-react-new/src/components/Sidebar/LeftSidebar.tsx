@@ -1,19 +1,39 @@
-import * as React from "react";
+import React, {useEffect, useState} from 'react';
 import { Container, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BsFillExclamationCircleFill, BsFillGridFill, BsFillPersonFill } from "react-icons/bs";
+import { BsBookHalf, BsFillExclamationCircleFill, BsFillGridFill, BsFillPersonFill } from "react-icons/bs";
 import { FaBook } from "react-icons/fa";
 import { AiOutlineLogout } from "react-icons/ai";
-
+import {useAuth0} from "@auth0/auth0-react";
 import "../../Assets/Styles/main.scss";
 import { Link } from "react-router-dom";
 import "../Pages/Student/MainPanel";
 import Button from "../Button/Button";
-import { useAuth0 } from "@auth0/auth0-react";
+
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 
 export const LeftSidebar = () => {
-  const { logout } = useAuth0();
+  const { logout, user } = useAuth0();
 
+  const [userDetails, setUserDetails] = useState<any>({});
+  const user_id = user?.sub;
+  const userLogOut = () => {
+    swal({
+      title: "Log out",
+      text: `Do you really want to logout?`,
+      icon: "warning",
+      buttons: {
+        cancel: true,
+        confirm: true
+      },
+    })
+        .then((willDelete: any) => {
+          if (willDelete) {
+            logout({ returnTo: window.location.origin });
+          }
+        })
+  };
   return (
     <div className="LeftSidebar">
       <Container>
@@ -58,6 +78,18 @@ export const LeftSidebar = () => {
               </Link>
             </li>
           </Row>
+          <Row>
+            <li>
+              <Link to="/searchresults" className="link">
+                <div className="Sidebar_item">
+                  <div>
+                    <BsBookHalf/>
+                  </div>
+                  <div className="Sidebar_item_name">Search Course</div>
+                </div>
+              </Link>
+            </li>
+          </Row>
           {/*<Row>*/}
           {/*  <li>*/}
           {/*    <Link to="/messages" className="link">*/}
@@ -98,7 +130,7 @@ export const LeftSidebar = () => {
           {/*</Row>*/}
         </ul>
 
-        <Link to="/" className="link" onClick={() => logout({ returnTo: window.location.origin })}>
+        <Link to="/" className="link" onClick={() =>userLogOut() }>
           <div className="LogoutBtn">
             {/*<RiLogoutCircleRFill  size={32} color={"#7c7d87;"} />*/}
             <AiOutlineLogout className="LogoutIcon" />

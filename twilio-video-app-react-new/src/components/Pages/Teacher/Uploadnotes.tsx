@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import {Alert, Button, Col, Container, Form, Row} from "react-bootstrap";
 import { Formik } from "formik";
 import { ButtonCommon } from '../../Button/ButtonCommon';
 import * as yup from "yup";
 
+// @ts-ignore
+import {v4 as uuidv4} from "uuid"
+import {FirebaseApp} from "../../../auth0/FirebaseConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
-import uploadFileToBlob, { isStorageConfigured } from '../../AzureCloudStorage/azure-storage-blob-notes';
-// import AzureCloudStorage from "../../AzureCloudStorage/AzureCloudStorageNotes";
-
-const storageConfigured = isStorageConfigured();
+import {useParams} from "react-router-dom";
+import axios from "axios";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 
 
 const schema = yup.object().shape({
@@ -16,15 +19,6 @@ const schema = yup.object().shape({
     .string()
     .required()
     .label("Topic")
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])/, "Topic must contain only letters"),
-  description: yup
-    .string()
-    .required()
-    .label("Description"),
-  subtopic: yup
-    .string()
-    .required()
-    .label("Subtopic")
 });
 
 const initialState = {
@@ -32,21 +26,8 @@ const initialState = {
 };
 
 export const Uploadnotes = () => {
+
   const [topicValidate, settopicValidate] = useState<boolean>(false);
-  // const [descriptionValidate, setdescriptionValidate] = useState(false);
-  // const [subtopicValidate, setsubtopicValidate] = useState(false);
-
-  // all blobs in container
-  const [blobList, setBlobList] = useState<string[]>([]);
-
-  // current file to upload into container
-  const [fileSelected, setFileSelected] = useState(null);
-
-  // UI/form management
-  const [uploading, setUploading] = useState(false);
-  const [uploaded, setUploaded] = useState(false);
-  const [inputKey, setInputKey] = useState(Math.random().toString(36));
-
   const changetopicValidate = (status: boolean): boolean => {
     if (status) {
       settopicValidate(true);
@@ -57,33 +38,70 @@ export const Uploadnotes = () => {
     }
   };
 
-  const onFileChange = (event: any) => {
-    // capture file into state
-    setFileSelected(event.target.files[0]);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [imageUpload, setImageUpload] = useState<any>(null);
+  const [file, setFile] = useState<any>(null);
+  const [progress, setProgress] = useState(0);
+  const [uploading, setUploading] = useState(false);
+  const params = useParams();
+  const [loading, setLoading] = useState(false);
+
+  console.log(params.course_id)
+
+  const uploadFile = (event:any) => {
+
+    // console.log(event);
+    setUploading(true)
+    const storageRef = FirebaseApp.storage().ref();
+    console.log(storageRef);
+    const fileRef = storageRef.child(`/Notes/${event.name + uuidv4()}`);
+    const uploadTask = fileRef.put(event);
+    uploadTask.on(
+      'state_changed',
+      snapshot => {
+        const prog = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        setProgress(prog);
+      },
+      err => console.log(err),
+      () => {
+        fileRef.getDownloadURL().then(url => {
+          console.log(url);
+          setFile(url);
+        });
+      }
+    );
   };
 
-  const onFileUpload = async () => {
-    // prepare UI
-    setUploaded(false);
-    setUploading(true);
+  const submitNotes = (values:any) => {
+    console.log(values)
+    const apiData = JSON.stringify({
+      "topic": `${values.topic}`,
+      "course_id": `${params.course_id}`,
+      "note": `${file}`,
+    })
+    axios({
+      method: "POST",
+      url: "https://learnx.azurewebsites.net/notes/createNotes",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: apiData
+    }).then((apiRes) => {
+      // console.log(apiData)
+      // console.log(apiRes.status);
+      if (apiRes.status === 200) {
+        setLoading(false);
+        swal(`Poof! You have successfully Uploaded the Note`, {
+          icon: "success",
+        });
+      }
+    }).catch((error) => {
+      console.log(error.message)
+    })
+  }
 
-    // *** UPLOAD TO AZURE STORAGE ***
-    const blobsInContainer: string[] = await uploadFileToBlob(fileSelected);
-    // await uploadFileToBlob(fileSelected);
 
-    // prepare UI for results
-    setBlobList(blobsInContainer);
-
-    // reset state/form
-    setFileSelected(null);
-    setUploading(false);
-    setUploaded(true);
-    setInputKey(Math.random().toString(36));
-
-    // return blobsInContainer[0];
-  };
-
-  const DisplayForm = () => (
+  return (
     <div className="StudentProfile">
       <Container>
         <div className="PanelHeader">
@@ -106,7 +124,7 @@ export const Uploadnotes = () => {
                           <Col xl={8}>
                             <Form.Control
                               type="text"
-                              placeholder="Topic of the lesson"
+                              placeholder="Enter name of the lesson"
                               name="topic"
                               value={values.topic}
                               onChange={handleChange}
@@ -130,25 +148,32 @@ export const Uploadnotes = () => {
                               placeholder="Notes"
                               name="upload"
                               accept="application/pdf"
-                              onChange={onFileChange} />
+                              onChange={(event:any) => {
+                                uploadFile(event.target.files[0]);
+                              }}
+                            />
                           </Col>
                         </Form.Group>
                       </Row>
-
+                      {uploading &&
+                      <Row className="px-5 mx-5 py-3" >
+                        <Alert variant="success" >Uploading {progress}%</Alert>
+                      </Row>
+                      }
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
                           <Col xl={4}>
                             <Form.Label style={{ fontWeight: 600 }}></Form.Label>
                           </Col>
-                          <Col xl={8} style={{ margin: '0 108px' }}>
-                            <div className="Buttonforsubmit">
-                              <ButtonCommon name={'Submit'} onClick={onFileUpload} />
+                          <Col xl={8}>
+                            <div className="Buttonforsubmit" style={{ marginTop: '1rem', marginLeft: '8rem' }}>
+                              <Button name={'Submit'} onClick={()=>submitNotes(values)}>Upload</Button>
                             </div>
                           </Col>
                         </Form.Group>
                       </Row>
-                      {/* <AzureCloudStorage /> */}
                     </Form>
+                    {/* <h4>Uploaded {progress}%</h4> */}
                   </Row>
                 )}
               </Formik>
@@ -156,15 +181,6 @@ export const Uploadnotes = () => {
           </Col>
         </div>
       </Container>
-    </div>
-  );
-
-  return (
-    <div>
-      {!storageConfigured && <div>Storage is not configured.</div>}
-      {storageConfigured && !uploading && DisplayForm()}
-      {storageConfigured && uploading && <div>Uploading</div>}
-      {storageConfigured && uploaded && <div>Successfully uploaded. Go back to page</div>}
     </div>
   );
 };

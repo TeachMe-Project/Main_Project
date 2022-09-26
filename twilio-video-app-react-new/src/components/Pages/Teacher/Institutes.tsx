@@ -73,49 +73,51 @@ export const Institutes = () => {
   }, []);
 
   const acceptInstitute = (item: any) => (
-    <button
-      className="CardButton"
-      onClick={() => {
-        swal({
-          title: "Request Acception",
-          text: `Do you really want to accept this institute?`,
-          icon: "error",
-          buttons: {
-            cancel: true,
-            confirm: true
-          }
-          // dangerMode: true,
-        })
-          .then((willDelete: any) => {
-            const apiData = JSON.stringify({
-              "institute_id": item.id,
-              "request_time": new Date(),
+    <div className="SubscribeBtn Accept">
+      <button
+        className="CardButton"
+        onClick={() => {
+          swal({
+            title: "Request Acception",
+            text: `Do you really want to accept this institute?`,
+            icon: "error",
+            buttons: {
+              cancel: true,
+              confirm: true
+            }
+            // dangerMode: true,
+          })
+            .then((willDelete: any) => {
+              const apiData = JSON.stringify({
+                "institute_id": item.id,
+                "request_time": new Date(),
+              });
+              axios({
+                method: "POST",
+                url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                data: apiData,
+              }).then((apiRes) => {
+                console.log(apiRes.status);
+                if (apiRes.status === 200) {
+                  swal(`Poof! You have successfully removed ${item.name}`, {
+                    icon: "success",
+                  });
+                }
+                console.log(`Successfully removed ${item.name}`);
+              }).catch((error) => {
+                console.log(error.message);
+              }).catch((error) => {
+                console.log(error.message);
+              });
             });
-            axios({
-              method: "POST",
-              url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
-              headers: {
-                "Content-Type": "application/json",
-              },
-              data: apiData,
-            }).then((apiRes) => {
-              console.log(apiRes.status);
-              if (apiRes.status === 200) {
-                swal(`Poof! You have successfully removed ${item.name}`, {
-                  icon: "success",
-                });
-              }
-              console.log(`Successfully removed ${item.name}`);
-            }).catch((error) => {
-              console.log(error.message);
-            }).catch((error) => {
-              console.log(error.message);
-            });
-          });
-      }}
-    >
-      Accept
-    </button>
+        }}
+      >
+        Accept
+      </button>
+    </div >
   );
 
   return (
@@ -135,13 +137,10 @@ export const Institutes = () => {
                 <table className="booking-table" id="view-booking">
                   <thead>
                     <tr className="booking-thead-second-tr" style={{ textAlign: "left" }}>
-                      {/*amc: Institute Manage Courses*/}
                       <th className="imc-first-th">Institute ID</th>
                       <th className="imc-second-th">Institute Name</th>
                       <th className="imc-second-th">Contact Number</th>
                       <th className="imc-last-th"></th>
-
-                      {/* <th className="imc-last-th"></th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -152,87 +151,15 @@ export const Institutes = () => {
                           <td data-label="Institute Name :">{item.name}</td>
                           <td data-label="Contact Number :">{item.contact}</td>
                           <td data-label="Contact Number :">
-                            <div className="ViewMore">
-                              <Link to="" className="link ViewMoreBtn">
-                                <CardButton btnname={"View More"} />
-                              </Link>
+                            <div className="ViewMore ViewMoreBtn">
+                              <button className="CardButton" onClick={() => navigate(`/instituteView/${item.id}`)}>
+                                View More
+                              </button>
                             </div>
                           </td>
                         </tr>
                       );
                     })}
-                    {/* <tr>
-                      <td data-label="Institute ID :">10000102345</td>
-                      <td data-label="Institute Name :">Sigma Institute</td>
-                      <td data-label="Contact Number :">011 2536472</td>
-                      <td data-label="Contact Number :">
-                        <div className="ViewMore">
-                          <Link to="" className="link ViewMoreBtn">
-                            <CardButton btnname={'View More'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Institute ID  :">10000102355</td>
-                      <td data-label="Institute Name :">Rotary Institute</td>
-                      <td data-label="Contact Number :">011 2859684</td>
-                      <td data-label="Contact Number :">
-                        <div className="ViewMore">
-                          <Link to="" className="link ViewMoreBtn">
-                            <CardButton btnname={'View More'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Institute ID  :">10000102320</td>
-                      <td data-label="Institute Name :">Syzygy Institute</td>
-                      <td data-label="Contact Number :">011 2772134</td>
-                      <td data-label="Contact Number :">
-                        <div className="ViewMore">
-                          <Link to="" className="link ViewMoreBtn">
-                            <CardButton btnname={'View More'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Institute ID  :">10000109945</td>
-                      <td data-label="Institute Name :">Montana Institute</td>
-                      <td data-label="Contact Number :">011 7234999</td>
-                      <td data-label="Contact Number :">
-                        <div className="ViewMore">
-                          <Link to="" className="link ViewMoreBtn">
-                            <CardButton btnname={'View More'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Institute ID  :">10000102300</td>
-                      <td data-label="Institute Name :">Sasip Institute</td>
-                      <td data-label="Contact Number :">033 2999684</td>
-                      <td data-label="Contact Number :">
-                        <div className="ViewMore">
-                          <Link to="" className="link ViewMoreBtn">
-                            <CardButton btnname={'View More'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Institute ID  :">10000102345</td>
-                      <td data-label="Institute Name :">Shakthi</td>
-                      <td data-label="Contact Number :">011 2859684</td>
-                      <td data-label="Contact Number :">
-                        <div className="ViewMore">
-                          <Link to="" className="link ViewMoreBtn">
-                            <CardButton btnname={'View More'} />
-                          </Link>
-                        </div>
-                      </td>
-                    </tr> */}
                   </tbody>
                 </table>
               </div>
@@ -253,17 +180,14 @@ export const Institutes = () => {
                           </Col>
 
                           <Col xl={6}>
-                            <div className="ViewMore">
-                              <Link to="" className="link ViewMoreBtn">
-                                <CardButton btnname="View More" />
-                              </Link>
+                            <div className="ViewMore link ViewMoreBtn">
+                              <button className="CardButton" onClick={() => navigate(`/instituteView/${item.id}`)}>
+                                View More
+                              </button>
                             </div>
                           </Col>
 
                           <Col xl={1}>
-                            {/* <Link to="" className=" link SubscribeBtn">
-                              <CardButton btnname="Accept" />
-                            </Link> */}
                             {acceptInstitute(item)}
                           </Col>
 
@@ -273,33 +197,9 @@ export const Institutes = () => {
                               <ButtonCommon name="Decline" />
                             </Link>
                           </Col>
-                          {/* </InstituteCard> */}
                         </div>
                       );
                     })}
-                    {/* <InstituteCard
-                      institutename="Susipwan Institute, Gampaha"
-                      image={<img src={'/Images/subjects/Science.png'} />}
-                      btn1="View more"
-                      btn2="Accept"
-                      btn3="Decline"
-                    />
-
-                    <InstituteCard
-                      institutename="Shakthi Institute"
-                      image={<img src={'/Images/subjects/art.png'} />}
-                      btn1="View more"
-                      btn2="Accept"
-                      btn3="Decline"
-                    />
-
-                    <InstituteCard
-                      institutename="Flysky Institute"
-                      image={<img src={'/Images/subjects/Mathematics.png'} />}
-                      btn1="View more"
-                      btn2="Accept"
-                      btn3="Decline"
-                    /> */}
                   </div>
                 </div>
               </div>

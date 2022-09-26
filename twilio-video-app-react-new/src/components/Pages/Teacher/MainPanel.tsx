@@ -8,6 +8,7 @@ import CreateCourse from "./CreateCourse";
 import Dashboard from "./Dashboard";
 import Editdetails from "./Editdetails";
 import Institutes from "./Institutes";
+import InstituteProfile from "./Instituteprofileview";
 import MyCourses from "./MyCourses";
 import FreeCard from "./FreeCard";
 import Settings from "./Settings";
@@ -82,7 +83,7 @@ const routes = [
     main: () => <Editdetails />
   },
   {
-    path: "/uploadnotes",
+    path: "/uploadnotes/:course_id",
     main: () => <Uploadnotes />
   },
   {
@@ -90,7 +91,7 @@ const routes = [
     main: () => <StudentAnalytics />
   },
   {
-    path: "/uploadhomework",
+    path: "/uploadhomework/:course_id",
     main: () => <Uploadhomework />
   },
   {
@@ -98,11 +99,15 @@ const routes = [
     main: () => <Institutes />
   },
   {
+    path: "/instituteView/:instituteId",
+    main: () => <InstituteProfile />
+  },
+  {
     path: "/freecard",
     main: () => <FreeCard />
   },
   {
-    path: "/addextraclass",
+    path: "/addextraclass/:course_id",
     main: () => <Addextraclass />
   },
   {

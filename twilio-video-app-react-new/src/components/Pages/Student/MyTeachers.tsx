@@ -53,7 +53,7 @@ export const MyTeachers = () => {
               <div className="small-scrollbar">
                 {teachers.map((item: any) => {
                   return (
-                    <Link to="/course" className="link">
+                    <Link to="/teacherProfile" className="link">
                       <TeacherCard
                         grade={item.grade}
                         subject={item.subject}

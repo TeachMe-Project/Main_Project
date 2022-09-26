@@ -42,13 +42,18 @@ window.electron.ipcRenderer.on('ipc-example', (arg) => {
 });
 
  */
+let totalAmount = 0;
+
 export const Dashboard = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
   // const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
+  const baseURLChart1 = `http://localhost:8081/teacher/chart1/${teacherAuthId}`;
   const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
-
+  const [chart1, setChart1] = useState<any[]>([]);
+  const [chart2, setChart2] = useState<any[]>([]);
+  
   useEffect(() => {
     axios
       .get(baseURL)
@@ -62,9 +67,43 @@ export const Dashboard = () => {
               grade: item.course.grade,
               date: convertDate(item.date),
               time: convertTime(item.course.start_time) + " - " + convertTime(item.course.end_time)
-              // time: item.course.start_time + ' - ' + item.course.end_time,
             }
           ]);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios
+      .get(baseURLChart1)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          const lengthStu = item.student_course.length
+          setChart1(prevState => [
+            ...prevState,
+            {
+              course: item.course_name,
+              student: lengthStu
+            }
+          ]);
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios
+      .get(baseURLChart1)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          const lengthStu = item.student_course.length
+          setChart2(prevState => [
+            ...prevState,
+            {
+              course: item.course_name,
+              amount: 'Rs.' + (item.price * lengthStu)
+            }
+          ]);
+          totalAmount = totalAmount + (item.price * lengthStu);
         });
       })
       .catch(error => {
@@ -124,31 +163,6 @@ export const Dashboard = () => {
                   />
                 );
               })}
-              {/* <Card
-                header="Mathematics"
-                time="04:00pm- 06:00pm"
-                date="23-08-2022"
-                grade="Grade 8"
-                btnname="Start"
-                image={<img src={'/Images/subjects/Mathematics.png'} />}
-              />
-              <Card
-                header="Mathematics"
-                time="04:00pm- 06:00pm"
-                date="24-08-2022"
-                grade="Grade 9"
-                btnname="Start"
-                image={<img src={'/Images/subjects/Mathematics.png'} />}
-              />
-
-              <Card
-                header="Mathematics"
-                time="04:00pm- 06:00pm"
-                date="30-08-2022"
-                grade="Grade 8"
-                btnname="Start"
-                image={<img src={'/Images/subjects/maths.png'} />}
-              /> */}
             </div>
           </div>
         </Row>
@@ -160,7 +174,7 @@ export const Dashboard = () => {
           <Row>
             <Col xl={6}>
               <div className="chart">
-                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem" }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem", overflow: 'scroll' }}>
                   <div className="card-body">
                     <div className="fundsRow" style={{ display: "Flex", marginBottom: "20px" }}>
                       <Col xl={8}>
@@ -174,27 +188,22 @@ export const Dashboard = () => {
                         </h5>
                       </Col>
                     </div>
-                    <div className="fundsRow" style={{ display: "Flex", marginBottom: "20px" }}>
-                      <Col xl={8}>
-                        <p style={{ marginRight: "20px" }}>Mathematics</p>
-                      </Col>
-                      <Col xl={4}>
-                        <p className="text-center">20</p>
-                      </Col>
-                    </div>
 
-                    <div className="fundsRow" style={{ display: "Flex", marginBottom: "20px" }}>
-                      <Col xl={8}>
-                        <p style={{ marginRight: "20px" }}>Science</p>
-                      </Col>
-                      <Col xl={4}>
-                        <p className="text-center">18</p>
-                      </Col>
-                    </div>
+                    {chart1.map((item: any) => {
+                      return (
+                        <div className="fundsRow" style={{ display: "Flex", marginBottom: "20px" }}>
+                          <Col xl={8}>
+                            <p style={{ marginRight: "20px" }}>{item.course}</p>
+                          </Col>
+                          <Col xl={4}>
+                            <p className="text-center">{item.student}</p>
+                          </Col>
+                        </div>
+                      );
+                    })}
+
                   </div>
                 </div>
-
-                {/* <Monthlyattendancechart /> */}
               </div>
             </Col>
 
@@ -202,28 +211,24 @@ export const Dashboard = () => {
 
             <Col xl={6}>
               <div className="chart">
-                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem" }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem", overflow: 'scroll' }}>
                   <div className="card-body">
                     <h5 className="card-title" style={{ marginBottom: "20px", color: "#1e90ff" }}>
                       Monthly Income
                     </h5>
-                    <div className="fundsRow" style={{ display: "Flex" }}>
-                      <Col xl={8}>
-                        <p style={{ marginRight: "20px" }}>Mathematics</p>
-                      </Col>
-                      <Col xl={4}>
-                        <p>Rs.5,000.00</p>
-                      </Col>
-                    </div>
 
-                    <div className="fundsRow" style={{ display: "Flex" }}>
-                      <Col xl={8}>
-                        <p style={{ marginRight: "20px" }}>Science</p>
-                      </Col>
-                      <Col xl={4}>
-                        <p>Rs.20,000.00</p>
-                      </Col>
-                    </div>
+                    {chart2.map((item: any) => {
+                      return (
+                        <div className="fundsRow" style={{ display: "Flex" }}>
+                          <Col xl={8}>
+                            <p style={{ marginRight: "20px" }}>{item.course}</p>
+                          </Col>
+                          <Col xl={4}>
+                            <p>{item.amount}</p>
+                          </Col>
+                        </div>
+                      );
+                    })}
 
                     <div className="fundsRow" style={{ display: "Flex" }}>
                       <Col xl={8}>
@@ -231,47 +236,16 @@ export const Dashboard = () => {
                       </Col>
                       <Col xl={4}>
                         <p>
-                          <b>Rs.30,000.00</b>
+                        <b>Rs. {totalAmount}</b>
                         </p>
                       </Col>
                     </div>
                   </div>
                 </div>
 
-                {/* <Monthlyattendancechart /> */}
               </div>
             </Col>
           </Row>
-
-          {/* <Row>
-            <Col xl={6}>
-              <div
-                className="chart"
-                style={{
-                  height: '460px',
-                  position: 'relative',
-                  top: 50,
-                  left: -10,
-                }}
-              >
-                <Enrollmentchart />
-              </div>
-            </Col>
-            <Col xl={6}>
-              <div
-                className="chart"
-                style={{
-                  height: '460px',
-                  width: '480px',
-                  position: 'relative',
-                  top: 50,
-                  // left: 40,
-                }}
-              >
-                <Averagetimechart />
-              </div>
-            </Col>
-          </Row> */}
 
           <Row>
             <Col xl={6}>
