@@ -1,5 +1,5 @@
 import express from "express";
-import {createNote, getNoteByID, getNotes} from "../controllers/notesController";
+import {createNote, getNoteByID, getNotes, removeNote} from "../controllers/notesController";
 
 export const notesRouter=express.Router();
 
@@ -13,5 +13,8 @@ notesRouter.route("/:id")
 
 notesRouter.route("/createNotes")
     .post(createNote);
+
+notesRouter.route("/removeNote")
+    .post(removeNote);
 
 

@@ -341,7 +341,7 @@ export const getAvgAttendanceAnalytics = async (req: Request, res: Response) => 
                 }
             }
         })
-        console.log(courses);
+        // console.log(courses);
         res.status(200).send(courses)
     } catch (error: any) {
         res.status(500).send(error.message);
