@@ -11,7 +11,7 @@ export const getInstitutes = async (req: Request, res: Response) => {
     try {
         const data = await prisma.institute.findMany()
         res.status(200).send(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).send(error.message);
     }
 }
@@ -29,7 +29,7 @@ export const getInstituteByID = async (req: Request, res: Response) => {
         })
         logger.info(NAME_SPACE, data[0].user_id)
         res.status(200).json(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).send(error.message);
     }
 }
@@ -43,7 +43,7 @@ export const getInstituteByName = async (req: Request, res: Response) => {
             }
         })
         res.status(200).send(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).send(error.message);
     }
 }
@@ -73,7 +73,7 @@ export const updateInstituteDetails = async (req: Request, res: Response) => {
             })
             res.status(200).send(data)
             logger.info(NAME_SPACE, "Your Institute Profile Successfully Updated");
-        } catch (error) {
+        } catch (error:any) {
             res.status(500).send(error);
             logger.error(NAME_SPACE, error.message);
 
@@ -108,7 +108,7 @@ export const getAllInstituteCourses = async (req: Request, res: Response) => {
             }
         })
         res.status(200).send(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).send(error.message);
     }
 }
@@ -141,7 +141,7 @@ export const getAllInstituteTeachers = async (req: Request, res: Response) => {
             }
         })
         res.status(200).send(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).send(error.message);
     }
 }
@@ -180,7 +180,7 @@ export const createInstitute = async (req: Request, res: Response) => {
             })
             logger.info(NAME_SPACE, "Your Institute Profile Successfully Created");
             res.status(200).send("Your Institute Profile Successfully Created");
-        } catch (error) {
+        } catch (error:any) {
             logger.error(NAME_SPACE, error.message);
             res.status(500).send(error.message);
         }
@@ -206,7 +206,7 @@ export const searchTeacher = async (req: Request, res: Response) => {
             }
         })
         res.status(200).send(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).send(error.message);
     }
 }
@@ -235,7 +235,7 @@ export const createTeacherRequest = async (req: Request, res: Response) => {
                 }
             })
             res.status(200).send(data)
-        } catch (error) {
+        } catch (error:any) {
             res.status(500).send(error.message);
         }
     } else {
@@ -272,7 +272,7 @@ export const removeInstituteTeacher = async (req: Request, res: Response) => {
         })
         console.log(data)
         res.status(200).send(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).send(error.message);
     }
 

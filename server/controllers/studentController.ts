@@ -79,6 +79,10 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
             date: {
               gte: new Date()
             }
+          },
+          include:{
+            teacher:true,
+            course:true
           }
         }
       );
@@ -281,21 +285,21 @@ export const makeCourseRequest = async (req: Request, res: Response) => {
 
 
 export const insertUsedApps = async (req: Request, res: Response) => {
-  try {
-    const data = await prisma.student_class.updateMany(
-      {
-        where: {
-          student_id: Number(req.params.id)
-        },
-        data: {
-          usedApps: req.body.apps
-        }
-      }
-    )
-    res.status(200).send(data)
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
+    try {
+        const data = await prisma.student_class.updateMany(
+            {
+                where: {
+                    student_id: Number(req.params.id)
+                },
+                data: {
+                    usedApps:req.body.apps
+                }
+            }
+        )
+        res.status(200).send(data)
+    } catch (error:any) {
+        res.status(500).send(error.message);
+    }
 }
 
 export const getUsedApps = async (req: Request, res: Response) => {
@@ -341,7 +345,7 @@ export const getUsedApps = async (req: Request, res: Response) => {
     }
 
     res.status(200).send(apps)
-  } catch (error) {
+  } catch (error:any) {
     res.status(500).send(error.message);
   }
 }
