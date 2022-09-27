@@ -174,7 +174,6 @@ export const Course = () => {
             cancel: true,
             confirm: true
           }
-          // dangerMode: true,
         })
           .then((willDelete: any) => {
             const apiData = JSON.stringify({
@@ -183,6 +182,50 @@ export const Course = () => {
             axios({
               method: "POST",
               url: `http://localhost:8081/homework/removeHomework`,
+              headers: {
+                "Content-Type": "application/json",
+              },
+              data: apiData,
+            }).then((apiRes) => {
+              console.log(apiRes.status);
+              if (apiRes.status === 200) {
+                swal(`Poof! You have successfully removed ${item.topic}`, {
+                  icon: "success",
+                });
+              }
+              console.log(`Successfully removed ${item.topic}`);
+            }).catch((error) => {
+              console.log(error.message);
+            }).catch((error) => {
+              console.log(error.message);
+            });
+          });
+      }}
+    ><MdDelete
+        className="Reacticon" />
+        Remove
+     </a>
+  );
+  const removeNote = (item: any) => (
+    <a
+      className="Reacticonbtn remove"
+      onClick={() => {
+        swal({
+          title: "Request Removal",
+          text: `Do you really want to remove this note?`,
+          icon: "error",
+          buttons: {
+            cancel: true,
+            confirm: true
+          }
+        })
+          .then((willDelete: any) => {
+            const apiData = JSON.stringify({
+              "note_id": item.id,
+            });
+            axios({
+              method: "POST",
+              url: `http://localhost:8081/notes/removeNote`,
               headers: {
                 "Content-Type": "application/json",
               },
@@ -291,11 +334,7 @@ export const Course = () => {
 
                             </td>
                             <td data-label="">
-                              <a
-                                className="Reacticonbtn remove"
-                              >
-                                <MdDelete className="Reacticon" />Remove
-                              </a>
+                              {removeNote(item)}
                             </td>
                           </tr>
                         );
@@ -340,14 +379,6 @@ export const Course = () => {
 
                           </td>
                           <td data-label="">
-                            {/* <a
-                              download="note1.pdf"
-                              href=""
-                              target="_blank"
-                              className="Reacticonbtn remove"
-                            >
-                              <MdDelete className="Reacticon" />Remove
-                            </a> */}
                             {removeHomework(item)}
                           </td>
                         </tr>

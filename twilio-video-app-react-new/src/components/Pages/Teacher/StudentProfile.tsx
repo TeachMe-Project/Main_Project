@@ -78,24 +78,20 @@ export const StudentProfile = () => {
         </div>
         <div className="PanelContainer">
           <Col xl={4}>
-            {/* {parentProfDetails.map((item: any) => {
-              return ( */}
-                <div className="LeftContainer">
-                  <div className="ProfileImg">
-                    <img src={parentProfDetails.Studentpic} />
-                  </div>
-                  <div className="ParentContact">
-                    <div className="ContactHeader">Parent's Contact Details:</div>
-                    <div className="ParentLabel">Name:</div>
-                    <div className="ParentValue">{parentProfDetails.Parentname}</div>
-                    <div className="ParentLabel">Mobile No:</div>
-                    <div className="ParentValue">{parentProfDetails.Parentcontact}</div>
-                    <div className="ParentLabel">Email:</div>
-                    <div className="ParentValue">{parentProfDetails.Parentemail}</div>
-                  </div>
-                </div>
-              {/* );
-            })} */}
+            <div className="LeftContainer">
+              <div className="ProfileImg">
+                <img src={parentProfDetails.Studentpic} />
+              </div>
+              <div className="ParentContact">
+                <div className="ContactHeader">Parent's Contact Details:</div>
+                <div className="ParentLabel">Name:</div>
+                <div className="ParentValue">{parentProfDetails.Parentname}</div>
+                <div className="ParentLabel">Mobile No:</div>
+                <div className="ParentValue">{parentProfDetails.Parentcontact}</div>
+                <div className="ParentLabel">Email:</div>
+                <div className="ParentValue">{parentProfDetails.Parentemail}</div>
+              </div>
+            </div>
           </Col>
 
           <Col xl={8}>
@@ -117,7 +113,6 @@ export const StudentProfile = () => {
                               placeholder="Enter the first name here"
                               name="Firstname"
                               value={values.Firstname}
-
                             />
                           </Col>
                         </Form.Group>
