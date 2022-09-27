@@ -181,7 +181,7 @@ export const Course = () => {
             });
             axios({
               method: "POST",
-              url: `http://localhost:8081/homework/removeHomework`,
+              url: `https://learnx.azurewebsites.net/homework/removeHomework`,
               headers: {
                 "Content-Type": "application/json",
               },
@@ -225,7 +225,7 @@ export const Course = () => {
             });
             axios({
               method: "POST",
-              url: `http://localhost:8081/notes/removeNote`,
+              url: `https://learnx.azurewebsites.net/notes/removeNote`,
               headers: {
                 "Content-Type": "application/json",
               },

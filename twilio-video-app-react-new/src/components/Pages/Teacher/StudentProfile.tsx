@@ -23,8 +23,8 @@ export const StudentProfile = () => {
   const studentAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  // const baseURLStudent = `https://learnx.azurewebsites.net/student/${params.user_id}`;
-  const baseURLStudent = `http://localhost:8081/student/${params.user_id}`;
+  const baseURLStudent = `https://learnx.azurewebsites.net/student/${params.user_id}`;
+  // const baseURLStudent = `http://localhost:8081/student/${params.user_id}`;
   const [parentProfDetails, setParentProfDetails] = useState<any>([]);
 
   const [initialState, setInitialState] = useState<initialState>({
