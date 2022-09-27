@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import {PrismaClient} from '@prisma/client'
+import {notesSchema} from "../models/notesModel";
 // import {notesSchema} from "../models/notesModel";
 
 const prisma = new PrismaClient()
@@ -58,9 +59,7 @@ export const createNote = async (req: Request, res: Response) => {
 }
 
 export const removeNote = async (req: Request, res: Response) => {
-    const { error, value } = notesSchema.validate(req.body);
 
-    if (!error) {
         try {
             // @ts-ignore
             const data = await prisma.notes.update({
@@ -75,9 +74,7 @@ export const removeNote = async (req: Request, res: Response) => {
         } catch (error) {
             res.status(500).send(error);
         }
-    }
-    else {
-        res.status(500).send(error.details[0].message);
-    }
+
+
 }
 
