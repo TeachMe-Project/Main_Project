@@ -91,8 +91,9 @@ export const Course = () => {
           setNotes(prevState => [
             ...prevState,
             {
+              id: item.note_id,
               topic: item.topic,
-              date: item.uploaded_date.substring(0,10),
+              date: item.uploaded_date.substring(0, 10),
               link: item.note
             }
           ]);
@@ -110,8 +111,9 @@ export const Course = () => {
           setHomework(prevState => [
             ...prevState,
             {
-              topic:item.topic,
-              date: item.uploaded_date.substring(0,10),
+              id: item.homework_id,
+              topic: item.topic,
+              date: item.uploaded_date.substring(0, 10),
               link: item.homework
             }
           ]);
@@ -161,11 +163,11 @@ export const Course = () => {
   }, []);
 
   const removeHomework = (item: any) => (
-    <MdDelete
-      className="Reacticonbtn remove Reacticon"
+    <a
+      className="Reacticonbtn remove"
       onClick={() => {
         swal({
-          title: "Request Removaal",
+          title: "Request Removal",
           text: `Do you really want to remove this homework?`,
           icon: "error",
           buttons: {
@@ -176,12 +178,11 @@ export const Course = () => {
         })
           .then((willDelete: any) => {
             const apiData = JSON.stringify({
-              "institute_id": item.id,
-              "request_time": new Date(),
+              "homework_id": item.id,
             });
             axios({
               method: "POST",
-              url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
+              url: `http://localhost:8081/homework/removeHomework`,
               headers: {
                 "Content-Type": "application/json",
               },
@@ -189,19 +190,22 @@ export const Course = () => {
             }).then((apiRes) => {
               console.log(apiRes.status);
               if (apiRes.status === 200) {
-                swal(`Poof! You have successfully removed ${item.name}`, {
+                swal(`Poof! You have successfully removed ${item.topic}`, {
                   icon: "success",
                 });
               }
-              console.log(`Successfully removed ${item.name}`);
+              console.log(`Successfully removed ${item.topic}`);
             }).catch((error) => {
               console.log(error.message);
             }).catch((error) => {
               console.log(error.message);
             });
           });
-      }} />
-    // </a>
+      }}
+    ><MdDelete
+        className="Reacticon" />
+        Remove
+     </a>
   );
 
   return (
@@ -336,14 +340,15 @@ export const Course = () => {
 
                           </td>
                           <td data-label="">
-                            <a
+                            {/* <a
                               download="note1.pdf"
                               href=""
                               target="_blank"
                               className="Reacticonbtn remove"
                             >
                               <MdDelete className="Reacticon" />Remove
-                            </a>
+                            </a> */}
+                            {removeHomework(item)}
                           </td>
                         </tr>
                       );
@@ -383,11 +388,11 @@ export const Course = () => {
               <div className="Schedules">
                 <div className="scheduleContainer">
                   <Row>
-                      <div className="buttoneditdetails">
-                        <div className="ButtonCommon" style={{ float: "right", position: "relative", top: "10px", width: "max-content" }} onClick={() => navigate(`/addextraclass/${params.course_id}`)}>
-                          Schedule Extra Class
-                        </div>
+                    <div className="buttoneditdetails">
+                      <div className="ButtonCommon" style={{ float: "right", position: "relative", top: "10px", width: "max-content" }} onClick={() => navigate(`/addextraclass/${params.course_id}`)}>
+                        Schedule Extra Class
                       </div>
+                    </div>
                   </Row>
                 </div>
                 <table className="booking-table" id="view-booking">

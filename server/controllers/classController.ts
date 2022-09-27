@@ -51,17 +51,18 @@ export const createClass = async (req: Request, res: Response) => {
                     teacher_id: true
                 }
             })
+            console.log(req.body.date);
 
             //@ts-ignore
             const data = await prisma.teacher_class.create({
                 data: {
+                    course_id: req.body.course_id,
+                    teacher_id: teacher_id,
                     date: req.body.date,
                     start_time: req.body.start_time,
                     end_time: req.body.end_time,
                     isActive: true,
                     isStarted: false,
-                    course_id: req.body.course_id,
-                    teacher_id: teacher_id,
                 }
             })
             res.status(200).send(data)

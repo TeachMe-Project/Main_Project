@@ -1,6 +1,5 @@
-import {Request, Response} from "express";
-import {PrismaClient} from '@prisma/client'
-import {notesSchema} from "../models/notesModel";
+import { Request, Response } from "express";
+import { PrismaClient } from '@prisma/client'
 // import {notesSchema} from "../models/notesModel";
 
 const prisma = new PrismaClient()
@@ -9,11 +8,11 @@ export const getNotes = async (req: Request, res: Response) => {
 
     try {
         const data = await prisma.notes.findMany({
-            where:{
+            where: {
                 course_id: Number(req.params.course_id)
             },
-            orderBy:{
-             uploaded_date: "desc"
+            orderBy: {
+                uploaded_date: "desc"
             }
         })
         res.status(200).send(data)
@@ -52,29 +51,26 @@ export const createNote = async (req: Request, res: Response) => {
             }
         })
         res.status(200).send(data)
-    } catch (error:any) {
+    } catch (error: any) {
         console.log(error.message)
         res.status(500).send(error.message);
     }
 }
 
 export const removeNote = async (req: Request, res: Response) => {
-
-        try {
-            // @ts-ignore
-            const data = await prisma.notes.update({
-                where: {
-                    note_id: req.body.note_id
-                },
-                data: {
-                    isActive: false
-                }
-            })
-            res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
-        }
-
-
+    try {
+        // @ts-ignore
+        const data = await prisma.notes.update({
+            where: {
+                note_id: req.body.note_id
+            },
+            data: {
+                isActive: false
+            }
+        })
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(500).send(error);
+    }
 }
 
