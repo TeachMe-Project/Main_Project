@@ -293,7 +293,7 @@ export const insertUsedApps = async (req: Request, res: Response) => {
             }
         )
         res.status(200).send(data)
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).send(error.message);
     }
 }
