@@ -48,7 +48,7 @@ export const StudentProfile = () => {
             Schoolname: item.school,
           });
         });
-        console.log(initialState);
+        console.log(initialState)
       })
       .catch(error => {
         console.log(error);

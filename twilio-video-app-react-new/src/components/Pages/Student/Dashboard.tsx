@@ -12,10 +12,10 @@ import Searchbar from '../../Searchbar/Searchbar';
 import axios, { AxiosResponse } from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loader from "../../../auth0/Loader";
-import {CardHeader} from "../../Card/CardHeader";
-import {CardDetails} from "../../Card/CardDetails";
-import {CardButton} from "../../Card/CardButton";
-import {useNavigate} from "react-router-dom";
+import { CardHeader } from "../../Card/CardHeader";
+import { CardDetails } from "../../Card/CardDetails";
+import { CardButton } from "../../Card/CardButton";
+import { useNavigate } from "react-router-dom";
 
 const convertTime = (x: Date) => {
   const time = x.toLocaleTimeString('it-IT');
@@ -34,7 +34,7 @@ export const Dashboard = () => {
   // const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
   const baseURL = `https://learnx.azurewebsites.net/student/upcomingClasses/${studentAuthId}`;
   const [loading, setLoading] = useState(true);
-  const [apps,setApps] = useState<any>([]);
+  const [apps, setApps] = useState<any>([]);
 
   // const updateApps = (()=>{
   //
@@ -62,51 +62,44 @@ export const Dashboard = () => {
   //
   // })
 
+  // @ts-ignore
+  window.electron.ipcRenderer.on('ipc-example', (arg) => {
+    // eslint-disable-next-line no-console
+    axios.post('http://localhost:8081/student/1/insertUsedApps', {
+
+      apps: Array.from(arg).toString()
+    })
+
+  });
+  // @ts-ignore
+  window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
 
 
 
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
-
-  useEffect(() => {
-
-    // @ts-ignore
-    window.electron.ipcRenderer.on('ipc-example', (arg) => {
-      // eslint-disable-next-line no-console
-      axios.post('http://localhost:8081/student/1/insertUsedApps', {
-
-        apps:Array.from(arg).toString()
-      })
-
-    });
-    // @ts-ignore
-    window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
-
-
-
-  const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {
         // console.log(res.data)
-        let count =0;
+        let count = 0;
         res.data.map((item: any) => {
           console.log(item)
           // console.log(item.teacher.first_name)
-            if(count<3){
-              setUpcomingClasses(prevState => [
-                ...prevState,
-                {
-                  class_id: item.class_id,
-                  subject: item.course.subject,
-                  teacher: item.teacher.title+'. ' + item.teacher.first_name + ' ' + item.teacher.last_name,
-                  date: item.date.substring(0,10),
-                  time: item.course.start_time.substring(0,5) + ' - ' + item.course.end_time.substring(0,5),
-                },
-              ]);
-              count++;
-            }
+          if (count < 3) {
+            setUpcomingClasses(prevState => [
+              ...prevState,
+              {
+                class_id: item.class_id,
+                subject: item.course.subject,
+                teacher: item.teacher.title + '. ' + item.teacher.first_name + ' ' + item.teacher.last_name,
+                date: item.date.substring(0, 10),
+                time: item.course.start_time.substring(0, 5) + ' - ' + item.course.end_time.substring(0, 5),
+              },
+            ]);
+            count++;
+          }
 
         });
         setLoading(false)
@@ -135,21 +128,21 @@ const navigate = useNavigate();
               <h5>Upcoming Classes</h5>
             </div>
             <div className="PanelBody">
-              {loading && <Loader/>}
+              {loading && <Loader />}
               {!loading && upcomingClasses.map((item: any) => {
                 return (
-                <div className="Card">
-                  <div className="CardImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
-                  <div className="CardBody">
-                    <CardHeader header={item.subject} />
-                    <CardDetails details={item.teacher} />
-                    <CardDetails details={item.time} />
-                    <CardDetails details={item.date} />
-                    <button className="CardButton" onClick={() => navigate('./twilio')}>
-                      Join
-                    </button>
+                  <div className="Card">
+                    <div className="CardImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
+                    <div className="CardBody">
+                      <CardHeader header={item.subject} />
+                      <CardDetails details={item.teacher} />
+                      <CardDetails details={item.time} />
+                      <CardDetails details={item.date} />
+                      <button className="CardButton" onClick={() => navigate('./twilio')}>
+                        Join
+                      </button>
+                    </div>
                   </div>
-                </div>
                 );
               })}
             </div>
