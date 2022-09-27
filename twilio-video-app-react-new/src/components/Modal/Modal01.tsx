@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import SearchIcon from "@material-ui/icons/Search";
 import {Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import CardButton from "../Card/CardButton";
+import axios from "axios";
 
 
 
@@ -50,16 +51,95 @@ const data = [
 ];
 
 function Modal01() {
+    const baseURL="http://localhost:8081/student/getUsedApps"
+    const [appData, setAppData] = useState<any>([])
+
+    function createAppData() {
+        axios
+            .post(baseURL, {
+                class_id:4,
+                course_id:3
+            })
+            .then((res) => {
+                res.data.map((item: any) => {
+                    setAppData((prevState: any) => [...prevState, {
+                        name:item.name,
+                        count:item.count,
+                        student:item.students
+
+                    }])
+
+
+                })
+            });
+    }
+    useEffect(()=>{
+        createAppData();
+    },[])
+
+
+
+
     const [show, setShow] = useState(false);
+    const[students,setStudents]=useState<any>([])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+
+    const [showapp, setappShow] = useState(false);
+
+    const handleappClose = () => setappShow(false);
+
+
+    const handleappShow = (items:any) => {setappShow(true)
+        console.log(items)
+
+        // items.map((item: any) => {
+        //     setStudents((prevState: any) => [...prevState, {
+        //         name:item
+        //
+        //     }])
+        //     console.log(item)
+        //
+        //
+        // })
+setStudents(items)
+
+             };
 
     return (
         <>
             <Button variant="light" onClick={handleShow}>
                 <SearchIcon />Monitor
             </Button>
+
+
+
+
+
+            <Modal  size={"sm"}   show={showapp} onHide={handleappClose}  >
+                <Modal.Header closeButton>
+
+                    <Modal.Title > Students</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {students.map((student:any) => {
+                        return (
+                            <tr>
+                                {student}
+                            </tr>
+
+                        );
+                    })}
+
+                </Modal.Body>
+
+            </Modal>
+
+
+
+
 
 
 
@@ -72,88 +152,119 @@ function Modal01() {
                     <table className="booking-table" id="view-booking">
 
                         <tbody>
-                        <tr>
-                            <td data-label="Course ID :">WhatsApp</td>
-                            <td data-label="Contact Number :">
-                                <div className="ViewMore">
-                                    <Link to="" className="link ViewMoreBtn">
-                                        <CardButton btnname={'View More'} />
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Institute ID  :">Facebook</td>
-                            <td data-label="Contact Number :">
-                                <div className="ViewMore">
-                                    <Link to="" className="link ViewMoreBtn">
-                                        <CardButton btnname={'View More'} />
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Institute ID  :">Instagram</td>
-                            <td data-label="Contact Number :">
-                                <div className="ViewMore">
-                                    <Link to="" className="link ViewMoreBtn">
-                                        <CardButton btnname={'View More'} />
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Institute ID  :">COC</td>
-                            <td data-label="Contact Number :">
-                                <div className="ViewMore">
-                                    <Link to="" className="link ViewMoreBtn">
-                                        <CardButton btnname={'View More'} />
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Institute ID  :">COD</td>
-                            <td data-label="Contact Number :">
-                                <div className="ViewMore">
-                                    <Link to="" className="link ViewMoreBtn">
-                                        <CardButton btnname={'View More'} />
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td data-label="Institute ID  :">PUBG</td>
-                            <td data-label="Contact Number :">
-                                <div className="ViewMore">
-                                    <Link to="" className="link ViewMoreBtn">
-                                        <CardButton btnname={'View More'} />
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Institute ID  :">Telegram</td>
-                            <td data-label="Contact Number :">
-                                <div className="ViewMore">
-                                    <Link to="" className="link ViewMoreBtn">
-                                        <CardButton btnname={'View More'} />
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
+                        {appData.map((item:any) => {
+                            if(item.count>0){
+                                return (
+                                    <tr>
+                                        <td data-label="Course ID :">{item.name}</td>
+                                        <td data-label="Contact Number :">
+                                            <div className="ViewMore">
+                                                <Link to="" className="link ViewMoreBtn">
 
-                        <tr>
-                            <td data-label="Institute ID  :">Viber</td>
-                            <td data-label="Contact Number :">
-                                <div className="ViewMore">
-                                    <Link to="" className="link ViewMoreBtn">
-                                        <CardButton btnname={'View More'} />
-                                    </Link>
-                                </div>
-                            </td>
-                        </tr>
+
+                                                    <Button variant="light"  onClick={() => handleappShow(item.student)}>
+                                                        <CardButton  btnname={item.count} />
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                );
+                            }
+
+                        })}
+
+
+
+
+                        {/*<tr>*/}
+                        {/*    <td data-label="Course ID :">WhatsApp</td>*/}
+                        {/*    <td data-label="Contact Number :">*/}
+                        {/*        <div className="ViewMore">*/}
+                        {/*            <Link to="" className="link ViewMoreBtn">*/}
+
+
+                        {/*                <Button variant="light"  onClick={handleappShow}>*/}
+                        {/*                    <CardButton btnname={'View More(5)'} />*/}
+                        {/*                </Button>*/}
+                        {/*            </Link>*/}
+                        {/*        </div>*/}
+                        {/*    </td>*/}
+                        {/*</tr>*/}
+                        {/*<tr>*/}
+                        {/*    <td data-label="Institute ID  :">Facebook</td>*/}
+                        {/*    <td data-label="Contact Number :">*/}
+                        {/*        <div className="ViewMore">*/}
+                        {/*            <Link to="" className="link ViewMoreBtn">*/}
+                        {/*                <CardButton btnname={'View More'} />*/}
+                        {/*            </Link>*/}
+                        {/*        </div>*/}
+                        {/*    </td>*/}
+                        {/*</tr>*/}
+                        {/*<tr>*/}
+                        {/*    <td data-label="Institute ID  :">Instagram</td>*/}
+                        {/*    <td data-label="Contact Number :">*/}
+                        {/*        <div className="ViewMore">*/}
+                        {/*            <Link to="" className="link ViewMoreBtn">*/}
+                        {/*                <CardButton btnname={'View More'} />*/}
+                        {/*            </Link>*/}
+                        {/*        </div>*/}
+                        {/*    </td>*/}
+                        {/*</tr>*/}
+                        {/*<tr>*/}
+                        {/*    <td data-label="Institute ID  :">COC</td>*/}
+                        {/*    <td data-label="Contact Number :">*/}
+                        {/*        <div className="ViewMore">*/}
+                        {/*            <Link to="" className="link ViewMoreBtn">*/}
+                        {/*                <CardButton btnname={'View More'} />*/}
+                        {/*            </Link>*/}
+                        {/*        </div>*/}
+                        {/*    </td>*/}
+                        {/*</tr>*/}
+                        {/*<tr>*/}
+                        {/*    <td data-label="Institute ID  :">COD</td>*/}
+                        {/*    <td data-label="Contact Number :">*/}
+                        {/*        <div className="ViewMore">*/}
+                        {/*            <Link to="" className="link ViewMoreBtn">*/}
+                        {/*                <CardButton btnname={'View More'} />*/}
+                        {/*            </Link>*/}
+                        {/*        </div>*/}
+                        {/*    </td>*/}
+                        {/*</tr>*/}
+
+                        {/*<tr>*/}
+                        {/*    <td data-label="Institute ID  :">PUBG</td>*/}
+                        {/*    <td data-label="Contact Number :">*/}
+                        {/*        <div className="ViewMore">*/}
+                        {/*            <Link to="" className="link ViewMoreBtn">*/}
+                        {/*                <CardButton btnname={'View More'} />*/}
+                        {/*            </Link>*/}
+                        {/*        </div>*/}
+                        {/*    </td>*/}
+                        {/*</tr>*/}
+                        {/*<tr>*/}
+                        {/*    <td data-label="Institute ID  :">Telegram</td>*/}
+                        {/*    <td data-label="Contact Number :">*/}
+                        {/*        <div className="ViewMore">*/}
+                        {/*            <Link to="" className="link ViewMoreBtn">*/}
+                        {/*                <CardButton btnname={'View More'} />*/}
+                        {/*            </Link>*/}
+                        {/*        </div>*/}
+                        {/*    </td>*/}
+                        {/*</tr>*/}
+
+                        {/*<tr>*/}
+                        {/*    <td data-label="Institute ID  :">Viber</td>*/}
+                        {/*    <td data-label="Contact Number :">*/}
+                        {/*        <div className="ViewMore">*/}
+                        {/*            <Link to="" className="link ViewMoreBtn">*/}
+                        {/*                <CardButton btnname={'View More'} />*/}
+                        {/*            </Link>*/}
+                        {/*        </div>*/}
+                        {/*    </td>*/}
+                        {/*</tr>*/}
 
                         </tbody>
                     </table>

@@ -3,9 +3,9 @@ import { createExpressHandler } from './createExpressHandler';
 import express, { RequestHandler } from 'express';
 import path from 'path';
 import { ServerlessFunction } from './types';
+
 import cors from "cors";
 import {classSchedule, payment_schedule} from "./utils/scheduler";
-// importing requires routings
 import {studentRouter} from "./route/studentRoutes";
 import {paymentGatewayRouter} from "./route/paymentGatewayRoutes";
 import {userRouter} from "./route/userRoutes";

@@ -32,8 +32,20 @@ export const getCourseByID = async (req: Request, res: Response) => {
             },
             include: {
                 teacher: true,
-                homework: true,
-                notes: true,
+                homework: 
+                {
+                    where: {
+                        isActive: true
+                    }
+                }
+                ,
+                notes: 
+                {
+                    where: {
+                        isActive: true
+                    }
+                }
+                ,
                 teacher_class: {
                     where: {
                         date: {
@@ -228,6 +240,7 @@ export const createCourse = async (req: Request, res: Response) => {
             })
             console.log(teacher_id)
 
+            // @ts-ignore
             const data = await prisma.course.create({
                 data: {
                     course_name: req.body.subject + " for " + req.body.grade + " in " + req.body.medium + " medium by " + first_name + " " + last_name,
@@ -242,7 +255,7 @@ export const createCourse = async (req: Request, res: Response) => {
                     end_time: req.body.end_time,
                     isActive: true,
                     medium: req.body.medium,
-                    created_date: "-",
+                    created_date: String(new Date()),
                     teacher_id: teacher_id,
                 }
             })

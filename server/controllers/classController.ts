@@ -1,13 +1,13 @@
-import {Request,Response} from "express";
+import { Request, Response } from "express";
 import { PrismaClient } from '@prisma/client';
-import {classSchema} from "../models/classModel";
+import { classSchema } from "../models/classModel";
 
 const prisma = new PrismaClient()
 
-export const getClasses=async (req:Request,res:Response)=>{
+export const getClasses = async (req: Request, res: Response) => {
 
     try {
-        const data =await prisma.teacher_class.findMany({
+        const data = await prisma.teacher_class.findMany({
 
         }
 
@@ -19,12 +19,12 @@ export const getClasses=async (req:Request,res:Response)=>{
         res.status(500).send(error);
     }
 }
-export const getClassByID=async (req:Request,res:Response)=>{
+export const getClassByID = async (req: Request, res: Response) => {
 
 
     try {
-        const data =await prisma.teacher_class.findMany({
-            where:<any>{
+        const data = await prisma.teacher_class.findMany({
+            where: <any>{
                 user_id: req.params.id
             }
         })
@@ -36,27 +36,41 @@ export const getClassByID=async (req:Request,res:Response)=>{
     }
 }
 
-// export const  createClass=async (req:Request,res:Response)=>{
-//
-//     const { error, value } = classSchema.validate(req.body);
-//
-//     if(!error) {
-//         try {
-//             const data = await prisma.Renamedclass.create({
-//                 data: {
-//                     first_name: req.body.first_name,
-//                     last_name: req.body.last_name,
-//                     mobile_no: req.body.mobile_no,
-//                     user_id: req.body.user_id
-//                 }
-//             })
-//             res.status(200).send(data)
-//         } catch (error) {
-//             res.status(500).send(error);
-//         }
-//     }
-//     else {
-//         res.status(500).send(error.details[0].message);
-//     }
-// }
+export const createClass = async (req: Request, res: Response) => {
+
+    const { error, value } = classSchema.validate(req.body);
+
+    if (!error) {
+        try {
+            // @ts-ignore
+            const { teacher_id } = await prisma.teacher.findUnique({
+                where: {
+                    user_id: req.body.user_id
+                },
+                select: {
+                    teacher_id: true
+                }
+            })
+
+            //@ts-ignore
+            const data = await prisma.teacher_class.create({
+                data: {
+                    date: req.body.date,
+                    start_time: req.body.start_time,
+                    end_time: req.body.end_time,
+                    isActive: true,
+                    isStarted: false,
+                    course_id: req.body.course_id,
+                    teacher_id: teacher_id,
+                }
+            })
+            res.status(200).send(data)
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    }
+    else {
+        res.status(500).send(error.details[0].message);
+    }
+}
 

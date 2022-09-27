@@ -107,7 +107,7 @@ const routes = [
     main: () => <FreeCard />
   },
   {
-    path: "/addextraclass",
+    path: "/addextraclass/:course_id",
     main: () => <Addextraclass />
   },
   {

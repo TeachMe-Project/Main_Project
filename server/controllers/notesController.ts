@@ -57,3 +57,27 @@ export const createNote = async (req: Request, res: Response) => {
     }
 }
 
+export const removeNote = async (req: Request, res: Response) => {
+    const { error, value } = notesSchema.validate(req.body);
+
+    if (!error) {
+        try {
+            // @ts-ignore
+            const data = await prisma.notes.update({
+                where: {
+                    note_id: req.body.note_id
+                },
+                data: {
+                    isActive: false
+                }
+            })
+            res.status(200).send(data)
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    }
+    else {
+        res.status(500).send(error.details[0].message);
+    }
+}
+
