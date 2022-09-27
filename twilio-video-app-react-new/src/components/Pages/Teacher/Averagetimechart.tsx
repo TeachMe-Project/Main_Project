@@ -72,31 +72,31 @@ export function Averagetimechart() {
   const baseURL = `http://localhost:8081/teacher/chart3/${teacherAuthId}`;
   const [chart3, setChart3] = useState<any[]>([]);
   
-  useEffect(() => {
-    axios
-        .get(baseURL)
-        .then((res: AxiosResponse) => {
-          res.data.map((x: any) => {
-            const stClass = x.student_class
-            stClass.map((y: any) => {
-              duration = duration + (y.left_time - y.joined_time)
-              console.log("Duration for class " + x.student_id + " is " + duration)
-            })
-            setChart3(prevState => [
-              ...prevState,
-              {
-                course: x.course_name,
-                average: duration / stClass.length
-              }
-            ]);
-          });
-          console.log(chart3)
-        })
-        .catch(error => {
-          console.log(error);
-        });
+  // useEffect(() => {
+  //   axios
+  //       .get(baseURL)
+  //       .then((res: AxiosResponse) => {
+  //         res.data.map((x: any) => {
+  //           const stClass = x.student_class
+  //           stClass.map((y: any) => {
+  //             duration = duration + (y.left_time - y.joined_time)
+  //             console.log("Duration for class " + x.student_id + " is " + duration)
+  //           })
+  //           setChart3(prevState => [
+  //             ...prevState,
+  //             {
+  //               course: x.course_name,
+  //               average: duration / stClass.length
+  //             }
+  //           ]);
+  //         });
+  //         console.log(chart3)
+  //       })
+  //       .catch(error => {
+  //         console.log(error);
+  //       });
       
-  })
+  // })
   
   
   

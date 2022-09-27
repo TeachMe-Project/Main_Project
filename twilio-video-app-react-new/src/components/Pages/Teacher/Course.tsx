@@ -160,13 +160,13 @@ export const Course = () => {
       });
   }, []);
 
-  const removeNote = (item: any) => (
+  const removeHomework = (item: any) => (
     <MdDelete
       className="Reacticonbtn remove Reacticon"
       onClick={() => {
         swal({
-          title: "Request Acception",
-          text: `Do you really want to accept this institute?`,
+          title: "Request Removaal",
+          text: `Do you really want to remove this homework?`,
           icon: "error",
           buttons: {
             cancel: true,
@@ -388,7 +388,6 @@ export const Course = () => {
                           Schedule Extra Class
                         </div>
                       </div>
-                    </Link>
                   </Row>
                 </div>
                 <table className="booking-table" id="view-booking">
