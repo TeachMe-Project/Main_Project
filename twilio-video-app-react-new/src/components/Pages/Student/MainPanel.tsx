@@ -78,7 +78,7 @@ const routes = [
     main: () => <SearchResults />,
   },
   {
-    path: '/course',
+    path: '/course/:course_id',
     main: () => <Course />,
   },
   {
@@ -98,7 +98,7 @@ const routes = [
     main: () => <VideoApp />,
   },
   {
-    path: '/teacherProfile',
+    path: '/teacherProfile/:teacher_id',
     main: () => <TeacherProfile />,
   },
 ];

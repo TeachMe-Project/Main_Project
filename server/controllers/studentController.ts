@@ -75,6 +75,10 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
             date: {
               gte: new Date()
             }
+          },
+          include:{
+            teacher:true,
+            course:true
           }
         }
       );
