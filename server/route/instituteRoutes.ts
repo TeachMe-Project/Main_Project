@@ -1,7 +1,7 @@
 import express from "express";
 import {
     createInstitute, createTeacherRequest, getAllInstituteCourses, getAllInstituteTeachers,
-    getInstituteByID,
+    getInstituteByID, getInstituteByInstituteID,
     getInstituteByName,
     getInstitutes, removeInstituteTeacher, searchTeacher,
     updateInstituteDetails
@@ -16,6 +16,9 @@ instituteRouter.route("/allInstitutes")
 
 instituteRouter.route("/:id")
     .get(getInstituteByID);
+
+instituteRouter.route("/getInstituteByInstituteId/:id")
+    .get(getInstituteByInstituteID);
 
 instituteRouter.route("/getInstituteByName/:name")
     .get(getInstituteByName);

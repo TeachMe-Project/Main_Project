@@ -91,8 +91,9 @@ export const Course = () => {
           setNotes(prevState => [
             ...prevState,
             {
+              id: item.note_id,
               topic: item.topic,
-              date: item.uploaded_date.substring(0,10),
+              date: item.uploaded_date.substring(0, 10),
               link: item.note
             }
           ]);
@@ -110,8 +111,9 @@ export const Course = () => {
           setHomework(prevState => [
             ...prevState,
             {
-              topic:item.topic,
-              date: item.uploaded_date.substring(0,10),
+              id: item.homework_id,
+              topic: item.topic,
+              date: item.uploaded_date.substring(0, 10),
               link: item.homework
             }
           ]);
@@ -160,28 +162,26 @@ export const Course = () => {
       });
   }, []);
 
-  const removeNote = (item: any) => (
-    <MdDelete
-      className="Reacticonbtn remove Reacticon"
+  const removeHomework = (item: any) => (
+    <a
+      className="Reacticonbtn remove"
       onClick={() => {
         swal({
-          title: "Request Acception",
-          text: `Do you really want to accept this institute?`,
+          title: "Request Removal",
+          text: `Do you really want to remove this homework?`,
           icon: "error",
           buttons: {
             cancel: true,
             confirm: true
           }
-          // dangerMode: true,
         })
           .then((willDelete: any) => {
             const apiData = JSON.stringify({
-              "institute_id": item.id,
-              "request_time": new Date(),
+              "homework_id": item.id,
             });
             axios({
               method: "POST",
-              url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
+              url: `https://learnx.azurewebsites.net/homework/removeHomework`,
               headers: {
                 "Content-Type": "application/json",
               },
@@ -189,19 +189,66 @@ export const Course = () => {
             }).then((apiRes) => {
               console.log(apiRes.status);
               if (apiRes.status === 200) {
-                swal(`Poof! You have successfully removed ${item.name}`, {
+                swal(`Poof! You have successfully removed ${item.topic}`, {
                   icon: "success",
                 });
               }
-              console.log(`Successfully removed ${item.name}`);
+              console.log(`Successfully removed ${item.topic}`);
             }).catch((error) => {
               console.log(error.message);
             }).catch((error) => {
               console.log(error.message);
             });
           });
-      }} />
-    // </a>
+      }}
+    ><MdDelete
+        className="Reacticon" />
+        Remove
+     </a>
+  );
+  const removeNote = (item: any) => (
+    <a
+      className="Reacticonbtn remove"
+      onClick={() => {
+        swal({
+          title: "Request Removal",
+          text: `Do you really want to remove this note?`,
+          icon: "error",
+          buttons: {
+            cancel: true,
+            confirm: true
+          }
+        })
+          .then((willDelete: any) => {
+            const apiData = JSON.stringify({
+              "note_id": item.id,
+            });
+            axios({
+              method: "POST",
+              url: `https://learnx.azurewebsites.net/notes/removeNote`,
+              headers: {
+                "Content-Type": "application/json",
+              },
+              data: apiData,
+            }).then((apiRes) => {
+              console.log(apiRes.status);
+              if (apiRes.status === 200) {
+                swal(`Poof! You have successfully removed ${item.topic}`, {
+                  icon: "success",
+                });
+              }
+              console.log(`Successfully removed ${item.topic}`);
+            }).catch((error) => {
+              console.log(error.message);
+            }).catch((error) => {
+              console.log(error.message);
+            });
+          });
+      }}
+    ><MdDelete
+        className="Reacticon" />
+        Remove
+     </a>
   );
 
   return (
@@ -287,11 +334,7 @@ export const Course = () => {
 
                             </td>
                             <td data-label="">
-                              <a
-                                className="Reacticonbtn remove"
-                              >
-                                <MdDelete className="Reacticon" />Remove
-                              </a>
+                              {removeNote(item)}
                             </td>
                           </tr>
                         );
@@ -336,14 +379,7 @@ export const Course = () => {
 
                           </td>
                           <td data-label="">
-                            <a
-                              download="note1.pdf"
-                              href=""
-                              target="_blank"
-                              className="Reacticonbtn remove"
-                            >
-                              <MdDelete className="Reacticon" />Remove
-                            </a>
+                            {removeHomework(item)}
                           </td>
                         </tr>
                       );
@@ -383,12 +419,11 @@ export const Course = () => {
               <div className="Schedules">
                 <div className="scheduleContainer">
                   <Row>
-                      <div className="buttoneditdetails">
-                        <div className="ButtonCommon" style={{ float: "right", position: "relative", top: "10px", width: "max-content" }} onClick={() => navigate(`/addextraclass/${params.course_id}`)}>
-                          Schedule Extra Class
-                        </div>
+                    <div className="buttoneditdetails">
+                      <div className="ButtonCommon" style={{ float: "right", position: "relative", top: "10px", width: "max-content" }} onClick={() => navigate(`/addextraclass/${params.course_id}`)}>
+                        Schedule Extra Class
                       </div>
-                    </Link>
+                    </div>
                   </Row>
                 </div>
                 <table className="booking-table" id="view-booking">

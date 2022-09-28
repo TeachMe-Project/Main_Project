@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+// import { debounce } from 'lodash';
 
 // Create a record
 export const createRecord = (key: string, value: string): { error?: string } | void => {
@@ -39,19 +39,19 @@ export const hasStoredItems = (): boolean => localStorage.length > 0;
 export const isLocalStorageSupported = (): boolean => !!window.localStorage;
 
 // Store (create or update) record to local storage with some delay (e.g. 1500 ms)
-export const storeToLocalStorageDebounced = debounce(
-  (key: string, value: string): void => {
-    if (isLocalStorageSupported()) {
-      if (readRecord(key)) {
-        updateRecord(key, value);
-      } else {
-        createRecord(key, value);
-      }
-    }
-  },
-  1500,
-  { leading: false }
-);
+// export const storeToLocalStorageDebounced = debounce(
+//   (key: string, value: string): void => {
+//     if (isLocalStorageSupported()) {
+//       if (readRecord(key)) {
+//         updateRecord(key, value);
+//       } else {
+//         createRecord(key, value);
+//       }
+//     }
+//   },
+//   1500,
+//   { leading: false }
+// );
 
 // Store (create or update) record to local storage
 export const storeToLocalStorage = (key: string, value: string): void => {
