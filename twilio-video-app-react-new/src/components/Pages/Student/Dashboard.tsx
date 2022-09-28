@@ -65,22 +65,22 @@ export const Dashboard = () => {
 
 
 
-  const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
+  // const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
-  useEffect(() => {
-
-    // @ts-ignore
-    window.electron.ipcRenderer.on('ipc-example', (arg) => {
-      // eslint-disable-next-line no-console
-      axios.post('http://localhost:8081/student/1/insertUsedApps', {
-
-        apps:Array.from(arg).toString()
-      })
-
-    });
-    // @ts-ignore
-    window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
-
+  // useEffect(() => {
+  //
+  //   // @ts-ignore
+  //   window.electron.ipcRenderer.on('ipc-example', (arg) => {
+  //     // eslint-disable-next-line no-console
+  //     axios.post('http://localhost:8081/student/1/insertUsedApps', {
+  //
+  //       apps:Array.from(arg).toString()
+  //     })
+  //
+  //   });
+  //   // @ts-ignore
+  //   window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
+  //
 
 
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);

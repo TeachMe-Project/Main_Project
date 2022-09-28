@@ -29,6 +29,7 @@ import AppStateProvider, { useAppState } from "../../../state";
 import theme from "../../../theme";
 import { CssBaseline } from "@material-ui/core";
 import { MuiThemeProvider } from "@material-ui/core/styles";
+import ViewInstituteProfile from "./ViewInstituteProfile";
 
 const VideoApp = () => {
   const { error, setError } = useAppState();
@@ -99,8 +100,8 @@ const routes = [
     main: () => <Institutes />
   },
   {
-    path: "/instituteView/:instituteId",
-    main: () => <InstituteProfile />
+    path: "/instituteView/:institute_user_id",
+    main: () => <ViewInstituteProfile/>
   },
   {
     path: "/freecard",
