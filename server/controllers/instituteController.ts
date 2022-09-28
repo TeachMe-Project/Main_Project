@@ -34,6 +34,24 @@ export const getInstituteByID = async (req: Request, res: Response) => {
     }
 }
 
+export const getInstituteByInstituteID = async (req: Request, res: Response) => {
+
+    try {
+        const data = await prisma.institute.findMany({
+            where: {
+                institute_id: Number(req.params.id)
+            },
+            include: {
+                user: true
+            }
+        })
+        logger.info(NAME_SPACE, data[0].user_id)
+        res.status(200).json(data)
+    } catch (error:any) {
+        res.status(500).send(error.message);
+    }
+}
+
 export const getInstituteByName = async (req: Request, res: Response) => {
 
     try {
