@@ -29,6 +29,7 @@ import AppStateProvider, { useAppState } from "../../../state";
 import theme from "../../../theme";
 import { CssBaseline } from "@material-ui/core";
 import { MuiThemeProvider } from "@material-ui/core/styles";
+import ViewInstituteProfile from "./ViewInstituteProfile";
 
 const VideoApp = () => {
   const { error, setError } = useAppState();
@@ -83,7 +84,7 @@ const routes = [
     main: () => <Editdetails />
   },
   {
-    path: "/uploadnotes",
+    path: "/uploadnotes/:course_id",
     main: () => <Uploadnotes />
   },
   {
@@ -91,7 +92,7 @@ const routes = [
     main: () => <StudentAnalytics />
   },
   {
-    path: "/uploadhomework",
+    path: "/uploadhomework/:course_id",
     main: () => <Uploadhomework />
   },
   {
@@ -99,15 +100,15 @@ const routes = [
     main: () => <Institutes />
   },
   {
-    path: "/instituteView/:instituteId",
-    main: () => <InstituteProfile />
+    path: "/instituteView/:institute_user_id",
+    main: () => <ViewInstituteProfile/>
   },
   {
     path: "/freecard",
     main: () => <FreeCard />
   },
   {
-    path: "/addextraclass",
+    path: "/addextraclass/:course_id",
     main: () => <Addextraclass />
   },
   {

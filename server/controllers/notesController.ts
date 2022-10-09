@@ -1,58 +1,76 @@
-import {Request,Response} from "express";
+import { Request, Response } from "express";
 import { PrismaClient } from '@prisma/client'
-import {notesSchema} from "../models/notesModel";
+// import {notesSchema} from "../models/notesModel";
 
 const prisma = new PrismaClient()
 
-export const getNotes=async (req:Request,res:Response)=>{
+export const getNotes = async (req: Request, res: Response) => {
 
     try {
-        const data =await prisma.notes.findMany()
-        res.status(200).send(data)
-    }
-
-    catch (error) {
-        res.status(500).send(error);
-    }
-}
-export const getNoteByID=async (req:Request,res:Response)=>{
-
-
-    try {
-        const data =await prisma.notes.findMany({
-            where:{
-                note_id:Number(req.params.id)
+        const data = await prisma.notes.findMany({
+            where: {
+                course_id: Number(req.params.course_id)
+            },
+            orderBy: {
+                uploaded_date: "desc"
             }
         })
         res.status(200).send(data)
+    } catch (error) {
+        res.status(500).send(error);
     }
+}
+export const getNoteByID = async (req: Request, res: Response) => {
 
-    catch (error) {
+
+    try {
+        const data = await prisma.notes.findMany({
+            where: {
+                note_id: Number(req.params.id)
+            }
+        })
+        res.status(200).send(data)
+    } catch (error) {
         res.status(500).send(error);
     }
 }
 
-export const  createNote=async (req:Request,res:Response)=>{
+export const createNote = async (req: Request, res: Response) => {
 
-    const { error, value } = notesSchema.validate(req.body);
-
-    if(!error) {
-        try {
-            const data = await prisma.notes.create({
-                data:<any> {
-                    uploaded_date: req.body.uploaded_date,
-                    note: req.body.note,
-                    course_id: req.body.course_id,
-                    student_id: req.body.student_id
-                }
-            })
-            res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
-        }
+    // const { error, value } = notesSchema.validate(req.body);
+    console.log(req.body)
+    const course_id = Number(req.body.course_id);
+    try {
+        const data = await prisma.notes.create({
+            data: {
+                topic: req.body.topic,
+                uploaded_date: new Date(),
+                note: req.body.note,
+                course_id: course_id,
+                isActive: true
+            }
+        })
+        res.status(200).send(data)
+    } catch (error: any) {
+        console.log(error.message)
+        res.status(500).send(error.message);
     }
-    else {
-        res.status(500).send(error.details[0].message);
+}
+
+export const removeNote = async (req: Request, res: Response) => {
+    try {
+        // @ts-ignore
+        const data = await prisma.notes.update({
+            where: {
+                note_id: req.body.note_id
+            },
+            data: {
+                isActive: false
+            }
+        })
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(500).send(error);
     }
 }
 

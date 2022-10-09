@@ -47,9 +47,9 @@ let totalAmount = 0;
 export const Dashboard = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
-  // const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
-  const baseURLChart1 = `http://localhost:8081/teacher/chart1/${teacherAuthId}`;
-  const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
+  const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
+  const baseURLChart1 = `https://learnx.azurewebsites.net/teacher/chart1/${teacherAuthId}`;
+  // const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
   const [chart1, setChart1] = useState<any[]>([]);
   const [chart2, setChart2] = useState<any[]>([]);
@@ -174,7 +174,7 @@ export const Dashboard = () => {
           <Row>
             <Col xl={6}>
               <div className="chart">
-                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem" }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem", overflow: 'scroll' }}>
                   <div className="card-body">
                     <div className="fundsRow" style={{ display: "Flex", marginBottom: "20px" }}>
                       <Col xl={8}>
@@ -211,7 +211,7 @@ export const Dashboard = () => {
 
             <Col xl={6}>
               <div className="chart">
-                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem" }}>
+                <div className="card shadow-sm p-3 mb-5 bg-white rounded" style={{ width: "29rem", height: "15rem", overflow: 'scroll' }}>
                   <div className="card-body">
                     <h5 className="card-title" style={{ marginBottom: "20px", color: "#1e90ff" }}>
                       Monthly Income
