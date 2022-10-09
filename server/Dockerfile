@@ -1,8 +1,3 @@
-
-Prasad Lakshan <prasadlakshan9984@gmail.com>
-Sun, Oct 9, 11:04 PM (1 hour ago)
-to me
-
 FROM node:16-alpine AS builder
 WORKDIR /app
 RUN npm install -g npm@8.18.0
