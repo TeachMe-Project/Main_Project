@@ -155,8 +155,8 @@ model parent_payment {
   month           parent_payment_month
   year            Int
   isActive        Boolean
-  student         student              @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO PARENT_PAYMENT FROM STUDENT")
   student_payment student_payment      @relation(fields: [payment_id], references: [payment_id], onDelete: Cascade, map: "FK TO PARENT_PAYMENT FROM STUDENT_PAYMENT")
+  student         student              @relation(fields: [student_id], references: [student_id], onDelete: Cascade, map: "FK TO PARENT_PAYMENT FROM STUDENT")
 
   @@index([student_id], map: "FK TO PARENT_PAYMENT FROM STUDENT")
 }

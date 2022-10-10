@@ -119,7 +119,7 @@ const {user} = useAuth0();
         });
         axios({
             method: "POST",
-            url: "https://learnx.azurewebsites.net/auth/createStudent",
+            url: "https://learnxy.azurewebsites.net/auth/createStudent",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -133,7 +133,7 @@ const {user} = useAuth0();
                 })
                 axios({
                     method: "POST",
-                    url: `https://learnx.azurewebsites.net/parent/parentIdByAuth`,
+                    url: `https://learnxy.azurewebsites.net/parent/parentIdByAuth`,
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -153,7 +153,7 @@ const {user} = useAuth0();
 
                     axios({
                         method: "POST",
-                        url: "https://learnx.azurewebsites.net/student/createStudent",
+                        url: "https://learnxy.azurewebsites.net/student/createStudent",
                         headers: {
                             'Content-Type': 'application/json'
                         },
