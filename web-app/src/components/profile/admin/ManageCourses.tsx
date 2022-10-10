@@ -21,7 +21,7 @@ const ManageCourses = () => {
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
 
-    const baseURL = "https://learnx.azurewebsites.net/course/allCourses";
+    const baseURL = "https://learnxy.azurewebsites.net/course/allCourses";
     const [courses, setCourses] = React.useState<any[]>([]);
     const navigate = useNavigate();
     const [isDataLoading, setIsDataLoading] = useState(false);

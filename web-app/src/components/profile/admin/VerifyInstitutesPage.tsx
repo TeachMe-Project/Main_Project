@@ -29,7 +29,7 @@ const VerifyInstitutesPage = () => {
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
     const navigate = useNavigate();
-    const baseURL = "https://learnx.azurewebsites.net/admin/newInstituteRequests";
+    const baseURL = "https://learnxy.azurewebsites.net/admin/newInstituteRequests";
     const [institutes, setInstitutes] = useState<appliedInstitute[]>([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
 
@@ -82,7 +82,7 @@ const VerifyInstitutesPage = () => {
                         })
                         axios({
                             method: "POST",
-                            url: "https://learnx.azurewebsites.net/auth/unblock",
+                            url: "https://learnxy.azurewebsites.net/auth/unblock",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
@@ -90,7 +90,7 @@ const VerifyInstitutesPage = () => {
                         }).then((apiRes: AxiosResponse) => {
                             axios({
                                 method: "POST",
-                                url: "https://learnx.azurewebsites.net/admin/verifyInstitute",
+                                url: "https://learnxy.azurewebsites.net/admin/verifyInstitute",
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
@@ -148,7 +148,7 @@ const VerifyInstitutesPage = () => {
 
                         axios({
                             method: "POST",
-                            url: "https://learnx.azurewebsites.net/admin/rejectInstitute",
+                            url: "https://learnxy.azurewebsites.net/admin/rejectInstitute",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
