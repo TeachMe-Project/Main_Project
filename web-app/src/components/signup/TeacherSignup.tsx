@@ -202,7 +202,7 @@ const TeacherSignup = () => {
         });
         axios({
             method: "POST",
-            url: "https://learnx.azurewebsites.net/auth/createTeacher",
+            url: "https://learnxy.azurewebsites.net/auth/createTeacher",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -229,7 +229,7 @@ const TeacherSignup = () => {
 
                 axios({
                     method: "POST",
-                    url: "https://learnx.azurewebsites.net/teacher/createTeacher",
+                    url: "https://learnxy.azurewebsites.net/teacher/createTeacher",
                     headers: {
                         'Content-Type': 'application/json'
                     },
