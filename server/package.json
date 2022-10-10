@@ -7,7 +7,7 @@
     "start": "node build/index.js",
     "build": "rimraf dist && tsc",
     "serve": "ts-node-dev --respawn --transpile-only -T -P ./tsconfig.json ./index.ts",
-    "generate": "npx prisma generate"
+    "generate": "npx prisma db pull && npx prisma generate "
   },
   "dependencies": {
     "@prisma/client": "^3.15.2",

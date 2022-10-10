@@ -12,10 +12,10 @@ import Searchbar from '../../Searchbar/Searchbar';
 import axios, { AxiosResponse } from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import Loader from "../../../auth0/Loader";
-import {CardHeader} from "../../Card/CardHeader";
-import {CardDetails} from "../../Card/CardDetails";
-import {CardButton} from "../../Card/CardButton";
-import {useNavigate} from "react-router-dom";
+import { CardHeader } from "../../Card/CardHeader";
+import { CardDetails } from "../../Card/CardDetails";
+import { CardButton } from "../../Card/CardButton";
+import { useNavigate } from "react-router-dom";
 
 const convertTime = (x: Date) => {
   const time = x.toLocaleTimeString('it-IT');
@@ -34,7 +34,7 @@ export const Dashboard = () => {
   // const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
   const baseURL = `https://learnx.azurewebsites.net/student/upcomingClasses/${studentAuthId}`;
   const [loading, setLoading] = useState(true);
-  const [apps,setApps] = useState<any>([]);
+  const [apps, setApps] = useState<any>([]);
 
   // const updateApps = (()=>{
   //
