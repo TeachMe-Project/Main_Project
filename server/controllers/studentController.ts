@@ -4,8 +4,8 @@ import { studentSchema } from "../models/studentModel";
 import logger from "../utils/logger";
 import userSchema from "../models/userModel";
 
-const prisma = new PrismaClient();
-const NAME_SPACE = "Student";
+const prisma = new PrismaClient()
+const NAME_SPACE = "Student"
 export const getStudents = async (req: Request, res: Response) => {
 
   try {
