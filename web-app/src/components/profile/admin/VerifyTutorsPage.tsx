@@ -33,7 +33,7 @@ const VerifyTutorsPage = () => {
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
     const navigate = useNavigate();
-    const baseURL = "https://learnx.azurewebsites.net/admin/newTeacherRequests";
+    const baseURL = "https://learnxy.azurewebsites.net/admin/newTeacherRequests";
     const [teachers, setTeachers] = useState<appliedTutor[]>([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
 
@@ -86,7 +86,7 @@ const VerifyTutorsPage = () => {
                         })
                         axios({
                             method: "POST",
-                            url: "https://learnx.azurewebsites.net/auth/unblock",
+                            url: "https://learnxy.azurewebsites.net/auth/unblock",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
@@ -94,7 +94,7 @@ const VerifyTutorsPage = () => {
                         }).then((apiRes) => {
                             axios({
                                 method: "POST",
-                                url: "https://learnx.azurewebsites.net/admin/verifyTeacher",
+                                url: "https://learnxy.azurewebsites.net/admin/verifyTeacher",
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
@@ -152,7 +152,7 @@ const VerifyTutorsPage = () => {
 
                         axios({
                             method: "POST",
-                            url: "https://learnx.azurewebsites.net/admin/rejectTeacher",
+                            url: "https://learnxy.azurewebsites.net/admin/rejectTeacher",
                             headers: {
                                 'Content-Type': 'application/json'
                             },

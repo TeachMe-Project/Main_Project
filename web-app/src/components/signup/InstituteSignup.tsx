@@ -170,7 +170,7 @@ const InstituteSignup = () => {
         });
         axios({
             method: "POST",
-            url: "https://learnx.azurewebsites.net/auth/createInstitute",
+            url: "https://learnxy.azurewebsites.net/auth/createInstitute",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -196,7 +196,7 @@ const InstituteSignup = () => {
 
                 axios({
                     method: "POST",
-                    url: "https://learnx.azurewebsites.net/institute/createInstitute",
+                    url: "https://learnxy.azurewebsites.net/institute/createInstitute",
                     headers: {
                         'Content-Type': 'application/json'
                     },

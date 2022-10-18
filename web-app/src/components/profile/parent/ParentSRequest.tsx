@@ -29,24 +29,24 @@ const ParentSRequest: React.FC = () => {
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
 
-    useEffect(() => {
-        axios.get(baseURL).then((response: AxiosResponse) => {
-            // console.log(response.data)
-            response.data.map((item: any) => {
-                    setCourses(prevState => [...prevState, {
-                        id: item.course_id,
-                        grade: item.grade,
-                        subject: item.subject,
-                        tutor_name: item.teacher.first_name + ' '+ item.teacher.last_name
-                    }])
-                }
-            )
-            setIsDataLoading(true);
-        })
-            .catch((error:any) => {
-                console.log(error.message);
-            })
-    }, []);
+    // useEffect(() => {
+    //     axios.get(baseURL).then((response: AxiosResponse) => {
+    //         // console.log(response.data)
+    //         response.data.map((item: any) => {
+    //                 setCourses(prevState => [...prevState, {
+    //                     id: item.course_id,
+    //                     grade: item.grade,
+    //                     subject: item.subject,
+    //                     tutor_name: item.teacher.first_name + ' '+ item.teacher.last_name
+    //                 }])
+    //             }
+    //         )
+    //         setIsDataLoading(true);
+    //     })
+    //         .catch((error:any) => {
+    //             console.log(error.message);
+    //         })
+    // }, []);
 
     // @ts-ignore
     return (
