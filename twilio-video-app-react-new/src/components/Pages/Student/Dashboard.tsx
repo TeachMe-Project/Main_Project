@@ -32,7 +32,7 @@ export const Dashboard = () => {
   const studentAuthId = user?.sub;
   console.log({ studentAuthId });
   // const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
-  const baseURL = `https://learnx.azurewebsites.net/student/upcomingClasses/${studentAuthId}`;
+  const baseURL = `https://learnxy.azurewebsites.net/student/upcomingClasses/${studentAuthId}`;
   const [loading, setLoading] = useState(true);
   const [apps, setApps] = useState<any>([]);
 
