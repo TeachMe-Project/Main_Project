@@ -24,7 +24,7 @@ const InstituteTutorsPage = () => {
     const navigate = useNavigate();
     const {user} = useAuth0();
     const user_id = user?.sub;
-    const baseURL = `https://learnx.azurewebsites.net/institute/getAllInstituteTeacher/${user_id}`;
+    const baseURL = `https://learnxy.azurewebsites.net/institute/getAllInstituteTeacher/${user_id}`;
     const [teachers, setTeachers] = useState<any[]>([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
 
@@ -98,7 +98,7 @@ const InstituteTutorsPage = () => {
                             })
                             axios({
                                 method: "POST",
-                                url: `https://learnx.azurewebsites.net/institute/removeTeacher/${user_id}`,
+                                url: `https://learnxy.azurewebsites.net/institute/removeTeacher/${user_id}`,
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },

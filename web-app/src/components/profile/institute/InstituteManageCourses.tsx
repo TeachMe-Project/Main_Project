@@ -73,7 +73,7 @@ const InstituteManageCourses = () => {
     ];
 
     useEffect(() => {
-        axios.get(`https://learnx.azurewebsites.net/institute/getAllInstituteCourses/${user_id}`).then((res: AxiosResponse) => {
+        axios.get(`https://learnxy.azurewebsites.net/institute/getAllInstituteCourses/${user_id}`).then((res: AxiosResponse) => {
             // setIsDataLoading(true);
             // console.log(res.data)
             res.data.map((item: any) => {
