@@ -13,7 +13,7 @@ import {CardButton} from "../../Card/CardButton";
 export const MyCourses = () => {
     const {user} = useAuth0();
     const studentAuthId = user?.sub;
-    const baseURL = `https://learnx.azurewebsites.net/student/tutors/${studentAuthId}`;
+    const baseURL = `https://learnxy.azurewebsites.net/student/tutors/${studentAuthId}`;
     const [courses, setCourses] = useState<any[]>([]);
     const navigate = useNavigate();
     // const convertTime = (x: Date) => {
