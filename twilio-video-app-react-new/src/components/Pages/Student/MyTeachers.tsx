@@ -13,7 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 export const MyTeachers = () => {
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURL = `https://learnx.azurewebsites.net/student/tutors/${studentAuthId}`;
+  const baseURL = `https://learnxy.azurewebsites.net/student/tutors/${studentAuthId}`;
   const [teachers, setTeachers] = useState<any[]>([]);
 
   useEffect(() => {

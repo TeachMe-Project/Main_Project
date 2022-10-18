@@ -46,10 +46,10 @@ export const Course = (props: tutorName) => {
   // };
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURLDetails = `https://learnx.azurewebsites.net/course/${studentAuthId}`;
-  const baseURLNotes = `https://learnx.azurewebsites.net/student/${studentAuthId}/notes`;
-  const baseURLHomework = `https://learnx.azurewebsites.net/student/${studentAuthId}/homeworks`;
-  const baseURLUpcoming = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
+  const baseURLDetails = `https://learnxy.azurewebsites.net/course/${studentAuthId}`;
+  const baseURLNotes = `https://learnxy.azurewebsites.net/student/${studentAuthId}/notes`;
+  const baseURLHomework = `https://learnxy.azurewebsites.net/student/${studentAuthId}/homeworks`;
+  const baseURLUpcoming = `https://learnxy.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
   const [details, setDetails] = useState<any[]>([]);
   const [homework, setHomework] = useState<any[]>([]);
   const [notes, setNotes] = useState<any[]>([]);
