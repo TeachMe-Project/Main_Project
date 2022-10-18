@@ -166,7 +166,7 @@ const InstituteManageProfile = () => {
         }
         axios({
             method: "GET",
-            url: `https://learnx.azurewebsites.net/institute/${user?.sub}`,
+            url: `https://learnxy.azurewebsites.net/institute/${user?.sub}`,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -236,7 +236,7 @@ const InstituteManageProfile = () => {
 
         axios({
             method: "POST",
-            url: "https://learnx.azurewebsites.net/institute/updateInstituteDetails",
+            url: "https://learnxy.azurewebsites.net/institute/updateInstituteDetails",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -285,7 +285,7 @@ const InstituteManageProfile = () => {
 
                     axios({
                         method: "POST",
-                        url: "https://learnx.azurewebsites.net/user/changeImage",
+                        url: "https://learnxy.azurewebsites.net/user/changeImage",
                         headers: {
                             'Content-Type': 'application/json'
                         },
