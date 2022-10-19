@@ -169,7 +169,7 @@ export const AddCourse = () => {
   const [institutes, setInstitutes] = useState<any[]>([]);
   const [isDataLoading, setIsDataLoading] = useState(false);
   useEffect(() => {
-    axios.get(`https://learnx.azurewebsites.net/teacher/teacherInstitutes/${user_id}`).then((res: AxiosResponse) => {
+    axios.get(`https://learnxy.azurewebsites.net/teacher/teacherInstitutes/${user_id}`).then((res: AxiosResponse) => {
       // setIsDataLoading(true);
       // console.log(res.data)
       res.data.map((item: any) => {
@@ -205,7 +205,7 @@ export const AddCourse = () => {
     });
     axios({
       method: "POST",
-      url: "https://learnx.azurewebsites.net/course/createCourse",
+      url: "https://learnxy.azurewebsites.net/course/createCourse",
       headers: {
         'Content-Type': 'application/json'
       },
