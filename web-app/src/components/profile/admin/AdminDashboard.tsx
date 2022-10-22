@@ -6,6 +6,9 @@ import AdminSidebar from "./AdminSidebar";
 import { useMediaQuery } from "react-responsive";
 import axios, { AxiosResponse } from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import AdminLayout from "./AdminLayout";
+import LineChart from "./LineChart";
+import BarChart from "./BarChart";
 
 
 
@@ -125,142 +128,41 @@ export const AdminDashboard = () => {
     });
   };
   return (
-    <div className="DashboardTeacher">
-      <Container>
+    <AdminLayout>
+      <Col lg={12} className="px-lg-5">
         <Row>
           {/*<PanelContainer />*/}
-          <div className="PanelHeader">
-            <h2>Admin Dashboard </h2>
-            {/*<button onClick={updateApps}>GET APPS</button>*/}
-          </div>
-          <div className="Panel">
-            {/*<div>{JSON.stringify(apps)}</div>*/}
-            <div className="PanelSubheader">
-              <h5> </h5>
-            </div>
-            <div className="PanelBody">
-              {upcomingClasses.map((item: any) => {
-                return (
-                  // <Card
-                  //   key={item.id}
-                  //   header={item.subject}
-                  //   time={item.time}
-                  //   date={item.date}
-                  //   grade={item.grade}
-                  //   btnname="Start"
-                  //   image={<img src={"/Images/subjects/Mathematics.png"} />}
-                  // />
-                  <h1>hi</h1>
-                );
-              })}
-            </div>
-          </div>
-        </Row>
-        <Row>
-          <div className="PanelSubheader">
-            <h5>Analytics </h5>
-          </div>
-          {/* 
-          <Row>
-            <Col xl={6}>
-              <div className="chart">
-                <div
-                  className="card shadow-sm p-3 mb-5 bg-white rounded"
-                  style={{ width: '29rem', height: '15rem', overflow: 'scroll' }}
-                >
-                  <div className="card-body">
-                    <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
-                      <Col xl={8}>
-                        <h5 className="card-title" style={{ marginBottom: '20px', color: '#1e90ff' }}>
-                          Course
-                        </h5>
-                      </Col>
-                      <Col xl={4}>
-                        <h5 className="card-title" style={{ marginBottom: '20px', color: '#1e90ff' }}>
-                          Student Count
-                        </h5>
-                      </Col>
-                    </div>
-
-                    {chart1.map((item: any) => {
-                      return (
-                        <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
-                          <Col xl={8}>
-                            <p style={{ marginRight: '20px' }}>{item.course}</p>
-                          </Col>
-                          <Col xl={4}>
-                            <p className="text-center">{item.student}</p>
-                          </Col>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
+          <Row className="d-lg-flex flex-lg-column align-items-center text-lg-center">
+            <Col lg={12} md={12} xs={12}>
+              <h1 className="text-lg-start header my-lg-3 text-md-center text-center">
+                Admin Dashboard
+              </h1>
             </Col>
+          </Row>
+        </Row>
 
-            {/* ------------------------------------------------------------------------------- */}
-
-          {/* <Col xl={6}>
-              <div className="chart">
-                <div
-                  className="card shadow-sm p-3 mb-5 bg-white rounded"
-                  style={{ width: '29rem', height: '15rem', overflow: 'scroll' }}
-                >
-                  <div className="card-body">
-                    <h5 className="card-title" style={{ marginBottom: '20px', color: '#1e90ff' }}>
-                      Monthly Income
-                    </h5>
-
-                    {chart2.map((item: any) => {
-                      return (
-                        <div className="fundsRow" style={{ display: 'Flex' }}>
-                          <Col xl={8}>
-                            <p style={{ marginRight: '20px' }}>{item.course}</p>
-                          </Col>
-                          <Col xl={4}>
-                            <p>{item.amount}</p>
-                          </Col>
-                        </div>
-                      );
-                    })}
-
-                    <div className="fundsRow" style={{ display: 'Flex' }}>
-                      <Col xl={8}>
-                        <h5 className="card-title">Total Earnings</h5>
-                      </Col>
-                      <Col xl={4}>
-                        <p>
-                          <b>Rs. {totalAmount}</b>
-                        </p>
-                      </Col>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Col> 
-          </Row> 
+        <Row>
           {/* ------------------------------ Row 1 ---------------------------------------- */}
           <Row>
             <Col xl={6}>
-              {/* <UserDistribution /> */}
+              <BarChart />
             </Col>
             <Col xl={6}>
-              {/* <EnrollmentDistribution /> */}
+              <LineChart />
             </Col>
           </Row>
           {/* ------------------------------ Row 2 ---------------------------------------- */}
           <Row>
             <Col xl={6}>
-              {/* <PendingPayments /> */}
+              <BarChart />
             </Col>
             <Col xl={6}>
-              {/* <RevenueDistribution /> */}
+              <LineChart />
             </Col>
           </Row>
         </Row>
-      </Container>
-    </div>
+      </Col>
+    </AdminLayout>
   );
 };
 export default AdminDashboard;
