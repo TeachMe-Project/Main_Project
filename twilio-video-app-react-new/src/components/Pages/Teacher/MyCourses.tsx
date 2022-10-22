@@ -13,7 +13,7 @@ export const MyCourses = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
   console.log(teacherAuthId);
-  const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/courses`;
+  const baseURL = `https://learnxy.azurewebsites.net/teacher/${teacherAuthId}/courses`;
   const [courses, setCourses] = useState<any[]>([]);
   const navigate = useNavigate();
   console.log("this is test");

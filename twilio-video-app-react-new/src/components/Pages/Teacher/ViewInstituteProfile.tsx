@@ -59,7 +59,7 @@ const ViewInstituteProfile = () => {
         // console.log(params)
         axios({
             method: "GET",
-            url: `https://learnx.azurewebsites.net/institute/getInstituteByInstituteId/${params.institute_user_id}`,
+            url: `https://learnxy.azurewebsites.net/institute/getInstituteByInstituteId/${params.institute_user_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },

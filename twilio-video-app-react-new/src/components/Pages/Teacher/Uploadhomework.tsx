@@ -9,7 +9,7 @@ import LazyLoad from "react-lazyload";
 import {v4 as uuidv4} from "uuid"
 import {FirebaseApp} from "../../../auth0/FirebaseConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
@@ -61,7 +61,7 @@ export const Uploadhomework = () => {
   const [uploading, setUploading] = useState(false);
   const params = useParams();
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   console.log(params.course_id)
 
   const uploadFile = (event:any) => {
@@ -97,7 +97,7 @@ export const Uploadhomework = () => {
     })
     axios({
       method: "POST",
-      url: "https://learnx.azurewebsites.net/homework/createHomework",
+      url: "https://learnxy.azurewebsites.net/homework/createHomework",
       headers: {
         'Content-Type': 'application/json'
       },
@@ -110,6 +110,7 @@ export const Uploadhomework = () => {
         swal(`Poof! You have successfully Uploaded the Homework`, {
           icon: "success",
         });
+        navigate(`/course/${params.course_id}`)
       }
     }).catch((error) => {
       console.log(error.message)

@@ -29,8 +29,8 @@ export const Institutes = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
   console.log(teacherAuthId);
-  const baseURLCurrent = `https://learnx.azurewebsites.net/teacher/teacherInstitutes/${teacherAuthId}`;
-  const baseURLNew = `https://learnx.azurewebsites.net/teacher/teacherPendingInstitutes/${teacherAuthId}`;
+  const baseURLCurrent = `https://learnxy.azurewebsites.net/teacher/teacherInstitutes/${teacherAuthId}`;
+  const baseURLNew = `https://learnxy.azurewebsites.net/teacher/teacherPendingInstitutes/${teacherAuthId}`;
   const [institutes, setInstitutes] = useState<any[]>([]);
   const [newInstitutes, setNewInstitutes] = useState<any[]>([]);
 
