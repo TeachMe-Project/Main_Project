@@ -32,6 +32,7 @@ import CourseProfile from "./components/profile/tutor/CourseProfile";
 import ViewCourse from "./components/profile/admin/ViewCourse";
 import InstituteViewCourse from "./components/profile/institute/InstituteViewCourse";
 import ParentSRequest from "./components/profile/parent/ParentSRequest";
+import AdminDashboard from './components/profile/admin/AdminDashboard';
 
 const App: React.FC = () => {
     return (
