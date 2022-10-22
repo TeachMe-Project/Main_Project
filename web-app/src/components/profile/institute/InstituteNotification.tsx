@@ -16,7 +16,7 @@ const InstituteNotification = () => {
     const [isDataLoading, setIsDataLoading] = useState(false);
 
     useEffect(() => {
-        axios.get(`https://learnx.azurewebsites.net/notification/user/${user_id}`).then((res: AxiosResponse) => {
+        axios.get(`https://learnxy.azurewebsites.net/notification/user/${user_id}`).then((res: AxiosResponse) => {
             // setIsDataLoading(true);
             // console.log(res.data)
             res.data.map((item: any) => {

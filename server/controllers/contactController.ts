@@ -4,12 +4,13 @@ import {Request, Response} from "express";
 export const contactUs = async (req: Request, res: Response) => {
 
     const data = req.body;
+    console.log(data);
     let smtpTransporter = nodemailer.createTransport({
         host: "smtp-relay.sendinblue.com",
         port: 587,
         auth: {
-            user: "contact.sportizza@gmail.com",
-            pass: "xsmtpsib-00b295ba66e33e320d390ef855798bcac8b4c69a4c26930f55f6bc9a8b4bce01-YDzTM27OsGWytmxp",
+            user: "contactus.learning.io@gmail.com",
+            pass: "xsmtpsib-f5468792801bcc70270ae5f9b77b8bebab31406827d77f42a89be2b535f0e496-NPCb5Da3rGSzJKcO",
         },
     });
     let mailOptions = {
@@ -212,6 +213,7 @@ table, td { color: #000000; } a { color: #fdc71b; text-decoration: underline; } 
   <div style="color: #000000; line-height: 180%; text-align: left; word-wrap: break-word;">
     <p style="line-height: 180%; font-size: 14px;"><span style="font-family: Montserrat, sans-serif;"><span style="font-size: 18px; line-height: 32.4px;"><strong>Name : </strong>${data.name}</span></span></p>
 <p style="line-height: 180%; font-size: 14px;"><span style="font-family: Montserrat, sans-serif;"><span style="font-size: 18px; line-height: 32.4px;"><strong>Email : </strong>${data.email}</span></span></p>
+<p style="line-height: 180%; font-size: 14px;"><span style="font-family: Montserrat, sans-serif;"><span style="font-size: 18px; line-height: 32.4px;"><strong>Subject: </strong>${data.subject}</span></span></p>
 <p style="line-height: 180%; font-size: 14px;"><span style="font-family: Montserrat, sans-serif;"><span style="font-size: 18px; line-height: 32.4px;"><strong>Message: </strong>${data.message}</span></span></p>
   </div>
 
@@ -334,7 +336,9 @@ table, td { color: #000000; } a { color: #fdc71b; text-decoration: underline; } 
     smtpTransporter.sendMail(mailOptions, (error) => {
         try {
             if (error)
+            {
                 return res.status(400).json({msg: "Please Fill All The Fields!"});
+            }
             res.status(200).json({msg: "Thank You For Contacting Me."});
         } catch (error) {
             if (error) return res.status(500).json({msg: "There is server error"});

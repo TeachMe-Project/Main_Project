@@ -46,7 +46,7 @@ const TutorProfile = () => {
     useEffect(() => {
         axios({
             method: "GET",
-            url: `https://learnx.azurewebsites.net/teacher/${params.tutor_id}`,
+            url: `https://learnxy.azurewebsites.net/teacher/${params.tutor_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },

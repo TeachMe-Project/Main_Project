@@ -29,7 +29,7 @@ const InstituteAddTutor = () => {
         });
         axios({
             method: "POST",
-            url: `https://learnx.azurewebsites.net/institute/searchTeacher`,
+            url: `https://learnxy.azurewebsites.net/institute/searchTeacher`,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -54,7 +54,7 @@ const InstituteAddTutor = () => {
         });
         axios({
             method: "POST",
-            url: `https://learnx.azurewebsites.net/institute/addTeacher/${user_id}`,
+            url: `https://learnxy.azurewebsites.net/institute/addTeacher/${user_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },

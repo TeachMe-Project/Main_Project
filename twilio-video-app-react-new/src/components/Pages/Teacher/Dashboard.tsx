@@ -47,9 +47,9 @@ let totalAmount = 0;
 export const Dashboard = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
-  // const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
-  const baseURLChart1 = `http://localhost:8081/teacher/chart1/${teacherAuthId}`;
-  const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
+  const baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
+  const baseURLChart1 = `https://learnx.azurewebsites.net/teacher/chart1/${teacherAuthId}`;
+  // const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
   const [chart1, setChart1] = useState<any[]>([]);
   const [chart2, setChart2] = useState<any[]>([]);
