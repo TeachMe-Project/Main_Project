@@ -98,6 +98,7 @@ const navigate = useNavigate();
               setUpcomingClasses(prevState => [
                 ...prevState,
                 {
+                  id: item.course.course_id,
                   class_id: item.class_id,
                   subject: item.course.subject,
                   teacher: item.teacher.title+'. ' + item.teacher.first_name + ' ' + item.teacher.last_name,
@@ -138,18 +139,33 @@ const navigate = useNavigate();
               {loading && <Loader/>}
               {!loading && upcomingClasses.map((item: any) => {
                 return (
-                <div className="Card">
-                  <div className="CardImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
-                  <div className="CardBody">
-                    <CardHeader header={item.subject} />
-                    <CardDetails details={item.teacher} />
-                    <CardDetails details={item.time} />
-                    <CardDetails details={item.date} />
-                    <button className="CardButton" onClick={() => navigate('./twilio')}>
-                      Join
-                    </button>
-                  </div>
-                </div>
+
+
+                // <div className="Card">
+                //   <div className="CardImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
+                //   <div className="CardBody">
+                //     <CardHeader header={item.subject} />
+                //     <CardDetails details={item.teacher} />
+                //     <CardDetails details={item.time} />
+                //     <CardDetails details={item.date} />
+                //     <button className="CardButton" onClick={() => navigate('./twilio/')}>
+                //       Join
+                //     </button>
+                //   </div>
+                // </div>
+
+
+                <Card
+                    key={item.id}
+                    id={item.id}
+                    teacher={item.teacher}
+                    header={item.subject}
+                    time={item.time}
+                    date={item.date}
+                    grade={item.grade}
+                    btnname="Join"
+                    image={<img src={"/Images/subjects/Mathematics.png"} />}
+                />
                 );
               })}
             </div>

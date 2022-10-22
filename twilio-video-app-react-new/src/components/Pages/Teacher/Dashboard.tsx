@@ -154,6 +154,7 @@ export const Dashboard = () => {
                 return (
                   <Card
                     key={item.id}
+                    id={item.id}
                     header={item.subject}
                     time={item.time}
                     date={item.date}

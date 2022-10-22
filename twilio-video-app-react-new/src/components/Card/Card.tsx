@@ -4,6 +4,7 @@ import { CardHeader } from './CardHeader';
 import { CardButton } from './CardButton';
 
 type Card = {
+  id?:string;
   btnname?: string;
   date?: string;
   teacher?: string;
@@ -28,7 +29,7 @@ export const Card: React.FC<Card> = props => {
         <CardDetails details={props.time} />
         <CardDetails details={props.date} />
         <CardDetails details={props.amount} />
-        <CardButton btnname={props.btnname} />
+        <CardButton btnname={props.btnname} id={props.id}/>
       </div>
     </div>
   );
