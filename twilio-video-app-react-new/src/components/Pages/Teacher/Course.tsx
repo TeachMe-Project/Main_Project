@@ -66,7 +66,7 @@ export const Course = () => {
             ...prevState,
             {
               subject: item.subject,
-              title: item.subject + " by " + item.first_name + " " + item.last_name,
+              title: item.course_name,
               grade: item.grade,
               medium: item.medium,
               desc: item.description,

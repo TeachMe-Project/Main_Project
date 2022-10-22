@@ -78,7 +78,9 @@ export const MyCourses = () => {
                                          <div className="lastRow">
                                              <div className="CardRow">
                                                  <CardDetails details={item.date} />
-                                                 <CardDetails details={item.time} />
+                                                 <div className='CardDetails'>
+                                                     Time: {item.time}
+                                                 </div>
                                                  <CardDetails details={item.amount} />
                                              </div>
                                              <div className="ViewMore">
