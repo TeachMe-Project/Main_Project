@@ -9,6 +9,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 import AdminLayout from "./AdminLayout";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
+import EnrollmentChart from "./EnrollmentChart";
+import PaymentChart from "./PaymentChart";
+import PieChart from "./PieChart";
+import NewCourses from "./NewCourses";
 
 
 
@@ -143,21 +147,34 @@ export const AdminDashboard = () => {
 
         <Row>
           {/* ------------------------------ Row 1 ---------------------------------------- */}
-          <Row>
-            <Col xl={6}>
-              <BarChart />
-            </Col>
-            <Col xl={6}>
-              <LineChart />
-            </Col>
-          </Row>
+
           {/* ------------------------------ Row 2 ---------------------------------------- */}
           <Row>
+            <Col
+              xl={2}
+              style={{
+                marginTop: "10px",
+                marginLeft: "180px",
+                marginRight: "350px",
+                position: "absolute",
+              }}
+            >
+              <PieChart />
+            </Col>
+            <Col
+              xl={6}
+              style={{ position: "relative", left: "585px", marginTop: "10px" }}
+            >
+              <EnrollmentChart />
+            </Col>
+          </Row>
+          {/* -------------------------------------------------------------------- */}
+          <Row>
             <Col xl={6}>
-              <BarChart />
+              <PaymentChart />
             </Col>
             <Col xl={6}>
-              <LineChart />
+              <NewCourses />
             </Col>
           </Row>
         </Row>
