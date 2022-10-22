@@ -115,23 +115,44 @@ const ProfileEdit = () => {
     const [isDateLoading, setIsDateLoading] = useState(false);
     const user_id = user?.sub;
     useEffect(() => {
-        axios.get(`https://learnx.azurewebsites.net/parent/${user_id}`).then((res: AxiosResponse) => {
-            // setIsDataLoading(true);
-            console.log(res)
+        if(user?.family_name == "admin") {
+            axios.get(`https://learnxy.azurewebsites.net/admin/${user_id}`).then((res: AxiosResponse) => {
+                // setIsDataLoading(true);
+                console.log(res)
 
-            setInitialState({
-                Firstname:  res.data.parent[0].first_name,
-                Lastname:  res.data.parent[0].last_name,
-                Email: res.data.username,
-                Mobile: res.data.parent[0].mobile_no,
-            })
+                setInitialState({
+                    Firstname: res.data.admin[0].first_name,
+                    Lastname: res.data.admin[0].last_name,
+                    Email: res.data.username,
+                    Mobile: res.data.admin[0].mobile_no,
+                })
 
-            setProfileImage(res.data.profile_image)
-            setIsDateLoading(true)
-        })
-            .catch((error: any) => {
-                console.log(error.message);
+                setProfileImage(res.data.profile_image)
+                setIsDateLoading(true)
             })
+                .catch((error: any) => {
+                    console.log(error.message);
+                })
+        }
+        else {
+            axios.get(`https://learnxy.azurewebsites.net/parent/${user_id}`).then((res: AxiosResponse) => {
+                // setIsDataLoading(true);
+                console.log(res)
+
+                setInitialState({
+                    Firstname: res.data.parent[0].first_name,
+                    Lastname: res.data.parent[0].last_name,
+                    Email: res.data.username,
+                    Mobile: res.data.parent[0].mobile_no,
+                })
+
+                setProfileImage(res.data.profile_image)
+                setIsDateLoading(true)
+            })
+                .catch((error: any) => {
+                    console.log(error.message);
+                })
+        }
     }, []);
 
 
@@ -165,7 +186,7 @@ const ProfileEdit = () => {
 
                     axios({
                         method: "POST",
-                        url: "https://learnx.azurewebsites.net/user/changeImage",
+                        url: "https://learnxy.azurewebsites.net/user/changeImage",
                         headers: {
                             'Content-Type': 'application/json'
                         },
@@ -192,7 +213,7 @@ const ProfileEdit = () => {
 
         axios({
             method: "POST",
-            url: "https://learnx.azurewebsites.net/parent/updateParent",
+            url: "https://learnxy.azurewebsites.net/parent/updateParent",
             headers: {
                 'Content-Type': 'application/json'
             },

@@ -34,7 +34,7 @@ const ContactUs: React.FC = () => {
         });
         axios({
             method: "POST",
-            url: "https://learnx.azurewebsites.net/contact/contactUs",
+            url: "https://learnxy.azurewebsites.net/contact/contactUs",
             headers: {
                 'Content-Type': 'application/json'
             },

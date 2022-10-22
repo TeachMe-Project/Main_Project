@@ -75,7 +75,7 @@ const TeacherProfile = () => {
   const { user } = useAuth0(),
     teacherAuthId = user?.sub,
     // navigate = useNavigate(),
-    baseURL = `https://learnx.azurewebsites.net/teacher/${teacherAuthId}`,
+    baseURL = `https://learnxy.azurewebsites.net/teacher/${teacherAuthId}`,
     [profDetails,setProfDetails] =useState<any[]>([]),
     [instituteNameValidate, setInstituteNameValidate] = useState(false),
     [ownerNameValidate, setOwnerNameValidate] = useState(false),
