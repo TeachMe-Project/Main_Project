@@ -38,9 +38,9 @@ export const getClassByID = async (req: Request, res: Response) => {
 
 export const createClass = async (req: Request, res: Response) => {
 
-    const { error, value } = classSchema.validate(req.body);
+    // const { error, value } = classSchema.validate(req.body);
 
-    if (!error) {
+    // if (!error) {
         try {
             // @ts-ignore
             const { teacher_id } = await prisma.teacher.findUnique({
@@ -69,9 +69,9 @@ export const createClass = async (req: Request, res: Response) => {
         } catch (error) {
             res.status(500).send(error);
         }
-    }
-    else {
-        res.status(500).send(error.details[0].message);
-    }
+    // }
+    // else {
+    //     res.status(500).send(error.details[0].message);
+    // }
 }
 

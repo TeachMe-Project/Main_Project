@@ -69,7 +69,10 @@ export const getTeacherUpcomingClasses = async (req: Request, res: Response) => 
         const data = await prisma.teacher_class.findMany({
             take: 3,
             where: {
-                teacher_id: teacher_id
+                teacher_id: teacher_id,
+                date: {
+                    gte: new Date()
+                }
             },
             orderBy: {
                 date: "asc"
@@ -293,7 +296,7 @@ export const getStudentCountAnalytics = async (req: Request, res: Response) => {
                 teacher_id: true
             }
         })
-        
+
         // @ts-ignore
         const courses = await prisma.course.findMany({
             where: {

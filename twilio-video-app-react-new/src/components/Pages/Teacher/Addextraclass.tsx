@@ -39,6 +39,7 @@ export const Addextraclass = () => {
   const teacherAuthId = user?.sub;
   const params = useParams();
   console.log(params);
+  console.log(teacherAuthId);
   
   const [isEditing, setISEditing] = useState(false);
 
@@ -94,6 +95,9 @@ export const Addextraclass = () => {
       return true;
     }
   };
+
+  const date = (new Date());
+  date.setDate(date.getDate()+1)
 
   const extraClassCreate = (values: any) => {
     const data = JSON.stringify({
@@ -152,6 +156,7 @@ export const Addextraclass = () => {
                               isInvalid={!!errors.date ? changedateValidate(false) : changedateValidate(true)}
                               isValid={touched.date}
                               onBlur={handleBlur}
+                              min={date.toISOString().substring(0,10)}
                             />
                           </Col>
                         </Form.Group>
