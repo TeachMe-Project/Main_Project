@@ -32,74 +32,208 @@ import CourseProfile from "./components/profile/tutor/CourseProfile";
 import ViewCourse from "./components/profile/admin/ViewCourse";
 import InstituteViewCourse from "./components/profile/institute/InstituteViewCourse";
 import ParentSRequest from "./components/profile/parent/ParentSRequest";
+import AdminDashboard from './components/profile/admin/AdminDashboard';
 
 const App: React.FC = () => {
     return (
-        <div>
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/dashboard" element={<PStudentProgress/>}/>
-                <Route path="/signup" element={<SignUpCategory/>}/>
-                <Route path="/signup/teacher" element={<TeacherSignup/>}/>
-                <Route path="/signup/institute" element={<InstituteSignup/>}/>
-                <Route path="/signup/parent" element={<ParentSignup/>}/>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<PStudentProgress />} />
+          <Route path="/signup" element={<SignUpCategory />} />
+          <Route path="/signup/teacher" element={<TeacherSignup />} />
+          <Route path="/signup/institute" element={<InstituteSignup />} />
+          <Route path="/signup/parent" element={<ParentSignup />} />
 
-                <Route path="/parent" element={<ProtectedRoute component={PUpComingClasses} role={'parent'}/>}/>
-                <Route path="/parent/payments"
-                       element={<ProtectedRoute component={PUpComingPayments} role={'parent'}/>}/>
-                <Route path="/parent/stuSignup" element={<ProtectedRoute component={StudentSignup} role={'parent'}/>}/>
-                <Route path="/parent/history" element={<ProtectedRoute component={PStudentProgress} role={'parent'}/>}/>
-                <Route path="/parent/summary" element={<ProtectedRoute component={PStudentSummery} role={'parent'}/>}/>
-                <Route path="/parent/studentrequests" element={<ProtectedRoute component={ParentSRequest} role={'parent'}/>}/>
-                <Route path="/parent/notification"
-                       element={<ProtectedRoute component={ParentNotification} role={'parent'}/>}/>
+          <Route
+            path="/parent"
+            element={
+              <ProtectedRoute component={PUpComingClasses} role={"parent"} />
+            }
+          />
+          <Route
+            path="/parent/payments"
+            element={
+              <ProtectedRoute component={PUpComingPayments} role={"parent"} />
+            }
+          />
+          <Route
+            path="/parent/stuSignup"
+            element={
+              <ProtectedRoute component={StudentSignup} role={"parent"} />
+            }
+          />
+          <Route
+            path="/parent/history"
+            element={
+              <ProtectedRoute component={PStudentProgress} role={"parent"} />
+            }
+          />
+          <Route
+            path="/parent/summary"
+            element={
+              <ProtectedRoute component={PStudentSummery} role={"parent"} />
+            }
+          />
+          <Route
+            path="/parent/studentrequests"
+            element={
+              <ProtectedRoute component={ParentSRequest} role={"parent"} />
+            }
+          />
+          <Route
+            path="/parent/notification"
+            element={
+              <ProtectedRoute component={ParentNotification} role={"parent"} />
+            }
+          />
 
+          <Route
+            path="/admin"
+            element={<ProtectedRoute component={ManageUsers} role={"admin"} />}
+          />
+          <Route
+            path="/admin/managecourses"
+            element={
+              <ProtectedRoute component={AdminManageCourses} role={"admin"} />
+            }
+          />
+          <Route
+            path="/admin/verifytutors"
+            element={
+              <ProtectedRoute component={VerifyTutorsPage} role={"admin"} />
+            }
+          />
+          <Route
+            path="/admin/verifyinstitutes"
+            element={
+              <ProtectedRoute component={VerifyInstitutesPage} role={"admin"} />
+            }
+          />
+          <Route
+            path="/admin/viewInstitute"
+            element={
+              <ProtectedRoute component={ViewInstituteProfile} role={"admin"} />
+            }
+          />
+          <Route
+            path="/admin/tutor/:tutor_id"
+            element={
+              <ProtectedRoute component={ViewTutorProfile} role={"admin"} />
+            }
+          />
+          <Route
+            path="/admin/institute/:institute_id"
+            element={
+              <ProtectedRoute component={ViewInstituteProfile} role={"admin"} />
+            }
+          />
+          <Route
+            path="/admin/tutor/:institute_id"
+            element={
+              <ProtectedRoute
+                component={InstituteManageProfile}
+                role={"admin"}
+              />
+            }
+          />
+          <Route
+            path="/admin/tutorpayment"
+            element={
+              <ProtectedRoute component={TutorPayments} role={"admin"} />
+            }
+          />
+          <Route
+            path="/admin/notification"
+            element={
+              <ProtectedRoute component={AdminNotification} role={"admin"} />
+            }
+          />
+          <Route
+            path="/admin/course/:course_id"
+            element={<ProtectedRoute component={ViewCourse} role={"admin"} />}
+          />
+          <Route
+            path="/admin/admindashboard"
+            element={<ProtectedRoute component={AdminDashboard} role={"admin"} />}
+          />
 
+          <Route
+            path="/institute"
+            element={
+              <ProtectedRoute
+                component={InstituteManageCourses}
+                role={"institute"}
+              />
+            }
+          />
+          <Route
+            path="/institute/tutors"
+            element={
+              <ProtectedRoute
+                component={InstituteTutorsPage}
+                role={"institute"}
+              />
+            }
+          />
+          <Route
+            path="/institute/profile"
+            element={
+              <ProtectedRoute
+                component={InstituteManageProfile}
+                role={"institute"}
+              />
+            }
+          />
+          <Route
+            path="/institute/addtutors"
+            element={
+              <ProtectedRoute
+                component={InstituteAddTutor}
+                role={"institute"}
+              />
+            }
+          />
+          <Route
+            path="/institute/tutors/:tutor_id"
+            element={
+              <ProtectedRoute
+                component={ViewInstituteTutorProfile}
+                role={"institute"}
+              />
+            }
+          />
+          <Route
+            path="/institute/notification"
+            element={
+              <ProtectedRoute
+                component={InstituteNotification}
+                role={"institute"}
+              />
+            }
+          />
+          <Route
+            path="/institute/course/:course_id"
+            element={
+              <ProtectedRoute
+                component={InstituteViewCourse}
+                role={"institute"}
+              />
+            }
+          />
 
-                <Route path="/admin" element={<ProtectedRoute component={ManageUsers} role={'admin'}/>}/>
-                <Route path="/admin/managecourses"
-                       element={<ProtectedRoute component={AdminManageCourses} role={'admin'}/>}/>
-                <Route path="/admin/verifytutors"
-                       element={<ProtectedRoute component={VerifyTutorsPage} role={'admin'}/>}/>
-                <Route path="/admin/verifyinstitutes"
-                       element={<ProtectedRoute component={VerifyInstitutesPage} role={'admin'}/>}/>
-                <Route path="/admin/viewInstitute"
-                       element={<ProtectedRoute component={ViewInstituteProfile} role={'admin'}/>}/>
-                <Route path="/admin/tutor/:tutor_id"
-                       element={<ProtectedRoute component={ViewTutorProfile} role={'admin'} />}/>
-                <Route path="/admin/institute/:institute_id"
-                       element={<ProtectedRoute component={ViewInstituteProfile} role={'admin'} />}/>
-                <Route path="/admin/tutor/:institute_id"
-                       element={<ProtectedRoute component={InstituteManageProfile} role={'admin'} />}/>
-                <Route path="/admin/tutorpayment"
-                       element={<ProtectedRoute component={TutorPayments} role={'admin'}/>}/>
-                <Route path="/admin/notification"
-                       element={<ProtectedRoute component={AdminNotification} role={'admin'}/>}/>
-                <Route path="/admin/course/:course_id"
-                       element={<ProtectedRoute component={ViewCourse} role={'admin'}/>}/>
+          <Route
+            path="/parent/profile"
+            element={<ProtectedRoute component={ProfileEdit} role={"parent"} />}
+          />
+          <Route
+            path="/admin/profile"
+            element={<ProtectedRoute component={ProfileEdit} role={"admin"} />}
+          />
 
-
-                <Route path="/institute"
-                       element={<ProtectedRoute component={InstituteManageCourses} role={'institute'}/>}/>
-                <Route path="/institute/tutors"
-                       element={<ProtectedRoute component={InstituteTutorsPage} role={'institute'}/>}/>
-                <Route path="/institute/profile"
-                       element={<ProtectedRoute component={InstituteManageProfile} role={'institute'} />}/>
-                <Route path="/institute/addtutors"
-                       element={<ProtectedRoute component={InstituteAddTutor} role={'institute'}/>}/>
-                <Route path="/institute/tutors/:tutor_id"
-                       element={<ProtectedRoute component={ViewInstituteTutorProfile} role={'institute'} />}/>
-                <Route path="/institute/notification"
-                       element={<ProtectedRoute component={InstituteNotification} role={'institute'}/>}/>
-                <Route path="/institute/course/:course_id"
-                       element={<ProtectedRoute component={InstituteViewCourse} role={'institute'}/>}/>
-
-                <Route path="/parent/profile" element={<ProtectedRoute component={ProfileEdit} role={'parent'}/>}/>
-                <Route path="/admin/profile" element={<ProtectedRoute component={ProfileEdit} role={'admin'}/>}/>
-
-                <Route path="/*" element={<NotFound/>}/>
-            </Routes>
-        </div>
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+      </div>
     );
 };
 
