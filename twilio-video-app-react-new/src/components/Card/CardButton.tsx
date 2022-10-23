@@ -11,7 +11,7 @@ type CardButton = {
 export const CardButton: React.FC<CardButton> = props => {
   const navigate = useNavigate();
   const id=props.id;
-  const class_id=props.class_id
+  const class_id=props.class_id;
 
   return (
     <button className="CardButton" onClick={() => navigate('./twilio/'+ id+'/'+ class_id )}>

@@ -19,6 +19,7 @@ type Card = {
 };
 
 export const Card: React.FC<Card> = props => {
+  console.log("card"+props.class_id)
   return (
     <div className="Card">
       <div className="CardImage">{props.image}</div>

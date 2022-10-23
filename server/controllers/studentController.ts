@@ -323,9 +323,12 @@ console.log(req.params.id)
 
 export const getUsedApps = async (req: Request, res: Response) => {
 
+  // console.log("test");
+  // console.log(req.body.class_id);
+  // console.log(req.body.course_id);
   let apps = [
-    { name: "facebook", students: [""], count: 0 },
-    { name: "whatsApp", students: [""], count: 0 }
+    { name: "facebook.exe", students: [""], count: 0 },
+    { name: "WhatsApp.exe", students: [""], count: 0 }
   ]
 
   try {
@@ -354,7 +357,7 @@ export const getUsedApps = async (req: Request, res: Response) => {
         for (let studentAppsIndex = 0; studentAppsIndex < stdentsApps.length; studentAppsIndex++) {
           if (apps[appIndex].name == stdentsApps[studentAppsIndex]) {
             apps[appIndex].count += 1
-            apps[appIndex].students.push(data[dataIndex].student.first_name)
+            apps[appIndex].students.push(data[dataIndex].student.first_name+" "+ data[dataIndex].student.last_name)
           }
         }
 
