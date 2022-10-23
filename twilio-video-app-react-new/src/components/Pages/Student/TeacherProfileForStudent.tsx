@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Col, Form, Row, Tab, Tabs} from "react-bootstrap";
+import {Button, Col, Form, Row, Tab, Tabs} from "react-bootstrap";
 import {AiOutlineCloseCircle} from "react-icons/ai";
 import {Formik} from "formik";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import axios, {AxiosResponse} from "axios";
 import {useAuth0} from "@auth0/auth0-react";
 import Loader from "../../../auth0/Loader";
+import CardDetails from "../../Card/CardDetails";
 // import Images from "../../../assets/images/Images";
 // import Loader from "../../utils/Loader";
 
@@ -34,11 +35,11 @@ const TeacherProfileForStudents = () => {
     console.log(params.teacher_id);
     const [enableEditProfile, setEnableEditProfile] = useState(true);
     const [passwordMail, setPasswordMail] = useState(null);
-
+    const [courses, setCourses] = useState<any[]>([]);
     useEffect(() => {
         axios({
             method: "GET",
-            url: `https://learnxy.azurewebsites.net/teacher/${params.teacher_id}`,
+            url: `http://localhost:8081/teacher/${params.teacher_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -51,6 +52,16 @@ const TeacherProfileForStudents = () => {
                 Email: res.data[0].user.username,
                 Image: res.data[0].user.profile_image
             })
+            const course = res.data[0].course;
+            course.map((item: any) => {
+                setCourses(prevState => [
+                    ...prevState,
+                    {
+                        id: item.course_id,
+                        title: item.subject + " " + item.grade + " " + item.medium + " " + "Medium",
+                    }
+                ]);
+            });
             if (res.status === 200) {
                 console.log(initialState)
                 setIsDataLoading(true);
@@ -147,6 +158,34 @@ const TeacherProfileForStudents = () => {
                                                     </Col>
                                                 </Row>
                                             </Tab>
+                                            <Tab eventKey="coursesconducted" title="Courses Conducted" className="teacherprofiletabcontent CoursesConducted">
+                                                {/*Put title as card header*/}
+
+                                                {courses.map((item: any) => {
+                                                    return (
+                                                        <div className="SearchResultCard">
+                                                            <Col xl={2}>
+                                                                <img className="CardImage" width="50" height="50" src="/Images/subjects/Mathematics.png" />
+                                                            </Col>
+
+                                                            <Col xl={8} className="me-4">
+                                                                <CardDetails details={item.title} />
+                                                            </Col>
+
+
+                                                            <Col xl={2} className="me-8">
+                                                                <div className="ViewMore">
+                                                                        <button className="CardButton" onClick={() => navigate(`/course/${item.id}`)}>
+                                                                            View More
+                                                                        </button>
+                                                                </div>
+                                                            </Col>
+                                                        </div>
+
+                                                    )})}
+
+                                                </Tab>
+
                                         </Tabs>
                                     </Form>
                                 </Row>)}

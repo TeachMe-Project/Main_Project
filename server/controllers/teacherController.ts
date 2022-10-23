@@ -25,7 +25,8 @@ export const getTeacherByID = async (req: Request, res: Response) => {
                 teacher_id: Number(req.params.id)
             },
             include: {
-                user: true
+                user: true,
+                course:true
             }
         })
         logger.info(NAME_SPACE, data[0].user_id)
