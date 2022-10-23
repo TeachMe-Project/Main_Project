@@ -40,20 +40,37 @@ const ProfileNavBar: React.FC<ProfileNavBarProps> = (props) => {
                 }
             })
     };
-
+    console.log(user)
     useEffect(() => {
-        axios.get(`https://learnx.azurewebsites.net/parent/${user_id}`).then((res: AxiosResponse) => {
-            // setIsDataLoading(true);
-            console.log(res)
-           setUserDetails({
-               first_name: res.data.parent[0].first_name,
-               last_name: res.data.parent[0].last_name,
-               profile: res.data.profile_image
-           })
-        })
-            .catch((error: any) => {
-                console.log(error.message);
+        // @ts-ignore
+        if(user.family_name == "parent") {
+            axios.get(`https://learnxy.azurewebsites.net/parent/${user_id}`).then((res: AxiosResponse) => {
+                // setIsDataLoading(true);
+                console.log(res)
+                setUserDetails({
+                    first_name: res.data.parent[0].first_name,
+                    last_name: res.data.parent[0].last_name,
+                    profile: res.data.profile_image
+                })
             })
+                .catch((error: any) => {
+                    console.log(error.message);
+                })
+        }
+        else{
+                axios.get(`https://learnxy.azurewebsites.net/admin/${user_id}`).then((res: AxiosResponse) => {
+                    // setIsDataLoading(true);
+                    console.log(res)
+                    setUserDetails({
+                        first_name: res.data.admin[0].first_name,
+                        last_name: res.data.admin[0].last_name,
+                        profile: res.data.profile_image
+                    })
+                })
+                    .catch((error: any) => {
+                        console.log(error.message);
+                    })
+        }
     }, []);
 
 

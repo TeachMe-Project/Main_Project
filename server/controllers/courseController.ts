@@ -31,7 +31,11 @@ export const getCourseByID = async (req: Request, res: Response) => {
                 course_id: Number(req.params.id)
             },
             include: {
-                teacher: true,
+                teacher: {
+                    include: {
+                        institute_teacher: true
+                    }
+                },
                 homework: 
                 {
                     where: {

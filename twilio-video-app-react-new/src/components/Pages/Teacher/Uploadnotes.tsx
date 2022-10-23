@@ -8,7 +8,7 @@ import * as yup from "yup";
 import {v4 as uuidv4} from "uuid"
 import {FirebaseApp} from "../../../auth0/FirebaseConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
@@ -28,6 +28,7 @@ const initialState = {
 export const Uploadnotes = () => {
 
   const [topicValidate, settopicValidate] = useState<boolean>(false);
+  const navigate = useNavigate();
   const changetopicValidate = (status: boolean): boolean => {
     if (status) {
       settopicValidate(true);
@@ -81,7 +82,7 @@ export const Uploadnotes = () => {
     })
     axios({
       method: "POST",
-      url: "https://learnx.azurewebsites.net/notes/createNotes",
+      url: "https://learnxy.azurewebsites.net/notes/createNotes",
       headers: {
         'Content-Type': 'application/json'
       },
@@ -94,6 +95,7 @@ export const Uploadnotes = () => {
         swal(`Poof! You have successfully Uploaded the Note`, {
           icon: "success",
         });
+        navigate(`/course/${params.course_id}`)
       }
     }).catch((error) => {
       console.log(error.message)

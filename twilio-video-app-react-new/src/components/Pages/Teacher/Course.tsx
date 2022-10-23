@@ -45,9 +45,9 @@ export const Course = () => {
   const teacherAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  const baseURLCourse = `https://learnx.azurewebsites.net/course/${params.course_id}`;
-  const baseURLStudents = `https://learnx.azurewebsites.net/course/courseStudents/${params.course_id}`;
-  const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
+  const baseURLCourse = `https://learnxy.azurewebsites.net/course/${params.course_id}`;
+  const baseURLStudents = `https://learnxy.azurewebsites.net/course/courseStudents/${params.course_id}`;
+  const baseURLSchedule = `https://learnxy.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
 
   const [display, setDisplay] = useState<any[]>([]);
   const [details, setDetails] = useState<any[]>([]);
@@ -66,7 +66,7 @@ export const Course = () => {
             ...prevState,
             {
               subject: item.subject,
-              title: item.subject + " by " + item.first_name + " " + item.last_name,
+              title: item.course_name,
               grade: item.grade,
               medium: item.medium,
               desc: item.description,
@@ -181,7 +181,7 @@ export const Course = () => {
             });
             axios({
               method: "POST",
-              url: `https://learnx.azurewebsites.net/homework/removeHomework`,
+              url: `https://learnxy.azurewebsites.net/homework/removeHomework`,
               headers: {
                 "Content-Type": "application/json",
               },
@@ -225,7 +225,7 @@ export const Course = () => {
             });
             axios({
               method: "POST",
-              url: `https://learnx.azurewebsites.net/notes/removeNote`,
+              url: `https://learnxy.azurewebsites.net/notes/removeNote`,
               headers: {
                 "Content-Type": "application/json",
               },

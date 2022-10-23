@@ -99,13 +99,13 @@ export const Addextraclass = () => {
     const data = JSON.stringify({
       "user_id": teacherAuthId,
       "course_id": params.course_id,
-      "date": new Date(values.class_date),
+      "date": values.class_date,
       "start_time": values.start_time,
       "end_time": values.end_time,
     });
     axios({
       method: "POST",
-      url: "http://localhost:8081/class/createClass",
+      url: "https://learnxy.azurewebsites.net/class/createClass",
       headers: {
         'Content-Type': 'application/json'
       },
