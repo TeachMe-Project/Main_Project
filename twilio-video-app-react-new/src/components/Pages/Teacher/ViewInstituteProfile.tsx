@@ -1,18 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {Alert, Col, Form, Row, Tab, Tabs} from "react-bootstrap";
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
+// import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+// import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css';
 import {useAuth0} from "@auth0/auth0-react";
 import {Formik} from "formik";
 import axios, {AxiosResponse} from "axios";
-import AdminLayout from "./AdminLayout";
+// import AdminLayout from "./AdminLayout";
 import {AiOutlineCloseCircle} from "react-icons/ai";
 import {useNavigate, useParams} from "react-router-dom";
-import Images from "../../../assets/images/Images";
-import Loader from "../../utils/Loader";
+import Loader from '../../../auth0/Loader';
+// import Images from "../../../assets/images/Images";
+// import Loader from "../../utils/Loader";
 
 
 type initialStateType = {
+    Image:string,
     InstituteName: string,
     OwnerName: string,
     Location: string,
@@ -39,6 +41,7 @@ const ViewInstituteProfile = () => {
     const [isDataLoading, setIsDataLoading] = useState(false);
     const [error, setError] = useState('');
     const [initialState, setInitialState] = useState<initialStateType>({
+        Image:'',
         InstituteName: '',
         OwnerName: '',
         Location: '',
@@ -53,15 +56,17 @@ const ViewInstituteProfile = () => {
     });
 
     useEffect(() => {
+        // console.log(params)
         axios({
             method: "GET",
-            url: `https://learnxy.azurewebsites.net/institute/${params.institute_id}`,
+            url: `https://learnxy.azurewebsites.net/institute/getInstituteByInstituteId/${params.institute_user_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },
         }).then((res: AxiosResponse) => {
             console.log(res.data[0].institute_name)
             setInitialState({
+                Image: res.data[0].user.profile_image,
                 InstituteName: res.data[0].institute_name,
                 AccountName: res.data[0].account_name,
                 AccountNo: res.data[0].account_no,
@@ -84,7 +89,6 @@ const ViewInstituteProfile = () => {
     }, []);
 
     return (
-        <AdminLayout>
             <Col lg={12} className='px-lg-5'>
                 <Row className='d-lg-flex flex-lg-column align-items-center text-lg-center'>
                     <Col lg={12} md={12} xs={12}>
@@ -95,9 +99,11 @@ const ViewInstituteProfile = () => {
                         </h1>
                     </Col>
                 </Row>
+                {!isDataLoading && <Loader/>}
+                {isDataLoading &&
                 <Row className='mt-5'>
                     <Col lg={3} className='d-flex flex-column justify-content-center align-items-center'>
-                        <img src={Images.instpro} className='w-100' style={{borderRadius: "50%"}}/>
+                        <img src={initialState.Image} className='w-100' style={{borderRadius: "50%"}}/>
 
                         {passwordMail === "success" &&
                         <Alert variant="success" className="p-1 mt-2"> Check email and reset the password</Alert>
@@ -105,8 +111,6 @@ const ViewInstituteProfile = () => {
 
                     </Col>
                     <Col className='px-lg-5'>
-                        {!isDataLoading && <Loader/>}
-                        {isDataLoading &&
                         <Formik
                             onSubmit={console.log}
                             initialValues={initialState}
@@ -285,11 +289,10 @@ const ViewInstituteProfile = () => {
                                         </Tabs>
                                     </Form>
                                 </Row>)}
-                        </Formik>}
+                        </Formik>
                     </Col>
-                </Row>
+                </Row>}
             </Col>
-        </AdminLayout>
     );
 };
 

@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import axios, {AxiosResponse} from "axios";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
+import Loader from "../../utils/Loader";
 
 const schema = yup.object().shape({
     Name: yup.string().required(),
@@ -34,7 +35,7 @@ const ContactUs: React.FC = () => {
         });
         axios({
             method: "POST",
-            url: "http://localhost:8081/contact/contactUs",
+            url: "https://learnxy.azurewebsites.net/contact/contactUs",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -144,6 +145,7 @@ const ContactUs: React.FC = () => {
                                         {errors.Message}
                                     </Form.Control.Feedback>
                                 </Form.Group>
+                                {loading && <Loader/>}
                                 <Button type="submit" variant="primary" className="mt-2 px-4 py-2"
                                         style={{borderRadius: "20px", float: "right"}}><GrSend
                                     style={{marginRight: "3px"}}

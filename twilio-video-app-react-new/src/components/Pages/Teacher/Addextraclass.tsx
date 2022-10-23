@@ -105,7 +105,7 @@ export const Addextraclass = () => {
     });
     axios({
       method: "POST",
-      url: "http://localhost:8081/class/createClass",
+      url: "https://learnxy.azurewebsites.net/class/createClass",
       headers: {
         'Content-Type': 'application/json'
       },

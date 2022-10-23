@@ -30,7 +30,7 @@ const CourseProfile = () => {
     useEffect(() => {
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         console.log(course_id)
-        axios.get(`https://learnx.azurewebsites.net/course/${course_id}`)
+        axios.get(`https://learnxy.azurewebsites.net/course/${course_id}`)
             .then((res: AxiosResponse) => {
                 // setIsDataLoading(true);
                 const data = res.data[0];

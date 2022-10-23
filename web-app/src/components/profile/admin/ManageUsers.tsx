@@ -17,7 +17,7 @@ import Loader from "../../utils/Loader";
 
 const ManageUsers = () => {
 
-    const baseURL = "https://learnx.azurewebsites.net/user/allUsers";
+    const baseURL = "https://learnxy.azurewebsites.net/user/allUsers";
     const [users, setUsers] = useState<any[]>([]);
     const [isDataLoading, setIsDataLoading] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
@@ -52,7 +52,7 @@ const ManageUsers = () => {
                         })
                         axios({
                             method: "POST",
-                            url: "https://learnx.azurewebsites.net/auth/block",
+                            url: "https://learnxy.azurewebsites.net/auth/block",
                             headers: {
                                 'Content-Type': 'application/json'
                             },
@@ -61,7 +61,7 @@ const ManageUsers = () => {
                             console.log(row.user_id)
                             axios({
                                 method: "POST",
-                                url: "https://learnx.azurewebsites.net/user/removeUser",
+                                url: "https://learnxy.azurewebsites.net/user/removeUser",
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },

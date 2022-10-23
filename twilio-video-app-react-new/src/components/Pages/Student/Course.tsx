@@ -4,7 +4,7 @@ import Card from '../../Card/Card';
 import CardHeader from '../../Card/CardHeader';
 import CardDetails from '../../Card/CardDetails';
 import { Row, Col, Container, Tab, NavItem } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import Tabs from '../../Tabs/Tabs';
 import Details from './Details';
 import Notes from './Notes';
@@ -46,14 +46,10 @@ export const Course = (props: tutorName) => {
   // };
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURLDetails = `https://learnx.azurewebsites.net/course/${studentAuthId}`;
-  const baseURLNotes = `https://learnx.azurewebsites.net/student/${studentAuthId}/notes`;
-  const baseURLHomework = `https://learnx.azurewebsites.net/student/${studentAuthId}/homeworks`;
-  const baseURLUpcoming = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
+  const params = useParams();
+  const course_id = params.course_id;
+  const baseURLDetails = `https://learnxy.azurewebsites.net/course/${course_id}`;
   const [details, setDetails] = useState<any[]>([]);
-  const [homework, setHomework] = useState<any[]>([]);
-  const [notes, setNotes] = useState<any[]>([]);
-  const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 
   useEffect(() => {
     axios
@@ -75,59 +71,8 @@ export const Course = (props: tutorName) => {
             },
           ]);
         });
+        console.log("Data")
         console.log(details);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    axios
-      .get(baseURLHomework)
-      .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
-          setHomework(prevState => [
-            ...prevState,
-            {
-              date: item.uploaded_date,
-              link: item.homework,
-            },
-          ]);
-        });
-        console.log(homework);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    axios
-      .get(baseURLNotes)
-      .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
-          setNotes(prevState => [
-            ...prevState,
-            {
-              date: item.uploaded_date,
-              link: item.note,
-            },
-          ]);
-        });
-        console.log(notes);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    axios
-      .get(baseURLUpcoming)
-      .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
-          setUpcomingClasses(prevState => [
-            ...prevState,
-            {
-              date: item.date,
-              start_time: convertTime(item.course.start_time),
-              end_time: convertTime(item.course.end_time)
-            },
-          ]);
-        });
-        console.log(upcomingClasses);
       })
       .catch(err => {
         console.log(err);
@@ -147,25 +92,6 @@ export const Course = (props: tutorName) => {
               <div className="PanelImage">
                 <img src={'/Images/subjects/Mathematics.png'} />
               </div>
-
-              {/* {details.map((item: any) => {
-                return (
-                  <div className="PanelTopic">
-                    <div className="SubjectName">
-                      <h3>{item.subject}</h3>
-                    </div>
-                    <div className="TutorProfileButton">
-                      <Link to="/userprofile" className="link">
-                        <div className="UserImg">
-                          <img src={'/Images/Teachers/mr1.jpg'} />
-                        </div>
-                        <div className="Name">{item.teacher}</div>
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })} */}
-
               <div className="PanelTopic">
                 <div className="SubjectName">
                   <h3>Mathematics</h3>
@@ -201,7 +127,7 @@ export const Course = (props: tutorName) => {
               })} */}
 
               <div className="Details">
-                <Details label="Subject" value="Mathematics" symbol=":" />
+                <Details label="Subject" value="Mathem" symbol=":" />
                 <Details label="Grade" value="8" symbol=":" />
                 <Details label="Medium" value="English" symbol=":" />
                 <Details

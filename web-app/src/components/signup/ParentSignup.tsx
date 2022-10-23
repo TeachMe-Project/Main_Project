@@ -114,7 +114,7 @@ const ParentSignup = () => {
         });
         axios({
             method: "POST",
-            url: "https://learnx.azurewebsites.net/auth/createParent",
+            url: "https://learnxy.azurewebsites.net/auth/createParent",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -133,7 +133,7 @@ const ParentSignup = () => {
 
                 axios({
                     method: "POST",
-                    url: "https://learnx.azurewebsites.net/parent/createParent",
+                    url: "https://learnxy.azurewebsites.net/parent/createParent",
                     headers: {
                         'Content-Type': 'application/json'
                     },

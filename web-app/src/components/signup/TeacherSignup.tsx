@@ -13,6 +13,7 @@ import {storage} from "../utils/fireBaseConfig";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 // @ts-ignore
 import {v4 as uuidv4} from "uuid"
+import Loader from "../utils/Loader";
 
 
 const schema = yup.object().shape({
@@ -202,7 +203,7 @@ const TeacherSignup = () => {
         });
         axios({
             method: "POST",
-            url: "https://learnx.azurewebsites.net/auth/createTeacher",
+            url: "https://learnxy.azurewebsites.net/auth/createTeacher",
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -229,7 +230,7 @@ const TeacherSignup = () => {
 
                 axios({
                     method: "POST",
-                    url: "https://learnx.azurewebsites.net/teacher/createTeacher",
+                    url: "https://learnxy.azurewebsites.net/teacher/createTeacher",
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -574,6 +575,7 @@ const TeacherSignup = () => {
                                                 </Row>
                                             </LazyLoad>}
                                             {(pageStage === 3) && <LazyLoad once>
+                                                {loading && <Loader/>}
                                                 <Row className="mt-lg-2 pe-lg-4 mt-md-3">
                                                     <Col lg={12} md={12} sm={12} xs={12}>
                                                         <Form.Group className="mb-2" controlId="validationAccountName">
