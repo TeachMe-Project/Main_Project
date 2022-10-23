@@ -35,6 +35,7 @@ export const MyCourses = () => {
                         setCourses(prevState => [
                             ...prevState,
                             {
+                                teacher_id: item.course.teacher_id,
                                 teacher_user_id: item.course.teacher.user_id,
                                 course_id: item.course_id,
                                 subject: item.course.subject,
@@ -45,6 +46,9 @@ export const MyCourses = () => {
                                 price: 'LKR '+ item.course.price,
                             },
                         ]);
+                    // console.log(courses[0].teacher_id)
+                    console.log("Details Here")
+                    console.log(courses)
                 });
             })
             .catch(error => {
@@ -70,7 +74,7 @@ export const MyCourses = () => {
                                      <div className="CardBody">
                                          <CardHeader header={item.subject} />
                                          <div className="teacherLink">
-                                             <Link to={`/teacherProfile/${item.teacher_user_id}`} className="link">
+                                             <Link to={`/teacherProfile/${item.teacher_id}`} className="link">
                                                  <CardDetails details={item.teacher} />
                                              </Link>
                                          </div>
