@@ -43,21 +43,27 @@ const schema = yup.object().shape({
     .label('School Name'),
 });
 
-const initialState = {
-  Firstname: '',
-  Lastname: '',
-  Email: '',
-  Password: '',
-  Grade: '',
-  Schoolname: '',
-};
+type initialState = {
+  Firstname: string,
+  Lastname: string,
+  Email: string,
+  Grade: string,
+  Schoolname: string,
+}
 
 export const StudentProfile = () => {
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURLStudent = `https://learnx.azurewebsites.net/student/${studentAuthId}`;
-  const baseURLParent = `https://learnx.azurewebsites.net/student/${studentAuthId}/parentDetails`;
+  const baseURLStudent = `https://learnxy.azurewebsites.net/student/${studentAuthId}`;
+  // const baseURLParent = `https://learnxy.azurewebsites.net/student/${studentAuthId}/parentDetails`;
 
+  const [initialState, setInitialState] = useState<initialState>({
+    Firstname: '',
+    Lastname: '',
+    Email: '',
+    Grade: '',
+    Schoolname: '',
+  });
   const [studentProfDetails, setStudentProfDetails] = useState<any[]>([]);
   const [parentProfDetails, setParentProfDetails] = useState<any[]>([]);
   const [isEditing, setISEditing] = useState(false);
@@ -68,6 +74,7 @@ export const StudentProfile = () => {
   const [emailValidate, setEmailValidate] = useState(false);
   const [passwordValidate, setPasswordValidate] = useState(false);
   const [schoolNameValidate, setSchoolNameValidate] = useState(false);
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
   const changeGradeValidate = (status: boolean): boolean => {
     if (status) {
@@ -125,6 +132,33 @@ export const StudentProfile = () => {
   };
 
   useEffect(() => {
+    axios({
+      method: "GET",
+      url: baseURLStudent,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      // .get(baseURLStudent)
+      .then((res: AxiosResponse) => {
+        // res.data.map((item: any) => {
+        setInitialState({
+          Firstname: res.data[0].first_name,
+          Lastname: res.data[0].last_name,
+          Email: res.data[0].user.username,
+          Grade: res.data[0].grade,
+          Schoolname: res.data[0].school,
+        });
+        if (res.status === 200) {
+          console.log(initialState);
+          setIsDataLoading(true);
+          // console.log("hello");
+        }
+        // });
+      })
+      .catch(error => {
+        console.log(error);
+      });
     axios
       .get(baseURLStudent)
       .then((res: AxiosResponse) => {
@@ -144,7 +178,7 @@ export const StudentProfile = () => {
         console.log(error);
       });
     axios
-      .get(baseURLParent)
+      .get(baseURLStudent)
       .then((res: AxiosResponse) => {
         res.data.map((item: any) => {
           setParentProfDetails(prevState => [
@@ -165,7 +199,7 @@ export const StudentProfile = () => {
 
   return (
     <div className="StudentProfile">
-      <Container>
+      { isDataLoading && <Container>
         <div className="PanelHeader">
           <h2>User Profile</h2>
           {!isEditing && <Button name=" Edit Profile" onClick={() => setISEditing(true)} />}
@@ -214,7 +248,7 @@ export const StudentProfile = () => {
           <Col xl={8}>
             <div className="RightContainer">
               <Formik on validationSchema={schema} onSubmit={console.log} initialValues={initialState}>
-                {({ handleSubmit, handleChange, handleBlur, values, touched, errors, validateField }) => (
+                {({ handleSubmit, handleChange, handleBlur, values, touched, errors, validateField, }) => (
                   <Row>
                     <Form noValidate onSubmit={handleSubmit}>
                       {/*FirstName*/}
@@ -236,6 +270,7 @@ export const StudentProfile = () => {
                               }
                               isValid={touched.Firstname}
                               onBlur={handleBlur}
+                              disabled={!isEditing}
                             />
                             <Form.Control.Feedback type="invalid">{errors.Firstname}</Form.Control.Feedback>
                           </Col>
@@ -260,6 +295,7 @@ export const StudentProfile = () => {
                               }
                               isValid={touched.Lastname}
                               onBlur={handleBlur}
+                              disabled={!isEditing}
                             />
                             <Form.Control.Feedback type="invalid">{errors.Lastname}</Form.Control.Feedback>
                           </Col>
@@ -281,6 +317,7 @@ export const StudentProfile = () => {
                               isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
                               isValid={touched.Email}
                               onBlur={handleBlur}
+                              disabled={true}
                             />
                             <Form.Control.Feedback type="invalid">{errors.Email}</Form.Control.Feedback>
                           </Col>
@@ -303,6 +340,7 @@ export const StudentProfile = () => {
                               isInvalid={!!errors.Grade ? changeGradeValidate(false) : changeGradeValidate(true)}
                               isValid={touched.Grade}
                               onBlur={handleBlur}
+                              disabled={!isEditing}
                             />
                             <Form.Control.Feedback type="invalid">{errors.Grade}</Form.Control.Feedback>
                           </Col>
@@ -347,9 +385,9 @@ export const StudentProfile = () => {
           {/*  <Button name="Save Changes"/>*/}
           {/*</div>*/}
         </div>
-      </Container>
+      </Container>}
     </div>
-  );
+    );
 };
 
 export default StudentProfile;

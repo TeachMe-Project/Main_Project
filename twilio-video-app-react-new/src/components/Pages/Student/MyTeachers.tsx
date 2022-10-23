@@ -20,11 +20,12 @@ export const MyTeachers = () => {
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {
-          console.log(res.data)
+        console.log(res.data)
         res.data.map((item: any) => {
           setTeachers(prevState => [
             ...prevState,
             {
+              teacher_user_id: item.course.teacher.user_id,
               grade: item.course.grade,
               subject: item.course.subject,
               teacher: 'Mr. ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
@@ -53,7 +54,7 @@ export const MyTeachers = () => {
               <div className="small-scrollbar">
                 {teachers.map((item: any) => {
                   return (
-                    <Link to="/teacherProfile" className="link">
+                    <Link to={`/teacherProfile/${item.teacher_user_id}`} className="link">
                       <TeacherCard
                         grade={item.grade}
                         subject={item.subject}
