@@ -9,6 +9,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 // @ts-ignore
 import LazyLoad from 'react-lazyload';
+// @ts-ignore
+import swal from "@sweetalert/with-react";
 
 const schema = yup.object().shape({
   Firstname: yup
@@ -48,7 +50,6 @@ type initialState = {
   Lastname: string,
   Email: string,
   Grade: string,
-  Schoolname: string,
 }
 
 export const StudentProfile = () => {
@@ -61,8 +62,7 @@ export const StudentProfile = () => {
     Firstname: '',
     Lastname: '',
     Email: '',
-    Grade: '',
-    Schoolname: '',
+    Grade: ''
   });
   const [studentProfDetails, setStudentProfDetails] = useState<any[]>([]);
   const [parentProfDetails, setParentProfDetails] = useState<any[]>([]);
@@ -139,22 +139,17 @@ export const StudentProfile = () => {
         'Content-Type': 'application/json'
       },
     })
-      // .get(baseURLStudent)
       .then((res: AxiosResponse) => {
-        // res.data.map((item: any) => {
         setInitialState({
           Firstname: res.data[0].first_name,
           Lastname: res.data[0].last_name,
           Email: res.data[0].user.username,
-          Grade: res.data[0].grade,
-          Schoolname: res.data[0].school,
+          Grade: res.data[0].grade
         });
         if (res.status === 200) {
           console.log(initialState);
           setIsDataLoading(true);
-          // console.log("hello");
         }
-        // });
       })
       .catch(error => {
         console.log(error);
@@ -197,9 +192,34 @@ export const StudentProfile = () => {
       });
   }, []);
 
+  const editDetails = (values: any) => {
+    const data = JSON.stringify({
+      "first_name": values.Firstname,
+      "last_name": values.Lastname,
+      "grade": values.Grade
+    });
+    axios({
+      method: "POST",
+      url: `http://localhost:8081/student/updateStudent/${studentAuthId}`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    }).then((res: AxiosResponse) => {
+      if (res.status == 200) {
+        console.log("Done")
+        swal(`Poof! You have successfully edited your profile`, {
+          icon: "success",
+        });
+      }
+    }).catch(function (error) {
+      console.log(error.message)
+    })
+  }
+
   return (
     <div className="StudentProfile">
-      { isDataLoading && <Container>
+      {isDataLoading && <Container>
         <div className="PanelHeader">
           <h2>User Profile</h2>
           {!isEditing && <Button name=" Edit Profile" onClick={() => setISEditing(true)} />}
@@ -356,11 +376,10 @@ export const StudentProfile = () => {
                                 gradeValidate &&
                                 fistNameValidate &&
                                 lastNameValidate &&
-                                emailValidate &&
-
-                                schoolNameValidate
+                                emailValidate
                               ) {
                                 setPageStage(2);
+                                editDetails(values);
                               }
                             }}
                             onClickCapture={() => {
@@ -368,8 +387,6 @@ export const StudentProfile = () => {
                               validateField('Firstname');
                               validateField('Lastname');
                               validateField('Email');
-
-                              validateField('Schoolname');
                             }}
                           />
                         )}
@@ -387,7 +404,7 @@ export const StudentProfile = () => {
         </div>
       </Container>}
     </div>
-    );
+  );
 };
 
 export default StudentProfile;

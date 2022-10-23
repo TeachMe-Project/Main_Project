@@ -80,9 +80,9 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
               gte: new Date()
             }
           },
-          include:{
-            teacher:true,
-            course:true
+          include: {
+            teacher: true,
+            course: true
           }
         }
       );
@@ -240,6 +240,24 @@ export const searchCourses = async (req: Request, res: Response) => {
   }
 };
 
+export const updateStudentDetails = async (req: Request, res: Response) => {
+  try {
+    const data = await prisma.student.update({
+      where: {
+        user_id: req.params.id
+      },
+      data: {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        grade: req.body.grade,
+      }
+    })
+    res.status(200).send(data)
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
+}
+
 export const makeCourseRequest = async (req: Request, res: Response) => {
 
   const course_id = Number(req.body.course_id)
@@ -285,21 +303,21 @@ export const makeCourseRequest = async (req: Request, res: Response) => {
 
 
 export const insertUsedApps = async (req: Request, res: Response) => {
-    try {
-        const data = await prisma.student_class.updateMany(
-            {
-                where: {
-                    student_id: Number(req.params.id)
-                },
-                data: {
-                    usedApps:req.body.apps
-                }
-            }
-        )
-        res.status(200).send(data)
-    } catch (error:any) {
-        res.status(500).send(error.message);
-    }
+  try {
+    const data = await prisma.student_class.updateMany(
+      {
+        where: {
+          student_id: Number(req.params.id)
+        },
+        data: {
+          usedApps: req.body.apps
+        }
+      }
+    )
+    res.status(200).send(data)
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
 }
 
 export const getUsedApps = async (req: Request, res: Response) => {
@@ -345,7 +363,7 @@ export const getUsedApps = async (req: Request, res: Response) => {
     }
 
     res.status(200).send(apps)
-  } catch (error:any) {
+  } catch (error: any) {
     res.status(500).send(error.message);
   }
 }
