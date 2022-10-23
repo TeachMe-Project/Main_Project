@@ -46,11 +46,11 @@ app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 app.use(cors());
-// setInterval(classSchedule, 14400000);
-// setInterval(payment_schedule, 14400000);
-// setInterval(studentClassSchedule, 14400000);
+setInterval(classSchedule, 14400000);
+setInterval(payment_schedule, 14400000);
+setInterval(studentClassSchedule, 14400000);
 // classSchedule();
-payment_schedule();
+// payment_schedule();
 // setInterval(studentClassSchedule, 60000)
 // classSchedule();
 //development endpoints by developers
