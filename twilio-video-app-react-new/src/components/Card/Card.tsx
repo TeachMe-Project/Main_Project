@@ -5,6 +5,7 @@ import { CardButton } from './CardButton';
 
 type Card = {
   id?:string;
+  class_id?:string;
   btnname?: string;
   date?: string;
   teacher?: string;
@@ -29,7 +30,7 @@ export const Card: React.FC<Card> = props => {
         <CardDetails details={props.time} />
         <CardDetails details={props.date} />
         <CardDetails details={props.amount} />
-        <CardButton btnname={props.btnname} id={props.id}/>
+        <CardButton btnname={props.btnname} id={props.id} class_id={props.class_id}/>
       </div>
     </div>
   );

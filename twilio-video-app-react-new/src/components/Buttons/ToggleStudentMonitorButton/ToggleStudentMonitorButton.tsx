@@ -60,8 +60,9 @@ const useStyles = makeStyles({
 
 
 
-export default function ToggleStudentMonitorButton() {
+export default function ToggleStudentMonitorButton(props:{course_id:string;class_id:string}) {
     const classes = useStyles();
+
 
     // const toggleChatWindow = () => {
     //     setIsChatWindowOpen(!isChatWindowOpen);
@@ -84,7 +85,7 @@ export default function ToggleStudentMonitorButton() {
             {/*    Monitor*/}
             {/*</Button>*/}
 
-            <Modal01 />
+            <Modal01 class_id={props.class_id} course_id={props.course_id}/>
         </div>
 
     );

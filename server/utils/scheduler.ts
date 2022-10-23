@@ -16,7 +16,7 @@ export const classSchedule = async () => {
             let startAt = data[i].start_time;
             // console.log(startAt)
             let endAt = data[i].end_time;
-            console.log(data[i].start_date)
+            // console.log(data[i].start_date)
             let newDate = new Date(data[i].start_date);
             // console.log(newDate)
             let nextWeek = new Date(newDate.getTime() + 7 * 24 * 60 * 60 * 1000)
@@ -45,7 +45,7 @@ export const classSchedule = async () => {
                 })
                 // console.log(res)
             } else {
-                console.log(existClasses)
+                // console.log(existClasses)
             }
             let update_date = await prisma.course.update({
                 where: {
@@ -97,7 +97,7 @@ export const classSchedule = async () => {
                 })
                 // console.log(res)
             } else {
-                console.log(existClasses)
+                // console.log(existClasses)
             }
             let update_date = await prisma.course.update({
                 where: {
@@ -111,7 +111,7 @@ export const classSchedule = async () => {
         }
 
     }
-    console.log("Class Data added")
+    // console.log("Class Data added")
 }
 
 export const payment_schedule = async () => {
@@ -130,12 +130,12 @@ export const payment_schedule = async () => {
             }
         }
     );
-    console.log(student_course)
+    // console.log(student_course)
     const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
     const current_date = new Date();
     let current_month = month[current_date.getMonth()];
-    console.log(current_month)
+    // console.log(current_month)
     for (let i = 0; i < student_course.length; i++) {
 
         const getCurrentPayment = await prisma.student_payment.findMany({
@@ -147,8 +147,8 @@ export const payment_schedule = async () => {
                 }
             }
         })
-        console.log("Current Payment")
-        console.log(getCurrentPayment);
+        // console.log("Current Payment")
+        // console.log(getCurrentPayment);
         if (getCurrentPayment.length == 0){
             const insert_payment = await prisma.student_payment.create({
                 data:{
@@ -159,8 +159,8 @@ export const payment_schedule = async () => {
                     isActive: true
                 }
             })
-            console.log("Insert payment")
-            console.log(insert_payment);
+            // console.log("Insert payment")
+            // console.log(insert_payment);
         }
 
     }

@@ -36,6 +36,7 @@ export const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [apps, setApps] = useState<any>([]);
 
+
   // const updateApps = (()=>{
   //
   //   // calling IPC exposed from preload script
@@ -55,13 +56,12 @@ export const Dashboard = () => {
   //     console.log(r);
   //   })
   //
-  //   axios.post('http://localhost:8081/student/1/insertUsedApps', {
-  //     // apps:"dfd,erere"
-  //   apps:apps.toString()
-  //   })
+  //   // axios.post('http://localhost:8081/student/1/insertUsedApps', {
+  //   //   // apps:"dfd,erere"
+  //   // apps:apps.toString()
+  //   // })
   //
   // })
-
 
 
 
@@ -72,20 +72,41 @@ export const Dashboard = () => {
   //   // @ts-ignore
   //   window.electron.ipcRenderer.on('ipc-example', (arg) => {
   //     // eslint-disable-next-line no-console
-  //     axios.post('http://localhost:8081/student/1/insertUsedApps', {
+  //     axios.post('http://localhost:8081/student/'+studentAuthId+'/insertUsedApps', {
   //
-  //       apps:Array.from(arg).toString()
+  //       apps:Array.from(arg).toString(),
+  //       class_id:120
   //     })
-  //
+  //     console.log(Array.from(arg).toString());
   //   });
-  //   // @ts-ignore
-  //   window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
   //
+  //   // @ts-ignore
+  //   window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);},[])
 
+
+  const insertApp=()=>{
+    // @ts-ignore
+    window.electron.ipcRenderer.on('ipc-example', (arg) => {
+          // eslint-disable-next-line no-console
+          axios.post('http://localhost:8081/student/'+studentAuthId+'/insertUsedApps', {
+
+            apps:Array.from(arg).toString(),
+
+          })
+          console.log(Array.from(arg).toString());
+        });
+
+        // @ts-ignore
+        window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);}
+
+
+
+// setInterval(insertApp, 10000);
 
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 const navigate = useNavigate();
   useEffect(() => {
+    insertApp();
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {
@@ -158,6 +179,7 @@ const navigate = useNavigate();
                 <Card
                     key={item.id}
                     id={item.id}
+                    class_id={item.class_id}
                     teacher={item.teacher}
                     header={item.subject}
                     time={item.time}

@@ -41,7 +41,7 @@ const VideoApp = () => {
     <VideoProvider options={connectionOptions} onError={setError}>
       <ErrorDialog dismissError={() => setError(null)} error={error} />
       <ChatProvider>
-        <Twilio id={params.id}/>
+        <Twilio id={params.id} class_id={params.class_id} tag={true}/>
       </ChatProvider>
     </VideoProvider>
   );
@@ -122,7 +122,7 @@ const routes = [
     main: () => <Parentscharts />,
   },
   {
-    path: '/twilio/:id',
+    path: '/twilio/:id/:class_id',
     main: () => <VideoApp />,
   },
   {

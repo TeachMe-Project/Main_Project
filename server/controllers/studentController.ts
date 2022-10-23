@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { studentSchema } from "../models/studentModel";
 import logger from "../utils/logger";
 import userSchema from "../models/userModel";
+import test from "node:test";
 
 const prisma = new PrismaClient()
 const NAME_SPACE = "Student"
@@ -69,7 +70,7 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
         course_id: true
       }
     });
-    console.log(student_courses);
+    // console.log(student_courses);
     let upcoming_class = [];
     for await (const course of student_courses) {
       const data = await prisma.teacher_class.findFirst(
@@ -86,7 +87,7 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
           }
         }
       );
-      console.log(data);
+      // console.log(data);
       if (data) {
         upcoming_class.push(data);
       }
@@ -142,6 +143,7 @@ export const getStudentCourses = async (req: Request, res: Response) => {
     // @ts-ignore
     const { student_id } = await prisma.student.findFirst({
       where: {
+
         user_id: req.params.id
       },
       select: {
@@ -220,7 +222,7 @@ export const createStudent = async (req: Request, res: Response) => {
 export const searchCourses = async (req: Request, res: Response) => {
 
 
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const data = await prisma.course.findMany(
       {
@@ -285,11 +287,28 @@ export const makeCourseRequest = async (req: Request, res: Response) => {
 
 
 export const insertUsedApps = async (req: Request, res: Response) => {
+console.log(req.params.id)
+//   console.log("class"+req.body.class_id)
+
+  // console.log(req.body.class_id)
     try {
+
+      const { student_id } = await prisma.student.findFirst({
+        where: {
+          user_id: req.params.id
+        },
+        select: {
+          student_id: true
+        }
+      });
+      console.log("student"+student_id)
+
         const data = await prisma.student_class.updateMany(
             {
                 where: {
-                    student_id: Number(req.params.id)
+
+                    user_id:req.params.id
+
                 },
                 data: {
                     usedApps:req.body.apps

@@ -25,7 +25,7 @@ const Main = styled('main')(({ theme }: { theme: Theme }) => ({
   },
 }));
 
-export default function Twilio(props: { id: string; }) {
+export default function Twilio(props: { id: string;class_id:string;tag:boolean ;}) {
   const roomState = useRoomState();
   console.log("me"+props.id);
 
@@ -48,7 +48,7 @@ export default function Twilio(props: { id: string; }) {
           <RecordingNotifications />
           <MobileTopMenuBar />
           <Room />
-          <MenuBar />
+          <MenuBar tag={props.tag} class_id={props.class_id} course_id={props.id}/>
         </Main>
 
       )}
