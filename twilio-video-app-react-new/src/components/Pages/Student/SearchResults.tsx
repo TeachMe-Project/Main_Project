@@ -26,7 +26,7 @@ export const SearchResults: React.FC<SearchResults> = props => {
     });
     axios({
       method: "POST",
-      url: `http://localhost:8081/student/searchCourse`,
+      url: `https://learnxy.azurewebsites.net/student/searchCourse`,
       headers: {
         "Content-Type": "application/json"
       },
@@ -74,7 +74,7 @@ export const SearchResults: React.FC<SearchResults> = props => {
           axios(
             {
               method: "POST",
-              url: `http://localhost:8081/student/requestCourse`,
+              url: `https://learnxy.azurewebsites.net/student/requestCourse`,
               headers: {
                 "Content-Type": "application/json"
               },
