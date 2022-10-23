@@ -49,7 +49,7 @@ export const Course = (props: tutorName) => {
   const studentAuthId = user?.sub;
   const params = useParams();
   const course_id = params.course_id;
-  const baseURLDetails = `http://localhost:8081/course/${course_id}`;
+  const baseURLDetails = `https://learnxy.azurewebsites.net/course/${course_id}`;
   const baseURLSchedule = `https://learnxy.azurewebsites.net/student/upcomingClasses/${studentAuthId}`;
   const [details, setDetails] = useState<any[]>([]);
   const [notes, setNotes] = useState<any[]>([]);
