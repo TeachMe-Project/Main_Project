@@ -7,7 +7,7 @@ type Details = {
   symbol?:any;
 };
 
-
+// Details
 export const Details: React.FC<Details> = (props) => {
   return (
     <div className="Details">

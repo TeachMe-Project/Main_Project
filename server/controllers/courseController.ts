@@ -33,7 +33,8 @@ export const getCourseByID = async (req: Request, res: Response) => {
             include: {
                 teacher: {
                     include: {
-                        institute_teacher: true
+                        institute_teacher: true,
+                        user:true
                     }
                 },
                 homework: 

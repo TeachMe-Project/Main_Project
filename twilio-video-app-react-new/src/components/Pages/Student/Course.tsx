@@ -49,7 +49,7 @@ export const Course = (props: tutorName) => {
   const studentAuthId = user?.sub;
   const params = useParams();
   const course_id = params.course_id;
-  const baseURLDetails = `http://localhost:8081/course/${course_id}`;
+  const baseURLDetails = `https://learnxy.azurewebsites.net/course/${course_id}`;
   const baseURLSchedule = `https://learnxy.azurewebsites.net/student/upcomingClasses/${studentAuthId}`;
   const [details, setDetails] = useState<any[]>([]);
   const [notes, setNotes] = useState<any[]>([]);
@@ -61,9 +61,11 @@ export const Course = (props: tutorName) => {
       .get(baseURLDetails)
       .then((res: AxiosResponse) => {
         res.data.map((item: any) => {
+          console.log(res.data);
           setDetails(prevState => [
             ...prevState,
             {
+              teacher_id: item.teacher.teacher_id,
               title: item.subject + " for " + item.grade,
               subject: item.subject,
               teacher: item.teacher.first_name + ' ' + item.teacher.last_name,
@@ -75,6 +77,9 @@ export const Course = (props: tutorName) => {
               start_date: item.start_date,
               institute: item.teacher.institute_teacher.institute,
               duration: item.duration + ' years',
+              start_time : item.start_time,
+              end_time: item.end_time,
+              profile:item.teacher.user.profile_image,
             },
           ]);
         });
@@ -169,9 +174,9 @@ export const Course = (props: tutorName) => {
                       <h3>{item.title}</h3>
                     </div>
                     <div className="TutorProfileButton">
-                      <Link to={`/teacherProfile/${item.teacher_user_id}`} className="link">
+                      <Link to={`/teacherProfile/${item.teacher_id}`} className="link">
                         <div className="UserImg">
-                          <img src={'/Images/Teachers/mr1.jpg'} />
+                          <img src={item.profile} />
                         </div>
                         <div className="Name">{item.teacher}</div>
                       </Link>
@@ -196,7 +201,8 @@ export const Course = (props: tutorName) => {
                       <Details label="Monthly Payment" value={item.price} symbol=":" />
                       <Details label="Started Date" value={item.start_date} symbol=":" />
                       <Details label="Institute" value={item.institute} symbol=":" />
-                      <Details label="Duration" value={item.duration} symbol=":" />
+                      <Details label="Start Time" value={item.start_time} symbol=":" />
+                      <Details label="End Time" value={item.end_time} symbol=":" />
                     </div>
                   );
                 })}
