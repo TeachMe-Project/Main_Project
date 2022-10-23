@@ -94,7 +94,7 @@ export const Institutes = () => {
               });
               axios({
                 method: "POST",
-                url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
+                url: `https://learnxy.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
                 headers: {
                   "Content-Type": "application/json",
                 },

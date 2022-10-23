@@ -32,7 +32,7 @@ export const CourseDetails = () => {
                                         <div className="UserImg">
                                             <img src={'/Images/Teachers/mr1.jpg'}/>
                                         </div>
-                                        <div className="Name">Mr. Lasitha Nuwan</div>
+                                        <div className="Name">Mr. Saman Rathnapriya</div>
                                     </Link>
                                 </div>
                             </div>
@@ -40,11 +40,11 @@ export const CourseDetails = () => {
 
                         <div className="Details">
                             <Details label="Subject" value="Mathematics" symbol=":"/>
-                            <Details label="Grade" value="8" symbol=":"/>
+                            <Details label="Grade" value="10" symbol=":"/>
                             <Details label="Medium" value="English" symbol=":"/>
                             <Details
                                 label="Description"
-                                value="This course includes content of grade 8 mathematics
+                                value="This course includes content of Grade 10 mathematics
                 of local syllabus in English medium. It contains algebraic concepts and skills needed to
                 graph and solve linear equations and inequalities."
                             />
