@@ -101,12 +101,12 @@ export const Dashboard = () => {
 
 
 
-// setInterval(insertApp, 10000);
+setInterval(insertApp, 10000);
 
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 const navigate = useNavigate();
   useEffect(() => {
-    insertApp();
+    // insertApp();
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {

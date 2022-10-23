@@ -327,8 +327,10 @@ export const getUsedApps = async (req: Request, res: Response) => {
   // console.log(req.body.class_id);
   // console.log(req.body.course_id);
   let apps = [
-    { name: "facebook.exe", students: [""], count: 0 },
-    { name: "WhatsApp.exe", students: [""], count: 0 }
+    { name: "Facebook.exe", students: [""], count: 0 },
+    { name: "WhatsApp.exe", students: [""], count: 0 },
+    { name: "Telegram.exe", students: [""], count: 0 },
+    { name: "OBS.exe", students: [""], count: 0 }
   ]
 
   try {
