@@ -80,7 +80,7 @@ const routes = [
     main: () => <Notifications />,
   },
   {
-    path: '/editdetails',
+    path: '/editdetails/:course_id',
     main: () => <Editdetails />,
   },
   {
