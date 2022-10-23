@@ -133,26 +133,19 @@ export const getCourseByGrade = async (req: Request, res: Response) => {
 
 export const updateCourseDetails = async (req: Request, res: Response) => {
 
-    const {error, value} = courseSchema.validate(req.body);
+    // const {error, value} = courseSchema.validate(req.body);
 
-    if (!error) {
+    // if (!error) {
         try {
             const data = await prisma.course.update({
                 where: {
                     course_id: Number(req.params.id)
                 },
                 data: {
-                    course_name: req.body.course_name,
                     description: req.body.description,
-                    teacher_id: req.body.teacher_id,
                     price: req.body.fee,
-                    day: req.body.class_date,
                     grade: req.body.grade,
                     subject: req.body.subject,
-                    start_date: req.body.start_date,
-                    end_date: req.body.end_date,
-                    start_time: req.body.start_time,
-                    end_time: req.body.end_time,
                     medium: req.body.medium
                 }
 
@@ -161,9 +154,9 @@ export const updateCourseDetails = async (req: Request, res: Response) => {
         } catch (error: any) {
             res.status(500).send(error.message);
         }
-    } else {
-        res.status(400).send(error.message);
-    }
+    // } else {
+    //     res.status(400).send(error.message);
+    // }
 }
 
 export const removeCourse = async (req: Request, res: Response) => {
