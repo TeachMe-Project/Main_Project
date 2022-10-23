@@ -6,7 +6,7 @@ type Details = {
   value?:string;
   symbol?:any;
 };
-// sss
+
 
 export const Details: React.FC<Details> = (props) => {
   return (
