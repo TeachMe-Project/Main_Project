@@ -38,7 +38,7 @@ export const options = {
 const labels = ['1st Week', '2nd Week', '3rd Week', '4th Week '];
 
 
-export function Parentsaveragetimechart(props: {subject:any}) {
+export function Parentsaveragetimechart(props:any) {
 
 
   const data = {

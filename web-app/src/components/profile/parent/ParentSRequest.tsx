@@ -62,7 +62,7 @@ const ParentSRequest: React.FC = () => {
                 </Row>
                 <Row>
                     <Tabs
-                        defaultActiveKey="profile"
+                        defaultActiveKey="enrollrequest"
                         id="uncontrolled-tab-example"
                         className="mb-3"
                     >
