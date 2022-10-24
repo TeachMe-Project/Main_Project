@@ -5,7 +5,7 @@ import path from 'path';
 import { ServerlessFunction } from './types';
 
 import cors from "cors";
-import {classSchedule, payment_schedule} from "./utils/scheduler";
+import {classSchedule, payment_schedule, studentClassSchedule} from "./utils/scheduler";
 import {studentRouter} from "./route/studentRoutes";
 import {paymentGatewayRouter} from "./route/paymentGatewayRoutes";
 import {userRouter} from "./route/userRoutes";
@@ -46,10 +46,12 @@ app.all('/token', authMiddleware, tokenEndpoint);
 app.all('/recordingrules', authMiddleware, recordingRulesEndpoint);
 
 app.use(cors());
-// setInterval(classSchedule, 172800000);
+setInterval(classSchedule, 14400000);
+setInterval(payment_schedule, 14400000);
+setInterval(studentClassSchedule, 14400000);
 // classSchedule();
-// setInterval(payment_schedule, 432000000);
-payment_schedule();
+// payment_schedule();
+// setInterval(studentClassSchedule, 60000)
 // classSchedule();
 //development endpoints by developers
 app.use('/admin',adminRouter)

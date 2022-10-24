@@ -40,7 +40,8 @@ export const classSchedule = async () => {
                         date: nextWeek,
                         start_time: startAt,
                         end_time: endAt,
-                        isActive: true
+                        isActive: true,
+                        getToStudentTable: "-"
                     }
                 })
                 // console.log(res)
@@ -131,7 +132,7 @@ export const payment_schedule = async () => {
         }
     );
     console.log(student_course)
-    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const current_date = new Date();
     let current_month = month[current_date.getMonth()];
@@ -139,23 +140,23 @@ export const payment_schedule = async () => {
     for (let i = 0; i < student_course.length; i++) {
 
         const getCurrentPayment = await prisma.student_payment.findMany({
-            where:{
+            where: {
                 student_id: student_course[i].student_id,
                 course_id: student_course[i].course_id,
-                month:{
+                month: {
                     equals: current_month
                 }
             }
         })
         console.log("Current Payment")
         console.log(getCurrentPayment);
-        if (getCurrentPayment.length == 0){
+        if (getCurrentPayment.length == 0) {
             const insert_payment = await prisma.student_payment.create({
-                data:{
+                data: {
                     course_id: student_course[i].course_id,
                     student_id: student_course[i].student_id,
                     month: current_month,
-                    payment_status:"unpaid",
+                    payment_status: "unpaid",
                     isActive: true
                 }
             })
@@ -164,4 +165,72 @@ export const payment_schedule = async () => {
         }
 
     }
+}
+
+export const studentClassSchedule = async () => {
+    let data = await prisma.teacher_class.findMany();
+
+    for (let i = 0; i < data.length; i++) {
+
+        let teacherClassId = data[i].class_id;
+        let courseId = data[i].course_id;
+        let teacherId = data[i].teacher_id;
+        let date = data[i].date;
+        let startTime = data[i].start_time;
+        let endTime = data[i].end_time;
+        let getToStudentTable = data[i].getToStudentTable;
+
+        let courseStudent = await prisma.student_course.findMany({
+            where: {
+                course_id: courseId
+            },
+            include: {
+                student: {
+                    select: {
+                        student_id: true,
+                        user_id: true
+                    },
+                }
+            }
+        })
+        console.log("Students For")
+        console.log(courseId)
+        console.log(teacherClassId)
+        console.log(courseStudent)
+        if (getToStudentTable == "-") {
+            for (let i = 0; i < courseStudent.length; i++) {
+                let res = await prisma.student_class.create({
+                    data: {
+                        class_id: teacherClassId,
+                        student_id: courseStudent[i].student_id,
+                        course_id: courseStudent[i].course_id,
+                        date: date,
+                        start_time: startTime,
+                        end_time: endTime,
+                        usedApps: "-",
+                        status: "upcoming",
+                        isActive: true,
+                        isStarted: false,
+                        online_status: "offline",
+                        user_id: courseStudent[i].student.user_id
+                    }
+                })
+            }
+            console.log("Data Added")
+            // console.log(res)
+
+            let update = await prisma.teacher_class.update({
+                where: {
+                    class_id: teacherClassId
+                },
+                data: {
+                    getToStudentTable: new Date().toDateString()
+                },
+            });
+            console.log("Updated");
+            console.log(update)
+        }
+
+    }
+
 }

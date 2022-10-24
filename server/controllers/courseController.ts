@@ -1,6 +1,6 @@
-import {Request, Response} from "express";
-import {PrismaClient} from '@prisma/client'
-import {courseSchema} from "../models/courseModel";
+import { Request, Response } from "express";
+import { PrismaClient } from '@prisma/client'
+import { courseSchema } from "../models/courseModel";
 
 const prisma = new PrismaClient()
 
@@ -31,15 +31,20 @@ export const getCourseByID = async (req: Request, res: Response) => {
                 course_id: Number(req.params.id)
             },
             include: {
-                teacher: true,
-                homework: 
+                teacher: {
+                    include: {
+                        institute_teacher: true,
+                        user: true
+                    }
+                },
+                homework:
                 {
                     where: {
                         isActive: true
                     }
                 }
                 ,
-                notes: 
+                notes:
                 {
                     where: {
                         isActive: true
@@ -128,36 +133,22 @@ export const getCourseByGrade = async (req: Request, res: Response) => {
 
 export const updateCourseDetails = async (req: Request, res: Response) => {
 
-    const {error, value} = courseSchema.validate(req.body);
+    try {
+        const data = await prisma.course.update({
+            where: {
+                course_id: Number(req.params.id)
+            },
+            data: {
+                description: req.body.description,
+                price: req.body.price,
+                grade: req.body.grade,
+                subject: req.body.subject
+            }
 
-    if (!error) {
-        try {
-            const data = await prisma.course.update({
-                where: {
-                    course_id: Number(req.params.id)
-                },
-                data: {
-                    course_name: req.body.course_name,
-                    description: req.body.description,
-                    teacher_id: req.body.teacher_id,
-                    price: req.body.fee,
-                    day: req.body.class_date,
-                    grade: req.body.grade,
-                    subject: req.body.subject,
-                    start_date: req.body.start_date,
-                    end_date: req.body.end_date,
-                    start_time: req.body.start_time,
-                    end_time: req.body.end_time,
-                    medium: req.body.medium
-                }
-
-            })
-            res.status(200).send(data)
-        } catch (error: any) {
-            res.status(500).send(error.message);
-        }
-    } else {
-        res.status(400).send(error.message);
+        })
+        res.status(200).send(data)
+    } catch (error: any) {
+        res.status(500).send(error.message);
     }
 }
 
@@ -223,12 +214,12 @@ export const getCourseByInstituteName = async (req: Request, res: Response) => {
 
 
 export const createCourse = async (req: Request, res: Response) => {
-    const {error, value} = courseSchema.validate(req.body);
+    const { error, value } = courseSchema.validate(req.body);
 
     if (!error) {
         try {
             // @ts-ignore
-            const {teacher_id, first_name, last_name} = await prisma.teacher.findUnique({
+            const { teacher_id, first_name, last_name } = await prisma.teacher.findUnique({
                 where: {
                     user_id: req.body.user_id
                 },
@@ -285,7 +276,7 @@ export const unrollCourseStudents = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const {student_id} = await prisma.student.findFirst({
+        const { student_id } = await prisma.student.findFirst({
             where: {
                 user_id: req.params.id,
             },
@@ -320,7 +311,7 @@ export const getStudentPendingPayments = async (req: Request, res: Response) => 
     try {
         const data = await prisma.student_payment.findMany(
             {
-                where: {course_id: Number(req.params.id), payment_status: "unpaid"},
+                where: { course_id: Number(req.params.id), payment_status: "unpaid" },
             }
         )
         res.status(200).send(data);

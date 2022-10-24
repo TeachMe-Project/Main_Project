@@ -16,7 +16,7 @@ type initialState = {
   Email: string,
   Grade: string,
   Schoolname: string,
-};
+}
 
 export const StudentProfile = () => {
   const { user } = useAuth0();
@@ -32,23 +32,31 @@ export const StudentProfile = () => {
     Lastname: '',
     Email: '',
     Grade: '',
-    Schoolname: '',
+    Schoolname: ''
   });
 
   useEffect(() => {
-    axios
-      .get(baseURLStudent)
+    axios({
+      method: "GET",
+      url: baseURLStudent,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      // .get(baseURLStudent)
       .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
-          setInitialState({
-            Firstname: item.first_name,
-            Lastname: item.last_name,
-            Email: item.user.username,
-            Grade: item.grade,
-            Schoolname: item.school,
-          });
+        // res.data.map((item: any) => {
+        setInitialState({
+          Firstname: res.data[0].first_name,
+          Lastname: res.data[0].last_name,
+          Email: res.data[0].user.username,
+          Grade: res.data[0].grade,
+          Schoolname: res.data[0].school,
         });
-        console.log(initialState)
+        if (res.status === 200) {
+          console.log(initialState);
+        }
+        // });
       })
       .catch(error => {
         console.log(error);
@@ -110,9 +118,10 @@ export const StudentProfile = () => {
                           <Col xl={8}>
                             <Form.Control
                               type="text"
-                              placeholder="Enter the first name here"
+                              // placeholder="Enter the first name here"
                               name="Firstname"
                               value={values.Firstname}
+                              disabled={true}
                             />
                           </Col>
                         </Form.Group>
@@ -127,9 +136,10 @@ export const StudentProfile = () => {
                           <Col xl={8}>
                             <Form.Control
                               type="text"
-                              placeholder="Enter the last name here"
+                              // placeholder="Enter the last name here"
                               name="Lastname"
                               value={values.Lastname}
+                              disabled={true}
                             />
                           </Col>
                         </Form.Group>
@@ -143,9 +153,10 @@ export const StudentProfile = () => {
                           <Col xl={8}>
                             <Form.Control
                               type="text"
-                              placeholder="Enter the email"
+                              // placeholder="Enter the email"
                               name="Email"
                               value={values.Email}
+                              disabled={true}
                             />
                           </Col>
                         </Form.Group>
@@ -159,9 +170,10 @@ export const StudentProfile = () => {
                           <Col xl={8}>
                             <Form.Control
                               type="text"
-                              placeholder="Enter school name here"
+                              // placeholder="Enter school name here"
                               name="Schoolname"
                               value={values.Schoolname}
+                              disabled={true}
                             />
                           </Col>
                         </Form.Group>
@@ -175,9 +187,10 @@ export const StudentProfile = () => {
                           <Col xl={8}>
                             <Form.Control
                               type="text"
-                              placeholder="Enter the grade here"
+                              // placeholder="Enter the grade here"
                               name="Grade"
                               value={values.Grade}
+                              disabled={true}
                             />
                           </Col>
                         </Form.Group>

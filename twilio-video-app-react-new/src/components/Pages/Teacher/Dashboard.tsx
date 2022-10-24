@@ -47,9 +47,10 @@ let totalAmount = 0;
 export const Dashboard = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
-  const baseURL = `https://learnxy.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
-  const baseURLChart1 = `https://learnxy.azurewebsites.net/teacher/chart1/${teacherAuthId}`;
-  // const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
+  // const baseURL = `https://learnxy.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
+  // const baseURLChart1 = `https://learnxy.azurewebsites.net/teacher/chart1/${teacherAuthId}`;
+  const baseURLChart1 = `http://localhost:8081/teacher/chart1/${teacherAuthId}`;
+  const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
   const [chart1, setChart1] = useState<any[]>([]);
   const [chart2, setChart2] = useState<any[]>([]);
@@ -63,6 +64,7 @@ export const Dashboard = () => {
             ...prevState,
             {
               id: item.course.course_id,
+              class_id:item.class_id,
               subject: item.course.subject,
               grade: item.course.grade,
               date: convertDate(item.date),
@@ -82,7 +84,7 @@ export const Dashboard = () => {
           setChart1(prevState => [
             ...prevState,
             {
-              course: item.course_name,
+              course: item.subject + " for " + item.grade,
               student: lengthStu
             }
           ]);
@@ -99,7 +101,7 @@ export const Dashboard = () => {
           setChart2(prevState => [
             ...prevState,
             {
-              course: item.course_name,
+              course: item.subject + " for " + item.grade,
               amount: 'Rs.' + (item.price * lengthStu)
             }
           ]);
@@ -154,6 +156,8 @@ export const Dashboard = () => {
                 return (
                   <Card
                     key={item.id}
+                    id={item.id}
+                    class_id={item.class_id}
                     header={item.subject}
                     time={item.time}
                     date={item.date}

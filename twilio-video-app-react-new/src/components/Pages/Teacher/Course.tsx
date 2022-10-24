@@ -65,8 +65,9 @@ export const Course = () => {
           setDetails(prevState => [
             ...prevState,
             {
+              id: item.course_id,
               subject: item.subject,
-              title: item.course_name,
+              title: item.subject + " for " + item.grade,
               grade: item.grade,
               medium: item.medium,
               desc: item.description,
@@ -203,8 +204,8 @@ export const Course = () => {
       }}
     ><MdDelete
         className="Reacticon" />
-        Remove
-     </a>
+      Remove
+    </a>
   );
   const removeNote = (item: any) => (
     <a
@@ -247,8 +248,8 @@ export const Course = () => {
       }}
     ><MdDelete
         className="Reacticon" />
-        Remove
-     </a>
+      Remove
+    </a>
   );
 
   return (
@@ -277,9 +278,12 @@ export const Course = () => {
                   return (
                     <div>
                       <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
-                        <Link to="/editdetails" className="link">
+                        {/* <Link to={navigate(`/editdetails/${item.id}`)} className="link">
                           <ButtonCommon name={'Edit Details'} />
-                        </Link>
+                        </Link> */}
+                        <div className="link ButtonCommon" onClick={() => navigate(`/editdetails/${item.id}`)}>
+                          Edit Details
+                        </div>
                       </div>
                       {/* <Details label="Title" value={item.title} symbol=":" /> */}
                       <Details label="Subject" value={item.subject} symbol=":" />

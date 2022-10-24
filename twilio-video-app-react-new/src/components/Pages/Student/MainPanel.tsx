@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, useParams} from 'react-router-dom';
 import Dashboard from './Dashboard';
 import MyCourses from './MyCourses';
 import MyTeachers from './MyTeachers';
@@ -26,6 +26,8 @@ import PaymentGateway from '../../PaymentGateway/PayementGateway';
 import TeacherProfile from "../Teacher/TeacherProfile";
 
 const VideoApp = () => {
+  const params=useParams();
+  console.log("test"+params.id)
   const { error, setError } = useAppState();
   const connectionOptions = useConnectionOptions();
 
@@ -34,7 +36,7 @@ const VideoApp = () => {
         <VideoProvider options={connectionOptions} onError={setError} >
           <ErrorDialog dismissError={() => setError(null)} error={error} />
           <ChatProvider>
-            <Twilio />
+            <Twilio id={params.id} tag={false}/>
           </ChatProvider>
         </VideoProvider>
 
@@ -90,7 +92,7 @@ const routes = [
     main: () => <PaymentGateway />,
   },
   {
-    path: '/twilio',
+    path: '/twilio/:id/:class_id',
     main: () => <VideoApp />,
   },
   {

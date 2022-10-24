@@ -52,6 +52,18 @@ export const LeftSidebar = () => {
               </Link>
             </li>
           </Row>
+          <Row>
+            <li>
+              <Link to="/searchresults" className="link">
+                <div className="Sidebar_item">
+                  <div>
+                    <BsBookHalf/>
+                  </div>
+                  <div className="Sidebar_item_name">Search Course</div>
+                </div>
+              </Link>
+            </li>
+          </Row>
 
           <Row>
             <li>
@@ -74,18 +86,6 @@ export const LeftSidebar = () => {
                     <BsFillPersonFill />
                   </div>
                   <div className="Sidebar_item_name">My Tutors</div>
-                </div>
-              </Link>
-            </li>
-          </Row>
-          <Row>
-            <li>
-              <Link to="/searchresults" className="link">
-                <div className="Sidebar_item">
-                  <div>
-                    <BsBookHalf/>
-                  </div>
-                  <div className="Sidebar_item_name">Search Course</div>
                 </div>
               </Link>
             </li>
