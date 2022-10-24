@@ -31,11 +31,11 @@ interface RoomNameScreenProps {
   name: string;
   roomName: string;
   setName: (name: string) => void;
-  setRoomName: (roomName: string) => void;
+  // setRoomName: (roomName: string) => void;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-export default function RoomNameScreen({ name, roomName, setName, setRoomName, handleSubmit }: RoomNameScreenProps) {
+export default function RoomNameScreen({ name, roomName, setName, handleSubmit }: RoomNameScreenProps) {
   const classes = useStyles();
   const { user } = useAppState();
 
@@ -43,9 +43,9 @@ export default function RoomNameScreen({ name, roomName, setName, setRoomName, h
     setName(event.target.value);
   };
 
-  const handleRoomNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRoomName(event.target.value);
-  };
+  // const handleRoomNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setRoomName(event.target.value);
+  // };
 
   const hasUsername = !window.location.search.includes('customIdentity=true') && user?.displayName;
 
@@ -87,7 +87,7 @@ export default function RoomNameScreen({ name, roomName, setName, setRoomName, h
               fullWidth
               size="small"
               value={roomName}
-              onChange={handleRoomNameChange}
+              // onChange={handleRoomNameChange}
             />
           </div>
         </div>

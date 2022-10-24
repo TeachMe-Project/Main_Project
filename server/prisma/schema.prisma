@@ -301,26 +301,29 @@ model user {
   teacher       teacher?
 }
 
-enum course_medium {
-  Sinhala
-  English
-  Tamil
-}
-
-enum institute_verification {
-  pending
-  verified
-  rejected
-}
-
 enum institute_teacher_status {
   active
   inactive
 }
 
-enum notification_read_status {
-  read
-  unread
+enum teacher_requests_request_status {
+  accepted
+  rejected
+  pending
+}
+
+enum user_type {
+  student
+  parent
+  teacher
+  institute
+  admin
+}
+
+enum student_course_status {
+  accepted
+  pending
+  rejected
 }
 
 enum parent_payment_month {
@@ -338,6 +341,16 @@ enum parent_payment_month {
   Dec
 }
 
+enum student_payment_payment_status {
+  paid
+  unpaid
+}
+
+enum notification_read_status {
+  read
+  unread
+}
+
 enum student_class_status {
   upcoming
   ended
@@ -349,15 +362,10 @@ enum student_class_online_status {
   offline
 }
 
-enum student_course_status {
-  accepted
-  pending
-  rejected
-}
-
-enum student_payment_payment_status {
-  paid
-  unpaid
+enum course_medium {
+  Sinhala
+  English
+  Tamil
 }
 
 enum teacher_verification {
@@ -366,16 +374,8 @@ enum teacher_verification {
   rejected
 }
 
-enum teacher_requests_request_status {
-  accepted
-  rejected
+enum institute_verification {
   pending
-}
-
-enum user_type {
-  student
-  parent
-  teacher
-  institute
-  admin
+  verified
+  rejected
 }

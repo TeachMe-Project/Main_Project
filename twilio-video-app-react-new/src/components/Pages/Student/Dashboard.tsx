@@ -36,6 +36,7 @@ export const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [apps, setApps] = useState<any>([]);
 
+
   // const updateApps = (()=>{
   //
   //   // calling IPC exposed from preload script
@@ -55,13 +56,12 @@ export const Dashboard = () => {
   //     console.log(r);
   //   })
   //
-  //   axios.post('http://localhost:8081/student/1/insertUsedApps', {
-  //     // apps:"dfd,erere"
-  //   apps:apps.toString()
-  //   })
+  //   // axios.post('http://localhost:8081/student/1/insertUsedApps', {
+  //   //   // apps:"dfd,erere"
+  //   // apps:apps.toString()
+  //   // })
   //
   // })
-
 
 
 
@@ -72,20 +72,43 @@ export const Dashboard = () => {
   //   // @ts-ignore
   //   window.electron.ipcRenderer.on('ipc-example', (arg) => {
   //     // eslint-disable-next-line no-console
-  //     axios.post('http://localhost:8081/student/1/insertUsedApps', {
+  //     axios.post('http://localhost:8081/student/'+studentAuthId+'/insertUsedApps', {
   //
-  //       apps:Array.from(arg).toString()
+  //       apps:Array.from(arg).toString(),
+  //       class_id:120
   //     })
-  //
+  //     console.log(Array.from(arg).toString());
   //   });
-  //   // @ts-ignore
-  //   window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
   //
+  //   // @ts-ignore
+  //   window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);},[])
 
+
+  const insertApp=()=>{
+    console.log("start")
+    // @ts-ignore
+    window.electron.ipcRenderer.on('ipc-example', (arg) => {
+          // eslint-disable-next-line no-console
+          axios.post('http://localhost:8081/student/'+studentAuthId+'/insertUsedApps', {
+
+            apps:Array.from(arg).toString(),
+
+          })
+          console.log(Array.from(arg).toString());
+        });
+
+        // @ts-ignore
+        window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);}
+
+
+
+setInterval(insertApp, 60000);
+//   insertApp();
 
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 const navigate = useNavigate();
   useEffect(() => {
+
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {
@@ -98,6 +121,7 @@ const navigate = useNavigate();
               setUpcomingClasses(prevState => [
                 ...prevState,
                 {
+                  id: item.course.course_id,
                   class_id: item.class_id,
                   subject: item.course.subject,
                   teacher: item.teacher.title+'. ' + item.teacher.first_name + ' ' + item.teacher.last_name,
@@ -138,18 +162,34 @@ const navigate = useNavigate();
               {loading && <Loader/>}
               {!loading && upcomingClasses.map((item: any) => {
                 return (
-                <div className="Card">
-                  <div className="CardImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
-                  <div className="CardBody">
-                    <CardHeader header={item.subject} />
-                    <CardDetails details={item.teacher} />
-                    <CardDetails details={item.time} />
-                    <CardDetails details={item.date} />
-                    <button className="CardButton" onClick={() => navigate('./twilio')}>
-                      Join
-                    </button>
-                  </div>
-                </div>
+
+
+                // <div className="Card">
+                //   <div className="CardImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
+                //   <div className="CardBody">
+                //     <CardHeader header={item.subject} />
+                //     <CardDetails details={item.teacher} />
+                //     <CardDetails details={item.time} />
+                //     <CardDetails details={item.date} />
+                //     <button className="CardButton" onClick={() => navigate('./twilio/')}>
+                //       Join
+                //     </button>
+                //   </div>
+                // </div>
+
+
+                <Card
+                    key={item.id}
+                    id={item.id}
+                    class_id={item.class_id}
+                    teacher={item.teacher}
+                    header={item.subject}
+                    time={item.time}
+                    date={item.date}
+                    grade={item.grade}
+                    btnname="Join"
+                    image={<img src={"/Images/subjects/Mathematics.png"} />}
+                />
                 );
               })}
             </div>

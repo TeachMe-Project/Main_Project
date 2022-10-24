@@ -25,8 +25,9 @@ const Main = styled('main')(({ theme }: { theme: Theme }) => ({
   },
 }));
 
-export default function Twilio() {
+export default function Twilio(props: { id: string;class_id:string;tag:boolean ;}) {
   const roomState = useRoomState();
+  console.log("me"+props.id);
 
   // Here we would like the height of the main container to be the height of the viewport.
   // On some mobile browsers, 'height: 100vh' sets the height equal to that of the screen,
@@ -40,14 +41,14 @@ export default function Twilio() {
     <Container style={{ height }}>
 
       {roomState === 'disconnected' ? (
-        <PreJoinScreens />
+        <PreJoinScreens id={props.id}/>
       ) : (
         <Main>
           <ReconnectingNotification />
           <RecordingNotifications />
           <MobileTopMenuBar />
           <Room />
-          <MenuBar />
+          <MenuBar tag={props.tag} class_id={props.class_id} course_id={props.id}/>
         </Main>
 
       )}
