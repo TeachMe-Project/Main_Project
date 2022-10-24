@@ -38,6 +38,7 @@ const ViewInstituteProfile = () => {
     const params = useParams();
     const [isDataLoading, setIsDataLoading] = useState(false);
     const [error, setError] = useState('');
+    const [profileImage, setProfileImage] = useState("");
     const [initialState, setInitialState] = useState<initialStateType>({
         InstituteName: '',
         OwnerName: '',
@@ -74,6 +75,7 @@ const ViewInstituteProfile = () => {
                 Mobile_Number: res.data[0].contact_no,
                 OwnerName: res.data[0].owner_name
             })
+            setProfileImage(res.data[0].user.profile_image)
             if (res.status === 200) {
                 console.log(initialState)
                 setIsDataLoading(true);
@@ -95,9 +97,9 @@ const ViewInstituteProfile = () => {
                         </h1>
                     </Col>
                 </Row>
-                <Row className='mt-5'>
+                <Row className='mt-2'>
                     <Col lg={3} className='d-flex flex-column justify-content-center align-items-center'>
-                        <img src={Images.instpro} className='w-100' style={{borderRadius: "50%"}}/>
+                        <img src={profileImage} className='w-100' style={{borderRadius: "50%"}}/>
 
                         {passwordMail === "success" &&
                         <Alert variant="success" className="p-1 mt-2"> Check email and reset the password</Alert>
