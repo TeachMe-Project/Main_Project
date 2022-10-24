@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { studentSchema } from "../models/studentModel";
 import logger from "../utils/logger";
 import userSchema from "../models/userModel";
+import test from "node:test";
 
 const prisma = new PrismaClient()
 const NAME_SPACE = "Student"
@@ -69,7 +70,7 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
         course_id: true
       }
     });
-    console.log(student_courses);
+    // console.log(student_courses);
     let upcoming_class = [];
     for await (const course of student_courses) {
       const data = await prisma.teacher_class.findFirst(
@@ -86,7 +87,7 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
           }
         }
       );
-      console.log(data);
+      // console.log(data);
       if (data) {
         upcoming_class.push(data);
       }
@@ -142,6 +143,7 @@ export const getStudentCourses = async (req: Request, res: Response) => {
     // @ts-ignore
     const { student_id } = await prisma.student.findFirst({
       where: {
+
         user_id: req.params.id
       },
       select: {
@@ -220,7 +222,7 @@ export const createStudent = async (req: Request, res: Response) => {
 export const searchCourses = async (req: Request, res: Response) => {
 
 
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const data = await prisma.course.findMany(
       {
@@ -303,28 +305,52 @@ export const makeCourseRequest = async (req: Request, res: Response) => {
 
 
 export const insertUsedApps = async (req: Request, res: Response) => {
-  try {
-    const data = await prisma.student_class.updateMany(
-      {
+console.log(req.params.id)
+//   console.log("class"+req.body.class_id)
+
+  // console.log(req.body.class_id)
+    try {
+
+      const { student_id } = await prisma.student.findFirst({
         where: {
-          student_id: Number(req.params.id)
+          user_id: req.params.id
         },
-        data: {
-          usedApps: req.body.apps
+        select: {
+          student_id: true
         }
-      }
-    )
-    res.status(200).send(data)
-  } catch (error: any) {
-    res.status(500).send(error.message);
-  }
+      });
+      console.log("student"+student_id)
+
+        const data = await prisma.student_class.updateMany(
+            {
+                where: {
+
+                    user_id:req.params.id
+
+                },
+                data: {
+                    usedApps:req.body.apps
+                }
+            }
+        )
+        res.status(200).send(data)
+    } catch (error:any) {
+        res.status(500).send(error.message);
+    }
 }
 
 export const getUsedApps = async (req: Request, res: Response) => {
 
+  // console.log("test");
+  // console.log(req.body.class_id);
+  // console.log(req.body.course_id);
   let apps = [
-    { name: "facebook", students: [""], count: 0 },
-    { name: "whatsApp", students: [""], count: 0 }
+    { name: "Facebook.exe", students: [""], count: 0 },
+    { name: "WhatsApp.exe", students: [""], count: 0 },
+    { name: "Telegram.exe", students: [""], count: 0 },
+    { name: "Spotify.exe", students: [""], count: 0 },
+    { name: "chrome.exe", students: [""], count: 0 },
+    { name: "obs64.exe", students: [""], count: 0 }
   ]
 
   try {
@@ -353,7 +379,7 @@ export const getUsedApps = async (req: Request, res: Response) => {
         for (let studentAppsIndex = 0; studentAppsIndex < stdentsApps.length; studentAppsIndex++) {
           if (apps[appIndex].name == stdentsApps[studentAppsIndex]) {
             apps[appIndex].count += 1
-            apps[appIndex].students.push(data[dataIndex].student.first_name)
+            apps[appIndex].students.push(data[dataIndex].student.first_name+" "+ data[dataIndex].student.last_name)
           }
         }
 
@@ -363,7 +389,7 @@ export const getUsedApps = async (req: Request, res: Response) => {
     }
 
     res.status(200).send(apps)
-  } catch (error: any) {
+  } catch (error:any) {
     res.status(500).send(error.message);
   }
 }

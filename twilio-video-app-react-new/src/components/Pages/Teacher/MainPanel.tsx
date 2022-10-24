@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Route, Routes } from "react-router-dom";
+import {Route, Routes, useParams} from "react-router-dom";
 
 import AddCourse from "./AddCourse";
 import Addextraclass from "./Addextraclass";
@@ -32,6 +32,8 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import ViewInstituteProfile from "./ViewInstituteProfile";
 
 const VideoApp = () => {
+  const params=useParams();
+  console.log("test"+params.id)
   const { error, setError } = useAppState();
   const connectionOptions = useConnectionOptions();
 
@@ -39,7 +41,7 @@ const VideoApp = () => {
     <VideoProvider options={connectionOptions} onError={setError}>
       <ErrorDialog dismissError={() => setError(null)} error={error} />
       <ChatProvider>
-        <Twilio />
+        <Twilio id={params.id} class_id={params.class_id} tag={true}/>
       </ChatProvider>
     </VideoProvider>
   );
@@ -120,7 +122,7 @@ const routes = [
     main: () => <Parentscharts />,
   },
   {
-    path: '/twilio',
+    path: '/twilio/:id/:class_id',
     main: () => <VideoApp />,
   },
   {
@@ -134,7 +136,11 @@ const routes = [
   {
     path: '/studentProfile/:user_id',
     main: () => <StudentProfile />,
-  }
+  },
+  {
+    path: '/admindashboard',
+    main: () => <AdminDashboard />,
+  },
 ];
 
 export default function MainPanelTeacher() {
