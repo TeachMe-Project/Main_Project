@@ -154,8 +154,8 @@ const App: React.FC = () => {
             element={<ProtectedRoute component={ViewCourse} role={"admin"} />}
           />
           <Route
-            path="/admin/admindashboard"
-            element={<ProtectedRoute component={AdminDashboard} role={"admin"} />}
+            path="/admin/manageUser"
+            element={<ProtectedRoute component={ManageUsers} role={"admin"} />}
           />
 
           <Route
