@@ -11,7 +11,7 @@ export const Notifications = () => {
   const { user } = useAuth0();
   const userAuthId = user?.sub;
   // const baseURL = `https://learnx.azurewebsites.net/notification/user/${userAuthId}`;
-  const baseURL = `http://localhost:8081/notification/user/${userAuthId}`;
+  const baseURL = `https://learnxy.azurewebsites.net/notification/user/${userAuthId}`;
   const [notifications, setNotifications] = useState<any[]>([]);
   const [isDataLoading, setIsDataLoading] = useState(false);
 

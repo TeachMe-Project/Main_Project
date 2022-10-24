@@ -30,7 +30,7 @@ export const MyTeachers = () => {
               teacher_user_id: item.course.teacher.user_id,
               grade: item.course.grade,
               subject: item.course.subject,
-              teacher: 'Mr. ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+              teacher: item.course.teacher.title +' ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
               contact: item.course.teacher.contact_no,
               desc: item.course.teacher.description,
             },
