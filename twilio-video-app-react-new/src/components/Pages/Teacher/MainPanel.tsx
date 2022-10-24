@@ -134,7 +134,7 @@ const routes = [
     main: () => <TeacherProfile />,
   },
   {
-    path: '/studentProfile/:user_id',
+    path: '/studentProfile/:student_id',
     main: () => <StudentProfile />,
   },
   {

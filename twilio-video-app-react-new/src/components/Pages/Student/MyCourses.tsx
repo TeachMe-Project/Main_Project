@@ -44,9 +44,10 @@ export const MyCourses = () => {
                                 desc: item.course.description,
                                 time: item.course.start_time.substring(0,5) + ' - ' + item.course.end_time.substring(0,5),
                                 price: 'LKR '+ item.course.price,
+                                course_image: item.course.image_url,
                             },
                         ]);
-                    // console.log(courses[0].teacher_id)
+                    // console.log(courses)
                     console.log("Details Here")
                     console.log(courses)
                 });
@@ -70,7 +71,7 @@ export const MyCourses = () => {
                             {courses.map((item: any) => {
                                 return (
                                 <div className="CourseCard">
-                                     <div className="CardImage"><img src={`/Images/subjects/Mathematics.png`}/></div>
+                                     <div className="CardImage"><img src={item.course_image}/></div>
                                      <div className="CardBody">
                                          <CardHeader header={item.subject} />
                                          <div className="teacherLink">

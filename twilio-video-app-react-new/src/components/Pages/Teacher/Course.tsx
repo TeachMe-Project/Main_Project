@@ -75,7 +75,8 @@ export const Course = () => {
               start_date: item.start_date,
               end_date: item.end_date,
               start_time: item.start_time,
-              day: item.day
+              day: item.day,
+              course_image: item.image_url,
             }
           ]);
         });
@@ -265,7 +266,7 @@ export const Course = () => {
             {details.map((item: any) => {
               return (
                 <div className="PanelSubHeader">
-                  <div className="PanelImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
+                  <div className="PanelImage">{<img src={item.course_image} />}</div>
                   <h3>{item.title}</h3>
                 </div>
               );
