@@ -33,6 +33,18 @@ export const options = {
       text: "Monthly User Enrollment Analysis",
     },
   },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: false,
+      },
+    },
+  },
 };
 
 const labels = ["","January", "February", "March", "April", "May", "June", "July"];
@@ -45,14 +57,14 @@ export const data = {
     {
       label: "Teacher",
       data: tutorenrollmentnumbers,
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      borderColor: "rgb(33, 31, 143)",
+      backgroundColor: "rgba(33, 31, 143)",
     },
     {
       label: "Student",
-      data:studentenrollmentnumbers,
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
+      data: studentenrollmentnumbers,
+      borderColor: "rgb(219, 0, 0)",
+      backgroundColor: "rgb(219, 0, 0)",
     },
   ],
 };
