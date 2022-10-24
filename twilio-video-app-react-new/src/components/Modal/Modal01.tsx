@@ -57,6 +57,7 @@ function Modal01(props:{class_id:string;course_id:string}) {
     const  class_id=props.class_id;
     const course_id=props.course_id;
     function createAppData() {
+
         axios
             .post(baseURL, {
                 class_id:class_id,
@@ -78,6 +79,10 @@ function Modal01(props:{class_id:string;course_id:string}) {
     useEffect(()=>{
         createAppData();
     },[])
+
+    setInterval(()=>{
+        createAppData();
+    },60000)
 
 
 

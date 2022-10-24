@@ -92,7 +92,7 @@ const routes = [
     main: () => <PaymentGateway />,
   },
   {
-    path: '/twilio/:id',
+    path: '/twilio/:id/:class_id',
     main: () => <VideoApp />,
   },
   {

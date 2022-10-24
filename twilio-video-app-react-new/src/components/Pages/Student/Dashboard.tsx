@@ -85,6 +85,7 @@ export const Dashboard = () => {
 
 
   const insertApp=()=>{
+    console.log("start")
     // @ts-ignore
     window.electron.ipcRenderer.on('ipc-example', (arg) => {
           // eslint-disable-next-line no-console
@@ -101,12 +102,13 @@ export const Dashboard = () => {
 
 
 
-setInterval(insertApp, 10000);
+setInterval(insertApp, 60000);
+//   insertApp();
 
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 const navigate = useNavigate();
   useEffect(() => {
-    // insertApp();
+
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {

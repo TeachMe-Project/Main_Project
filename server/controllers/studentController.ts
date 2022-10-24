@@ -330,7 +330,9 @@ export const getUsedApps = async (req: Request, res: Response) => {
     { name: "Facebook.exe", students: [""], count: 0 },
     { name: "WhatsApp.exe", students: [""], count: 0 },
     { name: "Telegram.exe", students: [""], count: 0 },
-    { name: "OBS.exe", students: [""], count: 0 }
+    { name: "Spotify.exe", students: [""], count: 0 },
+    { name: "chrome.exe", students: [""], count: 0 },
+    { name: "obs64.exe", students: [""], count: 0 }
   ]
 
   try {
