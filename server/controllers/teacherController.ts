@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { PrismaClient } from '@prisma/client'
-import { teacherSchema } from "../models/teacherModel";
+import {Request, Response} from "express";
+import {PrismaClient} from '@prisma/client'
+import {teacherSchema} from "../models/teacherModel";
 import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
@@ -23,6 +23,27 @@ export const getTeacherByID = async (req: Request, res: Response) => {
         const data = await prisma.teacher.findMany({
             where: {
                 teacher_id: Number(req.params.id)
+            },
+            include: {
+                user: true,
+                course: true
+            }
+        })
+        logger.info(NAME_SPACE, data[0].user_id)
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+
+export const getTeacherByAuthID = async (req: Request, res: Response) => {
+
+    console.log(req.params)
+    try {
+        const data = await prisma.teacher.findMany({
+            where: {
+                user_id: req.params.id
             },
             include: {
                 user: true,
@@ -62,7 +83,7 @@ export const getTeacherUpcomingClasses = async (req: Request, res: Response) => 
 
     try {
         // @ts-ignore
-        const { teacher_id } = await prisma.teacher.findUnique({
+        const {teacher_id} = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -83,9 +104,9 @@ export const getTeacherUpcomingClasses = async (req: Request, res: Response) => 
             orderBy: {
                 date: "asc"
             },
-            include: { course: true }
+            include: {course: true}
         })
-        // console.log(data);
+        console.log(data);
         res.status(200).send(data)
     } catch (error) {
         res.status(500).send(error);
@@ -99,7 +120,7 @@ export const getTeacherCourses = async (req: Request, res: Response) => {
             where: {
                 user_id: req.params.id
             },
-            include: { course: true }
+            include: {course: true}
         })
         res.status(200).send(data)
     } catch (error) {
@@ -111,7 +132,7 @@ export const getTeacherInstitutes = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const { teacher_id } = await prisma.teacher.findUnique({
+        const {teacher_id} = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -127,7 +148,7 @@ export const getTeacherInstitutes = async (req: Request, res: Response) => {
                 status: "active",
                 isActive: true
             },
-            include: { institute: true }
+            include: {institute: true}
         })
         res.status(200).send(data)
     } catch (error: any) {
@@ -139,7 +160,7 @@ export const getTeacherPendingInstitutes = async (req: Request, res: Response) =
 
     try {
         // @ts-ignore
-        const { teacher_id } = await prisma.teacher.findUnique({
+        const {teacher_id} = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -169,7 +190,7 @@ export const acceptInstituteRequest = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const { teacher_id } = await prisma.teacher.findUnique({
+        const {teacher_id} = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -214,7 +235,7 @@ export const rejectInstituteRequest = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const { teacher_id } = await prisma.teacher.findUnique({
+        const {teacher_id} = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -250,7 +271,7 @@ export const rejectInstituteRequest = async (req: Request, res: Response) => {
 
 export const createTeacher = async (req: Request, res: Response) => {
 
-    const { error, value } = teacherSchema.validate(req.body);
+    const {error, value} = teacherSchema.validate(req.body);
     if (!error) {
         try {
             const data = await prisma.user.create({
@@ -296,7 +317,7 @@ export const getStudentCountAnalytics = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const { teacher_id } = await prisma.teacher.findUnique({
+        const {teacher_id} = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -331,7 +352,7 @@ export const getAvgAttendanceAnalytics = async (req: Request, res: Response) => 
 
     try {
         // @ts-ignore
-        const { teacher_id } = await prisma.teacher.findUnique({
+        const {teacher_id} = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },

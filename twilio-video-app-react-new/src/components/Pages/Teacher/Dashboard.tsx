@@ -49,8 +49,8 @@ export const Dashboard = () => {
   const teacherAuthId = user?.sub;
   // const baseURL = `https://learnxy.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
   // const baseURLChart1 = `https://learnxy.azurewebsites.net/teacher/chart1/${teacherAuthId}`;
-  const baseURLChart1 = `http://localhost:8081/teacher/chart1/${teacherAuthId}`;
-  const baseURL = `http://localhost:8081/teacher/${teacherAuthId}/upcomingClasses`;
+  const baseURLChart1 = `https://learnxy.azurewebsites.net/teacher/chart1/${teacherAuthId}`;
+  const baseURL = `https://learnxy.azurewebsites.net/teacher/${teacherAuthId}/upcomingClasses`;
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
   const [chart1, setChart1] = useState<any[]>([]);
   const [chart2, setChart2] = useState<any[]>([]);

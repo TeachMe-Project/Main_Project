@@ -31,6 +31,18 @@ export const options = {
       text: "Revenue Analysis",
     },
   },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: false,
+      },
+    },
+  },
 };
 
 const labels = ["January", "February", "March", "April", "May", "June", "July"];
@@ -43,9 +55,8 @@ export const data = {
     {
       label: "Monthly Class Revenue Generated",
       data: data1,
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    }
-
+      backgroundColor: "rgb(219, 0, 0)",
+    },
   ],
 };
 

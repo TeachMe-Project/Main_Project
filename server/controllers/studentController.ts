@@ -74,18 +74,18 @@ export const getStudentUpcomingClasses = async (req: Request, res: Response) => 
     let upcoming_class = [];
     for await (const course of student_courses) {
       const data = await prisma.teacher_class.findFirst(
-        {
-          where: {
-            course_id: course.course_id,
-            date: {
-              gte: new Date()
+          {
+            where: {
+              course_id: course.course_id,
+              date: {
+                gte: new Date()
+              }
+            },
+            include:{
+              teacher:true,
+              course:true
             }
-          },
-          include: {
-            teacher: true,
-            course: true
           }
-        }
       );
       // console.log(data);
       if (data) {
@@ -152,14 +152,14 @@ export const getStudentCourses = async (req: Request, res: Response) => {
     });
 
     const data = await prisma.student_course.findMany(
-      {
-        where: {
-          student_id: student_id,
-          isActive: true
-        },
-        include: { course: true }
+        {
+          where: {
+            student_id: student_id,
+            isActive: true
+          },
+          include: { course: true }
 
-      }
+        }
     );
     res.status(200).send(data);
   } catch (error) {
@@ -170,11 +170,11 @@ export const getStudentUpcomingPayments = async (req: Request, res: Response) =>
 
   try {
     const data = await prisma.student_payment.findMany(
-      {
-        where: { student_id: Number(req.params.id), payment_status: "unpaid" },
+        {
+          where: { student_id: Number(req.params.id), payment_status: "unpaid" },
 
 
-      }
+        }
     );
     res.status(200).send(data);
   } catch (error) {
@@ -225,40 +225,22 @@ export const searchCourses = async (req: Request, res: Response) => {
   // console.log(req.body);
   try {
     const data = await prisma.course.findMany(
-      {
-        where: {
-          description: {
-            contains: req.body.data
+        {
+          where: {
+            description: {
+              contains: req.body.data
+            }
+          },
+          include: {
+            teacher: true
           }
-        },
-        include: {
-          teacher: true
         }
-      }
     );
     res.status(200).send(data);
   } catch (error: any) {
     res.status(500).send(error.message);
   }
 };
-
-export const updateStudentDetails = async (req: Request, res: Response) => {
-  try {
-    const data = await prisma.student.update({
-      where: {
-        user_id: req.params.id
-      },
-      data: {
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        grade: req.body.grade,
-      }
-    })
-    res.status(200).send(data)
-  } catch (error: any) {
-    res.status(500).send(error.message);
-  }
-}
 
 export const makeCourseRequest = async (req: Request, res: Response) => {
 
@@ -284,14 +266,14 @@ export const makeCourseRequest = async (req: Request, res: Response) => {
 
     if (existed.length == 0) {
       const data = await prisma.student_course.create(
-        {
-          data: {
-            student_id: student_id,
-            course_id: course_id,
-            isActive: true,
-            status: "pending"
+          {
+            data: {
+              student_id: student_id,
+              course_id: course_id,
+              isActive: true,
+              status: "pending"
+            }
           }
-        }
       );
       res.status(200).send(data);
     } else {
@@ -305,38 +287,38 @@ export const makeCourseRequest = async (req: Request, res: Response) => {
 
 
 export const insertUsedApps = async (req: Request, res: Response) => {
-console.log(req.params.id)
+  console.log(req.params.id)
 //   console.log("class"+req.body.class_id)
 
   // console.log(req.body.class_id)
-    try {
-      //@ts-ignore
-      const { student_id } = await prisma.student.findFirst({
-        where: {
-          user_id: req.params.id
-        },
-        select: {
-          student_id: true
+  try {
+
+    const { student_id } = await prisma.student.findFirst({
+      where: {
+        user_id: req.params.id
+      },
+      select: {
+        student_id: true
+      }
+    });
+    console.log("student"+student_id)
+
+    const data = await prisma.student_class.updateMany(
+        {
+          where: {
+
+            user_id:req.params.id
+
+          },
+          data: {
+            usedApps:req.body.apps
+          }
         }
-      });
-      console.log("student"+student_id)
-
-        const data = await prisma.student_class.updateMany(
-            {
-                where: {
-
-                    user_id:req.params.id
-
-                },
-                data: {
-                    usedApps:req.body.apps
-                }
-            }
-        )
-        res.status(200).send(data)
-    } catch (error:any) {
-        res.status(500).send(error.message);
-    }
+    )
+    res.status(200).send(data)
+  } catch (error:any) {
+    res.status(500).send(error.message);
+  }
 }
 
 export const getUsedApps = async (req: Request, res: Response) => {
@@ -394,3 +376,20 @@ export const getUsedApps = async (req: Request, res: Response) => {
   }
 }
 
+export const updateStudentDetails = async (req: Request, res: Response) => {
+  try {
+    const data = await prisma.student.update({
+      where: {
+        user_id: req.params.id
+      },
+      data: {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        grade: req.body.grade,
+      }
+    })
+    res.status(200).send(data)
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
+}

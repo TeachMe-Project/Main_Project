@@ -160,7 +160,7 @@ export const SearchResults: React.FC<SearchResults> = props => {
               );
             })}
             {!isDataLoading &&
-            <img width="750" className="mt-2" src="/Images/landingpage.png" />}
+            <img width="1000" className="mt-2 ms-2" src="/Images/landingpage.png" />}
           </div>
         </div>
       </Container>

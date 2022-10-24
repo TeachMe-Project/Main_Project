@@ -33,7 +33,7 @@ import ViewInstituteProfile from "./ViewInstituteProfile";
 
 const VideoApp = () => {
   const params=useParams();
-  console.log("test"+params.id)
+  console.log("cousreId from main panel"+params.id)
   const { error, setError } = useAppState();
   const connectionOptions = useConnectionOptions();
 
@@ -134,7 +134,7 @@ const routes = [
     main: () => <TeacherProfile />,
   },
   {
-    path: '/studentProfile/:user_id',
+    path: '/studentProfile/:student_id',
     main: () => <StudentProfile />,
   },
   {
