@@ -102,11 +102,11 @@ export const Institutes = () => {
               }).then((apiRes) => {
                 console.log(apiRes.status);
                 if (apiRes.status === 200) {
-                  swal(`Poof! You have successfully removed ${item.name}`, {
+                  swal(`Poof! You have accepted ${item.name}`, {
                     icon: "success",
                   });
                 }
-                console.log(`Successfully removed ${item.name}`);
+                console.log(`Successfully accepted ${item.name}`);
               }).catch((error) => {
                 console.log(error.message);
               }).catch((error) => {
@@ -116,6 +116,55 @@ export const Institutes = () => {
         }}
       >
         Accept
+      </button>
+    </div >
+  );
+
+  const rejectInstitute = (item: any) => (
+    <div className="SubscribeBtn">
+      <button
+        className="ButtonCommon"
+        onClick={() => {
+          swal({
+            title: "Request Rejection",
+            text: "Do you really want to reject this institute? Give a valid reason and confirm your decision",
+            content: "input",
+            buttons: {
+              cancel: true,
+              confirm: true
+            }
+          })
+            .then((response: any) => {
+              console.log(item.id + " => " + response);
+              const apiData = JSON.stringify({
+                "institute_id": parseInt(item.id),
+                "request_time": new Date(),
+                "reason": response
+              });
+              axios({
+                method: "POST",
+                url: `http://localhost:8081/teacher/rejectInstituteRequest/${teacherAuthId}`,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                data: apiData,
+              }).then((apiRes) => {
+                console.log(apiRes.status);
+                if (apiRes.status === 200) {
+                  swal(`Poof! You have rejected ${item.name}`, {
+                    icon: "success",
+                  });
+                }
+                console.log(`Successfully rejected ${item.name}`);
+              }).catch((error) => {
+                console.log(error.message);
+              }).catch((error) => {
+                console.log(error.message);
+              });
+            });
+        }}
+      >
+        Decline
       </button>
     </div >
   );
@@ -193,9 +242,10 @@ export const Institutes = () => {
 
 
                           <Col xl={1}>
-                            <Link to="" className=" link SubscribeBtn">
+                            {/* <Link to="" className=" link SubscribeBtn">
                               <ButtonCommon name="Decline" />
-                            </Link>
+                            </Link> */}
+                            {rejectInstitute(item)}
                           </Col>
                         </div>
                       );

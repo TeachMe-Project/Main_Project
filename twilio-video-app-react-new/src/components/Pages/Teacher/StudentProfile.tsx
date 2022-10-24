@@ -56,9 +56,11 @@ export const StudentProfile = () => {
   // const { user } = useAuth0();
   // const studentAuthId = user?.sub;
   const params = useParams();
-  const studentAuthId = params.student_id;
-  const baseURLStudent = `https://learnxy.azurewebsites.net/student/${studentAuthId}`;
-  // const baseURLParent = `https://learnxy.azurewebsites.net/student/${studentAuthId}/parentDetails`;
+  console.log(params);
+  const baseURLStudent = `https://learnxy.azurewebsites.net/student/${params.user_id}`;
+  // const baseURLStudent = `http://localhost:8081/student/${params.user_id}`;
+  // const [parentProfDetails, setParentProfDetails] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [initialState, setInitialState] = useState<initialState>({
     Firstname: '',
@@ -181,6 +183,15 @@ export const StudentProfile = () => {
         .catch(error => {
           console.log(error);
         });
+        if (res.status === 200) {
+          console.log(initialState);
+          setIsLoading(true);
+        }
+        // });
+      })
+      .catch(error => {
+        console.log(error);
+      });
     axios
         .get(baseURLStudent)
         .then((res: AxiosResponse) => {
