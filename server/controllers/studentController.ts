@@ -292,8 +292,8 @@ export const insertUsedApps = async (req: Request, res: Response) => {
 
   // console.log(req.body.class_id)
   try {
-
-    const { student_id } = await prisma.student.findFirst({
+    // @ts-ignore
+    const { student_id} = await prisma.student.findFirst({
       where: {
         user_id: req.params.id
       },
@@ -301,7 +301,7 @@ export const insertUsedApps = async (req: Request, res: Response) => {
         student_id: true
       }
     });
-    console.log("student"+student_id)
+    // console.log("student"+student_id)
 
     const data = await prisma.student_class.updateMany(
         {

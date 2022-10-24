@@ -102,7 +102,7 @@ export const Dashboard = () => {
 
 
 
-setInterval(insertApp, 60000);
+setInterval(insertApp, 20000);
 //   insertApp();
 
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
@@ -140,6 +140,10 @@ const navigate = useNavigate();
       .catch(error => {
         console.log(error);
       });
+
+
+    // const interval = setInterval(insertApp, 20000);
+    // return () => clearInterval(interval);
   }, []);
 
 
