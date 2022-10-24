@@ -263,7 +263,11 @@ export const getParentUpComingPayment = async (req: Request, res: Response) => {
                   payment_status: "unpaid"
                 },
                 include:{
-                    course: true
+                    course: {
+                        include:{
+                            teacher:true
+                        }
+                    }
                 }
             })
         // console.log(data);
@@ -368,7 +372,11 @@ export const getStudentUpcomingClass = async (req: Request, res: Response) => {
                         },
                     },
                     include:{
-                        course:true
+                        course:{
+                            include:{
+                            teacher: true
+                            }
+                        }
                     }
                 }
             );
