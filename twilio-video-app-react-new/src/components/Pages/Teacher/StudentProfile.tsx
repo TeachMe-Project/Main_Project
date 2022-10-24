@@ -183,15 +183,6 @@ export const StudentProfile = () => {
         .catch(error => {
           console.log(error);
         });
-        if (res.status === 200) {
-          console.log(initialState);
-          setIsLoading(true);
-        }
-        // });
-      })
-      .catch(error => {
-        console.log(error);
-      });
     axios
         .get(baseURLStudent)
         .then((res: AxiosResponse) => {

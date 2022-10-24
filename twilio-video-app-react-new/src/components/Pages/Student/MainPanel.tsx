@@ -23,7 +23,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import UnsupportedBrowserWarning from '../../UnsupportedBrowserWarning/UnsupportedBrowserWarning';
 import PaymentGateway from '../../PaymentGateway/PayementGateway';
-import TeacherProfileForStudent from "./TeacherProfileForStudent";
+import TeacherProfileForStudents from "./TeacherProfileForStudent";
 
 const VideoApp = () => {
   const params=useParams();
@@ -101,7 +101,7 @@ const routes = [
   },
   {
     path: '/teacherProfile/:teacher_id',
-    main: () => <TeacherProfileForStudent />,
+    main: () => <TeacherProfileForStudents />,
   },
 ];
 
