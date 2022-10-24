@@ -310,7 +310,7 @@ console.log(req.params.id)
 
   // console.log(req.body.class_id)
     try {
-
+      //@ts-ignore
       const { student_id } = await prisma.student.findFirst({
         where: {
           user_id: req.params.id

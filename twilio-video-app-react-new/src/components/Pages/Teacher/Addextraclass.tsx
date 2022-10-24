@@ -38,7 +38,8 @@ export const Addextraclass = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
   const params = useParams();
-  console.log(params);
+  const course_id = params.course_id;
+  console.log(course_id);
   console.log(teacherAuthId);
   
   const [isEditing, setISEditing] = useState(false);
@@ -100,16 +101,18 @@ export const Addextraclass = () => {
   date.setDate(date.getDate()+1)
 
   const extraClassCreate = (values: any) => {
+    console.log(values.date);
+    console.log(values.start_time);
     const data = JSON.stringify({
       "user_id": teacherAuthId,
-      "course_id": params.course_id,
-      "date": values.class_date,
+      "course_id": course_id,
+      "date": values.date,
       "start_time": values.start_time,
       "end_time": values.end_time,
     });
     axios({
       method: "POST",
-      url: "https://learnxy.azurewebsites.net/class/createClass",
+      url: "http://localhost:8081/class/createClass",
       headers: {
         'Content-Type': 'application/json'
       },
