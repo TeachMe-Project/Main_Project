@@ -49,7 +49,7 @@ const PStudentProgress: React.FC = () => {
     const user_id = user?.sub;
     const [isDataLoading, setIsDataLoading] = useState(false);
     useEffect(() => {
-        axios.get(`http://localhost:8081/parent/upcomingClass/${user_id}`).then((res: AxiosResponse) => {
+        axios.get(`https://learnxy.azurewebsites.net/parent/upcomingClass/${user_id}`).then((res: AxiosResponse) => {
             // setIsDataLoading(true);
             // console.log(res.data)
             res.data.map((item: any) => {
