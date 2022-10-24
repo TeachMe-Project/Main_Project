@@ -28,6 +28,7 @@ const Main = styled('main')(({ theme }: { theme: Theme }) => ({
 export default function Twilio(props: { id: string;class_id:string;tag:boolean ;}) {
   const roomState = useRoomState();
   console.log("course"+props.id);
+
   console.log("class"+props.class_id)
 
   // Here we would like the height of the main container to be the height of the viewport.
