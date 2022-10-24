@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Menu, MenuItem, ProSidebar, SidebarContent, SidebarHeader,} from 'react-pro-sidebar';
 import {HiOutlineMenu} from "react-icons/hi";
 import {useNavigate} from "react-router-dom";
-import {FaSchool, FaUsers} from "react-icons/fa";
+import {FaChartPie, FaSchool, FaUsers} from "react-icons/fa";
 import {SiCoursera, SiGoogleclassroom} from "react-icons/si";
 import {useMediaQuery} from 'react-responsive';
 
@@ -56,15 +56,19 @@ const AdminSidebar: React.FC<AdminSidebarProps> = (props: AdminSidebarProps) => 
 
         <SidebarContent>
           <Menu iconShape="circle">
+            <MenuItem
+              icon={<FaChartPie />}
+              onClick={() => navigate("/admin/admindashboard")}
+            >
+              Dashboard
+            </MenuItem>
+          </Menu>
+          <Menu iconShape="circle">
             <MenuItem icon={<FaUsers />} onClick={() => navigate("/admin")}>
               Manage Users
             </MenuItem>
           </Menu>
-          <Menu iconShape="circle">
-            <MenuItem icon={<FaUsers />} onClick={() => navigate("/admin/admindashboard")}>
-             Dashboard
-            </MenuItem>
-          </Menu>
+
           <Menu iconShape="circle">
             <MenuItem
               icon={<SiCoursera />}
