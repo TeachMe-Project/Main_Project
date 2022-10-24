@@ -280,6 +280,7 @@ model teacher_requests {
   request_status teacher_requests_request_status @default(pending)
   date           DateTime                        @default(now()) @db.Timestamp(0)
   isActive       Boolean
+  reason         String?                         @db.VarChar(500)
   institute      institute                       @relation(fields: [institute_id], references: [institute_id], onUpdate: Restrict, map: "FK_instituteID_to_institute")
   teacher        teacher                         @relation(fields: [teacher_id], references: [teacher_id], onUpdate: Restrict, map: "FK_teacherID_to_teacher")
 

@@ -26,6 +26,7 @@ export const StudentProfile = () => {
   const baseURLStudent = `https://learnxy.azurewebsites.net/student/${params.user_id}`;
   // const baseURLStudent = `http://localhost:8081/student/${params.user_id}`;
   const [parentProfDetails, setParentProfDetails] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [initialState, setInitialState] = useState<initialState>({
     Firstname: '',
@@ -55,6 +56,7 @@ export const StudentProfile = () => {
         });
         if (res.status === 200) {
           console.log(initialState);
+          setIsLoading(true);
         }
         // });
       })
@@ -104,7 +106,7 @@ export const StudentProfile = () => {
 
           <Col xl={8}>
             <div className="RightContainer">
-              <Formik onSubmit={console.log} initialValues={initialState}>
+              {isLoading && <Formik onSubmit={console.log} initialValues={initialState}>
                 {({ values, }) => (
                   <Row>
                     <Form noValidate>
@@ -161,23 +163,6 @@ export const StudentProfile = () => {
                           </Col>
                         </Form.Group>
                       </Row>
-                      {/*SchoolName*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>School Name</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              // placeholder="Enter school name here"
-                              name="Schoolname"
-                              value={values.Schoolname}
-                              disabled={true}
-                            />
-                          </Col>
-                        </Form.Group>
-                      </Row>
                       {/*Grade*/}
                       <Row>
                         <Form.Group className="ProfileDetailsContainer" controlId="validationGrade">
@@ -202,7 +187,7 @@ export const StudentProfile = () => {
                     </Form>
                   </Row>
                 )}
-              </Formik>
+              </Formik>}
             </div>
           </Col>
         </div>
