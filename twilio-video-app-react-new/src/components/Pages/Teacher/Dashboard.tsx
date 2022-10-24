@@ -64,6 +64,7 @@ export const Dashboard = () => {
             ...prevState,
             {
               id: item.course.course_id,
+              class_id:item.class_id,
               subject: item.course.subject,
               grade: item.course.grade,
               date: convertDate(item.date),
@@ -155,6 +156,8 @@ export const Dashboard = () => {
                 return (
                   <Card
                     key={item.id}
+                    id={item.id}
+                    class_id={item.class_id}
                     header={item.subject}
                     time={item.time}
                     date={item.date}

@@ -36,6 +36,7 @@ export const getTeacherByID = async (req: Request, res: Response) => {
     }
 }
 
+
 export const getTeacherByAuthID = async (req: Request, res: Response) => {
 
     console.log(req.params)
@@ -46,7 +47,11 @@ export const getTeacherByAuthID = async (req: Request, res: Response) => {
             },
             include: {
                 user: true,
-                course: true
+                course: {
+                    where: {
+                        isActive: true
+                    }
+                }
             }
         })
         logger.info(NAME_SPACE, data[0].user_id)
@@ -94,6 +99,7 @@ export const getTeacherUpcomingClasses = async (req: Request, res: Response) => 
                 date: {
                     gte: new Date()
                 },
+                isActive: true
             },
             orderBy: {
                 date: "asc"
@@ -240,6 +246,7 @@ export const rejectInstituteRequest = async (req: Request, res: Response) => {
         // console.log(req.body);
         const institute_id = req.body.institute_id;
         const request_time = req.body.request_time;
+        const reason = req.body.reason;
 
         // @ts-ignore
         const data = await prisma.teacher_requests.update({
@@ -247,7 +254,8 @@ export const rejectInstituteRequest = async (req: Request, res: Response) => {
                 institute_id_teacher_id_date: {
                     institute_id: institute_id,
                     teacher_id: teacher_id,
-                    date: request_time
+                    date: request_time,
+                    // reason: reason
                 }
             },
             data: {
@@ -322,6 +330,7 @@ export const getStudentCountAnalytics = async (req: Request, res: Response) => {
         const courses = await prisma.course.findMany({
             where: {
                 teacher_id: teacher_id,
+                isActive: true
             },
             include: {
                 student_course: {

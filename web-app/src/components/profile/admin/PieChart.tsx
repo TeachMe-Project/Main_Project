@@ -19,24 +19,20 @@ export const options = {
 };
 
 export const data = {
-  labels: ["Student", "Teacher","Institute"],
+  labels: ["Student", "Teacher", "Institute"],
   datasets: [
     {
       label: "User Distribution",
       data: [120, 40, 12],
       backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-      
-        
+        "rgb(219, 0, 0)",
+        "rgb(33, 31, 143)",
+        "rgb(240, 233, 38)",
       ],
       borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-     
-       
+        "rgb(219, 0, 0)",
+        "rgb(33, 31, 143)",
+        "rgb(240, 233, 38)",
       ],
       borderWidth: 1,
     },

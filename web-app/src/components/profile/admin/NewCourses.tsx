@@ -33,6 +33,18 @@ export const options = {
       text: "New Courses ",
     },
   },
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      grid: {
+        display: false,
+      },
+    },
+  },
 };
 
 const labels = [
@@ -54,10 +66,9 @@ export const data = {
     {
       label: "Courses",
       data: coursenumbers,
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    }
-
+      borderColor: "rgb(33, 31, 143)",
+      backgroundColor: "rgba(33, 31, 143)",
+    },
   ],
 };
 

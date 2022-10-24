@@ -56,7 +56,7 @@ export const createClass = async (req: Request, res: Response) => {
             //@ts-ignore
             const data = await prisma.teacher_class.create({
                 data: {
-                    course_id: req.body.course_id,
+                    course_id: parseInt(req.body.course_id),
                     teacher_id: teacher_id,
                     date: new Date(req.body.date),
                     start_time: req.body.start_time,
@@ -66,8 +66,9 @@ export const createClass = async (req: Request, res: Response) => {
                 }
             })
             res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
+        } catch (error:any) {
+            console.log(error)
+            res.status(500).send(error.message);
         }
     // }
     // else {
