@@ -1,10 +1,24 @@
+<p align="left">
+  <img src="https://github.com/TeachMe-Project/.github/blob/main/profile/5s.png?raw=true">
+</p>
+
 # LearnX
 > “LearnX” is an online education platform which facilitates students to join online classes,
 tutors to conduct online classes monitoring students’ activities and parents to track
 the active participation of students during the class.
-> Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
 
-## Table of Contents
+## Web App Link
+> Live demo [_here_](https://deploy-preview-84--sweet-cannoli-38633d.netlify.app/) <!-- If you have the project hosted somewhere, include the link here. -->
+<!-- > https://deploy-preview-84--sweet-cannoli-38633d.netlify.app/ -->
+
+## Server Link
+> Live demo [_here_](https://learnx.azurewebsites.net/)
+
+## Api Documentation
+> Postman Api Documentation [_here_](https://documenter.getpostman.com/view/20837792/2s83YVHRvw)
+
+
+<!-- ## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
@@ -14,7 +28,7 @@ the active participation of students during the class.
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
-* [Contact](#contact)
+* [Contact](#contact) -->
 <!-- * [License](#license) -->
 
 
@@ -35,12 +49,14 @@ students through their account and keep track of student learning activities.
 
 
 ## Technologies Used
-- React JS
-- Node JS
-- Express JS
-- MYSQL
-- Electron JS 
-- Twilio 
+- React TypeScript: 16.12.0
+- Node JS: 16.17.0
+- Express JS: 4.18.1
+- MYSQL: MariaDB 10.4.24
+- Electron JS: 19.0.1
+- Twilio: 3.77.1
+- Prisma: 4.3.1
+- Docker: 20.10.17
 
 
 
@@ -54,37 +70,45 @@ List the ready features here:
 
 
 
-## Screenshots
-![Example screenshot](./img/screenshot.png)
+<!-- ## Screenshots -->
+<!-- ![Example screenshot](./img/screenshot.png) -->
 <!-- If you have screenshots you'd like to share, include them here. -->
 
+### A typical top-level directory layout
 
-## Installation and Setup Instructions
+    .
+    ├── .github                         # Contain Github actions
+    ├── server                 	    # Contain Server source file 
+    ├── twilio-video-app-react-new      # Desktop app source file 
+    ├── web-app                         # Contain web-app source file
+    └── README.md
+
+
+## Desktop Application Installation and Setup Instructions
 
 Clone down this repository. You will need node and npm installed globally on your machine.
 
+Clone the repository
+
+` git clone https://github.com/TeachMe-Project/Main_Project.git`
+
+Go to each of the 3 directories web-app, server and twilio-video-app-react-new and carry out the following steps:
+
 Installation:
 
-npm install
+`npm install`
 
 To Run Test Suite:
 
-npm test
+`npm test`
 
 To Start Server:
 
-npm start
+`npm start`
 
-To Visit App:
+To Visit Web App:
 
 localhost:3000/
-
-
-## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
-
-`write-your-code-here`
 
 
 ## Project Status
@@ -96,6 +120,8 @@ Project is: _in progress_
 Room for improvement:
 - Enhance the number of participants that can attend an online class
 - Track student activity categorized by each application 
+- Machine learning model to detect participant behavior
+- Use of a realtime database to track client's applications
 
 ## Development
 
@@ -111,19 +137,16 @@ To fix a bug or enhance an existing module, follow these steps:
     Push to the branch (git push origin improve-feature)
     Create a Pull Request
 
-## Acknowledgements
-
-- 
 
 ## Team
 * Maneth Wijetunga
 * Jonathan Dass
-* Bhashitha 
+* Bhashitha Ranasinghe
 * Prasad Lakshan
 * Avishka Hettiarachchi
 
 ## Contact
-* Maneth Wijetunga - manethwijetunga@yahoo.com
+* contactus.learning.io@gmail.com
 
 
 
