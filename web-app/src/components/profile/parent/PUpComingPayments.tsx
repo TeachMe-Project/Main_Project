@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Card, Col, Row} from "react-bootstrap";
 import ParentLayout from "./ParentLayout";
 import {useMediaQuery} from "react-responsive";
@@ -11,6 +11,8 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react
 import {BsCashCoin} from "react-icons/bs";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
+import {useAuth0} from "@auth0/auth0-react";
+import axios, {AxiosResponse} from "axios";
 
 type UpComing = {
     id: number;
@@ -141,7 +143,7 @@ const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
             onClick={() => {
                 swal({
                     title: "Class Payment",
-                    text: `Do you really want to pay ${row.class} class fees for ${row.month}?`,
+                    text: `Do you really want to pay ${row.subject} class fees for ${row.month}?`,
                     icon: "info",
                     buttons: {
                         cancel: true,
@@ -151,7 +153,7 @@ const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
                 })
                     .then((willDelete: any) => {
                         if (willDelete) {
-                            swal(`Poof! You have successfully paid ${row.class} class fees for ${row.month}`, {
+                            swal(`Poof! You have successfully paid ${row.subject} class fees for ${row.month}`, {
                                 icon: "success",
                             });
                         }
@@ -163,12 +165,7 @@ const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
 
 const columns = [
     {
-        dataField: "id",
-        text: "",
-        hidden: true
-    },
-    {
-        dataField: "class",
+        dataField: "subject",
         text: "Subject",
     },
     {
@@ -176,7 +173,7 @@ const columns = [
         text: "month",
     },
     {
-        dataField: "name",
+        dataField: "teacher_name",
         text: "Tutor Name",
     },
     {
@@ -197,21 +194,32 @@ const columns = [
 const PStudentProgress: React.FC = () => {
 
 
-    // console.log(data);
-    // useEffect(() => {
-    //     // const fetchUsers = async () => {
-    //     // setLoading(true);
-    //     // const res = await axios.get('https://jsonplaceholder.typicode.com/users');
-    //     // setItems(res.data);
-    //     // setLoading(false)
-    //     // }
-    //     // fetchUsers().then();
-    //     setItems(data);
-    // }, []);
-    // // console.log(items);
-
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
+    const [upcoming, setUpcoming] = useState<any[]>([]);
+    const {user} = useAuth0();
+    const user_id = user?.sub;
+    const [isDataLoading, setIsDataLoading] = useState(false);
+    useEffect(() => {
+        axios.get(`http://localhost:8081/parent/upcomingPayment/${user_id}`).then((res: AxiosResponse) => {
+            // setIsDataLoading(true);
+            // console.log(res.data)
+            res.data.map((item: any) => {
+                console.log(item.course.teacher.first_name)
+                setUpcoming(prevState => [...prevState, {
+                    subject: item.course.subject,
+                    teacher_name : item.course.teacher.title + ' '+ item.course.teacher.first_name +' ' + item.course.teacher.last_name,
+                    month: item.month,
+                    payment: item.course.price,
+                }])
+
+                setIsDataLoading(true);
+            })
+        })
+            .catch((error: any) => {
+                console.log(error.message);
+            })
+    }, []);
 
     // @ts-ignore
     return (
@@ -229,7 +237,7 @@ const PStudentProgress: React.FC = () => {
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
-                        data={data}
+                        data={upcoming}
                         columns={columns}
                         search>
                         {(props: any) =>
@@ -239,7 +247,7 @@ const PStudentProgress: React.FC = () => {
                                                placeholder="Search Class"
                                     />
                                     <BootstrapTable
-                                        columns={columns} data={data} keyField="id"
+                                        columns={columns} data={upcoming} keyField="id"
                                         {...props.baseProps}
                                         bootstrap4={true}
                                         pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}

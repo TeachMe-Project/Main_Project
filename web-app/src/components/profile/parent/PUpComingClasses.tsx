@@ -43,10 +43,10 @@ const PStudentProgress: React.FC = () => {
 
 
     const isPc = useMediaQuery({minWidth: 991});
-    const {user} = useAuth0();
-    const user_id = user?.sub;
     const {SearchBar} = Search;
     const [upcoming, setUpcoming] = useState<any[]>([]);
+    const {user} = useAuth0();
+    const user_id = user?.sub;
     const [isDataLoading, setIsDataLoading] = useState(false);
     useEffect(() => {
         axios.get(`http://localhost:8081/parent/upcomingClass/${user_id}`).then((res: AxiosResponse) => {
