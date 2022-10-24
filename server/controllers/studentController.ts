@@ -375,3 +375,21 @@ export const getUsedApps = async (req: Request, res: Response) => {
     res.status(500).send(error.message);
   }
 }
+
+export const updateStudentDetails = async (req: Request, res: Response) => {
+  try {
+    const data = await prisma.student.update({
+      where: {
+        user_id: req.params.id
+      },
+      data: {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        grade: req.body.grade,
+      }
+    })
+    res.status(200).send(data)
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
+}
