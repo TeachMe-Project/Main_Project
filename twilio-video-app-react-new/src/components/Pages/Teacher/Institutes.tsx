@@ -90,11 +90,11 @@ export const Institutes = () => {
             .then((willDelete: any) => {
               const apiData = JSON.stringify({
                 "institute_id": item.id,
-                "request_time": new Date(),
+                // "request_time": new Date(),
               });
               axios({
                 method: "POST",
-                url: `https://learnxy.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
+                url: `http://localhost:8081/teacher/acceptInstituteRequest/${teacherAuthId}`,
                 headers: {
                   "Content-Type": "application/json",
                 },
