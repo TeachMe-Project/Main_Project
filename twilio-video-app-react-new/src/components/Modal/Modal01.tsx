@@ -76,13 +76,30 @@ function Modal01(props:{class_id:string;course_id:string}) {
                 })
             });
     }
-    useEffect(()=>{
-        createAppData();
-    },[])
+    // useEffect(()=>{
+    //     createAppData();
+    //     const interval=setInterval(()=>{
+    //         console.log(Date().toLocaleString())
+    //         setAppData([])
+    //
+    //     },10000)
+    //     return  clearInterval(interval)
+    //
+    // },[])
 
-    setInterval(()=>{
-        createAppData();
-    },60000)
+    useEffect(() => {
+        const interval = setInterval(() => {
+                    setAppData([])
+            createAppData();
+            console.log(Date().toLocaleString())
+
+        }, 60000);
+        return () => clearInterval(interval);
+    }, []);
+
+
+
+
 
 
 
@@ -111,9 +128,9 @@ function Modal01(props:{class_id:string;course_id:string}) {
         //
         //
         // })
-setStudents(items)
+        setStudents(items)
 
-             };
+    };
 
     return (
         <>
