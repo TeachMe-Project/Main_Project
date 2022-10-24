@@ -70,7 +70,7 @@ const App: React.FC = () => {
             }
           />
           <Route
-            path="/parent/summary"
+            path="/parent/summary/:subject"
             element={
               <ProtectedRoute component={PStudentSummery} role={"parent"} />
             }
