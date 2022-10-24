@@ -7,8 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import axios, { AxiosResponse } from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import AdminLayout from "./AdminLayout";
-import LineChart from "./LineChart";
-import BarChart from "./BarChart";
+
 import EnrollmentChart from "./EnrollmentChart";
 import PaymentChart from "./PaymentChart";
 import PieChart from "./PieChart";
@@ -163,7 +162,7 @@ export const AdminDashboard = () => {
             </Col>
             <Col
               xl={6}
-              style={{ position: "relative", left: "585px", marginTop: "10px" }}
+              style={{ position: "relative", left: "774px", marginTop: "10px" }}
             >
               <EnrollmentChart />
             </Col>

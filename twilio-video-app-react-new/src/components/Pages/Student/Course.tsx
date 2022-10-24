@@ -80,6 +80,7 @@ export const Course = (props: tutorName) => {
               start_time : item.start_time,
               end_time: item.end_time,
               profile:item.teacher.user.profile_image,
+              course_image: item.image_url
             },
           ]);
         });
@@ -167,7 +168,7 @@ export const Course = (props: tutorName) => {
               return (
                 <div className="PanelSubHeader">
                   <div className="PanelImage">
-                    <img src={'/Images/subjects/Mathematics.png'} />
+                    <img src={item.course_image} />
                   </div>
                   <div className="PanelTopic">
                     <div className="SubjectName">

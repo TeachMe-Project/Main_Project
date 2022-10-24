@@ -63,7 +63,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function MenuBar() {
+export default function MenuBar(props: { tag: boolean;class_id:string;course_id:string }) {
+  const tag=props.tag;
   const classes = useStyles();
   const { isSharingScreen, toggleScreenShare } = useVideoContext();
   const roomState = useRoomState();
@@ -92,8 +93,10 @@ export default function MenuBar() {
               {!isSharingScreen && !isMobile && <ToggleScreenShareButton disabled={isReconnecting} />}
               {process.env.REACT_APP_DISABLE_TWILIO_CONVERSATIONS !== 'true' && <ToggleChatButton />}
 
+            {
+              tag &&<ToggleStudentMonitorButton course_id={props.course_id} class_id={props.class_id}/>
+            }
 
-              <ToggleStudentMonitorButton/>
 
 
               <Hidden smDown>

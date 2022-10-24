@@ -39,7 +39,7 @@ const TeacherProfileForStudents = () => {
     useEffect(() => {
         axios({
             method: "GET",
-            url: `https://learnxy.azurewebsites.net/teacher/${params.teacher_id}`,
+            url: `http://localhost:8081/teacher/${params.teacher_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -168,12 +168,12 @@ const TeacherProfileForStudents = () => {
                                                                 <img className="CardImage" width="50" height="50" src="/Images/subjects/Mathematics.png" />
                                                             </Col>
 
-                                                            <Col xl={8} className="me-4">
+                                                            <Col xl={8} className="me-1">
                                                                 <CardDetails details={item.title} />
                                                             </Col>
 
 
-                                                            <Col xl={2} className="me-8">
+                                                            <Col xl={2} className="me-3">
                                                                 <div className="ViewMore">
                                                                         <button className="CardButton" onClick={() => navigate(`/course/${item.id}`)}>
                                                                             View More

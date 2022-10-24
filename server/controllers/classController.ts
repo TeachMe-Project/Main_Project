@@ -38,9 +38,9 @@ export const getClassByID = async (req: Request, res: Response) => {
 
 export const createClass = async (req: Request, res: Response) => {
 
-    const { error, value } = classSchema.validate(req.body);
+    // const { error, value } = classSchema.validate(req.body);
 
-    if (!error) {
+    // if (!error) {
         try {
             // @ts-ignore
             const { teacher_id } = await prisma.teacher.findUnique({
@@ -56,7 +56,7 @@ export const createClass = async (req: Request, res: Response) => {
             //@ts-ignore
             const data = await prisma.teacher_class.create({
                 data: {
-                    course_id: req.body.course_id,
+                    course_id: parseInt(req.body.course_id),
                     teacher_id: teacher_id,
                     date: new Date(req.body.date),
                     start_time: req.body.start_time,
@@ -66,12 +66,13 @@ export const createClass = async (req: Request, res: Response) => {
                 }
             })
             res.status(200).send(data)
-        } catch (error) {
-            res.status(500).send(error);
+        } catch (error:any) {
+            console.log(error)
+            res.status(500).send(error.message);
         }
-    }
-    else {
-        res.status(500).send(error.details[0].message);
-    }
+    // }
+    // else {
+    //     res.status(500).send(error.details[0].message);
+    // }
 }
 

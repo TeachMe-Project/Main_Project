@@ -189,9 +189,8 @@ export const AddCourse = () => {
   const courseCreate = (values: any) => {
     const data = JSON.stringify({
       "user_id": user_id,
-      // "course_name": "values.title",
       "description": values.description,
-      "price": values.fee,
+      "price": parseInt(values.fee),
       "day": values.class_date,
       "grade": values.grade,
       "subject": values.subject,
@@ -200,12 +199,11 @@ export const AddCourse = () => {
       "start_time": values.start_time,
       "end_time": values.end_time,
       "medium": values.medium,
-      "institute": values.institute,
-      // "created_date": new Date(),
+      "institute": parseInt(values.institute)
     });
     axios({
       method: "POST",
-      url: "https://learnxy.azurewebsites.net/course/createCourse",
+      url: "http://localhost:8081/course/createCourse",
       headers: {
         'Content-Type': 'application/json'
       },
@@ -450,6 +448,7 @@ export const AddCourse = () => {
                               isInvalid={!!errors.start_date && touched.start_date ? changeStartDateValidate(false) : changeStartDateValidate(true)}
                               isValid={touched.start_date}
                               onBlur={handleBlur}
+                              min={(new Date()).toISOString().substring(0,10)}
                             />
                           </Col>
                         </Form.Group>

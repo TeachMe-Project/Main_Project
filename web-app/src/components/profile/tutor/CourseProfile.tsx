@@ -175,7 +175,7 @@ const CourseProfile = () => {
                                 <span className='my-2'>
                                 Grade
                             </span>
-                                <span className='my-2'>
+                                <span className='my-2 mb-4'>
                                 Description
                             </span>
                                 <span className='my-2'>
@@ -210,7 +210,7 @@ const CourseProfile = () => {
                                 <span className='my-2'>
                                 :
                             </span>
-                                <span className='my-2'>
+                                <span className='my-2 mb-4'>
                                 :
                             </span>
                                 <span className='my-2'>
