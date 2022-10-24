@@ -46,6 +46,7 @@ type initialState = {
   Subject: string,
   Grade: string,
   Fee: number,
+  Medium: string,
   Description: string,
   Start_date: string,
   End_date: string,
@@ -75,6 +76,7 @@ export const TeacherProfile = () => {
     Subject: '',
     Grade: '',
     Fee: 0,
+    Medium: '',
     Description: '',
     Start_date: '',
     End_date: '',
@@ -94,6 +96,7 @@ export const TeacherProfile = () => {
           Subject: res.data[0].subject,
           Grade: res.data[0].grade,
           Fee: res.data[0].price,
+          Medium: res.data[0].medium,
           Description: res.data[0].description,
           Start_date: res.data[0].start_date,
           End_date: res.data[0].end_date,
@@ -187,10 +190,9 @@ export const TeacherProfile = () => {
   const editDetails = (values: any) => {
     const data = JSON.stringify({
       "description": values.Description,
-      "price": values.Fee,
+      "price": parseInt(values.Fee),
       "grade": values.Grade,
-      "subject": values.Subject,
-      "medium": values.Medium,
+      "subject": values.Subject
     });
     axios({
       method: "POST",
@@ -325,14 +327,25 @@ export const TeacherProfile = () => {
                             <Form.Label style={{ fontWeight: 600 }}>Medium</Form.Label>
                           </Col>
                           <Col xl={8}>
-                            <Form.Control as="select">
+                            {/* <Form.Control as="select" disabled={true}>
                               <option value="Sinhala" selected>
                                 Sinhala
                               </option>
                               <option value="English">English</option>
                               <option value="Tamil">Tamil</option>
                               <option value="Other">Other</option>
-                            </Form.Control>
+                            </Form.Control> */}
+                            <Form.Control
+                              type="text"
+                              placeholder="Medium"
+                              name="Medium"
+                              value={values.Medium}
+                              disabled={true}
+                              onChange={handleChange}
+                              // isInvalid={!!errors.Medium ? changefeeValidate(false) : changefeeValidate(true)}
+                              isValid={touched.Medium}
+                              onBlur={handleBlur}
+                            />
                           </Col>
                         </Form.Group>
                       </Row>
