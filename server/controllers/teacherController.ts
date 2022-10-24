@@ -36,6 +36,26 @@ export const getTeacherByID = async (req: Request, res: Response) => {
     }
 }
 
+export const getTeacherByAuthID = async (req: Request, res: Response) => {
+
+    console.log(req.params)
+    try {
+        const data = await prisma.teacher.findMany({
+            where: {
+                user_id: req.params.id
+            },
+            include: {
+                user: true,
+                course: true
+            }
+        })
+        logger.info(NAME_SPACE, data[0].user_id)
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
 export const getTeacherByUsername = async (req: Request, res: Response) => {
 
     try {

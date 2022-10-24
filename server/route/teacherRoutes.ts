@@ -1,5 +1,6 @@
 import express from "express";
 import {
+    getTeacherByAuthID,
     getTeacherByID,
     getTeachers,
     createTeacher,
@@ -22,6 +23,10 @@ teacherRouter.route("/allTeachers")
 
 teacherRouter.route("/:id")
     .get(getTeacherByID);
+
+teacherRouter.route("/authId/:id")
+    .get(getTeacherByAuthID);
+
 
 teacherRouter.route("/getTeacherByUsername/:username")
     .get(getTeacherByUsername);
