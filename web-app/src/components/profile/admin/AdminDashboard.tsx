@@ -11,7 +11,7 @@ import AdminLayout from "./AdminLayout";
 import EnrollmentChart from "./EnrollmentChart";
 import PaymentChart from "./PaymentChart";
 import PieChart from "./PieChart";
-import NewCourses from "./NewCourses";
+
 import PieChartGrades, { PieChartPayment } from "./PieChartPayment";
 import SubjectEnrollment, { GradeEnrollment } from "./gradeenrollment";
 
@@ -286,7 +286,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>120,000</b>
+                        <b>200,000</b>
                       </p>
                     </Col>
                   </div>
@@ -297,7 +297,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>120,000</b>
+                        <b>160,000</b>
                       </p>
                     </Col>
                   </div>
@@ -319,7 +319,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>120,000</b>
+                        <b>100,000</b>
                       </p>
                     </Col>
                   </div>
@@ -330,7 +330,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>120,000</b>
+                        <b>100,000</b>
                       </p>
                     </Col>
                   </div>
