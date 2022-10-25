@@ -135,7 +135,7 @@ export const AdminDashboard = () => {
   };
   return (
     <AdminLayout>
-      <Col lg={12} className="px-lg-5">
+      <Col lg={12} className="px-lg-5"  >
         <Row>
           {/*<PanelContainer />*/}
           <Row className="d-lg-flex flex-lg-column align-items-center text-lg-center">
@@ -147,7 +147,7 @@ export const AdminDashboard = () => {
           </Row>
         </Row>
 
-        <Row>
+        <Row style={{height:"80vh", overflowY:"scroll"}}>
           {/* ------------------------------ Row 1 ---------------------------------------- */}
 
           {/* ------------------------------ Row 2 ---------------------------------------- */}
