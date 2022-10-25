@@ -207,22 +207,24 @@ export const AddCourse = () => {
       "image_url":file,
     });
     axios({
-      method: "POST",
-      url: "http://localhost:8081/course/createCourse",
+      method: 'POST',
+      url: 'https://learnxy.azurewebsites.net/course/createCourse',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      data: data
-    }).then((res: AxiosResponse) => {
-      if (res.status == 200) {
-        console.log("Done")
-        swal(`Poof! You have successfully added this course`, {
-          icon: "success",
-        });
-      }
-    }).catch(function (error) {
-      console.log(error.message)
+      data: data,
     })
+      .then((res: AxiosResponse) => {
+        if (res.status == 200) {
+          console.log('Done');
+          swal(`Poof! You have successfully added this course`, {
+            icon: 'success',
+          });
+        }
+      })
+      .catch(function(error) {
+        console.log(error.message);
+      });
   }
 
   const [uploading,setUploading] = useState(false);
