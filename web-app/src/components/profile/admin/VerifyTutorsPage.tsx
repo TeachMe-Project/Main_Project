@@ -51,7 +51,7 @@ const VerifyTutorsPage = () => {
             }}
             className='accept-icon'
             onClick={() => {
-                navigate(`/admin/tutor/${row.user_id}`)
+                navigate(`/admin/tutor/${row.teacher_id}`)
             }}
         />
     );

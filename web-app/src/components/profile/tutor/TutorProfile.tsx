@@ -42,7 +42,7 @@ const TutorProfile = () => {
     const params = useParams();
     const [enableEditProfile, setEnableEditProfile] = useState(true);
     const [passwordMail, setPasswordMail] = useState(null);
-
+    const [profileImage,setProfileImage] = useState("")
     useEffect(() => {
         axios({
             method: "GET",
@@ -64,6 +64,7 @@ const TutorProfile = () => {
                 Qualification: res.data[0].qualification,
                 Email: res.data[0].user.username
             })
+            setProfileImage(res.data[0].user.profile_image)
             if (res.status === 200) {
                 console.log(initialState)
                 setIsDataLoading(true);
@@ -87,7 +88,7 @@ const TutorProfile = () => {
             </Row>
             <Row className='mt-3'>
                 <Col lg={3} className='d-flex flex-column justify-content-center align-items-center'>
-                    <img src={Images.tutorpro} className='w-100' style={{borderRadius: "50%"}}/>
+                    <img src={profileImage} className='w-100' style={{borderRadius: "50%"}}/>
 
                     {passwordMail === "success" &&
                     <Alert variant="success" className="p-1 mt-2"> Check email and reset the password</Alert>

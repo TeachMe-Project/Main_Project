@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Card, Col, Row} from "react-bootstrap";
 import ParentLayout from "./ParentLayout";
 import {useMediaQuery} from "react-responsive";
@@ -11,6 +11,8 @@ import ToolkitProvider, {Search} from 'react-bootstrap-table2-toolkit/dist/react
 import {BsCashCoin} from "react-icons/bs";
 // @ts-ignore
 import swal from "@sweetalert/with-react";
+import {useAuth0} from "@auth0/auth0-react";
+import axios, {AxiosResponse} from "axios";
 
 type UpComing = {
     id: number;
@@ -25,114 +27,9 @@ type UpComing = {
     classEndTime: string;
 };
 
-const handleTime = (x: Date) => {
-    const hour = x.getHours();
-    const time = x.toTimeString().substring(0, 5);
-    if (hour >= 12) {
-        return time + " PM";
-    }
-    return time + " AM";
-}
 
-const data: Array<UpComing> = [
-    {
-        id: 1,
-        name: "Nimal Weerasinghe",
-        class: "Mathematics",
-        month: "August",
-        payment: 1500,
-        date: new Date(2022, 8, 20, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-    {
-        id: 1,
-        name: "Upulshanthashantha Sanasagala",
-        class: "Science",
-        month: "August",
-        payment: 1500,
-        date: new Date(2022, 8, 21, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-    {
-        id: 1,
-        name: "Kamal Weerasinghe",
-        class: "History",
-        month: "August",
-        payment: 1500,
-        date: new Date(2022, 8, 22, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-    {
-        id: 1,
-        name: "Upul Sanasagala",
-        class: "English",
-        month: "August",
-        payment: 1500,
-        date: new Date(2022, 8, 23, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-    {
-        id: 1,
-        name: "Sameera Weerasinghe",
-        class: "Commerce",
-        month: "August",
-        payment: 1500,
-        date: new Date(2022, 8, 24, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-    {
-        id: 1,
-        name: "Upulshanthashantha Sanasagala",
-        class: "Mathematics",
-        month: "September",
-        payment: 1500,
-        date: new Date(2022, 7, 25, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-    {
-        id: 1,
-        name: "Upulshanthashantha Sanasagala",
-        class: "Mathematics",
-        month: "September",
-        payment: 1500,
-        date: new Date(2022, 7, 26, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-
-];
 
 const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
-    // < BsTrashFill
-    //     style={{
-    //         fontSize: "20px",
-    //         color: "#e74c3c",
-    //         padding: "7px",
-    //         width: "30px",
-    //         height: "30px",
-    //         borderRadius: "50%",
-    //         cursor: "pointer",
-    //         boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
-    //     }}
-    //     className='accept-icon'
-
-    // />
     <Button
         className='success-outline'
         style={{
@@ -141,7 +38,7 @@ const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
             onClick={() => {
                 swal({
                     title: "Class Payment",
-                    text: `Do you really want to pay ${row.class} class fees for ${row.month}?`,
+                    text: `Do you really want to pay ${row.subject} class fees for ${row.month}?`,
                     icon: "info",
                     buttons: {
                         cancel: true,
@@ -151,7 +48,7 @@ const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
                 })
                     .then((willDelete: any) => {
                         if (willDelete) {
-                            swal(`Poof! You have successfully paid ${row.class} class fees for ${row.month}`, {
+                            swal(`Poof! You have successfully paid ${row.subject} class fees for ${row.month}`, {
                                 icon: "success",
                             });
                         }
@@ -163,12 +60,7 @@ const payment = (cell: any, row: any, rowIndex: any, formatExtraData: any) => (
 
 const columns = [
     {
-        dataField: "id",
-        text: "",
-        hidden: true
-    },
-    {
-        dataField: "class",
+        dataField: "subject",
         text: "Subject",
     },
     {
@@ -176,7 +68,7 @@ const columns = [
         text: "month",
     },
     {
-        dataField: "name",
+        dataField: "teacher_name",
         text: "Tutor Name",
     },
     {
@@ -197,21 +89,32 @@ const columns = [
 const PStudentProgress: React.FC = () => {
 
 
-    // console.log(data);
-    // useEffect(() => {
-    //     // const fetchUsers = async () => {
-    //     // setLoading(true);
-    //     // const res = await axios.get('https://jsonplaceholder.typicode.com/users');
-    //     // setItems(res.data);
-    //     // setLoading(false)
-    //     // }
-    //     // fetchUsers().then();
-    //     setItems(data);
-    // }, []);
-    // // console.log(items);
-
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
+    const [upcoming, setUpcoming] = useState<any[]>([]);
+    const {user} = useAuth0();
+    const user_id = user?.sub;
+    const [isDataLoading, setIsDataLoading] = useState(false);
+    useEffect(() => {
+        axios.get(`https://learnxy.azurewebsites.net/parent/upcomingPayment/${user_id}`).then((res: AxiosResponse) => {
+            // setIsDataLoading(true);
+            // console.log(res.data)
+            res.data.map((item: any) => {
+                console.log(item.course.teacher.first_name)
+                setUpcoming(prevState => [...prevState, {
+                    subject: item.course.subject,
+                    teacher_name : item.course.teacher.title + ' '+ item.course.teacher.first_name +' ' + item.course.teacher.last_name,
+                    month: item.month,
+                    payment: item.course.price,
+                }])
+
+                setIsDataLoading(true);
+            })
+        })
+            .catch((error: any) => {
+                console.log(error.message);
+            })
+    }, []);
 
     // @ts-ignore
     return (
@@ -229,7 +132,7 @@ const PStudentProgress: React.FC = () => {
                     {isPc &&
                     <ToolkitProvider
                         keyField="id"
-                        data={data}
+                        data={upcoming}
                         columns={columns}
                         search>
                         {(props: any) =>
@@ -239,7 +142,7 @@ const PStudentProgress: React.FC = () => {
                                                placeholder="Search Class"
                                     />
                                     <BootstrapTable
-                                        columns={columns} data={data} keyField="id"
+                                        columns={columns} data={upcoming} keyField="id"
                                         {...props.baseProps}
                                         bootstrap4={true}
                                         pagination={paginationFactory({sizePerPage: 5, hideSizePerPage: true})}
@@ -262,29 +165,25 @@ const PStudentProgress: React.FC = () => {
                     }
                     {!isPc &&
                     <Col md={12} className='d-flex flex-column align-items-center  next-table-list'>
-                        {data.map((item) => {
+                        {upcoming.map((item) => {
                             return (
                                 <Card className='w-100 p-3 mb-2 table-card'>
                                     <ul className='ps-md-3 ps-0'>
-                                        <li className='d-none'>
+                                        <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[0].text}</span>
-                                            <span className='table-card-data'>{item.id}</span>
+                                            <span className='table-card-data'>{item.subject}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[1].text}</span>
-                                            <span className='table-card-data'>{item.class}</span>
+                                            <span className='table-card-data'>{item.month}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[2].text}</span>
-                                            <span className='table-card-data'>{item.date}</span>
+                                            <span className='table-card-data'>{item.teacher_name}</span>
                                         </li>
                                         <li className='d-flex flex-row align-items-center justify-content-between'>
                                             <span className='table-card-label'>{columns[3].text}</span>
-                                            <span className='table-card-data'>{item.attendTime}</span>
-                                        </li>
-                                        <li className='d-flex flex-row align-items-center justify-content-between'>
-                                            <span className='table-card-label'>{columns[4].text}</span>
-                                            <span className='table-card-data'>{item.leaveTime}</span>
+                                            <span className='table-card-data'>{item.payment}</span>
                                         </li>
                                     </ul>
                                 </Card>

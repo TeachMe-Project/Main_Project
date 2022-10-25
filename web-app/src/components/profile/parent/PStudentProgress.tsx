@@ -33,110 +33,36 @@ const handleTime = (x: Date) => {
     return time + " h";
 }
 
-const data: Array<UpComing> = [
+const data: Array<any> = [
     {
         id: 1,
-        name: "Nimal Weerasinghe",
-        class: "Mathematics",
-        month: "September",
-        payment: 1500,
-        date: new Date(2022, 7, 20, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 45)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 5)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        name: "Mr Saman Rathnapriya",
+        class: "Maths",
+        date: "2022-10-24",
+        attendTime: "16:01:34",
+        leaveTime: "18:00:00",
     },
     {
         id: 1,
-        name: "Upulshanthashantha Sanasagala",
+        name: "Mrs Samanthika Perera",
         class: "Science",
-        month: "September",
-        payment: 1500,
-        date: new Date(2022, 7, 21, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 55)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 25)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        date: "2022-10-21",
+        attendTime: "15:00:30",
+        leaveTime: "17:00:00",
     },
     {
         id: 1,
-        name: "Kamal Weerasinghe",
-        class: "History",
-        month: "September",
-        payment: 1500,
-        date: new Date(2022, 7, 22, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
+        name: "Ms Sumana Dias",
+        class: "Science",
+        date: "2022-10-21",
+        attendTime: "08:00:55",
+        leaveTime: "17:00:00",
     },
-    {
-        id: 1,
-        name: "Upul Sanasagala",
-        class: "English",
-        month: "September",
-        payment: 1500,
-        date: new Date(2022, 7, 23, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 38)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 34)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-    {
-        id: 1,
-        name: "Sameera Weerasinghe",
-        class: "Mathematics",
-        month: "September",
-        payment: 1500,
-        date: new Date(2022, 7, 27, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 33)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 25)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-    {
-        id: 1,
-        name: "Upulshanthashantha Sanasagala",
-        class: "Mathematics",
-        month: "September",
-        payment: 1500,
-        date: new Date(2022, 7, 25, 15, 30).toDateString(), attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-    {
-        id: 1,
-        name: "Upulshanthashantha Sanasagala",
-        class: "Mathematics",
-        month: "September",
-        payment: 1500,
-        date: new Date(2022, 7, 26, 15, 30).toDateString(),
-        attendTime: handleTime(new Date(2022, 7, 20, 15, 35)),
-        leaveTime: handleTime(new Date(2022, 7, 20, 17, 30)),
-        classStartTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-        classEndTime: handleTime(new Date(2022, 7, 20, 15, 30)),
-    },
-
 ];
 
 
 
 const PStudentProgress: React.FC = () => {
-
-
-    // console.log(data);
-    // useEffect(() => {
-    //     // const fetchUsers = async () => {
-    //     // setLoading(true);
-    //     // const res = await axios.get('https://jsonplaceholder.typicode.com/users');
-    //     // setItems(res.data);
-    //     // setLoading(false)
-    //     // }
-    //     // fetchUsers().then();
-    //     setItems(data);
-    // }, []);
-    // // console.log(items);
 
     const isPc = useMediaQuery({minWidth: 991});
     const {SearchBar} = Search;
@@ -149,7 +75,7 @@ const navigate = useNavigate();
                 boxShadow: "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset"
             }}
             onClick={() => {
-                navigate('/parent/summary')
+                navigate(`/parent/summary/${row.class}`)
             }}
         >
             Summary
@@ -164,6 +90,10 @@ const navigate = useNavigate();
         {
             dataField: "class",
             text:"Subject",
+        },
+        {
+            dataField: "name",
+            text:"Tutor Name",
         },
         {
             dataField: "date",

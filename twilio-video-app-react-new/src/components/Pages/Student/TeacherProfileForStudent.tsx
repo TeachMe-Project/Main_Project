@@ -39,7 +39,7 @@ const TeacherProfileForStudents = () => {
     useEffect(() => {
         axios({
             method: "GET",
-            url: `https://learnxy.azurewebsites.net/teacher/${params.teacher_id}`,
+            url: `http://localhost:8081/teacher/${params.teacher_id}`,
             headers: {
                 'Content-Type': 'application/json'
             },
