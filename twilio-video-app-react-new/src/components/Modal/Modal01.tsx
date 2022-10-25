@@ -93,7 +93,7 @@ function Modal01(props:{class_id:string;course_id:string}) {
             createAppData();
             console.log(Date().toLocaleString())
 
-        }, 60000);
+        }, 10000);
         return () => clearInterval(interval);
     }, []);
 

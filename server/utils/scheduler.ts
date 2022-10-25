@@ -194,11 +194,15 @@ export const studentClassSchedule = async () => {
             }
         })
         console.log("Students For")
-        console.log(courseId)
-        console.log(teacherClassId)
-        console.log(courseStudent)
-        if (getToStudentTable == "-") {
+        // console.log(courseId)
+        // console.log(teacherClassId)
+        // console.log(courseStudent)
+        console.log(getToStudentTable)
+        if (getToStudentTable == null) {
             for (let i = 0; i < courseStudent.length; i++) {
+                // console.log("Course Error")
+                // console.log(teacherClassId)
+                // console.log(courseStudent)
                 let res = await prisma.student_class.create({
                     data: {
                         class_id: teacherClassId,
@@ -215,8 +219,9 @@ export const studentClassSchedule = async () => {
                         user_id: courseStudent[i].student.user_id
                     }
                 })
+                console.log("Data Added")
             }
-            console.log("Data Added")
+
             // console.log(res)
 
             let update = await prisma.teacher_class.update({
