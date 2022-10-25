@@ -67,51 +67,64 @@ const VerifyInstitutesPage = () => {
             className='accept-icon'
             onClick={() => {
                 swal({
-                    title: "User Approve",
-                    text: `Do you really want to accept ${row.institute_name}?`,
-                    icon: "info",
-                    buttons: {
-                        cancel: true,
-                        confirm: true
+                  title: "User Approve",
+                  text: `Do you really want to accept ${row.institute_name}?`,
+                  icon: "info",
+                  buttons: {
+                    cancel: true,
+                    confirm: {
+                      text: "Confirm",
+                      value: "confirm",
                     },
+                  },
+                }).then((value: any) => {
+                  switch (value) {
+            case "confirm": {
+            console.log(row.user_id);
+            const apiData = JSON.stringify({
+              user_id: `${row.user_id}`,
+            });
+            axios({
+              method: "POST",
+              url: "https://learnxy.azurewebsites.net/auth/unblock",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              data: apiData,
+            })
+              .then((apiRes: AxiosResponse) => {
+                axios({
+                  method: "POST",
+                  url: "https://learnxy.azurewebsites.net/admin/verifyInstitute",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  data: apiData,
                 })
-                    .then((willDelete: any) => {
-                        console.log(row.user_id)
-                        const apiData = JSON.stringify({
-                            "user_id": `${row.user_id}`
-                        })
-                        axios({
-                            method: "POST",
-                            url: "https://learnxy.azurewebsites.net/auth/unblock",
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            data: apiData
-                        }).then((apiRes: AxiosResponse) => {
-                            axios({
-                                method: "POST",
-                                url: "https://learnxy.azurewebsites.net/admin/verifyInstitute",
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                data: apiData
-                            }).then((apiRes) => {
-                                console.log(apiRes.status);
-                                if (apiRes.status === 200) {
-                                    swal(`Poof! You have successfully accept ${row.institute_name}`, {
-                                        icon: "success",
-                                    });
-                                }
-                                const instituteArray = institutes.filter(institute => row.user_id !== institute.user_id);
-                                setInstitutes(instituteArray);
-                            }).catch((error) => {
-                                console.log(error.message)
-                            })
-
-                        }).catch((error) => {
-                            console.log(error.message)
-                        })
-                    });
+                  .then((apiRes) => {
+                    console.log(apiRes.status);
+                    if (apiRes.status === 200) {
+                      swal(
+                        `Poof! You have successfully accept ${row.institute_name}`,
+                        {
+                          icon: "success",
+                        }
+                      );
+                    }
+                    const instituteArray = institutes.filter(
+                      (institute) => row.user_id !== institute.user_id
+                    );
+                    setInstitutes(instituteArray);
+                  })
+                  .catch((error) => {
+                    console.log(error.message);
+                  });
+              })
+              .catch((error) => {
+                console.log(error.message);
+              });
+            }}
+                });
             }}
         />
     );
@@ -131,42 +144,52 @@ const VerifyInstitutesPage = () => {
             className='accept-icon'
             onClick={() => {
                 swal({
-                    title: "User Removal",
-                    text: `Do you really want to reject ${row.institute_name}?`,
-                    icon: "warning",
-                    buttons: {
-                        cancel: true,
-                        confirm: true
+                  title: "User Removal",
+                  text: `Do you really want to reject ${row.institute_name}?`,
+                  icon: "warning",
+                  buttons: {
+                    cancel: true,
+                    confirm: {
+                      text: "Confirm",
+                      value: "confirm",
                     },
-                    // dangerMode: true,
-                })
-                    .then((willDelete: any) => {
+                  },
+                  // dangerMode: true,
+                }).then((value: any) => {
+                  switch (value) {
+            case "confirm": {
+            const apiData = JSON.stringify({
+              user_id: `${row.user_id}`,
+            });
 
-                        const apiData = JSON.stringify({
-                            "user_id": `${row.user_id}`
-                        })
-
-                        axios({
-                            method: "POST",
-                            url: "https://learnxy.azurewebsites.net/admin/rejectInstitute",
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            data: apiData
-                        }).then((apiRes) => {
-                            console.log(apiRes.status);
-                            if (apiRes.status === 200) {
-                                swal(`Poof! You have successfully reject ${row.institute_name}`, {
-                                    icon: "success",
-                                });
-                                const instituteArray = institutes.filter(institute => row.user_id !== institute.user_id);
-                                setInstitutes(instituteArray);
-                            }
-                        }).catch((error) => {
-                            console.log(error.message)
-                        })
-
-                    });
+            axios({
+              method: "POST",
+              url: "https://learnxy.azurewebsites.net/admin/rejectInstitute",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              data: apiData,
+            })
+              .then((apiRes) => {
+                console.log(apiRes.status);
+                if (apiRes.status === 200) {
+                  swal(
+                    `Poof! You have successfully reject ${row.institute_name}`,
+                    {
+                      icon: "success",
+                    }
+                  );
+                  const instituteArray = institutes.filter(
+                    (institute) => row.user_id !== institute.user_id
+                  );
+                  setInstitutes(instituteArray);
+                }
+              })
+              .catch((error) => {
+                console.log(error.message);
+              });
+            }}
+                });
             }}
         />
     );
