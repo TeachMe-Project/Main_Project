@@ -10,7 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June'];
+const labels = ['May', 'June', 'July', 'August', 'September', 'October'];
 const colors = ['red', 'orange', 'yellow', 'lime', 'green', 'teal', 'blue', 'purple'];
 
 // const { user } = useAuth0();
@@ -84,16 +84,22 @@ export const data = {
     //   );
     // })
     {
-      label: 'Mathematics',
+      label: 'Mathematics Grade-11',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 10 })),
       backgroundColor: 'rgba(255, 139, 143, 0.89)',
       borderColor: 'rgba(255, 139, 143, 0.89)',
     },
     {
-      label: 'Science',
+      label: 'Mathematics Grade-10',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 10 })),
       backgroundColor: 'rgba(91, 6, 143, 0.89)',
       borderColor: 'rgba(91, 6, 143, 0.89)',
+    },
+    {
+      label: 'Mathematics Grade-6',
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 10 })),
+      backgroundColor: 'rgba(91, 255, 143, 0.89)',
+      borderColor: 'rgba(91, 255, 143, 0.89)',
     },
   ],
 };
