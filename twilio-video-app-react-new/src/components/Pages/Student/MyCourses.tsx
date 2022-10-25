@@ -9,6 +9,9 @@ import {CardHeader} from "../../Card/CardHeader";
 import {Link, useNavigate} from "react-router-dom";
 import {CardDetails} from "../../Card/CardDetails";
 import {CardButton} from "../../Card/CardButton";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
+
 
 export const MyCourses = () => {
     const {user} = useAuth0();
@@ -25,6 +28,30 @@ export const MyCourses = () => {
     //   const newHour = intHour % 12;
     //   return newHour + ':' + minute + ' ' + ampm;
     // };
+
+     const unenrollRequest = (row: any) => {
+       swal({
+         title: 'Unenroll Approve',
+         text: `Do you really want to unenroll ${row.subject} course by ${row.teacher}?`,
+         icon: 'warning',
+         buttons: {
+           cancel: true,
+           confirm: {
+             value: 'confirm',
+           },
+         },
+         // dangerMode: true,
+       }).then((value: any) => {
+         switch (value) {
+           case 'confirm': {
+               swal(`Poof! You have successfully make unenroll Request For ${row.subject}`, {
+                     icon: 'success',
+                   });
+           }
+         }
+       });
+     };
+
 
     useEffect(() => {
         axios
@@ -97,7 +124,7 @@ export const MyCourses = () => {
                                              </div>
                                              <div  className="link">
                                                  <div className="link">
-                                                     <button className="CardButton">
+                                                     <button className="CardButton" onClick={()=>unenrollRequest(item) }>
                                                          Unenroll
                                                      </button>
                                                  </div>
