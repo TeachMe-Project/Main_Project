@@ -49,6 +49,7 @@ app.use(cors());
 setInterval(classSchedule, 14400000);
 setInterval(payment_schedule, 14400000);
 setInterval(studentClassSchedule, 14400000);
+// studentClassSchedule()
 // classSchedule();
 // payment_schedule();
 // setInterval(studentClassSchedule, 60000)

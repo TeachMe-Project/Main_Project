@@ -12,6 +12,7 @@ export const courseSchema = Joi.object({
         start_time: Joi.string().min(1).required(),
         end_time: Joi.string().min(1).required(),
         medium: Joi.string().min(1).required(),
-        institute: Joi.required()
+        institute: Joi.required(),
+        image_url:Joi.string().min(1).required(),
     }
 );

@@ -33,6 +33,7 @@ import ViewCourse from "./components/profile/admin/ViewCourse";
 import InstituteViewCourse from "./components/profile/institute/InstituteViewCourse";
 import ParentSRequest from "./components/profile/parent/ParentSRequest";
 import AdminDashboard from './components/profile/admin/AdminDashboard';
+import ParentCourseProfile from "./components/profile/parent/ParentCourseProfile";
 
 const App: React.FC = () => {
     return (
@@ -230,6 +231,16 @@ const App: React.FC = () => {
             path="/admin/profile"
             element={<ProtectedRoute component={ProfileEdit} role={"admin"} />}
           />
+
+            <Route
+                path="/parent/course/:course_id"
+                element={
+                    <ProtectedRoute
+                        component={ParentCourseProfile}
+                        role={"parent"}
+                    />
+                }
+            />
 
           <Route path="/*" element={<NotFound />} />
         </Routes>

@@ -325,6 +325,9 @@ enum student_course_status {
   accepted
   pending
   rejected
+  unenrollAccepted
+  unenrollPending
+  unenrollRejected
 }
 
 enum parent_payment_month {
