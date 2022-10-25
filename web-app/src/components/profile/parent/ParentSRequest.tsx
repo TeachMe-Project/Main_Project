@@ -41,27 +41,41 @@ const ParentSRequest: React.FC = () => {
     const [isDataLoading, setIsDataLoading] = useState(false);
         const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
-        axios.get(`http://localhost:8081/parent/parentCourseRequest/${user_id}`).then((res: AxiosResponse) => {
+        axios
+          .get(
+            `https://learnxy.azurewebsites.net/parent/parentCourseRequest/${user_id}`
+          )
+          .then((res: AxiosResponse) => {
             // setIsDataLoading(true);
             // console.log(res.data)
             res.data.map((item: any) => {
-                console.log(res.data)
-                // @ts-ignore
-                setAcceptRequest(prevState => [...prevState, {
-                    subject: item.course.subject,
-                    teacher_name: item.course.teacher.title + ' ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
-                    course_id: item.course_id
-                }])
+              console.log(res.data);
+              // @ts-ignore
+              setAcceptRequest((prevState) => [
+                ...prevState,
+                {
+                  subject: item.course.subject,
+                  teacher_name:
+                    item.course.teacher.title +
+                    " " +
+                    item.course.teacher.first_name +
+                    " " +
+                    item.course.teacher.last_name,
+                  course_id: item.course_id,
+                },
+              ]);
 
-                setIsDataLoading(true);
-            })
-        })
-            .catch((error: any) => {
-                console.log(error.message);
-            })
+              setIsDataLoading(true);
+            });
+          })
+          .catch((error: any) => {
+            console.log(error.message);
+          });
 
         axios
-          .get(`http://localhost:8081/parent/parentCourseUnenroll/${user_id}`)
+          .get(
+            `https://learnxy.azurewebsites.net/parent/parentCourseUnenroll/${user_id}`
+          )
           .then((res: AxiosResponse) => {
             // setIsDataLoading(true);
             // console.log(res.data)
@@ -115,7 +129,7 @@ const ParentSRequest: React.FC = () => {
                         });
                         axios({
                           method: "POST",
-                          url: "http://localhost:8081/parent/acceptCourse",
+                          url: "https://learnxy.azurewebsites.net/parent/acceptCourse",
                           headers: {
                             "Content-Type": "application/json",
                           },
@@ -170,7 +184,7 @@ const ParentSRequest: React.FC = () => {
             });
             axios({
               method: "POST",
-              url: "http://localhost:8081/parent/rejectCourse",
+              url: "https://learnxy.azurewebsites.net/parent/rejectCourse",
               headers: {
                 "Content-Type": "application/json",
               },
@@ -220,7 +234,7 @@ const acceptUnEnrollRequest = (row: any) => {
         });
         axios({
           method: "POST",
-          url: "http://localhost:8081/parent/acceptUnenrollCourse",
+          url: "https://learnxy.azurewebsites.net/parent/acceptUnenrollCourse",
           headers: {
             "Content-Type": "application/json",
           },
@@ -270,7 +284,7 @@ const rejectUnEnrollRequest = (row: any) => {
         });
         axios({
           method: "POST",
-          url: "http://localhost:8081/parent/rejectUnenrollCourse",
+          url: "https://learnxy.azurewebsites.net/parent/rejectUnenrollCourse",
           headers: {
             "Content-Type": "application/json",
           },
