@@ -53,15 +53,11 @@ type initialState = {
 }
 
 export const StudentProfile = () => {
-  // const { user } = useAuth0();
-  // const studentAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  const baseURLStudent = `https://learnxy.azurewebsites.net/student/${params.user_id}`;
+  const baseURLStudent = `https://learnxy.azurewebsites.net/student/${params.student_id}`;
   // const baseURLStudent = `http://localhost:8081/student/${params.user_id}`;
-  // const [parentProfDetails, setParentProfDetails] = useState<any>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
+  
   const [initialState, setInitialState] = useState<initialState>({
     Firstname: '',
     Lastname: '',
@@ -144,10 +140,8 @@ export const StudentProfile = () => {
         'Content-Type': 'application/json'
       },
     })
-        // .get(baseURLStudent)
         .then((res: AxiosResponse) => {
           console.log(res.data)
-          // res.data.map((item: any) => {
           setInitialState({
             Firstname: res.data[0].first_name,
             Lastname: res.data[0].last_name,
@@ -158,9 +152,7 @@ export const StudentProfile = () => {
           if (res.status === 200) {
             console.log(initialState);
             setIsDataLoading(true);
-            // console.log("hello");
           }
-          // });
         })
         .catch(error => {
           console.log(error);
@@ -233,21 +225,6 @@ export const StudentProfile = () => {
                   );
                 })}
               </div>
-              {/* <div className="LeftContainer">
-                  <div className="ProfileImg">
-                    <img src={'https://learninggp2.blob.core.windows.net/images/student.png'} />
-                    <AzureCloudStorage />
-                  </div>
-                  <div className="ParentContact">
-                    <div className="ContactHeader">Student's Contact Details:</div>
-                    <div className="ParentLabel">Name:</div>
-                    <div className="ParentValue">Pathmani Ranatunga</div>
-                    <div className="ParentLabel">Mobile No:</div>
-                    <div className="ParentValue">0774832976</div>
-                    <div className="ParentLabel">Email:</div>
-                    <div className="ParentValue">pathmaniranatunga@gmail.com</div>
-                  </div>
-                </div> */}
             </Col>
 
             <Col xl={8}>
@@ -275,7 +252,7 @@ export const StudentProfile = () => {
                                     }
                                     isValid={touched.Firstname}
                                     onBlur={handleBlur}
-                                    disabled={!isEditing}
+                                    disabled={true}
                                 />
                                 <Form.Control.Feedback type="invalid">{errors.Firstname}</Form.Control.Feedback>
                               </Col>
@@ -300,7 +277,7 @@ export const StudentProfile = () => {
                                     }
                                     isValid={touched.Lastname}
                                     onBlur={handleBlur}
-                                    disabled={!isEditing}
+                                    disabled={true}
                                 />
                                 <Form.Control.Feedback type="invalid">{errors.Lastname}</Form.Control.Feedback>
                               </Col>
@@ -345,40 +322,13 @@ export const StudentProfile = () => {
                                     isInvalid={!!errors.Grade ? changeGradeValidate(false) : changeGradeValidate(true)}
                                     isValid={touched.Grade}
                                     onBlur={handleBlur}
-                                    disabled={!isEditing}
+                                    disabled={true}
                                 />
                                 <Form.Control.Feedback type="invalid">{errors.Grade}</Form.Control.Feedback>
                               </Col>
                             </Form.Group>
                           </Row>
 
-                          <Row>
-                            {isEditing && (
-                                <Button
-                                    name="Save Changes"
-                                    onClick={() => {
-                                      if (
-                                          gradeValidate &&
-                                          fistNameValidate &&
-                                          lastNameValidate &&
-                                          emailValidate &&
-
-                                          schoolNameValidate
-                                      ) {
-                                        setPageStage(2);
-                                      }
-                                    }}
-                                    onClickCapture={() => {
-                                      validateField('Grade');
-                                      validateField('Firstname');
-                                      validateField('Lastname');
-                                      validateField('Email');
-
-                                      validateField('Schoolname');
-                                    }}
-                                />
-                            )}
-                          </Row>
                         </Form>
                       </Row>
                   )}
@@ -386,9 +336,6 @@ export const StudentProfile = () => {
               </div>
             </Col>
 
-            {/*<div className="ProfileButton">*/}
-            {/*  <Button name="Save Changes"/>*/}
-            {/*</div>*/}
           </div>
         </Container>}
       </div>

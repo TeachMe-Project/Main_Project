@@ -51,6 +51,8 @@ const labels = ["","January", "February", "March", "April", "May", "June", "July
 
 const studentenrollmentnumbers = [0,40,33,34,21,50,20,45];
 const tutorenrollmentnumbers = [0,20, 43, 20, 26, 27, 31, 37];
+const parentenrollmentnumbers = [0, 20, 23, 16, 12, 27, 17, 20];
+const instituteenrollmentnumbers = [0, 2, 3, 5, 4, 3, 7, 9];
 export const data = {
   labels,
   datasets: [
@@ -63,8 +65,20 @@ export const data = {
     {
       label: "Student",
       data: studentenrollmentnumbers,
-      borderColor: "rgb(219, 0, 0)",
-      backgroundColor: "rgb(219, 0, 0)",
+      borderColor: "rgb(255, 108, 0)",
+      backgroundColor: "rgb(255, 108, 0)",
+    },
+    {
+      label: "Parent",
+      data: parentenrollmentnumbers,
+      borderColor: "rgb(55, 255, 27)",
+      backgroundColor: "rgb(55, 255, 27)",
+    },
+    {
+      label: "Institute",
+      data: instituteenrollmentnumbers,
+      borderColor: "rgb(136, 0, 225)",
+      backgroundColor: "rgb(136, 0, 225)",
     },
   ],
 };

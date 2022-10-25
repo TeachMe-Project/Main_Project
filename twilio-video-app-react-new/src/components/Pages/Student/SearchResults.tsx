@@ -134,9 +134,9 @@ export const SearchResults: React.FC<SearchResults> = props => {
                     <CardDetails details={item.tutor_name} />
                   </Col>
 
-                  <Col xl={2}>
+                  {/* <Col xl={2}>
                     <CardDetails details={item.price} />
-                  </Col>
+                  </Col> */}
                   <Col xl={2}>
                     <CardDetails details={item.grade} />
                   </Col>
