@@ -4,7 +4,6 @@ import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-
 export const options = {
   responsive: true,
   plugins: {
@@ -13,42 +12,34 @@ export const options = {
     },
     title: {
       display: true,
-      text: "User Distribution",
+      text: "Payment Analysis for the last month",
     },
   },
 };
 
 export const data = {
-  labels: ["Student", "Teacher", "Institute", "Parent"],
+  labels: ["Pending","Completed"],
   datasets: [
     {
       label: "User Distribution",
-      data: [120, 40, 12, 80],
+      data: [40, 140],
       backgroundColor: [
-        "rgb(255, 108, 0)",
+        "rgb(219, 0, 0)",
         "rgb(24, 185, 179)",
-        "rgb(240, 233, 38)",
-        "rgb(136, 0, 225)",
+      
       ],
       borderColor: [
-        "rgb(255, 108, 0)",
+        "rgb(219, 0, 0)",
         "rgb(24, 185, 179)",
-        "rgb(240, 233, 38)",
-        "rgb(136, 0, 225 )",
+        
       ],
       borderWidth: 1,
     },
   ],
 };
 
-export function PieChart() {
-  return (
-   
-      <Pie
-        data={data} options={options}     
-      />
- 
-  );
+export function PieChartPayment() {
+  return <Pie data={data} options={options} />;
 }
 
-export default PieChart;
+export default PieChartPayment;

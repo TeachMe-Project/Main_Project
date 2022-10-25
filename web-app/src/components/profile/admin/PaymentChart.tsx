@@ -55,7 +55,7 @@ export const data = {
     {
       label: "Monthly Class Revenue Generated",
       data: data1,
-      backgroundColor: "rgb(219, 0, 0)",
+      backgroundColor: "rgb(55, 255, 27)",
     },
   ],
 };
