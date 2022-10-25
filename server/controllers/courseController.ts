@@ -248,6 +248,7 @@ export const createCourse = async (req: Request, res: Response) => {
                     medium: req.body.medium,
                     created_date: String(new Date()),
                     teacher_id: teacher_id,
+                    image_url: req.body.image_url
                 }
             })
             // console.log(data.course_id);
