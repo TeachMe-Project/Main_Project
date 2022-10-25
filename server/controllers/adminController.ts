@@ -21,16 +21,19 @@ export const getAdminByID = async (req: Request, res: Response) => {
 
 
     try {
-        const data = await prisma.admin.findMany({
+        const data = await prisma.user.findUnique({
             where: {
-                admin_id: Number(req.params.id)
+                user_id: req.params.id
+            },
+            include:{
+                admin:true
             }
         })
         res.status(200).send(data)
     }
 
-    catch (error) {
-        res.status(500).send(error);
+    catch (error:any) {
+        res.status(500).send(error.message);
     }
 }
 export const adminRemoveUser = async (req: Request, res: Response) => {

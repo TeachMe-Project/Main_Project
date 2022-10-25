@@ -37,18 +37,21 @@ export const options = {
 
 const labels = ['1st Week', '2nd Week', '3rd Week', '4th Week '];
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Mathematics',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 3 })),
-      backgroundColor: '#f39c12',
-    },
-  ],
-};
 
-export function Parentsaveragetimechart() {
+export function Parentsaveragetimechart(props:any) {
+
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: props.subject,
+        data: labels.map(() => faker.datatype.number({ min: 0, max: 2 })),
+        backgroundColor: '#f39c12',
+      },
+    ],
+  };
+
   return (
     <Bar
       options={options}

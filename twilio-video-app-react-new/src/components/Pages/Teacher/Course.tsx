@@ -45,9 +45,9 @@ export const Course = () => {
   const teacherAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  const baseURLCourse = `https://learnx.azurewebsites.net/course/${params.course_id}`;
-  const baseURLStudents = `https://learnx.azurewebsites.net/course/courseStudents/${params.course_id}`;
-  const baseURLSchedule = `https://learnx.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
+  const baseURLCourse = `https://learnxy.azurewebsites.net/course/${params.course_id}`;
+  const baseURLStudents = `https://learnxy.azurewebsites.net/course/courseStudents/${params.course_id}`;
+  const baseURLSchedule = `https://learnxy.azurewebsites.net/course/courseUpcoming/${params.course_id}`;
 
   const [display, setDisplay] = useState<any[]>([]);
   const [details, setDetails] = useState<any[]>([]);
@@ -65,8 +65,9 @@ export const Course = () => {
           setDetails(prevState => [
             ...prevState,
             {
+              id: item.course_id,
               subject: item.subject,
-              title: item.subject + " by " + item.first_name + " " + item.last_name,
+              title: item.subject + " for " + item.grade,
               grade: item.grade,
               medium: item.medium,
               desc: item.description,
@@ -74,7 +75,8 @@ export const Course = () => {
               start_date: item.start_date,
               end_date: item.end_date,
               start_time: item.start_time,
-              day: item.day
+              day: item.day,
+              course_image: item.image_url,
             }
           ]);
         });
@@ -172,39 +174,46 @@ export const Course = () => {
           icon: "error",
           buttons: {
             cancel: true,
-            confirm: true
+            confirm: {
+              value: "confirm"
+            }
           }
         })
-          .then((willDelete: any) => {
-            const apiData = JSON.stringify({
-              "homework_id": item.id,
-            });
-            axios({
-              method: "POST",
-              url: `https://learnx.azurewebsites.net/homework/removeHomework`,
-              headers: {
-                "Content-Type": "application/json",
-              },
-              data: apiData,
-            }).then((apiRes) => {
-              console.log(apiRes.status);
-              if (apiRes.status === 200) {
-                swal(`Poof! You have successfully removed ${item.topic}`, {
-                  icon: "success",
+          .then((value: any) => {
+            switch (value) {
+              case "confirm": {
+                console.log("Homework about to be removed")
+                const apiData = JSON.stringify({
+                  "homework_id": item.id,
+                });
+                axios({
+                  method: "POST",
+                  url: `https://learnxy.azurewebsites.net/homework/removeHomework`,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  data: apiData,
+                }).then((apiRes) => {
+                  console.log(apiRes.status);
+                  if (apiRes.status === 200) {
+                    swal(`Poof! You have successfully removed ${item.topic}`, {
+                      icon: "success",
+                    });
+                  }
+                  console.log(`Successfully removed ${item.topic}`);
+                }).catch((error) => {
+                  console.log(error.message);
+                }).catch((error) => {
+                  console.log(error.message);
                 });
               }
-              console.log(`Successfully removed ${item.topic}`);
-            }).catch((error) => {
-              console.log(error.message);
-            }).catch((error) => {
-              console.log(error.message);
-            });
+            }
           });
       }}
     ><MdDelete
         className="Reacticon" />
-        Remove
-     </a>
+      Remove
+    </a>
   );
   const removeNote = (item: any) => (
     <a
@@ -216,39 +225,46 @@ export const Course = () => {
           icon: "error",
           buttons: {
             cancel: true,
-            confirm: true
+            confirm: {
+              value: "confirm"
+            }
           }
         })
-          .then((willDelete: any) => {
-            const apiData = JSON.stringify({
-              "note_id": item.id,
-            });
-            axios({
-              method: "POST",
-              url: `https://learnx.azurewebsites.net/notes/removeNote`,
-              headers: {
-                "Content-Type": "application/json",
-              },
-              data: apiData,
-            }).then((apiRes) => {
-              console.log(apiRes.status);
-              if (apiRes.status === 200) {
-                swal(`Poof! You have successfully removed ${item.topic}`, {
-                  icon: "success",
+          .then((value: any) => {
+            switch (value) {
+              case "confirm": {
+                console.log("Note about to be removed")
+                const apiData = JSON.stringify({
+                  "note_id": item.id,
+                });
+                axios({
+                  method: "POST",
+                  url: `https://learnxy.azurewebsites.net/notes/removeNote`,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  data: apiData,
+                }).then((apiRes) => {
+                  console.log(apiRes.status);
+                  if (apiRes.status === 200) {
+                    swal(`Poof! You have successfully removed ${item.topic}`, {
+                      icon: "success",
+                    });
+                  }
+                  console.log(`Successfully removed ${item.topic}`);
+                }).catch((error) => {
+                  console.log(error.message);
+                }).catch((error) => {
+                  console.log(error.message);
                 });
               }
-              console.log(`Successfully removed ${item.topic}`);
-            }).catch((error) => {
-              console.log(error.message);
-            }).catch((error) => {
-              console.log(error.message);
-            });
+            }
           });
       }}
     ><MdDelete
         className="Reacticon" />
-        Remove
-     </a>
+      Remove
+    </a>
   );
 
   return (
@@ -264,7 +280,7 @@ export const Course = () => {
             {details.map((item: any) => {
               return (
                 <div className="PanelSubHeader">
-                  <div className="PanelImage">{<img src={'/Images/subjects/Mathematics.png'} />}</div>
+                  <div className="PanelImage">{<img src={item.course_image} />}</div>
                   <h3>{item.title}</h3>
                 </div>
               );
@@ -277,9 +293,12 @@ export const Course = () => {
                   return (
                     <div>
                       <div className="buttoneditdetails" style={{ float: 'right', position: 'relative', top: '10px' }}>
-                        <Link to="/editdetails" className="link">
+                        {/* <Link to={navigate(`/editdetails/${item.id}`)} className="link">
                           <ButtonCommon name={'Edit Details'} />
-                        </Link>
+                        </Link> */}
+                        <div className="link ButtonCommon" onClick={() => navigate(`/editdetails/${item.id}`)}>
+                          Edit Details
+                        </div>
                       </div>
                       {/* <Details label="Title" value={item.title} symbol=":" /> */}
                       <Details label="Subject" value={item.subject} symbol=":" />

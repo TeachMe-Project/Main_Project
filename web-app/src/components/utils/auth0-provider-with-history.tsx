@@ -7,6 +7,7 @@ export const Auth0ProviderWithHistory = ({
                                          }: PropsWithChildren<any>): JSX.Element | null => {
     const navigate = useNavigate();
     const domain = "learningsl.us.auth0.com";
+    // const clientId = "TcLHoLVfwasFth089rKDfppLGZhD3Idn";
     const clientId = "TcLHoLVfwasFth089rKDfppLGZhD3Idn";
     const audience = "learning"
     const scope = "openid profile email";

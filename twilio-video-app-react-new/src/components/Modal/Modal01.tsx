@@ -50,15 +50,18 @@ const data = [
     }
 ];
 
-function Modal01() {
+function Modal01(props:{class_id:string;course_id:string}) {
     const baseURL="http://localhost:8081/student/getUsedApps"
     const [appData, setAppData] = useState<any>([])
 
+    const  class_id=props.class_id;
+    const course_id=props.course_id;
     function createAppData() {
+
         axios
             .post(baseURL, {
-                class_id:4,
-                course_id:3
+                class_id:class_id,
+                course_id:course_id
             })
             .then((res) => {
                 res.data.map((item: any) => {
@@ -73,9 +76,30 @@ function Modal01() {
                 })
             });
     }
-    useEffect(()=>{
-        createAppData();
-    },[])
+    // useEffect(()=>{
+    //     createAppData();
+    //     const interval=setInterval(()=>{
+    //         console.log(Date().toLocaleString())
+    //         setAppData([])
+    //
+    //     },10000)
+    //     return  clearInterval(interval)
+    //
+    // },[])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+                    setAppData([])
+            createAppData();
+            console.log(Date().toLocaleString())
+
+        }, 10000);
+        return () => clearInterval(interval);
+    }, []);
+
+
+
+
 
 
 
@@ -104,9 +128,9 @@ function Modal01() {
         //
         //
         // })
-setStudents(items)
+        setStudents(items)
 
-             };
+    };
 
     return (
         <>

@@ -26,7 +26,7 @@ export const SearchResults: React.FC<SearchResults> = props => {
     });
     axios({
       method: "POST",
-      url: `http://localhost:8081/student/searchCourse`,
+      url: `https://learnxy.azurewebsites.net/student/searchCourse`,
       headers: {
         "Content-Type": "application/json"
       },
@@ -74,7 +74,7 @@ export const SearchResults: React.FC<SearchResults> = props => {
           axios(
             {
               method: "POST",
-              url: `http://localhost:8081/student/requestCourse`,
+              url: `https://learnxy.azurewebsites.net/student/requestCourse`,
               headers: {
                 "Content-Type": "application/json"
               },
@@ -134,9 +134,9 @@ export const SearchResults: React.FC<SearchResults> = props => {
                     <CardDetails details={item.tutor_name} />
                   </Col>
 
-                  <Col xl={2}>
+                  {/* <Col xl={2}>
                     <CardDetails details={item.price} />
-                  </Col>
+                  </Col> */}
                   <Col xl={2}>
                     <CardDetails details={item.grade} />
                   </Col>
@@ -160,7 +160,7 @@ export const SearchResults: React.FC<SearchResults> = props => {
               );
             })}
             {!isDataLoading &&
-            <img width="750" className="mt-2" src="/Images/landingpage.png" />}
+            <img width="1000" className="mt-2 ms-2" src="/Images/landingpage.png" />}
           </div>
         </div>
       </Container>

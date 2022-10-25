@@ -25,7 +25,33 @@ export const getTeacherByID = async (req: Request, res: Response) => {
                 teacher_id: Number(req.params.id)
             },
             include: {
-                user: true
+                user: true,
+                course: true
+            }
+        })
+        logger.info(NAME_SPACE, data[0].user_id)
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
+
+
+export const getTeacherByAuthID = async (req: Request, res: Response) => {
+
+    console.log(req.params)
+    try {
+        const data = await prisma.teacher.findMany({
+            where: {
+                user_id: req.params.id
+            },
+            include: {
+                user: true,
+                course: {
+                    where: {
+                        isActive: true
+                    }
+                }
             }
         })
         logger.info(NAME_SPACE, data[0].user_id)
@@ -69,14 +95,18 @@ export const getTeacherUpcomingClasses = async (req: Request, res: Response) => 
         const data = await prisma.teacher_class.findMany({
             take: 3,
             where: {
-                teacher_id: teacher_id
+                teacher_id: teacher_id,
+                date: {
+                    gte: new Date()
+                },
+                isActive: true
             },
             orderBy: {
                 date: "asc"
             },
             include: { course: true }
         })
-        // console.log(data);
+        console.log(data);
         res.status(200).send(data)
     } catch (error) {
         res.status(500).send(error);
@@ -170,16 +200,12 @@ export const acceptInstituteRequest = async (req: Request, res: Response) => {
         })
         // console.log(req.body);
         const institute_id = req.body.institute_id;
-        const request_time = req.body.request_time;
 
         // @ts-ignore
-        const data = await prisma.teacher_requests.update({
+        const data = await prisma.teacher_requests.updateMany({
             where: {
-                institute_id_teacher_id_date: {
-                    institute_id: institute_id,
-                    teacher_id: teacher_id,
-                    date: request_time
-                }
+                institute_id: institute_id,
+                teacher_id: teacher_id
             },
             data: {
                 request_status: "accepted"
@@ -215,19 +241,17 @@ export const rejectInstituteRequest = async (req: Request, res: Response) => {
         })
         // console.log(req.body);
         const institute_id = req.body.institute_id;
-        const request_time = req.body.request_time;
+        const reason = req.body.reason;
 
         // @ts-ignore
-        const data = await prisma.teacher_requests.update({
+        const data = await prisma.teacher_requests.updateMany({
             where: {
-                institute_id_teacher_id_date: {
-                    institute_id: institute_id,
-                    teacher_id: teacher_id,
-                    date: request_time
-                }
+                institute_id: institute_id,
+                teacher_id: teacher_id,
             },
             data: {
-                request_status: "rejected"
+                request_status: "rejected",
+                reason: reason
             }
         })
 
@@ -293,11 +317,12 @@ export const getStudentCountAnalytics = async (req: Request, res: Response) => {
                 teacher_id: true
             }
         })
-        
+
         // @ts-ignore
         const courses = await prisma.course.findMany({
             where: {
                 teacher_id: teacher_id,
+                isActive: true
             },
             include: {
                 student_course: {

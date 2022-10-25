@@ -13,7 +13,7 @@ export enum Steps {
   deviceSelectionStep,
 }
 
-export default function PreJoinScreens() {
+export default function PreJoinScreens(props: { id: React.SetStateAction<string>; }) {
   const baseURL = 'http://localhost:8081/course/3';
   // const [courses, setCourses] = React.useState(null);
 
@@ -59,7 +59,7 @@ export default function PreJoinScreens() {
     //     console.log(error);
     //   });
 
-    setRoomName('@2139342');
+    setRoomName(props.id);
     if (user?.displayName) {
       setStep(Steps.deviceSelectionStep);
     }
@@ -94,7 +94,7 @@ export default function PreJoinScreens() {
           // roomName={c}
 
           setName={setName}
-          setRoomName={setRoomName}
+          // setRoomName={setRoomName}
           handleSubmit={handleSubmit}
         />
       )}

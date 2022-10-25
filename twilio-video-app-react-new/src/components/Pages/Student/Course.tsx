@@ -4,7 +4,7 @@ import Card from '../../Card/Card';
 import CardHeader from '../../Card/CardHeader';
 import CardDetails from '../../Card/CardDetails';
 import { Row, Col, Container, Tab, NavItem } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Tabs from '../../Tabs/Tabs';
 import Details from './Details';
 import Notes from './Notes';
@@ -23,6 +23,7 @@ type tutorName = {
   name?: string;
   image?: HTMLImageElement;
 };
+
 
 const convertTime = (x: Date) => {
   const time = x.toLocaleTimeString('it-IT');
@@ -46,25 +47,29 @@ export const Course = (props: tutorName) => {
   // };
   const { user } = useAuth0();
   const studentAuthId = user?.sub;
-  const baseURLDetails = `https://learnxy.azurewebsites.net/course/${studentAuthId}`;
-  const baseURLNotes = `https://learnxy.azurewebsites.net/student/${studentAuthId}/notes`;
-  const baseURLHomework = `https://learnxy.azurewebsites.net/student/${studentAuthId}/homeworks`;
-  const baseURLUpcoming = `https://learnxy.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
+  const params = useParams();
+  const course_id = params.course_id;
+  const baseURLDetails = `https://learnxy.azurewebsites.net/course/${course_id}`;
+  const baseURLSchedule = `https://learnxy.azurewebsites.net/student/upcomingClasses/${studentAuthId}`;
   const [details, setDetails] = useState<any[]>([]);
-  const [homework, setHomework] = useState<any[]>([]);
   const [notes, setNotes] = useState<any[]>([]);
-  const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
+  const [homework, setHomework] = useState<any[]>([]);
+  const [schedule, setSchedule] = useState<any[]>([]);
 
   useEffect(() => {
     axios
       .get(baseURLDetails)
       .then((res: AxiosResponse) => {
         res.data.map((item: any) => {
+          console.log(res.data);
           setDetails(prevState => [
             ...prevState,
             {
+              teacher_id: item.teacher.teacher_id,
+              title: item.subject + " for " + item.grade,
               subject: item.subject,
-              teacher: item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+              teacher: item.teacher.first_name + ' ' + item.teacher.last_name,
+              teacher_user_id: item.teacher.user_id,
               grade: item.grade,
               medium: item.medium,
               desc: item.description,
@@ -72,41 +77,32 @@ export const Course = (props: tutorName) => {
               start_date: item.start_date,
               institute: item.teacher.institute_teacher.institute,
               duration: item.duration + ' years',
+              start_time : item.start_time,
+              end_time: item.end_time,
+              profile:item.teacher.user.profile_image,
+              course_image: item.image_url
             },
           ]);
         });
+        console.log("Data")
         console.log(details);
       })
       .catch(err => {
         console.log(err);
       });
     axios
-      .get(baseURLHomework)
+      .get(baseURLDetails)
       .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
-          setHomework(prevState => [
-            ...prevState,
-            {
-              date: item.uploaded_date,
-              link: item.homework,
-            },
-          ]);
-        });
-        console.log(homework);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    axios
-      .get(baseURLNotes)
-      .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
+        const note = res.data[0].notes;
+        note.map((item: any) => {
           setNotes(prevState => [
             ...prevState,
             {
-              date: item.uploaded_date,
-              link: item.note,
-            },
+              id: item.note_id,
+              topic: item.topic,
+              date: item.uploaded_date.substring(0, 10),
+              link: item.note
+            }
           ]);
         });
         console.log(notes);
@@ -115,22 +111,46 @@ export const Course = (props: tutorName) => {
         console.log(err);
       });
     axios
-      .get(baseURLUpcoming)
+      .get(baseURLDetails)
       .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
-          setUpcomingClasses(prevState => [
+        const hw = res.data[0].homework;
+        hw.map((item: any) => {
+          setHomework(prevState => [
             ...prevState,
             {
-              date: item.date,
-              start_time: convertTime(item.course.start_time),
-              end_time: convertTime(item.course.end_time)
-            },
+              id: item.homework_id,
+              topic: item.topic,
+              date: item.uploaded_date.substring(0, 10),
+              link: item.homework
+            }
           ]);
         });
-        console.log(upcomingClasses);
+        console.log(homework);
       })
       .catch(err => {
         console.log(err);
+      });
+    axios
+      .get(baseURLSchedule)
+      .then((res: AxiosResponse) => {
+        res.data.map((item: any) => {
+          console.log(item)
+          setSchedule(prevState => [
+            ...prevState,
+            {
+              class_id: item.class_id,
+              subject: item.course.subject,
+              date: item.date.substring(0, 10),
+              start_time: item.course.start_time.substring(0, 5),
+              end_time: item.course.end_time.substring(0, 5),
+            },
+          ]);
+        }
+        );
+        console.log(schedule);
+      })
+      .catch(error => {
+        console.log(error);
       });
   }, []);
 
@@ -143,90 +163,64 @@ export const Course = (props: tutorName) => {
             <h2>My Courses</h2>
           </div>
           <div className="Panel">
-            <div className="PanelSubHeader">
-              <div className="PanelImage">
-                <img src={'/Images/subjects/Mathematics.png'} />
-              </div>
 
-              {/* {details.map((item: any) => {
-                return (
+            {details.map((item: any) => {
+              return (
+                <div className="PanelSubHeader">
+                  <div className="PanelImage">
+                    <img src={item.course_image} />
+                  </div>
                   <div className="PanelTopic">
                     <div className="SubjectName">
-                      <h3>{item.subject}</h3>
+                      <h3>{item.title}</h3>
                     </div>
                     <div className="TutorProfileButton">
-                      <Link to="/userprofile" className="link">
+                      <Link to={`/teacherProfile/${item.teacher_id}`} className="link">
                         <div className="UserImg">
-                          <img src={'/Images/Teachers/mr1.jpg'} />
+                          <img src={item.profile} />
                         </div>
                         <div className="Name">{item.teacher}</div>
                       </Link>
                     </div>
                   </div>
-                );
-              })} */}
-
-              <div className="PanelTopic">
-                <div className="SubjectName">
-                  <h3>Mathematics</h3>
                 </div>
-                <div className="TutorProfileButton">
-                  <Link to="/userprofile" className="link">
-                    <div className="UserImg">
-                      <img src={'/Images/Teachers/mr1.jpg'} />
-                    </div>
-                    <div className="Name">Mr. Lasitha Nuwan</div>
-                  </Link>
-                </div>
-              </div>
-            </div>
+              );
+            })}
 
             <Tabs>
-              {/* {details.map((item: any) => {
-                return (
-                  <div className="Details">
-                    <Details label="Subject" value={item.subject} symbol=":" />
-                    <Details label="Grade" value={item.grade} symbol=":" />
-                    <Details label="Medium" value={item.medium} symbol=":" />
-                    <Details
-                      label="Description"
-                      value={item.desc}
-                    />
-                    <Details label="Monthly Payment" value={item.price} symbol=":" />
-                    <Details label="Started Date" value={item.start_date} symbol=":" />
-                    <Details label="Institute" value={item.institute} symbol=":" />
-                    <Details label="Duration" value={item.duration} symbol=":" />
-                  </div>
-                );
-              })} */}
-
               <div className="Details">
-                <Details label="Subject" value="Mathematics" symbol=":" />
-                <Details label="Grade" value="8" symbol=":" />
-                <Details label="Medium" value="English" symbol=":" />
-                <Details
-                  label="Description"
-                  value="This course includes content of grade 8 mathematics
-                of local syllabus in English medium. It contains algebraic concepts and skills needed to
-                graph and solve linear equations and inequalities."
-                />
-                <Details label="Monthly Payment" value="LKR 2500" symbol=":" />
-                <Details label="Started Date" value="2022-03-24" symbol=":" />
-                <Details label="Institute" value="Sigma Institute" symbol=":" />
-                <Details label="Duration" value="12 months" symbol=":" />
+                {details.map((item: any) => {
+                  return (
+                    <div>
+                      <Details label="Subject" value={item.subject} symbol=":" />
+                      <Details label="Grade" value={item.grade} symbol=":" />
+                      <Details label="Medium" value={item.medium} symbol=":" />
+                      <Details
+                        label="Description"
+                        value={item.desc}
+                      />
+                      <Details label="Monthly Payment" value={item.price} symbol=":" />
+                      <Details label="Started Date" value={item.start_date} symbol=":" />
+                      <Details label="Institute" value={item.institute} symbol=":" />
+                      <Details label="Start Time" value={item.start_time} symbol=":" />
+                      <Details label="End Time" value={item.end_time} symbol=":" />
+                    </div>
+                  );
+                })}
               </div>
+
               <div className="Notes">
 
                 <table className="booking-table" id="view-booking">
                   <tbody>
 
-                    {/* {notes.map((item: any) => {
+                    {notes.map((item: any) => {
                       return (
                         <tr>
                           <td data-label="Note ID :"
                             className="noteheader"
                           >
-                            Note for week 1</td>
+                            {item.topic}</td>
                           <td data-label="Uploaded Date :"
                             className="notedetails">{item.date}</td>
 
@@ -239,106 +233,10 @@ export const Course = (props: tutorName) => {
                               <FiDownload className="Reacticon" />
                               Download
                             </a>
-
-                          </td>
-                          <td data-label="">
-                            <a
-                              href=""
-                              className="Reacticonbtn archive"
-                            >
-                              <BiArchive className="Reacticon" />Archive
-                            </a>
-
-                          </td>
-                          <td data-label="">
-                            <a
-                              href=""
-                              className="Reacticonbtn remove"
-                            >
-                              <MdDelete className="Reacticon" />Remove
-                            </a>
                           </td>
                         </tr>
                       );
-                    })} */}
-
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Note for week 1</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">04-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Note for week 2</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">11-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Note for week 3</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">18-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Note for week 4</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">25-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-                      </td>
-                    </tr>
+                    })}
 
                   </tbody>
                 </table>
@@ -350,13 +248,13 @@ export const Course = (props: tutorName) => {
                 <table className="booking-table" id="view-booking">
                   <tbody>
 
-                    {/* {homework.map((item: any) => {
+                    {homework.map((item: any) => {
                       return (
                         <tr>
                           <td data-label="Note ID :"
                             className="noteheader"
                           >
-                            Homework for week 1</td>
+                            {item.topic}</td>
                           <td data-label="Uploaded Date :"
                             className="notedetails">{item.date}</td>
 
@@ -371,147 +269,9 @@ export const Course = (props: tutorName) => {
                             </a>
 
                           </td>
-                          <td data-label="">
-                            <a
-                              href=""
-                              className="Reacticonbtn archive"
-                            >
-                              <BiArchive className="Reacticon" />Archive
-                            </a>
-
-                          </td>
-                          <td data-label="">
-                            <a
-                              href=""
-                              className="Reacticonbtn remove"
-                            >
-                              <MdDelete className="Reacticon" />Remove
-                            </a>
-                          </td>
                         </tr>
                       );
-                    })} */}
-
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Homework for week 1</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">04-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Homework for week 2</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">11-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Homework for week 3</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">18-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Homework for week 4</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">25-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Homework for week 6</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">02-06-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-
-                      </td>
-                    </tr>
-                    <tr>
-                      <td data-label="Note ID :"
-                        className="noteheader"
-                      >
-                        Homework for week 6</td>
-                      <td data-label="Uploaded Date :"
-                        className="notedetails">09-05-2022</td>
-
-                      <td data-label="">
-                        <a
-                          download="note1.pdf"
-                          href="https://learninggp2.blob.core.windows.net/homework/ProposalPresentationNew.pdf"
-                          target="_blank"
-                          className="Reacticonbtn download">
-                          <FiDownload className="Reacticon" />
-                          Download
-                        </a>
-
-                      </td>
-                    </tr>
+                    })}
 
                   </tbody>
                 </table>
@@ -521,7 +281,7 @@ export const Course = (props: tutorName) => {
                 <table className="booking-table" id="view-booking">
                   <tbody>
 
-                    {/* {upcomingClasses.map((item: any) => {
+                    {schedule.map((item: any) => {
                       return (
                         <tr>
                           <td data-label="Note ID :"
@@ -544,9 +304,9 @@ export const Course = (props: tutorName) => {
 
                         </tr>
                       );
-                    })} */}
+                    })}
 
-                    <tr>
+                    {/* <tr>
                       <td data-label="Note ID :"
                         className="noteheader"
                       >
@@ -677,7 +437,7 @@ export const Course = (props: tutorName) => {
 
                       </td>
 
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
 

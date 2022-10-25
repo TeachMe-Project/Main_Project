@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ParentLayout from "./ParentLayout";
 import {Col, ListGroup, Row, Tab, Tabs} from "react-bootstrap";
 import {AiOutlineCloseCircle} from "react-icons/ai";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Images from "../../../assets/images/Images";
 // @ts-ignore
 import { faker } from '@faker-js/faker';
@@ -17,6 +17,14 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const PStudentSummery = () => {
 
     const navigate = useNavigate();
+    const params = useParams();
+    console.log(params.subject);
+    const [num, setNum] = useState(0);
+
+    function randomNumberInRange() {
+        return Math.floor(Math.random() * (60 - 0 + 1)) + 0;
+    }
+
 
     return (
         <ParentLayout>
@@ -33,7 +41,7 @@ const PStudentSummery = () => {
                 <Row>
 
                     <Col lg={5} >
-                        <Parentsaveragetimechart />
+                        <Parentsaveragetimechart subject={params.subject} />
                     </Col>
                     <Col lg={5} >
                         <div className="chart">
@@ -54,12 +62,12 @@ const PStudentSummery = () => {
                                     <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
                                         <Col xl={8}>
                                             <p style={{ marginRight: '20px' }}>
-                                                <b>MS Office</b>
+                                                <b>Whatsapp.exe</b>
                                             </p>
                                         </Col>
                                         <Col xl={4}>
                                             <p className="text-center">
-                                                <b>13</b>
+                                                <b>{randomNumberInRange()}</b>
                                             </p>
                                         </Col>
                                     </div>
@@ -67,12 +75,12 @@ const PStudentSummery = () => {
                                     <div className="fundsRow" style={{ display: 'Flex', marginBottom: '20px' }}>
                                         <Col xl={8}>
                                             <p style={{ marginRight: '20px' }}>
-                                                <b>MS PowerPoint</b>
+                                                <b>Spotify</b>
                                             </p>
                                         </Col>
                                         <Col xl={4}>
                                             <p className="text-center">
-                                                <b>22</b>
+                                                <b>{randomNumberInRange()}</b>
                                             </p>
                                         </Col>
                                     </div>

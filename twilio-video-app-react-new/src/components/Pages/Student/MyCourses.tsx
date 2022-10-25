@@ -9,6 +9,9 @@ import {CardHeader} from "../../Card/CardHeader";
 import {Link, useNavigate} from "react-router-dom";
 import {CardDetails} from "../../Card/CardDetails";
 import {CardButton} from "../../Card/CardButton";
+// @ts-ignore
+import swal from "@sweetalert/with-react";
+
 
 export const MyCourses = () => {
     const {user} = useAuth0();
@@ -26,6 +29,30 @@ export const MyCourses = () => {
     //   return newHour + ':' + minute + ' ' + ampm;
     // };
 
+     const unenrollRequest = (row: any) => {
+       swal({
+         title: 'Unenroll Approve',
+         text: `Do you really want to unenroll ${row.subject} course by ${row.teacher}?`,
+         icon: 'warning',
+         buttons: {
+           cancel: true,
+           confirm: {
+             value: 'confirm',
+           },
+         },
+         // dangerMode: true,
+       }).then((value: any) => {
+         switch (value) {
+           case 'confirm': {
+               swal(`Poof! You have successfully make unenroll Request For ${row.subject}`, {
+                     icon: 'success',
+                   });
+           }
+         }
+       });
+     };
+
+
     useEffect(() => {
         axios
             .get(baseURL)
@@ -35,6 +62,7 @@ export const MyCourses = () => {
                         setCourses(prevState => [
                             ...prevState,
                             {
+                                teacher_id: item.course.teacher_id,
                                 teacher_user_id: item.course.teacher.user_id,
                                 course_id: item.course_id,
                                 subject: item.course.subject,
@@ -43,8 +71,12 @@ export const MyCourses = () => {
                                 desc: item.course.description,
                                 time: item.course.start_time.substring(0,5) + ' - ' + item.course.end_time.substring(0,5),
                                 price: 'LKR '+ item.course.price,
+                                course_image: item.course.image_url,
                             },
                         ]);
+                    // console.log(courses)
+                    console.log("Details Here")
+                    console.log(courses)
                 });
             })
             .catch(error => {
@@ -66,11 +98,11 @@ export const MyCourses = () => {
                             {courses.map((item: any) => {
                                 return (
                                 <div className="CourseCard">
-                                     <div className="CardImage"><img src={`/Images/subjects/Mathematics.png`}/></div>
+                                     <div className="CardImage"><img src={item.course_image}/></div>
                                      <div className="CardBody">
                                          <CardHeader header={item.subject} />
                                          <div className="teacherLink">
-                                             <Link to={`/teacherProfile/${item.teacher_user_id}`} className="link">
+                                             <Link to={`/teacherProfile/${item.teacher_id}`} className="link">
                                                  <CardDetails details={item.teacher} />
                                              </Link>
                                          </div>
@@ -78,7 +110,9 @@ export const MyCourses = () => {
                                          <div className="lastRow">
                                              <div className="CardRow">
                                                  <CardDetails details={item.date} />
-                                                 <CardDetails details={item.time} />
+                                                 <div className='CardDetails'>
+                                                     Time: {item.time}
+                                                 </div>
                                                  <CardDetails details={item.amount} />
                                              </div>
                                              <div className="ViewMore">
@@ -90,7 +124,7 @@ export const MyCourses = () => {
                                              </div>
                                              <div  className="link">
                                                  <div className="link">
-                                                     <button className="CardButton">
+                                                     <button className="CardButton" onClick={()=>unenrollRequest(item) }>
                                                          Unenroll
                                                      </button>
                                                  </div>

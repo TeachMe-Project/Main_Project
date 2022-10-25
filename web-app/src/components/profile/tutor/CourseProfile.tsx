@@ -44,7 +44,7 @@ const CourseProfile = () => {
                     fee: data.price,
                     medium: data.medium,
                     start_date: new Date(data.start_date).toDateString(),
-                    end_date: new Date(data.start_date).toDateString(),
+                    end_date: new Date(data.end_date).toDateString(),
                     class_day: data.day,
                     start_time: data.start_time,
                     end_time: data.end_time,
@@ -175,7 +175,7 @@ const CourseProfile = () => {
                                 <span className='my-2'>
                                 Grade
                             </span>
-                                <span className='my-2'>
+                                <span className='my-2 mb-4'>
                                 Description
                             </span>
                                 <span className='my-2'>
@@ -210,7 +210,7 @@ const CourseProfile = () => {
                                 <span className='my-2'>
                                 :
                             </span>
-                                <span className='my-2'>
+                                <span className='my-2 mb-4'>
                                 :
                             </span>
                                 <span className='my-2'>

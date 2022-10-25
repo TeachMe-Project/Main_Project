@@ -29,8 +29,8 @@ export const Institutes = () => {
   const { user } = useAuth0();
   const teacherAuthId = user?.sub;
   console.log(teacherAuthId);
-  const baseURLCurrent = `https://learnx.azurewebsites.net/teacher/teacherInstitutes/${teacherAuthId}`;
-  const baseURLNew = `https://learnx.azurewebsites.net/teacher/teacherPendingInstitutes/${teacherAuthId}`;
+  const baseURLCurrent = `https://learnxy.azurewebsites.net/teacher/teacherInstitutes/${teacherAuthId}`;
+  const baseURLNew = `https://learnxy.azurewebsites.net/teacher/teacherPendingInstitutes/${teacherAuthId}`;
   const [institutes, setInstitutes] = useState<any[]>([]);
   const [newInstitutes, setNewInstitutes] = useState<any[]>([]);
 
@@ -80,42 +80,105 @@ export const Institutes = () => {
           swal({
             title: "Request Acception",
             text: `Do you really want to accept this institute?`,
-            icon: "error",
+            icon: "warning",
             buttons: {
               cancel: true,
-              confirm: true
+              confirm: {
+                value: "confirm"
+              }
             }
             // dangerMode: true,
           })
-            .then((willDelete: any) => {
-              const apiData = JSON.stringify({
-                "institute_id": item.id,
-                "request_time": new Date(),
-              });
-              axios({
-                method: "POST",
-                url: `https://learnx.azurewebsites.net/teacher/acceptInstituteRequest/${teacherAuthId}`,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                data: apiData,
-              }).then((apiRes) => {
-                console.log(apiRes.status);
-                if (apiRes.status === 200) {
-                  swal(`Poof! You have successfully removed ${item.name}`, {
-                    icon: "success",
+            .then((value: any) => {
+              switch (value) {
+                case "confirm" : {
+                  console.log("Response about to be sent")
+                  const apiData = JSON.stringify({
+                    "institute_id": item.id
+                  });
+                  axios({
+                    method: "POST",
+                    url: `http://localhost:8081/teacher/acceptInstituteRequest/${teacherAuthId}`,
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    data: apiData,
+                  }).then((apiRes) => {
+                    console.log(apiRes.status);
+                    if (apiRes.status === 200) {
+                      swal(`Poof! You have accepted ${item.name}`, {
+                        icon: "success",
+                      });
+                    }
+                    console.log(`Successfully accepted ${item.name}`);
+                  }).catch((error) => {
+                    console.log(error.message);
+                  }).catch((error) => {
+                    console.log(error.message);
                   });
                 }
-                console.log(`Successfully removed ${item.name}`);
-              }).catch((error) => {
-                console.log(error.message);
-              }).catch((error) => {
-                console.log(error.message);
-              });
+              }
             });
         }}
       >
         Accept
+      </button>
+    </div >
+  );
+
+  const rejectInstitute = (item: any) => (
+    <div className="SubscribeBtn">
+      <button
+        className="ButtonCommon"
+        onClick={() => {
+          swal({
+            title: "Request Rejection",
+            text: "Do you really want to reject this institute? Give a valid reason and confirm your decision",
+            content: "input",
+            icon: "warning",
+            buttons: {
+              cancel: true,
+              confirm: {
+                value: "confirm"
+              }
+            }
+          })
+            .then((response: any) => {
+            // .then((value: any, response: any) => {
+              // switch (value) {
+              //   case "confirm": {
+                  console.log(item.id + " => " + response);
+                  const apiData = JSON.stringify({
+                      "institute_id": item.id,
+                      "reason": response
+                    });
+                    console.log(apiData);
+                  axios({
+                    method: "POST",
+                    url: `http://localhost:8081/teacher/rejectInstituteRequest/${teacherAuthId}`,
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    data: apiData,
+                  }).then((apiRes) => {
+                    console.log(apiRes.status);
+                    if (apiRes.status === 200) {
+                      swal(`Poof! You have rejected ${item.name}`, {
+                        icon: "success",
+                      });
+                    }
+                    console.log(`Successfully rejected ${item.name}`);
+                  }).catch((error) => {
+                    console.log(error.message);
+                  }).catch((error) => {
+                    console.log(error.message);
+                  });
+              //   }
+              // }
+            });
+        }}
+      >
+        Decline
       </button>
     </div >
   );
@@ -193,9 +256,10 @@ export const Institutes = () => {
 
 
                           <Col xl={1}>
-                            <Link to="" className=" link SubscribeBtn">
+                            {/* <Link to="" className=" link SubscribeBtn">
                               <ButtonCommon name="Decline" />
-                            </Link>
+                            </Link> */}
+                            {rejectInstitute(item)}
                           </Col>
                         </div>
                       );

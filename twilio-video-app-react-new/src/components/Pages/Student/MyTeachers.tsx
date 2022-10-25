@@ -20,14 +20,17 @@ export const MyTeachers = () => {
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {
-          console.log(res.data)
+        console.log(res.data)
         res.data.map((item: any) => {
           setTeachers(prevState => [
             ...prevState,
             {
+              profile: item.course.teacher.user.profile_image,
+              teacher_id: item.course.teacher_id,
+              teacher_user_id: item.course.teacher.user_id,
               grade: item.course.grade,
               subject: item.course.subject,
-              teacher: 'Mr. ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
+              teacher: item.course.teacher.title +' ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
               contact: item.course.teacher.contact_no,
               desc: item.course.teacher.description,
             },
@@ -53,11 +56,11 @@ export const MyTeachers = () => {
               <div className="small-scrollbar">
                 {teachers.map((item: any) => {
                   return (
-                    <Link to="/teacherProfile" className="link">
+                    <Link to={`/teacherProfile/${item.teacher_id}`} className="link">
                       <TeacherCard
                         grade={item.grade}
                         subject={item.subject}
-                        image={<img src={'/Images/Teachers/mr1.jpg'} />}
+                        image={<img src={item.profile} />}
                         teacher={item.teacher}
                         contact="0771212121"
                         description="I'm having 9 years of experience in teaching at a renowned
@@ -67,42 +70,6 @@ export const MyTeachers = () => {
                     </Link>
                   );
                 })}
-                {/* <Link to="/course" className="link">
-                  <TeacherCard
-                    grade="Grade 8"
-                    subject="Science"
-                    image={<img src={'/Images/Teachers/ms1.jpg'} />}
-                    teacher="Ms. Imalka Sandamali"
-                    contact="0771212990"
-                    description="I'm having more than 5 years of experience in teaching at a renowned
-                    government school as a science teacher. I have produced great results
-                   ..."
-                  />
-                </Link>
-                <Link to="/course" className="link">
-                  <TeacherCard
-                    grade="Grade 8"
-                    subject="History"
-                    image={<img src={'/Images/Teachers/mr2.jpg'} />}
-                    teacher="Mr. Kamal Maggona"
-                    contact="0771212450"
-                    description="I'm having more than 15 years of experience in teaching at a renowned
-                    government school as a history teacher. I have produced great results
-                   ..."
-                  />
-                </Link>
-                <Link to="/course" className="link">
-                  <TeacherCard
-                    grade="Grade 8"
-                    subject="Western Music"
-                    image={<img src={'/Images/Teachers/mr3.jpg'} />}
-                    teacher="Mr. Anura Kahatagoda"
-                    contact="0771212789"
-                    description="I'm having more than 7 years of experience in teaching at a renowned
-                    government school as a western music teacher. I have produced...
-                   ..."
-                  />
-                </Link> */}
               </div>
             </div>
           </div>

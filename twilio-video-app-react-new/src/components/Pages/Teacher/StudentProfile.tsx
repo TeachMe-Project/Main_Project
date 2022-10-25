@@ -1,14 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import { Button } from "../../Button/Button";
-import { Formik } from "formik";
-import * as yup from "yup";
-import axios, { AxiosResponse } from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Form, Row } from 'react-bootstrap';
+import { Button } from '../../Button/Button';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import AzureCloudStorage from '../../AzureCloudStorage/AzureCloudStorageImagesStudent';
+import axios, { AxiosResponse } from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 // @ts-ignore
-import LazyLoad from "react-lazyload";
+import LazyLoad from 'react-lazyload';
+import {useParams} from "react-router-dom";
+
+const schema = yup.object().shape({
+  Firstname: yup
+      .string()
+      .required()
+      .label('First Name')
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'First Name must contain only letters'),
+  Lastname: yup
+      .string()
+      .required()
+      .label('Last Name')
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])/, 'Last Name must contain only letters'),
+  Email: yup
+      .string()
+      .email()
+      .required()
+      .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Enter a valid Email address'),
+  Password: yup
+      .string()
+      .required()
+      .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
+          'Must contain 8 characters with 1 uppercase letter, 1 lowercase letter, 1 number & 1 special character'
+      ),
+  Grade: yup
+      .string()
+      .required()
+      .matches(/Grade-(?:1[01]|0[1-9])|AL-20\d\d/, 'Grade must be between Grade-03 to A/L-Year-3'),
+  Schoolname: yup
+      .string()
+      .required()
+      .label('School Name'),
+});
 
 type initialState = {
   Firstname: string,
@@ -16,17 +50,14 @@ type initialState = {
   Email: string,
   Grade: string,
   Schoolname: string,
-};
+}
 
 export const StudentProfile = () => {
-  const { user } = useAuth0();
-  const studentAuthId = user?.sub;
   const params = useParams();
   console.log(params);
-  const baseURLStudent = `https://learnx.azurewebsites.net/student/${params.user_id}`;
+  const baseURLStudent = `https://learnxy.azurewebsites.net/student/${params.student_id}`;
   // const baseURLStudent = `http://localhost:8081/student/${params.user_id}`;
-  const [parentProfDetails, setParentProfDetails] = useState<any>([]);
-
+  
   const [initialState, setInitialState] = useState<initialState>({
     Firstname: '',
     Lastname: '',
@@ -34,167 +65,280 @@ export const StudentProfile = () => {
     Grade: '',
     Schoolname: '',
   });
+  const [studentProfDetails, setStudentProfDetails] = useState<any[]>([]);
+  const [parentProfDetails, setParentProfDetails] = useState<any[]>([]);
+  const [isEditing, setISEditing] = useState(false);
+  const [pageStage, setPageStage] = useState(2);
+  const [gradeValidate, setGradeValidate] = useState<boolean>(false);
+  const [fistNameValidate, setFistNameValidate] = useState(false);
+  const [lastNameValidate, setLastNameValidate] = useState(false);
+  const [emailValidate, setEmailValidate] = useState(false);
+  const [passwordValidate, setPasswordValidate] = useState(false);
+  const [schoolNameValidate, setSchoolNameValidate] = useState(false);
+  const [isDataLoading, setIsDataLoading] = useState(false);
+
+  const changeGradeValidate = (status: boolean): boolean => {
+    if (status) {
+      setGradeValidate(true);
+      return false;
+    } else {
+      setGradeValidate(false);
+      return true;
+    }
+  };
+  const changeFistNameValidate = (status: boolean): boolean => {
+    if (status) {
+      setFistNameValidate(true);
+      return false;
+    } else {
+      setFistNameValidate(false);
+      return true;
+    }
+  };
+  const changeLastNameValidate = (status: boolean): boolean => {
+    if (status) {
+      setLastNameValidate(true);
+      return false;
+    } else {
+      setLastNameValidate(false);
+      return true;
+    }
+  };
+  const changeEmailValidate = (status: boolean): boolean => {
+    if (status) {
+      setEmailValidate(true);
+      return false;
+    } else {
+      setEmailValidate(false);
+      return true;
+    }
+  };
+  const changePasswordValidate = (status: boolean): boolean => {
+    if (status) {
+      setPasswordValidate(true);
+      return false;
+    } else {
+      setPasswordValidate(false);
+      return true;
+    }
+  };
+  const changeSchoolNameValidate = (status: boolean): boolean => {
+    if (status) {
+      setSchoolNameValidate(true);
+      return false;
+    } else {
+      setSchoolNameValidate(false);
+      return true;
+    }
+  };
 
   useEffect(() => {
-    axios
-      .get(baseURLStudent)
-      .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
+    axios({
+      method: "GET",
+      url: baseURLStudent,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+        .then((res: AxiosResponse) => {
+          console.log(res.data)
           setInitialState({
-            Firstname: item.first_name,
-            Lastname: item.last_name,
-            Email: item.user.username,
-            Grade: item.grade,
-            Schoolname: item.school,
+            Firstname: res.data[0].first_name,
+            Lastname: res.data[0].last_name,
+            Email: res.data[0].user.username,
+            Grade: res.data[0].grade,
+            Schoolname: res.data[0].school,
           });
+          if (res.status === 200) {
+            console.log(initialState);
+            setIsDataLoading(true);
+          }
+        })
+        .catch(error => {
+          console.log(error);
         });
-        console.log(initialState)
-      })
-      .catch(error => {
-        console.log(error);
-      });
     axios
-      .get(baseURLStudent)
-      .then((res: AxiosResponse) => {
-        res.data.map((item: any) => {
-          setParentProfDetails({
-            Studentpic: item.user.profile_image,
-            Parentname: item.parent.first_name + ' ' + item.parent.last_name,
-            Parentcontact: item.parent.mobile_no,
-            Parentemail: item.parent.user.username,
+        .get(baseURLStudent)
+        .then((res: AxiosResponse) => {
+          res.data.map((item: any) => {
+            setStudentProfDetails(prevState => [
+              ...prevState,
+              {
+                fullname: item.first_name + ' ' + item.last_name,
+                email: item.user.username,
+                picture: item.user.profile_image
+              },
+            ]);
           });
+          console.log(studentProfDetails);
+        })
+        .catch(error => {
+          console.log(error);
         });
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    axios
+        .get(baseURLStudent)
+        .then((res: AxiosResponse) => {
+          res.data.map((item: any) => {
+            setParentProfDetails(prevState => [
+              ...prevState,
+              {
+                fullname: item.parent.first_name + ' ' + item.parent.last_name,
+                email: item.parent.user.username,
+                contact: item.parent.mobile_no,
+              },
+            ]);
+          });
+          console.log(parentProfDetails);
+        })
+        .catch(error => {
+          console.log(error);
+        });
   }, []);
 
   return (
-    <div className="StudentProfile">
-      <Container>
-        <div className="PanelHeader">
-          <h2>Student Profile</h2>
-        </div>
-        <div className="PanelContainer">
-          <Col xl={4}>
-            <div className="LeftContainer">
-              <div className="ProfileImg">
-                <img src={parentProfDetails.Studentpic} />
+      <div className="StudentProfile">
+        { isDataLoading && <Container>
+          <div className="PanelHeader">
+            <h2>User Profile</h2>
+          </div>
+          <div className="PanelContainer">
+            <Col xl={4}>
+              <div className="LeftContainer">
+                {studentProfDetails.map((item: any) => {
+                  return (
+                      <div className="ProfileImg">
+                        <img src={item.picture} />
+                      </div>
+                  );
+                })}
+                {parentProfDetails.map((item: any) => {
+                  return (
+                      <div className="ParentContact">
+                        <div className="ContactHeader">Parent's Contact Details:</div>
+                        <div className="ParentLabel">Name:</div>
+                        <div className="ParentValue">{item.fullname}</div>
+                        <div className="ParentLabel">Mobile No:</div>
+                        <div className="ParentValue">{item.contact}</div>
+                        <div className="ParentLabel">Email:</div>
+                        <div className="ParentValue">{item.email}</div>
+                      </div>
+                  );
+                })}
               </div>
-              <div className="ParentContact">
-                <div className="ContactHeader">Parent's Contact Details:</div>
-                <div className="ParentLabel">Name:</div>
-                <div className="ParentValue">{parentProfDetails.Parentname}</div>
-                <div className="ParentLabel">Mobile No:</div>
-                <div className="ParentValue">{parentProfDetails.Parentcontact}</div>
-                <div className="ParentLabel">Email:</div>
-                <div className="ParentValue">{parentProfDetails.Parentemail}</div>
+            </Col>
+
+            <Col xl={8}>
+              <div className="RightContainer">
+                <Formik on validationSchema={schema} onSubmit={console.log} initialValues={initialState}>
+                  {({ handleSubmit, handleChange, handleBlur, values, touched, errors, validateField, }) => (
+                      <Row>
+                        <Form noValidate onSubmit={handleSubmit}>
+                          {/*FirstName*/}
+                          <Row>
+                            <Form.Group className="ProfileDetailsContainer" controlId="validationFirstName">
+                              <Col xl={4}>
+                                <Form.Label style={{ fontWeight: 600 }}>First Name</Form.Label>
+                              </Col>
+
+                              <Col xl={8}>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter the first name here"
+                                    name="Firstname"
+                                    value={values.Firstname}
+                                    onChange={handleChange}
+                                    isInvalid={
+                                      !!errors.Firstname ? changeFistNameValidate(false) : changeFistNameValidate(true)
+                                    }
+                                    isValid={touched.Firstname}
+                                    onBlur={handleBlur}
+                                    disabled={true}
+                                />
+                                <Form.Control.Feedback type="invalid">{errors.Firstname}</Form.Control.Feedback>
+                              </Col>
+                            </Form.Group>
+                          </Row>
+                          {/*LastName*/}
+                          <Row>
+                            <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
+                              <Col xl={4}>
+                                <Form.Label style={{ fontWeight: 600 }}>Last Name</Form.Label>
+                              </Col>
+
+                              <Col xl={8}>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter the last name here"
+                                    name="Lastname"
+                                    value={values.Lastname}
+                                    onChange={handleChange}
+                                    isInvalid={
+                                      !!errors.Lastname ? changeLastNameValidate(false) : changeLastNameValidate(true)
+                                    }
+                                    isValid={touched.Lastname}
+                                    onBlur={handleBlur}
+                                    disabled={true}
+                                />
+                                <Form.Control.Feedback type="invalid">{errors.Lastname}</Form.Control.Feedback>
+                              </Col>
+                            </Form.Group>
+                          </Row>
+                          {/*Email*/}
+                          <Row>
+                            <Form.Group className="ProfileDetailsContainer" controlId="validationEmail">
+                              <Col xl={4}>
+                                <Form.Label style={{ fontWeight: 600 }}>Email</Form.Label>
+                              </Col>
+                              <Col xl={8}>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter the email"
+                                    name="Email"
+                                    value={values.Email}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.Email ? changeEmailValidate(false) : changeEmailValidate(true)}
+                                    isValid={touched.Email}
+                                    onBlur={handleBlur}
+                                    disabled={true}
+                                />
+                                <Form.Control.Feedback type="invalid">{errors.Email}</Form.Control.Feedback>
+                              </Col>
+                            </Form.Group>
+                          </Row>
+
+                          {/*Grade*/}
+                          <Row>
+                            <Form.Group className="ProfileDetailsContainer" controlId="validationGrade">
+                              <Col xl={4}>
+                                <Form.Label style={{ fontWeight: 600 }}>Grade</Form.Label>
+                              </Col>
+                              <Col xl={8}>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter the grade here"
+                                    name="Grade"
+                                    value={values.Grade}
+                                    onChange={handleChange}
+                                    isInvalid={!!errors.Grade ? changeGradeValidate(false) : changeGradeValidate(true)}
+                                    isValid={touched.Grade}
+                                    onBlur={handleBlur}
+                                    disabled={true}
+                                />
+                                <Form.Control.Feedback type="invalid">{errors.Grade}</Form.Control.Feedback>
+                              </Col>
+                            </Form.Group>
+                          </Row>
+
+                        </Form>
+                      </Row>
+                  )}
+                </Formik>
               </div>
-            </div>
-          </Col>
+            </Col>
 
-          <Col xl={8}>
-            <div className="RightContainer">
-              <Formik onSubmit={console.log} initialValues={initialState}>
-                {({ values, }) => (
-                  <Row>
-                    <Form noValidate>
-                      {/*FirstName*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationFirstName">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>First Name</Form.Label>
-                          </Col>
-
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter the first name here"
-                              name="Firstname"
-                              value={values.Firstname}
-                            />
-                          </Col>
-                        </Form.Group>
-                      </Row>
-                      {/*LastName*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationLastname">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Last Name</Form.Label>
-                          </Col>
-
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter the last name here"
-                              name="Lastname"
-                              value={values.Lastname}
-                            />
-                          </Col>
-                        </Form.Group>
-                      </Row>
-                      {/*Email*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationEmail">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Email</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter the email"
-                              name="Email"
-                              value={values.Email}
-                            />
-                          </Col>
-                        </Form.Group>
-                      </Row>
-                      {/*SchoolName*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationschoolName">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>School Name</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter school name here"
-                              name="Schoolname"
-                              value={values.Schoolname}
-                            />
-                          </Col>
-                        </Form.Group>
-                      </Row>
-                      {/*Grade*/}
-                      <Row>
-                        <Form.Group className="ProfileDetailsContainer" controlId="validationGrade">
-                          <Col xl={4}>
-                            <Form.Label style={{ fontWeight: 600 }}>Grade</Form.Label>
-                          </Col>
-                          <Col xl={8}>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter the grade here"
-                              name="Grade"
-                              value={values.Grade}
-                            />
-                          </Col>
-                        </Form.Group>
-                      </Row>
-
-                      <Row>
-
-                      </Row>
-                    </Form>
-                  </Row>
-                )}
-              </Formik>
-            </div>
-          </Col>
-        </div>
-      </Container>
-    </div>
+          </div>
+        </Container>}
+      </div>
   );
 };
 
