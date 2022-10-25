@@ -197,9 +197,14 @@ const TeacherProfile = () => {
         connection: 'Username-Password-Authentication',
       },
     };
+
     // @ts-ignore
     axios
-      .request(options)
+      .post('https://learningsl.us.auth0.com/dbconnections/change_password',{
+        client_id: 'MfDW7eqZ6yFDxDukb3rINlB0269uTekx',
+        email: user?.email,
+        connection: 'Username-Password-Authentication',
+      })
       .then(function(response) {
         console.log('Success');
         // @ts-ignore

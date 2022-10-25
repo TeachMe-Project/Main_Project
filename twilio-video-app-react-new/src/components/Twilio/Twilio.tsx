@@ -25,7 +25,7 @@ const Main = styled('main')(({ theme }: { theme: Theme }) => ({
   },
 }));
 
-export default function Twilio(props: { id: string;class_id:string;tag:boolean ;}) {
+export default function Twilio(props: { id: any;class_id:any;tag:boolean ;}) {
   const roomState = useRoomState();
   console.log("course"+props.id);
 
