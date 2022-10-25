@@ -83,34 +83,41 @@ export const Institutes = () => {
             icon: "warning",
             buttons: {
               cancel: true,
-              confirm: true
+              confirm: {
+                value: "confirm"
+              }
             }
             // dangerMode: true,
           })
-            .then((willDelete: any) => {
-              const apiData = JSON.stringify({
-                "institute_id": item.id
-              });
-              axios({
-                method: "POST",
-                url: `http://localhost:8081/teacher/acceptInstituteRequest/${teacherAuthId}`,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                data: apiData,
-              }).then((apiRes) => {
-                console.log(apiRes.status);
-                if (apiRes.status === 200) {
-                  swal(`Poof! You have accepted ${item.name}`, {
-                    icon: "success",
+            .then((value: any) => {
+              switch (value) {
+                case "confirm" : {
+                  console.log("Response about to be sent")
+                  const apiData = JSON.stringify({
+                    "institute_id": item.id
+                  });
+                  axios({
+                    method: "POST",
+                    url: `http://localhost:8081/teacher/acceptInstituteRequest/${teacherAuthId}`,
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    data: apiData,
+                  }).then((apiRes) => {
+                    console.log(apiRes.status);
+                    if (apiRes.status === 200) {
+                      swal(`Poof! You have accepted ${item.name}`, {
+                        icon: "success",
+                      });
+                    }
+                    console.log(`Successfully accepted ${item.name}`);
+                  }).catch((error) => {
+                    console.log(error.message);
+                  }).catch((error) => {
+                    console.log(error.message);
                   });
                 }
-                console.log(`Successfully accepted ${item.name}`);
-              }).catch((error) => {
-                console.log(error.message);
-              }).catch((error) => {
-                console.log(error.message);
-              });
+              }
             });
         }}
       >
@@ -131,35 +138,43 @@ export const Institutes = () => {
             icon: "warning",
             buttons: {
               cancel: true,
-              confirm: true
+              confirm: {
+                value: "confirm"
+              }
             }
           })
             .then((response: any) => {
-              console.log(item.id + " => " + response);
-              const apiData = JSON.stringify({
-                "institute_id": item.id,
-                "reason": response
-              });
-              axios({
-                method: "POST",
-                url: `http://localhost:8081/teacher/rejectInstituteRequest/${teacherAuthId}`,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                data: apiData,
-              }).then((apiRes) => {
-                console.log(apiRes.status);
-                if (apiRes.status === 200) {
-                  swal(`Poof! You have rejected ${item.name}`, {
-                    icon: "success",
+            // .then((value: any, response: any) => {
+              // switch (value) {
+              //   case "confirm": {
+                  console.log(item.id + " => " + response);
+                  const apiData = JSON.stringify({
+                      "institute_id": item.id,
+                      "reason": response
+                    });
+                    console.log(apiData);
+                  axios({
+                    method: "POST",
+                    url: `http://localhost:8081/teacher/rejectInstituteRequest/${teacherAuthId}`,
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    data: apiData,
+                  }).then((apiRes) => {
+                    console.log(apiRes.status);
+                    if (apiRes.status === 200) {
+                      swal(`Poof! You have rejected ${item.name}`, {
+                        icon: "success",
+                      });
+                    }
+                    console.log(`Successfully rejected ${item.name}`);
+                  }).catch((error) => {
+                    console.log(error.message);
+                  }).catch((error) => {
+                    console.log(error.message);
                   });
-                }
-                console.log(`Successfully rejected ${item.name}`);
-              }).catch((error) => {
-                console.log(error.message);
-              }).catch((error) => {
-                console.log(error.message);
-              });
+              //   }
+              // }
             });
         }}
       >
