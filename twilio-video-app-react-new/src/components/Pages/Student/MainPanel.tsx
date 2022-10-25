@@ -36,7 +36,8 @@ const VideoApp = () => {
         <VideoProvider options={connectionOptions} onError={setError} >
           <ErrorDialog dismissError={() => setError(null)} error={error} />
           <ChatProvider>
-            <Twilio id={params.id} tag={false}/>
+
+            <Twilio id={params.id} tag={false} class_id={params.id}/>
           </ChatProvider>
         </VideoProvider>
 

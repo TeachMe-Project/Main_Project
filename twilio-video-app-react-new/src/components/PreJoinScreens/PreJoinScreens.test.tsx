@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useAppState } from '../../state';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 
+// @ts-ignore
 delete window.location;
 // @ts-ignore
 window.location = {
@@ -41,9 +42,13 @@ describe('the PreJoinScreens component', () => {
   });
 
   it('should update the URL to include the room name on submit', () => {
+    // @ts-ignore
+
     const wrapper = shallow(<PreJoinScreens />);
 
     const setRoomName = wrapper.find(RoomNameScreen).prop('setRoomName');
+    // @ts-ignore
+
     setRoomName('Test Room 123');
 
     const handleSubmit = wrapper.find(RoomNameScreen).prop('handleSubmit');
@@ -55,9 +60,11 @@ describe('the PreJoinScreens component', () => {
   it('should not update the URL when the app is deployed as a Twilio function', () => {
     // @ts-ignore
     window.location = { ...window.location, origin: 'https://video-app-1234-twil.io' };
+    // @ts-ignore
     const wrapper = shallow(<PreJoinScreens />);
 
     const setRoomName = wrapper.find(RoomNameScreen).prop('setRoomName');
+    // @ts-ignore
     setRoomName('Test Room 123');
 
     const handleSubmit = wrapper.find(RoomNameScreen).prop('handleSubmit');
@@ -67,6 +74,7 @@ describe('the PreJoinScreens component', () => {
   });
 
   it('should switch to the DeviceSelection screen when a room name is submitted', () => {
+    // @ts-ignore
     const wrapper = shallow(<PreJoinScreens />);
 
     expect(wrapper.find(RoomNameScreen).exists()).toBe(true);
@@ -80,6 +88,7 @@ describe('the PreJoinScreens component', () => {
   });
 
   it('should populate the room name from the URL and switch to the DeviceSelectionScreen when the displayName is present for the user', () => {
+    // @ts-ignore
     const wrapper = mount(<PreJoinScreens />);
     const roomName = wrapper.find(DeviceSelectionScreen).prop('roomName');
     expect(roomName).toBe('testRoom');
@@ -90,6 +99,7 @@ describe('the PreJoinScreens component', () => {
 
   it('should populate the room name from the URL and stay on the RoomNameScreen when the displayName is not present for the user', () => {
     mockUseAppState.mockImplementation(() => ({ user: {} }));
+    // @ts-ignore
     const wrapper = mount(<PreJoinScreens />);
     const roomName = wrapper.find(RoomNameScreen).prop('roomName');
     expect(roomName).toBe('testRoom');
@@ -102,6 +112,7 @@ describe('the PreJoinScreens component', () => {
     const mockGetAudioAndVideoTracks = jest.fn(() => Promise.reject('testError'));
     mockUseVideoContext.mockImplementation(() => ({ getAudioAndVideoTracks: mockGetAudioAndVideoTracks }));
 
+    // @ts-ignore
     const wrapper = mount(<PreJoinScreens />);
 
     // This may look odd, but it prevents 'An update to PreJoinScreens inside a test was not wrapped in act(...)' warning.

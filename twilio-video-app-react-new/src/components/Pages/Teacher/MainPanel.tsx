@@ -137,10 +137,7 @@ const routes = [
     path: '/studentProfile/:student_id',
     main: () => <StudentProfile />,
   },
-  {
-    path: '/admindashboard',
-    main: () => <AdminDashboard />,
-  },
+
 ];
 
 export default function MainPanelTeacher() {

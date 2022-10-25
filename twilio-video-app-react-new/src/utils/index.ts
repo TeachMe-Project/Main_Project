@@ -1,6 +1,6 @@
 import { isPlainObject } from 'is-plain-object';
 
-export const isMobile = (() => {
+export let isMobile = (() => {
   if (typeof navigator === 'undefined' || typeof navigator.userAgent !== 'string') {
     return false;
   }
