@@ -15,6 +15,7 @@ describe('the RoomNameScreen component', () => {
         name="test"
         roomName="testRoom"
         setName={() => {}}
+          // @ts-ignore
         setRoomName={() => {}}
         handleSubmit={() => {}}
       />
@@ -31,6 +32,7 @@ describe('the RoomNameScreen component', () => {
         name="test"
         roomName="testRoom"
         setName={() => {}}
+          // @ts-ignore
         setRoomName={() => {}}
         handleSubmit={() => {}}
       />
@@ -43,6 +45,7 @@ describe('the RoomNameScreen component', () => {
   it('should render correctly when there is a logged in user and "customIdentity=true" query parameter"', () => {
     mockUseAppState.mockImplementationOnce(() => ({ user: { displayName: 'Test Name' } }));
 
+    // @ts-ignore
     delete window.location;
     // @ts-ignore
     window.location = {
@@ -54,6 +57,7 @@ describe('the RoomNameScreen component', () => {
         name="test"
         roomName="testRoom"
         setName={() => {}}
+          // @ts-ignore
         setRoomName={() => {}}
         handleSubmit={() => {}}
       />

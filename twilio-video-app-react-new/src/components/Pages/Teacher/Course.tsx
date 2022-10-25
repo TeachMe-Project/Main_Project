@@ -174,33 +174,40 @@ export const Course = () => {
           icon: "error",
           buttons: {
             cancel: true,
-            confirm: true
+            confirm: {
+              value: "confirm"
+            }
           }
         })
-          .then((willDelete: any) => {
-            const apiData = JSON.stringify({
-              "homework_id": item.id,
-            });
-            axios({
-              method: "POST",
-              url: `https://learnxy.azurewebsites.net/homework/removeHomework`,
-              headers: {
-                "Content-Type": "application/json",
-              },
-              data: apiData,
-            }).then((apiRes) => {
-              console.log(apiRes.status);
-              if (apiRes.status === 200) {
-                swal(`Poof! You have successfully removed ${item.topic}`, {
-                  icon: "success",
+          .then((value: any) => {
+            switch (value) {
+              case "confirm": {
+                console.log("Homework about to be removed")
+                const apiData = JSON.stringify({
+                  "homework_id": item.id,
+                });
+                axios({
+                  method: "POST",
+                  url: `https://learnxy.azurewebsites.net/homework/removeHomework`,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  data: apiData,
+                }).then((apiRes) => {
+                  console.log(apiRes.status);
+                  if (apiRes.status === 200) {
+                    swal(`Poof! You have successfully removed ${item.topic}`, {
+                      icon: "success",
+                    });
+                  }
+                  console.log(`Successfully removed ${item.topic}`);
+                }).catch((error) => {
+                  console.log(error.message);
+                }).catch((error) => {
+                  console.log(error.message);
                 });
               }
-              console.log(`Successfully removed ${item.topic}`);
-            }).catch((error) => {
-              console.log(error.message);
-            }).catch((error) => {
-              console.log(error.message);
-            });
+            }
           });
       }}
     ><MdDelete
@@ -218,33 +225,40 @@ export const Course = () => {
           icon: "error",
           buttons: {
             cancel: true,
-            confirm: true
+            confirm: {
+              value: "confirm"
+            }
           }
         })
-          .then((willDelete: any) => {
-            const apiData = JSON.stringify({
-              "note_id": item.id,
-            });
-            axios({
-              method: "POST",
-              url: `https://learnxy.azurewebsites.net/notes/removeNote`,
-              headers: {
-                "Content-Type": "application/json",
-              },
-              data: apiData,
-            }).then((apiRes) => {
-              console.log(apiRes.status);
-              if (apiRes.status === 200) {
-                swal(`Poof! You have successfully removed ${item.topic}`, {
-                  icon: "success",
+          .then((value: any) => {
+            switch (value) {
+              case "confirm": {
+                console.log("Note about to be removed")
+                const apiData = JSON.stringify({
+                  "note_id": item.id,
+                });
+                axios({
+                  method: "POST",
+                  url: `https://learnxy.azurewebsites.net/notes/removeNote`,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  data: apiData,
+                }).then((apiRes) => {
+                  console.log(apiRes.status);
+                  if (apiRes.status === 200) {
+                    swal(`Poof! You have successfully removed ${item.topic}`, {
+                      icon: "success",
+                    });
+                  }
+                  console.log(`Successfully removed ${item.topic}`);
+                }).catch((error) => {
+                  console.log(error.message);
+                }).catch((error) => {
+                  console.log(error.message);
                 });
               }
-              console.log(`Successfully removed ${item.topic}`);
-            }).catch((error) => {
-              console.log(error.message);
-            }).catch((error) => {
-              console.log(error.message);
-            });
+            }
           });
       }}
     ><MdDelete

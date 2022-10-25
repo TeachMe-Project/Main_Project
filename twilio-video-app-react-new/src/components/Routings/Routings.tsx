@@ -12,6 +12,7 @@ const routings = [
   {
     path: '/twilio',
 
+    // @ts-ignore
     main: () => <Twilio />,
   },
   {

@@ -54,14 +54,19 @@ const data = {
     //   );
     // })
     {
-      label: "Mathematics",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 2 })),
+      label: "Mathematics Grade-11",
+      data: labels.map(() => faker.datatype.number({ min: 1, max: 2 })),
       backgroundColor: "#f39c12"
     },
     {
-      label: "Science",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 2 })),
+      label: "Mathematics Grade-10",
+      data: labels.map(() => faker.datatype.number({ min: 1, max: 2 })),
       backgroundColor: "#003865"
+    },
+    {
+      label: "Mathematics Grade-6",
+      data: labels.map(() => faker.datatype.number({ min: 1, max: 2 })),
+      backgroundColor: "green"
     }
   ]
 };

@@ -1,6 +1,6 @@
-import {Request, Response} from "express";
-import {PrismaClient} from '@prisma/client'
-import {teacherSchema} from "../models/teacherModel";
+import { Request, Response } from "express";
+import { PrismaClient } from '@prisma/client'
+import { teacherSchema } from "../models/teacherModel";
 import logger from "../utils/logger";
 
 const prisma = new PrismaClient()
@@ -83,7 +83,7 @@ export const getTeacherUpcomingClasses = async (req: Request, res: Response) => 
 
     try {
         // @ts-ignore
-        const {teacher_id} = await prisma.teacher.findUnique({
+        const { teacher_id } = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -104,7 +104,7 @@ export const getTeacherUpcomingClasses = async (req: Request, res: Response) => 
             orderBy: {
                 date: "asc"
             },
-            include: {course: true}
+            include: { course: true }
         })
         console.log(data);
         res.status(200).send(data)
@@ -120,7 +120,7 @@ export const getTeacherCourses = async (req: Request, res: Response) => {
             where: {
                 user_id: req.params.id
             },
-            include: {course: true}
+            include: { course: true }
         })
         res.status(200).send(data)
     } catch (error) {
@@ -132,7 +132,7 @@ export const getTeacherInstitutes = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const {teacher_id} = await prisma.teacher.findUnique({
+        const { teacher_id } = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -148,7 +148,7 @@ export const getTeacherInstitutes = async (req: Request, res: Response) => {
                 status: "active",
                 isActive: true
             },
-            include: {institute: true}
+            include: { institute: true }
         })
         res.status(200).send(data)
     } catch (error: any) {
@@ -160,7 +160,7 @@ export const getTeacherPendingInstitutes = async (req: Request, res: Response) =
 
     try {
         // @ts-ignore
-        const {teacher_id} = await prisma.teacher.findUnique({
+        const { teacher_id } = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -190,7 +190,7 @@ export const acceptInstituteRequest = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const {teacher_id} = await prisma.teacher.findUnique({
+        const { teacher_id } = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -200,16 +200,12 @@ export const acceptInstituteRequest = async (req: Request, res: Response) => {
         })
         // console.log(req.body);
         const institute_id = req.body.institute_id;
-        const request_time = req.body.request_time;
 
         // @ts-ignore
-        const data = await prisma.teacher_requests.update({
+        const data = await prisma.teacher_requests.updateMany({
             where: {
-                institute_id_teacher_id_date: {
-                    institute_id: institute_id,
-                    teacher_id: teacher_id,
-                    date: request_time
-                }
+                institute_id: institute_id,
+                teacher_id: teacher_id
             },
             data: {
                 request_status: "accepted"
@@ -235,7 +231,7 @@ export const rejectInstituteRequest = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const {teacher_id} = await prisma.teacher.findUnique({
+        const { teacher_id } = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -245,21 +241,17 @@ export const rejectInstituteRequest = async (req: Request, res: Response) => {
         })
         // console.log(req.body);
         const institute_id = req.body.institute_id;
-        const request_time = req.body.request_time;
         const reason = req.body.reason;
 
         // @ts-ignore
-        const data = await prisma.teacher_requests.update({
+        const data = await prisma.teacher_requests.updateMany({
             where: {
-                institute_id_teacher_id_date: {
-                    institute_id: institute_id,
-                    teacher_id: teacher_id,
-                    date: request_time,
-                    // reason: reason
-                }
+                institute_id: institute_id,
+                teacher_id: teacher_id,
             },
             data: {
-                request_status: "rejected"
+                request_status: "rejected",
+                reason: reason
             }
         })
 
@@ -271,7 +263,7 @@ export const rejectInstituteRequest = async (req: Request, res: Response) => {
 
 export const createTeacher = async (req: Request, res: Response) => {
 
-    const {error, value} = teacherSchema.validate(req.body);
+    const { error, value } = teacherSchema.validate(req.body);
     if (!error) {
         try {
             const data = await prisma.user.create({
@@ -317,7 +309,7 @@ export const getStudentCountAnalytics = async (req: Request, res: Response) => {
 
     try {
         // @ts-ignore
-        const {teacher_id} = await prisma.teacher.findUnique({
+        const { teacher_id } = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
@@ -352,7 +344,7 @@ export const getAvgAttendanceAnalytics = async (req: Request, res: Response) => 
 
     try {
         // @ts-ignore
-        const {teacher_id} = await prisma.teacher.findUnique({
+        const { teacher_id } = await prisma.teacher.findUnique({
             where: {
                 user_id: req.params.id
             },
