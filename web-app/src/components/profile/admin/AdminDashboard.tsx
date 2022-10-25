@@ -11,7 +11,7 @@ import AdminLayout from "./AdminLayout";
 import EnrollmentChart from "./EnrollmentChart";
 import PaymentChart from "./PaymentChart";
 import PieChart from "./PieChart";
-import NewCourses from "./NewCourses";
+// import NewCourses from "./NewCourses";
 import PieChartGrades, { PieChartPayment } from "./PieChartPayment";
 import SubjectEnrollment, { GradeEnrollment } from "./gradeenrollment";
 
@@ -135,7 +135,7 @@ export const AdminDashboard = () => {
   };
   return (
     <AdminLayout>
-      <Col lg={12} className="px-lg-5"  >
+      <Col lg={12} className="px-lg-5">
         <Row>
           {/*<PanelContainer />*/}
           <Row className="d-lg-flex flex-lg-column align-items-center text-lg-center">
@@ -147,12 +147,12 @@ export const AdminDashboard = () => {
           </Row>
         </Row>
 
-        <Row style={{height:"80vh", overflowY:"scroll"}}>
+        <Row style={{ height: "80vh", overflowY: "scroll" }}>
           {/* ------------------------------ Row 1 ---------------------------------------- */}
 
           {/* ------------------------------ Row 2 ---------------------------------------- */}
           <Row>
-            <Col xl={3} style={{position:"relative", top:"15px"}}>
+            <Col xl={3} style={{ position: "relative", top: "15px" }}>
               <PieChartPayment />
             </Col>
             <Col xl={3}>
@@ -172,7 +172,6 @@ export const AdminDashboard = () => {
             </Col>
             <Col xl={6}>
               <GradeEnrollment />
-
             </Col>
           </Row>
 
@@ -202,44 +201,44 @@ export const AdminDashboard = () => {
 
                   <div className="fundsRow" style={{ display: "Flex" }}>
                     <Col xl={8}>
-                      <h5 className="card-title">Mr K Silva</h5>
+                      <h5 className="card-title">Mr. Kamal Silva</h5>
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>90,000</b>
+                        <b>97,500</b>
                       </p>
                     </Col>
                   </div>
 
                   <div className="fundsRow" style={{ display: "Flex" }}>
                     <Col xl={8}>
-                      <h5 className="card-title">Mrs.Chandrakanthi Perera</h5>
+                      <h5 className="card-title">Mrs. Chandrakanthi Perera</h5>
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>90,000</b>
+                        <b>93,000</b>
                       </p>
                     </Col>
                   </div>
 
                   <div className="fundsRow" style={{ display: "Flex" }}>
                     <Col xl={8}>
-                      <h5 className="card-title">Miss.Hasini Arachchige</h5>
+                      <h5 className="card-title">Mrs. Sumana Dias</h5>
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>80,000</b>
+                        <b>90,200</b>
                       </p>
                     </Col>
                   </div>
 
                   <div className="fundsRow" style={{ display: "Flex" }}>
                     <Col xl={8}>
-                      <h5 className="card-title">Mr.Rahul Soyza</h5>
+                      <h5 className="card-title">Mr. Rahul Soyza</h5>
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>70,000</b>
+                        <b>86,000</b>
                       </p>
                     </Col>
                   </div>
@@ -250,7 +249,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>70,000</b>
+                        <b>84,200</b>
                       </p>
                     </Col>
                   </div>
@@ -286,7 +285,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>120,000</b>
+                        <b>122,000</b>
                       </p>
                     </Col>
                   </div>
@@ -297,7 +296,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>120,000</b>
+                        <b>117,500</b>
                       </p>
                     </Col>
                   </div>
@@ -308,7 +307,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>120,000</b>
+                        <b>103,200</b>
                       </p>
                     </Col>
                   </div>
@@ -319,7 +318,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>120,000</b>
+                        <b>96,000</b>
                       </p>
                     </Col>
                   </div>
@@ -330,7 +329,7 @@ export const AdminDashboard = () => {
                     </Col>
                     <Col xl={4}>
                       <p>
-                        <b>120,000</b>
+                        <b>93,500</b>
                       </p>
                     </Col>
                   </div>

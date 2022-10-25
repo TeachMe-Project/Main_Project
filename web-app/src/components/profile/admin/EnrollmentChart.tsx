@@ -47,7 +47,7 @@ export const options = {
   },
 };
 
-const labels = ["","January", "February", "March", "April", "May", "June", "July"];
+const labels = ["May","June","July","August","September", "October"];
 
 const studentenrollmentnumbers = [0,40,33,34,21,50,20,45];
 const tutorenrollmentnumbers = [0,20, 43, 20, 26, 27, 31, 37];

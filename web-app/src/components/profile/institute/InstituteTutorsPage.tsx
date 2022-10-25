@@ -82,41 +82,54 @@ const InstituteTutorsPage = () => {
                 className='accept-icon'
                 onClick={() => {
                     swal({
-                        title: "User Removal",
-                        text: `Do you really want to remove ${row.first_name} ${row.last_name} ?`,
-                        icon: "error",
-                        buttons: {
-                            cancel: true,
-                            confirm: true
+                      title: "User Removal",
+                      text: `Do you really want to remove ${row.first_name} ${row.last_name} ?`,
+                      icon: "error",
+                      buttons: {
+                        cancel: true,
+                        confirm: {
+                          text: "Confirm",
+                          value: "confirm",
                         },
-                        // dangerMode: true,
-                    })
-                        .then((willDelete: any) => {
-                            setIsDataLoading(false)
-                            const apiData = JSON.stringify({
-                                "teacher_id": `${row.user_id}`
-                            })
-                            axios({
-                                method: "POST",
-                                url: `https://learnxy.azurewebsites.net/institute/removeTeacher/${user_id}`,
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                data: apiData
-                            }).then((apiRes) => {
-                                if (apiRes.status === 200) {
-                                    swal(`Poof! You have successfully removed ${row.first_name} ${row.last_name}`, {
-                                        icon: "success",
-                                    });
-                                    const newTeachersArray = teachers.filter(teacher => row.user_id !== teacher.user_id);
-                                    setTeachers(newTeachersArray);
-                                }
-                                setIsDataLoading(true)
-
-                            }).catch((error: any) => {
-                                console.log(error.message)
-                            })
-                        });
+                      },
+                      // dangerMode: true,
+                    }).then((value: any) => {
+                     switch(value){
+                        case "confirm":{
+                             setIsDataLoading(false);
+                             const apiData = JSON.stringify({
+                               teacher_id: `${row.user_id}`,
+                             });
+                             axios({
+                               method: "POST",
+                               url: `https://learnxy.azurewebsites.net/institute/removeTeacher/${user_id}`,
+                               headers: {
+                                 "Content-Type": "application/json",
+                               },
+                               data: apiData,
+                             })
+                               .then((apiRes) => {
+                                 if (apiRes.status === 200) {
+                                   swal(
+                                     `Poof! You have successfully removed ${row.first_name} ${row.last_name}`,
+                                     {
+                                       icon: "success",
+                                     }
+                                   );
+                                   const newTeachersArray = teachers.filter(
+                                     (teacher) =>
+                                       row.user_id !== teacher.user_id
+                                   );
+                                   setTeachers(newTeachersArray);
+                                 }
+                                 setIsDataLoading(true);
+                               })
+                               .catch((error: any) => {
+                                 console.log(error.message);
+                               });
+                        }
+                     }
+                    });
                 }}
             />
         )

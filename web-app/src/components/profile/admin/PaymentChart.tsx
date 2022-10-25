@@ -45,9 +45,9 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const labels = ["May", "June", "July", "August", "September", "October"];
 
-const data1 = [45000, 100000, 65000, 40000, 30000, 40000, 20000];
+const data1 = [102700, 436000, 589000, 634700, 615500, 725000];
 
 export const data = {
   labels,

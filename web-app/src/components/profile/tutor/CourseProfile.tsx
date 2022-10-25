@@ -44,7 +44,7 @@ const CourseProfile = () => {
                     fee: data.price,
                     medium: data.medium,
                     start_date: new Date(data.start_date).toDateString(),
-                    end_date: new Date(data.start_date).toDateString(),
+                    end_date: new Date(data.end_date).toDateString(),
                     class_day: data.day,
                     start_time: data.start_time,
                     end_time: data.end_time,
