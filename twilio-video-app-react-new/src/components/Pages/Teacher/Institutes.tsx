@@ -80,7 +80,7 @@ export const Institutes = () => {
           swal({
             title: "Request Acception",
             text: `Do you really want to accept this institute?`,
-            icon: "error",
+            icon: "warning",
             buttons: {
               cancel: true,
               confirm: true
@@ -89,8 +89,7 @@ export const Institutes = () => {
           })
             .then((willDelete: any) => {
               const apiData = JSON.stringify({
-                "institute_id": item.id,
-                // "request_time": new Date(),
+                "institute_id": item.id
               });
               axios({
                 method: "POST",
@@ -129,6 +128,7 @@ export const Institutes = () => {
             title: "Request Rejection",
             text: "Do you really want to reject this institute? Give a valid reason and confirm your decision",
             content: "input",
+            icon: "warning",
             buttons: {
               cancel: true,
               confirm: true
@@ -137,8 +137,7 @@ export const Institutes = () => {
             .then((response: any) => {
               console.log(item.id + " => " + response);
               const apiData = JSON.stringify({
-                "institute_id": parseInt(item.id),
-                "request_time": new Date(),
+                "institute_id": item.id,
                 "reason": response
               });
               axios({

@@ -124,7 +124,7 @@ const navigate = useNavigate();
                   id: item.course.course_id,
                   class_id: item.class_id,
                   subject: item.course.subject,
-                  teacher: item.teacher.title+'. ' + item.teacher.first_name + ' ' + item.teacher.last_name,
+                  teacher: item.course.teacher.title+'. ' + item.course.teacher.first_name + ' ' + item.course.teacher.last_name,
                   date: item.date.substring(0,10),
                   time: item.course.start_time.substring(0,5) + ' - ' + item.course.end_time.substring(0,5),
                 },
