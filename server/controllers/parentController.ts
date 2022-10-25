@@ -188,14 +188,80 @@ export const getParentCourseRequest = async (req: Request, res: Response) => {
     }
 };
 
+export const getParentCourseUnenroll = async (req: Request, res: Response) => {
+
+    console.log(req.params);
+    try {
+        // @ts-ignore
+        const {parent_id} = await prisma.parent.findFirst({
+            where: {
+                user_id: req.params.id
+            },
+            select: {
+                parent_id: true
+            }
+        });
+        // @ts-ignore
+        const {student_id} = await prisma.student.findFirst({
+            where: {
+                parent_id: parent_id
+            },
+            select: {
+                student_id: true
+            }
+        });
+
+        const data = await prisma.student_course.findMany({
+            where: {
+                student_id: student_id,
+                status: "unenrollPending"
+            },
+            include: {
+                course: {
+                    include: {
+                        teacher: true
+                    }
+                }
+            }
+        });
+        console.log();
+        // @ts-ignore
+        // logger.info(NAME_SPACE, data[0].parent_id);
+        res.status(200).send(data);
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error.message);
+    }
+};
+
 export const acceptCourseRequest = async (req: Request, res: Response) => {
 
     try {
+        // @ts-ignore
+        const {parent_id} = await prisma.parent.findFirst({
+            where: {
+                user_id: req.body.user_id
+            },
+            select: {
+                parent_id: true
+            }
+        });
+        // @ts-ignore
+        const {student_id} = await prisma.student.findFirst({
+            where: {
+                parent_id: parent_id
+            },
+            select: {
+                student_id: true
+            }
+        });
+
+        const courseId = Number(req.body.course_id)
         const data = await prisma.student_course.update({
             where: {
                 student_id_course_id: {
-                    course_id: req.body.course_id,
-                    student_id: req.body.student_id
+                    student_id: student_id,
+                    course_id: courseId
                 }
             },
             data: {
@@ -210,14 +276,76 @@ export const acceptCourseRequest = async (req: Request, res: Response) => {
     }
 };
 
-export const rejectCourseRequest = async (req: Request, res: Response) => {
+export const acceptUnEnrollCourseRequest = async (req: Request, res: Response) => {
 
     try {
+        // @ts-ignore
+        const {parent_id} = await prisma.parent.findFirst({
+            where: {
+                user_id: req.body.user_id
+            },
+            select: {
+                parent_id: true
+            }
+        });
+        // @ts-ignore
+        const {student_id} = await prisma.student.findFirst({
+            where: {
+                parent_id: parent_id
+            },
+            select: {
+                student_id: true
+            }
+        });
+
+        const courseId = Number(req.body.course_id)
         const data = await prisma.student_course.update({
             where: {
                 student_id_course_id: {
-                    course_id: req.body.course_id,
-                    student_id: req.body.student_id
+                    student_id: student_id,
+                    course_id: courseId
+                }
+            },
+            data: {
+                status: "unenrollAccepted"
+            }
+        });
+
+        res.status(200).send(data);
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error.message);
+    }
+};
+
+export const rejectCourseRequest = async (req: Request, res: Response) => {
+
+    try {
+        // @ts-ignore
+        const {parent_id} = await prisma.parent.findFirst({
+            where: {
+                user_id: req.body.user_id
+            },
+            select: {
+                parent_id: true
+            }
+        });
+        // @ts-ignore
+        const {student_id} = await prisma.student.findFirst({
+            where: {
+                parent_id: parent_id
+            },
+            select: {
+                student_id: true
+            }
+        });
+
+        const courseId = Number(req.body.course_id)
+        const data = await prisma.student_course.update({
+            where: {
+                student_id_course_id: {
+                    student_id: student_id,
+                    course_id: courseId
                 }
             },
             data: {
@@ -226,12 +354,54 @@ export const rejectCourseRequest = async (req: Request, res: Response) => {
         });
 
         res.status(200).send(data);
-    } catch
-        (error: any) {
+    } catch (error: any) {
         logger.error(NAME_SPACE, error.message);
         res.status(500).send(error.message);
     }
 }
+
+export const rejectUnenrollCourseRequest = async (req: Request, res: Response) => {
+
+    try {
+        // @ts-ignore
+        const {parent_id} = await prisma.parent.findFirst({
+            where: {
+                user_id: req.body.user_id
+            },
+            select: {
+                parent_id: true
+            }
+        });
+        // @ts-ignore
+        const {student_id} = await prisma.student.findFirst({
+            where: {
+                parent_id: parent_id
+            },
+            select: {
+                student_id: true
+            }
+        });
+
+        const courseId = Number(req.body.course_id)
+        const data = await prisma.student_course.update({
+            where: {
+                student_id_course_id: {
+                    student_id: student_id,
+                    course_id: courseId
+                }
+            },
+            data: {
+                status: "accepted"
+            }
+        });
+
+        res.status(200).send(data);
+    } catch (error: any) {
+        logger.error(NAME_SPACE, error.message);
+        res.status(500).send(error.message);
+    }
+}
+
 
 export const getParentUpComingPayment = async (req: Request, res: Response) => {
 

@@ -285,6 +285,53 @@ export const makeCourseRequest = async (req: Request, res: Response) => {
   }
 };
 
+export const makeCourseUnenrollRequest = async (req: Request, res: Response) => {
+
+  const course_id = Number(req.body.course_id)
+  try {
+    // @ts-ignore
+    const { student_id } = await prisma.student.findFirst({
+      where: {
+        user_id: req.body.user_id
+      },
+      select: {
+        student_id: true
+      }
+    });
+
+    const existed = await prisma.student_course.findMany({
+      where: {
+        course_id: course_id,
+        student_id: student_id,
+        status:"unenrollPending"
+      }
+    });
+
+    if (existed.length == 0) {
+      const data = await prisma.student_course.update(
+          {
+            where:{
+              student_id_course_id:{
+                student_id: student_id,
+                course_id: course_id
+              }
+            },
+            data: {
+              isActive: true,
+              status: "unenrollPending"
+            }
+          }
+      );
+      res.status(200).send(data);
+    } else {
+      res.status(200).send("UnEnroll Request Already Added");
+    }
+  } catch (error: any) {
+    console.log(error)
+    res.status(500).send(error.message);
+  }
+};
+
 
 export const insertUsedApps = async (req: Request, res: Response) => {
   console.log(req.params.id)
