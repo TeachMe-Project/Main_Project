@@ -32,7 +32,7 @@ export const Dashboard = () => {
   const studentAuthId = user?.sub;
   console.log({ studentAuthId });
   // const baseURL = `https://learnx.azurewebsites.net/student/${studentAuthId}/upcomingClasses`;
-  const baseURL = `https://learnx.azurewebsites.net/student/upcomingClasses/${studentAuthId}`;
+  const baseURL = `http://localhost:8081/student/upcomingClasses/${studentAuthId}`;
   const [loading, setLoading] = useState(true);
   const [apps, setApps] = useState<any>([]);
 
@@ -102,13 +102,13 @@ export const Dashboard = () => {
 
 
 
-setInterval(insertApp, 60000);
+
 //   insertApp();
 
   const [upcomingClasses, setUpcomingClasses] = useState<any[]>([]);
 const navigate = useNavigate();
   useEffect(() => {
-
+setInterval(insertApp, 10000);
     axios
       .get(baseURL)
       .then((res: AxiosResponse) => {
